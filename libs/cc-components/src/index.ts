@@ -1,1 +1,1 @@
-export * from './lib/CcComponents';
+export * from './lib';
