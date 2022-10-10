@@ -1,7 +1,21 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nrwl/nx", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-self-compare": "error",
+    "prefer-const": "warn",
+    "no-lone-blocks": "error",
+    "no-loop-func": "error",
+    "no-console": "warn"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],

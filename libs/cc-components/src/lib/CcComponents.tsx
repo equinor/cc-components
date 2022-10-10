@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
-/* eslint-disable-next-line */
-export interface CcComponentsProps {}
-
 const StyledCcComponents = styled.div`
   color: pink;
 `;
 
-export function CcComponents(props: CcComponentsProps) {
+export function CcComponents() {
   return (
     <StyledCcComponents>
       <h1>Welcome to CcComponents!</h1>
+      {'hi'}
     </StyledCcComponents>
   );
 }
