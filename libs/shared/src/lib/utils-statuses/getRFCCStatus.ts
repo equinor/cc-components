@@ -1,11 +1,11 @@
-import { Status } from '../types';
+import { PackageStatus } from '../types';
 
 type RFCCBase = {
   rfccIsAccepted: boolean;
   rfccIsRejected: boolean;
   rfccIsShipped: boolean;
 };
-export const getRFCCStatus = <T extends RFCCBase>(item: T): Status =>
+export const getRFCCStatus = <T extends RFCCBase>(item: T): PackageStatus =>
   item.rfccIsAccepted
     ? 'RFCC Accepted'
     : item.rfccIsRejected

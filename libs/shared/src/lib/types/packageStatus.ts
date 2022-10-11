@@ -1,4 +1,4 @@
-export type Status =
+export type PackageStatus =
   | 'PA'
   | 'PB'
   | 'RFOC Accepted'

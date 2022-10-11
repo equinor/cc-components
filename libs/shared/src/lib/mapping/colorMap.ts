@@ -1,7 +1,7 @@
-import { Status } from '../types/status';
+import { PackageStatus } from '../types';
 
-/** Dictionary for mapping Status to colors */
-export const colorMap: Record<Status, string> = {
+/** Dictionary for mapping MC & Commpkg statuses to colors */
+export const colorMap: Record<PackageStatus, string> = {
   'No status': '#d1d1d1',
   'RFOC Sent': '#09CCF2',
   'RFOC Accepted': '#0035BC',
