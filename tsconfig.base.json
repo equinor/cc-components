@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cc-components/handoverapp": ["libs/handoverapp/src/index.ts"],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
       "@equinor/cc-components": ["libs/cc-components/src/index.ts"]
     }
