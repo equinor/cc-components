@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'cc-components',
+  displayName: 'shared',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/cc-components',
+  coverageDirectory: '../../coverage/libs/shared',
 };
