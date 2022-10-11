@@ -1,4 +1,5 @@
-import { Status } from '../../../types/status';
+import { Status } from '../types';
+
 type RFCCBase = {
   rfccIsAccepted: boolean;
   rfccIsRejected: boolean;
