@@ -1,1 +1,1 @@
-export * from './lib/Mechanicalcompletionapp';
+export * from './lib';
