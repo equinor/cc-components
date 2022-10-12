@@ -1,0 +1,1 @@
+export { hasProperty } from './hasProperty';
