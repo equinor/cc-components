@@ -21,6 +21,7 @@
         "libs/mechanicalcompletionapp/src/index.ts"
       ],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
+      "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
       "@cc-components/workorderapp": ["libs/workorderapp/src/index.ts"],
       "@equinor/cc-components": ["libs/cc-components/src/index.ts"]
     }
