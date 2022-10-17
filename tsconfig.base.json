@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@cc-components/handoverapp": ["libs/handoverapp/src/index.ts"],
+      "@cc-components/loopapp": ["libs/loopapp/src/index.ts"],
       "@cc-components/mechanicalcompletionapp": [
         "libs/mechanicalcompletionapp/src/index.ts"
       ],
