@@ -1,5 +1,12 @@
-import type { Kpi, McPackage } from '../types';
-
+import type { McPackage } from '../types';
+type Kpi = {
+  mcPkgsCount: number;
+  finalPunchCount: number;
+  punchAcceptedCount: number;
+  mcToComCount: number;
+  rfccCount: number;
+  rfccPercentage: number;
+};
 export const getStatusBarData = (mcPackages: McPackage[]): Kpi => {
   const counts = mcPackages.reduce(
     (acc, curr) => {

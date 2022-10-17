@@ -1,9 +1,5 @@
-import {
-  getYearAndWeekAndDayFromString,
-  getYearAndWeekFromString,
-  hasProperty,
-} from '@cc-components/shared';
-import type { ExtendedGardenFields, McPackage } from '../types';
+import { getColumnDateKey } from '@cc-components/shared';
+import type { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
 
 const getFieldKeyBasedOnPlannedForecast = (
   groupBy: ExtendedGardenFields | string,
@@ -31,34 +27,13 @@ const getFieldKeyBasedOnPlannedForecast = (
   }
 };
 
-const getKeyData = (item: McPackage, groupBy: keyof McPackage): string => {
-  const value = item[groupBy].toString();
-
-  if (value) return value;
-
-  // Use planned dates instead of forecast because of lack of forecast data.
-  const groupByPlanned = groupBy
-    .replace('forecast', 'planned')
-    .replace('Forecast', 'Planned');
-
-  if (hasProperty(item, groupByPlanned)) {
-    return String(item[groupByPlanned]);
-  } else {
-    return item[groupBy].toString();
-  }
+//TODO: Update types when Garden package is released
+export const getDateKey = (
+  item: McPackage,
+  key: keyof McPackage,
+  groupBy: CustomGroupByKeys
+) => {
+  const { plannedForecast, weeklyDaily } = groupBy;
+  const mcFieldKey = getFieldKeyBasedOnPlannedForecast(key, plannedForecast);
+  return getColumnDateKey(mcFieldKey, weeklyDaily, item);
 };
-const getColumnDateKey = (
-  mcFieldKey: keyof McPackage,
-  weeklyDaily: 'Weekly' | 'Daily',
-  item: McPackage
-): string => {
-  const date = getKeyData(item, mcFieldKey);
-  return weeklyDaily === 'Weekly'
-    ? getYearAndWeekFromString(date)
-    : getYearAndWeekAndDayFromString(date);
-};
-// export const getDateKey: GetKeyFunction<McPackage> = (item, key, groupBy) => {
-//   const { plannedForecast, weeklyDaily } = groupBy as CustomGroupByKeys;
-//   const mcFieldKey = getFieldKeyBasedOnPlannedForecast(key, plannedForecast);
-//   return getColumnDateKey(mcFieldKey, weeklyDaily, item);
-// };

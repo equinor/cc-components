@@ -1,6 +1,6 @@
 import { numberFormat } from '@cc-components/shared';
 import { getStatusBarData, HandoverPackage } from '..';
-
+//TODO: add correct return type
 export const statusBarConfig = (data: HandoverPackage[]) => {
   const statusData = getStatusBarData(data);
 
