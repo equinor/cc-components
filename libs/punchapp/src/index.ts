@@ -1,1 +1,1 @@
-export * from './lib/Punchapp';
+export * from './lib';
