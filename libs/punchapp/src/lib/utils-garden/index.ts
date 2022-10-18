@@ -1,0 +1,1 @@
+export { getHighlightedColumn } from './getHighlightedColumn';
