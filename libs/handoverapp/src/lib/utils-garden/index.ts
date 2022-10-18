@@ -1,3 +1,4 @@
 export { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
-export * from './getHighlightedColumn';
-export * from './getMaxVolumeFromData';
+export { getHighlightedColumn } from './getHighlightedColumn';
+export { getMaxVolumeFromData } from './getMaxVolumeFromData';
+export { getSubtitleHeader } from './getSubtitleHeader';
