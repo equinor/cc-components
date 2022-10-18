@@ -1,1 +1,1 @@
-export * from './lib/Swcrapp';
+export * from './lib';

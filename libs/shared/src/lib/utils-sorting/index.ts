@@ -1,0 +1,1 @@
+export { sortByNumber } from './sortByNumber';
