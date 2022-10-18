@@ -5,3 +5,4 @@ export * from './mapping';
 export * from './types';
 export * from './utils-formatting';
 export * from './utils-typescript';
+export * from './utils-sorting';

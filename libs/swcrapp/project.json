@@ -1,0 +1,44 @@
+{
+  "name": "swcrapp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/swcrapp/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/swcrapp",
+        "tsConfig": "libs/swcrapp/tsconfig.lib.json",
+        "project": "libs/swcrapp/package.json",
+        "entryFile": "libs/swcrapp/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/swcrapp/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/swcrapp/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/swcrapp"],
+      "options": {
+        "jestConfig": "libs/swcrapp/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

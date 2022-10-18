@@ -1,0 +1,1 @@
+export { statusBarConfig } from './config';
