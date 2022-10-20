@@ -1,9 +1,17 @@
 import { FieldSettings, sortByNumber } from '@cc-components/shared';
-import { ExtendedGardenFields, HandoverPackage } from '../types';
+import {
+  ExtendedGardenFields,
+  HandoverCustomGroupByKeys,
+  HandoverPackage,
+} from '../types';
 import { getDateKey } from './getDateKey';
 import { getProgressKey } from './getProgressKey';
 
-export const fieldSettings: FieldSettings<HandoverPackage, ExtendedGardenFields> = {
+export const fieldSettings: FieldSettings<
+  HandoverPackage,
+  ExtendedGardenFields,
+  HandoverCustomGroupByKeys
+> = {
   RFCC: { label: 'RFCC', getKey: getDateKey, getColumnSort: sortByNumber },
   TAC: { label: 'TAC', getKey: getDateKey, getColumnSort: sortByNumber },
   RFOC: { label: 'RFOC', getKey: getDateKey, getColumnSort: sortByNumber },
