@@ -1,15 +1,23 @@
 //TODO: TEMP WHOLE FILE
 export type GetSortFunction = (a: string, b: string) => number;
-export type GetKeyFunction<T> = (
+export type GetKeyFunction<
+  T,
+  ExtendedFields extends unknown = unknown,
+  CustomGroupByKeys extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
+> = (
   item: T,
-  itemKey: keyof T | string,
-  customGroupByKeys?: Record<string, unknown>
+  itemKey: keyof T | ExtendedFields extends unknown ? never : ExtendedFields,
+  customGroupByKeys?: CustomGroupByKeys
 ) => string[] | string;
 
-export type FieldSetting<ItemType> = {
+export type FieldSetting<
+  ItemType,
+  ExtendedFields extends string = never,
+  CustomGroupByKeys extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
+> = {
   key?: keyof ItemType | string;
   label?: string;
-  getKey?: GetKeyFunction<ItemType>;
+  getKey?: GetKeyFunction<ItemType, ExtendedFields, CustomGroupByKeys>;
   getColumnSort?: GetSortFunction;
 };
 
@@ -22,6 +30,13 @@ export type FieldSetting<ItemType> = {
  * @template ItemType  Base model for item/package used. Is the type that is passed to functions.
  * @template ExtendedFields (optional) string literal that defines fields that does not exist on the base model.
  */
-export type FieldSettings<ItemType, ExtendedFields extends string = never> = Partial<
-  Record<keyof ItemType | ExtendedFields, FieldSetting<ItemType>>
+export type FieldSettings<
+  ItemType,
+  ExtendedFields extends string = never,
+  CustomGroupByKeys extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
+> = Partial<
+  Record<
+    keyof ItemType | ExtendedFields,
+    FieldSetting<ItemType, ExtendedFields, CustomGroupByKeys>
+  >
 >;

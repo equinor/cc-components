@@ -2,13 +2,16 @@ import {
   getYearAndWeekAndDayFromString,
   getYearAndWeekFromDate,
 } from '@cc-components/shared';
-import { CustomGroupByKeys } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
 
 export const getHighlightedColumn = (
-  groupByKey: string,
-  customGroupByKeys?: Record<string, unknown>
+  groupByKey: keyof McPackage | ExtendedGardenFields,
+  customGroupByKeys: CustomGroupByKeys = {
+    weeklyDaily: 'Weekly',
+    plannedForecast: 'Planned',
+  }
 ): string | undefined => {
-  const { weeklyDaily } = customGroupByKeys as CustomGroupByKeys;
+  const { weeklyDaily } = customGroupByKeys;
 
   if (
     groupByKey === 'finalPunch' ||

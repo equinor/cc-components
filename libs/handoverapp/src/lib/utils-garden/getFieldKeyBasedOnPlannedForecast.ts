@@ -1,7 +1,7 @@
-import { HandoverPackage } from '../types';
+import { ExtendedGardenFields, HandoverPackage } from '../types';
 
 export const getFieldKeyBasedOnPlannedForecast = (
-  groupBy: string,
+  groupBy: keyof HandoverPackage | ExtendedGardenFields,
   plannedForecast: string
 ): keyof HandoverPackage => {
   switch (groupBy) {

@@ -2,14 +2,18 @@ import {
   getYearAndWeekAndDayFromString,
   getYearAndWeekFromDate,
 } from '@cc-components/shared';
-import { HandoverCustomGroupByKeys } from '../types';
+import {
+  ExtendedGardenFields,
+  HandoverCustomGroupByKeys,
+  HandoverPackage,
+} from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 
 export const getHighlightedColumn = (
-  groupByKey: string,
-  customGroupByKeys: Record<string, unknown> | undefined
+  groupByKey: keyof HandoverPackage | ExtendedGardenFields,
+  customGroupByKeys: HandoverCustomGroupByKeys
 ) => {
-  const customKeys = customGroupByKeys as HandoverCustomGroupByKeys;
+  const customKeys = customGroupByKeys;
   const groupByOption = getFieldKeyBasedOnPlannedForecast(
     groupByKey,
     customKeys?.plannedForecast
