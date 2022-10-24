@@ -1,4 +1,4 @@
-import { getColumnDateKey, GetKeyFunction } from '@cc-components/shared';
+import { getColumnDateKey } from '@cc-components/shared';
 import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
 const getFieldKeyBasedOnPlannedForecast = (
   groupBy: keyof Punch | ExtendedGardenFields | string,
@@ -14,8 +14,15 @@ const getFieldKeyBasedOnPlannedForecast = (
       return 'c01PlannedDate';
   }
 };
-export const getDateKey: GetKeyFunction<Punch> = (item, key, groupBy) => {
-  const { plannedForecast, weeklyDaily } = groupBy as CustomGroupByKeys;
+export const getDateKey = (
+  item: Punch,
+  key: keyof Punch | ExtendedGardenFields,
+  groupBy: CustomGroupByKeys | undefined
+) => {
+  if (!groupBy) {
+    return 'N/A';
+  }
+  const { plannedForecast, weeklyDaily } = groupBy;
   const fieldKey = getFieldKeyBasedOnPlannedForecast(key, plannedForecast);
   return getColumnDateKey(fieldKey, weeklyDaily, item);
 };

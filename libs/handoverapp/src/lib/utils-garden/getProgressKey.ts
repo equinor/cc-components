@@ -1,5 +1,3 @@
-import { GetKeyFunction } from '@cc-components/shared';
 import { HandoverPackage } from '../types';
 
-export const getProgressKey: GetKeyFunction<HandoverPackage> = (item) =>
-  `${item.progress || '0'}%`;
+export const getProgressKey = (item: HandoverPackage) => `${item.progress || '0'}%`;

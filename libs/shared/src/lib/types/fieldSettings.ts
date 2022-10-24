@@ -3,17 +3,17 @@ export type GetSortFunction = (a: string, b: string) => number;
 export type GetKeyFunction<
   T,
   ExtendedFields extends unknown = unknown,
-  CustomGroupByKeys extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
+  CustomGroupByKeys extends Record<PropertyKey, unknown> = never
 > = (
   item: T,
-  itemKey: keyof T | ExtendedFields extends unknown ? never : ExtendedFields,
-  customGroupByKeys?: CustomGroupByKeys
+  itemKey: keyof T | ExtendedFields,
+  customGroupByKeys: CustomGroupByKeys
 ) => string[] | string;
 
 export type FieldSetting<
   ItemType,
-  ExtendedFields extends string = never,
-  CustomGroupByKeys extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
+  ExtendedFields extends string,
+  CustomGroupByKeys extends Record<PropertyKey, unknown>
 > = {
   key?: keyof ItemType | string;
   label?: string;
@@ -33,7 +33,7 @@ export type FieldSetting<
 export type FieldSettings<
   ItemType,
   ExtendedFields extends string = never,
-  CustomGroupByKeys extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>
+  CustomGroupByKeys extends Record<PropertyKey, unknown> = never
 > = Partial<
   Record<
     keyof ItemType | ExtendedFields,
