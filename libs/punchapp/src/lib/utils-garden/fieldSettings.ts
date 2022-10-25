@@ -1,17 +1,12 @@
 import { FieldSettings, sortByNumber } from '@cc-components/shared';
-import { ExtendedGardenFields, Punch } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
 import { getDateKey } from './getDateKey';
 
-export const fieldSettings: FieldSettings<Punch, ExtendedGardenFields> = {
-  responsible: {
-    label: 'Responsible',
-  },
-  functionalSystem: {
-    label: 'System',
-  },
-  formularType: {
-    label: 'Form type',
-  },
+export const fieldSettings: FieldSettings<
+  Punch,
+  ExtendedGardenFields,
+  CustomGroupByKeys
+> = {
   RFC: {
     label: 'RFC',
     getKey: getDateKey,
@@ -22,10 +17,33 @@ export const fieldSettings: FieldSettings<Punch, ExtendedGardenFields> = {
     getKey: getDateKey,
     getColumnSort: sortByNumber,
   },
-  punchListSorting: {
-    label: 'PL Sorting',
+  verifiedAtDate: {
+    label: 'Verified',
+    getKey: getDateKey,
+    getColumnSort: sortByNumber,
   },
-  punchListType: {
-    label: 'PL Type',
+  clearedAtDate: {
+    label: 'Cleared',
+    getKey: getDateKey,
+    getColumnSort: sortByNumber,
+  },
+  clearingByOrganization: {
+    label: 'Clearing by',
+  },
+  materialRequired: {
+    label: 'Material required',
+    getKey: (item, itemKey, d) => {
+      return item.materialRequired === null
+        ? '(Blank)'
+        : item.materialRequired === false
+        ? 'False'
+        : 'True';
+    },
+  },
+  commissioningPackageNo: {
+    label: 'Compack',
+  },
+  functionalSystem: {
+    label: 'System',
   },
 };

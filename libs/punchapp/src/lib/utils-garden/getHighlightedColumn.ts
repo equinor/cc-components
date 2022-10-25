@@ -13,6 +13,8 @@ export const getHighlightedColumn = (
   switch (groupByKey) {
     case 'RFO':
     case 'RFC':
+    case 'clearedAtDate':
+    case 'verifiedAtDate':
       return weeklyDaily === 'Daily'
         ? getYearAndWeekAndDayFromString(new Date().toString())
         : getYearAndWeekFromDate(new Date());
