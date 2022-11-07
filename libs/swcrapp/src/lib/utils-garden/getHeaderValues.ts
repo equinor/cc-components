@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DATE_BLANKSTRING } from '../constants/dateBlankString';
 import { DEFAULT_BLANKSTRING } from '../constants/defaultBlankString';
 import { SwcrPackage } from '../types';
 //TODO: import Dataset from Garden
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DataSet<T> = any;
 export const getMinorTitle = (groupKey: string, column: DataSet<SwcrPackage>): string => {
   if (column.value === DEFAULT_BLANKSTRING || column.value === DATE_BLANKSTRING)

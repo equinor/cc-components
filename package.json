@@ -49,6 +49,7 @@
   "dependencies": {
     "@equinor/eds-core-react": "^0.23.0",
     "@equinor/eds-tokens": "^0.7.1",
+    "@equinor/workspace-ag-grid": "^0.0.2",
     "core-js": "^3.6.5",
     "luxon": "^3.0.4",
     "react": "18.2.0",

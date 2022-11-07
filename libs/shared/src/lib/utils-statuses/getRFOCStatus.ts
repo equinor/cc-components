@@ -1,9 +1,9 @@
 import { PackageStatus } from '../types';
 
 type RFOCBase = {
-  rfocIsAccepted: boolean;
-  rfocIsRejected: boolean;
-  rfocIsShipped: boolean;
+  rfocIsAccepted: boolean | null;
+  rfocIsRejected: boolean | null;
+  rfocIsShipped: boolean | null;
 };
 export const getRFOCStatus = <T extends RFOCBase>(item: T): PackageStatus =>
   item.rfocIsAccepted
