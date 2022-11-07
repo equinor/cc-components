@@ -1,12 +1,11 @@
-import { PackageStatus } from '@cc-components/shared';
-
+export type Status = 'OS' | 'OK' | 'PA' | 'PB';
 //TODO: Update to new properties when FAM is ready
 export type HandoverPackage = {
   actualFinishDate: string;
   actualStartDate: string;
   area: string;
   commpkgNo: string;
-  commpkgStatus: PackageStatus;
+  commpkgStatus: Status;
   createdDate: string;
   demolitionActualFinishDate: string;
   demolitionActualStartDate: string;
@@ -37,7 +36,7 @@ export type HandoverPackage = {
   mcPkgsRFCCSigned: number;
   mcPkgsRFOCShipped: number;
   mcPkgsRFOCSigned: number;
-  mcStatus: PackageStatus;
+  mcStatus: Status;
   phase: string;
   plannedFinishDate: string;
   plannedStartDate: string;
