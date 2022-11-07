@@ -1,5 +1,5 @@
-import { proCoSysUrls } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { proCoSysUrls } from 'libs/shared/src/lib/mapping';
 import { DescriptionCell, LinkCell } from '../../../table';
 import { PunchBase } from './type';
 

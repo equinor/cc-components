@@ -1,4 +1,4 @@
-import { TabTable } from '../../../table/TabTable/TabTable';
+import { TabTable } from '../../../table';
 import { StyledContentWrapper } from '../tabs.styles';
 import { columns } from './columns';
 import { WorkorderBase } from './types';
