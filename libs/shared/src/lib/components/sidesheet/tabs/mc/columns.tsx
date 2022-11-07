@@ -1,7 +1,7 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { colorMap, proCoSysUrls } from 'libs/shared/src/lib/mapping';
-import { PackageStatus } from 'libs/shared/src/lib/types';
-import { getRFCCStatus, getRFOCStatus } from 'libs/shared/src/lib/utils-statuses';
+import { colorMap, proCoSysUrls } from '../../../../mapping';
+import { PackageStatus } from '../../../../types';
+import { getRFCCStatus, getRFOCStatus } from '../../../../utils-statuses';
 import { DescriptionCell, LinkCell, StatusCell } from '../../../table';
 import { McBase } from './types';
 

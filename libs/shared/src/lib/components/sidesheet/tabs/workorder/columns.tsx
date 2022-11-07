@@ -1,5 +1,5 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { proCoSysUrls } from 'libs/shared/src/lib/mapping';
+import { proCoSysUrls } from '../../../../mapping';
 import {
   DateCell,
   DescriptionCell,

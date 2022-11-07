@@ -1,6 +1,6 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { proCoSysUrls } from 'libs/shared/src/lib/mapping';
 import { DescriptionCell, LinkCell } from '../../../table';
+import { proCoSysUrls } from '../../../../mapping';
 import { SwcrBase } from './types';
 
 export const columns: ColDef<SwcrBase>[] = [
