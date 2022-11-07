@@ -2,7 +2,7 @@ import { proCoSysUrls } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { DescriptionCell, LinkCell } from '../../../table';
 import { UnsignedActionBase } from './types';
-
+//TODO: Fix url
 export const columns: ColDef<UnsignedActionBase>[] = [
   {
     field: '#',
