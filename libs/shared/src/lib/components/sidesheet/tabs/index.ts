@@ -1,5 +1,5 @@
 export * from './workorder';
 export * from './swcr';
-export * from './mcTab';
+export * from './mc';
 export * from './ncr';
 export * from './punch';
