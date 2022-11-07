@@ -1,7 +1,7 @@
 import { TabTable } from '../../../table/TabTable/TabTable';
+import { StyledContentWrapper } from '../tabs.styles';
 import { columns } from './columns';
 import { WorkorderBase } from './types';
-import { StyledContentWrapper } from './workorderTab.styles';
 
 type WorkorderTabProps<T extends WorkorderBase> = {
   workorders: T[] | undefined;
