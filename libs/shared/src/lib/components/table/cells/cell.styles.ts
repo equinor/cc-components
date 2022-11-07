@@ -1,3 +1,4 @@
+import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
 
 export const StyledDescription = styled.div`
@@ -28,4 +29,12 @@ export const StyledProgressNumber = styled.div`
   position: absolute;
   right: 5px;
   top: 0;
+`;
+export const StyledLink = styled.a`
+  color: ${tokens.colors.interactive.primary__resting.hex};
+  text-decoration: none;
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
