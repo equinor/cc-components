@@ -1,5 +1,12 @@
+import { proCoSysUrls } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { DateCell, DescriptionCell, EstimateCell, ProgressCell } from '../../../table';
+import {
+  DateCell,
+  DescriptionCell,
+  EstimateCell,
+  LinkCell,
+  ProgressCell,
+} from '../../../table';
 import { WorkorderBase } from './types';
 
 export const columns = (): ColDef<WorkorderBase>[] => {
@@ -9,7 +16,21 @@ export const columns = (): ColDef<WorkorderBase>[] => {
   return [
     {
       field: 'WO',
-      valueGetter: (pkg) => pkg.data?.workOrderId,
+      valueGetter: (pkg) => pkg.data?.workOrderNo,
+      valueFormatter: (pkg) => {
+        if (pkg.data?.workOrderId) {
+          return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId);
+        } else {
+          return '';
+        }
+      },
+      cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
+        if (props.valueFormatted) {
+          return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        } else {
+          return null;
+        }
+      },
       width: 130,
     },
     {
