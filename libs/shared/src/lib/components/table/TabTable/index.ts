@@ -1,0 +1,1 @@
+export { TabTable } from './TabTable';
