@@ -1,17 +1,28 @@
+import { proCoSysUrls } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { DescriptionCell } from '../../../table';
+import { DescriptionCell, LinkCell } from '../../../table';
 import { SwcrBase } from './types';
 
 export const columns: ColDef<SwcrBase>[] = [
   {
     field: '#',
     valueGetter: (pkg) => pkg.data?.swcrNumber,
+    valueFormatter: (pkg) => {
+      if (pkg.data?.swcrId) {
+        return proCoSysUrls.getSwcrUrl(pkg.data.swcrId);
+      } else return '';
+    },
+    cellRenderer: (props: ICellRendererProps<SwcrBase>) => {
+      if (props.valueFormatted) {
+        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+      } else return null;
+    },
     width: 80,
   },
   {
     field: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
-    cellRenderer: (props: ICellRendererProps) => (
+    cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
     width: 200,
