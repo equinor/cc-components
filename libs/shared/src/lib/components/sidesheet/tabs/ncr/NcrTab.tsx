@@ -11,7 +11,7 @@ export const NcrTab = <T extends NcrBase>({
   error,
   isFetching,
   ncrs,
-}: NcrTabProps<T>) => {
+}: NcrTabProps<T>): JSX.Element => {
   return (
     <StyledContentWrapper>
       <TabTable

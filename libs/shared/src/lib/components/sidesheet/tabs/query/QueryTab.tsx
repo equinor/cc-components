@@ -11,7 +11,7 @@ export const QueryTab = <T extends QueryBase>({
   error,
   isFetching,
   queries,
-}: QueryTabProps<T>) => {
+}: QueryTabProps<T>): JSX.Element => {
   return (
     <StyledContentWrapper>
       <TabTable

@@ -8,7 +8,11 @@ type McTabProps<T> = {
   isFetching: boolean;
   error: Error | null;
 };
-export const McTab = <T extends McBase>({ error, isFetching, mc }: McTabProps<T>) => {
+export const McTab = <T extends McBase>({
+  error,
+  isFetching,
+  mc,
+}: McTabProps<T>): JSX.Element => {
   return (
     <StyledContentWrapper>
       <TabTable

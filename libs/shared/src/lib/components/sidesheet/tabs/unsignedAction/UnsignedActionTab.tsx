@@ -11,7 +11,7 @@ export const UnsignedActionTab = <T extends UnsignedActionBase>({
   unsignedActions,
   error,
   isFetching,
-}: UnsignedActionTabProps<T>) => {
+}: UnsignedActionTabProps<T>): JSX.Element => {
   return (
     <StyledContentWrapper>
       <TabTable
