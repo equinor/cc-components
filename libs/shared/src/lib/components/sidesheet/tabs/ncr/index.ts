@@ -1,0 +1,1 @@
+export { NcrTab } from './NcrTab';
