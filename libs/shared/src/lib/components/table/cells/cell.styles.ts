@@ -38,3 +38,18 @@ export const StyledLink = styled.a`
     cursor: pointer;
   }
 `;
+
+export const StyledStatusWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  font-weight: 400;
+  font-size: 13px;
+`;
+export const StyledStatus = styled.div`
+  background-color: green;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+`;
