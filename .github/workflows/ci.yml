@@ -5,9 +5,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
@@ -19,8 +19,8 @@ jobs:
           fetch-depth: 0
         # https://github.com/nrwl/nx-set-shas#background
       - uses: nrwl/nx-set-shas@v3
-      - run: npm ci
-      
+      - run: npm ci --legacy-peer-deps
+
       - run: npx nx workspace-lint
       # - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3
