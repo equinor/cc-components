@@ -1,14 +1,11 @@
-/*eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
-//TODO: Add types from Filter component
 import { FollowUpStatuses } from '@cc-components/shared';
-import { Progress } from '../types';
+import { Progress, WorkOrder } from '../types';
 import { FollowUpStatusFilter } from '../ui-filter';
 import { progressPriMap, progressValueFormatter } from '../utils-filter';
 import { followUpStatusPriorityMap, getFollowUpStatus } from '../utils-statuses';
+import { FilterConfig } from '@equinor/workspace-fusion';
 
-// TODO: Add FilterOptions<WorkOrder> type
-export const filterConfig = [
+export const filterConfig: FilterConfig<WorkOrder> = [
   {
     name: 'Discipline',
     valueFormatter: ({ disciplineCode }) => disciplineCode,
