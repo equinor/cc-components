@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck //TODO Remove when FilterOptions type is ready
+import { FilterConfig } from '@equinor/workspace-fusion';
+import { HandoverPackage } from '../types';
 import { daysDiff, getFilterDateValues } from '../utils-filter';
 import { getStatus } from '../utils-statuses/getStatus';
-export const filterConfig = [
+export const filterConfig: FilterConfig<HandoverPackage> = [
   {
     name: 'Commpkgno',
     valueFormatter: ({ commpkgNo }) => commpkgNo,

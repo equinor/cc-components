@@ -1,55 +1,48 @@
 import { numberFormat } from '@cc-components/shared';
+import { StatusBarConfig } from '@equinor/workspace-fusion';
 import { HandoverPackage } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
-//TODO: add correct return type
-export const statusBarConfig = (data: HandoverPackage[]) => {
+export const statusBarConfig: StatusBarConfig<HandoverPackage> = (data) => {
   const statusData = getStatusBarData(data);
 
   return [
     {
       title: 'Total CP',
-      value: () => numberFormat(data.length),
+      value: numberFormat(data.length),
     },
     {
       title: 'RFO Accepted',
-      value: () => numberFormat(statusData['RFOC Accepted']),
+      value: numberFormat(statusData['RFOC Accepted']),
     },
     {
       title: 'RFO Sent',
-      value: () => numberFormat(statusData['RFOC Sent']),
+      value: numberFormat(statusData['RFOC Sent']),
     },
     {
       title: 'RFO Partly',
-      value: () => {
-        return statusData['RFOC Partly'].toString();
-      },
+      value: statusData['RFOC Partly'].toString(),
     },
     {
       title: 'RFO OS',
-      value: () => numberFormat(statusData.OS),
+      value: numberFormat(statusData.OS),
     },
 
     {
       title: 'RFO vs target',
-      value: () =>
-        numberFormat(
-          statusData['RFOC Accepted'] + statusData['RFOC Sent'] - statusData.targetSum
-        ),
+      value: numberFormat(
+        statusData['RFOC Accepted'] + statusData['RFOC Sent'] - statusData.targetSum
+      ),
     },
     {
       title: 'RFO overdue',
-      value: () => numberFormat(statusData.overdue),
+      value: numberFormat(statusData.overdue),
     },
     {
       title: 'RFO %',
-      value: () => {
-        const rfoPercent = (
-          ((statusData['RFOC Accepted'] + statusData['RFOC Sent']) / data.length) *
-          100
-        ).toFixed(1);
-
-        return `${rfoPercent}%`;
-      },
+      value: `${(
+        ((statusData['RFOC Accepted'] + statusData['RFOC Sent']) / data.length) *
+        100
+      ).toFixed(1)}%`,
     },
   ];
 };
