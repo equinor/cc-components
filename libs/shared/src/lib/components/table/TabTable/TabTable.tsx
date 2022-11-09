@@ -25,12 +25,12 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
   if (error || packages === undefined || packages.length === 0) {
     return (
       <NoResourceData>
-        <Icon
+        {/* <Icon
           name="info_circle"
           size={40}
           color={tokens.colors.interactive.primary__resting.hsla}
         />
-        <InfoText>{`No ${resourceName}`}</InfoText>
+        <InfoText>{`No ${resourceName}`}</InfoText> */}
       </NoResourceData>
     );
   }
