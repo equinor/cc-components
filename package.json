@@ -51,7 +51,7 @@
     "@equinor/eds-icons": "^0.16.0",
     "@equinor/eds-tokens": "^0.7.1",
     "@equinor/workspace-ag-grid": "^0.0.2",
-    "@equinor/workspace-fusion": "^0.1.8",
+    "@equinor/workspace-fusion": "^0.1.9",
     "core-js": "^3.6.5",
     "luxon": "^3.0.4",
     "react": "18.2.0",
