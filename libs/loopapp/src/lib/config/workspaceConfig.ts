@@ -2,6 +2,7 @@ import { createFusionWorkspace } from '@equinor/workspace-fusion';
 import { Loop } from '../types';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
+import { tableConfig } from './tableConfig';
 
 export const fusionWorkspaceConfig = () =>
   createFusionWorkspace<Loop>(
@@ -16,6 +17,7 @@ export const fusionWorkspaceConfig = () =>
         })
         .addFilter(filterConfig)
         .addStatusBarItems(statusBarConfig)
+        .addGrid(tableConfig())
         .addFusionPowerBI({
           reportUri: 'pp-punch-analytics',
         })

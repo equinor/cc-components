@@ -1,3 +1,4 @@
+export type Status = 'OS' | 'OK' | 'PA' | 'PB';
 export type Loop = {
   callOffNo: string | null;
   checklistId: string;
@@ -11,7 +12,7 @@ export type Loop = {
   functionalSystem: string | null;
   isVoided: boolean | null;
   location: string | null;
-  loopContentStatus: string | null;
+  loopContentStatus: Status | null;
   loopId: string | null;
   loopNo: string;
   needDate: Date | null;
@@ -30,7 +31,7 @@ export type Loop = {
   rfO_Planned_Forecast_Date: Date | null;
   isOverdue: number | null;
   signedDate: string | null;
-  status: string | null;
+  status: Status | null;
   system: string | null;
   tagStatus: string | null;
   verifiedDate: Date | null;
