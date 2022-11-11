@@ -1,0 +1,73 @@
+{
+  "name": "loop",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/loop/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/loop",
+        "index": "apps/loop/src/index.html",
+        "baseHref": "/",
+        "main": "apps/loop/src/main.tsx",
+        "polyfills": "apps/loop/src/polyfills.ts",
+        "tsConfig": "apps/loop/tsconfig.app.json",
+        "assets": ["apps/loop/src/favicon.ico", "apps/loop/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/loop/src/environments/environment.ts",
+              "with": "apps/loop/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "loop:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "loop:build:development"
+        },
+        "production": {
+          "buildTarget": "loop:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/loop/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["loopapp"]
+}

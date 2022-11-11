@@ -1,39 +1,39 @@
 import { numberFormat } from '@cc-components/shared';
+import { StatusBarConfig } from '@equinor/workspace-fusion';
 import { Loop } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
 
-// TODO: Add correct return type
-export const statusBarConfig = (data: Loop[]) => {
+export const statusBarConfig: StatusBarConfig<Loop> = (data) => {
   const kpis = getStatusBarData(data);
 
   return [
     {
       title: 'Loop tags',
-      value: () => numberFormat(kpis.uniqueLoopTags),
+      value: numberFormat(kpis.uniqueLoopTags),
     },
     {
       title: 'Checklists',
-      value: () => numberFormat(kpis.uniqueChecklists),
+      value: numberFormat(kpis.uniqueChecklists),
     },
     {
       title: 'Checklist signed',
-      value: () => numberFormat(kpis.checklistsSigned),
+      value: numberFormat(kpis.checklistsSigned),
     },
     {
       title: 'Checklist not signed',
-      value: () => numberFormat(kpis.checklistsNotSigned),
+      value: numberFormat(kpis.checklistsNotSigned),
     },
     {
       title: 'Ready',
-      value: () => numberFormat(kpis.ready),
+      value: numberFormat(kpis.ready),
     },
     {
       title: 'Overdue checklists',
-      value: () => numberFormat(kpis.overdueChecklists),
+      value: numberFormat(kpis.overdueChecklists),
     },
     {
       title: '% complete',
-      value: () => `${kpis.complete}%`,
+      value: `${kpis.complete}%`,
     },
   ];
 };
