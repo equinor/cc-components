@@ -1,7 +1,10 @@
-import { FollowUpStatuses, MaterialStatus } from '@cc-components/shared';
+import {
+  FollowUpStatuses,
+  MaterialStatus,
+  orderedProCoSysStatuses,
+} from '@cc-components/shared';
 import { WorkOrder } from '../../types';
 import { getWoStatus } from '../getWoStatus';
-import { orderedProCoSysStatuses } from '../orderedProCoSysStatuses';
 const prepareMaterialStatus = (status: MaterialStatus): string[] => {
   const statusLower = status.toLowerCase();
 

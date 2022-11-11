@@ -4,11 +4,11 @@ import {
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { WorkOrder } from '../types';
+import { ExtendedGardenFields, WorkOrder } from '../types';
 
 export const getItemWidth = (
   garden: GardenGroups<WorkOrder>,
-  groupByKey: string
+  groupByKey: keyof WorkOrder | ExtendedGardenFields
 ): number => {
   const columnName = groupByKey.replace('Code', '');
   const checkHeaderLength = ['milestone', 'responsible', 'discipline'].includes(

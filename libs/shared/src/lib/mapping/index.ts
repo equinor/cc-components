@@ -7,4 +7,5 @@ export {
   proCoSysStatusPriorityMap,
   proCoSysWorkOrderColorMap,
   proCoSysWorkOrderProgressColorMap,
+  orderedProCoSysStatuses,
 } from './procosys';

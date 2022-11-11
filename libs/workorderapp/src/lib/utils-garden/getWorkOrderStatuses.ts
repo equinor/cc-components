@@ -1,5 +1,5 @@
 import { FollowUpStatuses, hasProperty, ProcosysStatuses } from '@cc-components/shared';
-import { WorkOrder } from '../types';
+import { ExtendedGardenFields, WorkOrder } from '../types';
 import {
   getColorBasedOnGroupBy,
   getMatStatus,
@@ -22,8 +22,8 @@ type PackageStatusReturn = {
 };
 export const getWorkOrderStatuses = (
   data: WorkOrder,
-  gardenKey: keyof WorkOrder,
-  groupByKeys: (keyof WorkOrder)[]
+  gardenKey: keyof WorkOrder | ExtendedGardenFields,
+  groupByKeys: (keyof WorkOrder | ExtendedGardenFields)[]
 ): PackageStatusReturn => {
   const mccrColor = getMccrStatusColorByStatus(data.mccrStatus);
   const matColor = getMatStatusColorByStatus(data.materialStatus);

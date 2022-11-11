@@ -4,7 +4,7 @@ import { getGroupBy } from './getGroupBy';
 
 export const getHighlightedColumn = (
   groupByKey: keyof WorkOrder | ExtendedGardenFields
-) => {
+): string | undefined => {
   const groupBy = getGroupBy(groupByKey);
   switch (groupBy) {
     case 'plannedStartupDate':

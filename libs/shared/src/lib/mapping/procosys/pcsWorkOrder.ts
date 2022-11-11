@@ -40,3 +40,17 @@ export const proCoSysWorkOrderColorMap: Record<ProcosysStatuses, string> = {
   [ProcosysStatuses.Prepared]: '#B8B8B8',
   [ProcosysStatuses.NoStatus]: '#EC3E13',
 };
+
+export const orderedProCoSysStatuses: ProcosysStatuses[] = [
+  ProcosysStatuses.NoStatus,
+  ProcosysStatuses.Prepared,
+  ProcosysStatuses.ToMC,
+  ProcosysStatuses.MCDocsPrepared,
+  ProcosysStatuses.ToField,
+  ProcosysStatuses.FromField,
+  ProcosysStatuses.ComplByMC,
+  ProcosysStatuses.Cancelled,
+  ProcosysStatuses.SentDC,
+  ProcosysStatuses.ASBuiltCompleted,
+  ProcosysStatuses.SentToPlanning,
+];

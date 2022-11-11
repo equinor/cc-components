@@ -1,7 +1,7 @@
 import { FlagIcon, PopoverWrapper } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { WorkOrder } from '../types';
+import { ExtendedGardenFields, WorkOrder } from '../types';
 import { getWorkOrderStatuses } from '../utils-garden';
 import {
   StyledStatusCircles,
@@ -12,7 +12,15 @@ import {
 } from './garden.styles';
 import { WorkOrderPopover } from './Popover';
 
-const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
+const WorkorderItem = (
+  props: CustomItemView<
+    WorkOrder,
+    ExtendedGardenFields,
+    Record<string, unknown>,
+    Record<string, unknown>,
+    Record<string, unknown>
+  >
+): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
     null

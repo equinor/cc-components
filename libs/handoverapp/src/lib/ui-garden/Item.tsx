@@ -1,12 +1,11 @@
-import {
-  FlagIcon,
-  hasProperty,
-  PopoverWrapper,
-  WarningIcon,
-} from '@cc-components/shared';
+import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { HandoverPackage } from '../types';
+import {
+  ExtendedGardenFields,
+  HandoverCustomGroupByKeys,
+  HandoverPackage,
+} from '../types';
 import { getDotsColor, getItemSize, getTextColor } from '../utils-garden';
 import { getStatus } from '../utils-statuses';
 import { createProgressGradient } from '../utils-statuses/mcProgress';
@@ -21,7 +20,15 @@ import {
 import { PopoverContent } from './PopoverContent';
 import { ItemOptions } from './types';
 
-const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
+const HandoverItem = (
+  props: CustomItemView<
+    HandoverPackage,
+    ExtendedGardenFields,
+    HandoverCustomGroupByKeys,
+    Record<'maxVolume', number>,
+    Record<string, unknown>
+  >
+) => {
   const {
     data,
     onClick,
@@ -42,10 +49,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
 
   const { customState } = controller;
 
-  const size = getItemSize(
-    data.volume,
-    ((customState as any)?.['maxVolume'] as number) || 0
-  );
+  const size = getItemSize(data.volume, customState?.['maxVolume'] || 0);
 
   const status = getStatus(data);
   const backgroundColor = useMemo(
