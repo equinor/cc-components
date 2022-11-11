@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck //TODO Remove when  type is ready
+import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { HandoverPackage } from '../types';
@@ -21,4 +20,4 @@ const HandoverGardenHeader = (props: CustomHeaderView<HandoverPackage>) => {
   );
 };
 
-export default memo(HandoverGardenHeader);
+export const GardenHeader = memo(HandoverGardenHeader);

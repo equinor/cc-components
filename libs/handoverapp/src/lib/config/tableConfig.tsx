@@ -5,7 +5,7 @@ import {
   statusColorMap,
 } from '@cc-components/shared';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { GridConfig } from '@equinor/workspace-fusion';
+import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { HandoverPackage } from '../types';
 import { Status } from '../types/handoverPackage';
 

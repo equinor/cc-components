@@ -1,4 +1,4 @@
-import { FieldSettings, sortByNumber } from '@cc-components/shared';
+import { sortByNumber } from '@cc-components/shared';
 import {
   ExtendedGardenFields,
   HandoverCustomGroupByKeys,
@@ -6,6 +6,7 @@ import {
 } from '../types';
 import { getDateKey } from './getDateKey';
 import { getProgressKey } from './getProgressKey';
+import { FieldSettings } from '@equinor/workspace-fusion/garden';
 
 export const fieldSettings: FieldSettings<
   HandoverPackage,

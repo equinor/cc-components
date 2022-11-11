@@ -1,5 +1,5 @@
 import { numberFormat } from '@cc-components/shared';
-import { StatusBarConfig } from '@equinor/workspace-fusion';
+import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { HandoverPackage } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
 export const statusBarConfig: StatusBarConfig<HandoverPackage> = (data) => {

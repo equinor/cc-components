@@ -1,1 +1,2 @@
-export { default as GardenHeader } from './Header';
+export { GardenHeader } from './Header';
+export { GardenGroupBy } from './GroupBy';
