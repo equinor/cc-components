@@ -1,9 +1,8 @@
 import { Autocomplete } from '@equinor/eds-core-react';
-import { HandoverCustomGroupByKeys } from '../types';
-import {} from '@equinor/workspace-fusion/garden';
-
-export const GardenGroupBy = (props: unknown, a: unknown): JSX.Element => {
-  console.log(props, a);
+import { HandoverCustomGroupByKeys, HandoverPackage } from '../types';
+import { CustomVirtualViews } from '@equinor/workspace-fusion/garden';
+export const GardenGroupBy = (props: unknown): JSX.Element => {
+  console.log(props);
   //   const { setCustomGroupKeys, ...parkViewContext } = useParkViewContext();
   //   const customGroupByKeys =
   //     parkViewContext.customGroupByKeys as HandoverCustomGroupByKeys;

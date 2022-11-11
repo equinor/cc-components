@@ -1,8 +1,13 @@
-import { FieldSettings, sortByNumber } from '@cc-components/shared';
+import { sortByNumber } from '@cc-components/shared';
+import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { ExtendedGardenFields, WorkOrder } from '../types';
 import { columnKeyAccessor } from './columnKeyAccessor';
 
-export const fieldSettings: FieldSettings<WorkOrder, ExtendedGardenFields> = {
+export const fieldSettings: FieldSettings<
+  WorkOrder,
+  ExtendedGardenFields,
+  Record<PropertyKey, unknown>
+> = {
   wp: {
     label: 'Workorder production',
     getKey: columnKeyAccessor,

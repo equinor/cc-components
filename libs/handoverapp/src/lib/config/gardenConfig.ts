@@ -15,7 +15,11 @@ import {
   getMaxVolumeFromData,
 } from '../utils-garden';
 
-export const gardenConfig: GardenConfig<HandoverPackage, HandoverCustomGroupByKeys> = {
+export const gardenConfig: GardenConfig<
+  HandoverPackage,
+  ExtendedGardenFields,
+  HandoverCustomGroupByKeys
+> = {
   initialGrouping: {
     horizontalGroupingAccessor: 'RFCC',
     verticalGroupingKeys: [],

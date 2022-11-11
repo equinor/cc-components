@@ -1,7 +1,10 @@
-export { getFollowUpStatus } from './getFollowUpStatus';
-export { followUpStatusPriorityMap } from './followUpStatusPriorityMap';
-export { followUpColorMap } from './followUpColorMap';
-export { proCoSysStatusPriorityMap } from './proCoSysStatusPriorityMap';
+export {
+  getFollowUpStatus,
+  followUpStatusPriorityMap,
+  followUpColorMap,
+} from './followup';
 export { getStatusFn } from './getStatusFn';
-export { getMatStatusColorByStatus } from './getMatStatusColorByStatus';
+export { getMatStatusColorByStatus, getMatStatus } from './material';
 export { getMccrStatusColorByStatus } from './getMccrStatusColorByStatus';
+export { getColorBasedOnGroupBy } from './getColorBasedOnGroupBy';
+export { getTextColorByStatus } from './getTextColorByStatus';

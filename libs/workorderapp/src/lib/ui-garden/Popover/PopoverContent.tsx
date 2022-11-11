@@ -3,16 +3,13 @@ import {
   SizeIcons,
   StyledPopoverContainer,
   StyledPopoverProgressBar,
+  StyledPopoverProjectDescription,
+  StyledPopoverProjectTitle,
   StyledPopoverStatus,
 } from '@cc-components/shared';
 import { memo } from 'react';
 import { WorkOrder } from '../../types';
-import {
-  StyledStatuses,
-  StyledHoldBy,
-  StyledProjectTitle,
-  StyledProjectDescription,
-} from './popover.styles';
+import { StyledStatuses, StyledHoldBy } from './popover.styles';
 type ItemSize = 'small' | 'medium' | 'large';
 
 type ItemOptions = {
@@ -33,11 +30,13 @@ const WorkOrderPopoverWrapper = ({ data, itemOptions }: WorkOrderPopoverProps) =
     itemOptions;
   return (
     <StyledPopoverContainer>
-      <StyledProjectTitle>Project (ProCoSys)</StyledProjectTitle>
+      <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
       <p>
         {data.projectIdentifier}, {data.projectDescription}
       </p>
-      <StyledProjectDescription>{data.description}</StyledProjectDescription>
+      <StyledPopoverProjectDescription>
+        {data.description}
+      </StyledPopoverProjectDescription>
       <hr />
       <StyledPopoverProgressBar barColor={barColor} textColor={textColor}>
         <strong>Status: {milestone}</strong>
