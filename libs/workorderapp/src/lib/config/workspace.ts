@@ -4,24 +4,23 @@ import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 
-export const Workspace = () =>
-  createFusionWorkspace<WorkOrder>(
-    { appKey: 'Workorder', getIdentifier: (item) => item.workOrderNumber },
-    (config) =>
-      config
-        .addMiddleware((mediator) => (mediator.dataService.data = workorders))
-        .addConfig({
-          appColor: 'purple',
-          appKey: 'Workorder',
-          defaultTab: 'garden',
-        })
-        .addGrid(tableConfig)
-        .addFilter(filterConfig)
-        .addStatusBarItems(statusBarConfig)
-        .addFusionPowerBI({
-          reportUri: 'pp-punch-analytics',
-        })
-  );
+export const Workspace = createFusionWorkspace<WorkOrder>(
+  { appKey: 'Workorder', getIdentifier: (item) => item.workOrderNumber },
+  (config) =>
+    config
+      .addMiddleware((mediator) => (mediator.dataService.data = workorders))
+      .addConfig({
+        appColor: 'purple',
+        appKey: 'Workorder',
+        defaultTab: 'garden',
+      })
+      .addGrid(tableConfig)
+      .addFilter(filterConfig)
+      .addStatusBarItems(statusBarConfig)
+      .addFusionPowerBI({
+        reportUri: 'pp-punch-analytics',
+      })
+);
 export const workorders = [
   {
     projectIdentifier: 'L.O532C.002',
