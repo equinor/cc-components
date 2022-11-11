@@ -4,7 +4,7 @@ import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 
-export const fusionWorkspaceConfig = () =>
+export const Workspace = () =>
   createFusionWorkspace<Loop>(
     { appKey: 'Workorder', getIdentifier: (item) => item.checklistId },
     (config) =>
@@ -18,7 +18,4 @@ export const fusionWorkspaceConfig = () =>
         .addFilter(filterConfig)
         .addStatusBarItems(statusBarConfig)
         .addGrid(tableConfig())
-        .addFusionPowerBI({
-          reportUri: 'pp-punch-analytics',
-        })
   );

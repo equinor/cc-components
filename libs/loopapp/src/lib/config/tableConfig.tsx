@@ -6,7 +6,7 @@ import {
   statusColorMap,
 } from '@cc-components/shared';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { GridConfig } from '@equinor/workspace-fusion';
+import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { Loop, Status } from '../types';
 
 export const tableConfig = (): GridConfig<Loop> => {

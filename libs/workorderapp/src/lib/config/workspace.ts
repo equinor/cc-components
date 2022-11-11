@@ -4,7 +4,7 @@ import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 
-export const fusionWorkspaceConfig = () =>
+export const Workspace = () =>
   createFusionWorkspace<WorkOrder>(
     { appKey: 'Workorder', getIdentifier: (item) => item.workOrderNumber },
     (config) =>
@@ -17,15 +17,6 @@ export const fusionWorkspaceConfig = () =>
         })
         .addGrid(tableConfig)
         .addFilter(filterConfig)
-        .addGarden({
-          data: [],
-          nodeLabelCallback: (s) => s.workOrderNumber,
-          getIdentifier: (s) => s.workOrderNumber,
-          initialGrouping: {
-            horizontalGroupingAccessor: 'discipline',
-            verticalGroupingKeys: [],
-          },
-        })
         .addStatusBarItems(statusBarConfig)
         .addFusionPowerBI({
           reportUri: 'pp-punch-analytics',
