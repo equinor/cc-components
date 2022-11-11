@@ -1,18 +1,15 @@
-import { fusionWorkspaceConfig } from '@cc-components/handoverapp';
-import { Workspace } from '@equinor/workspace-fusion';
-import { useMemo } from 'react';
+import { Workspace } from '@cc-components/handoverapp';
 import styled from 'styled-components';
 
 const StyledApp = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  width: 90vw;
 `;
 
 export function App() {
-  const controller = useMemo(() => fusionWorkspaceConfig(), []);
   return (
     <StyledApp>
-      <Workspace controller={controller} />
+      <Workspace />
     </StyledApp>
   );
 }

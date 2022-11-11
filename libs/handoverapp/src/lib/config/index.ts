@@ -1,5 +1,5 @@
 export { filterConfig } from './filterConfig';
 export { statusBarConfig } from './statusBarConfig';
 export { tableConfig } from './tableConfig';
-export { fusionWorkspaceConfig } from './workspaceConfig';
+export { Workspace } from './workspaceConfig';
 export { gardenConfig } from './gardenConfig';

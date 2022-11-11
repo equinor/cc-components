@@ -17,6 +17,16 @@ export const StyledPopoverContainer = styled.div`
     font-size: 12px;
   }
 `;
+
+export const StyledPopoverProjectTitle = styled.p`
+  font-weight: bold;
+`;
+
+export const StyledPopoverProjectDescription = styled.p`
+  word-break: break-word;
+  white-space: break-spaces;
+`;
+
 type PopoverProgressBarProps = {
   barColor: string;
   textColor: string;
