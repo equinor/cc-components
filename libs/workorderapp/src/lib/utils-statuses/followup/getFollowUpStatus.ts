@@ -35,7 +35,7 @@ const materialOk = (workOrder: WorkOrder): number =>
   woHasMaterialStatus(workOrder, 'M12', 'M13', 'MN');
 
 const materialAvailable = (workOrder: WorkOrder): number =>
-  woHasMaterialStatus(workOrder, 'M7', 'M9', 'M10', 'M11', 'MN');
+  woHasMaterialStatus(workOrder, 'M7', 'M9', 'M10', 'M11', 'M12', 'MN');
 
 /**
  * Function to retrieve "follow up" status of a package based on the package's projectProgress
