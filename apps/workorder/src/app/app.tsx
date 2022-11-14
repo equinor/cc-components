@@ -1,15 +1,16 @@
-import styled from 'styled-components';
-import { Workspace } from '@cc-components/workorderapp';
-const StyledApp = styled.div`
-  height: 100vh;
-`;
+import { AppModuleInitiator } from '@equinor/fusion-framework-app';
+import { createComponent, renderComponent } from '@equinor/fusion-framework-react-app';
+import { module as serviceModule } from '@equinor/fusion-framework-module-services';
+const configure: AppModuleInitiator = async (config) => {
+  config.useFrameworkServiceClient('portal');
+  config.addConfig({
+    module: serviceModule,
+  });
+};
+export const render = renderComponent((el, args) => {
+  const componentRenderer = createComponent(() => <div></div>, configure);
 
-export function App() {
-  return (
-    <StyledApp>
-      <Workspace />
-    </StyledApp>
-  );
-}
+  return componentRenderer(el, args);
+});
 
-export default App;
+export default render;
