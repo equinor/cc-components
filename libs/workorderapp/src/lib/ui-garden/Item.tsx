@@ -13,13 +13,7 @@ import {
 import { WorkOrderPopover } from './Popover';
 
 const WorkorderItem = (
-  props: CustomItemView<
-    WorkOrder,
-    ExtendedGardenFields,
-    Record<string, unknown>,
-    Record<string, unknown>,
-    Record<string, unknown>
-  >
+  props: CustomItemView<WorkOrder, ExtendedGardenFields>
 ): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
