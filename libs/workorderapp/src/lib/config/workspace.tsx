@@ -1,5 +1,6 @@
 import { createFusionWorkspace } from '@equinor/workspace-fusion';
 import { WorkOrder } from '../types';
+import { WorkorderSidesheet } from '../ui-sidesheet/WorkorderSidesheet';
 import { workorders } from './data';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
@@ -20,4 +21,10 @@ export const Workspace = createFusionWorkspace<WorkOrder>(
       .addFilter(filterConfig)
       .addGarden(gardenConfig)
       .addStatusBarItems(statusBarConfig)
+      .addSidesheet({
+        Component: ({ item }) => (
+          <WorkorderSidesheet id={item.workOrderId} workOrder={item} />
+        ),
+        getTitle: () => '',
+      })
 );
