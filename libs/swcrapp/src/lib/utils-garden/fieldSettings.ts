@@ -1,8 +1,5 @@
-import {
-  FieldSettings,
-  getYearAndWeekFromString,
-  sortByNumber,
-} from '@cc-components/shared';
+import { getYearAndWeekFromString, sortByNumber } from '@cc-components/shared';
+import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { ExtendedGardenFields, SwcrPackage } from '../types';
 import {
   getHoursGroupKey,
