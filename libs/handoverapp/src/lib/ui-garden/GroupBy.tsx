@@ -1,39 +1,61 @@
-import { Autocomplete } from '@equinor/eds-core-react';
-import { HandoverCustomGroupByKeys, HandoverPackage } from '../types';
-import { CustomVirtualViews } from '@equinor/workspace-fusion/garden';
-export const GardenGroupBy = (props: unknown): JSX.Element => {
-  console.log(props);
-  //   const { setCustomGroupKeys, ...parkViewContext } = useParkViewContext();
-  //   const customGroupByKeys =
-  //     parkViewContext.customGroupByKeys as HandoverCustomGroupByKeys;
+import { Autocomplete, AutocompleteChanges } from '@equinor/eds-core-react';
+import {
+  ExtendedGardenFields,
+  HandoverCustomGroupByKeys,
+  HandoverPackage,
+} from '../types';
+import { CustomGroupViewProps } from '@equinor/workspace-fusion/garden';
+export const GardenGroupBy = (
+  props: CustomGroupViewProps<
+    HandoverPackage,
+    ExtendedGardenFields,
+    HandoverCustomGroupByKeys
+  >
+): JSX.Element => {
+  const { customGroupByKeys } = props.controller;
 
+  const handlePlannedForecast = (changes: AutocompleteChanges<string | undefined>) => {
+    const plannedForecast = changes
+      .selectedItems[0] as unknown as HandoverCustomGroupByKeys['plannedForecast'];
+
+    customGroupByKeys?.setValue({
+      ...customGroupByKeys.value,
+      plannedForecast: plannedForecast || 'Planned',
+    });
+  };
+
+  const handleWeeklyDaily = (changes: AutocompleteChanges<string | undefined>) => {
+    const weeklyDaily = changes
+      .selectedItems[0] as unknown as HandoverCustomGroupByKeys['weeklyDaily'];
+
+    customGroupByKeys?.setValue({
+      ...customGroupByKeys.value,
+      weeklyDaily: weeklyDaily || 'Weekly',
+    });
+  };
   return (
     <>
-      {/* <Autocomplete
+      <Autocomplete
         key={'plannedForecast'}
         options={['Planned', 'Forecast']}
         label={''}
-        selectedOptions={[customGroupByKeys.plannedForecast]}
-        onOptionsChange={(changes) =>
-          setCustomGroupKeys({
-            ...customGroupByKeys,
-            plannedForecast: changes.selectedItems[0] || 'Planned',
-          })
-        }
+        initialSelectedOptions={[customGroupByKeys?.value.plannedForecast]}
+        // selectedOptions={[customGroupByKeys?.value.plannedForecast]}
+        onOptionsChange={handlePlannedForecast}
+        hideClearButton
+        disablePortal
+        aria-expanded={false}
       />
 
       <Autocomplete
         key={'weeklyDaily'}
         options={['Weekly', 'Daily']}
         label={''}
-        selectedOptions={[customGroupByKeys.weeklyDaily]}
-        onOptionsChange={(changes) =>
-          setCustomGroupKeys({
-            ...customGroupByKeys,
-            weeklyDaily: changes.selectedItems[0] || 'Weekly',
-          })
-        }
-      /> */}
+        initialSelectedOptions={[customGroupByKeys?.value.weeklyDaily]}
+        // selectedOptions={[customGroupByKeys?.value.weeklyDaily]}
+        onOptionsChange={handleWeeklyDaily}
+        hideClearButton
+      />
     </>
   );
 };

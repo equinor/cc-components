@@ -2,8 +2,8 @@ import { Workspace } from '@cc-components/handoverapp';
 import styled from 'styled-components';
 
 const StyledApp = styled.div`
-  height: 90vh;
-  width: 90vw;
+  height: 80vh;
+  width: 80vw;
 `;
 
 export function App() {
