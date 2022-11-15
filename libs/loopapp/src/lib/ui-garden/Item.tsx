@@ -14,13 +14,7 @@ const createProgressBackground = (progress: number) => {
   return `linear-gradient(90deg, #d9eaf2 ${progress}%, ${standardColor} ${progress}%)`;
 };
 const LoopGardenItem = (
-  props: CustomItemView<
-    Loop,
-    ExtendedGardenFields,
-    CustomGroupByKeys,
-    Record<string, unknown>,
-    Record<string, unknown>
-  >
+  props: CustomItemView<Loop, ExtendedGardenFields, CustomGroupByKeys>
 ) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
@@ -40,6 +34,7 @@ const LoopGardenItem = (
     parentRef,
     controller,
   } = props;
+
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 

@@ -3,12 +3,7 @@ import { CustomGroupByKeys, ExtendedGardenFields, Loop } from '../types';
 import { GardenItem } from '../ui-garden';
 import { fieldSettings, getHighlightedColumn, getItemWidth } from '../utils-garden';
 
-export const gardenConfig: GardenConfig<
-  Loop,
-  ExtendedGardenFields,
-  CustomGroupByKeys,
-  Record<string, unknown>
-> = {
+export const gardenConfig: GardenConfig<Loop, ExtendedGardenFields, CustomGroupByKeys> = {
   getDisplayName: (item) => item.loopNo,
   initialGrouping: { horizontalGroupingAccessor: 'RFC', verticalGroupingKeys: [] },
   customGroupByKeys: {
