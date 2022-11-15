@@ -2,20 +2,20 @@ import { FusionConfigurator } from '@equinor/fusion-framework-react';
 import { configureAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import { enableServices } from '@equinor/fusion-framework-module-services';
 export const configure = async (config: FusionConfigurator) => {
+  // config.configureServiceDiscovery({
+  //   client: {
+  //     baseUri: 'https://famapi.equinor.com',
+  //     defaultScopes: ['api://958bef40-48c3-496e-bc0b-0fe5783f196b/access_as_user'],
+  //   },
+  // });
+
   config.configureServiceDiscovery({
     client: {
-      baseUri: 'https://famapi.equinor.com',
-      defaultScopes: ['api://958bef40-48c3-496e-bc0b-0fe5783f196b/access_as_user'],
+      baseUri: 'https://pro-s-portal-ci.azurewebsites.net/',
+
+      defaultScopes: ['5a842df8-3238-415d-b168-9f16a6a6031b/.default'],
     },
   });
-
-  //   config.configureServiceDiscovery({
-  //     client: {
-  //       baseUri: 'https://pro-s-portal-ci.azurewebsites.net/',
-
-  //       defaultScopes: ['5a842df8-3238-415d-b168-9f16a6a6031b/.default'],
-  //     },
-  //   });
 
   config.configureMsal(
     {
