@@ -1,7 +1,7 @@
-import { proCoSysUrls } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { DescriptionCell, LinkCell } from '../../..';
 import { MccrBase } from './types';
+import { proCoSysUrls } from '../../../../mapping';
 
 export const columns: ColDef<MccrBase>[] = [
   {
