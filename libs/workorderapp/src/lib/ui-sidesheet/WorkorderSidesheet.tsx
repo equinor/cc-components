@@ -6,7 +6,7 @@ import { DetailsTab } from './DetailsTab';
 
 type WorkorderSidesheetProps = {
   id: string;
-  workOrder: WorkOrder;
+  workOrder?: WorkOrder;
 };
 export const WorkorderSidesheet = ({
   id,
@@ -14,6 +14,7 @@ export const WorkorderSidesheet = ({
 }: WorkorderSidesheetProps): JSX.Element => {
   const [activeTab, setActiveTab] = useState(0);
 
+  
   const handleChangeTab = (index: number) => {
     setActiveTab(index);
   };

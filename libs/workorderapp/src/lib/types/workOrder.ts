@@ -35,6 +35,6 @@ export type WorkOrder = {
   w8ActualDate: string | null;
   w9ActualDate: string | null;
   w10ActualDate: string | null;
-  workOrderId: string | null;
+  workOrderId: string;
   workOrderNumber: string;
 };
