@@ -6,3 +6,6 @@ export * from './punch';
 export * from './query';
 export * from './unsignedAction';
 export * from './unsignedTask';
+export * from './details';
+export * from './material';
+export * from './mccr';

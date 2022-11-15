@@ -1,0 +1,1 @@
+export { MaterialTab } from './MaterialTab';
