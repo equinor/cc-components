@@ -62,6 +62,10 @@
         }
       }
     },
+    "dev": {
+      "executor": "fusion-framework-cli app dev",
+      "defaultConfiguration": "dev"
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
