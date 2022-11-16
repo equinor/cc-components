@@ -1,0 +1,9 @@
+{
+  "name": "handover",
+  "version": "0.0.1",
+  "main": "src/main.tsx",
+  "scripts": {
+    "dev": "fusion-framework-cli app dev",
+    "build": "fusion-framework-cli app build"
+  }
+}
