@@ -1,0 +1,10 @@
+{
+  "name": "Handover",
+  "shortName": "handover",
+  "key": "handover",
+  "version": {
+    "major": "0",
+    "minor": "0",
+    "patch": "1"
+  }
+}
