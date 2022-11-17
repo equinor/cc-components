@@ -1,10 +1,12 @@
 import { CommissioningStatus, McPackage, TagSize } from '../../types';
-import { ProjectDescription, ProjectTitle, Statuses } from './popoverContent.styles';
+import { Statuses } from './popoverContent.styles';
 import {
   StyledPopoverContainer,
   StyledPopoverProgressBar,
   StyledPopoverStatus,
   SizeIcons,
+  StyledPopoverProjectTitle,
+  StyledPopoverProjectDescription,
 } from '@cc-components/shared';
 type ItemOptions = {
   status: CommissioningStatus;
@@ -24,11 +26,13 @@ export const PopoverContent = ({
 }: PopoverContentProps): JSX.Element => {
   return (
     <StyledPopoverContainer>
-      <ProjectTitle>Project (ProCoSys)</ProjectTitle>
+      <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
       <p>
         {data.projectIdentifier}, {data.projectDescription}
       </p>
-      <ProjectDescription>{data.description}</ProjectDescription>
+      <StyledPopoverProjectDescription>
+        {data.description}
+      </StyledPopoverProjectDescription>
       <hr />
       <StyledPopoverProgressBar barColor={backgroundColor} textColor={contentsColor}>
         <span>
