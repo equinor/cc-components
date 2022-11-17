@@ -8,7 +8,7 @@ export type McPackage = {
   mcPkgNumber: string;
   commPkgId: string;
   commPkgNumber: string;
-  commPkgStatus: string;
+  commPkgStatus: McStatus;
   description: string;
   remark: string;
   system: string;

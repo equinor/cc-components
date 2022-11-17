@@ -1,34 +1,34 @@
 import { numberFormat } from '@cc-components/shared';
+import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { McPackage } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
-// TODO: Import StatusItem[] type from KPI package
-export const statusBarConfig = (data: McPackage[]) => {
+export const statusBarConfig: StatusBarConfig<McPackage> = (data) => {
   const kpis = getStatusBarData(data);
 
   return [
     {
       title: 'Total MCpkgs',
-      value: () => numberFormat(kpis.mcPkgsCount),
+      value: numberFormat(kpis.mcPkgsCount),
     },
     {
       title: 'Final punch',
-      value: () => numberFormat(kpis.finalPunchCount),
+      value: numberFormat(kpis.finalPunchCount),
     },
     {
       title: 'Punch status Accepted',
-      value: () => numberFormat(kpis.punchAcceptedCount),
+      value: numberFormat(kpis.punchAcceptedCount),
     },
     {
       title: 'MC to Com',
-      value: () => numberFormat(kpis.mcToComCount),
+      value: numberFormat(kpis.mcToComCount),
     },
     {
       title: 'RFCC',
-      value: () => numberFormat(kpis.rfccCount),
+      value: numberFormat(kpis.rfccCount),
     },
     {
       title: 'RFCC %',
-      value: () => `${numberFormat(kpis.rfccPercentage)}%`,
+      value: `${numberFormat(kpis.rfccPercentage)}%`,
     },
   ];
 };

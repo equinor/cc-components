@@ -2,8 +2,8 @@ import { getColumnDateKey } from '@cc-components/shared';
 import type { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
 
 const getFieldKeyBasedOnPlannedForecast = (
-  groupBy: ExtendedGardenFields | string,
-  plannedForecast: string
+  groupBy: ExtendedGardenFields | keyof McPackage,
+  plannedForecast: 'Planned' | 'Forecast'
 ): keyof McPackage => {
   switch (groupBy) {
     case 'finalPunch':
@@ -30,9 +30,12 @@ const getFieldKeyBasedOnPlannedForecast = (
 //TODO: Update types when Garden package is released
 export const getDateKey = (
   item: McPackage,
-  key: keyof McPackage,
-  groupBy: CustomGroupByKeys
+  key: keyof McPackage | ExtendedGardenFields,
+  groupBy?: CustomGroupByKeys
 ) => {
+  if (!groupBy) {
+    return 'N/A';
+  }
   const { plannedForecast, weeklyDaily } = groupBy;
   const mcFieldKey = getFieldKeyBasedOnPlannedForecast(key, plannedForecast);
   return getColumnDateKey(mcFieldKey, weeklyDaily, item);
