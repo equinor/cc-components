@@ -1,11 +1,52 @@
-import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom/client';
+import { createWorkspace } from '@cc-components/handoverapp';
+import {
+  ComponentRenderArgs,
+  IAppConfigurator,
+  makeComponent,
+} from '@equinor/fusion-framework-react-app';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
+import { StrictMode, useMemo } from 'react';
+import { createRoot } from 'react-dom/client';
+const dataProxy = {
+  clientId: '5a842df8-3238-415d-b168-9f16a6a6031b',
+  uri: 'https://pro-s-dataproxy-CI.azurewebsites.net',
+  defaultScopes: ['5a842df8-3238-415d-b168-9f16a6a6031b/.default'],
+};
 
-import App from './app/app';
+const configure = async (config: IAppConfigurator) => {
+  config.configureHttpClient('data-proxy', {
+    baseUri: dataProxy.uri,
+    defaultScopes: dataProxy.defaultScopes,
+  });
+  enableAgGrid(config);
+};
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+const MyApp = () => {
+  const dataProxy = useHttpClient('data-proxy');
+  const Workspace = useMemo(() => createWorkspace(dataProxy), [dataProxy]);
+  return (
+    <StrictMode>
+      <div style={{ height: '90vh', width: '90vw' }}>
+        <Workspace />
+      </div>
+    </StrictMode>
+  );
+};
+
+export default function render(el: HTMLElement, args: ComponentRenderArgs) {
+  /** Create root from provided element */
+  const root = createRoot(el);
+
+  /** Make the app component
+   * First argument is the main React component
+   * Second argu is the the render args (framework and env variables)
+   * Third argument is the configuration callback
+   */
+  const AppComponent = makeComponent(<MyApp />, args, configure);
+
+  root.render(<AppComponent />);
+
+  /** Teardown */
+  return () => root.unmount();
+}

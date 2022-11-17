@@ -3,12 +3,12 @@ import {
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { getFieldKeyBasedOnPlannedForecast } from '.';
 import {
   ExtendedGardenFields,
   HandoverCustomGroupByKeys,
   HandoverPackage,
 } from '../types';
+import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 
 const MIN_WIDTH = 139;
 
