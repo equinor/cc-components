@@ -1,1 +1,1 @@
-export { statusBarConfig } from './config';
+export * from './config';

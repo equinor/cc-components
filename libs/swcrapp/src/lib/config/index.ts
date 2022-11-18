@@ -1,2 +1,1 @@
-export { statusBarConfig } from './statusBarConfig';
-export { filterSetup } from './filterConfig';
+export { createWorkspace } from './workspaceConfig';
