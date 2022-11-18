@@ -54,7 +54,7 @@
     "@equinor/fusion-framework-module-ag-grid": "^1.0.17",
     "@equinor/fusion-framework-react-app": "^1.2.13",
     "@equinor/workspace-ag-grid": "^0.0.2",
-    "@equinor/workspace-fusion": "^0.3.2",
+    "@equinor/workspace-fusion": "^0.7.0",
     "core-js": "^3.6.5",
     "luxon": "^3.0.4",
     "react": "18.2.0",

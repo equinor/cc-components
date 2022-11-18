@@ -8,7 +8,7 @@ specifiers:
   '@equinor/fusion-framework-module-ag-grid': ^1.0.17
   '@equinor/fusion-framework-react-app': ^1.2.13
   '@equinor/workspace-ag-grid': ^0.0.2
-  '@equinor/workspace-fusion': ^0.3.2
+  '@equinor/workspace-fusion': ^0.7.0
   '@nrwl/cli': 14.8.3
   '@nrwl/eslint-plugin-nx': ^14.8.3
   '@nrwl/jest': ^14.8.3
@@ -61,7 +61,7 @@ dependencies:
   '@equinor/fusion-framework-module-ag-grid': 1.0.17
   '@equinor/fusion-framework-react-app': 1.3.2_hwm3je2db4gcuvax2htnqka26e
   '@equinor/workspace-ag-grid': 0.0.2_biqbaboplfbrettd7655fr4n2y
-  '@equinor/workspace-fusion': 0.3.2_eqibwb5zplagz2n3ojb6q7urha
+  '@equinor/workspace-fusion': 0.7.0_eqibwb5zplagz2n3ojb6q7urha
   core-js: 3.26.1
   luxon: 3.1.0
   react: 18.2.0
@@ -2099,8 +2099,8 @@ packages:
       styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
     dev: false
 
-  /@equinor/workspace-ag-grid/0.0.7_7i5myeigehqah43i5u7wbekgba:
-    resolution: {integrity: sha512-qKQv5ElBVvIx5jNV/IOO4E/toRgFzU7FoFEBT/eogMVstbrbsMzj9uA0t10yYGnwAaZeWgtVXtfQUx8aiGx0Sw==}
+  /@equinor/workspace-ag-grid/0.2.0_7i5myeigehqah43i5u7wbekgba:
+    resolution: {integrity: sha512-rlN5VGZBAPVGB2UyisIoCdFyrUZAmfVisyJXpT6ObFP3f2x7b5VX2FC2/mq4CvA1yoX6IYtStCwB4h/LzTCf0A==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -2109,8 +2109,8 @@ packages:
       '@ag-grid-community/client-side-row-model': 28.2.1
       '@ag-grid-community/core': 28.2.1
       '@ag-grid-enterprise/column-tool-panel': 28.2.1
-      '@equinor/workspace-core': 0.0.6
-      '@equinor/workspace-observable-proxy': 0.0.5
+      '@equinor/workspace-core': 0.0.8
+      '@equinor/workspace-observable-proxy': 0.2.0
       ag-grid-community: 28.2.1
       ag-grid-enterprise: 28.2.1
       ag-grid-react: 28.2.1_kap55pawlsqblyi2mqg5b5ge64
@@ -2120,17 +2120,17 @@ packages:
       styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
     dev: false
 
-  /@equinor/workspace-core/0.0.6:
-    resolution: {integrity: sha512-aIB2Ng1hVxfXk3BKE5SesSlAO8jPHldVQ8O790hfPWC6ZKGpFoXbglpPkJL14j74Bx9j+bO1kvCBE+2mQM3e7Q==}
+  /@equinor/workspace-core/0.0.8:
+    resolution: {integrity: sha512-qqgcy6X9XJJ3BSvcyrxWORxQ+2gYkNg07d3PRXYIS4SuobEpF/h1Nt2skub6jjzb0osH+Kw14w04LpvuqAVLCw==}
     dependencies:
-      '@equinor/workspace-observable-proxy': 0.0.5
+      '@equinor/workspace-observable-proxy': 0.2.0
       rxjs: 7.5.7
     dev: false
 
-  /@equinor/workspace-data-source/0.0.7:
-    resolution: {integrity: sha512-naFNNbTk3UXR4rO9C02kUz0BoHlq2W9iL9qL4RJgOhFerWbcg6yL9WyHGjFcPayGzDWm/pJvEH5s1HMoXuYudQ==}
+  /@equinor/workspace-data-source/0.1.0:
+    resolution: {integrity: sha512-Zbe5libfVs3FKmIZe6BUIgsSfP2WGVGs0uCA6bPBwzKbIBHZrQ0H4cCyyUCVi1GYIY6bgWs6sFbgfuYX1kWnaQ==}
     dependencies:
-      '@equinor/workspace-core': 0.0.6
+      '@equinor/workspace-core': 0.0.8
     dev: false
 
   /@equinor/workspace-filter/0.0.7_7i5myeigehqah43i5u7wbekgba:
@@ -2154,8 +2154,8 @@ packages:
       - '@types/sortablejs'
     dev: false
 
-  /@equinor/workspace-fusion/0.3.2_eqibwb5zplagz2n3ojb6q7urha:
-    resolution: {integrity: sha512-mwJPEYIoh6G5HNiYjJ1keawT8gtPc1kEHxleiVuMsos4CcFusXgC22v72bRTJtrmPUZ30PIrgJprKZEXLJ49Cw==}
+  /@equinor/workspace-fusion/0.7.0_eqibwb5zplagz2n3ojb6q7urha:
+    resolution: {integrity: sha512-HNn17Gk5RHRPdlDBP3hUhLPXJl/SkpdMo3oGrd3IKSFVmADa1Sxc0smcwp7gQlpyiUsal1Bao6PLp5zbgPbvTQ==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -2165,18 +2165,19 @@ packages:
       '@equinor/eds-icons': 0.15.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/fusion-framework': 4.4.2_w5j4k42lgipnm43s3brx6h3c34
-      '@equinor/workspace-ag-grid': 0.0.7_7i5myeigehqah43i5u7wbekgba
-      '@equinor/workspace-data-source': 0.0.7
+      '@equinor/workspace-ag-grid': 0.2.0_7i5myeigehqah43i5u7wbekgba
+      '@equinor/workspace-data-source': 0.1.0
       '@equinor/workspace-filter': 0.0.7_7i5myeigehqah43i5u7wbekgba
-      '@equinor/workspace-garden': 0.1.3_eqibwb5zplagz2n3ojb6q7urha
-      '@equinor/workspace-powerbi': 0.0.6_7i5myeigehqah43i5u7wbekgba
-      '@equinor/workspace-react': 0.0.8_eqibwb5zplagz2n3ojb6q7urha
-      '@equinor/workspace-sidesheet': 0.0.6_ihs4q656o4fuc7iygjgbhapzmi
+      '@equinor/workspace-garden': 0.4.0_eqibwb5zplagz2n3ojb6q7urha
+      '@equinor/workspace-powerbi': 0.1.0_7i5myeigehqah43i5u7wbekgba
+      '@equinor/workspace-react': 0.2.0_eqibwb5zplagz2n3ojb6q7urha
+      '@equinor/workspace-sidesheet': 0.1.0_ihs4q656o4fuc7iygjgbhapzmi
       '@equinor/workspace-status-bar': 0.0.7_7i5myeigehqah43i5u7wbekgba
       history: 5.3.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
+      rxjs: 7.5.7
       styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
     transitivePeerDependencies:
       - '@babel/core'
@@ -2187,8 +2188,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-garden/0.1.3_eqibwb5zplagz2n3ojb6q7urha:
-    resolution: {integrity: sha512-XuY9dbsBkMzdyY9diSb7MCwlvGN1Px0qWqHayiSbd55HpDLRRqw+7OXyOzwMfFNgzD7ZXVDGPKI7gldR2mUuNw==}
+  /@equinor/workspace-garden/0.4.0_eqibwb5zplagz2n3ojb6q7urha:
+    resolution: {integrity: sha512-mXUWYWK10ijqYceSg85VIYHSotLMNcuQ7AVaF7VA3VrsIbj4A+cwGBazvFQ0iexzshEwwNsMCsg3keAH8fKK9A==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -2214,14 +2215,14 @@ packages:
       rxjs: 7.5.7
     dev: false
 
-  /@equinor/workspace-observable-proxy/0.0.5:
-    resolution: {integrity: sha512-t8bKWUPlhYonAEo7XsGJ5VGAheDnHgt956Vh15MdGBMQQIhuHNh7KWRzq1FQ6Z/FA4vmhfa+a9S8seO2Bne3nw==}
+  /@equinor/workspace-observable-proxy/0.2.0:
+    resolution: {integrity: sha512-chPLZlqcYSKePvEK0vzS04jWJyjLajkB/tYQwCP3BsygCxOYwSvvicJLfQ9nIR+oanV2DEeFuAhlSHv7ZpSn1A==}
     dependencies:
       rxjs: 7.5.7
     dev: false
 
-  /@equinor/workspace-powerbi/0.0.6_7i5myeigehqah43i5u7wbekgba:
-    resolution: {integrity: sha512-CqQz76yCP9XWb1l6YKquALPzGBazHc5IMExN0kJ6JMXIfmWEpIA3TGZ5MnAnRM9ZGvEzCCDvaf8nDVmMJRZGEg==}
+  /@equinor/workspace-powerbi/0.1.0_7i5myeigehqah43i5u7wbekgba:
+    resolution: {integrity: sha512-tNbXcvur7ezq+qH56kgfhjeYubQr3X4OLhY3oRAxpqfDxBqkHVrM9s/uqUC7MVyj39yggJJBb+gb2SpAgZJkvw==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -2243,8 +2244,8 @@ packages:
       - sortablejs
     dev: false
 
-  /@equinor/workspace-react/0.0.8_eqibwb5zplagz2n3ojb6q7urha:
-    resolution: {integrity: sha512-Ece2gMh6TP/21IjVP9raI3K5ZpwprK8vMuk8d4S8jvJIeq/O9IaqvmNv8O/muvaF+edKfJpDVe14sQfkNyWk8w==}
+  /@equinor/workspace-react/0.2.0_eqibwb5zplagz2n3ojb6q7urha:
+    resolution: {integrity: sha512-XNCHf5mshIMw8BfiBUFF6VBOq4iZlrM7nuPTgO+vuHh/mTPzxY3PJt/C6d9GPHGIzUkIqhLm/Nwx2mkjVcsNAA==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -2252,7 +2253,7 @@ packages:
     dependencies:
       '@equinor/eds-core-react': 0.26.0_fehvxi5i7exmbt3zszdxasbicu
       '@equinor/eds-tokens': 0.9.0
-      '@equinor/workspace-core': 0.0.6
+      '@equinor/workspace-core': 0.0.8
       re-resizable: 6.9.9_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -2264,8 +2265,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-sidesheet/0.0.6_ihs4q656o4fuc7iygjgbhapzmi:
-    resolution: {integrity: sha512-C1Yb7SzLTQZhmfZZeqiwwU0eeQK4zuxgN28IrEemNchkRk7mbycUUKBA3Dno3EtirRibGBJKS/y8GAoLKK/CmA==}
+  /@equinor/workspace-sidesheet/0.1.0_ihs4q656o4fuc7iygjgbhapzmi:
+    resolution: {integrity: sha512-NJgor2o85uXc+Kx+u7tJtOM9SqWihws2+zkeAPsxD1INmksq7Dm0cCLZkYL5FuQXNbvcoeXdfhRMX1SKUu3OsQ==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -2274,6 +2275,7 @@ packages:
       '@equinor/eds-core-react': 0.26.0_fehvxi5i7exmbt3zszdxasbicu
       '@equinor/eds-icons': 0.15.0
       '@equinor/eds-tokens': 0.9.0
+      re-resizable: 6.9.9_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
@@ -2442,7 +2444,7 @@ packages:
     dependencies:
       '@jest/types': 28.1.3
       '@types/node': 16.11.7
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-message-util: 28.1.3
       jest-util: 28.1.3
       slash: 3.0.0
@@ -2557,7 +2559,7 @@ packages:
       '@jest/types': 28.1.3
       '@jridgewell/trace-mapping': 0.3.17
       '@types/node': 16.11.7
-      chalk: 4.1.0
+      chalk: 4.1.2
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
       glob: 7.2.3
@@ -8192,7 +8194,7 @@ packages:
       '@jest/test-result': 28.1.3
       '@jest/types': 28.1.3
       '@types/node': 16.11.7
-      chalk: 4.1.0
+      chalk: 4.1.2
       co: 4.6.0
       dedent: 0.7.0
       is-generator-fn: 2.1.0
@@ -8255,7 +8257,7 @@ packages:
       '@jest/types': 28.1.3
       '@types/node': 16.11.7
       babel-jest: 28.1.1_@babel+core@7.20.2
-      chalk: 4.1.0
+      chalk: 4.1.2
       ci-info: 3.6.1
       deepmerge: 4.2.2
       glob: 7.2.3
@@ -8350,7 +8352,7 @@ packages:
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
       '@jest/types': 28.1.3
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-get-type: 28.0.2
       jest-util: 28.1.3
       pretty-format: 28.1.3
@@ -8457,7 +8459,7 @@ packages:
     resolution: {integrity: sha512-kQeJ7qHemKfbzKoGjHHrRKH6atgxMk8Enkk2iPQ3XwO6oE/KYD8lMYOziCkeSB9G4adPM4nR1DE8Tf5JeWH6Bw==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-diff: 28.1.3
       jest-get-type: 28.0.2
       pretty-format: 28.1.3
@@ -8470,7 +8472,7 @@ packages:
       '@babel/code-frame': 7.18.6
       '@jest/types': 28.1.3
       '@types/stack-utils': 2.0.1
-      chalk: 4.1.0
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       micromatch: 4.0.5
       pretty-format: 28.1.3
@@ -8534,7 +8536,7 @@ packages:
     resolution: {integrity: sha512-/d1UbyUkf9nvsgdBildLe6LAD4DalgkgZcKd0nZ8XUGPyA/7fsnaQIlKVnDiuUXv/IeZhPEDrRJubVSulxrShA==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       jest-haste-map: 28.1.3
       jest-pnp-resolver: 1.2.3_jest-resolve@28.1.1
@@ -8570,7 +8572,7 @@ packages:
       '@jest/transform': 28.1.3
       '@jest/types': 28.1.3
       '@types/node': 16.11.7
-      chalk: 4.1.0
+      chalk: 4.1.2
       emittery: 0.10.2
       graceful-fs: 4.2.10
       jest-docblock: 28.1.1
@@ -8656,7 +8658,7 @@ packages:
     dependencies:
       '@jest/types': 28.1.3
       '@types/node': 16.11.7
-      chalk: 4.1.0
+      chalk: 4.1.2
       ci-info: 3.6.1
       graceful-fs: 4.2.10
       picomatch: 2.3.1
@@ -8692,7 +8694,7 @@ packages:
     dependencies:
       '@jest/types': 28.1.3
       camelcase: 6.3.0
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-get-type: 28.0.2
       leven: 3.1.0
       pretty-format: 28.1.3
@@ -11649,7 +11651,7 @@ packages:
       typescript: '*'
       webpack: ^5.0.0
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       enhanced-resolve: 5.10.0
       micromatch: 4.0.5
       semver: 7.3.8
@@ -11691,7 +11693,7 @@ packages:
   /tsconfig-paths-webpack-plugin/3.5.2:
     resolution: {integrity: sha512-EhnfjHbzm5IYI9YPNVIxx1moxMI4bpHD2e0zTXeDNQcwjjRaGepP7IhTHJkyDBG0CAOoxRfe7jCG630Ou+C6Pw==}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       enhanced-resolve: 5.10.0
       tsconfig-paths: 3.14.1
     dev: true
