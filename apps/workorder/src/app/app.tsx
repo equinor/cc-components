@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Workspace } from '@cc-components/workorderapp';
+import { WorkspaceWrapper } from '@cc-components/workorderapp';
 const StyledApp = styled.div`
   height: 100vh;
 `;
@@ -7,7 +7,7 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <Workspace />
+      <WorkspaceWrapper />
     </StyledApp>
   );
 }
