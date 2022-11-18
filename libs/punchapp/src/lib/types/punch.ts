@@ -5,7 +5,7 @@ export type Punch = {
   punchItemCategory: string | null;
   raisedByOrganization: string | null;
   clearingByOrganization: string | null;
-  dueDate: Date | null;
+  dueDate: string | null;
   punchPriority: string | null;
   punchListType: string | null;
   punchListSorting: string | null;
@@ -15,10 +15,10 @@ export type Punch = {
   materialRequired: boolean | null;
   materialEstimatedTimeOfArrival: string | null;
   externalMaterialNo: string | null;
-  clearedAtDate: Date | null;
-  rejectedAtDate: Date | null;
-  verifiedAtDate: Date | null;
-  updatedDate: Date | null;
+  clearedAtDate: string | null;
+  rejectedAtDate: string | null;
+  verifiedAtDate: string | null;
+  updatedDate: string | null;
   responsible: string | null;
   formularType: string | null;
   tagNo: string | null;
@@ -29,9 +29,9 @@ export type Punch = {
   commissioningPackageNo: string | null;
   commissioningPackageId: string | null;
   functionalSystem: string | null;
-  c01PlannedDate: Date | null;
-  c01ForecastDate: Date | null;
-  c07PlannedDate: Date | null;
-  c07ForecastDate: Date | null;
+  c01PlannedDate: string | null;
+  c01ForecastDate: string | null;
+  c07PlannedDate: string | null;
+  c07ForecastDate: string | null;
   priority1: string | null;
 };
