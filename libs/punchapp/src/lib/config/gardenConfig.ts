@@ -1,7 +1,6 @@
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
-import { getHighlightedColumn } from '../utils-garden';
-import { fieldSettings } from '../utils-garden/fieldSettings';
+import { fieldSettings, getHighlightedColumn } from '../utils-garden';
 export const gardenConfig: GardenConfig<Punch, ExtendedGardenFields, CustomGroupByKeys> =
   {
     getDisplayName: (item) => item.punchItemNo,

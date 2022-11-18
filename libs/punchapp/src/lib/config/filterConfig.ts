@@ -1,4 +1,4 @@
-import type { FilterConfig } from '@equinor/workspace-fusion/filter';
+import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { Punch } from '../types';
 
 export const filterConfig: FilterConfig<Punch> = {
