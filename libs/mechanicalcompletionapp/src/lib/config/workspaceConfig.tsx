@@ -29,6 +29,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         appKey: 'MC',
         getIdentifier: (item) => item.mcPkgId,
+        defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}

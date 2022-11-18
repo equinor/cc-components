@@ -10,6 +10,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.checklistId,
+        defaultTab: 'grid',
       }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}

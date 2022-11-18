@@ -28,6 +28,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         appKey: 'SWCR',
         getIdentifier: (item) => item.swcrId,
+        defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
