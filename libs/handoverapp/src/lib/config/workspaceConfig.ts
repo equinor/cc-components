@@ -20,7 +20,7 @@ export const createWorkspace = (httpClient: IHttpClient) => {
         .addDataSource({
           getResponseAsync: async () => {
             const handovers = await httpClient.fetch(
-              `/api/contexts/94dd5f4d-17f1-4312-bf75-ad75f4d9572c/handover`
+              `/api/contexts/2d489afd-d3ec-43f8-b7ca-cf2de5f39a89/handover`
             );
             return handovers;
           },
