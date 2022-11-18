@@ -1,5 +1,5 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { DescriptionCell } from '../../..';
+import { DescriptionCell } from '../../../table/cells';
 import { AvailableItemCell } from './AvailableItemCell';
 import { MaterialBase } from './types';
 

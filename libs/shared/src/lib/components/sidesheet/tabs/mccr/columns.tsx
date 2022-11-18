@@ -1,5 +1,5 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { DescriptionCell, LinkCell } from '../../..';
+import { DescriptionCell, LinkCell } from '../../../table';
 import { MccrBase } from './types';
 import { proCoSysUrls } from '../../../../mapping';
 
