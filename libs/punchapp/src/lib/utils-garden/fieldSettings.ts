@@ -1,4 +1,5 @@
-import { FieldSettings, sortByNumber } from '@cc-components/shared';
+import { sortByNumber } from '@cc-components/shared';
+import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
 import { getDateKey } from './getDateKey';
 

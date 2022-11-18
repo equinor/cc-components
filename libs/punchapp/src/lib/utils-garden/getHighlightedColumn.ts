@@ -6,16 +6,14 @@ import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
 
 export const getHighlightedColumn = (
   groupByKey: keyof Punch | ExtendedGardenFields,
-  customGroupByKeys: CustomGroupByKeys
+  customGroupByKeys?: CustomGroupByKeys
 ) => {
-  const { weeklyDaily } = customGroupByKeys;
-
   switch (groupByKey) {
     case 'RFO':
     case 'RFC':
     case 'clearedAtDate':
     case 'verifiedAtDate':
-      return weeklyDaily === 'Daily'
+      return customGroupByKeys?.weeklyDaily === 'Daily'
         ? getYearAndWeekAndDayFromString(new Date().toString())
         : getYearAndWeekFromDate(new Date());
 

@@ -19,19 +19,10 @@ jobs:
           fetch-depth: 0
         # https://github.com/nrwl/nx-set-shas#background
       - uses: nrwl/nx-set-shas@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.1
-        with:
-          version: '7.x'
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install
-      - run: pnpm nx workspace-lint
+      - run: npm ci --legacy-peer-deps
+
+      - run: npx nx workspace-lint
       # - run: npx nx format:check
-      - run: pnpm nx affected --target=lint --parallel=3
-      - run: pnpm nx affected --target=test --parallel=3 --ci --code-coverage
-      - run: pnpm nx affected --target=build --parallel=3
+      - run: npx nx affected --target=lint --parallel=3
+      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage
+      - run: npx nx affected --target=build --parallel=3
