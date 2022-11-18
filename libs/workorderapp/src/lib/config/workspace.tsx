@@ -10,6 +10,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         appKey: 'Workorder',
         getIdentifier: (item) => item.workOrderNumber,
+        defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}

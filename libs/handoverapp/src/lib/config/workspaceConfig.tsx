@@ -29,6 +29,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         appKey: 'Handover',
         getIdentifier: (item) => item.commpkgNo,
+        defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
