@@ -19,8 +19,8 @@ jobs:
           fetch-depth: 0
         # https://github.com/nrwl/nx-set-shas#background
       - uses: nrwl/nx-set-shas@v3
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+      - run: npm ci --legacy-peer-deps
+
       - run: npx nx workspace-lint
       # - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3
