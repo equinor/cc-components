@@ -3,11 +3,10 @@ import {
   IAppConfigurator,
   makeComponent,
 } from '@equinor/fusion-framework-react-app';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
-import { StrictMode, useMemo } from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createWorkspace } from '@cc-components/mechanicalcompletionapp';
+import { WorkspaceWrapper } from '@cc-components/mechanicalcompletionapp';
 const dataProxy = {
   clientId: '5a842df8-3238-415d-b168-9f16a6a6031b',
   uri: 'https://pro-s-dataproxy-CI.azurewebsites.net',
@@ -23,12 +22,10 @@ const configure = async (config: IAppConfigurator) => {
 };
 
 const MyApp = () => {
-  const dataProxy = useHttpClient('data-proxy');
-  const Workspace = useMemo(() => createWorkspace(dataProxy), [dataProxy]);
   return (
     <StrictMode>
       <div style={{ height: '90vh', width: '90vw' }}>
-        <Workspace />
+        <WorkspaceWrapper />
       </div>
     </StrictMode>
   );

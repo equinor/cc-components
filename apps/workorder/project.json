@@ -4,61 +4,26 @@
   "sourceRoot": "apps/workorder/src",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nrwl/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+    "serve": {
+      "executor": "nx:run-commands",
       "options": {
-        "compiler": "babel",
-        "outputPath": "dist/apps/workorder",
-        "index": "apps/workorder/src/index.html",
-        "baseHref": "/",
-        "main": "apps/workorder/src/main.tsx",
-        "polyfills": "apps/workorder/src/polyfills.ts",
-        "tsConfig": "apps/workorder/tsconfig.app.json",
-        "assets": ["apps/workorder/src/favicon.ico", "apps/workorder/src/assets"],
-        "styles": [],
-        "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
-      },
-      "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
-        "production": {
-          "fileReplacements": [
-            {
-              "replace": "apps/workorder/src/environments/environment.ts",
-              "with": "apps/workorder/src/environments/environment.prod.ts"
-            }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
-        }
+        "cwd": "apps/workorder",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app dev"
+          }
+        ]
       }
     },
-    "serve": {
-      "executor": "@nrwl/webpack:dev-server",
-      "defaultConfiguration": "development",
+    "build": {
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "workorder:build",
-        "hmr": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "workorder:build:development"
-        },
-        "production": {
-          "buildTarget": "workorder:build:production",
-          "hmr": false
-        }
+        "cwd": "apps/workorder",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app build"
+          }
+        ]
       }
     },
     "lint": {

@@ -1,1 +1,1 @@
-export { createWorkspace } from './workspaceConfig';
+export { WorkspaceWrapper } from './workspaceConfig';

@@ -1,40 +1,45 @@
-import { createFusionWorkspace } from '@equinor/workspace-fusion';
+import Workspace from '@equinor/workspace-fusion';
 import { gardenConfig } from './gardenConfig';
-import { IHttpClient } from '@equinor/fusion-framework-module-http';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { SwcrPackage } from '../types';
 import { sortPackagesByStatusAndNumber } from '../utils-statuses';
 import { tableConfig } from './tableConfig';
-export const createWorkspace = (httpClient: IHttpClient) => {
-  return createFusionWorkspace<SwcrPackage>(
-    { appKey: 'SWCR', getIdentifier: (item) => item.swcrNo },
-    (config) =>
-      config
-        .addConfig({
-          appColor: 'purple',
-          appKey: 'SWCR',
-          defaultTab: 'grid',
-        })
-        .addDataSource({
-          getResponseAsync: async () => {
-            const handovers = await httpClient.fetch(
-              `/api/contexts/2d489afd-d3ec-43f8-b7ca-cf2de5f39a89/swcr`
-            );
-            return handovers;
-          },
-          responseParser: async (response: Response) => {
-            const parsedResponse = JSON.parse(await response.text()) as SwcrPackage[];
-            return parsedResponse.sort(sortPackagesByStatusAndNumber);
-          },
-        })
-        .addGrid(tableConfig)
-        .addFilter(filterConfig)
-        .addGarden(gardenConfig)
+import { useCallback } from 'react';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+const useContextId = () => {
+  return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
+};
+export const WorkspaceWrapper = () => {
+  const dataProxy = useHttpClient('data-proxy');
+  const contextId = useContextId();
+  const getResponseAsync = useCallback(async () => {
+    const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`);
+    return swcrs;
+  }, [dataProxy, contextId]);
 
-        .addStatusBarItems(statusBarConfig)
-        .addFusionPowerBI({
-          reportUri: 'pp-swcr-analytics',
-        })
+  const responseParser = async (response: Response) => {
+    const parsedResponse = JSON.parse(await response.text()) as SwcrPackage[];
+    return parsedResponse.sort(sortPackagesByStatusAndNumber);
+  };
+
+  return (
+    <Workspace
+      workspaceOptions={{
+        appKey: 'SWCR',
+        getIdentifier: (item) => item.swcrId,
+      }}
+      filterOptions={filterConfig}
+      gardenOptions={gardenConfig}
+      gridOptions={tableConfig}
+      statusBarOptions={statusBarConfig}
+      fusionPowerBiOptions={{
+        reportUri: 'pp-swcr-analytics',
+      }}
+      dataOptions={{
+        getResponseAsync,
+        responseParser,
+      }}
+    />
   );
 };
