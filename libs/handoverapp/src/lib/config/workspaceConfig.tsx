@@ -7,10 +7,8 @@ import { statusBarConfig } from './statusBarConfig';
 import { sortPackagesByStatus } from '../utils-statuses/sortPackagesByStatus';
 import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useContextId } from '@cc-components/shared';
 
-const useContextId = () => {
-  return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
-};
 export const WorkspaceWrapper = () => {
   const dataProxy = useHttpClient('data-proxy');
   const contextId = useContextId();

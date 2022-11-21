@@ -3,7 +3,7 @@ import { StyledContentWrapper } from '../tabs.styles';
 import { columns } from './columns';
 import { PunchBase } from './type';
 type PunchTabProps<T> = {
-  punches: T[];
+  punches: T[] | undefined;
   isFetching: boolean;
   error: Error | null;
 };

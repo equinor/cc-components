@@ -1,20 +1,12 @@
 export type WorkorderBase = {
   actualCompletionDate: string | null;
-  description: string | null;
   discipline: string | null;
-  disciplineDescription: string | null;
   estimatedManHours: number | null;
   expendedManHours?: number | null;
-  facility: string | null;
-  holdBy: string | null;
   jobStatus: string | null;
-  materialStatus: string | null;
   plannedCompletionDate: string | null;
-  project: string | null;
   projectProgress: number | null;
   remainingManHours: number | null;
-  responsible: string | null;
-  responsibleDescription: string | null;
   title: string | null;
   workOrderId: string;
   workOrderNo: string;
