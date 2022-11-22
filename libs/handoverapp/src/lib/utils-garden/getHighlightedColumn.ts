@@ -11,7 +11,7 @@ import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedFo
 
 export const getHighlightedColumn = (
   groupByKey: keyof HandoverPackage | ExtendedGardenFields,
-  customGroupByKeys: HandoverCustomGroupByKeys
+  customGroupByKeys?: HandoverCustomGroupByKeys
 ) => {
   const customKeys = customGroupByKeys;
   const groupByOption = getFieldKeyBasedOnPlannedForecast(

@@ -9,7 +9,7 @@ import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedFo
 export const getDateKey = (
   item: HandoverPackage,
   key: keyof HandoverPackage | ExtendedGardenFields,
-  groupBy: HandoverCustomGroupByKeys | undefined
+  groupBy?: HandoverCustomGroupByKeys | undefined
 ) => {
   if (!groupBy) {
     return 'N/A';

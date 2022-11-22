@@ -32,7 +32,7 @@ const LoopGardenItem = (
     rowStart,
     columnStart,
     parentRef,
-    controller,
+    controller: { getDisplayName },
   } = props;
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
@@ -58,7 +58,7 @@ const LoopGardenItem = (
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
         >
-          <StyledItemText>{(data.loopNo as string).replace('@LOOP-', '')}</StyledItemText>
+          <StyledItemText>{getDisplayName(data).replace('@LOOP-', '')}</StyledItemText>
           <StyledStatusCircles
             mcColor={
               data.loopContentStatus ? statusColorMap[data.loopContentStatus] : null

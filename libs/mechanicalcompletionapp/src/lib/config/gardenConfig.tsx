@@ -2,7 +2,6 @@ import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
 import { GardenHeader, GardenItem } from '../ui-garden';
 import { fieldSettings } from '../utils-garden/fieldSettings';
-import { getAverageTagVolume } from '../utils-garden/getAverageTagVolume';
 import { getHighlightedColumn } from '../utils-garden/getHighlightedColumn';
 import { getItemWidth } from '../utils-garden/getItemWidth';
 
@@ -28,5 +27,4 @@ export const gardenConfig: GardenConfig<
     highlightHorizontalColumn: getHighlightedColumn,
     rowHeight: 30,
   },
-  getCustomState: (data) => ({ averageTagVolume: getAverageTagVolume(data) }),
 };
