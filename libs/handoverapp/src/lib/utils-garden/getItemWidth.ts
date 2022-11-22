@@ -15,7 +15,7 @@ const MIN_WIDTH = 139;
 export const getItemWidth = (
   garden: GardenGroups<HandoverPackage>,
   groupByKey: ExtendedGardenFields | keyof HandoverPackage,
-  customgroupByKeys: HandoverCustomGroupByKeys
+  customgroupByKeys?: HandoverCustomGroupByKeys
 ): number => {
   const customKeys = customgroupByKeys;
   const columnName = getFieldKeyBasedOnPlannedForecast(
