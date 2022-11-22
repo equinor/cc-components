@@ -13,6 +13,7 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage, ExtendedGardenFields
     onClick,
     depth,
     width: itemWidth = 300,
+    controller: { getDisplayName },
   } = props;
 
   const statusColor = getSwcrStatusColor(data.status);
@@ -31,7 +32,7 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage, ExtendedGardenFields
         onClick={onClick}
         isSelected={isSelected}
       >
-        {data['swcrNo']}
+        {getDisplayName(data)}
       </StyledItemWrapper>
       {columnExpanded && (
         <>

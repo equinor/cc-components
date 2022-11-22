@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import {
   ExtendedGardenFields,
@@ -8,17 +6,13 @@ import {
 } from '../types';
 import { GardenGroupBy, GardenHeader } from '../ui-garden';
 import { GardenItem } from '../ui-garden/Item';
-import {
-  fieldSettings,
-  getHighlightedColumn,
-  getItemWidth,
-  getMaxVolumeFromData,
-} from '../utils-garden';
+import { fieldSettings, getHighlightedColumn, getItemWidth } from '../utils-garden';
 
 export const gardenConfig: GardenConfig<
   HandoverPackage,
   ExtendedGardenFields,
-  HandoverCustomGroupByKeys
+  HandoverCustomGroupByKeys,
+  Record<'maxVolume', number>
 > = {
   initialGrouping: {
     horizontalGroupingAccessor: 'RFCC',
@@ -41,5 +35,4 @@ export const gardenConfig: GardenConfig<
 
     rowHeight: 30,
   },
-  getCustomState: (data) => ({ maxVolume: getMaxVolumeFromData(data) }),
 };

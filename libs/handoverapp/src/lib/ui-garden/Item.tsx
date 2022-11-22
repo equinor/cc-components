@@ -25,8 +25,7 @@ const HandoverItem = (
     HandoverPackage,
     ExtendedGardenFields,
     HandoverCustomGroupByKeys,
-    Record<'maxVolume', number>,
-    Record<string, unknown>
+    Record<'maxVolume', number>
   >
 ) => {
   const {
@@ -47,9 +46,9 @@ const HandoverItem = (
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { customState } = controller;
-
-  const size = getItemSize(data.volume, customState?.['maxVolume'] || 0);
+  const { useContext, getDisplayName } = controller;
+  const context = useContext();
+  const size = getItemSize(data.volume, context?.maxVolume || 0);
 
   const status = getStatus(data);
   const backgroundColor = useMemo(
@@ -102,7 +101,7 @@ const HandoverItem = (
           )}
           <StyledSizes size={size} color={textColor} />
           {data.hasUnsignedActions && <FlagIcon color={textColor} />}
-          <StyledItemText>{data.commpkgNo}</StyledItemText>
+          <StyledItemText>{getDisplayName(data)}</StyledItemText>
           <StyledStatusCircles mcColor={mcPackageColor} commColor={commStatusColor} />
         </StyledItemWrapper>
 

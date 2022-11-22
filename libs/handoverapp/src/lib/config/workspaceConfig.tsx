@@ -1,12 +1,12 @@
 import Workspace from '@equinor/workspace-fusion';
 import { gardenConfig } from './gardenConfig';
-import { HandoverPackage } from '../types';
 import { tableConfig } from './tableConfig';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
-import { sortPackagesByStatus } from '../utils-statuses/sortPackagesByStatus';
 import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { contextConfig } from './contextConfig';
+import { responseParser } from './responseConfig';
 
 const useContextId = () => {
   return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
@@ -18,11 +18,6 @@ export const WorkspaceWrapper = () => {
     const commpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/handover`);
     return commpkgs;
   }, [dataProxy, contextId]);
-
-  const responseParser = async (response: Response) => {
-    const parsedResponse = JSON.parse(await response.text()) as HandoverPackage[];
-    return parsedResponse.sort(sortPackagesByStatus);
-  };
 
   return (
     <Workspace
@@ -42,6 +37,7 @@ export const WorkspaceWrapper = () => {
         getResponseAsync,
         responseParser,
       }}
+      contextOptions={contextConfig}
     />
   );
 };

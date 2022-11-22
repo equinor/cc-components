@@ -39,10 +39,12 @@ const McGardenItem = (
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
     null
   );
+  const { useContext, getDisplayName } = controller;
 
+  const context = useContext();
   const size = useMemo(
-    () => getTagSize(data, controller.customState?.['averageTagVolume'] || 0),
-    [data, controller.customState]
+    () => getTagSize(data, context?.['averageTagVolume'] || 0),
+    [context, data]
   );
   const status = useMemo(() => getCommissioningStatus(data), [data]);
   const backgroundColor = useMemo(() => commStatusColors[status], [status]);
@@ -81,7 +83,7 @@ const McGardenItem = (
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
         >
           <StyledSizes color={contentsColor} size={size} />
-          <StyledItemText> {data['mcPkgNumber']}</StyledItemText>
+          <StyledItemText> {getDisplayName(data)}</StyledItemText>
 
           <StyledStatusCircles mcColor={mcDotColor} commColor={commDotColor} />
         </StyledItemWrapper>

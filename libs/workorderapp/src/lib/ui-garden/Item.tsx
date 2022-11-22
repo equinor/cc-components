@@ -32,7 +32,7 @@ const WorkorderItem = (
     rowStart,
     parentRef,
     width: itemWidth = 300,
-    controller,
+    controller: { getDisplayName },
   } = props;
 
   const {
@@ -72,7 +72,7 @@ const WorkorderItem = (
         >
           <StyledSizes size={size} color={textColor} />
           {data.holdBy && <FlagIcon color={textColor} />}
-          <StyledItemText>{data.workOrderNumber}</StyledItemText>
+          <StyledItemText>{getDisplayName(data)}</StyledItemText>
           <StyledStatusCircles matColor={matColor} mccrColor={mccrColor} />
         </StyledItemWrapper>
         {columnExpanded && data.description}
