@@ -1,4 +1,5 @@
-import type { HandoverPackage, KPIStatus } from '../types';
+import { HandoverPackage } from '@cc-components/handovershared';
+import type { KPIStatus } from '../types';
 
 export const getKPIStatus = (pkg: HandoverPackage): KPIStatus => {
   if (

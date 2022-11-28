@@ -1,4 +1,4 @@
-import { HandoverPackage } from '../types';
+import { HandoverPackage } from '@cc-components/handovershared';
 import { getStatus } from './getStatus';
 import { statusPriorityMap } from './statusPriorityMap';
 

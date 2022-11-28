@@ -1,3 +1,4 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import {
   formatDateString,
   stringCell,
@@ -5,7 +6,6 @@ import {
   StyledTable,
 } from '@cc-components/shared';
 import { useMemo } from 'react';
-import { HandoverPackage } from '../types';
 type HandoverDetails = {
   nextToSign: string;
 };

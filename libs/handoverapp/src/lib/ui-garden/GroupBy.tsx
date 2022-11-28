@@ -1,5 +1,5 @@
 import { Autocomplete } from '@equinor/eds-core-react';
-import { HandoverCustomGroupByKeys, HandoverPackage } from '../types';
+import { HandoverCustomGroupByKeys } from '../types';
 import { CustomVirtualViews } from '@equinor/workspace-fusion/garden';
 export const GardenGroupBy = (props: unknown): JSX.Element => {
   console.log(props);

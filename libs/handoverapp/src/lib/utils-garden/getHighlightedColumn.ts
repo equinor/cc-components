@@ -1,12 +1,9 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import {
   getYearAndWeekAndDayFromString,
   getYearAndWeekFromDate,
 } from '@cc-components/shared';
-import {
-  ExtendedGardenFields,
-  HandoverCustomGroupByKeys,
-  HandoverPackage,
-} from '../types';
+import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 
 export const getHighlightedColumn = (

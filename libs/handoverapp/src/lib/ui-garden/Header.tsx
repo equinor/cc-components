@@ -1,7 +1,7 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
-import { HandoverPackage } from '../types';
 import { getSubtitleHeader } from '../utils-garden';
 const HeaderContent = styled.div`
   font-weight: 600;

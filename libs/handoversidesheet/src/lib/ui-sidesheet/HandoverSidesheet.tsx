@@ -1,3 +1,4 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import {
   McTab,
   NcrTab,
@@ -12,7 +13,6 @@ import {
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';
-import { HandoverPackage } from '../types';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper } from './sidesheet.styles';
@@ -78,6 +78,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     dataIsFetching: isDataFetchingQuery,
     error: queryError,
   } = useHandoverResource(props.id, 'query');
+
   return (
     <StyledSideSheetContainer>
       <Tabs activeTab={activeTab} onChange={handleChange}>

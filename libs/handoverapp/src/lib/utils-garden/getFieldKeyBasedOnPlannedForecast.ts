@@ -1,8 +1,5 @@
-import {
-  ExtendedGardenFields,
-  HandoverCustomGroupByKeys,
-  HandoverPackage,
-} from '../types';
+import { HandoverPackage } from '@cc-components/handovershared';
+import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 
 export const getFieldKeyBasedOnPlannedForecast = (
   groupBy: keyof HandoverPackage | ExtendedGardenFields,

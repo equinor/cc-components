@@ -1,9 +1,6 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import {
-  ExtendedGardenFields,
-  HandoverCustomGroupByKeys,
-  HandoverPackage,
-} from '../types';
+import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { GardenGroupBy, GardenHeader } from '../ui-garden';
 import { GardenItem } from '../ui-garden/Item';
 import { fieldSettings, getHighlightedColumn, getItemWidth } from '../utils-garden';

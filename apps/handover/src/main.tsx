@@ -7,6 +7,7 @@ import {
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
 const dataProxy = {
   clientId: '5a842df8-3238-415d-b168-9f16a6a6031b',
   uri: 'https://pro-s-dataproxy-CI.azurewebsites.net',
@@ -21,12 +22,16 @@ const configure = async (config: IAppConfigurator) => {
   enableAgGrid(config);
 };
 
+const queryClient = new QueryClient();
+
 const MyApp = () => {
   return (
     <StrictMode>
-      <div style={{ height: '90vh', width: '90vw' }}>
-        <WorkspaceWrapper />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div style={{ height: '90vh', width: '90vw' }}>
+          <WorkspaceWrapper />
+        </div>
+      </QueryClientProvider>
     </StrictMode>
   );
 };
