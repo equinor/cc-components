@@ -16,7 +16,6 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {
   const { columns, error, isFetching, packages, resourceName, height } = props;
-  console.log('Props', props);
   if (isFetching) {
     <NoResourceData>
       <Progress.Circular />
