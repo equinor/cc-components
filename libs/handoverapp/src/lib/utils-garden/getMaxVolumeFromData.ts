@@ -1,4 +1,4 @@
-import { HandoverPackage } from '../types';
+import { HandoverPackage } from '@cc-components/handovershared';
 
 export const getMaxVolumeFromData = (data: HandoverPackage[]): number => {
   const volumes = data.map((d) => d.volume).sort((a, b) => a - b);

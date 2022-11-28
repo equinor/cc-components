@@ -8,6 +8,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useContextId } from '@cc-components/shared';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 
 export const WorkspaceWrapper = () => {
   const dataProxy = useHttpClient('data-proxy');
@@ -21,13 +22,14 @@ export const WorkspaceWrapper = () => {
     <Workspace
       workspaceOptions={{
         appKey: 'Handover',
-        getIdentifier: (item) => item.commpkgNo,
+        getIdentifier: (item) => item.id,
         defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
+      sidesheetOptions={sidesheetConfig}
       fusionPowerBiOptions={{
         reportUri: 'pp-handover-analytics',
       }}

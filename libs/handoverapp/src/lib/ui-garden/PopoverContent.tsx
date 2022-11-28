@@ -1,3 +1,4 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import {
   FlagIcon,
   SizeIcons,
@@ -8,7 +9,6 @@ import {
   StyledPopoverStatus,
   WarningIcon,
 } from '@cc-components/shared';
-import { HandoverPackage } from '../types/handoverPackage';
 import { getTextColor } from '../utils-garden';
 import {
   StyledFlagUnsignedAction,

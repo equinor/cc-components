@@ -1,5 +1,5 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
-import { HandoverPackage } from '../types';
 import { daysDiff, getFilterDateValues } from '../utils-filter';
 import { getStatus } from '../utils-statuses/getStatus';
 

@@ -1,4 +1,4 @@
-import { HandoverPackage } from '../types';
+import { HandoverPackage } from '@cc-components/handovershared';
 import { getStatus, statusPriorityMap } from '../utils-statuses';
 
 export const getSubtitleHeader = (

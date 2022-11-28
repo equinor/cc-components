@@ -1,3 +1,4 @@
+import { HandoverPackage, Status } from '@cc-components/handovershared';
 import {
   DateCell,
   DescriptionCell,
@@ -6,8 +7,6 @@ import {
 } from '@cc-components/shared';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
-import { HandoverPackage } from '../types';
-import { Status } from '../types/handoverPackage';
 
 export const tableConfig: GridConfig<HandoverPackage> = {
   columnDefinitions: [

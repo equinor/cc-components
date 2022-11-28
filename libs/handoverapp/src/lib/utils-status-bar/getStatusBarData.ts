@@ -1,4 +1,5 @@
-import type { HandoverPackage, KPI } from '../types';
+import { HandoverPackage } from '@cc-components/handovershared';
+import { KPI } from '../types';
 import { getKPIStatus } from './getKPIStatus';
 
 /**

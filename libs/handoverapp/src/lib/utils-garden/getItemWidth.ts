@@ -1,13 +1,10 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import {
   GardenGroups,
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import {
-  ExtendedGardenFields,
-  HandoverCustomGroupByKeys,
-  HandoverPackage,
-} from '../types';
+import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 
 const MIN_WIDTH = 139;

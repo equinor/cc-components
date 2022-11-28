@@ -1,4 +1,5 @@
 import { Icon, Progress } from '@equinor/eds-core-react';
+import { info_circle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { ColDef, ReactGrid } from '@equinor/workspace-ag-grid';
 import { InfoText, NoResourceData } from './tabTable.styles';
@@ -10,11 +11,11 @@ type TabTableProps<T> = {
   resourceName: string;
   height?: number;
 };
+Icon.add({ info_circle });
 export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {
   const { columns, error, isFetching, packages, resourceName, height } = props;
-
   if (isFetching) {
     <NoResourceData>
       <Progress.Circular />

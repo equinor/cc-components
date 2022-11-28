@@ -1,4 +1,4 @@
-import { Status } from '../types/handoverPackage';
+import { Status } from '@cc-components/handovershared';
 import { colorMap, PackageStatus } from '@cc-components/shared';
 
 export const dotsColorMap: Record<Extract<Status, 'OS'>, string> = {

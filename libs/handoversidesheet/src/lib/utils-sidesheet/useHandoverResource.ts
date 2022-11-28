@@ -43,7 +43,9 @@ export const useHandoverResource = <T extends keyof HandoverResourceTypeMap>(
         `api/contexts/${contextId}/handover/${id}/${packageType}`,
         { signal }
       );
-
+      if (!result.ok) {
+        throw new Error('Error fetching API');
+      }
       return JSON.parse(await result.text()) as HandoverResourceTypeMap[T][];
     },
     [packageType, dataProxy, contextId]

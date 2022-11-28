@@ -1,5 +1,5 @@
+import { HandoverPackage } from '@cc-components/handovershared';
 import { colorMap, PackageStatus } from '@cc-components/shared';
-import { HandoverPackage } from '../types';
 import { getStatus } from './getStatus';
 
 type McProgress = {
