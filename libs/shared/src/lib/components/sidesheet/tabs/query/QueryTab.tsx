@@ -3,7 +3,7 @@ import { StyledContentWrapper } from '../tabs.styles';
 import { columns } from './columns';
 import { QueryBase } from './types';
 type QueryTabProps<T> = {
-  queries: T[];
+  queries: T[] | undefined;
   isFetching: boolean;
   error: Error | null;
 };

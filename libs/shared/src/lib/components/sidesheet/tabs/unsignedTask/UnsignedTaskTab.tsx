@@ -3,7 +3,7 @@ import { StyledContentWrapper } from '../tabs.styles';
 import { columns } from './columns';
 import { UnsignedTaskBase } from './types';
 type UnsignedTaskTabProps<T> = {
-  unsignedTasks: T[];
+  unsignedTasks: T[] | undefined;
   isFetching: boolean;
   error: Error | null;
 };
