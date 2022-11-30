@@ -25,16 +25,16 @@ export const columns: ColDef<SwcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 200,
+    width: 300,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    width: 100,
+    width: 150,
   },
   {
     field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
-    width: 100,
+    width: 180,
   },
 ];
