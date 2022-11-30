@@ -28,7 +28,7 @@ const MyApp = () => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <div style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
           <WorkspaceWrapper />
         </div>
       </QueryClientProvider>
