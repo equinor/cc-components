@@ -31,14 +31,6 @@
       "options": {
         "lintFilePatterns": ["libs/handovershared/**/*.{ts,tsx,js,jsx}"]
       }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/handovershared"],
-      "options": {
-        "jestConfig": "libs/handovershared/jest.config.ts",
-        "passWithNoTests": true
-      }
     }
   }
 }
