@@ -2,7 +2,6 @@ import { Button, Icon } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
 import { close } from '@equinor/eds-icons';
-import { useResizeContext } from '@equinor/workspace-sidesheet';
 Icon.add({ close });
 
 const StyledContainer = styled.div`
@@ -28,11 +27,9 @@ type HeaderProps = {
   onClose: VoidFunction;
 };
 export const SidesheetHeader = ({ title, onClose }: HeaderProps) => {
-  const { setWidth } = useResizeContext();
   return (
     <StyledContainer>
       <StyledWrap>
-        <Button onClick={() => setWidth(window.innerWidth)}>Width</Button>
         <StyledTitle>{title}</StyledTitle>
         <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
           <Icon
