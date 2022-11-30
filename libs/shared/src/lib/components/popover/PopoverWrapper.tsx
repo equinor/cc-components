@@ -62,7 +62,7 @@ export const PopoverWrapper = ({
         left: `${columnStart + placement.x}px`,
       }}
     >
-      <Popover open={isOpen} ref={ref}>
+      <Popover open={isOpen} ref={ref} style={{ padding: '1em' }}>
         <Popover.Title>{popoverTitle}</Popover.Title>
         <Popover.Content>{children}</Popover.Content>
       </Popover>
