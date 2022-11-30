@@ -29,7 +29,7 @@ export const gardenConfig: GardenConfig<
   visuals: {
     calculateItemWidth: getItemWidth,
     highlightHorizontalColumn: getHighlightedColumn,
-
+    collapseSubGroupsByDefault: true,
     rowHeight: 30,
   },
 };
