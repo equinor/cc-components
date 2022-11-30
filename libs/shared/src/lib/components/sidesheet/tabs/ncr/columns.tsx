@@ -21,5 +21,6 @@ export const columns: ColDef<NcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<NcrBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
+    width: 400,
   },
 ];

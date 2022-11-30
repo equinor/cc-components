@@ -1,11 +1,21 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import {
+  BannerItem,
   McTab,
   NcrTab,
+  proCoSysUrls,
   PunchTab,
   QueryTab,
+  SidesheetHeader,
+  StatusCircle,
+  statusColorMap,
+  StyledBanner,
+  StyledItemLink,
+  StyledPanels,
   StyledSideSheetContainer,
+  StyledTabs,
   SwcrTab,
+  TabTitle,
   UnsignedActionTab,
   UnsignedTaskTab,
   WorkorderTab,
@@ -15,10 +25,11 @@ import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
-import { StyledTabListWrapper } from './sidesheet.styles';
+import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
+  close: () => void;
 };
 export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -81,14 +92,84 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
 
   return (
     <StyledSideSheetContainer>
-      <Tabs activeTab={activeTab} onChange={handleChange}>
-        <StyledTabListWrapper ref={ref}>
-          <Tabs.List>
-            <Tabs.Tab>Details</Tabs.Tab>
-          </Tabs.List>
+      <SidesheetHeader title={props?.item?.commpkgNo || ''} onClose={props.close} />
+      <StyledBanner>
+        <BannerItem
+          title="Compkg status"
+          value={
+            <StatusCircle
+              content={props?.item?.commpkgStatus || 'N/A'}
+              statusColor={
+                props?.item?.commpkgStatus
+                  ? statusColorMap[props.item.commpkgStatus]
+                  : 'transparent'
+              }
+            />
+          }
+        />
+        <BannerItem
+          title="MC status"
+          value={
+            <StatusCircle
+              content={props?.item?.mcStatus || 'N/A'}
+              statusColor={
+                props?.item?.mcStatus
+                  ? statusColorMap[props.item.mcStatus]
+                  : 'transparent'
+              }
+            />
+          }
+        />
+        <BannerItem
+          title="Commpkg"
+          value={
+            <StyledItemLink
+              target="_blank"
+              href={proCoSysUrls.getCommPkgUrl(props?.item?.id || '')}
+            >
+              {props?.item?.commpkgNo}
+            </StyledItemLink>
+          }
+        />
+      </StyledBanner>
+      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+        <StyledTabListWrapper>
+          <StyledTabsList ref={ref}>
+            <Tabs.Tab>Details </Tabs.Tab>
+            <Tabs.Tab>
+              McPackages <TabTitle data={mcPackages} isLoading={isDataFetchingMc} />{' '}
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Work Orders{' '}
+              <TabTitle data={workOrderPackages} isLoading={isDataFetchingWorkOrder} />{' '}
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Unsigned Tasks{' '}
+              <TabTitle data={unsignedTasks} isLoading={isDataFetchingUnsignedTasks} />{' '}
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Unsigned Actions{' '}
+              <TabTitle
+                data={unsignedActions}
+                isLoading={isDataFetchingUnsignedActions}
+              />
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Punch <TabTitle data={punchPackages} isLoading={isDataFetchingPunch} />{' '}
+            </Tabs.Tab>
+            <Tabs.Tab>
+              SWCR <TabTitle data={swcrPackages} isLoading={isDataFetchingSwcr} />
+            </Tabs.Tab>
+            <Tabs.Tab>
+              NCr <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
+            </Tabs.Tab>
+          </StyledTabsList>
         </StyledTabListWrapper>
 
-        <Tabs.Panels>
+        <StyledPanels>
           <Tabs.Panel>
             <DetailsTab
               commpkg={props.item as HandoverPackage}
@@ -144,8 +225,8 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               error={queryError}
             />
           </Tabs.Panel>
-        </Tabs.Panels>
-      </Tabs>
+        </StyledPanels>
+      </StyledTabs>
     </StyledSideSheetContainer>
   );
 });

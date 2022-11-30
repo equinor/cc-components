@@ -1,23 +1,31 @@
 import styled from 'styled-components';
 
-import { tokens } from '@equinor/eds-tokens';
-
-type StatusIconProps = {
-  statusColor: string;
-  size?: number;
-};
-
-const Circle = styled.div<StatusIconProps>`
-  width: ${(props) => (props.size ? props.size + 'px' : '14px')};
-  height: ${(props) => (props.size ? props.size + 'px' : '14px')};
-  outline: 1px solid ${tokens.colors.text.static_icons__primary_white.rgba};
-  background-color: ${(props) => props.statusColor};
-  border-radius: 50%;
-  margin-left: 4px;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  font-weight: 400;
+  font-size: 13px;
 `;
-/**
- * Component displaying a circle with some predefined styles for the Garden package item.
- */
-export const StatusCircle = ({ statusColor, size }: StatusIconProps): JSX.Element => (
-  <Circle statusColor={statusColor} size={size} />
-);
+type StatusCircleProps = {
+  statusColor: string;
+};
+const StyledStatusCircle = styled.div<StatusCircleProps>`
+  background-color: ${(props) => props.statusColor};
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+`;
+type StatusProps = {
+  content: string;
+  statusColor: string;
+};
+export const StatusCircle = ({ content, statusColor }: StatusProps) => {
+  return (
+    <Wrapper>
+      <StyledStatusCircle statusColor={statusColor} />
+      <span>{content}</span>
+    </Wrapper>
+  );
+};

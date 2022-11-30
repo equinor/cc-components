@@ -21,5 +21,6 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
+    width: 400,
   },
 ];

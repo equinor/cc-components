@@ -21,5 +21,6 @@ export const columns: ColDef<UnsignedActionBase>[] = [
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
+    width: 400,
   },
 ];

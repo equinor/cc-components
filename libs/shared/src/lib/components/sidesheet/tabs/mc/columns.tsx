@@ -19,6 +19,7 @@ export const columns: ColDef<McBase>[] = [
         return <LinkCell url={props.valueFormatted} urlText={props.value} />;
       } else return null;
     },
+    width: 100,
   },
   {
     field: 'Title',
@@ -26,10 +27,12 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
+    width: 250,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.mcStatus,
+    width: 150,
   },
   {
     field: 'RFCC',
@@ -44,6 +47,7 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
+    width: 150,
   },
   {
     field: 'RFOC',
@@ -56,5 +60,6 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
+    width: 150,
   },
 ];
