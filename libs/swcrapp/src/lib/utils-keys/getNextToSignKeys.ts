@@ -1,5 +1,6 @@
-import { GetKeyFunction, SwcrPackage } from '../types';
+import { GetKeyFunction } from '../types';
 import { DEFAULT_BLANKSTRING } from '../constants/defaultBlankString';
+import { SwcrPackage } from '@cc-components/swcrshared';
 const getNextToSignKey = (nextToSign: string, ranking?: string): string => {
   if (!ranking?.length) ranking = '0';
 

@@ -1,0 +1,36 @@
+{
+  "name": "swcrsidesheet",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/swcrsidesheet/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/swcrsidesheet",
+        "tsConfig": "libs/swcrsidesheet/tsconfig.lib.json",
+        "project": "libs/swcrsidesheet/package.json",
+        "entryFile": "libs/swcrsidesheet/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/swcrsidesheet/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/swcrsidesheet/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

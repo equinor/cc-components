@@ -1,6 +1,6 @@
 import { numberFormat } from '@cc-components/shared';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { SwcrPackage } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
 
 export const statusBarConfig: StatusBarConfig<SwcrPackage> = (data) => {

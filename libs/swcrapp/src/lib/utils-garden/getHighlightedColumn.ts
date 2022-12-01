@@ -1,5 +1,6 @@
 import { getYearAndWeekFromDate } from '@cc-components/shared';
-import { ExtendedGardenFields, SwcrPackage } from '../types';
+import { SwcrPackage } from '@cc-components/swcrshared';
+import { ExtendedGardenFields } from '../types';
 
 export const getHighlighColumn = (
   groupByKey: keyof SwcrPackage | ExtendedGardenFields

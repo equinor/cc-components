@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { GardenGroup } from '@equinor/workspace-fusion/garden';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { DATE_BLANKSTRING } from '../constants/dateBlankString';
 import { DEFAULT_BLANKSTRING } from '../constants/defaultBlankString';
-import { SwcrPackage } from '../types';
-//TODO: import Dataset from Garden
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DataSet<T> = any;
-export const getMinorTitle = (groupKey: string, column: DataSet<SwcrPackage>): string => {
+
+export const getMinorTitle = (
+  groupKey: string,
+  column: GardenGroup<SwcrPackage>
+): string => {
   if (column.value === DEFAULT_BLANKSTRING || column.value === DATE_BLANKSTRING)
     return '';
 
@@ -23,10 +24,10 @@ export const getMinorTitle = (groupKey: string, column: DataSet<SwcrPackage>): s
   }
 };
 
-export const getTitle = (groupKey: string, column: DataSet<SwcrPackage>): string => {
+export const getTitle = (groupKey: string, column: GardenGroup<SwcrPackage>): string => {
   switch (groupKey) {
     case 'dueAtDate': {
-      if (column.value === 'No Date') return column.value;
+      if (column.value === 'N/A') return column.value;
 
       return 'W' + column.value.split('-')[1]?.padStart(2, '0') || '';
     }

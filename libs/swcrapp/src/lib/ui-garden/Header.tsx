@@ -1,6 +1,6 @@
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
 import { memo } from 'react';
-import { SwcrPackage } from '../types';
 import { getMinorTitle, getTitle } from '../utils-garden/getHeaderValues';
 import { StyledHeaderContainer } from './garden.styles';
 

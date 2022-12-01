@@ -1,4 +1,4 @@
-import { SwcrStatus } from '../types';
+import { SwcrStatus } from '@cc-components/swcrshared';
 import { getSwcrStatusPriority } from './getSwcrStatusPriority';
 
 export const sortBySwcrStatusPriority = (a: string, b: string): number => {

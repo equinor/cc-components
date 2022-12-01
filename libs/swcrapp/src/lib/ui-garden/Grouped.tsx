@@ -1,5 +1,4 @@
 import { CustomGroupView } from '@equinor/workspace-fusion/garden';
-import { SwcrPackage } from '../types';
 import {
   StyledChevron,
   StyledCount,
@@ -10,6 +9,7 @@ import {
 import { Icon } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import { memo } from 'react';
+import { SwcrPackage } from '@cc-components/swcrshared';
 
 export const ChevronUp = (): JSX.Element => (
   <Icon name={'chevron_up'} color={tokens.colors.interactive.primary__resting.rgba} />
