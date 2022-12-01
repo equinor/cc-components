@@ -1,10 +1,11 @@
 import { hasProperty } from '@cc-components/shared';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import {
   GardenGroups,
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields, SwcrPackage } from '../types';
+import { ExtendedGardenFields } from '../types';
 
 export const getItemWidth = (
   garden: GardenGroups<SwcrPackage>,

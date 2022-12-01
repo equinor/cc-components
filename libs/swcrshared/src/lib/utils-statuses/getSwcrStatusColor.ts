@@ -1,4 +1,5 @@
-import { SwcrStatus } from '../types';
+import { SwcrStatus } from '../types/swcrStatus';
+
 const swcrPackageStatusColors: Record<SwcrStatus, string> = {
   'Not initiated': '#D9EAF2',
   Initiated: '#BCF316',
@@ -8,5 +9,5 @@ const swcrPackageStatusColors: Record<SwcrStatus, string> = {
   Closed: '#0D59F2',
   'Closed - Rejected': '#0D59F2',
 };
-export const getSwcrStatusColor = (status: SwcrStatus): string =>
-  swcrPackageStatusColors[status];
+export const getSwcrStatusColor = (status: SwcrStatus | undefined): string =>
+  status ? swcrPackageStatusColors[status] : 'transparent';

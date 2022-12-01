@@ -1,4 +1,4 @@
-import { SwcrStatus } from '../types';
+import { SwcrStatus } from '@cc-components/swcrshared';
 
 export const SwcrPackageStatusPriority: Record<SwcrStatus, number> = {
   'Not initiated': 1,

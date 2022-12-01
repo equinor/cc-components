@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { GardenItem } from '@equinor/workspace-fusion/garden';
-import { SwcrPackage } from '../types';
-export const customDescription = (item: SwcrPackage | GardenItem<SwcrPackage>) => {
+export const customDescription = (swcr: SwcrPackage | GardenItem<SwcrPackage>) => {
+  //TODO: TS check
+  const item = swcr as SwcrPackage;
   return `${item.title} ${
     parseInt(item.estimatedManhours) > 0 ? `(${item.estimatedManhours}h)` : ''
   }`;

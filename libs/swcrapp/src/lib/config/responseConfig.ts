@@ -1,4 +1,4 @@
-import { SwcrPackage } from '../types';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { sortPackagesByStatusAndNumber } from '../utils-statuses';
 
 export const responseParser = async (response: Response) => {

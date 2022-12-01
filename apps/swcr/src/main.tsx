@@ -24,7 +24,7 @@ const configure = async (config: IAppConfigurator) => {
 const MyApp = () => {
   return (
     <StrictMode>
-      <div style={{ height: '90vh', width: '90vw' }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <WorkspaceWrapper />
       </div>
     </StrictMode>

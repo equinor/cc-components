@@ -1,6 +1,7 @@
-import { GetKeyFunction, SwcrPackage } from '../types';
+import { GetKeyFunction } from '../types';
 import { nextToSignParallelRuleValidation } from './nextToSignParallelRuleValidation';
 import { DEFAULT_BLANKSTRING } from '../constants/defaultBlankString';
+import { SwcrPackage } from '@cc-components/swcrshared';
 
 const getNextSignatureRoleKey = (nextToSign: string, ranking?: string): string => {
   if (!ranking?.length) ranking = '0';

@@ -1,5 +1,5 @@
+import { SwcrPackage, SwcrStatus } from '@cc-components/swcrshared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
-import { SwcrPackage, SwcrStatus } from '../types';
 import { StatusFilter } from '../ui-filter';
 import {
   getLatestSignedRankingKey,

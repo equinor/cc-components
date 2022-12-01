@@ -1,5 +1,4 @@
-import { SwcrStatus } from '../types';
-import { getSwcrStatusColor } from '../utils-statuses';
+import { getSwcrStatusColor, SwcrStatus } from '@cc-components/swcrshared';
 import { StyledContainer, StyledStatusColor, StyledTitle } from './filter.styles';
 
 type StatusFilterProps = {

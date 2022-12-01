@@ -6,16 +6,19 @@ import { tableConfig } from './tableConfig';
 import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { responseParser } from './responseConfig';
-const useContextId = () => {
-  return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
-};
+import { sidesheetConfig } from './sidesheetConfig';
+import { useContextId } from '@cc-components/shared';
+
 export const WorkspaceWrapper = () => {
   const dataProxy = useHttpClient('data-proxy');
   const contextId = useContextId();
-  const getResponseAsync = useCallback(async () => {
-    const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`);
-    return swcrs;
-  }, [dataProxy, contextId]);
+  const getResponseAsync = useCallback(
+    async (signal?: AbortSignal) => {
+      const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`, { signal });
+      return swcrs;
+    },
+    [dataProxy, contextId]
+  );
 
   return (
     <Workspace
@@ -28,6 +31,7 @@ export const WorkspaceWrapper = () => {
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
+      sidesheetOptions={sidesheetConfig}
       fusionPowerBiOptions={{
         reportUri: 'pp-swcr-analytics',
       }}

@@ -1,5 +1,6 @@
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields, SwcrPackage } from '../types';
+import { ExtendedGardenFields } from '../types';
 import { GardenGrouped, GardenHeader, GardenItem } from '../ui-garden';
 import { customDescription } from '../utils-garden/customDescription';
 import { fieldSettings } from '../utils-garden/fieldSettings';

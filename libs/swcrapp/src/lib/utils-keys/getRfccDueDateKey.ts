@@ -1,7 +1,7 @@
 import { getYearAndWeekFromDate } from '@cc-components/shared';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { DateTime } from 'luxon';
 import { DATE_BLANKSTRING } from '../constants/dateBlankString';
-import { SwcrPackage } from '../types';
 import { GetKeyFunction } from '../types/getKeyFunction';
 
 export const getRfccDueDateKey: GetKeyFunction<SwcrPackage> = (item) => {

@@ -1,5 +1,6 @@
 import { getYearAndWeekFromString } from '@cc-components/shared';
-import { GetKeyFunction, SwcrPackage } from '../types';
+import { SwcrPackage } from '@cc-components/swcrshared';
+import { GetKeyFunction } from '../types';
 
 export const getStartImplForecastKey: GetKeyFunction<SwcrPackage> = (item) => {
   const workdays =
