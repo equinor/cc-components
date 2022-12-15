@@ -3,7 +3,7 @@ import { HandoverSidesheet } from '@cc-components/handoversidesheet';
 import { SidesheetConfig } from '@equinor/workspace-fusion/sidesheet';
 
 export const sidesheetConfig: SidesheetConfig<HandoverPackage> = {
-  type: 'simple',
+  type: 'default',
   DetailsSidesheet: (props) => (
     <HandoverSidesheet.Component
       id={props.id}
