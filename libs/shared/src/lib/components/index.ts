@@ -1,4 +1,5 @@
 export { StatusCircle } from './StatusCircle';
+export { StatusSquare } from './StatusSquare';
 
 export * from './icons';
 

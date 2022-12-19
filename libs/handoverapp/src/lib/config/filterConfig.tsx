@@ -2,6 +2,12 @@ import { HandoverPackage } from '@cc-components/handovershared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { daysDiff, getFilterDateValues } from '../utils-filter';
 import { getStatus } from '../utils-statuses/getStatus';
+import {
+  colorMap,
+  hasProperty,
+  statusColorMap,
+  StatusSquare,
+} from '@cc-components/shared';
 
 export const filterConfig: FilterConfig<HandoverPackage> = {
   filterGroups: [
@@ -19,11 +25,31 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
       name: 'Comm pkg status',
       valueFormatter: (pkg) => getStatus(pkg),
       isQuickFilter: true,
+      customValueRender: (value) => {
+        if (typeof value !== 'string') return <span>{value}</span>;
+        return (
+          <StatusSquare
+            content={value}
+            statusColor={hasProperty(colorMap, value) ? colorMap[value] : 'transparent'}
+          />
+        );
+      },
     },
     {
       name: 'MC status',
       valueFormatter: ({ mcStatus }) => mcStatus,
       isQuickFilter: true,
+      customValueRender: (value) => {
+        if (typeof value !== 'string') return <span>{value}</span>;
+        return (
+          <StatusSquare
+            content={value}
+            statusColor={
+              hasProperty(statusColorMap, value) ? statusColorMap[value] : 'transparent'
+            }
+          />
+        );
+      },
     },
     {
       name: 'Responsible',
@@ -32,11 +58,11 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'Area',
-      valueFormatter: ({ area }) => area,
+      valueFormatter: ({ area }) => area || null,
     },
     {
       name: 'Phase',
-      valueFormatter: ({ phase }) => phase,
+      valueFormatter: ({ phase }) => phase || null,
     },
 
     {
@@ -47,15 +73,15 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
 
     {
       name: 'Priority 1',
-      valueFormatter: ({ priority1 }) => priority1,
+      valueFormatter: ({ priority1 }) => priority1 || null,
     },
     {
       name: 'Priority 2',
-      valueFormatter: ({ priority2 }) => priority2,
+      valueFormatter: ({ priority2 }) => priority2 || null,
     },
     {
       name: 'Priority 3',
-      valueFormatter: ({ priority3 }) => priority3,
+      valueFormatter: ({ priority3 }) => priority3 || null,
     },
     {
       name: 'Planned RFC',

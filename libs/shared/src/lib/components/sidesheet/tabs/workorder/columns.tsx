@@ -73,7 +73,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <ProgressCell percentWidth={props.value === null ? 0 : props.value} />;
       },
-      width: 100,
+      width: 300,
     },
     {
       field: 'Estimated',

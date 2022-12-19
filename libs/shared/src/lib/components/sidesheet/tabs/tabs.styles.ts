@@ -14,7 +14,10 @@ export const StyledTabs = styled(Tabs)`
 
 export const StyledPanels = styled(Tabs.Panels)`
   overflow: auto;
-  padding: 1em;
+  padding-left: 1em;
+  > div {
+    padding: 0;
+  }
 `;
 
 export const StyledTabListWrapper = styled.div`
