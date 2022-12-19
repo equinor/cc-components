@@ -1,6 +1,7 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { proCoSysUrls } from '../../../../mapping';
-import { DescriptionCell, LinkCell } from '../../../table';
+import { hasProperty } from '../../../../utils-typescript';
+import { proCoSysUrls, statusColorMap } from '../../../../mapping';
+import { DescriptionCell, LinkCell, StatusCell } from '../../../table';
 import { PunchBase } from './type';
 
 export const columns: ColDef<PunchBase>[] = [
@@ -14,6 +15,7 @@ export const columns: ColDef<PunchBase>[] = [
         return <LinkCell url={props.valueFormatted} urlText={props.value} />;
       } else return null;
     },
+    width: 100,
   },
   {
     field: 'Description',
@@ -21,14 +23,32 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
+    width: 350,
   },
   {
     field: 'To be cleared by',
     valueGetter: (pkg) => pkg.data?.toBeClearedBy,
+    width: 250,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
+    cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
+      return (
+        <StatusCell
+          content={props.value}
+          cellAttributeFn={() => ({
+            style: {
+              backgroundColor: props.value
+                ? hasProperty(statusColorMap, props.value)
+                  ? statusColorMap[props.value]
+                  : 'transparent'
+                : 'transparent',
+            },
+          })}
+        />
+      );
+    },
   },
   {
     field: 'Sorting',

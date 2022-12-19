@@ -25,7 +25,7 @@ export const columns: ColDef<SwcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 300,
+    width: 500,
   },
   {
     field: 'Status',

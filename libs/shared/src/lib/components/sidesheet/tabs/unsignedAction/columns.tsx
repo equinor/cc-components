@@ -19,8 +19,10 @@ export const columns: ColDef<UnsignedActionBase>[] = [
     field: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase, string | null>) => {
-      return <DescriptionCell description={props.value} />;
+      return <DescriptionCell description={props.value} displayFullText />;
     },
-    width: 400,
+    autoHeight: true,
+    wrapText: true,
+    width: 600,
   },
 ];
