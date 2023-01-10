@@ -25,13 +25,6 @@
           }
         ]
       }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/workorder/**/*.{ts,tsx,js,jsx}"]
-      }
     }
   },
   "tags": []
