@@ -14,10 +14,15 @@ type WorkspaceWrapperProps = {
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = useCallback(async () => {
-    const commpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/handover`);
-    return commpkgs;
-  }, [contextId, dataProxy]);
+  const getResponseAsync = useCallback(
+    async (signal: AbortSignal | undefined) => {
+      const commpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
+        signal,
+      });
+      return commpkgs;
+    },
+    [contextId, dataProxy]
+  );
 
   return (
     <Workspace
