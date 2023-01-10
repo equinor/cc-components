@@ -1,7 +1,8 @@
 import { FlagIcon, PopoverWrapper } from '@cc-components/shared';
+import { WorkOrder } from '@cc-components/workordershared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { ExtendedGardenFields } from '../types';
 import { getWorkOrderStatuses } from '../utils-garden';
 import {
   StyledStatusCircles,
@@ -32,8 +33,9 @@ const WorkorderItem = (
     rowStart,
     parentRef,
     width: itemWidth = 300,
-    controller: { getDisplayName },
+    controller: { getDisplayName, useCurrentGroupingKeys },
   } = props;
+  const { horizontalGroupingAccessor, verticalGroupingKeys } = useCurrentGroupingKeys();
 
   const {
     backgroundColor,
@@ -44,7 +46,7 @@ const WorkorderItem = (
     size,
     status,
     textColor,
-  } = useMemo(() => getWorkOrderStatuses(data, 'discipline', []), [data]);
+  } = useMemo(() => getWorkOrderStatuses(data, horizontalGroupingAccessor, []), [data]);
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);

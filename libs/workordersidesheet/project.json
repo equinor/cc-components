@@ -1,0 +1,35 @@
+{
+  "name": "workordersidesheet",
+  "sourceRoot": "libs/workordersidesheet/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/workordersidesheet/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/workordersidesheet",
+        "tsConfig": "libs/workordersidesheet/tsconfig.lib.json",
+        "project": "libs/workordersidesheet/package.json",
+        "entryFile": "libs/workordersidesheet/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/workordersidesheet/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}

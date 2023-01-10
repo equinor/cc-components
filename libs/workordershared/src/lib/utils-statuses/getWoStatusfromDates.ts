@@ -1,5 +1,5 @@
 import { ProcosysStatuses } from '@cc-components/shared';
-import { WorkOrder } from '../types';
+import { WorkOrder } from '@cc-components/workordershared';
 
 export const getWoStatusFromDates = (workOrder: WorkOrder): ProcosysStatuses => {
   if (workOrder.w10ActualDate) return ProcosysStatuses.SentToPlanning;

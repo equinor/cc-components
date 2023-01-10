@@ -8,9 +8,9 @@ import {
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { WorkOrder } from '../types';
 import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
+import { WorkOrder } from '@cc-components/workordershared';
 
 export const tableConfig: GridConfig<WorkOrder> = {
   columnDefinitions: [

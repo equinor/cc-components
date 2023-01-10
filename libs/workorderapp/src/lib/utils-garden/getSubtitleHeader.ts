@@ -1,10 +1,10 @@
 import { FollowUpStatuses, getYearAndWeekFromDate } from '@cc-components/shared';
+import { WorkOrder } from '@cc-components/workordershared';
 import {
   GardenGroups,
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { WorkOrder } from '../types';
 import { getFollowUpStatus } from '../utils-statuses';
 
 const shouldCountHours = (workOrder: WorkOrder): boolean =>
