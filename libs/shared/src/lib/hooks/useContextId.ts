@@ -1,3 +1,11 @@
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
 export const useContextId = () => {
-  return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
+  try {
+    const { currentContext } = useModuleCurrentContext();
+    return currentContext?.id;
+  } catch {
+    throw new Error(
+      'UseModuleCurrentContext has to be called in the scope of Fusion framework with context enabled in config.'
+    );
+  }
 };

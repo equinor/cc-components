@@ -5,18 +5,19 @@ import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 
-export const WorkspaceWrapper = () => {
+type WorkspaceWrapperProps = {
+  contextId: string;
+};
+export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const contextId = useContextId();
   const getResponseAsync = useCallback(async () => {
     const commpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/handover`);
     return commpkgs;
-  }, [dataProxy, contextId]);
+  }, [contextId, dataProxy]);
 
   return (
     <Workspace
