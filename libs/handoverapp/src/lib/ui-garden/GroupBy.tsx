@@ -1,22 +1,41 @@
 import { Autocomplete } from '@equinor/eds-core-react';
-import { HandoverCustomGroupByKeys } from '../types';
-import { CustomVirtualViews } from '@equinor/workspace-fusion/garden';
-export const GardenGroupBy = (props: unknown): JSX.Element => {
-  //   const { setCustomGroupKeys, ...parkViewContext } = useParkViewContext();
-  //   const customGroupByKeys =
-  //     parkViewContext.customGroupByKeys as HandoverCustomGroupByKeys;
+import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
+import { CustomGroupViewProps } from '@equinor/workspace-fusion/garden';
+import { HandoverPackage } from '@cc-components/handovershared';
+import styled from 'styled-components';
 
+const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+`;
+export const GardenGroupBy = (
+  props: CustomGroupViewProps<
+    HandoverPackage,
+    ExtendedGardenFields,
+    HandoverCustomGroupByKeys
+  >
+): JSX.Element => {
+  const {
+    controller: { useCustomGroupByKeys },
+  } = props;
+  const [customGroupByKeys, setCustomGroupByKeys] = useCustomGroupByKeys();
   return (
-    <>
-      {/* <Autocomplete
+    <StyledContainer>
+      <Autocomplete
         key={'plannedForecast'}
         options={['Planned', 'Forecast']}
+        autoWidth={true}
+        hideClearButton={true}
         label={''}
-        selectedOptions={[customGroupByKeys.plannedForecast]}
+        selectedOptions={[customGroupByKeys?.plannedForecast]}
         onOptionsChange={(changes) =>
-          setCustomGroupKeys({
-            ...customGroupByKeys,
-            plannedForecast: changes.selectedItems[0] || 'Planned',
+          setCustomGroupByKeys({
+            weeklyDaily: customGroupByKeys?.weeklyDaily || 'Weekly',
+            plannedForecast:
+              (changes
+                .selectedItems[0] as HandoverCustomGroupByKeys['plannedForecast']) ||
+              'Planned',
           })
         }
       />
@@ -25,14 +44,18 @@ export const GardenGroupBy = (props: unknown): JSX.Element => {
         key={'weeklyDaily'}
         options={['Weekly', 'Daily']}
         label={''}
-        selectedOptions={[customGroupByKeys.weeklyDaily]}
+        hideClearButton={true}
+        autoWidth={true}
+        selectedOptions={[customGroupByKeys?.weeklyDaily]}
         onOptionsChange={(changes) =>
-          setCustomGroupKeys({
-            ...customGroupByKeys,
-            weeklyDaily: changes.selectedItems[0] || 'Weekly',
+          setCustomGroupByKeys({
+            plannedForecast: customGroupByKeys?.plannedForecast || 'Planned',
+            weeklyDaily:
+              (changes.selectedItems[0] as HandoverCustomGroupByKeys['weeklyDaily']) ||
+              'Weekly',
           })
         }
-      /> */}
-    </>
+      />
+    </StyledContainer>
   );
 };
