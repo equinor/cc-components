@@ -6,12 +6,12 @@ import { tableConfig } from './tableConfig';
 import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { responseParser } from './responseConfig';
-const useContextId = () => {
-  return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
+type WorkspaceWrapperProps = {
+  contextId: string;
 };
-export const WorkspaceWrapper = () => {
+export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const contextId = useContextId();
+
   const getResponseAsync = useCallback(async () => {
     const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`);
     return swcrs;
