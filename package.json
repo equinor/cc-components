@@ -10,7 +10,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@equinor/fusion-framework-cli": "^1.2.6",
+    "@equinor/fusion-framework-cli": "^2.0.3",
     "@equinor/fusion-observable": "^3.0.2",
     "@nrwl/cli": "14.8.3",
     "@nrwl/eslint-plugin-nx": "^14.8.3",
@@ -54,7 +54,7 @@
     "@equinor/eds-icons": "^0.17.0",
     "@equinor/eds-tokens": "^0.9.0",
     "@equinor/fusion-framework-module-ag-grid": "^1.0.19",
-    "@equinor/fusion-framework-react-app": "^2.0.19",
+    "@equinor/fusion-framework-react-app": "^2.0.30",
     "@equinor/fusion-framework-react-module-context": "^1.0.16",
     "@equinor/workspace-ag-grid": "^0.3.1",
     "@equinor/workspace-fusion": "^0.12.0",
