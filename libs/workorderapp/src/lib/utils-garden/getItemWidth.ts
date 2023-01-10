@@ -1,10 +1,11 @@
 import { hasProperty } from '@cc-components/shared';
+import { WorkOrder } from '@cc-components/workordershared';
 import {
   GardenGroups,
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { ExtendedGardenFields } from '../types';
 
 export const getItemWidth = (
   garden: GardenGroups<WorkOrder>,

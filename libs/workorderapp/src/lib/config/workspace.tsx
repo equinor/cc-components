@@ -3,6 +3,7 @@ import Workspace from '@equinor/workspace-fusion';
 import { useCallback } from 'react';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 type WorkspaceWrapperProps = {
@@ -33,6 +34,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       dataOptions={{
         getResponseAsync,
       }}
+      sidesheetOptions={sidesheetConfig}
     />
   );
 };

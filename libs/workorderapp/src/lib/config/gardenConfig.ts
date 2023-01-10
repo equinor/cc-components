@@ -1,5 +1,5 @@
+import { WorkOrder } from '@cc-components/workordershared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { WorkOrder } from '..';
 import { ExtendedGardenFields } from '../types';
 import { GardenHeader, GardenItem } from '../ui-garden';
 import { getHighlightedColumn, getItemWidth } from '../utils-garden';

@@ -1,5 +1,6 @@
 import { FollowUpStatuses, hasProperty, ProcosysStatuses } from '@cc-components/shared';
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { WorkOrder } from '@cc-components/workordershared';
+import { ExtendedGardenFields } from '../types';
 import {
   getColorBasedOnGroupBy,
   getMatStatus,

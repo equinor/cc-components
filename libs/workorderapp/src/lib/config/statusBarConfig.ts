@@ -1,6 +1,6 @@
 import { numberFormat } from '@cc-components/shared';
+import { WorkOrder } from '@cc-components/workordershared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { WorkOrder } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
 
 export const statusBarConfig: StatusBarConfig<WorkOrder> = (data) => {

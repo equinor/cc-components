@@ -1,7 +1,7 @@
+import { WorkOrder } from '@cc-components/workordershared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
-import { WorkOrder } from '../types';
 import { getSubtitleHeader } from '../utils-garden';
 const HeaderContent = styled.div`
   display: flex;

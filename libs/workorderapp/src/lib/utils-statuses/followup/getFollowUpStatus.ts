@@ -3,8 +3,7 @@ import {
   MaterialStatus,
   orderedProCoSysStatuses,
 } from '@cc-components/shared';
-import { WorkOrder } from '../../types';
-import { getWoStatus } from '../getWoStatus';
+import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
 const prepareMaterialStatus = (status: MaterialStatus): string[] => {
   const statusLower = status.toLowerCase();
 

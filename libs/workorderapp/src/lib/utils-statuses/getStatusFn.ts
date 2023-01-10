@@ -1,6 +1,6 @@
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
+import { ExtendedGardenFields } from '../types';
 import { getFollowUpStatus } from './followup';
-import { getWoStatus } from './getWoStatus';
 
 /**
  * Function that returns another function, depending on what is currently grouped, which retrieves the package's status.

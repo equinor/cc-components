@@ -7,8 +7,8 @@ import {
   StyledPopoverProjectTitle,
   StyledPopoverStatus,
 } from '@cc-components/shared';
+import { WorkOrder } from '@cc-components/workordershared';
 import { memo } from 'react';
-import { WorkOrder } from '../../types';
 import { StyledStatuses, StyledHoldBy } from './popover.styles';
 type ItemSize = 'small' | 'medium' | 'large';
 

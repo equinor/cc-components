@@ -1,5 +1,6 @@
 import { FollowUpStatuses } from '@cc-components/shared';
-import { Kpi, WorkOrder } from '../types';
+import { WorkOrder } from '@cc-components/workordershared';
+import { Kpi } from '../types';
 import { getFollowUpStatus } from '../utils-statuses';
 
 export const getStatusBarData = (workOrders: WorkOrder[]) => {
