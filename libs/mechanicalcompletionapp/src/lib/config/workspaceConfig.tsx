@@ -13,10 +13,15 @@ type WorkspaceWrapperProps = {
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = useCallback(async () => {
-    const mcpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`);
-    return mcpkgs;
-  }, [dataProxy, contextId]);
+  const getResponseAsync = useCallback(
+    async (signal: AbortSignal | undefined) => {
+      const mcpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`, {
+        signal,
+      });
+      return mcpkgs;
+    },
+    [dataProxy, contextId]
+  );
 
   return (
     <Workspace
