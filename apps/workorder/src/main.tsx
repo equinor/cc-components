@@ -1,32 +1,22 @@
-import { WorkspaceWrapper } from '@cc-components/workorderapp';
-import {
-  ComponentRenderArgs,
-  IAppConfigurator,
-  makeComponent,
-} from '@equinor/fusion-framework-react-app';
-import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
+import { NoContext, useContextId } from '@cc-components/shared';
+import { configure, WorkspaceWrapper } from '@cc-components/workorderapp';
+import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-const dataProxy = {
-  clientId: '5a842df8-3238-415d-b168-9f16a6a6031b',
-  uri: 'https://pro-s-dataproxy-CI.azurewebsites.net',
-  defaultScopes: ['5a842df8-3238-415d-b168-9f16a6a6031b/.default'],
-};
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-const configure = async (config: IAppConfigurator) => {
-  config.configureHttpClient('data-proxy', {
-    baseUri: dataProxy.uri,
-    defaultScopes: dataProxy.defaultScopes,
-  });
-  enableAgGrid(config);
-};
+const queryClient = new QueryClient();
 
-const MyApp = () => {
+const WorkorderApp = () => {
+  const contextId = useContextId();
+
   return (
     <StrictMode>
-      <div style={{ height: '90vh', width: '90vw' }}>
-        <WorkspaceWrapper />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
+          {contextId ? <WorkspaceWrapper contextId={contextId} /> : <NoContext />}
+        </div>
+      </QueryClientProvider>
     </StrictMode>
   );
 };
@@ -40,7 +30,7 @@ export default function render(el: HTMLElement, args: ComponentRenderArgs) {
    * Second argu is the the render args (framework and env variables)
    * Third argument is the configuration callback
    */
-  const AppComponent = makeComponent(<MyApp />, args, configure);
+  const AppComponent = makeComponent(<WorkorderApp />, args, configure);
 
   root.render(<AppComponent />);
 
