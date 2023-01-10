@@ -3,8 +3,10 @@ import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
-
-export const WorkspaceWrapper = () => {
+type WorkspaceWrapperProps = {
+  contextId: string;
+};
+export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   return (
     <Workspace
       workspaceOptions={{
