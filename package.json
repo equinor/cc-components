@@ -51,8 +51,8 @@
   },
   "dependencies": {
     "@equinor/eds-core-react": "^0.28.0",
-    "@equinor/eds-icons": "^0.16.0",
-    "@equinor/eds-tokens": "^0.7.1",
+    "@equinor/eds-icons": "^0.17.0",
+    "@equinor/eds-tokens": "^0.9.0",
     "@equinor/fusion-framework-module-ag-grid": "^1.0.19",
     "@equinor/fusion-framework-react-app": "^2.0.19",
     "@equinor/fusion-framework-react-module-context": "^1.0.16",
