@@ -1,6 +1,7 @@
 import { sortByNumber } from '@cc-components/shared';
+import { WorkOrder } from '@cc-components/workordershared';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { ExtendedGardenFields } from '../types';
 import { columnKeyAccessor } from './columnKeyAccessor';
 
 export const fieldSettings: FieldSettings<WorkOrder, ExtendedGardenFields> = {

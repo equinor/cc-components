@@ -1,8 +1,10 @@
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import Workspace from '@equinor/workspace-fusion';
 import { useCallback } from 'react';
+import { contextConfig } from './contextConfig';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 type WorkspaceWrapperProps = {
@@ -23,7 +25,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     <Workspace
       workspaceOptions={{
         appKey: 'Workorder',
-        getIdentifier: (item) => item.workOrderNumber,
+        getIdentifier: (item) => item.workOrderId,
         defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
@@ -33,6 +35,8 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       dataOptions={{
         getResponseAsync,
       }}
+      sidesheetOptions={sidesheetConfig}
+      contextOptions={contextConfig}
     />
   );
 };

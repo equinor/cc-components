@@ -1,5 +1,6 @@
 import {
   DescriptionCell,
+  EstimateCell,
   LinkCell,
   proCoSysUrls,
   ProgressCell,
@@ -8,9 +9,9 @@ import {
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { WorkOrder } from '../types';
 import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
+import { WorkOrder } from '@cc-components/workordershared';
 
 export const tableConfig: GridConfig<WorkOrder> = {
   columnDefinitions: [
@@ -32,12 +33,12 @@ export const tableConfig: GridConfig<WorkOrder> = {
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
         return <DescriptionCell description={props.value} />;
       },
-      width: 100,
+      width: 300,
     },
     {
       field: 'Discipline',
       valueGetter: (pkg) => pkg.data?.disciplineCode,
-      width: 100,
+      width: 150,
     },
     {
       field: 'Milestone',
@@ -65,7 +66,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
           );
         } else return null;
       },
-      width: 100,
+      width: 150,
     },
     {
       field: 'Hold',
@@ -92,7 +93,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 150,
+      width: 200,
     },
     {
       field: 'Planned finish',
@@ -100,6 +101,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
+      width: 200,
     },
     {
       field: 'Planned start',
@@ -107,21 +109,50 @@ export const tableConfig: GridConfig<WorkOrder> = {
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
+      width: 200,
     },
     {
       field: 'Est mhr',
+      valueFormatter: (pkg) => pkg.context.maxEstHrs,
       valueGetter: (pkg) => pkg.data?.estimatedHours,
-      width: 100,
+      cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
+        return (
+          <EstimateCell
+            current={Number(props.value ?? '0')}
+            max={(props.valueFormatted as unknown as number) ?? 0}
+          />
+        );
+      },
+      width: 150,
     },
     {
       field: 'Exp mhr',
+      valueFormatter: (pkg) => pkg.context.maxExpHrs,
       valueGetter: (pkg) => pkg.data?.expendedHours,
-      width: 100,
+      cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
+        return (
+          <EstimateCell
+            current={Number(props.value ?? '0')}
+            max={(props.valueFormatted as unknown as number) ?? 0}
+          />
+        );
+      },
+
+      width: 150,
     },
     {
       field: 'Rem mhr',
+      valueFormatter: (pkg) => pkg.context.maxRemHrs,
       valueGetter: (pkg) => pkg.data?.remainingHours,
-      width: 100,
+      cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
+        return (
+          <EstimateCell
+            current={Number(props.value ?? '0')}
+            max={(props.valueFormatted as unknown as number) ?? 0}
+          />
+        );
+      },
+      width: 150,
     },
     {
       field: 'Progress',
@@ -133,7 +164,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
 
         return <ProgressCell percentWidth={Number(props.value)} />;
       },
-      width: 100,
+      width: 150,
     },
     {
       field: 'MC',

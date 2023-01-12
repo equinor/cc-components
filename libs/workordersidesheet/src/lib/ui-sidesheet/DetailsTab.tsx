@@ -1,4 +1,3 @@
-import { WorkOrder } from '../types';
 import {
   formatDateString,
   materialStatusMap,
@@ -7,11 +6,12 @@ import {
   stringCell,
   hasProperty,
 } from '@cc-components/shared';
-import { getWoStatus } from '../utils-statuses/getWoStatus';
+import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
 type DetailsTabProps = {
-  workOrder: WorkOrder;
+  workOrder: WorkOrder | undefined;
 };
-export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element => {
+export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null => {
+  if (!workOrder) return null;
   return (
     <StyledTabContent>
       <h3>Details</h3>

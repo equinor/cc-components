@@ -1,6 +1,6 @@
 import { ProcosysStatuses } from '@cc-components/shared';
 import { WorkOrder } from '../types';
-import { getWoStatusFromDates } from './getWoStatusFromDates';
+import { getWoStatusFromDates } from './getWoStatusfromDates';
 
 /**
  * Function to retrieve a package's status based on its jobStatus property.

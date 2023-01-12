@@ -1,9 +1,10 @@
 import { FollowUpStatuses } from '@cc-components/shared';
-import { Progress, WorkOrder } from '../types';
+import { Progress } from '../types';
 import { FollowUpStatusFilter } from '../ui-filter';
 import { progressPriMap, progressValueFormatter } from '../utils-filter';
 import { followUpStatusPriorityMap, getFollowUpStatus } from '../utils-statuses';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
+import { WorkOrder } from '@cc-components/workordershared';
 
 export const filterConfig: FilterConfig<WorkOrder> = {
   filterGroups: [
