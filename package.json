@@ -58,7 +58,7 @@
     "@equinor/eds-tokens": "^0.9.0",
     "@equinor/fusion-framework-module-ag-grid": "^1.0.19",
     "@equinor/fusion-framework-react-app": "^2.0.30",
-    "@equinor/fusion-framework-react-module-context": "^1.0.16",
+    "@equinor/fusion-framework-react-module-context": "^1.0.17",
     "@equinor/workspace-ag-grid": "^0.3.5",
     "@equinor/workspace-fusion": "^0.12.0",
     "core-js": "^3.6.5",
