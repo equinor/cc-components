@@ -24,6 +24,7 @@ export const columns: ColDef<MccrBase>[] = [
       return <DescriptionCell description={props.value} />;
     },
     width: 250,
+    resizable: true,
   },
   {
     field: 'Type',
@@ -41,11 +42,12 @@ export const columns: ColDef<MccrBase>[] = [
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
-    width: 85,
+    width: 120,
   },
   {
     field: 'Res',
     valueGetter: (pkg) => pkg.data?.mccrResponsible,
+    width: 120,
   },
   {
     field: 'McpkgNo.',
