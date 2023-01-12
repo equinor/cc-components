@@ -5,8 +5,6 @@ import {
   MccrTab,
   proCoSysUrls,
   SidesheetHeader,
-  StatusCircle,
-  statusColorMap,
   StyledBanner,
   StyledItemLink,
   StyledPanels,
@@ -57,11 +55,23 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props?.item?.workOrderNumber || ''}
+        title={props?.item?.description ?? ''}
         onClose={props.closeSidesheet}
       />
       <StyledBanner>
-        <BannerItem title="WO status" value={<div></div>} />
+        <BannerItem
+          title="WO"
+          value={
+            <StyledItemLink
+              href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderId ?? '')}
+              target="_blank"
+            >
+              {props?.item?.workOrderNumber}
+            </StyledItemLink>
+          }
+        />
+        <BannerItem title="Material status" value={'?'} />
+        <BannerItem title="MCCR status" value={'?'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
