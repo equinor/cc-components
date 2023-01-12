@@ -35,7 +35,7 @@ const WorkorderItem = (
     width: itemWidth = 300,
     controller: { getDisplayName, useCurrentGroupingKeys },
   } = props;
-  const { horizontalGroupingAccessor, verticalGroupingKeys } = useCurrentGroupingKeys();
+  const { horizontalGroupingAccessor } = useCurrentGroupingKeys();
 
   const {
     backgroundColor,
@@ -46,7 +46,15 @@ const WorkorderItem = (
     size,
     status,
     textColor,
-  } = useMemo(() => getWorkOrderStatuses(data, horizontalGroupingAccessor, []), [data]);
+  } = useMemo(
+    () =>
+      getWorkOrderStatuses(
+        data,
+        horizontalGroupingAccessor as keyof WorkOrder | ExtendedGardenFields,
+        []
+      ),
+    [data, horizontalGroupingAccessor]
+  );
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
