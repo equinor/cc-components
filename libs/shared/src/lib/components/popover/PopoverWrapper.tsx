@@ -7,6 +7,14 @@ import {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import styled from 'styled-components';
+
+const StyledPopover = styled(Popover)`
+  padding: 1em;
+  .arrow {
+    display: none;
+  }
+`;
 
 type PopoverWrapperProps = {
   isOpen: boolean;
@@ -62,10 +70,10 @@ export const PopoverWrapper = ({
         left: `${columnStart + placement.x}px`,
       }}
     >
-      <Popover open={isOpen} ref={ref} style={{ padding: '1em' }}>
+      <StyledPopover open={isOpen} ref={ref}>
         <Popover.Title>{popoverTitle}</Popover.Title>
         <Popover.Content>{children}</Popover.Content>
-      </Popover>
+      </StyledPopover>
     </div>,
     parentRef.current
   );
