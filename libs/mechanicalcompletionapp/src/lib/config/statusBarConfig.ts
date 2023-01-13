@@ -1,6 +1,6 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { numberFormat } from '@cc-components/shared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { McPackage } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
 export const statusBarConfig: StatusBarConfig<McPackage> = (data) => {
   const kpis = getStatusBarData(data);

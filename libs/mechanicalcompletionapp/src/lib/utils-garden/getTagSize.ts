@@ -1,4 +1,5 @@
-import { McPackage, TagSize } from '../types';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import { TagSize } from '../types';
 
 export const getTagSize = (mcPackage: McPackage, averageTagVolume: number): TagSize => {
   let size: TagSize = 'small';

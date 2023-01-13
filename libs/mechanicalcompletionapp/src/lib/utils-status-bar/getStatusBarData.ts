@@ -1,4 +1,5 @@
-import type { McPackage } from '../types';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
+
 type Kpi = {
   mcPkgsCount: number;
   finalPunchCount: number;

@@ -1,10 +1,11 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { hasProperty } from '@cc-components/shared';
 import {
   GardenGroups,
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields, McPackage } from '../types';
+import { ExtendedGardenFields } from '../types';
 
 export const getItemWidth = (
   garden: GardenGroups<McPackage>,

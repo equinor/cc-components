@@ -22,6 +22,12 @@
       "@cc-components/mechanicalcompletionapp": [
         "libs/mechanicalcompletionapp/src/index.ts"
       ],
+      "@cc-components/mechanicalcompletionshared": [
+        "libs/mechanicalcompletionshared/src/index.ts"
+      ],
+      "@cc-components/mechanicalcompletionsidesheet": [
+        "libs/mechanicalcompletionsidesheet/src/index.ts"
+      ],
       "@cc-components/punchapp": ["libs/punchapp/src/index.ts"],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],

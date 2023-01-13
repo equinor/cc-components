@@ -1,4 +1,5 @@
-import type { McPackage, CommissioningStatus } from '../types';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import type { CommissioningStatus } from '../types';
 
 export const getCommissioningStatus = (mcPackage: McPackage): CommissioningStatus => {
   if (mcPackage.rfocIsAccepted) {

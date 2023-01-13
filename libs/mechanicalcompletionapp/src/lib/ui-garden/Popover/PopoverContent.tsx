@@ -1,4 +1,4 @@
-import { CommissioningStatus, McPackage, TagSize } from '../../types';
+import { CommissioningStatus, TagSize } from '../../types';
 import { Statuses } from './popoverContent.styles';
 import {
   StyledPopoverContainer,
@@ -8,6 +8,7 @@ import {
   StyledPopoverProjectTitle,
   StyledPopoverProjectDescription,
 } from '@cc-components/shared';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 type ItemOptions = {
   status: CommissioningStatus;
   backgroundColor: string;

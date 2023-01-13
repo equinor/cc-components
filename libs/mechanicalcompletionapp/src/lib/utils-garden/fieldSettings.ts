@@ -1,6 +1,7 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { sortByNumber } from '@cc-components/shared';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { getDateKey } from './getGroupByKey';
 
 export const fieldSettings: FieldSettings<

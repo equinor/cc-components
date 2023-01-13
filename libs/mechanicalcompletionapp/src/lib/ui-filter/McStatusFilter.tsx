@@ -1,5 +1,5 @@
+import { McStatus } from '@cc-components/mechanicalcompletionshared';
 import { statusColorMap } from '@cc-components/shared';
-import { McStatus } from '../types';
 import { Container, StatusColor, Title } from './filter.styles';
 
 type McStatusFilterProps = {

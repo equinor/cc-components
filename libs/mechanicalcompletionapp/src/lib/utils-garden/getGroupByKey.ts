@@ -1,5 +1,6 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { getColumnDateKey } from '@cc-components/shared';
-import type { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
+import type { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 
 const getFieldKeyBasedOnPlannedForecast = (
   groupBy: ExtendedGardenFields | keyof McPackage,
