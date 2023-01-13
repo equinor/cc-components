@@ -1,6 +1,7 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
-import { GardenHeader, GardenItem } from '../ui-garden';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
+import { GardenHeader, GardenItem, GardenGroupBy } from '../ui-garden';
 import { fieldSettings } from '../utils-garden/fieldSettings';
 import { getHighlightedColumn } from '../utils-garden/getHighlightedColumn';
 import { getItemWidth } from '../utils-garden/getItemWidth';
@@ -21,6 +22,7 @@ export const gardenConfig: GardenConfig<
   customViews: {
     customItemView: GardenItem,
     customHeaderView: GardenHeader,
+    customGroupByView: GardenGroupBy,
   },
   visuals: {
     calculateItemWidth: getItemWidth,

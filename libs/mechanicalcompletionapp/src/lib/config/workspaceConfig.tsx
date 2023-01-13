@@ -7,6 +7,7 @@ import { gardenConfig } from './gardenConfig';
 import { useCallback } from 'react';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -41,6 +42,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         getResponseAsync,
         responseParser,
       }}
+      sidesheetOptions={sidesheetConfig}
       contextOptions={contextConfig}
     />
   );

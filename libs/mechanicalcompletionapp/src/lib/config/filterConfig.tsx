@@ -1,5 +1,6 @@
+import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
-import { CommissioningStatus, McPackage, McStatus } from '../types';
+import { CommissioningStatus } from '../types';
 import { HandoverStatusFilter, McStatusFilter } from '../ui-filter';
 import {
   commissioningStatusOrder,
@@ -52,15 +53,15 @@ export const filterConfig: FilterConfig<McPackage> = {
 
     {
       name: 'MC Package Phase',
-      valueFormatter: (mc) => mc.phase,
+      valueFormatter: (mc) => mc.phase || null,
     },
     {
       name: 'Commissioning Priority 1',
-      valueFormatter: (mc) => mc.priority || 'N/A',
+      valueFormatter: (mc) => mc.priority || null,
     },
     {
       name: 'Area',
-      valueFormatter: (mc) => mc.area,
+      valueFormatter: (mc) => mc.area || null,
     },
 
     {
@@ -69,7 +70,7 @@ export const filterConfig: FilterConfig<McPackage> = {
     },
     {
       name: 'Remark',
-      valueFormatter: (mc) => mc.remark,
+      valueFormatter: (mc) => mc.remark || null,
     },
 
     {

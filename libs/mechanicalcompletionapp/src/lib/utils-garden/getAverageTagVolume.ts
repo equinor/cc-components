@@ -1,4 +1,4 @@
-import { McPackage } from '../types';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 
 export const getAverageTagVolume = (mcPackages: McPackage[]): number => {
   const avgTagVol = mcPackages

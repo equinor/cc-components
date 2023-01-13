@@ -1,4 +1,4 @@
-import { McPackage } from '../types';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { commissioningStatusOrder } from './commssioningStatusOrder';
 import { getCommissioningStatus } from './getStatuses';
 

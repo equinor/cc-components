@@ -9,7 +9,7 @@
     "build": "fusion-framework-cli app build",
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k mechanicalcompletion dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k mechanicalcompletion"
+    "deploy:spa": "fdev portal upload -e ci -k mechanical-completion dist/bundle.zip",
+    "postdeploy:spa": "fdev portal publish -e ci -k mechanical-completion"
   }
 }

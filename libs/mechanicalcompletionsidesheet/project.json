@@ -1,0 +1,35 @@
+{
+  "name": "mechanicalcompletionsidesheet",
+  "sourceRoot": "libs/mechanicalcompletionsidesheet/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/mechanicalcompletionsidesheet/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/mechanicalcompletionsidesheet",
+        "tsConfig": "libs/mechanicalcompletionsidesheet/tsconfig.lib.json",
+        "project": "libs/mechanicalcompletionsidesheet/package.json",
+        "entryFile": "libs/mechanicalcompletionsidesheet/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/mechanicalcompletionsidesheet/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}
