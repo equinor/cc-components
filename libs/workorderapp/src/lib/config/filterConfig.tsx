@@ -1,8 +1,16 @@
-import { FollowUpStatuses } from '@cc-components/shared';
+import {
+  FollowUpStatuses,
+  hasProperty,
+  statusColorMap,
+  StatusSquare,
+} from '@cc-components/shared';
 import { Progress } from '../types';
-import { FollowUpStatusFilter } from '../ui-filter';
 import { progressPriMap, progressValueFormatter } from '../utils-filter';
-import { followUpStatusPriorityMap, getFollowUpStatus } from '../utils-statuses';
+import {
+  followUpColorMap,
+  followUpStatusPriorityMap,
+  getFollowUpStatus,
+} from '../utils-statuses';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { WorkOrder } from '@cc-components/workordershared';
 
@@ -28,7 +36,18 @@ export const filterConfig: FilterConfig<WorkOrder> = {
             followUpStatusPriorityMap[a as FollowUpStatuses]
         ),
       customValueRender: (filterValue) => {
-        return <FollowUpStatusFilter status={filterValue as FollowUpStatuses} />;
+        if (!filterValue) return <>(Blank)</>;
+
+        return (
+          <StatusSquare
+            content={String(filterValue)}
+            statusColor={
+              hasProperty(followUpColorMap, filterValue)
+                ? followUpColorMap[filterValue]
+                : 'transparent'
+            }
+          />
+        );
       },
       isQuickFilter: true,
     },
@@ -97,6 +116,21 @@ export const filterConfig: FilterConfig<WorkOrder> = {
     {
       name: 'MC',
       valueFormatter: ({ mccrStatus }) => mccrStatus || null,
+      customValueRender: (filterValue) => {
+        if (!filterValue) {
+          return <>(Blank)</>;
+        }
+        return (
+          <StatusSquare
+            content={String(filterValue)}
+            statusColor={
+              hasProperty(statusColorMap, filterValue)
+                ? statusColorMap[filterValue]
+                : 'transparent'
+            }
+          />
+        );
+      },
     },
     {
       name: 'Progress',
