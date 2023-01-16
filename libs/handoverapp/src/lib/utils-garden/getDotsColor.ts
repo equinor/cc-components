@@ -1,7 +1,6 @@
-import { Status } from '@cc-components/handovershared';
-import { colorMap, PackageStatus } from '@cc-components/shared';
+import { BaseStatus, colorMap, PackageStatus } from '@cc-components/shared';
 
-export const dotsColorMap: Record<Extract<Status, 'OS'>, string> = {
+export const dotsColorMap: Record<Extract<BaseStatus, 'OS'>, string> = {
   OS: '#9E9E9E',
 };
 export const getDotsColor = (status: PackageStatus) => {

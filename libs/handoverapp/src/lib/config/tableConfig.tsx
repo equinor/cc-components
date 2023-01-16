@@ -1,5 +1,6 @@
-import { HandoverPackage, Status } from '@cc-components/handovershared';
+import { HandoverPackage } from '@cc-components/handovershared';
 import {
+  BaseStatus,
   DateCell,
   DescriptionCell,
   StatusCell,
@@ -31,7 +32,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     {
       field: 'MC status',
       valueGetter: (pkg) => pkg.data?.mcStatus,
-      cellRenderer: (props: ICellRendererProps<HandoverPackage, Status>) => {
+      cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
         return (
           <StatusCell
             content={props.value}
@@ -46,7 +47,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     {
       field: 'Comm status',
       valueGetter: (pkg) => pkg.data?.commpkgStatus,
-      cellRenderer: (props: ICellRendererProps<HandoverPackage, Status>) => {
+      cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
         return (
           <StatusCell
             content={props.value}

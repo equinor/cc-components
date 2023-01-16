@@ -1,8 +1,16 @@
-import { FollowUpStatuses } from '@cc-components/shared';
+import {
+  FollowUpStatuses,
+  hasProperty,
+  statusColorMap,
+  StatusSquare,
+} from '@cc-components/shared';
 import { Progress } from '../types';
-import { FollowUpStatusFilter } from '../ui-filter';
 import { progressPriMap, progressValueFormatter } from '../utils-filter';
-import { followUpStatusPriorityMap, getFollowUpStatus } from '../utils-statuses';
+import {
+  followUpColorMap,
+  followUpStatusPriorityMap,
+  getFollowUpStatus,
+} from '../utils-statuses';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { WorkOrder } from '@cc-components/workordershared';
 
@@ -15,7 +23,7 @@ export const filterConfig: FilterConfig<WorkOrder> = {
     },
     {
       name: 'Job status',
-      valueFormatter: ({ jobStatus }) => jobStatus,
+      valueFormatter: ({ jobStatus }) => jobStatus || null,
       isQuickFilter: true,
     },
     {
@@ -28,17 +36,28 @@ export const filterConfig: FilterConfig<WorkOrder> = {
             followUpStatusPriorityMap[a as FollowUpStatuses]
         ),
       customValueRender: (filterValue) => {
-        return <FollowUpStatusFilter status={filterValue as FollowUpStatuses} />;
+        if (!filterValue) return <>(Blank)</>;
+
+        return (
+          <StatusSquare
+            content={String(filterValue)}
+            statusColor={
+              hasProperty(followUpColorMap, filterValue)
+                ? followUpColorMap[filterValue]
+                : 'transparent'
+            }
+          />
+        );
       },
       isQuickFilter: true,
     },
     {
       name: 'Responsible',
-      valueFormatter: ({ responsibleCode }) => responsibleCode,
+      valueFormatter: ({ responsibleCode }) => responsibleCode || null,
     },
     {
       name: 'Milestone',
-      valueFormatter: ({ milestoneCode }) => milestoneCode,
+      valueFormatter: ({ milestoneCode }) => milestoneCode || null,
     },
 
     // {
@@ -86,17 +105,32 @@ export const filterConfig: FilterConfig<WorkOrder> = {
     // },
     {
       name: 'Material',
-      valueFormatter: ({ materialStatus }) => materialStatus,
+      valueFormatter: ({ materialStatus }) => materialStatus || null,
       isQuickFilter: true,
     },
     {
       name: 'Hold',
-      valueFormatter: ({ holdBy }) => holdBy,
+      valueFormatter: ({ holdBy }) => holdBy || null,
       isQuickFilter: true,
     },
     {
       name: 'MC',
-      valueFormatter: ({ mccrStatus }) => mccrStatus,
+      valueFormatter: ({ mccrStatus }) => mccrStatus || null,
+      customValueRender: (filterValue) => {
+        if (!filterValue) {
+          return <>(Blank)</>;
+        }
+        return (
+          <StatusSquare
+            content={String(filterValue)}
+            statusColor={
+              hasProperty(statusColorMap, filterValue)
+                ? statusColorMap[filterValue]
+                : 'transparent'
+            }
+          />
+        );
+      },
     },
     {
       name: 'Progress',
