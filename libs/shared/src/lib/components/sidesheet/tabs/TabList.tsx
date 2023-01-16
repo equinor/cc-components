@@ -1,21 +1,16 @@
-import { Tabs } from '@equinor/eds-core-react';
-import { PropsWithChildren } from 'react';
-import { StyledTabListWrapper, StyledTabs } from './tabs.styles';
-
-type TabListProps = {
-  activeTab: number;
-  handleChange: (index: number) => void;
+import { ReactNode } from 'react';
+import { StyledTabListWrapper, StyledTabsList } from './tabs.styles';
+type TabsWrapperProps = {
+  children: ReactNode;
 };
-export const TabList = ({
-  activeTab,
-  handleChange,
-  children,
-}: PropsWithChildren<TabListProps>) => {
+/**
+ * Component to wrap Tabs.Tab in.
+ * @param children - Tabs.tab from EDS
+ */
+export const TabsWrapper = ({ children }: TabsWrapperProps) => {
   return (
-    <StyledTabs activeTab={activeTab} onChange={handleChange}>
-      <StyledTabListWrapper>
-        <Tabs.List>{children}</Tabs.List>
-      </StyledTabListWrapper>
-    </StyledTabs>
+    <StyledTabListWrapper>
+      <StyledTabsList>{children}</StyledTabsList>
+    </StyledTabListWrapper>
   );
 };

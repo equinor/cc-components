@@ -1,0 +1,1 @@
+export { getSwcrStatusColor } from './getSwcrStatusColor';

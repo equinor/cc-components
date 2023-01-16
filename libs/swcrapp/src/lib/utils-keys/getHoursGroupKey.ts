@@ -1,4 +1,4 @@
-import { SwcrPackage } from '../types';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { GetKeyFunction } from '../types/getKeyFunction';
 
 export const getHoursGroupKey: GetKeyFunction<SwcrPackage> = (item) => {

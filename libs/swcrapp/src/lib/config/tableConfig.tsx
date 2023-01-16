@@ -1,14 +1,15 @@
 import { DescriptionCell } from '@cc-components/shared';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { SwcrPackage } from '../types';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
 
 export const tableConfig: GridConfig<SwcrPackage> = {
   columnDefinitions: [
     {
       field: 'SWCRs',
+      headerName: 'SWCRs',
       valueGetter: (pkg) => pkg.data?.swcrNo,
-      width: 60,
+      width: 150,
     },
     {
       field: 'Title',
@@ -21,17 +22,17 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'Contract',
       valueGetter: (pkg) => pkg.data?.contract,
-      width: 100,
+      width: 200,
     },
     {
       field: 'System',
       valueGetter: (pkg) => pkg.data?.system,
-      width: 80,
+      width: 150,
     },
     {
       field: 'Status',
       valueGetter: (pkg) => pkg.data?.status,
-      width: 80,
+      width: 200,
     },
     {
       field: 'Next sign by',
@@ -55,6 +56,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
           );
         }
       },
+      width: 400,
     },
     {
       field: 'Next sign role',
@@ -72,7 +74,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'Supplier',
       valueGetter: (pkg) => pkg.data?.supplier,
-      width: 500,
+      width: 350,
     },
     {
       field: 'Types',
@@ -85,7 +87,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
           return <div>{keys}</div>;
         }
       },
-      width: 70,
+      width: 150,
     },
     {
       field: 'Priority',
@@ -95,12 +97,12 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'Control System',
       valueGetter: (pkg) => pkg.data?.controlSystem,
-      width: 150,
+      width: 200,
     },
     {
       field: 'Node',
       valueGetter: (pkg) => pkg.data?.node,
-      width: 60,
+      width: 150,
     },
   ],
 };

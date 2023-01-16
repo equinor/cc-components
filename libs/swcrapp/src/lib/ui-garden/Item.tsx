@@ -1,8 +1,8 @@
+import { getSwcrStatusColor, SwcrPackage } from '@cc-components/swcrshared';
 import { tokens } from '@equinor/eds-tokens';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo } from 'react';
-import { ExtendedGardenFields, SwcrPackage } from '../types';
-import { getSwcrStatusColor } from '../utils-statuses';
+import { ExtendedGardenFields } from '../types';
 import { StyledItemWrapper, StyledRoot } from './garden.styles';
 
 export const SwcrItem = (props: CustomItemView<SwcrPackage, ExtendedGardenFields>) => {

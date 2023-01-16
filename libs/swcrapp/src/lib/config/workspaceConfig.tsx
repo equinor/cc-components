@@ -6,6 +6,8 @@ import { tableConfig } from './tableConfig';
 import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { responseParser } from './responseConfig';
+import { sidesheetConfig } from './sidesheetConfig';
+
 type WorkspaceWrapperProps = {
   contextId: string;
 };
@@ -28,6 +30,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
+      sidesheetOptions={sidesheetConfig}
       fusionPowerBiOptions={{
         reportUri: 'pp-swcr-analytics',
       }}

@@ -1,4 +1,4 @@
-import { SwcrPackage } from '../types';
+import { SwcrPackage } from '@cc-components/swcrshared';
 
 type Kpi = {
   allSwcrs: number;

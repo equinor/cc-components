@@ -1,0 +1,36 @@
+{
+  "name": "swcrshared",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/swcrshared/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/swcrshared",
+        "tsConfig": "libs/swcrshared/tsconfig.lib.json",
+        "project": "libs/swcrshared/package.json",
+        "entryFile": "libs/swcrshared/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/swcrshared/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/swcrshared/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ Icon.add({ close });
 const StyledContainer = styled.div`
   display: flex;
   width: 100%;
+  overflow: hidden;
 `;
 const StyledWrap = styled.div`
   display: flex;
