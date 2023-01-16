@@ -15,7 +15,7 @@ export const filterConfig: FilterConfig<WorkOrder> = {
     },
     {
       name: 'Job status',
-      valueFormatter: ({ jobStatus }) => jobStatus,
+      valueFormatter: ({ jobStatus }) => jobStatus || null,
       isQuickFilter: true,
     },
     {
@@ -34,11 +34,11 @@ export const filterConfig: FilterConfig<WorkOrder> = {
     },
     {
       name: 'Responsible',
-      valueFormatter: ({ responsibleCode }) => responsibleCode,
+      valueFormatter: ({ responsibleCode }) => responsibleCode || null,
     },
     {
       name: 'Milestone',
-      valueFormatter: ({ milestoneCode }) => milestoneCode,
+      valueFormatter: ({ milestoneCode }) => milestoneCode || null,
     },
 
     // {
@@ -86,17 +86,17 @@ export const filterConfig: FilterConfig<WorkOrder> = {
     // },
     {
       name: 'Material',
-      valueFormatter: ({ materialStatus }) => materialStatus,
+      valueFormatter: ({ materialStatus }) => materialStatus || null,
       isQuickFilter: true,
     },
     {
       name: 'Hold',
-      valueFormatter: ({ holdBy }) => holdBy,
+      valueFormatter: ({ holdBy }) => holdBy || null,
       isQuickFilter: true,
     },
     {
       name: 'MC',
-      valueFormatter: ({ mccrStatus }) => mccrStatus,
+      valueFormatter: ({ mccrStatus }) => mccrStatus || null,
     },
     {
       name: 'Progress',
