@@ -1,6 +1,8 @@
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { SwcrSignature } from '../types';
 import {
+  PreBlock,
+  SignatureBlock,
   StyledAttachments,
   StyledChipText,
   StyledSignatures,
@@ -11,7 +13,7 @@ import {
 } from './sidesheet.styles';
 import { Chip } from '@equinor/eds-core-react';
 import { Fragment } from 'react';
-import { StyledItemLink } from '@cc-components/shared';
+import { StyledItemLink, StyledTabContent } from '@cc-components/shared';
 type DetailsTabProps = {
   item: SwcrPackage | undefined;
   signatures: SwcrSignature[] | undefined;
@@ -25,7 +27,7 @@ export const DetailsTab = ({
   attachmentsUrls,
 }: DetailsTabProps) => {
   return (
-    <div>
+    <StyledTabContent style={{ marginTop: '1em', marginBottom: '1em' }}>
       <StyledTagsAndAttachmentBlock>
         <StyledTags>
           <Chip>
@@ -56,7 +58,7 @@ export const DetailsTab = ({
       <StyledTextBlock>
         <h5>Description</h5>
         {item?.description ? (
-          <div>{item.description}</div>
+          <PreBlock>{item.description}</PreBlock>
         ) : (
           <StyledTextBlockEmpty>No description</StyledTextBlockEmpty>
         )}
@@ -64,7 +66,7 @@ export const DetailsTab = ({
       <StyledTextBlock>
         <h5>Modifications</h5>
         {item?.modification ? (
-          <div>{item.modification}</div>
+          <PreBlock>{item.modification}</PreBlock>
         ) : (
           <StyledTextBlockEmpty>No modifications</StyledTextBlockEmpty>
         )}
@@ -80,12 +82,14 @@ export const DetailsTab = ({
             .filter((signature) => !signature.signDate)
             .map((signature, key) => (
               <Fragment key={'signature' + key}>
-                <div>{signature.signatureRole}</div>
-                <div>{signature.ranking}</div>
-                <div>{signature.functionalRole || signature.person}</div>
+                <SignatureBlock>{signature.signatureRole}</SignatureBlock>
+                <SignatureBlock>{signature.ranking}</SignatureBlock>
+                <SignatureBlock>
+                  {signature.functionalRole || signature.person}
+                </SignatureBlock>
               </Fragment>
             ))}
       </StyledSignatures>
-    </div>
+    </StyledTabContent>
   );
 };

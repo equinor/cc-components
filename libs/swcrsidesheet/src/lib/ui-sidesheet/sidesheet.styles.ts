@@ -34,3 +34,13 @@ export const StyledSignatures = styled.div`
   gap: 16px;
   grid-template-columns: 3fr 1fr 5fr;
 `;
+
+export const PreBlock = styled.pre`
+  font-family: Equinor;
+  font-size: 13px;
+  white-space: pre-wrap;
+`;
+
+export const SignatureBlock = styled.div`
+  font-size: 13px;
+`;

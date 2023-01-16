@@ -21,14 +21,18 @@ export const StyledPanels = styled(Tabs.Panels)`
   }
 `;
 
-export const StyledTabListWrapper = styled.div`
+export const StyledTabsList = styled(Tabs.List)`
   overflow: auto;
-  width: 100%;
-  background-color: ${tokens.colors.ui.background__light.hex};
   ::-webkit-scrollbar {
     width: 0;
     height: 0;
   }
 
   scroll-behavior: smooth;
+`;
+
+export const StyledTabListWrapper = styled.div`
+  overflow: hidden;
+  width: 100%;
+  background-color: ${tokens.colors.ui.background__light.hex};
 `;
