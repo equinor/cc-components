@@ -49,9 +49,9 @@ Sorting the columns will be based on dates when the current grouping is using da
 ## Glossary
 * RFOC - Ready for operation certificate
 * RFCC - Ready for commissioning certificate
-* RFRC - Ready for ..
+* RFRC - Ready for removal certiciate
 * TAC - Technical acceptance (record) certificate
-* DCC - 
+* DCC - Decomissioned Certificate
 * OS - Outstanding
 * OK
 * PA - Punch list (A)

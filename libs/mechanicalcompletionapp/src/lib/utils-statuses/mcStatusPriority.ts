@@ -1,4 +1,4 @@
-import { McStatus } from '../types';
+import { McStatus } from '@cc-components/mechanicalcompletionshared';
 
 export const mcStatusPriority: Record<McStatus, number> = {
   OS: 1,

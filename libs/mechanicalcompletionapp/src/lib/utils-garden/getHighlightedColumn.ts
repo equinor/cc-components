@@ -1,8 +1,9 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import {
   getYearAndWeekAndDayFromString,
   getYearAndWeekFromDate,
 } from '@cc-components/shared';
-import { CustomGroupByKeys, ExtendedGardenFields, McPackage } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 
 export const getHighlightedColumn = (
   groupByKey: keyof McPackage | ExtendedGardenFields,

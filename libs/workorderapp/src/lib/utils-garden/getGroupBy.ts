@@ -1,4 +1,5 @@
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { WorkOrder } from '@cc-components/workordershared';
+import { ExtendedGardenFields } from '../types';
 
 export const getGroupBy = (
   groupBy: ExtendedGardenFields | keyof WorkOrder

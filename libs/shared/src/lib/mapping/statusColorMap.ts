@@ -1,5 +1,6 @@
-type Status = 'OS' | 'PB' | 'PA' | 'OK';
-export const statusColorMap: Record<Status, string> = {
+import { BaseStatus } from '../types';
+
+export const statusColorMap: Record<BaseStatus, string> = {
   OS: '#9e9e9e',
   PB: '#ffc107',
   PA: '#ff4081',

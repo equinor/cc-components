@@ -1,6 +1,6 @@
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
 import { memo } from 'react';
-import { McPackage } from '../types';
 import { StyledHeaderContainer } from './garden.styles';
 
 export const McHeader = (props: CustomHeaderView<McPackage>) => {

@@ -1,7 +1,7 @@
 {
-  "name": "mc",
+  "name": "Mechanical completion",
   "shortName": "mc",
-  "key": "mc",
+  "key": "mechanical-completion",
   "version": {
     "major": "0",
     "minor": "0",

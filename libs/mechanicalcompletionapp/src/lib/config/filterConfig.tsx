@@ -1,11 +1,14 @@
+import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
+import { hasProperty, statusColorMap, StatusSquare } from '@cc-components/shared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
-import { CommissioningStatus, McPackage, McStatus } from '../types';
-import { HandoverStatusFilter, McStatusFilter } from '../ui-filter';
+import { CommissioningStatus } from '../types';
 import {
   commissioningStatusOrder,
   getCommissioningStatus,
   mcStatusPriority,
+  commStatusColors,
 } from '../utils-statuses';
+
 export const filterConfig: FilterConfig<McPackage> = {
   filterGroups: [
     {
@@ -26,7 +29,20 @@ export const filterConfig: FilterConfig<McPackage> = {
     {
       name: 'MC status',
       valueFormatter: (mc) => mc.mcStatus,
-      customValueRender: (mcStatus) => <McStatusFilter status={mcStatus as McStatus} />,
+      customValueRender: (mcStatus) => {
+        if (!mcStatus) return <>(Blank)</>;
+
+        return (
+          <StatusSquare
+            content={String(mcStatus)}
+            statusColor={
+              hasProperty(statusColorMap, mcStatus)
+                ? statusColorMap[mcStatus]
+                : 'transparent'
+            }
+          />
+        );
+      },
       sort: (filterValues) =>
         filterValues.sort(
           (a, b) => mcStatusPriority[a as McStatus] - mcStatusPriority[b as McStatus]
@@ -45,22 +61,33 @@ export const filterConfig: FilterConfig<McPackage> = {
             commissioningStatusOrder[b as CommissioningStatus]
         ),
       customValueRender: (filterValue) => {
-        return <HandoverStatusFilter status={filterValue as CommissioningStatus} />;
+        if (!filterValue) return <>(Blank)</>;
+
+        return (
+          <StatusSquare
+            content={String(filterValue)}
+            statusColor={
+              hasProperty(commStatusColors, filterValue)
+                ? commStatusColors[filterValue]
+                : 'transparent'
+            }
+          />
+        );
       },
       isQuickFilter: true,
     },
 
     {
       name: 'MC Package Phase',
-      valueFormatter: (mc) => mc.phase,
+      valueFormatter: (mc) => mc.phase || null,
     },
     {
       name: 'Commissioning Priority 1',
-      valueFormatter: (mc) => mc.priority || 'N/A',
+      valueFormatter: (mc) => mc.priority || null,
     },
     {
       name: 'Area',
-      valueFormatter: (mc) => mc.area,
+      valueFormatter: (mc) => mc.area || null,
     },
 
     {
@@ -69,7 +96,7 @@ export const filterConfig: FilterConfig<McPackage> = {
     },
     {
       name: 'Remark',
-      valueFormatter: (mc) => mc.remark,
+      valueFormatter: (mc) => mc.remark || null,
     },
 
     {

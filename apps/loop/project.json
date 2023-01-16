@@ -7,7 +7,7 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "cwd": "apps/workorder",
+        "cwd": "apps/loop",
         "commands": [
           {
             "command": "fusion-framework-cli app dev"
@@ -18,19 +18,12 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "cwd": "apps/workorder",
+        "cwd": "apps/loop",
         "commands": [
           {
             "command": "fusion-framework-cli app build"
           }
         ]
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/loop/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

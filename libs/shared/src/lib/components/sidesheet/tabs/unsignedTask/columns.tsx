@@ -19,8 +19,10 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     field: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
-      return <DescriptionCell description={props.value} />;
+      return <DescriptionCell description={props.value} displayFullText />;
     },
+    autoHeight: true,
+    wrapText: true,
     width: 400,
   },
 ];

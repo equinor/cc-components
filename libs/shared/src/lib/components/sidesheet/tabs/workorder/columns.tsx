@@ -44,12 +44,12 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     {
       field: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
-      width: 80,
+      width: 130,
     },
     {
       field: 'Status',
       valueGetter: (pkg) => pkg.data?.jobStatus,
-      width: 80,
+      width: 120,
     },
     {
       field: 'Plan. finish',
@@ -73,7 +73,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <ProgressCell percentWidth={props.value === null ? 0 : props.value} />;
       },
-      width: 100,
+      width: 140,
     },
     {
       field: 'Estimated',
@@ -91,7 +91,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
           />
         );
       },
-      width: 100,
+      width: 140,
     },
     {
       field: 'Remaining',
@@ -109,7 +109,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
           />
         );
       },
-      width: 100,
+      width: 140,
     },
   ];
 };

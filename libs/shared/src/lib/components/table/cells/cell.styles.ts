@@ -1,14 +1,29 @@
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
+/**
+ * Use this together with
+ * ```
+ * autoHeight: true,
+ * wrapText: true
+ * ```
+ * in the column definition to display the whole text and insert break lines.
+ */
+export const StyledFullDescription = styled.div`
+  word-break: break-word;
+`;
 
+/**
+ * Will only display text until it overflows and add ellipsis at the end.
+ */
 export const StyledDescription = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
+
 export const StyledProgressBarContainer = styled.div`
   height: 16px;
-  width: 68px;
+  /* width: 68px; */
   background-color: #f5f5f5;
   border-bottom: 2px #dcdcdc solid;
   width: -webkit-fill-available;
@@ -28,7 +43,8 @@ export const StyledActualProgress = styled.div<{
 export const StyledProgressNumber = styled.div`
   position: absolute;
   right: 5px;
-  top: 0;
+  top: 0px;
+  line-height: normal;
 `;
 export const StyledLink = styled.a`
   color: ${tokens.colors.interactive.primary__resting.hex};

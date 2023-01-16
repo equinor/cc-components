@@ -1,5 +1,6 @@
 import { getYearAndWeekFromDate } from '@cc-components/shared';
-import { ExtendedGardenFields, WorkOrder } from '../types';
+import { WorkOrder } from '@cc-components/workordershared';
+import { ExtendedGardenFields } from '../types';
 import { getGroupBy } from './getGroupBy';
 
 export const getHighlightedColumn = (

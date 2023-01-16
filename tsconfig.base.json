@@ -22,12 +22,20 @@
       "@cc-components/mechanicalcompletionapp": [
         "libs/mechanicalcompletionapp/src/index.ts"
       ],
+      "@cc-components/mechanicalcompletionshared": [
+        "libs/mechanicalcompletionshared/src/index.ts"
+      ],
+      "@cc-components/mechanicalcompletionsidesheet": [
+        "libs/mechanicalcompletionsidesheet/src/index.ts"
+      ],
       "@cc-components/punchapp": ["libs/punchapp/src/index.ts"],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
       "@cc-components/swcrshared": ["libs/swcrshared/src/index.ts"],
       "@cc-components/swcrsidesheet": ["libs/swcrsidesheet/src/index.ts"],
       "@cc-components/workorderapp": ["libs/workorderapp/src/index.ts"],
+      "@cc-components/workordershared": ["libs/workordershared/src/index.ts"],
+      "@cc-components/workordersidesheet": ["libs/workordersidesheet/src/index.ts"],
       "@equinor/cc-components": ["libs/cc-components/src/index.ts"]
     }
   },

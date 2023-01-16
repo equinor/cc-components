@@ -7,17 +7,22 @@ import { gardenConfig } from './gardenConfig';
 import { useCallback } from 'react';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 
-const useContextId = () => {
-  return '2d489afd-d3ec-43f8-b7ca-cf2de5f39a89';
+type WorkspaceWrapperProps = {
+  contextId: string;
 };
-export const WorkspaceWrapper = () => {
+export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const contextId = useContextId();
-  const getResponseAsync = useCallback(async () => {
-    const mcpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`);
-    return mcpkgs;
-  }, [dataProxy, contextId]);
+  const getResponseAsync = useCallback(
+    async (signal: AbortSignal | undefined) => {
+      const mcpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`, {
+        signal,
+      });
+      return mcpkgs;
+    },
+    [dataProxy, contextId]
+  );
 
   return (
     <Workspace
@@ -37,6 +42,7 @@ export const WorkspaceWrapper = () => {
         getResponseAsync,
         responseParser,
       }}
+      sidesheetOptions={sidesheetConfig}
       contextOptions={contextConfig}
     />
   );

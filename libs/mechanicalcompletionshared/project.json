@@ -1,0 +1,35 @@
+{
+  "name": "mechanicalcompletionshared",
+  "sourceRoot": "libs/mechanicalcompletionshared/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/mechanicalcompletionshared/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "build": {
+      "executor": "@nrwl/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/mechanicalcompletionshared",
+        "tsConfig": "libs/mechanicalcompletionshared/tsconfig.lib.json",
+        "project": "libs/mechanicalcompletionshared/package.json",
+        "entryFile": "libs/mechanicalcompletionshared/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/mechanicalcompletionshared/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}

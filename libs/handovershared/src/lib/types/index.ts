@@ -1,1 +1,1 @@
-export type { HandoverPackage, Status } from './handoverPackage';
+export type { HandoverPackage } from './handoverPackage';

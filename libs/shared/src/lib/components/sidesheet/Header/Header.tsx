@@ -23,6 +23,15 @@ const StyledTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+const StyledLeftSection = styled.div`
+  display: flex;
+  width: 90%;
+`;
+
+const StyledRightSection = styled.div`
+  display: flex;
+  width: fit-content;
+`;
 type HeaderProps = {
   title: string;
   onClose: VoidFunction;
@@ -31,14 +40,18 @@ export const SidesheetHeader = ({ title, onClose }: HeaderProps) => {
   return (
     <StyledContainer>
       <StyledWrap>
-        <StyledTitle>{title}</StyledTitle>
-        <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
-          <Icon
-            name="close"
-            size={24}
-            color={tokens.colors.interactive.primary__resting.hex}
-          />
-        </Button>
+        <StyledLeftSection>
+          <StyledTitle>{title}</StyledTitle>
+        </StyledLeftSection>
+        <StyledRightSection>
+          <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
+            <Icon
+              name="close"
+              size={24}
+              color={tokens.colors.interactive.primary__resting.hex}
+            />
+          </Button>
+        </StyledRightSection>
       </StyledWrap>
     </StyledContainer>
   );

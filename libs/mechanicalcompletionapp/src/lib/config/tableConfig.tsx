@@ -1,3 +1,4 @@
+import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
 import {
   DescriptionCell,
   LinkCell,
@@ -7,7 +8,6 @@ import {
   YearAndWeekCell,
 } from '@cc-components/shared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { McPackage, McStatus } from '../types';
 
 export const tableConfig: GridConfig<McPackage> = {
   columnDefinitions: [
