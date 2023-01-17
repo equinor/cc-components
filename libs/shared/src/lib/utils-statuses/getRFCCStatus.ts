@@ -5,6 +5,9 @@ type RFCCBase = {
   rfccIsRejected: boolean | null;
   rfccIsShipped: boolean | null;
 };
+/**
+ * Resolves the RFCC (Ready for Comissioning Certificate) status for an item.
+ */
 export const getRFCCStatus = <T extends RFCCBase>(item: T): PackageStatus =>
   item.rfccIsAccepted
     ? 'RFCC Accepted'

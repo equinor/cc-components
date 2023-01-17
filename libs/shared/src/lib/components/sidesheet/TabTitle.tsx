@@ -4,6 +4,10 @@ type LoadingTabTitleProps<T> = {
   isLoading: boolean;
   data: T[] | undefined;
 };
+/**
+ * Standard component for displaying a loading spinner and length of dataset.
+ * Use this within the EDS `<Tabs.Tab>` component.
+ */
 export const TabTitle = <T extends Record<string, unknown>>({
   data,
   isLoading,

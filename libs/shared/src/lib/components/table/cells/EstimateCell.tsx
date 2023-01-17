@@ -9,6 +9,9 @@ type EstimateCellProps = {
   current: number;
   max: number;
 };
+/**
+ * Standard component for displaying an estimate bar in a table cell.
+ */
 export const EstimateCell = ({ current, max }: EstimateCellProps): JSX.Element => {
   const percentage = useMemo(
     () => (max === 0 ? 0 : (current / max) * 100),
