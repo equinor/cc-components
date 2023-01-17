@@ -1,5 +1,7 @@
 import {
   DateCell,
+  DescriptionCell,
+  EstimateCell,
   LinkCell,
   proCoSysUrls,
   StatusCell,
@@ -15,17 +17,23 @@ export const tableConfig = (): GridConfig<Loop> => {
       {
         field: 'Loop tag',
         valueGetter: (pkg) => pkg.data?.loopNo,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <DescriptionCell description={props.value} />;
+        },
         width: 200,
       },
       {
         field: 'Description',
         valueGetter: (pkg) => pkg.data?.description,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <DescriptionCell description={props.value} />;
+        },
         width: 350,
       },
       {
         field: 'System',
         valueGetter: (pkg) => pkg.data?.system,
-        width: 80,
+        width: 120,
       },
       {
         field: 'Comm pkg',
@@ -41,7 +49,7 @@ export const tableConfig = (): GridConfig<Loop> => {
             return null;
           }
         },
-        width: 90,
+        width: 150,
       },
       {
         field: 'MC pkg',
@@ -57,12 +65,12 @@ export const tableConfig = (): GridConfig<Loop> => {
             return null;
           }
         },
-        width: 80,
+        width: 130,
       },
       {
         field: 'Priority',
         valueGetter: (pkg) => pkg.data?.priority1,
-        width: 80,
+        width: 130,
       },
       {
         field: 'Planned/Forecast RFC',
@@ -70,7 +78,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
           return <DateCell dateString={props.value} />;
         },
-        width: 160,
+        width: 250,
       },
       {
         field: 'Planned/Forecast RFO',
@@ -78,7 +86,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
           return <DateCell dateString={props.value} />;
         },
-        width: 160,
+        width: 250,
       },
       {
         field: 'Checklist status',
@@ -97,22 +105,22 @@ export const tableConfig = (): GridConfig<Loop> => {
             />
           );
         },
-        width: 120,
+        width: 180,
       },
       {
         field: 'Responsible',
         valueGetter: (pkg) => pkg.data?.responsible,
-        width: 100,
+        width: 150,
       },
       {
         field: 'Location',
         valueGetter: (pkg) => pkg.data?.location,
-        width: 100,
+        width: 150,
       },
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
-        width: 100,
+        width: 150,
       },
       {
         field: 'Signed',
@@ -120,7 +128,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
           return <DateCell dateString={props.value} />;
         },
-        width: 100,
+        width: 150,
       },
       {
         field: 'Verified',
@@ -128,7 +136,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
           return <DateCell dateString={props.value} />;
         },
-        width: 100,
+        width: 150,
       },
       {
         field: 'Content MC status',
@@ -147,7 +155,7 @@ export const tableConfig = (): GridConfig<Loop> => {
             />
           );
         },
-        width: 150,
+        width: 200,
       },
       {
         field: 'Planned MC complete',
@@ -155,21 +163,27 @@ export const tableConfig = (): GridConfig<Loop> => {
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
           return <DateCell dateString={props.value} />;
         },
-        width: 150,
+        width: 220,
       },
-      {
-        field: 'Actual MC complete',
-        valueGetter: (pkg) => pkg.data?.woActualCompletionDate,
-        cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
-          return <DateCell dateString={props.value} />;
-        },
-        width: 150,
-      },
+      // {
+      //   field: 'Actual MC complete',
+      //   valueGetter: (pkg) => pkg.data?.woActualCompletionDate,
+      //   cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+      //     return <DateCell dateString={props.value} />;
+      //   },
+      //   width: 150,
+      // },
       {
         field: 'Rem mhrs',
         valueGetter: (pkg) => pkg.data?.remainingManHours,
+        valueFormatter: (pkg) => pkg.context.maxRemHrs,
         cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
-          return <div></div>;
+          return (
+            <EstimateCell
+              current={Number(props.value ?? '0')}
+              max={(props.valueFormatted as unknown as number) ?? 0}
+            />
+          );
         },
       },
     ],
