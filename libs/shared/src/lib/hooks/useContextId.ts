@@ -1,4 +1,8 @@
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+/**
+ * Hook that uses fusion-framework's `useModuleCurrentContext`
+ * @returns A context id or undefined
+ */
 export const useContextId = () => {
   try {
     const { currentContext } = useModuleCurrentContext();

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 /**
- * Styled component to wrap the package's sidesheet in.
+ * Standard styled component to use for wrapping a Sidesheet component in.
  */
 export const StyledSideSheetContainer = styled.div`
   height: 100%;

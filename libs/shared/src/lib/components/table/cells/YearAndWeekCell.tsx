@@ -5,6 +5,9 @@ type YearAndWeekCellProps<T extends string | null> = {
   dateString: T;
   cellAttributeFunction?: (content: T) => HTMLAttributes<HTMLElement>;
 };
+/**
+ * Standard component for displaying year and week in a table cell.
+ */
 export const YearAndWeekCell = <T extends string | null>({
   dateString,
   cellAttributeFunction,

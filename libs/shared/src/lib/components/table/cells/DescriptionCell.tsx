@@ -14,6 +14,9 @@ type DescriptionCellProps = {
   displayFullText?: boolean;
 };
 
+/**
+ * Standard component for displaying a long text in a table cell.
+ */
 export const DescriptionCell = ({
   description,
   displayFullText,

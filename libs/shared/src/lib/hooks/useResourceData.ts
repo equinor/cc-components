@@ -6,6 +6,12 @@ type PackageResourceReturn<T> = {
   isFetching: boolean;
   error: Error | null;
 };
+/**
+ * Hook that uses React Query to fetch data.
+ * @param resourceName Will be added as a query key
+ * @param packageId Will be added as a query key and passed to fetch parameter
+ * @param fetch Query function to be run
+ */
 export const usePackageResource = <T>(
   resourceName: string,
   packageId: string,

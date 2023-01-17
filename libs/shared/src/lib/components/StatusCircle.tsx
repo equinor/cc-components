@@ -21,6 +21,8 @@ type StatusProps = {
   content: string;
   statusColor: string;
 };
+
+/** Standard component for displaying a colored circle based on prop and content to the right of it. */
 export const StatusCircle = ({ content, statusColor }: StatusProps) => {
   return (
     <Wrapper>
