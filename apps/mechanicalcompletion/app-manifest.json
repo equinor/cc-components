@@ -1,10 +1,10 @@
 {
   "name": "Mechanical completion",
-  "shortName": "mc",
+  "shortName": "mechanical-completion",
   "key": "mechanical-completion",
   "version": {
     "major": "0",
     "minor": "0",
-    "patch": "1"
+    "patch": "2"
   }
 }
