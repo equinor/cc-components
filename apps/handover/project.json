@@ -21,6 +21,17 @@
         "cwd": "apps/handover",
         "commands": [
           {
+            "command": "tsc --noEmit"
+          }
+        ]
+      }
+    },
+    "build-spa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/handover",
+        "commands": [
+          {
             "command": "fusion-framework-cli app build"
           }
         ]

@@ -21,6 +21,17 @@
         "cwd": "apps/swcr",
         "commands": [
           {
+            "command": "tsc --noEmit"
+          }
+        ]
+      }
+    },
+    "build-spa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/swcr",
+        "commands": [
+          {
             "command": "fusion-framework-cli app build"
           }
         ]
