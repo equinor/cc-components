@@ -36,6 +36,10 @@ type HeaderProps = {
   title: string;
   onClose: VoidFunction;
 };
+/**
+ * Standard component for displaying a sidesheet header.
+ * This will add a title and close button to the header.
+ */
 export const SidesheetHeader = ({ title, onClose }: HeaderProps) => {
   return (
     <StyledContainer>

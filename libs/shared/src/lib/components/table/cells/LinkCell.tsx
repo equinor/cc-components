@@ -5,6 +5,9 @@ type LinkCellProps = {
   urlText: string;
   tooltipText?: string;
 };
+/**
+ * Standard component for displaying a link in a table cell.
+ */
 export const LinkCell = ({
   url,
   urlText,

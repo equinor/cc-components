@@ -12,6 +12,10 @@ type TabTableProps<T> = {
   height?: number;
 };
 Icon.add({ info_circle });
+/**
+ * Standard Table component using `ReactGrid` from workspace-ag-grid.
+ * Use this if you need a table in a sidesheet tab.
+ */
 export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {

@@ -25,6 +25,10 @@ type PopoverWrapperProps = {
   parentRef: MutableRefObject<HTMLDivElement | null>;
 };
 
+/**
+ * Standard popover component when hovering a Garden item.
+ * This component wraps EDS' Popover component and adds extra checks for placements.
+ */
 export const PopoverWrapper = ({
   isOpen,
   rowStart,

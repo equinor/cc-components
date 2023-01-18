@@ -10,11 +10,23 @@
         "cwd": "apps/mechanicalcompletion",
         "commands": [
           {
+            "command": "tsc --noEmit"
+          }
+        ]
+      }
+    },
+    "build-spa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/mechanicalcompletion",
+        "commands": [
+          {
             "command": "fusion-framework-cli app build"
           }
         ]
       }
     },
+
     "serve": {
       "executor": "nx:run-commands",
       "options": {

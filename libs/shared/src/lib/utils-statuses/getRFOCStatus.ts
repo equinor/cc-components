@@ -5,6 +5,9 @@ type RFOCBase = {
   rfocIsRejected: boolean | null;
   rfocIsShipped: boolean | null;
 };
+/**
+ * Resolves the RFOC (Ready for Operation Certificate) status for an item.
+ */
 export const getRFOCStatus = <T extends RFOCBase>(item: T): PackageStatus =>
   item.rfocIsAccepted
     ? 'RFOC Accepted'

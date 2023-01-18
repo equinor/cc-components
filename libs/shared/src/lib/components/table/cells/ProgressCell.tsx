@@ -7,6 +7,10 @@ import {
 type ProgressCellProps = {
   percentWidth: number;
 };
+
+/**
+ * Standard component for displaying a progress bar inside a table cell.
+ */
 export const ProgressCell = ({ percentWidth }: ProgressCellProps): JSX.Element => {
   return (
     <StyledProgressBarContainer>
