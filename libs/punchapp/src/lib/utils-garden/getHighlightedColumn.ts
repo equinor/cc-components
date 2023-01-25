@@ -1,23 +1,22 @@
 import {
-  getYearAndWeekAndDayFromString,
-  getYearAndWeekFromDate,
+    getYearAndWeekFromDate,
 } from '@cc-components/shared';
-import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
+import { ExtendedGardenFields, Punch } from '../types';
 
 export const getHighlightedColumn = (
-  groupByKey: keyof Punch | ExtendedGardenFields,
-  customGroupByKeys?: CustomGroupByKeys
+  groupByKey: keyof Punch | ExtendedGardenFields
 ) => {
   switch (groupByKey) {
-    case 'RFO':
-    case 'RFC':
+    case 'dueDate':
+    case 'handoverPlan':
+    case 'rfC_PlannedForecastDate':
+    case 'rfO_PlannedForecastDate':
+    case 'createdDate':
     case 'clearedAtDate':
     case 'verifiedAtDate':
-      return customGroupByKeys?.weeklyDaily === 'Daily'
-        ? getYearAndWeekAndDayFromString(new Date().toString())
-        : getYearAndWeekFromDate(new Date());
+        return getYearAndWeekFromDate(new Date());
 
     default:
-      return undefined;
-  }
+        return undefined;
+}
 };

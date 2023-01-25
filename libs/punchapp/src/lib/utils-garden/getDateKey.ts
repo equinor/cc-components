@@ -1,28 +1,8 @@
-import { getColumnDateKey } from '@cc-components/shared';
-import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
-const getFieldKeyBasedOnPlannedForecast = (
-  groupBy: keyof Punch | ExtendedGardenFields | string,
-  plannedForecast: CustomGroupByKeys['plannedForecast']
-): keyof Punch => {
-  switch (groupBy) {
-    case 'RFC':
-      return plannedForecast === 'Forecast' ? 'c01ForecastDate' : 'c01PlannedDate';
-    case 'RFO':
-      return plannedForecast === 'Forecast' ? 'c07ForecastDate' : 'c07PlannedDate';
+import { getYearAndWeekFromString } from '@cc-components/shared';
+import { DATE_BLANKSTRING } from '../utils-keys/constants';
 
-    default:
-      return 'c01PlannedDate';
-  }
-};
-export const getDateKey = (
-  item: Punch,
-  key: keyof Punch | ExtendedGardenFields,
-  groupBy: CustomGroupByKeys | undefined
-) => {
-  if (!groupBy) {
-    return 'N/A';
-  }
-  const { plannedForecast, weeklyDaily } = groupBy;
-  const fieldKey = getFieldKeyBasedOnPlannedForecast(key, plannedForecast);
-  return getColumnDateKey(fieldKey, weeklyDaily, item);
+export const getDateKey = (dateString: string | null): string => {
+  if (!dateString) return DATE_BLANKSTRING;
+
+  return getYearAndWeekFromString(dateString, 0, DATE_BLANKSTRING);
 };
