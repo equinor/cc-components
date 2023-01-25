@@ -17,7 +17,7 @@ export const tableConfig: GridConfig<Punch> = {
       valueGetter: (pkg) => pkg.data?.punchItemNo,
       valueFormatter: (pkg) =>
         pkg.data?.commissioningPackageId
-          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo)
           : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
@@ -128,9 +128,7 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Form type',
       valueGetter: (pkg) => pkg.data?.formularType,
       valueFormatter: (pkg) =>
-        pkg.data?.commissioningPackageId
-          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
-          : '',
+        pkg.data?.checklistId ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistId) : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
@@ -143,9 +141,7 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Tag',
       valueGetter: (pkg) => pkg.data?.tagNo,
       valueFormatter: (pkg) =>
-        pkg.data?.commissioningPackageId
-          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
-          : '',
+        pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
@@ -158,8 +154,8 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Commpkg',
       valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
       valueFormatter: (pkg) =>
-        pkg.data?.commissioningPackageId
-          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+        pkg.data?.commissioningPackageUrlId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
           : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
@@ -173,8 +169,8 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Workorder',
       valueGetter: (pkg) => pkg.data?.workOrderNo,
       valueFormatter: (pkg) =>
-        pkg.data?.commissioningPackageId
-          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+        pkg.data?.workOrderUrlId
+          ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
           : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
