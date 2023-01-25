@@ -3,6 +3,7 @@ import {
   DescriptionCell,
   hasProperty,
   LinkCell,
+  proCoSysUrls,
   StatusCell,
   StatusCircle,
   statusColorMap,
@@ -14,6 +15,10 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Punch',
       valueGetter: (pkg) => pkg.data?.punchItemNo,
+      valueFormatter: (pkg) =>
+        pkg.data?.commissioningPackageId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
@@ -70,11 +75,6 @@ export const tableConfig: GridConfig<Punch> = {
       },
       width: 150,
     },
-    // {
-    //   field: 'Priority',
-    //   valueGetter: (pkg) => pkg.data?.priority,
-    //   width: 100,
-    // },
     {
       field: 'PL Sorting',
       valueGetter: (pkg) => pkg.data?.sorting,
@@ -127,6 +127,10 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Form type',
       valueGetter: (pkg) => pkg.data?.formularType,
+      valueFormatter: (pkg) =>
+        pkg.data?.commissioningPackageId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
@@ -138,6 +142,10 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Tag',
       valueGetter: (pkg) => pkg.data?.tagNo,
+      valueFormatter: (pkg) =>
+        pkg.data?.commissioningPackageId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
@@ -149,6 +157,10 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Commpkg',
       valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+      valueFormatter: (pkg) =>
+        pkg.data?.commissioningPackageId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
@@ -160,6 +172,10 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Workorder',
       valueGetter: (pkg) => pkg.data?.workOrderNo,
+      valueFormatter: (pkg) =>
+        pkg.data?.commissioningPackageId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
