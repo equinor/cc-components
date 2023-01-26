@@ -44,6 +44,7 @@ At the root level of the newly created application, create a `app-manifest.json`
   }
 }
 ```
+
 You want to edit your project.json file so it uses fusion-framework CLI tool for serving the application. For example: 
 ```json
  "targets": {
@@ -70,6 +71,7 @@ You want to edit your project.json file so it uses fusion-framework CLI tool for
       }
     },
 ```
+
 ## Library
 Each application will have a corresponding library placed under the `libs` folder. In addition, common code should be put inside the `shared` library.
 The naming convention for a app library should be `<appname>app` i.e. `handoverapp`. An app library contains specific utilities, components and configuration for the application. An app library cannot import modules from other app libraries and an app cannot import modules from a different app library than its own.
