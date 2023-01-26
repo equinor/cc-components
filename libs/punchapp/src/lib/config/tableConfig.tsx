@@ -16,9 +16,7 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Punch',
       valueGetter: (pkg) => pkg.data?.punchItemNo,
       valueFormatter: (pkg) =>
-        pkg.data?.commissioningPackageId
-          ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo)
-          : '',
+        pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
