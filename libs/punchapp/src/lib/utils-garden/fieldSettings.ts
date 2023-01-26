@@ -1,50 +1,51 @@
-import { sortByNumber } from '@cc-components/shared';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields, Punch } from '../types';
+import { ExtendedGardenFields, Punch } from '../types';
+import { sortByDate } from '../utils-keys/sortByDate';
 import { getDateKey } from './getDateKey';
 
-export const fieldSettings: FieldSettings<
-  Punch,
-  ExtendedGardenFields,
-  CustomGroupByKeys
-> = {
-  RFC: {
-    label: 'RFC',
-    getKey: getDateKey,
-    getColumnSort: sortByNumber,
+export const fieldSettings: FieldSettings<Punch, ExtendedGardenFields> = {
+  handoverPlan: {
+      label: 'Handover plan',
+      getKey: (item) => getDateKey(item.handoverPlan),
+      getColumnSort: sortByDate,
   },
-  RFO: {
-    label: 'RFO',
-    getKey: getDateKey,
-    getColumnSort: sortByNumber,
+  rfC_PlannedForecastDate: {
+      label: 'RFC plan',
+      getKey: (item) => getDateKey(item.rfC_PlannedForecastDate),
+      getColumnSort: sortByDate,
   },
-  verifiedAtDate: {
-    label: 'Verified',
-    getKey: getDateKey,
-    getColumnSort: sortByNumber,
+  rfO_PlannedForecastDate: {
+      label: 'RFO plan',
+      getKey: (item) => getDateKey(item.rfO_PlannedForecastDate),
+      getColumnSort: sortByDate,
+  },
+  dueDate: {
+      label: 'Due date',
+      getKey: (item) => getDateKey(item.dueDate),
+      getColumnSort: sortByDate,
+  },
+  createdDate: {
+      label: 'Created date',
+      getKey: (item) => getDateKey(item.createdDate),
+      getColumnSort: sortByDate,
   },
   clearedAtDate: {
-    label: 'Cleared',
-    getKey: getDateKey,
-    getColumnSort: sortByNumber,
+      label: 'Cleared date',
+      getKey: (item) => getDateKey(item.clearedAtDate),
+      getColumnSort: sortByDate,
   },
-  clearingByOrganization: {
-    label: 'Clearing by',
+  verifiedAtDate: {
+      label: 'Verified date',
+      getKey: (item) => getDateKey(item.verifiedAtDate),
+      getColumnSort: sortByDate,
   },
-  materialRequired: {
-    label: 'Material required',
-    getKey: (item, itemKey, d) => {
-      return item.materialRequired === null
-        ? '(Blank)'
-        : item.materialRequired === false
-        ? 'False'
-        : 'True';
-    },
+  cleardBy: {
+      label: 'Clearing by',
   },
   commissioningPackageNo: {
-    label: 'Compack',
+      label: 'Commpkg',
   },
-  functionalSystem: {
-    label: 'System',
+  system: {
+      label: 'System',
   },
 };

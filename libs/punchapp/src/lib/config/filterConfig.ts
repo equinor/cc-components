@@ -16,26 +16,26 @@ export const filterConfig: FilterConfig<Punch> = {
     },
     {
       name: 'Clearing by',
-      valueFormatter: (punch) => punch.clearingByOrganization,
+      valueFormatter: (punch) => punch.cleardBy,
       isQuickFilter: true,
     },
     {
       name: 'Priority',
-      valueFormatter: (punch) => punch.punchPriority,
+      valueFormatter: (punch) => punch.priority,
       isQuickFilter: true,
     },
     {
       name: 'Sorting',
-      valueFormatter: (punch) => punch.punchListSorting,
+      valueFormatter: (punch) => punch.sorting,
       isQuickFilter: true,
     },
     {
       name: 'Category',
-      valueFormatter: (punch) => punch.punchItemCategory,
+      valueFormatter: (punch) => punch.category,
     },
     {
       name: 'Type',
-      valueFormatter: (punch) => punch.punchListType,
+      valueFormatter: (punch) => punch.type,
     },
   ],
 };

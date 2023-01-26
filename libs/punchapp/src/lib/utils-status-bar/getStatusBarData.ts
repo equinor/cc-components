@@ -14,7 +14,7 @@ export const getStatusBarData = (data: Punch[]): Kpi => {
       if (curr.clearedAtDate) {
         acc.cleared += 1;
       } else {
-        if (curr.punchItemCategory === 'PB') {
+        if (curr.category === 'PB') {
           acc.openPB += 1;
         } else {
           acc.openPA += 1;
