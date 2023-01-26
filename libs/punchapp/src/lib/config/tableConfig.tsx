@@ -104,7 +104,7 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Cleared',
       valueGetter: (pkg) => pkg.data?.clearedAtDate,
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-        return props.value ? new Date(props.value).toLocaleDateString : '';
+        return props.value ? new Date(props.value).toLocaleDateString() : '';
       },
       width: 100,
     },
@@ -112,7 +112,7 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Verified',
       valueGetter: (pkg) => pkg.data?.verifiedAtDate,
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-        return props.value ? new Date(props.value).toLocaleDateString : '';
+        return props.value ? new Date(props.value).toLocaleDateString() : '';
       },
       width: 100,
     },
@@ -120,7 +120,7 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Handover plan',
       valueGetter: (pkg) => pkg.data?.handoverPlan,
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-        return props.value ? new Date(props.value).toLocaleDateString : '';
+        return props.value ? new Date(props.value).toLocaleDateString() : '';
       },
       width: 110,
     },
