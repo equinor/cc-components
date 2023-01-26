@@ -128,7 +128,9 @@ export const tableConfig: GridConfig<Punch> = {
       field: 'Form type',
       valueGetter: (pkg) => pkg.data?.formularType,
       valueFormatter: (pkg) =>
-        pkg.data?.checklistId ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistId) : '',
+        pkg.data?.checklistUrlId
+          ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
+          : '',
       cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
         if (props.valueFormatted && props.value) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
