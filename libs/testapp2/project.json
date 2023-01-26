@@ -1,0 +1,12 @@
+{
+  "name": "testapp2",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "libs/testapp2/src",
+  "targets": {
+    "build": {
+      "executor": "@cc-components/plugins:build"
+    }
+  },
+  "tags": []
+}

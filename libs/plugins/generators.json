@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "plugins",
+  "version": "0.0.1",
+  "generators": {
+    "plugins": {
+      "factory": "./src/generators/plugins/generator",
+      "schema": "./src/generators/plugins/schema.json",
+      "description": "plugins generator"
+    },
+    "fusion-app-generator": {
+      "factory": "./src/generators/fusion-app-generator/generator",
+      "schema": "./src/generators/fusion-app-generator/schema.json",
+      "description": "fusion-app-generator generator"
+    }
+  }
+}

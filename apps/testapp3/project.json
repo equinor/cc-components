@@ -1,0 +1,23 @@
+{
+  "name": "testapp3",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/testapp3/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/testapp3",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app dev"
+          }
+        ]
+      }
+    },
+    "build": {
+      "executor": "@cc-components/plugins:build"
+    }
+  },
+  "tags": []
+}
