@@ -17,7 +17,7 @@ Each application will have its own library where every component, util and confi
 * `nx generate @cc-components/plugins:app-library <name>` For generating new libraries
 
 # Setup
-After cloning the repo, install the project's dependencies and required tooling with `npm run install:init`. This will install all the project's dependencies as well as NX and fusion-framework-cli globally.
+Install Node LTS and use npm for this project. After cloning the repo, install the project's dependencies and required tooling with `npm run install:init`. This will install all the project's dependencies as well as NX and fusion-framework-cli globally.
 # NX
 This project uses NX as its build tool. Download the NX extension (called Nx Console) in VSCode to get some better support for when creating new libraries and apps.
 To build a library or app download the nx npm package globally (npm i nx -g), and use the command `nx run <name>:build`, to serve an app use the command `nx run <name>:serve`. `<name>` can be loop, handover, swcr etc..
