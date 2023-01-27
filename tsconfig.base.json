@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cc-components/checklistapp": ["libs/checklistapp/src/index.ts"],
       "@cc-components/handoverapp": ["libs/handoverapp/src/index.ts"],
       "@cc-components/handovershared": ["libs/handovershared/src/index.ts"],
       "@cc-components/handoversidesheet": ["libs/handoversidesheet/src/index.ts"],

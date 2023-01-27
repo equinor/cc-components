@@ -41,6 +41,7 @@
       "application": {
         "style": "styled-components",
         "linter": "eslint",
+        "bundler": "vite",
         "babel": true
       },
       "component": {

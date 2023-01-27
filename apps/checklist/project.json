@@ -1,0 +1,42 @@
+{
+  "name": "checklist",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/checklist/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/checklist",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app dev"
+          }
+        ]
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/checklist",
+        "commands": [
+          {
+            "command": "tsc --noEmit"
+          }
+        ]
+      }
+    },
+    "build-spa": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/checklist",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app build"
+          }
+        ]
+      }
+    }
+  },
+  "tags": ["checklistapp"]
+}
