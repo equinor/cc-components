@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 type FetchPackageResource<T> = (packageId: string, signal?: AbortSignal) => Promise<T[]>;
 type PackageResourceReturn<T> = {
