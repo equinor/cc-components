@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "plugins",
+  "version": "0.0.1",
+  "generators": {
+    "fusion-app-generator": {
+      "factory": "./src/generators/fusion-app-generator/generator",
+      "schema": "./src/generators/fusion-app-generator/schema.json",
+      "description": "fusion-app-generator generator"
+    },
+    "app-library": {
+      "factory": "./src/generators/app-library/generator",
+      "schema": "./src/generators/app-library/schema.json",
+      "description": "To generate a library for an app"
+    }
+  }
+}

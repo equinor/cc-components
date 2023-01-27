@@ -3,6 +3,7 @@ import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
+import { testData } from './testData';
 type WorkspaceWrapperProps = {
   contextId: string;
 };
@@ -20,6 +21,9 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       statusBarOptions={statusBarConfig}
       fusionPowerBiOptions={{
         reportUri: 'pp-punch-analytics',
+      }}
+      onWorkspaceReady={(ev) => {
+        ev.api.setData(testData);
       }}
     />
   );
