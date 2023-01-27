@@ -27,11 +27,6 @@
             "input": "./libs/plugins",
             "glob": "generators.json",
             "output": "."
-          },
-          {
-            "input": "./libs/plugins",
-            "glob": "executors.json",
-            "output": "."
           }
         ]
       }
@@ -43,7 +38,6 @@
         "lintFilePatterns": [
           "libs/plugins/**/*.ts",
           "libs/plugins/generators.json",
-          "libs/plugins/executors.json",
           "libs/plugins/package.json"
         ]
       }
