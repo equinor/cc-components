@@ -1,0 +1,47 @@
+{
+  "name": "plugins",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/plugins/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/plugins",
+        "main": "libs/plugins/src/index.ts",
+        "tsConfig": "libs/plugins/tsconfig.lib.json",
+        "assets": [
+          "libs/plugins/*.md",
+          {
+            "input": "./libs/plugins/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/plugins/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/plugins",
+            "glob": "generators.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/plugins/**/*.ts",
+          "libs/plugins/generators.json",
+          "libs/plugins/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

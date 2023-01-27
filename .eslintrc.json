@@ -53,6 +53,11 @@
         "jest": true
       },
       "rules": {}
+    },
+    {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
+      "rules": {}
     }
   ]
 }

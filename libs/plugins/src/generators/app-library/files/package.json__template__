@@ -1,0 +1,5 @@
+{
+  "name": "@cc-components/<%= projectName %>",
+  "version": "0.0.1"
+}
+
