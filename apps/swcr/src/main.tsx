@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { configure, WorkspaceWrapper } from '@cc-components/swcrapp';
 import { NoContext, useContextId } from '@cc-components/shared';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 const SwcrApp = () => {
