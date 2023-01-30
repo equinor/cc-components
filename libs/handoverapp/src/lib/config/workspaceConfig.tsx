@@ -40,7 +40,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       dataOptions={{
         getResponseAsync,
         responseParser,
-        queryKey: ['handoverr', contextId],
+        queryKey: ['handover', contextId],
       }}
       contextOptions={contextConfig}
     />
