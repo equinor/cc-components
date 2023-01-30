@@ -1,13 +1,15 @@
 import Workspace from '@equinor/workspace-fusion';
-import { useContextTitle, usePBIHelpers } from '@cc-components/shared';
+import { usePBIOptions } from '@cc-components/shared';
 
 type WorkspaceWrapperProps = {
   contextId: string;
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const { getEmbed, getToken } = usePBIHelpers();
-  const title = useContextTitle();
+  const pbi = usePBIOptions('checklist-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
 
   return (
     <Workspace
@@ -15,15 +17,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         appKey: 'checklistapp',
         getIdentifier: () => '',
       }}
-      powerBiOptions={{
-        reportUri: 'checklist-analytics',
-        getEmbed,
-        getToken,
-        filters: {
-          values: [title ?? ''],
-          target: { column: 'ProjectName', table: 'Dim_ProjectMaster' },
-        },
-      }}
+      powerBiOptions={pbi}
     />
   );
 };

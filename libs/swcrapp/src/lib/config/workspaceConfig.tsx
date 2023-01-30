@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
+import { usePBIOptions } from '@cc-components/shared';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -18,6 +19,11 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`);
     return swcrs;
   }, [dataProxy, contextId]);
+
+  const pbi = usePBIOptions('swcr-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
 
   return (
     <Workspace
@@ -31,9 +37,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
-      fusionPowerBiOptions={{
-        reportUri: 'pp-swcr-analytics',
-      }}
+      powerBiOptions={pbi}
       dataOptions={{
         getResponseAsync,
         responseParser,
