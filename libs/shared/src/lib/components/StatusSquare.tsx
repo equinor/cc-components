@@ -6,7 +6,7 @@ const StyledContainer = styled.div`
   align-items: center;
 `;
 
-const StyledStatusColor = styled.div<{ color: string | undefined }>`
+const StyledStatusColor = styled.div<{ color: string }>`
   margin: 0 4px;
   width: 10px;
   height: 12px;
