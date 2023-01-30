@@ -1,5 +1,6 @@
 import { useFramework } from '@equinor/fusion-framework-react';
-export const useServiceDiscovery = () => {
+import { type IServiceDiscoveryProvider } from '@equinor/fusion-framework-module-service-discovery';
+export const useServiceDiscovery = (): IServiceDiscoveryProvider => {
   try {
     const serviceDisovery = useFramework().modules.serviceDiscovery;
     return serviceDisovery;
