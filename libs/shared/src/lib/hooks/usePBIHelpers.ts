@@ -27,11 +27,7 @@ const isEmbedToken = (embedToken: unknown): embedToken is EmbedToken => {
 export const usePBIHelpers = () => {
   const serviceDisco = useServiceDiscovery();
 
-  const getEmbed = async (
-    reportUri: string,
-    _token: EmbedToken,
-    signal?: AbortSignal
-  ) => {
+  const getEmbed = async (reportUri: string, _token: string, signal?: AbortSignal) => {
     const client = await serviceDisco.createClient('reports');
     const res = await client.fetch(
       `${client.uri}/reports/${reportUri}/config/embedinfo`,
