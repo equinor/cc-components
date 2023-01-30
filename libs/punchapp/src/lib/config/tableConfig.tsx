@@ -1,11 +1,9 @@
 import {
-  DateCell,
   DescriptionCell,
   hasProperty,
   LinkCell,
   proCoSysUrls,
   StatusCell,
-  StatusCircle,
   statusColorMap,
 } from '@cc-components/shared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
