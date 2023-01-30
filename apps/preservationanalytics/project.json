@@ -1,0 +1,42 @@
+{
+  "name": "preservationanalytics",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/preservationanalytics/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/preservationanalytics",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app dev"
+          }
+        ]
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/preservationanalytics",
+        "commands": [
+          {
+            "command": "tsc --noEmit"
+          }
+        ]
+      }
+    },
+    "build:spa": {
+      "executor": "nx:runcommands",
+      "options": {
+        "cwd": "apps/preservationanalytics",
+        "commands": [
+          {
+            "command": "fusion-framework-cli app build"
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

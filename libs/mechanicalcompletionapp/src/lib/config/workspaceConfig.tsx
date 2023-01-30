@@ -8,6 +8,7 @@ import { useCallback } from 'react';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
+import { usePBIOptions } from '@cc-components/shared';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -24,6 +25,11 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     [dataProxy, contextId]
   );
 
+  const pbi = usePBIOptions('mc-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
+
   return (
     <Workspace
       workspaceOptions={{
@@ -35,9 +41,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
-      fusionPowerBiOptions={{
-        reportUri: 'pp-mc-analytics',
-      }}
+      powerBiOptions={pbi}
       dataOptions={{
         getResponseAsync,
         responseParser,

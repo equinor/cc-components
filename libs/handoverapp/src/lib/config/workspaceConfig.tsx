@@ -8,6 +8,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
+import { usePBIOptions } from '@cc-components/shared';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -23,7 +24,10 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     },
     [contextId, dataProxy]
   );
-
+  const pbi = usePBIOptions('handover-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
   return (
     <Workspace
       workspaceOptions={{
@@ -36,9 +40,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
-      fusionPowerBiOptions={{
-        reportUri: 'pp-handover-analytics',
-      }}
+      powerBiOptions={pbi}
       dataOptions={{
         getResponseAsync,
         responseParser,

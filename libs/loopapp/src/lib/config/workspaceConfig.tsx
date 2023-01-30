@@ -1,3 +1,4 @@
+import { usePBIOptions } from '@cc-components/shared';
 import Workspace from '@equinor/workspace-fusion';
 import { contextConfig } from './contextConfig';
 import { filterConfig } from './filterConfig';
@@ -11,23 +12,24 @@ type WorkspaceWrapperProps = {
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+  const pbi = usePBIOptions('loop-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
+
   return (
     <Workspace
+      dataOptions={{ initialData: testData }}
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.checklistId,
         defaultTab: 'grid',
       }}
-      onWorkspaceReady={(e) => {
-        e.api.setData(testData);
-      }}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig()}
       statusBarOptions={statusBarConfig}
-      fusionPowerBiOptions={{
-        reportUri: 'pp-loop-analytics',
-      }}
+      powerBiOptions={pbi}
       contextOptions={contextConfig}
     />
   );
