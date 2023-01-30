@@ -15,15 +15,11 @@ type WorkspaceWrapperProps = {
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = useCallback(
-    async (signal: AbortSignal | undefined) => {
-      const commpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
-        signal,
-      });
-      return commpkgs;
-    },
-    [contextId, dataProxy]
-  );
+  const getResponseAsync = async (signal: AbortSignal | undefined) =>
+    dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
+      signal,
+    });
+
   const pbi = usePBIOptions('handover-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
@@ -44,6 +40,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       dataOptions={{
         getResponseAsync,
         responseParser,
+        queryKey: ['handover', contextId],
       }}
       contextOptions={contextConfig}
     />
