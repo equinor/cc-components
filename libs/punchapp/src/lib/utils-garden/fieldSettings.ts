@@ -1,10 +1,9 @@
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { ExtendedGardenFields, Punch } from '../types';
-import { CustomGroupByKeys } from '../types/customGroupByKeys';
 import { sortByDate } from '../utils-keys/sortByDate';
 import { getDateKey } from './getDateKey';
 
-export const fieldSettings: FieldSettings<Punch, ExtendedGardenFields, CustomGroupByKeys> = {
+export const fieldSettings: FieldSettings<Punch, ExtendedGardenFields> = {
   handoverPlan: {
       label: 'Handover plan',
       getKey: (item) => getDateKey(item.handoverPlan),
