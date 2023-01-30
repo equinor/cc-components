@@ -1,6 +1,5 @@
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import Workspace from '@equinor/workspace-fusion';
-import { useCallback } from 'react';
 import { contextConfig } from './contextConfig';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
@@ -12,15 +11,11 @@ type WorkspaceWrapperProps = {
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = useCallback(
-    async (signal: AbortSignal | undefined) => {
-      const wos = await dataProxy.fetch(`/api/contexts/${contextId}/work-orders`, {
-        signal,
-      });
-      return wos;
-    },
-    [contextId, dataProxy]
-  );
+  const getResponseAsync = async (signal: AbortSignal | undefined) =>
+    dataProxy.fetch(`/api/contexts/${contextId}/work-orders`, {
+      signal,
+    });
+
   return (
     <Workspace
       workspaceOptions={{
@@ -34,6 +29,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       statusBarOptions={statusBarConfig}
       dataOptions={{
         getResponseAsync,
+        queryKey: ['workorder', contextId],
       }}
       sidesheetOptions={sidesheetConfig}
       contextOptions={contextConfig}
