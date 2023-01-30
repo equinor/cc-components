@@ -22,106 +22,67 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
         <tbody>
           <tr>
             <td>Category</td>
-            <td>
-              {stringCell(
-                `${formatDateString(workOrder.plannedStartupDate)} - ${formatDateString(
-                  workOrder.plannedFinishDate
-                )}`
-              )}
-            </td>
+            <td>{stringCell(punch.category)}</td>
           </tr>
           <tr>
             <td>Status</td>
-            <td>{stringCell(getWoStatus(workOrder))}</td>
+            <td>{stringCell(punch.status)}</td>
           </tr>
           <tr>
-            <td>Discipline</td>
-            <td>{stringCell(workOrder.discipline)}</td>
+            <td>Priorty</td>
+            <td>{stringCell(punch.priority)}</td>
           </tr>
           <tr>
-            <td>Project</td>
-            <td>
-              {stringCell(
-                `${workOrder.projectIdentifier}, ${workOrder.projectDescription}`
-              )}
-            </td>
+            <td>Sorting</td>
+            <td>{stringCell(punch.sorting)}</td>
           </tr>
           <tr>
-            <td>Responsible</td>
-            <td>{stringCell(workOrder.responsible)}</td>
+            <td>Type</td>
+            <td>{stringCell(punch.type)}</td>
           </tr>
           <tr>
-            <td>Milestone</td>
-            <td>{stringCell(workOrder.milestone)}</td>
+            <td>Estimate</td>
+            <td>{punch.estimate}</td>
           </tr>
           <tr>
-            <td>Project progress</td>
-            <td>
-              {stringCell(
-                workOrder.projectProgress ? `${workOrder.projectProgress}%` : null
-              )}
-            </td>
+            <td>Raised by</td>
+            <td>{stringCell(punch.raisedBy)}</td>
           </tr>
           <tr>
-            <td>Estimated manhours</td>
-            <td>
-              {stringCell(
-                workOrder.estimatedHours ? `${workOrder.estimatedHours}h` : null
-              )}
-            </td>
+            <td>Clearing by</td>
+            <td>{stringCell(punch.cleardBy)}</td>
           </tr>
           <tr>
-            <td>Remaining manhours</td>
-            <td>
-              {stringCell(
-                workOrder.remainingHours ? `${workOrder.remainingHours}h` : null
-              )}
-            </td>
+            <td>Cleared date</td>
+            <td>{stringCell(formatDateString(punch.clearedAtDate))}</td>
           </tr>
           <tr>
-            <td>Expended manhours</td>
-            <td>
-              {stringCell(workOrder.expendedHours ? `${workOrder.expendedHours}h` : null)}
-            </td>
+            <td>Verified date</td>
+            <td>{stringCell(formatDateString(punch.verifiedAtDate))}</td>
           </tr>
           <tr>
-            <td>Hold</td>
-            <td>
-              {workOrder.holdBy} {workOrder.holdByDescription}
-            </td>
+            <td>Handover plan</td>
+            <td>{stringCell(formatDateString(punch.handoverPlan))}</td>
           </tr>
           <tr>
-            <td>Material status</td>
-            <td>
-              {workOrder.materialStatus}{' '}
-              {workOrder.materialStatus !== null &&
-                hasProperty(materialStatusMap, workOrder.materialStatus) &&
-                materialStatusMap[workOrder.materialStatus]}
-            </td>
+            <td>Due date</td>
+            <td>{stringCell(formatDateString(punch.dueDate))}</td>
           </tr>
           <tr>
-            <td>Material Comments</td>
-            <td>{workOrder.materialComments}</td>
+            <td>Material requried</td>
+            <td>{punch.materialRequired}</td>
           </tr>
           <tr>
-            <td>Construction Comments</td>
-            <td>{workOrder.constructionComments}</td>
+            <td>Material est. arrival</td>
+            <td>{stringCell(formatDateString(punch.materialEstimatedTimeOfArrival))}</td>
           </tr>
           <tr>
-            <td>Actual start date</td>
-            <td>{workOrder.actualStartupDate}</td>
+            <td>Created date</td>
+            <td>{stringCell(formatDateString(punch.createdDate))}</td>
           </tr>
           <tr>
-            <td>Planned start date</td>
-            <td>{workOrder.plannedStartupDate}</td>
-          </tr>
-          <tr>
-            <td>Actual finish date</td>
-            <td>{workOrder.actualFinishDate}</td>
-          </tr>
-          <tr>
-            <td>Planned finish date</td>
-            <td>{workOrder.plannedFinishDate}</td>
+            <td>Description</td>
+            <td>{stringCell(punch.description)}</td>
           </tr>
         </tbody>
       </StyledTable>
