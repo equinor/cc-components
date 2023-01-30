@@ -32,7 +32,7 @@ export const testData : Punch[] = [
             "materialRequired": false,
             "materialEstimatedTimeOfArrival": null,
             "externalMaterialNo": null,
-            "clearedAtDate": null,
+            "clearedAtDate": "2021-04-01T00:00:00",
             "rejectedAtDate": null,
             "verifiedAtDate": null,
             "createdDate": "2020-04-01T00:00:00",

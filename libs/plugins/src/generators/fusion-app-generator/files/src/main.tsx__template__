@@ -1,12 +1,13 @@
+import { configure, WorkspaceWrapper } from '@cc-components/<%= projectName%>app';
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { configure, WorkspaceWrapper } from '@cc-components/swcrapp';
-import { NoContext, useContextId } from '@cc-components/shared';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NoContext, useContextId } from '@cc-components/shared';
 
 const queryClient = new QueryClient();
-const SwcrApp = () => {
+
+const MyApp = () => {
   const contextId = useContextId();
 
   return (
@@ -29,7 +30,7 @@ export default function render(el: HTMLElement, args: ComponentRenderArgs) {
    * Second argu is the the render args (framework and env variables)
    * Third argument is the configuration callback
    */
-  const AppComponent = makeComponent(<SwcrApp />, args, configure);
+  const AppComponent = makeComponent(<MyApp />, args, configure);
 
   root.render(<AppComponent />);
 
