@@ -8,14 +8,8 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { AppLibraryGeneratorSchema } from './schema';
-
-interface NormalizedSchema extends AppLibraryGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
+import { AppLibraryGeneratorSchema, NormalizedSchema } from './schema';
+import { updateBaseTsConfig } from './updateBaseTsconfig';
 
 function normalizeOptions(
   tree: Tree,
@@ -28,6 +22,7 @@ function normalizeOptions(
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
   const parsedTags = options.tags ? options.tags.split(',').map((s) => s.trim()) : [];
+  const importPath = `@cc-components/${projectName}`;
 
   return {
     ...options,
@@ -35,6 +30,7 @@ function normalizeOptions(
     projectRoot,
     projectDirectory,
     parsedTags,
+    importPath,
   };
 }
 
@@ -55,6 +51,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
 
 export default async function (tree: Tree, options: AppLibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
+  updateBaseTsConfig(tree, normalizedOptions);
   addProjectConfiguration(tree, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
     projectType: 'library',
