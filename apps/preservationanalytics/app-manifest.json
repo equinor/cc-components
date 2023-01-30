@@ -1,7 +1,7 @@
 {
-  "name": "preservationanalytics",
-  "shortName": "preservationanalytics",
-  "key": "preservationanalytics",
+  "name": "Preservation workspace",
+  "shortName": "preservation",
+  "key": "preservation-workspace",
   "version": {
     "major": "0",
     "minor": "0",
