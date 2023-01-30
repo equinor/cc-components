@@ -3,15 +3,17 @@ type EmbedInfo = {
   type: number;
   embedConfig: {
     name: string | null;
+    embedUrl: string;
+    reportId: string;
   };
 };
 type EmbedToken = {
   expirationUtc: string;
-  token: string | null;
+  token: string;
 };
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
-  return (embedInfo as EmbedInfo).embedConfig.name !== undefined ? true : false;
+  return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;
 };
 const isEmbedToken = (embedToken: unknown): embedToken is EmbedToken => {
   if (
@@ -25,9 +27,16 @@ const isEmbedToken = (embedToken: unknown): embedToken is EmbedToken => {
 export const usePBIHelpers = () => {
   const serviceDisco = useServiceDiscovery();
 
-  const getEmbed = async (reportUri: string) => {
+  const getEmbed = async (
+    reportUri: string,
+    _token: EmbedToken,
+    signal?: AbortSignal
+  ) => {
     const client = await serviceDisco.createClient('reports');
-    const res = await client.fetch(`${client.uri}/reports/${reportUri}/config/embedinfo`);
+    const res = await client.fetch(
+      `${client.uri}/reports/${reportUri}/config/embedinfo`,
+      { signal }
+    );
 
     const embedInfo = await res.json();
 
@@ -37,9 +46,11 @@ export const usePBIHelpers = () => {
     }
   };
 
-  const getToken = async (reportUri: string) => {
+  const getToken = async (reportUri: string, signal?: AbortSignal) => {
     const client = await serviceDisco.createClient('reports');
-    const res = await client.fetch(`${client.uri}/reports/${reportUri}/token`);
+    const res = await client.fetch(`${client.uri}/reports/${reportUri}/token`, {
+      signal,
+    });
     const jsonRes = await res.json();
     if (isEmbedToken(jsonRes)) return jsonRes;
     else {
