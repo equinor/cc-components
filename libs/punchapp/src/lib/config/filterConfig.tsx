@@ -1,7 +1,8 @@
 import { hasProperty, StatusSquare } from '@cc-components/shared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { Punch } from '../types';
-import { getHasWO, getMaterialRequired, punchStatusColors } from '../utils-filter/';
+import { getHasWO, getMaterialRequired } from '../utils-filter/';
+import { punchStatusColors } from '../utils-statuses/punchStatusColors';
 
 export const filterConfig: FilterConfig<Punch> = {
   filterGroups: [

@@ -8,9 +8,11 @@ import {
 import { Punch } from '../types';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { FlagIcon } from '@cc-components/shared';
-import { getPunchStatusColors } from '../utils-garden/getPunchStatusColor';
-import { getPunchStatusTextColors } from '../utils-garden/getPunchStatusTextColor';
 import { getDotsColor } from '../utils-garden/getDotsColor';
+import {
+  punchStatusColors,
+  punchStatusTextColors,
+} from '../utils-statuses/punchStatusColors';
 
 function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
   const {
@@ -22,8 +24,8 @@ function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
     controller: { getDisplayName },
     width: itemWidth = 300,
   } = props;
-  const statusColor = getPunchStatusColors(data.status);
-  const textColor = getPunchStatusTextColors(data.status);
+  const statusColor = punchStatusColors[data.status];
+  const textColor = punchStatusTextColors[data.status];
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
   const punchTypeColor = getDotsColor(data.category);
