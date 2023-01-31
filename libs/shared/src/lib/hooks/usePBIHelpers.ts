@@ -33,7 +33,9 @@ export const usePBIHelpers = () => {
       `${client.uri}/reports/${reportUri}/config/embedinfo`,
       { signal }
     );
-
+    if (!res.ok) {
+      throw new Error('', { cause: res });
+    }
     const embedInfo = await res.json();
 
     if (isEmbedInfo(embedInfo)) return embedInfo.embedConfig;
@@ -47,6 +49,9 @@ export const usePBIHelpers = () => {
     const res = await client.fetch(`${client.uri}/reports/${reportUri}/token`, {
       signal,
     });
+    if (!res.ok) {
+      throw new Error('', { cause: res });
+    }
     const jsonRes = await res.json();
     if (isEmbedToken(jsonRes)) return jsonRes;
     else {
