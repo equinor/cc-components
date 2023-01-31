@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@cc-components/ccoverviewapp": ["libs/ccoverviewapp/src/index.ts"],
+      "@cc-components/checklistapp": ["libs/checklistapp/src/index.ts"],
       "@cc-components/handoverapp": ["libs/handoverapp/src/index.ts"],
       "@cc-components/handovershared": ["libs/handovershared/src/index.ts"],
       "@cc-components/handoversidesheet": ["libs/handoversidesheet/src/index.ts"],
@@ -30,6 +31,9 @@
         "libs/mechanicalcompletionsidesheet/src/index.ts"
       ],
       "@cc-components/plugins": ["libs/plugins/src/index.ts"],
+      "@cc-components/preservationanalyticsapp": [
+        "libs/preservationanalyticsapp/src/index.ts"
+      ],
       "@cc-components/punchapp": ["libs/punchapp/src/index.ts"],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
