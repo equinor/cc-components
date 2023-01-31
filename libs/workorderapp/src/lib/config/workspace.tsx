@@ -1,3 +1,4 @@
+import { usePBIOptions } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import Workspace from '@equinor/workspace-fusion';
 import { contextConfig } from './contextConfig';
@@ -15,7 +16,10 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     dataProxy.fetch(`/api/contexts/${contextId}/work-orders`, {
       signal,
     });
-
+  const pbi = usePBIOptions('workorder-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
   return (
     <Workspace
       workspaceOptions={{
@@ -23,6 +27,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         getIdentifier: (item) => item.workOrderId,
         defaultTab: 'garden',
       }}
+      powerBiOptions={pbi}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
