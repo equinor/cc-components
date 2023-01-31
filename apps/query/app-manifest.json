@@ -1,7 +1,7 @@
 {
-  "name": "query",
+  "name": "Query workspace",
   "shortName": "query",
-  "key": "query",
+  "key": "query-workspace",
   "version": {
     "major": "0",
     "minor": "0",
