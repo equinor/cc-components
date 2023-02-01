@@ -20,6 +20,7 @@
       "@cc-components/handoverapp": ["libs/handoverapp/src/index.ts"],
       "@cc-components/handovershared": ["libs/handovershared/src/index.ts"],
       "@cc-components/handoversidesheet": ["libs/handoversidesheet/src/index.ts"],
+      "@cc-components/jcainstallationapp": ["libs/jcainstallationapp/src/index.ts"],
       "@cc-components/loopapp": ["libs/loopapp/src/index.ts"],
       "@cc-components/mechanicalcompletionapp": [
         "libs/mechanicalcompletionapp/src/index.ts"
