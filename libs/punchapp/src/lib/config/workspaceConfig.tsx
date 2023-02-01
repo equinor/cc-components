@@ -1,3 +1,4 @@
+import { usePBIOptions } from '@cc-components/shared';
 import Workspace from '@equinor/workspace-fusion';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
@@ -9,8 +10,14 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+  const pbi = usePBIOptions('punch-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
+
   return (
     <Workspace
+      dataOptions={{ initialData: testData }}
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.punchItemNo,
@@ -20,13 +27,8 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
-      fusionPowerBiOptions={{
-        reportUri: 'pp-punch-analytics',
-      }}
-      onWorkspaceReady={(ev) => {
-        ev.api.setData(testData);
-      }}
       sidesheetOptions={sidesheetConfig}
+      powerBiOptions={pbi}
     />
   );
 };

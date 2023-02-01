@@ -3,27 +3,26 @@ import { gardenConfig } from './gardenConfig';
 import { tableConfig } from './tableConfig';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
-import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
+import { usePBIOptions } from '@cc-components/shared';
 
 type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = useCallback(
-    async (signal: AbortSignal | undefined) => {
-      const commpkgs = await dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
-        signal,
-      });
-      return commpkgs;
-    },
-    [contextId, dataProxy]
-  );
+  const getResponseAsync = async (signal: AbortSignal | undefined) =>
+    dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
+      signal,
+    });
 
+  const pbi = usePBIOptions('handover-analytics', {
+    column: 'ProjectName',
+    table: 'Dim_ProjectMaster',
+  });
   return (
     <Workspace
       workspaceOptions={{
@@ -36,12 +35,11 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
-      fusionPowerBiOptions={{
-        reportUri: 'pp-handover-analytics',
-      }}
+      powerBiOptions={pbi}
       dataOptions={{
         getResponseAsync,
         responseParser,
+        queryKey: ['handover', contextId],
       }}
       contextOptions={contextConfig}
     />
