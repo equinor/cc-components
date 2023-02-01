@@ -1,6 +1,7 @@
 import Workspace from '@equinor/workspace-fusion';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 import { testData } from './testData';
@@ -25,6 +26,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       onWorkspaceReady={(ev) => {
         ev.api.setData(testData);
       }}
+      sidesheetOptions={sidesheetConfig}
     />
   );
 };

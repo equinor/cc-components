@@ -1,17 +1,16 @@
 import {
   formatDateString,
-  materialStatusMap,
   StyledTabContent,
   StyledTable,
   stringCell,
-  hasProperty,
 } from '@cc-components/shared';
-import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
 import { Punch } from '@cc-components/punchshared';
+import { StyledTextBlock } from './sidesheet.styles';
 
 type DetailsTabProps = {
   punch: Punch | undefined;
 };
+
 export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
   if (!punch) return null;
   return (
@@ -42,7 +41,9 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
           </tr>
           <tr>
             <td>Estimate</td>
-            <td>{punch.estimate}</td>
+            <td>
+              {stringCell(punch.estimate !== null ? punch.estimate.toString() : null)}
+            </td>
           </tr>
           <tr>
             <td>Raised by</td>
@@ -70,7 +71,7 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
           </tr>
           <tr>
             <td>Material requried</td>
-            <td>{punch.materialRequired}</td>
+            <td>{stringCell(punch.materialRequired ? 'Yes' : 'No')}</td>
           </tr>
           <tr>
             <td>Material est. arrival</td>
@@ -82,7 +83,34 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
           </tr>
           <tr>
             <td>Description</td>
-            <td>{stringCell(punch.description)}</td>
+            <td>
+              {punch.description ? (
+                <StyledTextBlock>
+                  <pre>{punch.description}</pre>
+                </StyledTextBlock>
+              ) : (
+                'N/A'
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </StyledTable>
+
+      <h3>Checklist</h3>
+
+      <StyledTable>
+        <tbody>
+          <tr>
+            <td>Form type</td>
+            <td>{stringCell(punch.formularType)}</td>
+          </tr>
+          <tr>
+            <td>Form group</td>
+            <td>{stringCell(punch.formularGroup)}</td>
+          </tr>
+          <tr>
+            <td>Form discipline</td>
+            <td>{stringCell(punch.formularDiscipline)}</td>
           </tr>
         </tbody>
       </StyledTable>
