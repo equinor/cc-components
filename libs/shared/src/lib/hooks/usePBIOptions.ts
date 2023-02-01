@@ -19,5 +19,7 @@ export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConf
         }
       : undefined,
     reportUri,
+    //TODO: Return actual error
+    getErrorMessage: async () => '',
   };
 }
