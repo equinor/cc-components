@@ -1,6 +1,6 @@
+import { Punch } from '@cc-components/punchshared';
 import { numberFormat } from '@cc-components/shared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { Punch } from '../types';
 import { getStatusBarData } from '../utils-status-bar';
 export const statusBarConfig: StatusBarConfig<Punch> = (data) => {
   const kpis = getStatusBarData(data);

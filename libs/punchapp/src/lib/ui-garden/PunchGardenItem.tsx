@@ -5,7 +5,6 @@ import {
   StyledRoot,
   StyledStatusCircles,
 } from './punchGardenItem.styles';
-import { Punch } from '../types';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { FlagIcon } from '@cc-components/shared';
 import { getDotsColor } from '../utils-garden/getDotsColor';
@@ -13,6 +12,7 @@ import {
   punchStatusColors,
   punchStatusTextColors,
 } from '../utils-statuses/punchStatusColors';
+import { Punch } from '@cc-components/punchshared';
 
 function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
   const {

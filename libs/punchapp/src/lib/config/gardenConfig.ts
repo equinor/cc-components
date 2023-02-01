@@ -1,5 +1,5 @@
+import { Punch } from '@cc-components/punchshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { Punch } from '../types';
 import PunchGardenItem from '../ui-garden/PunchGardenItem';
 import { fieldSettings, getHighlightedColumn } from '../utils-garden';
 

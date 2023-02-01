@@ -1,7 +1,8 @@
+import { Punch } from '@cc-components/punchshared';
 import {
     getYearAndWeekFromDate,
 } from '@cc-components/shared';
-import { ExtendedGardenFields, Punch } from '../types';
+import { ExtendedGardenFields } from '../types';
 
 export const getHighlightedColumn = (
   groupByKey: keyof Punch | ExtendedGardenFields

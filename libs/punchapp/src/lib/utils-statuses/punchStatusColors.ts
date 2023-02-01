@@ -1,5 +1,4 @@
-
-import { PunchStatus } from "../types/punch";
+import { PunchStatus } from "@cc-components/punchshared";
 
 export const punchStatusColors: Record<PunchStatus, string> = {
     'Cleared not verified': '#0084C4',
