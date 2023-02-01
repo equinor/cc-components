@@ -1,7 +1,7 @@
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { configure, WorkspaceWrapper } from '@cc-components/loopapp';
 import { NoContext, useContextId } from '@cc-components/shared';
 
