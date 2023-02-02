@@ -39,7 +39,7 @@ export const ReportMeta = ({ anchor, reportUri, close }: ReportMetaDataProps) =>
           </StyledColumn>
           <StyledColumn>
             <Typography>{data.dataSources}</Typography>
-            <Typography>{data.ownedBy.name}</Typography>
+            <a href={`mailto:${data.ownedBy.mail}`}>{data.ownedBy.name}</a>
             <Typography>{data.dataRefreshRate}</Typography>
             {/* TODO: add to header */}
             <Typography>{data.access}</Typography>
