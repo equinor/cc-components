@@ -8,12 +8,13 @@ export type Filters = {
   column: string;
 };
 export function usePBIOptions(
+  // Report identifier
   reportUri: string,
-  reportName: string,
   filters?: Filters
 ): PowerBiConfig {
   const { getEmbed, getToken, getErrorMessage } = usePBIHelpers();
   const title = useContextTitle();
+
   return {
     getEmbed,
     getToken,
@@ -24,7 +25,7 @@ export function usePBIOptions(
         }
       : undefined,
     getErrorMessage,
-    ReportMetaData: (props) => <ReportMeta {...props} reportName={reportName} />,
+    ReportMetaData: (props) => <ReportMeta {...props} />,
     reportUri,
   };
 }

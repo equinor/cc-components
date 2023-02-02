@@ -16,7 +16,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     dataProxy.fetch(`/api/contexts/${contextId}/work-orders`, {
       signal,
     });
-  const pbi = usePBIOptions('workorder-analytics', 'Workorder analytics', {
+  const pbi = usePBIOptions('workorder-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

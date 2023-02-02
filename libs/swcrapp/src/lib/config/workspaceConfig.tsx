@@ -19,7 +19,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     return swcrs;
   };
 
-  const pbi = usePBIOptions('swcr-analytics', 'SWCR analytics', {
+  const pbi = usePBIOptions('swcr-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

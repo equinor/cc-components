@@ -6,7 +6,7 @@ type WorkspaceWrapperProps = {
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const pbi = usePBIOptions('cc-preservation-analytics', 'Preservation analytics', {
+  const pbi = usePBIOptions('cc-preservation-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

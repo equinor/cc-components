@@ -12,7 +12,7 @@ type WorkspaceWrapperProps = {
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const pbi = usePBIOptions('loop-analytics', 'Loop analytics', {
+  const pbi = usePBIOptions('loop-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

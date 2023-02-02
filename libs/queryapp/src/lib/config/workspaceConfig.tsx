@@ -6,7 +6,7 @@ type WorkspaceWrapperProps = {
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const pbi = usePBIOptions('query-analytics', 'Query analytics', {
+  const pbi = usePBIOptions('query-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });
