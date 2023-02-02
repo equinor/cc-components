@@ -9,7 +9,7 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const pbi = usePBIOptions('punch-analytics', {
+  const pbi = usePBIOptions('punch-analytics', 'Punch analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

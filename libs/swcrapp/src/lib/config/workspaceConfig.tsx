@@ -20,7 +20,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     return swcrs;
   }, [dataProxy, contextId]);
 
-  const pbi = usePBIOptions('swcr-analytics', {
+  const pbi = usePBIOptions('swcr-analytics', 'SWCR analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

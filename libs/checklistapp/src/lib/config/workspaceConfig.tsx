@@ -6,7 +6,7 @@ type WorkspaceWrapperProps = {
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const pbi = usePBIOptions('checklist-analytics', {
+  const pbi = usePBIOptions('checklist-analytics', 'Checklist Analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

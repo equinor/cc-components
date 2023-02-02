@@ -19,7 +19,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       signal,
     });
 
-  const pbi = usePBIOptions('mc-analytics', {
+  const pbi = usePBIOptions('mc-analytics', 'MC analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });
