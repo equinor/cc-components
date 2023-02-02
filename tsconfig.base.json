@@ -37,6 +37,8 @@
         "libs/preservationanalyticsapp/src/index.ts"
       ],
       "@cc-components/punchapp": ["libs/punchapp/src/index.ts"],
+      "@cc-components/punchshared": ["libs/punchshared/src/index.ts"],
+      "@cc-components/punchsidesheet": ["libs/punchsidesheet/src/index.ts"],
       "@cc-components/queryapp": ["libs/queryapp/src/index.ts"],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
