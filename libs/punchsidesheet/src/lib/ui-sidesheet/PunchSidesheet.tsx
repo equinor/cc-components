@@ -47,7 +47,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
           value={
             <StyledItemLink
               target="_blank"
-              href={proCoSysUrls.getFormTypeUrl(props.item?.tagUrlId || '')}
+              href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
             >
               {props.item?.tagNo}
             </StyledItemLink>
@@ -58,7 +58,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
           value={
             <StyledItemLink
               target="_blank"
-              href={proCoSysUrls.getFormTypeUrl(
+              href={proCoSysUrls.getCommPkgUrl(
                 props.item?.commissioningPackageUrlId || ''
               )}
             >
