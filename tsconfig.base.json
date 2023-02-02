@@ -22,6 +22,7 @@
       "@cc-components/handovershared": ["libs/handovershared/src/index.ts"],
       "@cc-components/handoversidesheet": ["libs/handoversidesheet/src/index.ts"],
       "@cc-components/jcainstallationapp": ["libs/jcainstallationapp/src/index.ts"],
+      "@cc-components/jcaworkpreparationapp": ["libs/jcaworkpreparationapp/src/index.ts"],
       "@cc-components/loopapp": ["libs/loopapp/src/index.ts"],
       "@cc-components/mechanicalcompletionapp": [
         "libs/mechanicalcompletionapp/src/index.ts"
@@ -37,6 +38,8 @@
         "libs/preservationanalyticsapp/src/index.ts"
       ],
       "@cc-components/punchapp": ["libs/punchapp/src/index.ts"],
+      "@cc-components/punchshared": ["libs/punchshared/src/index.ts"],
+      "@cc-components/punchsidesheet": ["libs/punchsidesheet/src/index.ts"],
       "@cc-components/queryapp": ["libs/queryapp/src/index.ts"],
       "@cc-components/shared": ["libs/shared/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
