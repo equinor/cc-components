@@ -9,7 +9,7 @@
     "build": "tsc --noEmit",
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k commissioningtask dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k commissioningtask"
+    "deploy:spa": "fdev portal upload -e ci -k commissioning-task dist/bundle.zip",
+    "postdeploy:spa": "fdev portal publish -e ci -k commissioning-task"
   }
 }
