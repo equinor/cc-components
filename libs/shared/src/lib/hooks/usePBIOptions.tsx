@@ -7,11 +7,13 @@ export type Filters = {
   table: string;
   column: string;
 };
-export function usePBIOptions(
-  // Report identifier
-  reportUri: string,
-  filters?: Filters
-): PowerBiConfig {
+/**
+ *
+ * @param reportUri - Report identifier
+ * @param filters - Filters for dataset
+ * @returns - PowerBiConfig
+ */
+export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConfig {
   const { getEmbed, getToken, getErrorMessage } = usePBIHelpers();
   const title = useContextTitle();
 
