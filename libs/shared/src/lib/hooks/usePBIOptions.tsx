@@ -1,14 +1,22 @@
 import { PowerBiConfig } from '@equinor/workspace-fusion/power-bi';
 import { useContextTitle } from './useContextTitle';
 import { usePBIHelpers } from './usePBIHelpers';
+import { ReportMeta } from '../components';
 
 export type Filters = {
   table: string;
   column: string;
 };
+/**
+ *
+ * @param reportUri - Report identifier
+ * @param filters - Filters for dataset
+ * @returns - PowerBiConfig
+ */
 export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConfig {
-  const { getEmbed, getToken } = usePBIHelpers();
+  const { getEmbed, getToken, getErrorMessage } = usePBIHelpers();
   const title = useContextTitle();
+
   return {
     getEmbed,
     getToken,
@@ -18,8 +26,8 @@ export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConf
           target: { column: filters.column, table: filters.table },
         }
       : undefined,
+    getErrorMessage,
+    ReportMetaData: (props) => <ReportMeta {...props} />,
     reportUri,
-    //TODO: Return actual error
-    getErrorMessage: async () => '',
   };
 }
