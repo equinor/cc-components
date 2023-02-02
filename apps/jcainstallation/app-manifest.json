@@ -1,7 +1,7 @@
 {
-  "name": "jcainstallation",
-  "shortName": "jcainstallation",
-  "key": "jcainstallation",
+  "name": "Installation",
+  "shortName": "installation",
+  "key": "jca-installation",
   "version": {
     "major": "0",
     "minor": "0",
