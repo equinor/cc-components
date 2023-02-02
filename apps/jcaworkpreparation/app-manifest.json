@@ -1,7 +1,7 @@
 {
-  "name": "jcaworkpreparation",
-  "shortName": "jcaworkpreparation",
-  "key": "jcaworkpreparation",
+  "name": "Work Preparation",
+  "shortName": "work-preparation",
+  "key": "jca-work-preparation",
   "version": {
     "major": "0",
     "minor": "0",
