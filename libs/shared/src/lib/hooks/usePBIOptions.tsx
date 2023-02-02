@@ -26,5 +26,7 @@ export function usePBIOptions(
     getErrorMessage,
     ReportMetaData: (props) => <ReportMeta {...props} reportName={reportName} />,
     reportUri,
+    //TODO: Return actual error
+    getErrorMessage: async () => '',
   };
 }

@@ -19,7 +19,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       signal,
     });
 
-  const pbi = usePBIOptions('handover-analytics', 'Handover analytics', {
+  const pbi = usePBIOptions('handoveranalytics', 'Handover analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });
