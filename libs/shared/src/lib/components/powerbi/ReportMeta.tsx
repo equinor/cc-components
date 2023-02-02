@@ -38,11 +38,14 @@ export const ReportMeta = ({
             <Typography>Data Source</Typography>
             <Typography>Contact person</Typography>
             <Typography>Refresh rate</Typography>
+            <Typography>Access</Typography>
           </StyledColumn>
           <StyledColumn>
             <Typography>{data.dataSources}</Typography>
             <Typography>{data.ownedBy.name}</Typography>
             <Typography>{data.dataRefreshRate}</Typography>
+            {/* TODO: add to header */}
+            <Typography>{data.access}</Typography>
           </StyledColumn>
         </StyledContent>
       </Popover.Content>
