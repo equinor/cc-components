@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { usePBIHelpers } from '../../hooks';
 
-export const ReportMeta = ({ anchor, reportUri }: ReportMetaDataProps) => {
+export const ReportMeta = ({ anchor, reportUri, close }: ReportMetaDataProps) => {
   const { getReportInfo } = usePBIHelpers();
   const { data } = useQuery(
     ['reportInfo', reportUri],
@@ -21,6 +21,7 @@ export const ReportMeta = ({ anchor, reportUri }: ReportMetaDataProps) => {
   return (
     <Popover
       open
+      onClose={close}
       anchorEl={anchor}
       title={`Report information ${data.title}`}
       placement="bottom"
