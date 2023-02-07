@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 import { join } from 'path';
+import { Plugin } from 'vite-plugin-cdn-import';
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/loopapp',
@@ -15,6 +16,20 @@ export default defineConfig({
       skipDiagnostics: true,
     }),
     react(),
+    Plugin({
+      modules: [
+        {
+          name: 'react',
+          var: 'React',
+          path: `https://unpkg.com/react@18.2.0/umd/react.development.js`,
+        },
+        {
+          name: 'react-dom',
+          var: 'ReactDOM',
+          path: `https://unpkg.com/react-dom@18/umd/react-dom.development.js`,
+        },
+      ],
+    }),
     viteTsConfigPaths({
       root: '../../',
     }),
