@@ -5,7 +5,7 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/plugins",
@@ -26,6 +26,11 @@
           {
             "input": "./libs/plugins",
             "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/plugins",
+            "glob": "executors.json",
             "output": "."
           }
         ]
