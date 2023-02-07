@@ -5,23 +5,19 @@
   "sourceRoot": "libs/preservationanalyticsapp/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/preservationanalyticsapp",
-        "tsConfig": "libs/preservationanalyticsapp/tsconfig.lib.json",
-        "project": "libs/preservationanalyticsapp/package.json",
-        "entryFile": "libs/preservationanalyticsapp/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/preservationanalyticsapp/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "outputPath": "dist/libs/preservationanalyticsapp"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "lint": {
