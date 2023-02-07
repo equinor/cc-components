@@ -1,4 +1,6 @@
 import { Tooltip, Icon } from '@equinor/eds-core-react';
+import { check, clear } from '@equinor/eds-icons';
+Icon.add({ check, clear });
 type AvailableItemCellProps = {
   available: string | null;
 };
