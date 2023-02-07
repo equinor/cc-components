@@ -19,7 +19,7 @@
       "inputs": ["production", "^production"]
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "inputs": ["default", "^production"]
     },
     "lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
@@ -39,14 +39,15 @@
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ],
-    "sharedGlobals": ["{workspaceRoot}/babel.config.json"]
+    "sharedGlobals": []
   },
   "generators": {
     "@nrwl/react": {
       "application": {
         "style": "styled-components",
         "linter": "eslint",
-        "babel": true
+        "bundler": "vite",
+        "babel": false
       },
       "component": {
         "style": "styled-components"

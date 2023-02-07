@@ -5,23 +5,19 @@
   "sourceRoot": "libs/jcaworkpreparationapp/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/jcaworkpreparationapp",
-        "tsConfig": "libs/jcaworkpreparationapp/tsconfig.lib.json",
-        "project": "libs/jcaworkpreparationapp/package.json",
-        "entryFile": "libs/jcaworkpreparationapp/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/jcaworkpreparationapp/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "outputPath": "dist/libs/jcaworkpreparationapp"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "lint": {

@@ -6,23 +6,19 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/handoverapp",
-        "tsConfig": "libs/handoverapp/tsconfig.lib.json",
-        "project": "libs/handoverapp/package.json",
-        "entryFile": "libs/handoverapp/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/handoverapp/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "outputPath": "dist/libs/testlib"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "lint": {
@@ -30,14 +26,6 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/handoverapp/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/handoverapp"],
-      "options": {
-        "jestConfig": "libs/handoverapp/jest.config.ts",
-        "passWithNoTests": true
       }
     }
   }
