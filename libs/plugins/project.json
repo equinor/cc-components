@@ -43,6 +43,7 @@
         "lintFilePatterns": [
           "libs/plugins/**/*.ts",
           "libs/plugins/generators.json",
+          "libs/plugins/executors.json",
           "libs/plugins/package.json"
         ]
       }
