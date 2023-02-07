@@ -22,6 +22,7 @@
       "@cc-components/handovershared": ["libs/handovershared/src/index.ts"],
       "@cc-components/handoversidesheet": ["libs/handoversidesheet/src/index.ts"],
       "@cc-components/jcainstallationapp": ["libs/jcainstallationapp/src/index.ts"],
+      "@cc-components/jcaspoolsapp": ["libs/jcaspoolsapp/src/index.ts"],
       "@cc-components/jcaworkpreparationapp": ["libs/jcaworkpreparationapp/src/index.ts"],
       "@cc-components/loopapp": ["libs/loopapp/src/index.ts"],
       "@cc-components/mechanicalcompletionapp": [
