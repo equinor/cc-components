@@ -29,6 +29,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: "Out of memory"
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
