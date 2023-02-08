@@ -33,7 +33,7 @@ NormalTable.args = {
     {
       id: '1',
       description: 'Storybook',
-      age: '27',
+      age: '287',
       location: 'Norway',
     },
     {
