@@ -23,7 +23,7 @@ const TemplateTwo: ComponentStory<typeof StyledBanner> = (args) => (
     />
     <BannerItem
       title="MC pkg"
-      value={<StyledItemLink href="https://example.com">12344</StyledItemLink>}
+      value={<StyledItemLink href="https://example.com">12345</StyledItemLink>}
     />
   </StyledBanner>
 );
