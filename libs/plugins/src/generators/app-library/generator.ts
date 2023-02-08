@@ -58,23 +58,19 @@ export default async function (tree: Tree, options: AppLibraryGeneratorSchema) {
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
-        executor: '@nrwl/web:rollup',
+        executor: '@nrwl/vite:build',
         outputs: ['{options.outputPath}'],
+        defaultConfiguration: 'production',
         options: {
           outputPath: `dist/libs/${normalizedOptions.projectName}`,
-          tsConfig: `libs/${normalizedOptions.projectName}/tsconfig.lib.json`,
-          project: `libs/${normalizedOptions.projectName}/package.json`,
-          entryFile: `libs/${normalizedOptions.projectName}/src/index.ts`,
-          external: ['react/jsx-runtime'],
-          rollupConfig: '@nrwl/react/plugins/bundle-rollup',
-          compiler: 'babel',
-          assets: [
-            {
-              glob: `libs/${normalizedOptions.projectName}/README.md`,
-              input: '.',
-              output: '.',
+          configurations: {
+            development: {
+              mode: 'development',
             },
-          ],
+            production: {
+              mode: 'production',
+            },
+          },
         },
       },
       lint: {
