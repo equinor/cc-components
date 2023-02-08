@@ -5,23 +5,19 @@
   "sourceRoot": "libs/jcaspoolsapp/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/jcaspoolsapp",
-        "tsConfig": "libs/jcaspoolsapp/tsconfig.lib.json",
-        "project": "libs/jcaspoolsapp/package.json",
-        "entryFile": "libs/jcaspoolsapp/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/jcaspoolsapp/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "outputPath": "dist/libs/jcaspoolapp"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "lint": {
