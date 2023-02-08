@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run shared:storybook",
-    "storybook-build": "cross-env NODE_OPTIONS='--openssl-legacy-provider --max_old_space_size=8048' npx run shared:build-storybook",
+    "storybook-build": "npx run shared:build-storybook",
     "test": "nx test",
     "lint-all": "nx run-many --all --target=lint",
     "install:init": "npm install --legacy-peer-deps && npm install nx -g && npm install @equinor/fusion-framework-cli -g"
