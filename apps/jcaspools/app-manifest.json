@@ -1,7 +1,7 @@
 {
-  "name": "jcaspools",
-  "shortName": "jcaspools",
-  "key": "jcaspools",
+  "name": "Spools",
+  "shortName": "spools",
+  "key": "jca-spools",
   "version": {
     "major": "0",
     "minor": "0",
