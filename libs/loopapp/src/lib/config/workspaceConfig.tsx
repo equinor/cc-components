@@ -1,5 +1,5 @@
 import { usePBIOptions } from '@cc-components/shared';
-import Workspace from '@equinor/workspace-fusion';
+import { Workspace } from '@equinor/workspace-dynamic';
 import { contextConfig } from './contextConfig';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
