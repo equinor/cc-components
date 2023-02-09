@@ -6,6 +6,7 @@ import dts from 'vite-plugin-dts';
 import { join } from 'path';
 
 export default defineConfig({
+  base: '/cc-components/',
   cacheDir: '../../node_modules/.vite/shared',
 
   plugins: [
