@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cc-components/activitiesapp": ["libs/activitiesapp/src/index.ts"],
       "@cc-components/ccoverviewapp": ["libs/ccoverviewapp/src/index.ts"],
       "@cc-components/checklistapp": ["libs/checklistapp/src/index.ts"],
       "@cc-components/commissioningtaskapp": ["libs/commissioningtaskapp/src/index.ts"],
