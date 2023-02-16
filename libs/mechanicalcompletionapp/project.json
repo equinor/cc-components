@@ -6,23 +6,19 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/mechanicalcompletionapp",
-        "tsConfig": "libs/mechanicalcompletionapp/tsconfig.lib.json",
-        "project": "libs/mechanicalcompletionapp/package.json",
-        "entryFile": "libs/mechanicalcompletionapp/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/mechanicalcompletionapp/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "outputPath": "dist/libs/mechanicalcompletionapp"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "lint": {
@@ -30,14 +26,6 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/mechanicalcompletionapp/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/mechanicalcompletionapp"],
-      "options": {
-        "jestConfig": "libs/mechanicalcompletionapp/jest.config.ts",
-        "passWithNoTests": true
       }
     }
   }

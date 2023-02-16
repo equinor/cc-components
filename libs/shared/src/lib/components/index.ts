@@ -9,5 +9,6 @@ export * from './popover';
 export * from './sidesheet';
 
 export * from './table';
+export * from './powerbi';
 
 export { StyledItemLink } from './common.styles';

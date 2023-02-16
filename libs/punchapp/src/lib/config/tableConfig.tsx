@@ -1,3 +1,4 @@
+import { Punch } from '@cc-components/punchshared';
 import {
   DescriptionCell,
   hasProperty,
@@ -7,7 +8,6 @@ import {
   statusColorMap,
 } from '@cc-components/shared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { Punch } from '../types';
 export const tableConfig: GridConfig<Punch> = {
   columnDefinitions: [
     {

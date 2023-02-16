@@ -7,6 +7,9 @@ type NcrTabProps<T> = {
   isFetching: boolean;
   error: Error | null;
 };
+/**
+ * Preconfigured table for showing NCR data
+ */
 export const NcrTab = <T extends NcrBase>({
   error,
   isFetching,

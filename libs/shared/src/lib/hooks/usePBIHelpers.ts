@@ -1,16 +1,5 @@
+import { EmbedInfo, EmbedToken, ReportInfo } from '../types';
 import { useServiceDiscovery } from './useServiceDiscovery';
-type EmbedInfo = {
-  type: number;
-  embedConfig: {
-    name: string | null;
-    embedUrl: string;
-    reportId: string;
-  };
-};
-type EmbedToken = {
-  expirationUtc: string;
-  token: string;
-};
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
   return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;
@@ -29,11 +18,10 @@ export const usePBIHelpers = () => {
 
   const getEmbed = async (reportUri: string, _token: string, signal?: AbortSignal) => {
     const client = await serviceDisco.createClient('reports');
-    const res = await client.fetch(
-      `${client.uri}/reports/${reportUri}/config/embedinfo`,
-      { signal }
-    );
-
+    const res = await client.fetch(`reports/${reportUri}/config/embedinfo`, { signal });
+    if (!res.ok) {
+      throw new Error('', { cause: res });
+    }
     const embedInfo = await res.json();
 
     if (isEmbedInfo(embedInfo)) return embedInfo.embedConfig;
@@ -44,9 +32,12 @@ export const usePBIHelpers = () => {
 
   const getToken = async (reportUri: string, signal?: AbortSignal) => {
     const client = await serviceDisco.createClient('reports');
-    const res = await client.fetch(`${client.uri}/reports/${reportUri}/token`, {
+    const res = await client.fetch(`reports/${reportUri}/token`, {
       signal,
     });
+    if (!res.ok) {
+      throw new Error('', { cause: res });
+    }
     const jsonRes = await res.json();
     if (isEmbedToken(jsonRes)) return jsonRes;
     else {
@@ -54,8 +45,25 @@ export const usePBIHelpers = () => {
     }
   };
 
+  const getErrorMessage = async (reportUri: string, signal?: AbortSignal) => {
+    const client = await serviceDisco.createClient('reports');
+    const res = await client.fetch(`reports/${reportUri}/rlsrequirements`, { signal });
+    return res.text();
+  };
+
+  const getReportInfo = async (
+    reportUri: string,
+    signal?: AbortSignal
+  ): Promise<ReportInfo> => {
+    const client = await serviceDisco.createClient('reports');
+    const res = await client.fetch(`reports/${reportUri}`, { signal });
+    return res.json();
+  };
+
   return {
     getEmbed,
     getToken,
+    getErrorMessage,
+    getReportInfo,
   };
 };

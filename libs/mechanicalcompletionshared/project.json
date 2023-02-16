@@ -12,23 +12,19 @@
       }
     },
     "build": {
-      "executor": "@nrwl/rollup:rollup",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/mechanicalcompletionshared",
-        "tsConfig": "libs/mechanicalcompletionshared/tsconfig.lib.json",
-        "project": "libs/mechanicalcompletionshared/package.json",
-        "entryFile": "libs/mechanicalcompletionshared/src/index.ts",
-        "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/mechanicalcompletionshared/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "outputPath": "dist/libs/mechanicalcompletionshared"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     }
   }

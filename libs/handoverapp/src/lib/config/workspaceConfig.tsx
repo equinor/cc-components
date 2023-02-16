@@ -3,7 +3,6 @@ import { gardenConfig } from './gardenConfig';
 import { tableConfig } from './tableConfig';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
-import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
@@ -20,7 +19,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       signal,
     });
 
-  const pbi = usePBIOptions('handover-analytics', {
+  const pbi = usePBIOptions('handoveranalytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });

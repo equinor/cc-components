@@ -2,6 +2,7 @@ import { usePBIOptions } from '@cc-components/shared';
 import Workspace from '@equinor/workspace-fusion';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './sidesheetConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 import { testData } from './testData';
@@ -9,7 +10,7 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const pbi = usePBIOptions('punch-analytics', {
+  const pbi = usePBIOptions('cc-punch-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });
@@ -26,6 +27,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
+      sidesheetOptions={sidesheetConfig}
       powerBiOptions={pbi}
     />
   );

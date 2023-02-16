@@ -1,4 +1,4 @@
-import { Punch } from "../types";
+import { Punch } from "@cc-components/punchshared";
 
 export type MaterialStatus = 'Yes' | 'No';
 

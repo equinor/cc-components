@@ -1,5 +1,6 @@
+import { Punch } from '@cc-components/punchshared';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields, Punch } from '../types';
+import { ExtendedGardenFields } from '../types';
 import { sortByDate } from '../utils-keys/sortByDate';
 import { getDateKey } from './getDateKey';
 
