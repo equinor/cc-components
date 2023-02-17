@@ -28,6 +28,7 @@ export const SwcrSidesheet = createWidget<SwcrProps>(({ props }) => {
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={`${props?.item?.swcrNo || ''}, ${props?.item?.title || ''} `}
+        applicationTitle={'Software change record'}
         onClose={props.close}
       />
       <StyledBanner>

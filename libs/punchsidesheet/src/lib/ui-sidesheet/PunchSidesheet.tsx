@@ -29,7 +29,11 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
 
   return (
     <StyledSideSheetContainer>
-      <SidesheetHeader title={props.item?.punchItemNo || ''} onClose={props.close} />
+      <SidesheetHeader
+        title={props.item?.punchItemNo || ''}
+        applicationTitle={'Punch'}
+        onClose={props.close}
+      />
       <StyledBanner>
         <BannerItem
           title="Form type"

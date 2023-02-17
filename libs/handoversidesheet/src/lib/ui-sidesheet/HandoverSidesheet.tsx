@@ -92,7 +92,11 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
 
   return (
     <StyledSideSheetContainer>
-      <SidesheetHeader title={props?.item?.commpkgNo || ''} onClose={props.close} />
+      <SidesheetHeader
+        title={props?.item?.commpkgNo || ''}
+        applicationTitle={'Handover'}
+        onClose={props.close}
+      />
       <StyledBanner>
         <BannerItem
           title="Compkg status"
