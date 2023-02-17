@@ -13,7 +13,8 @@ const StyledWrap = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding-left: 1em;
+  padding-left: 24px;
+  padding-bottom: 24px;
   justify-content: space-between;
   align-items: center;
 `;
@@ -22,10 +23,32 @@ const StyledTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+const StyledApplicationTitle = styled.div`
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+const StyledWrapTitles = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 8px;
+`;
+const StyledColor = styled.div`
+  display: flex;
+  width: 3%;
+  background-color: #8c1159;
 `;
 const StyledLeftSection = styled.div`
   display: flex;
   width: 90%;
+  padding-top: 16px;
 `;
 
 const StyledRightSection = styled.div`
@@ -34,18 +57,23 @@ const StyledRightSection = styled.div`
 `;
 type HeaderProps = {
   title: string;
+  applicationTitle: string;
   onClose: VoidFunction;
 };
 /**
  * Standard component for displaying a sidesheet header.
  * This will add a title and close button to the header.
  */
-export const SidesheetHeader = ({ title, onClose }: HeaderProps) => {
+export const SidesheetHeader = ({ title, applicationTitle, onClose }: HeaderProps) => {
   return (
     <StyledContainer>
       <StyledWrap>
         <StyledLeftSection>
-          <StyledTitle>{title}</StyledTitle>
+          <StyledColor />
+          <StyledWrapTitles>
+            <StyledTitle>{title}</StyledTitle>
+            <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
+          </StyledWrapTitles>
         </StyledLeftSection>
         <StyledRightSection>
           <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">

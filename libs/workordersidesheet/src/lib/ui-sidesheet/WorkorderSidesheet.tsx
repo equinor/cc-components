@@ -56,6 +56,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={props?.item?.description ?? ''}
+        applicationTitle={'Workorder'}
         onClose={props.closeSidesheet}
       />
       <StyledBanner>
