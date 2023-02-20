@@ -43,6 +43,9 @@
       "options": {
         "lintFilePatterns": ["apps/swcr/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "version": {
+      "executor": "@cc-components/plugins:version"
     }
   },
   "tags": ["@cc-components/shared", "@cc-components/swcrapp"]

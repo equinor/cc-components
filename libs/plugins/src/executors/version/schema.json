@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "Version executor",
+  "description": "Executor to update package.json and app-manifest.json versions",
+  "type": "object",
+  "properties": {
+    "reason": {
+      "type": "string",
+      "description": "Why are you bumping?"
+    },
+    "type": {
+      "type": "string",
+      "description": "Patch, minor or patch?",
+      "default": "patch"
+    }
+  },
+  "required": ["reason"]
+}

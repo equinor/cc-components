@@ -43,6 +43,9 @@
       "options": {
         "lintFilePatterns": ["apps/punch/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "version": {
+      "executor": "@cc-components/plugins:version"
     }
   },
   "tags": []

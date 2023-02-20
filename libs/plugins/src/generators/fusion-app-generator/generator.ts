@@ -93,6 +93,9 @@ export default async function (tree: Tree, options: FusionAppGeneratorGeneratorS
           ],
         },
       },
+      version: {
+        executor: '@cc-components/plugins:version',
+      },
     },
     tags: normalizedOptions.parsedTags,
   });
