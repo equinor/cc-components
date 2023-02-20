@@ -1,66 +1,39 @@
 /* eslint-disable no-console */
-import { ExecutorContext, readJsonFile, writeJsonFile } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
+import { versionHelper } from './lib/versionHelper';
 import { VersionExecutorSchema } from './schema';
 
 export default async function runExecutor(
   options: VersionExecutorSchema,
   context: ExecutorContext
 ) {
-  const path = `${context.root}/apps/${context.projectName}`;
-  const appManifestPath = `${path}/app-manifest.json`;
-  const packageJsonPath = `${path}/package.json`;
-  const file = readJsonFile(appManifestPath);
-  const version = file.version;
-
+  const { bumpVersion, checkVersions, pkgJsonToManifestVersion } = versionHelper(
+    context.root,
+    context.projectName
+  );
   if (options.type === 'patch') {
-    console.log('Incrementing patch version');
-
-    const patchVersionNumber = Number(file.version.patch);
-    const updated = {
-      ...file,
-      version: {
-        ...version,
-        patch: `${patchVersionNumber + 1}`,
-      },
-    };
-    writeJsonFile(appManifestPath, updated);
+    logger.info('Incrementing patch version');
+    bumpVersion('patch');
   } else if (options.type === 'minor') {
-    console.log('Incrementing minor version');
-
-    const minorVersionNumber = Number(file.version.minor);
-    const updated = {
-      ...file,
-      version: {
-        ...version,
-        minor: `${minorVersionNumber + 1}`,
-      },
-    };
-
-    writeJsonFile(appManifestPath, updated);
+    logger.info('Incrementing minor version');
+    bumpVersion('minor');
   } else if (options.type === 'major') {
-    console.log('Incrementing major version');
-
-    const majorVersionNumber = Number(file.version.major);
-    const updated = {
-      ...file,
-      version: {
-        ...version,
-        major: `${majorVersionNumber + 1}`,
-      },
-    };
-    writeJsonFile(appManifestPath, updated);
+    logger.info('Incrementing major version');
+    bumpVersion('major');
   } else {
-    console.log('Use a valid version type: major, minor or patch');
+    logger.error('Use a valid version type: major, minor or patch');
+    logger.error(`You used: ${options.type} as a version type which is invalid!`);
     return {
       success: false,
     };
   }
-  const maybeNewfile = readJsonFile(appManifestPath);
-  console.log('Your app-manifest.json is now:', maybeNewfile);
 
-  const packageJson = readJsonFile(packageJsonPath);
-  console.log('Your package.json version is', packageJson.version.split('.'));
-  console.log(Object.values(maybeNewfile.version));
+  if (!checkVersions()) {
+    logger.warn('Package.json and app-manifest.json versions are not identical');
+    logger.warn('Updating package.json version to the new app-manifest.json version!!');
+    pkgJsonToManifestVersion();
+  }
+
   return {
     success: true,
   };

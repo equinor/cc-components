@@ -3,7 +3,7 @@
   "version": 2,
   "cli": "nx",
   "title": "Version executor",
-  "description": "",
+  "description": "Executor to update package.json and app-manifest.json versions",
   "type": "object",
   "properties": {
     "type": {
