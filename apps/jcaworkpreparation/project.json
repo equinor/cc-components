@@ -41,5 +41,5 @@
       "executor": "@cc-components/plugins:version"
     }
   },
-  "tags": []
+  "tags": ["pbi"]
 }
