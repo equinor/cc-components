@@ -1,10 +1,10 @@
 # CC components and workspaces
 Repository for CC applications/workspaces and common components and utilities.
 CC applications that belong in this repository are:
-* [Activities]()
-* [CCOverview]()
-* [Checklist]()
-* [Commissioning Task]()
+* [Activities](https://github.com/equinor/cc-components/tree/main/apps/activities)
+* [CCOverview](https://github.com/equinor/cc-components/tree/main/apps/ccoverview)
+* [Checklist](https://github.com/equinor/cc-components/tree/main/apps/checklist)
+* [Commissioning Task](https://github.com/equinor/cc-components/tree/main/apps/commissioningtask)
 * [Handover](https://github.com/equinor/cc-components/tree/main/apps/handover)
 * [JCA Installation](https://github.com/equinor/cc-components/tree/main/apps/jcainstallation)
 * [JCA Spools](https://github.com/equinor/cc-components/tree/main/apps/jcaspools)
