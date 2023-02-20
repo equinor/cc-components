@@ -48,5 +48,5 @@
       "executor": "@cc-components/plugins:version"
     }
   },
-  "tags": ["@cc-components/shared", "@cc-components/swcrapp"]
+  "tags": ["ws", "@cc-components/shared", "@cc-components/swcrapp"]
 }

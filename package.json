@@ -11,9 +11,8 @@
     "lint-all": "nx run-many --all --target=lint",
     "install:init": "npm install --legacy-peer-deps && npm install nx -g && npm install @equinor/fusion-framework-cli -g",
     "bump-all-apps": "nx run-many --target=version --exclude *app *shared *sidesheet",
-    "bump-pbi-apps": "nx run-many --target=version --projects=$(node tools/projectsWithPBITag.js) --exclude *app *shared *sidesheet",
-    "bump-ws-apps": "nx run-many --target=version --exclude *app *shared *sidesheet $(node tools/projectsWithPBITag.js)",
-    "hello": "$(node tools/projectsWithPBITag.js)"
+    "bump-pbi-apps": "nx run-many --target=version --projects=$(node tools/projectsWithPBITag.js)",
+    "bump-ws-apps": "nx run-many --target=version --projects=$(node tools/projectsWithWSTag.js)"
   },
   "private": true,
   "devDependencies": {

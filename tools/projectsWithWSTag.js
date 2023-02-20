@@ -5,7 +5,7 @@ const projects = [];
 const newOne = allAppFolders.filter((a) => a !== '.gitkeep');
 newOne.forEach((folder) => {
   const project = devkit.readJsonFile(`apps/${folder}/project.json`);
-  if (project?.tags.includes('pbi')) {
+  if (project?.tags.includes('ws')) {
     projects.push(folder);
   }
 });
