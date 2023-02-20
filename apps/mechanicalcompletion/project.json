@@ -44,6 +44,9 @@
       "options": {
         "lintFilePatterns": ["apps/mechanicalcompletion/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "version": {
+      "executor": "@cc-components/plugins:version"
     }
   },
   "tags": ["mechanicalcompletionapp", "shared"]

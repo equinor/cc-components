@@ -36,6 +36,9 @@
           }
         ]
       }
+    },
+    "version": {
+      "executor": "@cc-components/plugins:version"
     }
   },
   "tags": []

@@ -35,6 +35,9 @@
             "command": "fusion-framework-cli app build"
           }
         ]
+      },
+      "version": {
+        "executor": "@cc-components/plugins:version"
       }
     },
     "version": {
