@@ -15,10 +15,6 @@
         ]
       }
     },
-
-    "some": {
-      "executor": "@cc-components/plugins:testex"
-    },
     "build": {
       "executor": "nx:run-commands",
       "options": {

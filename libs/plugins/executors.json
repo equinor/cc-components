@@ -5,11 +5,6 @@
       "implementation": "./src/executors/version/executor",
       "schema": "./src/executors/version/schema.json",
       "description": "Version apps"
-    },
-    "testex": {
-      "implementation": "./src/executors/testex/executor",
-      "schema": "./src/executors/testex/schema.json",
-      "description": "test"
     }
   }
 }
