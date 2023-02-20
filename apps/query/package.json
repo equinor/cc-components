@@ -10,7 +10,6 @@
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k query-workspace dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k query-workspace",
-    "patch": "npm version patch && nx run query:version --type=path"
+    "postdeploy:spa": "fdev portal publish -e ci -k query-workspace"
   }
 }
