@@ -1,16 +1,23 @@
 # CC components and workspaces
 Repository for CC applications/workspaces and common components and utilities.
 CC applications that belong in this repository are:
-* Handover
-* Mechanical Completion
-* Workorder
-* SWCR
-* Loop
-* Punch
-* Heat Trace
-* Release Control
+* [Activities]()
+* [CCOverview]()
+* [Checklist]()
+* [Commissioning Task]()
+* [Handover](https://github.com/equinor/cc-components/tree/main/apps/handover)
+* [JCA Installation](https://github.com/equinor/cc-components/tree/main/apps/jcainstallation)
+* [JCA Spools](https://github.com/equinor/cc-components/tree/main/apps/jcaspools)
+* [JCA Work preparation](https://github.com/equinor/cc-components/tree/main/apps/jcaworkpreparation)
+* [Loop](https://github.com/equinor/cc-components/tree/main/apps/loop)
+* [Mechanical Completion](https://github.com/equinor/cc-components/tree/main/apps/mechanicalcompletion)
+* [Preservation Analytics](https://github.com/equinor/cc-components/tree/main/apps/preservationanalytics)
+* [Punch](https://github.com/equinor/cc-components/tree/main/apps/punch)
+* [Query](https://github.com/equinor/cc-components/tree/main/apps/query)
+* [SWCR](https://github.com/equinor/cc-components/tree/main/apps/swcr)
+* [Workorder](https://github.com/equinor/cc-components/tree/main/apps/workorder)
 
-Each application will have its own library where every component, util and config is placed under. Common components and utilities should be placed in the `shared` library.
+Each application will have its own library where every component, util and config is placed under. Some applications might have a separate 'app' (i.e. sidesheet) that requires some of the same types and components as the main application. Create a new library called `<name>shared` which contains the common application utilities. Common components and utilities used across many projects should be placed in the `shared` library. 
 
 # TLDR
 * `nx generate @cc-components/plugins:fusion-app-generator <name>` For generating new applications
@@ -46,4 +53,7 @@ The naming convention for an app library should be `<appname>app` i.e. `handover
 If there are common modules across libraries/apps, then it should probably be put under the `shared` library where everyone can consume from.
 
 ### Creating a new library
-To create a new library, follow the same steps as mentioned in the section about creating a new application, but this time you want to choose `@cc-components/plugins - app-library`. Choose an appropriate name for the library (see naming convention). 
+To create a new library, follow the same steps as mentioned in the section about creating a new application, but this time you want to choose `@cc-components/plugins - app-library`. Choose an appropriate name for the library (see naming convention).
+
+## Release
+We are using fdev to release applications. Before uploading and publishing an app, you need to keep the app-manifest.json up-to-date. After updating app-manifest.json, bundle the app with `npm run build:spa`. This command will use `fusion-framework-cli` (vite/rollup) to build the application, and will also zip the bundled file together with app-manifest.json. After building the app, upload and publish it with `npm run deploy:spa`. This will use fdev and upload the zipped files, as well as publish them in CI.
