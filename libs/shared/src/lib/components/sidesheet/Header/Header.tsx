@@ -43,7 +43,7 @@ const StyledWrapTitles = styled.div`
 const StyledColor = styled.div`
   display: flex;
   width: 3%;
-  background-color: #8c1159;
+  background-color: ${(prop) => prop.color || '#8c1159'};
 `;
 const StyledLeftSection = styled.div`
   display: flex;
@@ -58,18 +58,24 @@ const StyledRightSection = styled.div`
 type HeaderProps = {
   title: string;
   applicationTitle: string;
+  color?: string;
   onClose: VoidFunction;
 };
 /**
  * Standard component for displaying a sidesheet header.
  * This will add a title and close button to the header.
  */
-export const SidesheetHeader = ({ title, applicationTitle, onClose }: HeaderProps) => {
+export const SidesheetHeader = ({
+  title,
+  applicationTitle,
+  color,
+  onClose,
+}: HeaderProps) => {
   return (
     <StyledContainer>
       <StyledWrap>
         <StyledLeftSection>
-          <StyledColor />
+          <StyledColor defaultValue={color} />
           <StyledWrapTitles>
             <StyledTitle>{title}</StyledTitle>
             <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
