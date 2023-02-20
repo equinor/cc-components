@@ -9,7 +9,8 @@
     "storybook-build": "npx nx run shared:build-storybook",
     "test": "nx test",
     "lint-all": "nx run-many --all --target=lint",
-    "install:init": "npm install --legacy-peer-deps && npm install nx -g && npm install @equinor/fusion-framework-cli -g"
+    "install:init": "npm install --legacy-peer-deps && npm install nx -g && npm install @equinor/fusion-framework-cli -g",
+    "bump-all-apps": "nx run-many --target=version --exclude *app *shared *sidesheet"
   },
   "private": true,
   "devDependencies": {

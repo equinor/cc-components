@@ -2,15 +2,20 @@
 import { ExecutorContext, logger } from '@nrwl/devkit';
 import { versionHelper } from './lib/versionHelper';
 import { VersionExecutorSchema } from './schema';
+import changelogExecutor from '../changelog/executor';
 
 export default async function runExecutor(
   options: VersionExecutorSchema,
   context: ExecutorContext
 ) {
-  const { bumpVersion, checkVersions, pkgJsonToManifestVersion } = versionHelper(
-    context.root,
-    context.projectName
-  );
+  if (!options.reason) {
+    logger.error('Please provide a reason for bumping');
+    return {
+      success: false,
+    };
+  }
+  const { bumpVersion, checkVersions, pkgJsonToManifestVersion, rollback } =
+    versionHelper(context.root, context.projectName);
   if (options.type === 'patch') {
     logger.info('Incrementing patch version');
     bumpVersion('patch');
@@ -34,6 +39,20 @@ export default async function runExecutor(
     pkgJsonToManifestVersion();
   }
 
+  const res = await changelogExecutor(
+    {
+      reason: options.reason,
+    },
+    context
+  );
+  if (!res.success) {
+    logger.info('Something failed, rolling back to latest version');
+    rollback();
+
+    return {
+      success: false,
+    };
+  }
   return {
     success: true,
   };

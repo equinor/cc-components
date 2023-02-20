@@ -5,6 +5,11 @@
       "implementation": "./src/executors/version/executor",
       "schema": "./src/executors/version/schema.json",
       "description": "Version apps"
+    },
+    "changelog": {
+      "implementation": "./src/executors/changelog/executor",
+      "schema": "./src/executors/changelog/schema.json",
+      "description": "changelog executor"
     }
   }
 }

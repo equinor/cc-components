@@ -130,9 +130,14 @@ export const versionHelper = (root: string, projectName: string | undefined) => 
     };
     writeJsonFile(packageJsonPath, updatedPkgJson);
   };
+  const rollback = () => {
+    writeJsonFile(packageJsonPath, packageJsonFile);
+    writeJsonFile(appManifestPath, manifestFile);
+  };
   return {
     bumpVersion,
     checkVersions,
     pkgJsonToManifestVersion,
+    rollback,
   };
 };

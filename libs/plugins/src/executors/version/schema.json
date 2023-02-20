@@ -6,11 +6,15 @@
   "description": "Executor to update package.json and app-manifest.json versions",
   "type": "object",
   "properties": {
+    "reason": {
+      "type": "string",
+      "description": "Why are you bumping?"
+    },
     "type": {
       "type": "string",
       "description": "Patch, minor or patch?",
       "default": "patch"
     }
   },
-  "required": []
+  "required": ["reason"]
 }
