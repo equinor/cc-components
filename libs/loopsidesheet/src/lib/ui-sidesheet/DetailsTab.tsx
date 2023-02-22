@@ -27,7 +27,6 @@ export const DetailsTab = ({ loop }: DetailsTabProps): JSX.Element | null => {
           </tr>
           <tr>
             <td>Status</td>
-
             <td>{stringCell(loop.tagStatus)}</td>
           </tr>
         </tbody>

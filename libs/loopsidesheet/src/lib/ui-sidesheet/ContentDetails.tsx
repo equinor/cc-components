@@ -7,7 +7,7 @@ import {
   StyledTabContent,
   StyledTable,
 } from '@cc-components/shared';
-import { ContentTable } from './contentTable';
+import { ContentTable } from './ContentTable';
 
 type ContentDetailsProps = {
   loop: Loop | undefined;
@@ -38,7 +38,7 @@ export const ContentDetails = ({ loop }: ContentDetailsProps): JSX.Element | nul
             <td>Planned MC complete of content</td>
             <td>
               {loop.woPlannedCompletionDate
-                ? stringCell(formatDateString(loop.woPlannedCompletionDate.toString()))
+                ? stringCell(formatDateString(loop.woPlannedCompletionDate))
                 : '-'}
             </td>
           </tr>
@@ -46,7 +46,7 @@ export const ContentDetails = ({ loop }: ContentDetailsProps): JSX.Element | nul
             <td>Actual MC complete of content</td>
             <td>
               {loop.woActualCompletionDate
-                ? stringCell(formatDateString(loop.woActualCompletionDate.toString()))
+                ? stringCell(formatDateString(loop.woActualCompletionDate))
                 : '-'}
             </td>
           </tr>

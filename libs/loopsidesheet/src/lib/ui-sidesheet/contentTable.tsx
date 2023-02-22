@@ -1,5 +1,6 @@
 import { Loop } from '@cc-components/loopshared';
 import {
+  DescriptionCell,
   hasProperty,
   LinkCell,
   proCoSysUrls,
@@ -27,10 +28,18 @@ const columns: ColDef<LoopContent>[] = [
       }
       return null;
     },
+    width: 120,
   },
   {
     field: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
+    cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
+      if (props.value) {
+        return <DescriptionCell description={props.value} />;
+      }
+      return null;
+    },
+    width: 250,
   },
   {
     field: 'MC status',
@@ -52,6 +61,7 @@ const columns: ColDef<LoopContent>[] = [
       }
       return null;
     },
+    width: 140,
   },
   {
     field: 'Cmpkg',
@@ -68,13 +78,14 @@ const columns: ColDef<LoopContent>[] = [
       }
       return null;
     },
+    width: 120,
   },
   {
-    field: 'MCpkg',
+    headerName: 'MCpkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     valueFormatter: (pkg) => {
       if (pkg.data?.mechanicalCompletionPackageUrlId) {
-        return proCoSysUrls.getCommPkgUrl(pkg.data.mechanicalCompletionPackageUrlId);
+        return proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageUrlId);
       }
       return '';
     },
@@ -84,6 +95,7 @@ const columns: ColDef<LoopContent>[] = [
       }
       return null;
     },
+    width: 140,
   },
 ];
 
@@ -102,7 +114,7 @@ export const ContentTable = ({ loop }: ContentTableProps) => {
         isFetching={isLoading}
         resourceName="ContentTable"
         columns={columns}
-        height={100}
+        height={300}
       />
     </div>
   );

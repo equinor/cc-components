@@ -14,7 +14,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
   {
     field: 'Group',
     valueGetter: (pkg) => pkg.data?.formularGroup,
-    width: 80,
+    width: 120,
   },
   {
     field: 'Cmpkg',
@@ -31,10 +31,10 @@ const columns: ColDef<ChecklistForLoop>[] = [
       }
       return null;
     },
-    width: 100,
+    width: 120,
   },
   {
-    field: 'MCpkg',
+    headerName: 'MCpkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     valueFormatter: (pkg) => {
       if (pkg.data?.mechanicalCompletionPackageUrlId) {
@@ -48,7 +48,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
       }
       return null;
     },
-    width: 100,
+    width: 130,
   },
   {
     field: 'MC status',
@@ -70,7 +70,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
       }
       return null;
     },
-    width: 100,
+    width: 140,
   },
   {
     field: 'Form type',
@@ -87,12 +87,12 @@ const columns: ColDef<ChecklistForLoop>[] = [
       }
       return null;
     },
-    width: 100,
+    width: 140,
   },
   {
     field: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
-    width: 120,
+    width: 150,
   },
 ];
 

@@ -43,7 +43,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -87,7 +86,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -131,7 +129,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -175,7 +172,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -219,7 +215,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -263,7 +258,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -307,7 +301,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -351,7 +344,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -395,7 +387,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -439,7 +430,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -483,7 +473,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -527,7 +516,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -571,7 +559,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -615,7 +602,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -659,7 +645,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -703,7 +688,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -747,7 +731,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -791,7 +774,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f40-c6e1-c84b-e053-2810000a69dd',
@@ -835,7 +817,6 @@ export const testData: Loop[] = [
     tagStatus: 'RESERVED',
     loopContentStatus: 'OS',
     loopContentProgress: 0.5,
-    woActualCompletionDate: "2023-05-19"
   },
   {
     checklistId: 'ed187f42-14ec-c84b-e053-2810000a69dd',
@@ -863,7 +844,6 @@ export const testData: Loop[] = [
     rfO_Planned_Forecast_Date: '2023-12-08T00:00:00',
     rfC_Planned_Forecast_Date: '2023-03-10T00:00:00',
     isOverdue: 0,
-
     woPlannedCompletionDate: null,
     remainingManHours: 221.8,
     system: '80',
