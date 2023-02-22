@@ -1,5 +1,6 @@
 import * as path from 'path';
 import EnvironmentPlugin from 'vite-plugin-environment';
+import injectProcessEnv from 'rollup-plugin-inject-process-env';
 
 export default {
   plugins: [EnvironmentPlugin({ NODE_ENV: 'development' })],
@@ -11,6 +12,15 @@ export default {
         '../../libs/workordersidesheet/src'
       ),
       '@cc-components/workordershared': path.resolve('../../libs/workordershared/src'),
+    },
+  },
+  build: {
+    rollupOptions: {
+      plugins: [
+        injectProcessEnv({
+          NODE_ENV: 'development',
+        }),
+      ],
     },
   },
 };
