@@ -2,7 +2,12 @@ import * as path from 'path';
 import EnvironmentPlugin from 'vite-plugin-environment';
 import injectProcessEnv from 'rollup-plugin-inject-process-env';
 export default {
-  plugins: [EnvironmentPlugin({ NODE_ENV: 'development' })],
+  plugins: [
+    {
+      apply: 'serve',
+      ...EnvironmentPlugin({ NODE_ENV: 'development' }),
+    },
+  ],
   resolve: {
     alias: {
       '@cc-components/activitiesapp': path.resolve('../../libs/activitiesapp/src'),
