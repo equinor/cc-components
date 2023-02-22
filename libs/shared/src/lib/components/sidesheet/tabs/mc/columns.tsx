@@ -1,6 +1,5 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { hasProperty } from 'libs/shared/src/lib/utils-typescript';
-import { colorMap, proCoSysUrls, statusColorMap } from '../../../../mapping';
+import { colorMap, proCoSysUrls } from '../../../../mapping';
 import { PackageStatus } from '../../../../types';
 import { getRFCCStatus, getRFOCStatus } from '../../../../utils-statuses';
 import { DescriptionCell, LinkCell, StatusCell } from '../../../table';
