@@ -1,0 +1,119 @@
+import {
+  hasProperty,
+  LinkCell,
+  proCoSysUrls,
+  StatusCell,
+  statusColorMap,
+  TabTable,
+} from '@cc-components/shared';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { ChecklistForLoop } from '../types';
+import { useGetChecklists, useGetWorkorders } from '../utils-sidesheet';
+
+const columns: ColDef<ChecklistForLoop>[] = [
+  {
+    field: 'Group',
+    valueGetter: (pkg) => pkg.data?.formularGroup,
+    width: 80,
+  },
+  {
+    field: 'Cmpkg',
+    valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+    valueFormatter: (pkg) => {
+      if (pkg.data?.commissioningPackageUrlId) {
+        return proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId);
+      }
+      return '';
+    },
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      if (props.valueFormatted) {
+        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      }
+      return null;
+    },
+    width: 100,
+  },
+  {
+    field: 'MCpkg',
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
+    valueFormatter: (pkg) => {
+      if (pkg.data?.mechanicalCompletionPackageUrlId) {
+        return proCoSysUrls.getCommPkgUrl(pkg.data.mechanicalCompletionPackageUrlId);
+      }
+      return '';
+    },
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      if (props.valueFormatted) {
+        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      }
+      return null;
+    },
+    width: 100,
+  },
+  {
+    field: 'MC status',
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      if (props.value) {
+        return (
+          <StatusCell
+            content={props.value}
+            cellAttributeFn={(status) => ({
+              style: {
+                backgroundColor: hasProperty(statusColorMap, status)
+                  ? statusColorMap[status]
+                  : 'transparent',
+              },
+            })}
+          />
+        );
+      }
+      return null;
+    },
+    width: 100,
+  },
+  {
+    field: 'Form type',
+    valueGetter: (pkg) => pkg.data?.formularType,
+    valueFormatter: (pkg) => {
+      if (pkg.data?.checklistUrlId) {
+        return proCoSysUrls.getCommPkgUrl(pkg.data.checklistUrlId);
+      }
+      return '';
+    },
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      if (props.valueFormatted) {
+        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      }
+      return null;
+    },
+    width: 100,
+  },
+  {
+    field: 'Responsible',
+    valueGetter: (pkg) => pkg.data?.responsible,
+    width: 120,
+  },
+];
+
+type ChecklistsProps = {
+  checklistId: string;
+};
+
+export const Checklists = ({ checklistId }: ChecklistsProps) => {
+  const { data, error, isLoading } = useGetChecklists();
+
+  return (
+    <div>
+      <h3>Checklists</h3>
+      <TabTable
+        packages={data}
+        error={error instanceof Error ? error : null}
+        isFetching={isLoading}
+        resourceName="Checklists"
+        columns={columns}
+        height={120}
+      />
+    </div>
+  );
+};

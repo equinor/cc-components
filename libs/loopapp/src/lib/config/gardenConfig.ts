@@ -1,5 +1,6 @@
+import { Loop } from '@cc-components/loopshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields, Loop } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { GardenItem } from '../ui-garden';
 import { fieldSettings, getHighlightedColumn, getItemWidth } from '../utils-garden';
 

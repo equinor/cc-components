@@ -21,6 +21,7 @@ export const WorkorderTab = <T extends WorkorderBase>({
         isFetching={isFetching}
         packages={workorders}
         resourceName="Workorders"
+        height={300}
       />
     </StyledContentWrapper>
   );
