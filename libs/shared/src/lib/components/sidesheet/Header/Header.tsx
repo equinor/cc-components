@@ -40,7 +40,7 @@ const StyledWrapTitles = styled.div`
   justify-content: space-between;
   padding-left: 8px;
 `;
-const StyledColor = styled.div`
+const StyledColor = styled.div<{ color?: string }>`
   display: flex;
   width: 3%;
   background-color: ${(prop) => prop.color || '#8c1159'};
