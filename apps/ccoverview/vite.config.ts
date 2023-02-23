@@ -1,11 +1,27 @@
 import * as path from 'path';
-import injectProcessEnv from 'vite-plugin-environment';
+import EnvironmentPlugin from 'vite-plugin-environment';
+import injectProcessEnv from 'rollup-plugin-inject-process-env';
+
 export default {
-  plugins: [injectProcessEnv({ NODE_ENV: 'development' })],
+  plugins: [
+    {
+      ...EnvironmentPlugin({ NODE_ENV: 'development' }),
+      apply: 'serve',
+    },
+  ],
   resolve: {
     alias: {
       '@cc-components/ccoverviewapp': path.resolve('../../libs/ccoverviewapp/src'),
       '@cc-components/shared': path.resolve('../../libs/shared/src'),
+    },
+  },
+  build: {
+    rollupOptions: {
+      plugins: [
+        injectProcessEnv({
+          NODE_ENV: 'production',
+        }),
+      ],
     },
   },
 };

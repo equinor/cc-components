@@ -1,7 +1,14 @@
 import * as path from 'path';
+import EnvironmentPlugin from 'vite-plugin-environment';
 import injectProcessEnv from 'rollup-plugin-inject-process-env';
+
 export default {
-  plugins: [injectProcessEnv({ NODE_ENV: 'development' })],
+  plugins: [
+    {
+      ...EnvironmentPlugin({ NODE_ENV: 'development' }),
+      apply: 'serve',
+    },
+  ],
   resolve: {
     alias: {
       '@cc-components/handoverapp': path.resolve('../../libs/handoverapp/src'),
@@ -10,6 +17,15 @@ export default {
         '../../libs/handoversidesheet/src'
       ),
       '@cc-components/handovershared': path.resolve('../../libs/handovershared/src'),
+    },
+  },
+  build: {
+    rollupOptions: {
+      plugins: [
+        injectProcessEnv({
+          NODE_ENV: 'production',
+        }),
+      ],
     },
   },
 };
