@@ -1,11 +1,10 @@
 import * as path from 'path';
-import EnvironmentPlugin from 'vite-plugin-environment';
 import injectProcessEnv from 'rollup-plugin-inject-process-env';
 import { Plugin } from 'vite-plugin-cdn-import';
 
 export default {
   plugins: [
-    EnvironmentPlugin({ NODE_ENV: 'development' }),
+    injectProcessEnv({ NODE_ENV: 'development' }),
     Plugin({
       modules: [
         {
@@ -25,15 +24,6 @@ export default {
     alias: {
       '@cc-components/loopapp': path.resolve('../../libs/loopapp/src'),
       '@cc-components/shared': path.resolve('../../libs/shared/src'),
-    },
-  },
-  build: {
-    rollupOptions: {
-      plugins: [
-        injectProcessEnv({
-          NODE_ENV: 'development',
-        }),
-      ],
     },
   },
 };
