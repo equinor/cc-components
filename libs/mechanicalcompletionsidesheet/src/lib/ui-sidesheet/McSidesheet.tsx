@@ -60,6 +60,7 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={props?.item?.description || ''}
+        applicationTitle={'Mechanical completion'}
         onClose={props.closeSidesheet}
       />
       <StyledBanner>
