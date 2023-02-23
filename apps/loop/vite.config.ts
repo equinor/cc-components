@@ -1,11 +1,11 @@
 import * as path from 'path';
-import EnvironmentPlugin from 'vite-plugin-environment';
-
 import { Plugin } from 'vite-plugin-cdn-import';
+import viteConfigBase from '../../vite.config.base';
 
 export default {
+  ...viteConfigBase,
   plugins: [
-    EnvironmentPlugin({ NODE_ENV: 'development' }),
+    ...viteConfigBase.plugins,
     Plugin({
       modules: [
         {

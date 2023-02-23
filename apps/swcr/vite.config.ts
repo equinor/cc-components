@@ -1,8 +1,9 @@
 import * as path from 'path';
-import EnvironmentPlugin from 'vite-plugin-environment';
+
+import viteConfigBase from '../../vite.config.base';
 
 export default {
-  plugins: [EnvironmentPlugin({ NODE_ENV: 'development' })],
+  ...viteConfigBase,
   resolve: {
     alias: {
       '@cc-components/swcrapp': path.resolve('../../libs/swcrapp/src'),

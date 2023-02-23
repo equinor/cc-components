@@ -1,7 +1,7 @@
-import * as path from 'path';
-import EnvironmentPlugin from 'vite-plugin-environment';
+import viteConfigBase from '../../vite.config.base';
+import path from 'path';
 export default {
-  plugins: [EnvironmentPlugin({ NODE_ENV: 'development' })],
+  ...viteConfigBase,
   resolve: {
     alias: {
       '@cc-components/activitiesapp': path.resolve('../../libs/activitiesapp/src'),
