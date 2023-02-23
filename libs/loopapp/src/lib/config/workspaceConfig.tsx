@@ -3,6 +3,7 @@ import { Workspace } from '@equinor/workspace-dynamic';
 import { contextConfig } from './contextConfig';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './loopSidesheet';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 import { testData } from './testData';
@@ -31,6 +32,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       statusBarOptions={statusBarConfig}
       powerBiOptions={pbi}
       contextOptions={contextConfig}
+      sidesheetOptions={sidesheetConfig}
     />
   );
 };

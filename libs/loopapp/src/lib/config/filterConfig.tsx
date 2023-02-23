@@ -1,6 +1,6 @@
+import { Loop } from '@cc-components/loopshared';
 import { hasProperty, statusColorMap, StatusSquare } from '@cc-components/shared';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
-import { Loop } from '../types';
 
 export const filterConfig: FilterConfig<Loop> = {
   filterGroups: [
