@@ -7,7 +7,7 @@ import {
   StyledTabContent,
   StyledTable,
 } from '@cc-components/shared';
-import { ContentTable } from './ContentTable';
+import { ContentTable } from './LoopContentTable';
 
 type ContentDetailsProps = {
   loop: Loop | undefined;
