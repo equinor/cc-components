@@ -108,7 +108,7 @@ export const Checklists = ({ checklistId }: ChecklistsProps) => {
       <h3>Checklists</h3>
       <TabTable
         packages={data}
-        error={error instanceof Error ? error : null}
+        error={error}
         isFetching={isLoading}
         resourceName="Checklists"
         columns={columns}

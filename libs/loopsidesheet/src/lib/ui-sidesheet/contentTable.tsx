@@ -110,7 +110,7 @@ export const ContentTable = ({ loop }: ContentTableProps) => {
     <div>
       <TabTable
         packages={data}
-        error={error instanceof Error ? error : null}
+        error={error}
         isFetching={isLoading}
         resourceName="ContentTable"
         columns={columns}
