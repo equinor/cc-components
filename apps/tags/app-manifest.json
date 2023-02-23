@@ -1,0 +1,10 @@
+{
+  "name": "tags",
+  "shortName": "tags",
+  "key": "tags",
+  "version": {
+    "major": "0",
+    "minor": "0",
+    "patch": "1"
+  }
+}

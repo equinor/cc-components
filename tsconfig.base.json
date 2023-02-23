@@ -49,6 +49,7 @@
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
       "@cc-components/swcrshared": ["libs/swcrshared/src/index.ts"],
       "@cc-components/swcrsidesheet": ["libs/swcrsidesheet/src/index.ts"],
+      "@cc-components/tagsapp": ["libs/tagsapp/src/index.ts"],
       "@cc-components/workorderapp": ["libs/workorderapp/src/index.ts"],
       "@cc-components/workordershared": ["libs/workordershared/src/index.ts"],
       "@cc-components/workordersidesheet": ["libs/workordersidesheet/src/index.ts"],
