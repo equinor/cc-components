@@ -1,4 +1,4 @@
-import { Loop } from '../types';
+import { Loop } from "@cc-components/loopshared";
 
 export const contextConfig = (data: Loop[]) => {
   const maxHrs = data.reduce(
