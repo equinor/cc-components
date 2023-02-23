@@ -122,7 +122,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab loop={props.item} />
-            <Checklists checklistId={props.item?.checklistId ?? ''} />
+            {props.item?.loopId && <Checklists loopId={props.item.loopId} />}
             <ContentDetails loop={props.item} />
           </Tabs.Panel>
           <Tabs.Panel>

@@ -51,8 +51,8 @@ const columns: ColDef<ChecklistForLoop>[] = [
     width: 130,
   },
   {
-    field: 'MC status',
-    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
+    field: 'Checklist status',
+    valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
       if (props.value) {
         return (
@@ -97,10 +97,10 @@ const columns: ColDef<ChecklistForLoop>[] = [
 ];
 
 type ChecklistsProps = {
-  checklistId: string;
+  loopId: string;
 };
 
-export const Checklists = ({ checklistId }: ChecklistsProps) => {
+export const Checklists = ({ loopId }: ChecklistsProps) => {
   const { data, error, isLoading } = useGetChecklists();
 
   return (

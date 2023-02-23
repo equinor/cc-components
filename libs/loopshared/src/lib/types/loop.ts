@@ -16,7 +16,7 @@ export type Loop = {
   isVoided: boolean | null;
   location: string | null;
   loopContentStatus: Status | null;
-  loopId: string | null;
+  loopId: string;
   loopUrlId: string | null;
   loopNo: string;
   needDate: string | null;
