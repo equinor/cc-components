@@ -1,3 +1,6 @@
+## Version 0.0.6
+Fix build output
+
 ## Version 0.0.5
 Inject process.env to bundle
 
