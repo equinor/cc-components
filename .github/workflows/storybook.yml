@@ -32,12 +32,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci --legacy-peer-deps
-      - name: "Out of memory"
+      - name: 'Out of memory'
         env:
-          NODE_OPTIONS: "--max_old_space_size=8048"
-          BASE_PATH: "/cc-components/"
+          NODE_OPTIONS: '--max_old_space_size=8048'
+          BASE_PATH: '/cc-components/'
         run: npm run storybook-build
       - uses: actions/configure-pages@v3
       - uses: actions/upload-pages-artifact@v1
