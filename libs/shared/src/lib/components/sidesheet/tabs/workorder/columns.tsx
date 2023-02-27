@@ -80,8 +80,8 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       valueGetter: (pkg) => pkg.data?.estimatedManHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (estimateHoursMax === -1) {
-          //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
-          const maxCount = 0;
+          let maxCount = 0;
+          if (props.data?.estimatedManHours) maxCount = props.data.estimatedManHours;
           estimateHoursMax = maxCount;
         }
         return (
@@ -98,8 +98,8 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       valueGetter: (pkg) => pkg.data?.remainingManHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (remainingHoursMax === -1) {
-          //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
-          const maxCount = 0;
+          let maxCount = 0;
+          if (props.data?.remainingManHours) maxCount = props.data.remainingManHours;
           remainingHoursMax = maxCount;
         }
         return (
