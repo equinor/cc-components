@@ -1,4 +1,4 @@
-import { getYearAndWeekFromString } from '@cc-components/shared';
+import { getYearAndWeekFromString } ' ';
 import { DATE_BLANKSTRING } from '../utils-keys/constants';
 
 export const getDateKey = (dateString: string | null): string => {

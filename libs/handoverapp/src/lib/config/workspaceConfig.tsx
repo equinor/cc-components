@@ -7,7 +7,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
-import { usePBIOptions } from '@cc-components/shared';
+import { usePBIOptions } from '@cc-components/shared/hooks';
 
 type WorkspaceWrapperProps = {
   contextId: string;

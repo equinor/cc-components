@@ -1,4 +1,4 @@
-import { PackageStatus } from '@cc-components/shared';
+import { PackageStatus } from '@cc-components/shared/types';
 
 export const statusPriorityMap: Record<PackageStatus, number> = {
   'RFOC Accepted': 0,

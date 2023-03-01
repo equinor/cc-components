@@ -1,4 +1,4 @@
-import { itemContentColors } from '@cc-components/shared';
+import { itemContentColors } from '@cc-components/shared/mapping';
 import { CommissioningStatus } from '../types';
 
 export const getItemContentsColor = (status: CommissioningStatus): string => {

@@ -1,5 +1,7 @@
 import { Loop } from '@cc-components/loopshared';
-import { hasProperty, statusColorMap, StatusSquare } from '@cc-components/shared';
+import { StatusSquare } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 
 export const filterConfig: FilterConfig<Loop> = {

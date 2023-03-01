@@ -49,6 +49,7 @@
     "@vitejs/plugin-react": "^3.0.0",
     "@vitest/coverage-c8": "~0.25.8",
     "@vitest/ui": "^0.25.8",
+    "babel-plugin-styled-components": "1.10.7",
     "cross-env": "^7.0.3",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",

@@ -6,7 +6,7 @@ import {
   StyledStatusCircles,
 } from './punchGardenItem.styles';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
-import { FlagIcon } from '@cc-components/shared';
+import { FlagIcon } ' ';
 import { getDotsColor } from '../utils-garden/getDotsColor';
 import {
   punchStatusColors,

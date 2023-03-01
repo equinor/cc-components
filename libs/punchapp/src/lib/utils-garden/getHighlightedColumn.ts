@@ -1,7 +1,7 @@
 import { Punch } from '@cc-components/punchshared';
 import {
     getYearAndWeekFromDate,
-} from '@cc-components/shared';
+} ' ';
 import { ExtendedGardenFields } from '../types';
 
 export const getHighlightedColumn = (

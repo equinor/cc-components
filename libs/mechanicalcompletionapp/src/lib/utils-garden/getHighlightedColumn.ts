@@ -2,7 +2,8 @@ import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import {
   getYearAndWeekAndDayFromString,
   getYearAndWeekFromDate,
-} from '@cc-components/shared';
+} from '@cc-components/shared/utils-dates';
+
 import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 
 export const getHighlightedColumn = (

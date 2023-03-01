@@ -1,10 +1,11 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import {
-  formatDateString,
   stringCell,
   StyledTabContent,
   StyledTable,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
+import { formatDateString } from '@cc-components/shared/utils-dates';
+
 import { useMemo } from 'react';
 type HandoverDetails = {
   nextToSign: string;

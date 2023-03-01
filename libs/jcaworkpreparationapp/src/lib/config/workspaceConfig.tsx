@@ -1,5 +1,5 @@
+import { usePBIOptions } from '@cc-components/shared/hooks';
 import Workspace from '@equinor/workspace-fusion';
-import { usePBIOptions } from '@cc-components/shared';
 
 type WorkspaceWrapperProps = {
   contextId: string;

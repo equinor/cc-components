@@ -1,4 +1,4 @@
-import { getYearAndWeekFromString } from '@cc-components/shared';
+import { getYearAndWeekFromString } from '@cc-components/shared/utils-dates';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GetKeyFunction } from '../types';
 

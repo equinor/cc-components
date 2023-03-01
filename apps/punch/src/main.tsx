@@ -1,9 +1,10 @@
 import { configure, WorkspaceWrapper } from '@cc-components/punchapp';
-import { NoContext, useContextId } from '@cc-components/shared';
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useContextId } from '@cc-components/shared/hooks';
+import { NoContext } from '@cc-components/shared/common';
 
 const queryClient = new QueryClient();
 

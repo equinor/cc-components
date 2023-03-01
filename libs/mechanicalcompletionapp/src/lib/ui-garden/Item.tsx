@@ -1,5 +1,6 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { PopoverWrapper, statusColorMap } from '@cc-components/shared';
+import { PopoverWrapper } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useState } from 'react';
 import { CustomGroupByKeys, ExtendedGardenFields } from '../types';

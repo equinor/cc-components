@@ -1,4 +1,5 @@
-import { FollowUpStatuses, hasProperty, ProcosysStatuses } from '@cc-components/shared';
+import { FollowUpStatuses, ProcosysStatuses } from '@cc-components/shared/types';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { WorkOrder } from '@cc-components/workordershared';
 import { ExtendedGardenFields } from '../types';
 import {

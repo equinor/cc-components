@@ -1,12 +1,11 @@
 import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
 import {
   DescriptionCell,
   LinkCell,
-  proCoSysUrls,
   StatusCell,
-  statusColorMap,
   YearAndWeekCell,
-} from '@cc-components/shared';
+} from '@cc-components/shared/table-helpers';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 
 export const tableConfig: GridConfig<McPackage> = {

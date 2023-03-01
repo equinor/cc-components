@@ -1,4 +1,4 @@
-import { usePBIOptions } from '@cc-components/shared';
+import { usePBIOptions } from '@cc-components/shared/hooks';
 import Workspace from '@equinor/workspace-fusion';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';

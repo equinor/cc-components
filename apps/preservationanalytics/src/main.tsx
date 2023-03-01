@@ -3,7 +3,8 @@ import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-re
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { NoContext, useContextId } from '@cc-components/shared';
+import { useContextId } from '@cc-components/shared/hooks';
+import { NoContext } from '@cc-components/shared/common';
 
 const queryClient = new QueryClient();
 

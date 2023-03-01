@@ -1,4 +1,5 @@
-import { FollowUpStatuses, getYearAndWeekFromDate } from '@cc-components/shared';
+import { FollowUpStatuses } from '@cc-components/shared/types';
+import { getYearAndWeekFromDate } from '@cc-components/shared/utils-dates';
 import { WorkOrder } from '@cc-components/workordershared';
 import {
   GardenGroups,

@@ -1,5 +1,6 @@
-import { getYearAndWeekFromDate } from '@cc-components/shared';
-import { ExtendedGardenFields, Loop } from '../types';
+import { Loop } from '@cc-components/loopshared';
+import { getYearAndWeekFromDate } from '@cc-components/shared/utils-dates';
+import { ExtendedGardenFields } from '../types';
 import { getGroupBy } from './getGroupBy';
 
 export const getHighlightedColumn = (groupByKey: keyof Loop | ExtendedGardenFields) => {

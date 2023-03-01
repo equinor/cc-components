@@ -1,4 +1,4 @@
-import { Loop } from '../types';
+import { Loop } from '@cc-components/loopshared';
 
 type Kpi = {
   uniqueLoopTags: number;

@@ -1,6 +1,7 @@
-import { sortByNumber } from '@cc-components/shared';
+import { Loop } from '@cc-components/loopshared';
+import { sortByNumber } from '@cc-components/shared/utils-sorting';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields, Loop } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { getDateKey } from './getGroupByKey';
 
 export const fieldSettings: FieldSettings<Loop, ExtendedGardenFields, CustomGroupByKeys> =

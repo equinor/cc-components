@@ -13,7 +13,8 @@ import {
 } from './sidesheet.styles';
 import { Chip } from '@equinor/eds-core-react';
 import { Fragment } from 'react';
-import { StyledItemLink, StyledTabContent } from '@cc-components/shared';
+import { StyledTabContent } from '@cc-components/shared/sidesheet';
+import { StyledItemLink } from '@cc-components/shared/common';
 type DetailsTabProps = {
   item: SwcrPackage | undefined;
   signatures: SwcrSignature[] | undefined;

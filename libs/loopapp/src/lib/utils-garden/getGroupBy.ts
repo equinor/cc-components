@@ -1,4 +1,5 @@
-import { ExtendedGardenFields, Loop } from '../types';
+import { Loop } from '@cc-components/loopshared';
+import { ExtendedGardenFields } from '../types';
 
 export const getGroupBy = (
   groupBy: keyof Loop | ExtendedGardenFields

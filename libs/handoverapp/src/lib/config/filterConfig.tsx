@@ -1,13 +1,10 @@
 import { HandoverPackage } from '@cc-components/handovershared';
+import { StatusSquare } from '@cc-components/shared/common';
+import { colorMap, statusColorMap } from '@cc-components/shared/mapping';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { daysDiff, getFilterDateValues } from '../utils-filter';
 import { getStatus } from '../utils-statuses/getStatus';
-import {
-  colorMap,
-  hasProperty,
-  statusColorMap,
-  StatusSquare,
-} from '@cc-components/shared';
 
 export const filterConfig: FilterConfig<HandoverPackage> = {
   filterGroups: [
