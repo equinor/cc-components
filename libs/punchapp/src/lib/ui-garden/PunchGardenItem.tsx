@@ -6,13 +6,13 @@ import {
   StyledStatusCircles,
 } from './punchGardenItem.styles';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
-import { FlagIcon } ' ';
 import { getDotsColor } from '../utils-garden/getDotsColor';
 import {
   punchStatusColors,
   punchStatusTextColors,
 } from '../utils-statuses/punchStatusColors';
 import { Punch } from '@cc-components/punchshared';
+import { FlagIcon } from '@cc-components/shared/common';
 
 function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
   const {
