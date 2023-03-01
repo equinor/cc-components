@@ -8,6 +8,9 @@ import { contextConfig } from './contextConfig';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 import { usePBIOptions } from '@cc-components/shared';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
+import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -42,6 +45,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         queryKey: ['handover', contextId],
       }}
       contextOptions={contextConfig}
+      modules={[gridModule, gardenModule, powerBiModule]}
     />
   );
 };
