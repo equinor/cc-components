@@ -1,2 +1,0 @@
-# Handover app library
-This library is made for the Handover application. All components, utils and configs that the app uses should be placed in this library. No other application should consume from this library. If there is any code in this library that is useful in other applications/libraries, it should probably be placed in the `shared` library.

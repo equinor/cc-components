@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/handoverapp';
+import { configure, WorkspaceWrapper } from '@cc-components/handover/handoverapp';
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
