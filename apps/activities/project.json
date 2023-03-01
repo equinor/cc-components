@@ -26,7 +26,7 @@
         ]
       }
     },
-    "build-spa": {
+    "build:spa": {
       "executor": "nx:runcommands",
       "options": {
         "cwd": "apps/activities",
