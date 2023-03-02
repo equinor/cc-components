@@ -1,4 +1,4 @@
-import { proCoSysWorkOrderColorMap } from '@cc-components/shared';
+import { proCoSysWorkOrderColorMap } from '@cc-components/shared/mapping';
 import { followUpColorMap } from './followup';
 
 export const getColorBasedOnGroupBy = (

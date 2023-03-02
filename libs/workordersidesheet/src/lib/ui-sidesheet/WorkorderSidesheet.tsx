@@ -1,17 +1,4 @@
 import { createWidget } from '@equinor/workspace-sidesheet';
-import {
-  BannerItem,
-  MaterialTab,
-  MccrTab,
-  proCoSysUrls,
-  SidesheetHeader,
-  StyledBanner,
-  StyledItemLink,
-  StyledPanels,
-  StyledSideSheetContainer,
-  StyledTabs,
-  TabTitle,
-} from '@cc-components/shared';
 import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
@@ -19,6 +6,19 @@ import { tokens } from '@equinor/eds-tokens';
 import { WorkOrder } from '@cc-components/workordershared';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
+import {
+  BannerItem,
+  MaterialTab,
+  MccrTab,
+  SidesheetHeader,
+  StyledBanner,
+  StyledPanels,
+  StyledSideSheetContainer,
+  StyledTabs,
+  TabTitle,
+} from '@cc-components/shared/sidesheet';
+import { StyledItemLink } from '@cc-components/shared/common';
+import { proCoSysUrls } from '@cc-components/shared/mapping';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;

@@ -83,7 +83,7 @@ export default async function (tree: Tree, options: FusionAppGeneratorGeneratorS
         },
       },
       'build:spa': {
-        executor: 'nx:runcommands',
+        executor: 'nx:run-commands',
         options: {
           cwd: `apps/${normalizedOptions.projectName}`,
           commands: [

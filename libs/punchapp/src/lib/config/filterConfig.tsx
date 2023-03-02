@@ -1,5 +1,6 @@
 import { Punch } from '@cc-components/punchshared';
-import { hasProperty, StatusSquare } from '@cc-components/shared';
+import { StatusSquare } from '@cc-components/shared/common';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { getHasWO, getMaterialRequired } from '../utils-filter/';
 import { punchStatusColors } from '../utils-statuses/punchStatusColors';

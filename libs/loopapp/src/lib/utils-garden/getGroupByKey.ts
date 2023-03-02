@@ -1,5 +1,6 @@
-import { getColumnDateKey } from '@cc-components/shared';
-import { CustomGroupByKeys, ExtendedGardenFields, Loop } from '../types';
+import { Loop } from '@cc-components/loopshared';
+import { getColumnDateKey } from '@cc-components/shared/utils-dates';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 
 export const getDateKey = (

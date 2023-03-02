@@ -2,7 +2,8 @@ import { HandoverPackage } from '@cc-components/handovershared';
 import {
   getYearAndWeekAndDayFromString,
   getYearAndWeekFromDate,
-} from '@cc-components/shared';
+} from '@cc-components/shared/utils-dates';
+
 import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 

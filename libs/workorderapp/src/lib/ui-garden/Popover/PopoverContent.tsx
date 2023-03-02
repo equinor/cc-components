@@ -6,7 +6,7 @@ import {
   StyledPopoverProjectDescription,
   StyledPopoverProjectTitle,
   StyledPopoverStatus,
-} from '@cc-components/shared';
+} from '@cc-components/shared/common';
 import { WorkOrder } from '@cc-components/workordershared';
 import { memo } from 'react';
 import { StyledStatuses, StyledHoldBy } from './popover.styles';

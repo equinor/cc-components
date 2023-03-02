@@ -1,4 +1,4 @@
-import { hasProperty } from '@cc-components/shared';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import {
   GardenGroups,

@@ -1,5 +1,5 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { numberFormat } from '@cc-components/shared';
+import { numberFormat } from '@cc-components/shared/utils-formatting';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { getStatusBarData } from '../utils-status-bar';
 export const statusBarConfig: StatusBarConfig<McPackage> = (data) => {

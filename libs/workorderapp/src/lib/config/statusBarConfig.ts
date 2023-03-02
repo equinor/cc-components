@@ -1,4 +1,4 @@
-import { numberFormat } from '@cc-components/shared';
+import { numberFormat } from '@cc-components/shared/utils-formatting';
 import { WorkOrder } from '@cc-components/workordershared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { getStatusBarData } from '../utils-status-bar';

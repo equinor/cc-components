@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { PackageStatus } from '@cc-components/shared';
+import { PackageStatus } from '@cc-components/shared/types';
 
 export const getStatus = (item: HandoverPackage): PackageStatus => {
   if (

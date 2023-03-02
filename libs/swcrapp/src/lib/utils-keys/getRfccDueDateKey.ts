@@ -1,4 +1,4 @@
-import { getYearAndWeekFromDate } from '@cc-components/shared';
+import { getYearAndWeekFromDate } from '@cc-components/shared/utils-dates';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { DateTime } from 'luxon';
 import { DATE_BLANKSTRING } from '../constants/dateBlankString';

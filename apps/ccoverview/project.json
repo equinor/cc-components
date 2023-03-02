@@ -27,7 +27,7 @@
       }
     },
     "build:spa": {
-      "executor": "nx:runcommands",
+      "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/ccoverview",
         "commands": [

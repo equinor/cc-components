@@ -1,4 +1,5 @@
-import { ExtendedGardenFields, Loop } from '../types';
+import { Loop } from '@cc-components/loopshared';
+import { ExtendedGardenFields } from '../types';
 
 //TODO: Might need to split dates into two properties from API
 export const getFieldKeyBasedOnPlannedForecast = (

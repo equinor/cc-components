@@ -1,5 +1,6 @@
+import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
 import Workspace from '@equinor/workspace-fusion';
-import { usePBIOptions } from '@cc-components/shared';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -18,6 +19,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         getIdentifier: () => '',
       }}
       powerBiOptions={pbi}
+      modules={[powerBiModule]}
     />
   );
 };
