@@ -1,11 +1,6 @@
-import {
-  hasProperty,
-  LinkCell,
-  proCoSysUrls,
-  StatusCell,
-  statusColorMap,
-  TabTable,
-} from '@cc-components/shared';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { LinkCell, StatusCell, TabTable } from '@cc-components/shared/table-helpers';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { ChecklistForLoop } from '../types';
 import { useGetChecklists, useGetWorkorders } from '../utils-sidesheet';

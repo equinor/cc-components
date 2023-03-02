@@ -1,11 +1,11 @@
 import {
-  formatDateString,
   StyledTabContent,
   StyledTable,
   stringCell,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
 import { Punch } from '@cc-components/punchshared';
 import { StyledTextBlock } from './sidesheet.styles';
+import { formatDateString } from '@cc-components/shared/utils-dates';
 
 type DetailsTabProps = {
   punch: Punch | undefined;

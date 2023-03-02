@@ -1,4 +1,4 @@
-import { ProcosysStatuses } from '@cc-components/shared';
+import { ProcosysStatuses } from '@cc-components/shared/types';
 import { WorkOrder } from '../types';
 import { getWoStatusFromDates } from './getWoStatusfromDates';
 

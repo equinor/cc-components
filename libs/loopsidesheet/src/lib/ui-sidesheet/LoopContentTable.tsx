@@ -1,13 +1,13 @@
 import { Loop } from '@cc-components/loopshared';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
 import {
   DescriptionCell,
-  hasProperty,
   LinkCell,
-  proCoSysUrls,
   StatusCell,
-  statusColorMap,
   TabTable,
-} from '@cc-components/shared';
+} from '@cc-components/shared/table-helpers';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
+
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { LoopContent } from '../types';
 import { useGetLoopContent } from '../utils-sidesheet/useGetLoopContent';

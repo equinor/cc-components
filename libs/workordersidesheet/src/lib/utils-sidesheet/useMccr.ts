@@ -1,4 +1,4 @@
-import { useContextId, usePackageResource } from '@cc-components/shared';
+import { useContextId, usePackageResource } from '@cc-components/shared/hooks';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useCallback } from 'react';
 import { WorkOrderMccr } from '../types';

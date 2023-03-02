@@ -1,4 +1,4 @@
-import { DescriptionCell } from '@cc-components/shared';
+import { DescriptionCell } from '@cc-components/shared/table-helpers';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';

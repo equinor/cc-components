@@ -1,5 +1,5 @@
 import { Loop } from '@cc-components/loopshared';
-import { numberFormat } from '@cc-components/shared';
+import { numberFormat } from '@cc-components/shared/utils-formatting';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { getStatusBarData } from '../utils-status-bar';
 

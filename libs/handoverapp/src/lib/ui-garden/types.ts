@@ -1,4 +1,4 @@
-import { PackageStatus } from '@cc-components/shared';
+import { PackageStatus } from '@cc-components/shared/types';
 
 export type ItemSize = 'small' | 'medium' | 'large';
 

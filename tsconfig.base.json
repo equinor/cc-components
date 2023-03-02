@@ -45,7 +45,23 @@
       "@cc-components/punchshared": ["libs/punchshared/src/index.ts"],
       "@cc-components/punchsidesheet": ["libs/punchsidesheet/src/index.ts"],
       "@cc-components/queryapp": ["libs/queryapp/src/index.ts"],
-      "@cc-components/shared": ["libs/shared/src/index.ts"],
+      "@cc-components/shared/common": ["libs/shared/common/src/index.ts"],
+      "@cc-components/shared/hooks": ["libs/shared/hooks/src/index.ts"],
+      "@cc-components/shared/mapping": ["libs/shared/mapping/src/index.ts"],
+      "@cc-components/shared/pbi-helpers": ["libs/shared/pbi-helpers/src/index.ts"],
+      "@cc-components/shared/sidesheet": ["libs/shared/sidesheet/src/index.ts"],
+      "@cc-components/shared/table-helpers": ["libs/shared/table-helpers/src/index.ts"],
+      "@cc-components/shared/types": ["libs/shared/types/src/index.ts"],
+      "@cc-components/shared/utils-dates": ["libs/shared/utils-dates/src/index.ts"],
+      "@cc-components/shared/utils-formatting": [
+        "libs/shared/utils-formatting/src/index.ts"
+      ],
+      "@cc-components/shared/utils-sorting": ["libs/shared/utils-sorting/src/index.ts"],
+      "@cc-components/shared/utils-statuses": ["libs/shared/utils-statuses/src/index.ts"],
+      "@cc-components/shared/utils-typescript": [
+        "libs/shared/utils-typescript/src/index.ts"
+      ],
+      "@cc-components/storybook-host": ["libs/storybook-host/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
       "@cc-components/swcrshared": ["libs/swcrshared/src/index.ts"],
       "@cc-components/swcrsidesheet": ["libs/swcrsidesheet/src/index.ts"],

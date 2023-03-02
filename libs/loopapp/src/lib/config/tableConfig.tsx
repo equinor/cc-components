@@ -1,13 +1,13 @@
 import { Loop, Status } from '@cc-components/loopshared';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
 import {
   DateCell,
   DescriptionCell,
   EstimateCell,
   LinkCell,
-  proCoSysUrls,
   StatusCell,
-  statusColorMap,
-} from '@cc-components/shared';
+} from '@cc-components/shared/table-helpers';
+
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 

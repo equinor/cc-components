@@ -1,12 +1,13 @@
 import { Loop } from '@cc-components/loopshared';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
-  formatDateString,
-  StatusCircle,
-  statusColorMap,
   stringCell,
   StyledTabContent,
   StyledTable,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
+import { formatDateString } from '@cc-components/shared/utils-dates';
+
 import { ContentTable } from './LoopContentTable';
 
 type ContentDetailsProps = {

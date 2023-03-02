@@ -6,7 +6,7 @@ import { tableConfig } from './tableConfig';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { responseParser } from './responseConfig';
 import { sidesheetConfig } from './sidesheetConfig';
-import { usePBIOptions } from '@cc-components/shared';
+import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';

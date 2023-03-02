@@ -1,5 +1,9 @@
 import { Loop } from '@cc-components/loopshared';
-import { stringCell, StyledTabContent, StyledTable } from '@cc-components/shared';
+import {
+  stringCell,
+  StyledTabContent,
+  StyledTable,
+} from '@cc-components/shared/sidesheet';
 
 type DetailsTabProps = {
   loop: Loop | undefined;

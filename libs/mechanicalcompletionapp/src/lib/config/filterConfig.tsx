@@ -1,5 +1,7 @@
 import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
-import { hasProperty, statusColorMap, StatusSquare } from '@cc-components/shared';
+import { StatusSquare } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { CommissioningStatus } from '../types';
 import {

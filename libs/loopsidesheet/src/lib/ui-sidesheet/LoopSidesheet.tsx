@@ -1,19 +1,6 @@
 import { Loop } from '@cc-components/loopshared';
 import { createWidget } from '@equinor/workspace-sidesheet';
-import {
-  BannerItem,
-  proCoSysUrls,
-  SidesheetHeader,
-  StatusCircle,
-  statusColorMap,
-  StyledBanner,
-  StyledItemLink,
-  StyledPanels,
-  StyledSideSheetContainer,
-  StyledTabs,
-  TabTitle,
-  WorkorderTab,
-} from '@cc-components/shared';
+
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { Tabs } from '@equinor/eds-core-react';
@@ -22,6 +9,18 @@ import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { Checklists } from './Checklists';
 import { ContentDetails } from './ContentDetails';
+import {
+  BannerItem,
+  SidesheetHeader,
+  StyledBanner,
+  StyledPanels,
+  StyledSideSheetContainer,
+  StyledTabs,
+  TabTitle,
+  WorkorderTab,
+} from '@cc-components/shared/sidesheet';
+import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -58,6 +57,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
       <SidesheetHeader
         title={`${props?.item?.loopNo}, ${props?.item?.description}` || ''}
         onClose={props.close}
+        applicationTitle="Loop"
       />
       <StyledBanner>
         <BannerItem

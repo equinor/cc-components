@@ -1,5 +1,5 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { hasProperty } from '@cc-components/shared';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
 import {
   GardenGroups,
   getGardenItems,

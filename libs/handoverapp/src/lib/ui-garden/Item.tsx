@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared';
+import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared/common';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';

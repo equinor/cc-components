@@ -1,15 +1,14 @@
+import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { proCoSysUrls } from '@cc-components/shared/mapping';
 import {
   BannerItem,
-  proCoSysUrls,
   SidesheetHeader,
-  StatusCircle,
   StyledBanner,
-  StyledItemLink,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabsWrapper,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
 import { getSwcrStatusColor, SwcrPackage } from '@cc-components/swcrshared';
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@equinor/workspace-sidesheet';

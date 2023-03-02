@@ -1,4 +1,4 @@
-import { FollowUpStatuses, ProcosysStatuses } from '@cc-components/shared';
+import { FollowUpStatuses, ProcosysStatuses } from '@cc-components/shared/types';
 
 export const getTextColorByStatus = (status: string) => {
   return status === FollowUpStatuses.WOFinished || status === ProcosysStatuses.ComplByMC

@@ -1,7 +1,9 @@
-import { PopoverWrapper, statusColorMap } from '@cc-components/shared';
+import { Loop } from '@cc-components/loopshared';
+import { PopoverWrapper } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { CustomGroupByKeys, ExtendedGardenFields, Loop } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import {
   StyledItemText,
   StyledItemWrapper,
