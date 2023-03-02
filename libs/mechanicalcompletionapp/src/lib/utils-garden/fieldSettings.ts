@@ -1,5 +1,5 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { sortByNumber } from '@cc-components/shared';
+import { sortByNumber } from '@cc-components/shared/utils-sorting';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { getDateKey } from './getGroupByKey';

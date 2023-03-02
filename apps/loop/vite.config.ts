@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { Plugin } from 'vite-plugin-cdn-import';
 import viteConfigBase from '../../vite.config.base';
 
@@ -21,12 +20,4 @@ export default {
       ],
     }),
   ],
-  resolve: {
-    alias: {
-      '@cc-components/loopapp': path.resolve('../../libs/loopapp/src'),
-      '@cc-components/loopshared': path.resolve('../../libs/loopshared/src'),
-      '@cc-components/loopsidesheet': path.resolve('../../libs/loopsidesheet/src'),
-      '@cc-components/shared': path.resolve('../../libs/shared/src'),
-    },
-  },
 };

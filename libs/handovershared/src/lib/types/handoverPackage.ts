@@ -1,4 +1,4 @@
-import { BaseStatus } from '@cc-components/shared';
+import { BaseStatus } from '@cc-components/shared/types';
 
 //TODO: Update to new properties when FAM is ready
 export type HandoverPackage = {

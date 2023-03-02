@@ -1,16 +1,14 @@
 import { HandoverPackage } from '@cc-components/handovershared';
+import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
 import {
   BannerItem,
   McTab,
   NcrTab,
-  proCoSysUrls,
   PunchTab,
   QueryTab,
   SidesheetHeader,
-  StatusCircle,
-  statusColorMap,
   StyledBanner,
-  StyledItemLink,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
@@ -19,7 +17,8 @@ import {
   UnsignedActionTab,
   UnsignedTaskTab,
   WorkorderTab,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
+
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';

@@ -1,9 +1,10 @@
+import { Loop } from '@cc-components/loopshared';
 import {
   GardenGroups,
   getGardenItems,
   isSubGroup,
 } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields, Loop } from '../types';
+import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 
 export const getItemWidth = (

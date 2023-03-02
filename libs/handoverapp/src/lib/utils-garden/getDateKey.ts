@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { getColumnDateKey } from '@cc-components/shared';
+import { getColumnDateKey } from '@cc-components/shared/utils-dates';
 import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { getFieldKeyBasedOnPlannedForecast } from './getFieldKeyBasedOnPlannedForecast';
 

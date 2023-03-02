@@ -1,4 +1,5 @@
-import { MaterialStatus, statusColorMap } from '@cc-components/shared';
+import { statusColorMap } from '@cc-components/shared/mapping';
+import { MaterialStatus } from '@cc-components/shared/types';
 import { MappedMaterialStatus } from '../../types';
 
 export const materialColorMap: Record<MappedMaterialStatus, string> = {

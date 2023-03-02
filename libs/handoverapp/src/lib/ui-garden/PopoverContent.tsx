@@ -8,7 +8,8 @@ import {
   StyledPopoverProjectTitle,
   StyledPopoverStatus,
   WarningIcon,
-} from '@cc-components/shared';
+} from '@cc-components/shared/common';
+
 import { getTextColor } from '../utils-garden';
 import {
   StyledFlagUnsignedAction,

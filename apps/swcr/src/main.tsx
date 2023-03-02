@@ -2,8 +2,9 @@ import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-re
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { configure, WorkspaceWrapper } from '@cc-components/swcrapp';
-import { NoContext, useContextId } from '@cc-components/shared';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useContextId } from '@cc-components/shared/hooks';
+import { NoContext } from '@cc-components/shared/common';
 
 const queryClient = new QueryClient();
 const SwcrApp = () => {

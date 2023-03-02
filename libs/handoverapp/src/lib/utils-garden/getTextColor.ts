@@ -1,4 +1,4 @@
-import { PackageStatus } from '@cc-components/shared';
+import { PackageStatus } from '@cc-components/shared/types';
 import { tokens } from '@equinor/eds-tokens';
 
 export const getTextColor = (status: PackageStatus) => {

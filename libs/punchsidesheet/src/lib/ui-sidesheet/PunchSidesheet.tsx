@@ -1,14 +1,14 @@
 import { Punch } from '@cc-components/punchshared';
+import { StyledItemLink } from '@cc-components/shared/common';
+import { proCoSysUrls } from '@cc-components/shared/mapping';
 import {
   BannerItem,
-  proCoSysUrls,
   SidesheetHeader,
   StyledBanner,
-  StyledItemLink,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';

@@ -7,7 +7,7 @@ import {
   SizeIcons,
   StyledPopoverProjectTitle,
   StyledPopoverProjectDescription,
-} from '@cc-components/shared';
+} from '@cc-components/shared/common';
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
 type ItemOptions = {
   status: CommissioningStatus;

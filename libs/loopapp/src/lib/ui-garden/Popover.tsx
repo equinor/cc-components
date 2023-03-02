@@ -1,11 +1,11 @@
+import { Loop } from '@cc-components/loopshared';
 import {
-  statusColorMap,
   StyledPopoverContainer,
   StyledPopoverProjectDescription,
   StyledPopoverProjectTitle,
   StyledPopoverStatus,
-} from '@cc-components/shared';
-import { Loop } from '../types';
+} from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { StyledStatuses, StyledNoStatus } from './garden.styles';
 
 type PopoverContentProps = {

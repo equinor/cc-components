@@ -1,4 +1,4 @@
-import { useContextId } from '@cc-components/shared';
+import { useContextId } from '@cc-components/shared/hooks';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useCallback, useEffect, useState } from 'react';
 import { SwcrSignature } from '../types';

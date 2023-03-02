@@ -1,4 +1,5 @@
-import { getYearAndWeekFromString, sortByNumber } from '@cc-components/shared';
+import { getYearAndWeekFromString } from '@cc-components/shared/utils-dates';
+import { sortByNumber } from '@cc-components/shared/utils-sorting';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { ExtendedGardenFields } from '../types';

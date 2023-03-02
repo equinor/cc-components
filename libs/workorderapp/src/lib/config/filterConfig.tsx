@@ -1,9 +1,3 @@
-import {
-  FollowUpStatuses,
-  hasProperty,
-  statusColorMap,
-  StatusSquare,
-} from '@cc-components/shared';
 import { Progress } from '../types';
 import { progressPriMap, progressValueFormatter } from '../utils-filter';
 import {
@@ -13,6 +7,10 @@ import {
 } from '../utils-statuses';
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { WorkOrder } from '@cc-components/workordershared';
+import { FollowUpStatuses } from '@cc-components/shared/types';
+import { StatusSquare } from '@cc-components/shared/common';
+import { hasProperty } from '@cc-components/shared/utils-typescript';
+import { statusColorMap } from '@cc-components/shared/mapping';
 
 export const filterConfig: FilterConfig<WorkOrder> = {
   filterGroups: [

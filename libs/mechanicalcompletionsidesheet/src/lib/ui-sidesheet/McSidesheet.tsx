@@ -4,24 +4,22 @@ import { createWidget } from '@equinor/workspace-sidesheet';
 import {
   BannerItem,
   NcrTab,
-  proCoSysUrls,
   PunchTab,
   SidesheetHeader,
-  StatusCircle,
-  statusColorMap,
   StyledBanner,
-  StyledItemLink,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
   WorkorderTab,
-} from '@cc-components/shared';
+} from '@cc-components/shared/sidesheet';
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { DetailsTab } from './DetailsTab';
 import { useMcResource } from '../utils-sidesheet';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
+import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;

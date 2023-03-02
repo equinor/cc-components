@@ -1,4 +1,4 @@
-import { sortByNumber } from '@cc-components/shared';
+import { sortByNumber } from '@cc-components/shared/utils-sorting';
 import { WorkOrder } from '@cc-components/workordershared';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { ExtendedGardenFields } from '../types';
