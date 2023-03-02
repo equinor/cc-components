@@ -17,8 +17,13 @@ export const tableConfig = (): GridConfig<Loop> => {
       {
         field: 'Loop tag',
         valueGetter: (pkg) => pkg.data?.loopNo,
-        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-          return <DescriptionCell description={props.value} />;
+        valueFormatter: (pkg) =>
+          pkg.data?.loopUrlId ? proCoSysUrls.getTagUrl(pkg.data.loopUrlId) : '',
+        cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+          if (!props.valueFormatted) {
+            return null;
+          }
+          return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
         },
         width: 200,
       },

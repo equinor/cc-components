@@ -1,4 +1,5 @@
-import { DescriptionCell } from '@cc-components/shared/table-helpers';
+import { proCoSysUrls } from '@cc-components/shared/mapping';
+import { DescriptionCell, LinkCell } from '@cc-components/shared/table-helpers';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
@@ -9,6 +10,14 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       field: 'SWCRs',
       headerName: 'SWCRs',
       valueGetter: (pkg) => pkg.data?.swcrNo,
+      valueFormatter: (pkg) =>
+        pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
+      cellRenderer: (props: ICellRendererProps<SwcrPackage, string | null>) => {
+        if (!props.valueFormatted) {
+          return null;
+        }
+        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      },
       width: 150,
     },
     {

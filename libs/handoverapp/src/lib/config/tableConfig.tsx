@@ -3,6 +3,8 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DateCell,
   DescriptionCell,
+  LinkCell,
+  proCoSysUrls,
   StatusCell,
 } from '@cc-components/shared/table-helpers';
 import { BaseStatus } from '@cc-components/shared/types';
@@ -15,6 +17,13 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     {
       field: 'Commpkgno',
       valueGetter: (pkg) => pkg.data?.commpkgNo,
+      valueFormatter: (pkg) => pkg.data?.url ?? '',
+      cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
+        if (!props.valueFormatted) {
+          return null;
+        }
+        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      },
       width: 150,
     },
     {
