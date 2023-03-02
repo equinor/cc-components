@@ -2,7 +2,7 @@ import { Popover, Typography } from '@equinor/eds-core-react';
 import { ReportMetaDataProps } from '@equinor/workspace-fusion/power-bi';
 import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
-import { usePBIHelpers } from '../../hooks';
+import { usePBIHelpers } from './usePBIHelpers';
 
 export const ReportMeta = ({ anchor, reportUri, close }: ReportMetaDataProps) => {
   const { getReportInfo } = usePBIHelpers();

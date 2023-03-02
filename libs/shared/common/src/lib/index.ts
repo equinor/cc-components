@@ -6,6 +6,4 @@ export * from './icons';
 
 export * from './popover';
 
-export * from './powerbi';
-
 export { StyledItemLink } from './common.styles';

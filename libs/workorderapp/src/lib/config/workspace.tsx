@@ -1,4 +1,4 @@
-import { usePBIOptions } from '@cc-components/shared/hooks';
+import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import Workspace from '@equinor/workspace-fusion';
 import { contextConfig } from './contextConfig';

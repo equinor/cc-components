@@ -1,7 +1,7 @@
+import { useContextTitle } from '@cc-components/shared/hooks';
 import { PowerBiConfig } from '@equinor/workspace-fusion/power-bi';
-import { useContextTitle } from './useContextTitle';
+import { ReportMeta } from './ReportMeta';
 import { usePBIHelpers } from './usePBIHelpers';
-import { ReportMeta } from '@cc-components/shared/common';
 
 export type Filters = {
   table: string;

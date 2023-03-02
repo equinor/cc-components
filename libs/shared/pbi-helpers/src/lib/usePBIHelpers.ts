@@ -1,5 +1,5 @@
-import { EmbedInfo, EmbedToken, ReportInfo } from '@cc-components/shared/types';
-import { useServiceDiscovery } from './useServiceDiscovery';
+import { useServiceDiscovery } from '@cc-components/shared/hooks';
+import { EmbedInfo, EmbedToken, ReportInfo } from './types';
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
   return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;
