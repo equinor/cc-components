@@ -61,6 +61,7 @@
       "@cc-components/shared/utils-typescript": [
         "libs/shared/utils-typescript/src/index.ts"
       ],
+      "@cc-components/storybook-host": ["libs/storybook-host/src/index.ts"],
       "@cc-components/swcrapp": ["libs/swcrapp/src/index.ts"],
       "@cc-components/swcrshared": ["libs/swcrshared/src/index.ts"],
       "@cc-components/swcrsidesheet": ["libs/swcrsidesheet/src/index.ts"],

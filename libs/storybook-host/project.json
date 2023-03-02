@@ -1,23 +1,16 @@
 {
-  "name": "shared-sidesheet",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/sidesheet/src",
+  "name": "storybook-host",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/storybook-host/src",
   "projectType": "library",
   "tags": [],
   "targets": {
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/shared/sidesheet/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
     "build": {
       "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/shared/sidesheet"
+        "outputPath": "dist/libs/storybook-host"
       },
       "configurations": {
         "development": {
@@ -33,7 +26,7 @@
       "options": {
         "uiFramework": "@storybook/react",
         "port": 4400,
-        "configDir": "libs/shared/sidesheet/.storybook"
+        "configDir": "libs/storybook-host/.storybook"
       },
       "configurations": {
         "ci": {
@@ -46,8 +39,8 @@
       "outputs": ["{options.outputDir}"],
       "options": {
         "uiFramework": "@storybook/react",
-        "outputDir": "dist/storybook/shared-sidesheet",
-        "configDir": "libs/shared/sidesheet/.storybook"
+        "outputDir": "dist/storybook/storybook-host",
+        "configDir": "libs/storybook-host/.storybook"
       },
       "configurations": {
         "ci": {
