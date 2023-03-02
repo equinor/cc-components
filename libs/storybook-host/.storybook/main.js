@@ -8,7 +8,7 @@ module.exports = {
     return mergeConfig(config, {
       plugins: [
         viteTsConfigPaths({
-          root: '../',
+          projects: ['../../tsconfig.base.json'],
         }),
       ],
     });
