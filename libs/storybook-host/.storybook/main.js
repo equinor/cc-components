@@ -3,10 +3,14 @@ const viteTsConfigPaths = require('vite-tsconfig-paths').default;
 module.exports = {
   core: { builder: '@storybook/builder-vite' },
   stories: ['../../**/stories/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-essentials'],
+  addons: ['@storybook/addon-essentials', 'storybook-addon-swc'],
   async viteFinal(config, { configType }) {
     return mergeConfig(config, {
-      plugins: [viteTsConfigPaths()],
+      plugins: [
+        viteTsConfigPaths({
+          root: '../',
+        }),
+      ],
     });
   },
 };

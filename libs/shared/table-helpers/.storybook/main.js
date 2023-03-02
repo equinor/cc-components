@@ -11,7 +11,11 @@ module.exports = {
   async viteFinal(config, { configType }) {
     config.base = process.env.BASE_PATH || config.base;
     return mergeConfig(config, {
-      plugins: [viteTsConfigPaths()],
+      plugins: [
+        viteTsConfigPaths({
+          root: '../',
+        }),
+      ],
     });
   },
 };
