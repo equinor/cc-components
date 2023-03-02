@@ -4,11 +4,6 @@
     "emitDecoratorMetadata": true,
     "outDir": ""
   },
-  "references": [
-    {
-      "path": "../../../../tsconfig.base.json"
-    }
-  ],
   "files": [
     "../../../../node_modules/@nrwl/react/typings/styled-jsx.d.ts",
     "../../../../node_modules/@nrwl/react/typings/cssmodule.d.ts",
