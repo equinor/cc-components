@@ -1,5 +1,5 @@
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
-import { Workspace } from '@equinor/workspace-dynamic';
+import { Workspace } from '@equinor/workspace-fusion';
 import { contextConfig } from './contextConfig';
 import { filterConfig } from './filterConfig';
 import { gardenConfig } from './gardenConfig';
@@ -7,6 +7,9 @@ import { sidesheetConfig } from './loopSidesheet';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
 import { testData } from './testData';
+import { gardenModule } from '@equinor/workspace-fusion/garden-module';
+import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -33,6 +36,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       powerBiOptions={pbi}
       contextOptions={contextConfig}
       sidesheetOptions={sidesheetConfig}
+      modules={[gridModule, gardenModule, powerBiModule]}
     />
   );
 };
