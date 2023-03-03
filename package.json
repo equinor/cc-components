@@ -12,10 +12,12 @@
     "install:init": "npm install --legacy-peer-deps && npm install nx -g && npm install @equinor/fusion-framework-cli -g",
     "bump-all-apps": "nx run-many --target=version --exclude *app *shared *sidesheet",
     "bump-pbi-apps": "nx run-many --target=version --projects=$(node tools/projectsWithPBITag.js)",
-    "bump-ws-apps": "nx run-many --target=version --projects=$(node tools/projectsWithWSTag.js)"
+    "bump-ws-apps": "nx run-many --target=version --projects=$(node tools/projectsWithWSTag.js)",
+    "postinstall": "node ./tools/scripts/patch-nx-cli.js"
   },
   "private": true,
   "devDependencies": {
+    "@astrojs/react": "^2.0.2",
     "@equinor/fusion-framework-cli": "^5.0.1",
     "@equinor/fusion-observable": "^7.0.1",
     "@nrwl/cli": "15.7.1",
@@ -30,6 +32,7 @@
     "@nrwl/vite": "15.7.1",
     "@nrwl/web": "15.7.1",
     "@nrwl/workspace": "15.7.1",
+    "@nxtensions/astro": "^3.3.0",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/builder-vite": "^0.2.6",
     "@storybook/core-server": "^6.5.15",
@@ -49,6 +52,7 @@
     "@vitejs/plugin-react": "^3.0.0",
     "@vitest/coverage-c8": "~0.25.8",
     "@vitest/ui": "^0.25.8",
+    "astro": "^2.0.0",
     "cross-env": "^7.0.3",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
