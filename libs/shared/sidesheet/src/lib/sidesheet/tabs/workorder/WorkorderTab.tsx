@@ -13,15 +13,9 @@ export const WorkorderTab = <T extends WorkorderBase>({
   error,
   isFetching,
 }: WorkorderTabProps<T>): JSX.Element => {
-  const estimateHoursMax = Math.max.apply(
-    workorders?.map((workorder) => workorder.estimatedManHours)
-  );
-  const remainingHoursMax = Math.max.apply(
-    workorders?.map((workorder) => workorder.remainingManHours)
-  );
+  const estimateHoursMax = getMaxEstimateHours(workorders);
+  const remainingHoursMax = getMaxRemaningHours(workorders);
 
-  console.log('est', estimateHoursMax);
-  console.log('rem', remainingHoursMax);
   return (
     <StyledContentWrapper>
       <TabTable
@@ -33,4 +27,20 @@ export const WorkorderTab = <T extends WorkorderBase>({
       />
     </StyledContentWrapper>
   );
+};
+
+const getMaxEstimateHours = (workorders: T[] | undefined) => {
+  if (workorders === null || workorders === undefined) return 0;
+  const estimateHoursMax = Math.max(
+    ...workorders.map((workorder) => workorder.estimatedManHours)
+  );
+  return estimateHoursMax;
+};
+
+const getMaxRemaningHours = (workorders: T[] | undefined) => {
+  if (workorders === null || workorders === undefined) return 0;
+  const remainingHoursMax = Math.max(
+    ...workorders.map((workorder) => workorder.remainingManHours)
+  );
+  return remainingHoursMax;
 };
