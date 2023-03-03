@@ -1,4 +1,5 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import styled from 'styled-components';
 import { proCoSysUrls } from '@cc-components/shared/mapping';
 import {
   DateCell,
@@ -71,7 +72,11 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'Progress',
       valueGetter: (pkg) => pkg.data?.projectProgress,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        return <ProgressCell percentWidth={props.value === null ? 0 : props.value} />;
+        return (
+          <Center>
+            <ProgressCell percentWidth={props.value === null ? 0 : props.value} />
+          </Center>
+        );
       },
       width: 140,
     },
@@ -85,10 +90,12 @@ export const columns = (): ColDef<WorkorderBase>[] => {
           estimateHoursMax = maxCount;
         }
         return (
-          <EstimateCell
-            current={Number(props.value === null ? 0 : props.value)}
-            max={estimateHoursMax}
-          />
+          <Center>
+            <EstimateCell
+              current={Number(props.value === null ? 0 : props.value)}
+              max={estimateHoursMax}
+            />
+          </Center>
         );
       },
       width: 140,
@@ -103,13 +110,22 @@ export const columns = (): ColDef<WorkorderBase>[] => {
           remainingHoursMax = maxCount;
         }
         return (
-          <EstimateCell
-            current={Number(props.value === null ? 0 : props.value)}
-            max={remainingHoursMax}
-          />
+          <Center>
+            <EstimateCell
+              current={Number(props.value === null ? 0 : props.value)}
+              max={remainingHoursMax}
+            />
+          </Center>
         );
       },
       width: 140,
     },
   ];
 };
+
+const Center = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+`;
