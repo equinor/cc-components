@@ -2,7 +2,8 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "$id": "FusionAppGenerator",
-  "title": "",
+  "title": "Create a Fusion Application",
+  "description": "Create a Fusion Application",
   "type": "object",
   "properties": {
     "name": {
@@ -16,13 +17,16 @@
     },
     "tags": {
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    }, 
+      "alias": "t",
+      "description": "Use pbi if app is only PBI. Use ws if it's more than PBI",
+      "x-prompt": "Is it workspace or PBI only?",
+      "enum": ["pbi", "ws"],
+      "default": "ws"
+    },
     "directory": {
       "type": "string",
       "description": "A directory where the project is placed"
     }
   },
-  "required": ["name"]
+  "required": ["name", "tags"]
 }
