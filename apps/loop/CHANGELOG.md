@@ -1,3 +1,7 @@
+## Version 0.0.10
+New sidesheet header design.
+Injecting process env to bundle correctly. 
+
 ## Version 0.0.9
 Inject process.env to bundle
 
