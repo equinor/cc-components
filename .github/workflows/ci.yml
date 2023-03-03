@@ -19,10 +19,13 @@ jobs:
           fetch-depth: 0
         # https://github.com/nrwl/nx-set-shas#background
       - uses: nrwl/nx-set-shas@v3
-      - run: npm ci --legacy-peer-deps
 
+      - run: npm ci --legacy-peer-deps
       - run: npx nx workspace-lint
       # - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3
       - run: npx nx affected --target=test --parallel=3 --ci --code-coverage
-      - run: npx nx affected --target=build --configuration=development --parallel=3
+      - name: Build projects
+        env:
+          NODE_OPTIONS: '--max_old_space_size=8048'
+        run: npx nx affected --target=build --configuration=development --parallel=3
