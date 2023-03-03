@@ -13,10 +13,19 @@ export const WorkorderTab = <T extends WorkorderBase>({
   error,
   isFetching,
 }: WorkorderTabProps<T>): JSX.Element => {
+  const estimateHoursMax = Math.max.apply(
+    workorders?.map((workorder) => workorder.estimatedManHours)
+  );
+  const remainingHoursMax = Math.max.apply(
+    workorders?.map((workorder) => workorder.remainingManHours)
+  );
+
+  console.log('est', estimateHoursMax);
+  console.log('rem', remainingHoursMax);
   return (
     <StyledContentWrapper>
       <TabTable
-        columns={columns()}
+        columns={columns(estimateHoursMax, remainingHoursMax)}
         error={error}
         isFetching={isFetching}
         packages={workorders}

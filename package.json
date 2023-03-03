@@ -6,6 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
+    "storybook-sidesheet": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run shared-sidesheet:storybook",
     "storybook-build": "npx nx run storybook-host:build-storybook",
     "test": "nx test",
     "lint-all": "nx run-many --all --target=lint",

@@ -10,10 +10,10 @@ import {
 } from '@cc-components/shared/table-helpers';
 import { WorkorderBase } from './types';
 
-export const columns = (): ColDef<WorkorderBase>[] => {
-  let estimateHoursMax = -1;
-  let remainingHoursMax = -1;
-
+export const columns = (
+  estimateHoursMax: number,
+  remainingHoursMax: number
+): ColDef<WorkorderBase>[] => {
   return [
     {
       field: 'WO',
@@ -84,11 +84,11 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'Estimated',
       valueGetter: (pkg) => pkg.data?.estimatedManHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        if (estimateHoursMax === -1) {
-          let maxCount = 0;
-          if (props.data?.estimatedManHours) maxCount = props.data.estimatedManHours;
-          estimateHoursMax = maxCount;
-        }
+        // if (estimateHoursMax === -1) {
+        //   let maxCount = 0;
+        //   if (props.data?.estimatedManHours) maxCount = props.data.estimatedManHours;
+        //   estimateHoursMax = maxCount;
+        // }
         return (
           <Center>
             <EstimateCell
@@ -104,11 +104,11 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'Remaining',
       valueGetter: (pkg) => pkg.data?.remainingManHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        if (remainingHoursMax === -1) {
-          let maxCount = 0;
-          if (props.data?.remainingManHours) maxCount = props.data.remainingManHours;
-          remainingHoursMax = maxCount;
-        }
+        // if (remainingHoursMax === -1) {
+        //   let maxCount = 0;
+        //   if (props.data?.remainingManHours) maxCount = props.data.remainingManHours;
+        //   remainingHoursMax = maxCount;
+        // }
         return (
           <Center>
             <EstimateCell
