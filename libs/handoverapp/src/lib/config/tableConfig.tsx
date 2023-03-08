@@ -4,7 +4,6 @@ import {
   DateCell,
   DescriptionCell,
   LinkCell,
-  proCoSysUrls,
   StatusCell,
 } from '@cc-components/shared/table-helpers';
 import { BaseStatus } from '@cc-components/shared/types';
