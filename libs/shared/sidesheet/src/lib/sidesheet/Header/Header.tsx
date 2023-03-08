@@ -5,26 +5,20 @@ import { close } from '@equinor/eds-icons';
 Icon.add({ close });
 
 const StyledContainer = styled.div`
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-`;
-const StyledWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr 35px;
   padding-left: 24px;
   padding-bottom: 24px;
-  justify-content: space-between;
+  padding-top: 24px;
+  position: relative;
+  gap: 1em;
   align-items: center;
 `;
 const StyledTitle = styled.div`
   font-size: 24px;
-  white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 const StyledApplicationTitle = styled.div`
   font-size: 12px;
@@ -36,24 +30,19 @@ const StyledApplicationTitle = styled.div`
 const StyledWrapTitles = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  justify-content: space-between;
-  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 const StyledColor = styled.div<{ color?: string }>`
+  width: 20px;
+  height: 100%;
   display: flex;
-  width: 3%;
   background-color: ${(prop) => prop.color || '#8c1159'};
 `;
-const StyledLeftSection = styled.div`
-  display: flex;
-  width: 90%;
-  padding-top: 16px;
-`;
-
-const StyledRightSection = styled.div`
-  display: flex;
-  width: fit-content;
+const StyledButton = styled.div`
+  position: absolute;
+  right: 0;
 `;
 type HeaderProps = {
   title: string;
@@ -63,7 +52,7 @@ type HeaderProps = {
 };
 /**
  * Standard component for displaying a sidesheet header.
- * This will add a title and close button to the header.
+ * This will add a title, color and close button to the header.
  */
 export const SidesheetHeader = ({
   title,
@@ -73,24 +62,20 @@ export const SidesheetHeader = ({
 }: HeaderProps) => {
   return (
     <StyledContainer>
-      <StyledWrap>
-        <StyledLeftSection>
-          <StyledColor defaultValue={color} />
-          <StyledWrapTitles>
-            <StyledTitle>{title}</StyledTitle>
-            <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
-          </StyledWrapTitles>
-        </StyledLeftSection>
-        <StyledRightSection>
-          <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
-            <Icon
-              name="close"
-              size={24}
-              color={tokens.colors.interactive.primary__resting.hex}
-            />
-          </Button>
-        </StyledRightSection>
-      </StyledWrap>
+      <StyledColor defaultValue={color} />
+      <StyledWrapTitles>
+        <StyledTitle> {title}</StyledTitle>
+        <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
+      </StyledWrapTitles>
+      <StyledButton>
+        <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
+          <Icon
+            name="close"
+            size={24}
+            color={tokens.colors.interactive.primary__resting.hex}
+          />
+        </Button>
+      </StyledButton>
     </StyledContainer>
   );
 };
