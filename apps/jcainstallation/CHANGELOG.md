@@ -1,3 +1,7 @@
+## Version 0.0.6
+Add new module concepts to lower bundle size.
+Inject process env correctly
+
 ## Version 0.0.5
 Inject process.env to dev build 
 

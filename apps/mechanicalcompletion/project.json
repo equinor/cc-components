@@ -49,5 +49,5 @@
       "executor": "@cc-components/plugins:version"
     }
   },
-  "tags": ["mechanicalcompletionapp", "shared"]
+  "tags": ["mechanicalcompletionapp", "shared", "ws"]
 }

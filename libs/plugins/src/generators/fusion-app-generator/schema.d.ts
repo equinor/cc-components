@@ -1,5 +1,5 @@
 export interface FusionAppGeneratorGeneratorSchema {
-    name: string;
-    tags?: string;
-    directory?: string;
+  name: string;
+  tags: 'ws' | 'pbi' | (string & unknown);
+  directory?: string;
 }
