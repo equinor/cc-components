@@ -18,9 +18,8 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         if (!props.valueFormatted) {
           return null;
-        } else {
-          return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
         }
+        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
       },
       width: 100,
     },
