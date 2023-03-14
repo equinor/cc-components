@@ -36,11 +36,13 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'System',
       valueGetter: (pkg) => pkg.data?.system,
+      enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Status',
       valueGetter: (pkg) => pkg.data?.status,
+      enableRowGroup: true,
       width: 200,
     },
     {
@@ -96,11 +98,13 @@ export const tableConfig: GridConfig<SwcrPackage> = {
           return <div>{keys}</div>;
         }
       },
+      enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Priority',
       valueGetter: (pkg) => pkg.data?.priority,
+      enableRowGroup: true,
       width: 150,
     },
     {
