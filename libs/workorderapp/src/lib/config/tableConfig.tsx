@@ -38,6 +38,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
     {
       field: 'Discipline',
       valueGetter: (pkg) => pkg.data?.disciplineCode,
+      enableRowGroup: true,
       width: 150,
     },
     {
@@ -48,6 +49,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
     {
       field: 'Job status',
       valueGetter: (pkg) => pkg.data?.jobStatus,
+      enableRowGroup: true,
       width: 150,
     },
     {
@@ -66,6 +68,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
           );
         } else return null;
       },
+      enableRowGroup: true,
       width: 150,
     },
     {
@@ -85,6 +88,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
           );
         } else return null;
       },
+      enableRowGroup: true,
       width: 100,
     },
     {
@@ -116,6 +120,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
       valueFormatter: (pkg) => pkg.context.maxEstHrs,
       valueGetter: (pkg) => pkg.data?.estimatedHours,
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
+        if (props.node.group) return null;
         return (
           <EstimateCell
             current={Number(props.value ?? '0')}
@@ -130,6 +135,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
       valueFormatter: (pkg) => pkg.context.maxExpHrs,
       valueGetter: (pkg) => pkg.data?.expendedHours,
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
+        if (props.node.group) return null;
         return (
           <EstimateCell
             current={Number(props.value ?? '0')}
@@ -145,6 +151,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
       valueFormatter: (pkg) => pkg.context.maxRemHrs,
       valueGetter: (pkg) => pkg.data?.remainingHours,
       cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
+        if (props.node.group) return null;
         return (
           <EstimateCell
             current={Number(props.value ?? '0')}
@@ -181,6 +188,7 @@ export const tableConfig: GridConfig<WorkOrder> = {
           />
         );
       },
+      enableRowGroup: true,
       width: 100,
     },
   ],
