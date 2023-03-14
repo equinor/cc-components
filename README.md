@@ -29,6 +29,8 @@ Install Node LTS and use npm for this project. After cloning the repo, install t
 This project uses NX as its build tool. Download the NX extension (called Nx Console) in VSCode to get some better support for when creating new libraries and apps.
 To build a library or app download the nx npm package globally (npm i nx -g), and use the command `nx run <name>:build`, to serve an app use the command `nx run <name>:serve`. `<name>` can be loop, handover, swcr etc..
 
+# Docs
+You can see the docs application by running `nx run docs:dev`
 
 # Contributing
 For project structure and development we use NX' recommendations. In general, we want to place every util, component, business logic in a library, and keep the application clean. Read more about it [here](https://nx.dev/more-concepts/monorepo-nx-enterprise#using-nx-at-enterpriseshere): Download the NX extension in VSCode to get some better support for when creating a new library or app.

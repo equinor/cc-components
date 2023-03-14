@@ -44,6 +44,10 @@ export const SIDEBAR: Sidebar = {
       text: 'Creating an app',
       link: 'development/creating-an-app',
     },
+    {
+      text: 'TLDR',
+      link: 'development/tldr',
+    },
   ],
   Applications: [
     {
