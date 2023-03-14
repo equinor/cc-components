@@ -34,6 +34,7 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
+      enableRowGroup: true,
       width: 100,
     },
     {
@@ -53,21 +54,25 @@ export const tableConfig: GridConfig<McPackage> = {
           />
         );
       },
+      enableRowGroup: true,
       width: 100,
     },
     {
       field: 'Responsible',
       valueGetter: (pkg) => pkg.data?.responsible,
+      enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Phase',
       valueGetter: (pkg) => pkg.data?.phase,
+      enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Area',
       valueGetter: (pkg) => pkg.data?.area,
+      enableRowGroup: true,
       width: 150,
     },
     {
@@ -87,6 +92,7 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'System',
       valueGetter: (pkg) => pkg.data?.system,
+      enableRowGroup: true,
       width: 100,
     },
     {
@@ -124,16 +130,19 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'Comm Pri1',
       valueGetter: (pkg) => pkg.data?.priority,
+      enableRowGroup: true,
       width: 100,
     },
     {
       field: 'Comm Pri2',
       valueGetter: (pkg) => pkg.data?.priority2,
+      enableRowGroup: true,
       width: 100,
     },
     {
       field: 'Comm Pri3',
       valueGetter: (pkg) => pkg.data?.priority3,
+      enableRowGroup: true,
       width: 100,
     },
   ],
