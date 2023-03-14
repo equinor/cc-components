@@ -38,6 +38,7 @@ export const tableConfig = (): GridConfig<Loop> => {
       {
         field: 'System',
         valueGetter: (pkg) => pkg.data?.system,
+        enableRowGroup: true,
         width: 120,
       },
       {
@@ -75,12 +76,14 @@ export const tableConfig = (): GridConfig<Loop> => {
       {
         field: 'Priority',
         valueGetter: (pkg) => pkg.data?.priority1,
+        enableRowGroup: true,
         width: 130,
       },
       {
         field: 'Planned/Forecast RFC',
         valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+          if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
         width: 250,
@@ -89,6 +92,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         field: 'Planned/Forecast RFO',
         valueGetter: (pkg) => pkg.data?.rfO_Planned_Forecast_Date,
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+          if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
         width: 250,
@@ -110,27 +114,32 @@ export const tableConfig = (): GridConfig<Loop> => {
             />
           );
         },
+        enableRowGroup: true,
         width: 180,
       },
       {
         field: 'Responsible',
         valueGetter: (pkg) => pkg.data?.responsible,
+        enableRowGroup: true,
         width: 150,
       },
       {
         field: 'Location',
         valueGetter: (pkg) => pkg.data?.location,
+        enableRowGroup: true,
         width: 150,
       },
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
+        enableRowGroup: true,
         width: 150,
       },
       {
         field: 'Signed',
         valueGetter: (pkg) => pkg.data?.signedDate,
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+          if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
         width: 150,
@@ -139,6 +148,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         field: 'Verified',
         valueGetter: (pkg) => pkg.data?.verifiedDate,
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+          if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
         width: 150,
@@ -160,12 +170,14 @@ export const tableConfig = (): GridConfig<Loop> => {
             />
           );
         },
+        enableRowGroup: true,
         width: 200,
       },
       {
         field: 'Planned MC complete',
         valueGetter: (pkg) => pkg.data?.woPlannedCompletionDate,
         cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+          if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
         width: 220,
@@ -183,6 +195,7 @@ export const tableConfig = (): GridConfig<Loop> => {
         valueGetter: (pkg) => pkg.data?.remainingManHours,
         valueFormatter: (pkg) => pkg.context.maxRemHrs,
         cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
+          if (props.node.group) return null;
           return (
             <EstimateCell
               current={Number(props.value ?? '0')}
