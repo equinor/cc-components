@@ -48,6 +48,7 @@ export const tableConfig: GridConfig<Punch> = {
           />
         );
       },
+      enableRowGroup: true,
       width: 100,
     },
     {
@@ -68,16 +69,19 @@ export const tableConfig: GridConfig<Punch> = {
           />
         );
       },
+      enableRowGroup: true,
       width: 150,
     },
     {
       field: 'PL Sorting',
       valueGetter: (pkg) => pkg.data?.sorting,
+      enableRowGroup: true,
       width: 100,
     },
     {
       field: 'PL Type',
       valueGetter: (pkg) => pkg.data?.type,
+      enableRowGroup: true,
       width: 100,
     },
     {
@@ -88,11 +92,13 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Raised by org',
       valueGetter: (pkg) => pkg.data?.raisedBy,
+      enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Clearing by org',
       valueGetter: (pkg) => pkg.data?.cleardBy,
+      enableRowGroup: true,
       width: 150,
     },
     {
@@ -132,6 +138,7 @@ export const tableConfig: GridConfig<Punch> = {
         }
         return null;
       },
+      enableRowGroup: true,
       width: 100,
     },
     {
@@ -180,6 +187,7 @@ export const tableConfig: GridConfig<Punch> = {
     {
       field: 'Material required',
       valueGetter: (pkg) => pkg.data?.materialRequired,
+      enableRowGroup: true,
       width: 120,
     },
     {

@@ -1,3 +1,6 @@
+## Version 0.0.12
+add grouping to grid
+
 ## Version 0.0.11
 add link to procosys in table column
 
