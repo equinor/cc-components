@@ -4,6 +4,8 @@ description: Documentation about creating a new application
 ---
 This section will walk you through generating an example Fusion application.
 
+> **__TLDR__**: The workflow in general will be: Bump version and changelog with `nx run <app-name>:version --reason=Reason for bumping`, bundle and zip the application with: `npm run build:spa`, deploy the app with `npm run deploy:spa`. 
+
 ## App generation
 Our app will be called "Foo", it is going to use functionality from `fusion-workspace` and `fusion-framework` so we will use the custom NX plugins to scaffold new projects to do it as efficient as possible.
 We start with creating the new application: `nx g @cc-components/plugins:fusion-app-generator --name=foo --tags=ws`. This will generate the following structure in our `apps`-folder:
@@ -133,3 +135,5 @@ app-manifest.json:
 ```
 
 To run the version executor for our "Foo"-app, use the following command: `nx run foo:version reason=Fix bug in table column XYZ`
+
+> *📝* If you want to add new lines to the changelog do: `nx run foo:version reason=$'First line\nThis will be on a new line'` 
