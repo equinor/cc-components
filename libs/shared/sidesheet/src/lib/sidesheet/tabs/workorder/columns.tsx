@@ -84,11 +84,6 @@ export const columns = (
       field: 'Estimated',
       valueGetter: (pkg) => pkg.data?.estimatedManHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        // if (estimateHoursMax === -1) {
-        //   let maxCount = 0;
-        //   if (props.data?.estimatedManHours) maxCount = props.data.estimatedManHours;
-        //   estimateHoursMax = maxCount;
-        // }
         return (
           <Center>
             <EstimateCell
@@ -104,11 +99,6 @@ export const columns = (
       field: 'Remaining',
       valueGetter: (pkg) => pkg.data?.remainingManHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        // if (remainingHoursMax === -1) {
-        //   let maxCount = 0;
-        //   if (props.data?.remainingManHours) maxCount = props.data.remainingManHours;
-        //   remainingHoursMax = maxCount;
-        // }
         return (
           <Center>
             <EstimateCell
