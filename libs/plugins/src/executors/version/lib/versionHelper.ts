@@ -33,10 +33,10 @@ const bumpedPkgJsonVersion = (
     return `${splitVersion[0]}.${splitVersion[1]}.${Number(splitVersion[2]) + 1}`;
   }
   if (type === 'minor') {
-    return `${splitVersion[0]}.${Number(splitVersion[1]) + 1}.${splitVersion[2]}`;
+    return `${splitVersion[0]}.${Number(splitVersion[1]) + 1}.0`;
   }
   if (type === 'major') {
-    return `${Number(splitVersion[0]) + 1}.${splitVersion[1]}.${splitVersion[2]}`;
+    return `${Number(splitVersion[0]) + 1}.0.0}`;
   }
 };
 
@@ -78,6 +78,7 @@ export const versionHelper = (root: string, projectName: string | undefined) => 
         version: {
           ...manifestVersion,
           minor: `${minorManifestVersionNumber + 1}`,
+          patch: '0',
         },
       };
       const updatedPkgJson: PackageJson = {
@@ -93,8 +94,9 @@ export const versionHelper = (root: string, projectName: string | undefined) => 
       const updated = {
         ...manifestFile,
         version: {
-          ...manifestVersion,
           major: `${majorManifestVersionNumber + 1}`,
+          minor: '0',
+          patch: '0',
         },
       };
       const updatedPkgJson: PackageJson = {
