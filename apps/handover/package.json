@@ -1,12 +1,12 @@
 {
   "name": "handover",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "zip" : "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
+    "zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
     "build": "tsc --noEmit",
     "build:spa": "cross-env NODE_OPTIONS=--max_old_space_size=8048 fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",

@@ -1,3 +1,6 @@
+## Version 0.0.10
+add grouping to grid
+
 ## Version 0.0.9
 New sidesheet header design.
 Injecting process env to bundle correctly. 
