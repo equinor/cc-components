@@ -64,7 +64,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
           title="WO"
           value={
             <StyledItemLink
-              href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderId ?? '')}
+              href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
               target="_blank"
             >
               {props?.item?.workOrderNumber}
