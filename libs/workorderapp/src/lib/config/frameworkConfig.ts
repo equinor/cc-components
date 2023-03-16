@@ -3,10 +3,10 @@ import { IAppConfigurator } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 
-const dataProxy = {
-  clientId: '5a842df8-3238-415d-b168-9f16a6a6031b',
-  uri: 'https://pro-s-dataproxy-CI.azurewebsites.net',
-  defaultScopes: ['5a842df8-3238-415d-b168-9f16a6a6031b/.default'],
+const ccApp = {
+  clientId: '2225e001-b04f-43ea-ac12-6fc3bbcf3a12',
+  uri: 'https://backend-fusion-data-gateway-test.radix.equinor.com',
+  defaultScopes: ['api://2225e001-b04f-43ea-ac12-6fc3bbcf3a12/user_impersonation'],
 };
 
 export const configure = async (config: IAppConfigurator) => {
@@ -23,9 +23,10 @@ export const configure = async (config: IAppConfigurator) => {
       });
     });
   });
-  config.configureHttpClient('data-proxy', {
-    baseUri: dataProxy.uri,
-    defaultScopes: dataProxy.defaultScopes,
+
+  config.configureHttpClient('cc-app', {
+    baseUri: ccApp.uri,
+    defaultScopes: ccApp.defaultScopes,
   });
   enableAgGrid(config);
 };
