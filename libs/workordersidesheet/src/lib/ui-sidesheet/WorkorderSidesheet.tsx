@@ -64,7 +64,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
           title="WO"
           value={
             <StyledItemLink
-              href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderId ?? '')}
+              href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
               target="_blank"
             >
               {props?.item?.workOrderNumber}
@@ -93,13 +93,17 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             <DetailsTab workOrder={props?.item} />
           </Tabs.Panel>
           <Tabs.Panel>
-            <MccrTab mccr={mccr} isFetching={isFetchingMccr} error={mccrError} />
+            <MccrTab
+              mccr={mccr}
+              isFetching={isFetchingMccr}
+              error={mccrError instanceof Error ? mccrError : null}
+            />
           </Tabs.Panel>
           <Tabs.Panel>
             <MaterialTab
               material={material}
               isFetching={isFetchingMaterial}
-              error={materialError}
+              error={materialError instanceof Error ? materialError : null}
             />
           </Tabs.Panel>
 

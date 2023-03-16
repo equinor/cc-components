@@ -15,9 +15,9 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const dataProxy = useHttpClient('data-proxy');
+  const ccApp = useHttpClient('cc-app');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    dataProxy.fetch(`/api/contexts/${contextId}/work-orders`, {
+    ccApp.fetch(`/api/work-orders?contextId=${contextId}`, {
       signal,
     });
   const pbi = usePBIOptions('workorder-analytics', {
@@ -38,6 +38,10 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       statusBarOptions={statusBarConfig}
       dataOptions={{
         getResponseAsync,
+        responseParser: async (res) => {
+          const resJson = await res.json();
+          return resJson.result;
+        },
         queryKey: ['workorder', contextId],
       }}
       sidesheetOptions={sidesheetConfig}

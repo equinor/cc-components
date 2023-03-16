@@ -1,3 +1,6 @@
+## Version 0.0.11
+(WIP) Connecting frontend to new WO app API
+
 ## Version 0.0.10
 add grouping to grid
 

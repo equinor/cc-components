@@ -1,31 +1,37 @@
-import { useContextId, usePackageResource } from '@cc-components/shared/hooks';
+import { useContextId } from '@cc-components/shared/hooks';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { WorkOrderMccr } from '../types';
 
-export const useMccr = (
-  packageId: string | null
-): { mccr: WorkOrderMccr[] | undefined; isFetching: boolean; error: Error | null } => {
-  const dataProxy = useHttpClient('data-proxy');
+const fetchMccr = async (
+  ccClient: ReturnType<typeof useHttpClient>,
+  contextId: string | undefined,
+  packageId: string | null,
+  signal?: AbortSignal
+) => {
+  const res = await ccClient.fetch(
+    `/api/work-orders/checklists?contextId=${contextId}&workOrderId=${packageId}`,
+    {
+      signal,
+    }
+  );
+  return (await res.json()) as WorkOrderMccr[];
+};
+
+export const useMccr = (packageId: string | null) => {
+  const ccApp = useHttpClient('cc-app');
   const contextId = useContextId();
 
-  const fetch = useCallback(async (id: string, signal?: AbortSignal) => {
-    const response = await dataProxy.fetch(
-      `/api/contexts/${contextId}/work-orders/${packageId}/mccr`,
-      {
-        signal,
-      }
-    );
-    return JSON.parse(await response.text()) as WorkOrderMccr[];
-  }, []);
-
-  const resource = usePackageResource('mccr', packageId || '', fetch);
+  const { data, isFetching, error } = useQuery({
+    queryFn: (a) => fetchMccr(ccApp, contextId, packageId, a.signal),
+    queryKey: ['mccr', packageId],
+  });
 
   return {
-    mccr: resource?.data?.filter(
+    mccr: data?.filter(
       (wo, i, list) => i === list.findIndex((w) => w.tagNumber === wo.tagNumber)
     ),
-    isFetching: resource.isFetching,
-    error: resource.error,
+    isFetching,
+    error,
   };
 };

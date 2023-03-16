@@ -19,7 +19,9 @@ export const tableConfig: GridConfig<WorkOrder> = {
       field: 'Workorder',
       valueGetter: (pkg) => pkg.data?.workOrderNumber,
       valueFormatter: (pkg) =>
-        pkg.data?.workOrderId ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId) : '',
+        pkg.data?.workOrderUrlId
+          ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+          : '',
       cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
         if (props.valueFormatted) {
           return <LinkCell url={props.valueFormatted} urlText={props.value} />;
