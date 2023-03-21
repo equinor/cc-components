@@ -15,7 +15,7 @@ import {
 } from '@cc-components/shared/sidesheet';
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { DetailsTab } from './DetailsTab';
-import { useMcResource } from '../utils-sidesheet';
+import { useMc, useNcr, usePunch } from '../utils-sidesheet';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
@@ -39,20 +39,19 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
 
   const {
     data: workOrders,
-    isFetching: isFetchingWorkOrders,
     error: workOrderError,
-  } = useMcResource(props.id, 'work-orders');
-
+    isFetching: isFetchingWorkOrders,
+  } = useMc(props.id);
   const {
     data: punchItems,
     isFetching: isFetchingPunchItems,
     error: punchError,
-  } = useMcResource(props.id, 'punch');
+  } = usePunch(props.id);
   const {
     data: ncr,
     isFetching: isFetchingNcr,
     error: ncrError,
-  } = useMcResource(props.id, 'ncr');
+  } = useNcr(props.item?.mechanicalCompletionPackageUrlId);
 
   return (
     <StyledSideSheetContainer>
@@ -65,8 +64,13 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
         <BannerItem
           title="MC pkg"
           value={
-            <StyledItemLink href={proCoSysUrls.getMcUrl(props.id)} target="_blank">
-              {props.item?.mcPkgNumber ?? 'N/A'}
+            <StyledItemLink
+              href={proCoSysUrls.getMcUrl(
+                props.item?.mechanicalCompletionPackageUrlId ?? ''
+              )}
+              target="_blank"
+            >
+              {props.item?.mechanicalCompletionPackageNo ?? 'N/A'}
             </StyledItemLink>
           }
         />
@@ -74,10 +78,12 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
           title="Comm pkg"
           value={
             <StyledItemLink
-              href={proCoSysUrls.getCommPkgUrl(props.item?.commPkgId ?? '')}
+              href={proCoSysUrls.getCommPkgUrl(
+                props.item?.commissioningPackageUrlId ?? ''
+              )}
               target="_blank"
             >
-              {props.item?.commPkgNumber}
+              {props.item?.commissioningPackageNo}
             </StyledItemLink>
           }
         />
@@ -85,10 +91,10 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
           title="MC status"
           value={
             <StatusCircle
-              content={props.item?.mcStatus ?? 'N/A'}
+              content={props.item?.mechanicalCompletionStatus ?? 'N/A'}
               statusColor={
-                props.item?.mcStatus
-                  ? statusColorMap[props.item?.mcStatus]
+                props.item?.mechanicalCompletionStatus
+                  ? statusColorMap[props.item?.mechanicalCompletionStatus]
                   : 'transparent'
               }
             />
@@ -98,10 +104,10 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
           title="Comm status"
           value={
             <StatusCircle
-              content={props.item?.commPkgStatus ?? 'N/A'}
+              content={props.item?.commissioningPackageStatus ?? 'N/A'}
               statusColor={
-                props.item?.commPkgStatus
-                  ? statusColorMap[props.item?.commPkgStatus]
+                props.item?.commissioningPackageStatus
+                  ? statusColorMap[props.item?.commissioningPackageStatus]
                   : 'transparent'
               }
             />
@@ -130,20 +136,24 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab
-              error={workOrderError}
+              error={workOrderError instanceof Error ? workOrderError : null}
               isFetching={isFetchingWorkOrders}
               workorders={workOrders}
             />
           </Tabs.Panel>
           <Tabs.Panel>
             <PunchTab
-              error={punchError}
+              error={punchError instanceof Error ? punchError : null}
               isFetching={isFetchingPunchItems}
               punches={punchItems}
             />
           </Tabs.Panel>
           <Tabs.Panel>
-            <NcrTab error={ncrError} isFetching={isFetchingNcr} ncrs={ncr} />
+            <NcrTab
+              error={ncrError instanceof Error ? ncrError : null}
+              isFetching={isFetchingNcr}
+              ncrs={ncr}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

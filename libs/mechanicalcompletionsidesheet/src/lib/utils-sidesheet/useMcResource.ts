@@ -1,35 +1,68 @@
-import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { McNcr, McPunchItem, McWorkOrder } from '../types';
-import { useContextId, usePackageResource } from '@cc-components/shared/hooks';
-type McResourceTypeMap = {
-  ncr: McNcr;
-  'work-orders': McWorkOrder;
-  punch: McPunchItem;
-};
-export const useMcResource = <T extends keyof McResourceTypeMap>(
-  packageId: string,
-  packageType: T
-) => {
+import { useContextId } from '@cc-components/shared/hooks';
+import { useQuery } from '@tanstack/react-query';
+
+export const useNcr = (packageId: string | undefined) => {
   const dataProxy = useHttpClient('data-proxy');
   const contextId = useContextId();
-  const fetch = useCallback(
-    async (id: string, signal?: AbortSignal) => {
-      const result = await dataProxy.fetch(
-        `api/contexts/${contextId}/mc-pkgs/${id}/${packageType}`,
-        { signal }
+  const { data, isLoading, error } = useQuery({
+    queryFn: async (context) => {
+      if (!packageId) throw Error('No ID given');
+      const res = await dataProxy.fetch(
+        `/api/contexts/${contextId}/mc-pkgs/${packageId}/ncr`,
+        { signal: context.signal }
       );
-
-      return JSON.parse(await result.text()) as McResourceTypeMap[T][];
+      return (await res.json()) as McNcr[];
     },
-    [dataProxy, contextId, packageType]
-  );
-
-  const resource = usePackageResource(packageType, packageId, fetch);
+    queryKey: ['MECHANICAL_COMPLETION', packageId, contextId, 'NCR'],
+  });
 
   return {
-    data: resource.data,
-    isFetching: resource.isFetching,
-    error: resource.error,
+    data,
+    isFetching: isLoading,
+    error,
+  };
+};
+
+export const useMc = (packageId: string) => {
+  const ccApi = useHttpClient('cc-api');
+  const contextId = useContextId();
+  const { data, isLoading, error } = useQuery({
+    queryFn: async (context) => {
+      const res = await ccApi.fetch(
+        `/api/contexts/${contextId}/mc-pkgs/${packageId}/workorders`,
+        { signal: context.signal }
+      );
+      return (await res.json()) as McWorkOrder[];
+    },
+    queryKey: ['MECHANICAL_COMPLETION', packageId, contextId, 'WORK_ORDERS'],
+  });
+
+  return {
+    data,
+    isFetching: isLoading,
+    error,
+  };
+};
+
+export const usePunch = (packageId: string) => {
+  const ccApi = useHttpClient('cc-api');
+  const contextId = useContextId();
+  const { data, isLoading, error } = useQuery({
+    queryFn: async (context) => {
+      const res = await ccApi.fetch(
+        `/api/contexts/${contextId}/mc-pkgs/${packageId}/punch`,
+        { signal: context.signal }
+      );
+      return (await res.json()) as McPunchItem[];
+    },
+    queryKey: ['MECHANICAL_COMPLETION', packageId, contextId, 'PUNCH'],
+  });
+
+  return {
+    data,
+    isFetching: isLoading,
+    error,
   };
 };

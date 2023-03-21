@@ -12,9 +12,11 @@ export const tableConfig: GridConfig<McPackage> = {
   columnDefinitions: [
     {
       field: 'McpkgNo',
-      valueGetter: (pkg) => pkg.data?.mcPkgNumber,
+      valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
       valueFormatter: (pkg) =>
-        pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
+        pkg.data?.mechanicalCompletionPackageId
+          ? proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         if (!props.valueFormatted) {
           return null;
@@ -33,13 +35,13 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Discipline',
-      valueGetter: (pkg) => pkg.data?.discipline,
+      valueGetter: (pkg) => pkg.data?.disciplineDescription,
       enableRowGroup: true,
       width: 100,
     },
     {
       field: 'MC Status',
-      valueGetter: (pkg) => pkg.data?.mcStatus,
+      valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
       cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
         return (
           <StatusCell
@@ -71,15 +73,17 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Area',
-      valueGetter: (pkg) => pkg.data?.area,
+      valueGetter: (pkg) => pkg.data?.location,
       enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Comm. package',
-      valueGetter: (pkg) => pkg.data?.commPkgNumber,
+      valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
       valueFormatter: (pkg) =>
-        pkg.data?.commPkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commPkgId) : '',
+        pkg.data?.commissioningPackageId
+          ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+          : '',
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         if (!props.valueFormatted) {
           return null;

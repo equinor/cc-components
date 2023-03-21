@@ -8,7 +8,9 @@ export const columns: ColDef<NcrBase>[] = [
     field: 'Document No.',
     valueGetter: (pkg) => pkg.data?.documentNumber,
     valueFormatter: (pkg) =>
-      pkg.data?.documentId ? proCoSysUrls.getDocumentUrl(pkg.data.documentId) : '',
+      pkg.data?.documentNumber
+        ? proCoSysUrls.getDocumentUrl(pkg.data.documentNumber)
+        : '',
     cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
       if (props.valueFormatted) {
         return <LinkCell url={props.valueFormatted} urlText={props.value} />;

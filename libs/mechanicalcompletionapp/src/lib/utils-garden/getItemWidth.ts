@@ -27,9 +27,9 @@ export const getItemWidth = (
           ? String(item[groupByKey]).length
           : 0
         : 0;
-      return titleLength >= item.mcPkgNumber.length
+      return titleLength >= item.mechanicalCompletionPackageNo.length
         ? titleLength
-        : item.mcPkgNumber.length;
+        : item.mechanicalCompletionPackageNo.length;
     })
   );
 

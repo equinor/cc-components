@@ -18,11 +18,7 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
         <tbody>
           <tr>
             <td>Project</td>
-            <td>
-              {stringCell(
-                `${mcPackage.projectDescription} (${mcPackage.projectIdentifier})`
-              )}
-            </td>
+            <td>{stringCell(` (${mcPackage.projectIdentifier})`)}</td>
           </tr>
           <tr>
             <td>MC Package Responsible</td>
@@ -30,13 +26,11 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>MC Package Discipline</td>
-            <td>
-              {stringCell(`${mcPackage.discipline} ${mcPackage.disciplineDescription}`)}
-            </td>
+            <td>{stringCell(`${mcPackage.disciplineDescription} `)}</td>
           </tr>
           <tr>
             <td>MC Package Area</td>
-            <td>{stringCell(mcPackage.area)}</td>
+            <td>{stringCell(mcPackage.location)}</td>
           </tr>
           <tr>
             <td>MC Package Phase</td>
@@ -44,7 +38,7 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>Commissioning Package</td>
-            <td>{stringCell(mcPackage.commPkgNumber)}</td>
+            <td>{stringCell(mcPackage.commissioningPackageNo)}</td>
           </tr>
           <tr>
             <td>System</td>

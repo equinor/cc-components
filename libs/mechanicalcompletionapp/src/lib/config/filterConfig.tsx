@@ -25,12 +25,12 @@ export const filterConfig: FilterConfig<McPackage> = {
     },
     {
       name: 'Discipline',
-      valueFormatter: (mc) => mc.discipline,
+      valueFormatter: (mc) => mc.disciplineDescription,
       isQuickFilter: true,
     },
     {
       name: 'MC status',
-      valueFormatter: (mc) => mc.mcStatus,
+      valueFormatter: (mc) => mc.mechanicalCompletionStatus,
       customValueRender: (mcStatus) => {
         if (!mcStatus) return <>(Blank)</>;
 
@@ -89,7 +89,7 @@ export const filterConfig: FilterConfig<McPackage> = {
     },
     {
       name: 'Area',
-      valueFormatter: (mc) => mc.area || null,
+      valueFormatter: (mc) => mc.location || null,
     },
 
     {

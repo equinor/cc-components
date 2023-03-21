@@ -17,7 +17,7 @@ export const getStatusBarData = (mcPackages: McPackage[]): Kpi => {
       }
 
       // Punch status Accepted
-      if (curr.punchAcceptActualDate) {
+      if (curr?.punchAcceptActualDate) {
         acc.punchAcceptedCount += 1;
       }
 

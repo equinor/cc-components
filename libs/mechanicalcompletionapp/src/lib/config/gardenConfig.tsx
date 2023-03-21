@@ -12,7 +12,7 @@ export const gardenConfig: GardenConfig<
   CustomGroupByKeys,
   Record<'averageTagVolume', number>
 > = {
-  getDisplayName: (item) => item.mcPkgNumber,
+  getDisplayName: (item) => item.mechanicalCompletionPackageNo,
   customGroupByKeys: {
     plannedForecast: 'Planned',
     weeklyDaily: 'Weekly',

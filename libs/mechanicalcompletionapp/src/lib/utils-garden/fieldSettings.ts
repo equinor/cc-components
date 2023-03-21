@@ -32,16 +32,16 @@ export const fieldSettings: FieldSettings<
   responsible: {
     label: 'MC package Responsible',
   },
-  discipline: {
+  disciplineDescription: {
     label: 'MC Package Discipline',
   },
-  area: {
+  location: {
     label: 'MC Package Area',
   },
   phase: {
     label: 'MC Package Phase',
   },
-  commPkgNumber: {
+  commissioningPackageNo: {
     label: 'Commissioning Package',
   },
   system: {

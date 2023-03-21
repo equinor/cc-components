@@ -51,10 +51,13 @@ const McGardenItem = (
   const status = useMemo(() => getCommissioningStatus(data), [data]);
   const backgroundColor = useMemo(() => commStatusColors[status], [status]);
   const contentsColor = useMemo(() => getItemContentsColor(status), [status]);
-  const mcDotColor = useMemo(() => statusColorMap[data.mcStatus], [data.mcStatus]);
+  const mcDotColor = useMemo(
+    () => statusColorMap[data.mechanicalCompletionStatus],
+    [data.mechanicalCompletionStatus]
+  );
   const commDotColor = useMemo(
-    () => statusColorMap[data.commPkgStatus],
-    [data.commPkgStatus]
+    () => statusColorMap[data.commissioningPackageStatus],
+    [data.commissioningPackageStatus]
   );
   const width = useMemo(() => (depth ? 100 - depth * 3 : 97), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
@@ -98,7 +101,7 @@ const McGardenItem = (
           parentRef={parentRef}
           rowStart={rowStart}
           columnStart={columnStart}
-          popoverTitle={`Mc.pkg: ${data.mcPkgNumber}`}
+          popoverTitle={`Mc.pkg: ${data.mechanicalCompletionPackageNo}`}
         >
           <PopoverContent data={data} options={options} />
         </PopoverWrapper>

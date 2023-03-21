@@ -28,9 +28,7 @@ export const PopoverContent = ({
   return (
     <StyledPopoverContainer>
       <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
-      <p>
-        {data.projectIdentifier}, {data.projectDescription}
-      </p>
+      <p>{data.projectIdentifier}</p>
       <StyledPopoverProjectDescription>
         {data.description}
       </StyledPopoverProjectDescription>
@@ -49,12 +47,16 @@ export const PopoverContent = ({
       <Statuses>
         <h5>MC status</h5>
         <StyledPopoverStatus color={mcDotColor}>
-          {['OS', 'OK', 'PA'].includes(data.mcStatus) ? data.mcStatus : 'PB'}
+          {['OS', 'OK', 'PA'].includes(data.mechanicalCompletionStatus)
+            ? data.mechanicalCompletionStatus
+            : 'PB'}
         </StyledPopoverStatus>
 
         <h5>Comm status</h5>
         <StyledPopoverStatus color={commDotColor}>
-          {['OS', 'OK', 'PA'].includes(data.commPkgStatus) ? data.commPkgStatus : 'PB'}
+          {['OS', 'OK', 'PA'].includes(data.commissioningPackageStatus)
+            ? data.commissioningPackageStatus
+            : 'PB'}
         </StyledPopoverStatus>
       </Statuses>
     </StyledPopoverContainer>

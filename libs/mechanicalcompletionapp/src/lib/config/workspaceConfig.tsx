@@ -16,9 +16,9 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const dataProxy = useHttpClient('data-proxy');
+  const ccApp = useHttpClient('cc-api');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`, {
+    ccApp.fetch(`/api/contexts/${contextId}/mc-pkgs`, {
       signal,
     });
 
@@ -31,7 +31,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     <Workspace
       workspaceOptions={{
         appKey: 'MC',
-        getIdentifier: (item) => item.mcPkgId,
+        getIdentifier: (item) => item.mechanicalCompletionPackageId,
         defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
