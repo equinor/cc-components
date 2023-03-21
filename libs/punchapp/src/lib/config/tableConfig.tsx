@@ -10,9 +10,6 @@ import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 export const tableConfig: GridConfig<Punch> = {
   columnDefinitions: [
     {
-      field: 'description',
-    },
-    {
       field: 'Punch',
       valueGetter: (pkg) => pkg.data?.punchItemNo,
       valueFormatter: (pkg) =>
