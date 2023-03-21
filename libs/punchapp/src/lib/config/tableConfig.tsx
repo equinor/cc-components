@@ -10,6 +10,9 @@ import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 export const tableConfig: GridConfig<Punch> = {
   columnDefinitions: [
     {
+      field: 'description',
+    },
+    {
       field: 'Punch',
       valueGetter: (pkg) => pkg.data?.punchItemNo,
       valueFormatter: (pkg) =>
@@ -97,7 +100,7 @@ export const tableConfig: GridConfig<Punch> = {
     },
     {
       field: 'Clearing by org',
-      valueGetter: (pkg) => pkg.data?.cleardBy,
+      valueGetter: (pkg) => pkg.data?.clearedBy,
       enableRowGroup: true,
       width: 150,
     },

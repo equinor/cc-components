@@ -27,7 +27,7 @@ export const filterConfig: FilterConfig<Punch> = {
     },
     {
       name: 'Clearing by',
-      valueFormatter: (punch) => punch.cleardBy,
+      valueFormatter: (punch) => punch.clearedBy,
       isQuickFilter: true,
     },
     {
