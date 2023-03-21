@@ -18,7 +18,7 @@
   "private": true,
   "devDependencies": {
     "@astrojs/react": "^2.0.2",
-    "@equinor/fusion-framework-cli": "^5.0.1",
+    "@equinor/fusion-framework-cli": "^5.1.2",
     "@equinor/fusion-observable": "^7.0.1",
     "@nrwl/cli": "15.7.1",
     "@nrwl/devkit": "15.7.1",
