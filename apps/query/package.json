@@ -1,12 +1,12 @@
 {
   "name": "query",
-  "version": "0.0.6",
-  "main": "src/main.tsx",
+  "version": "0.0.7",
+  "main": "/src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "windows-zip" : "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
+    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
     "build": "tsc --noEmit",
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",

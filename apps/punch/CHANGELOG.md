@@ -1,3 +1,7 @@
+## Version 0.0.7
+Bump workspace fusion 0.20.0
+Bump workspace ag grid 0.3.8
+
 ## Version 0.0.6
 add grouping to grid
 
