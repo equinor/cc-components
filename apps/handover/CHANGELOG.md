@@ -1,3 +1,6 @@
+## Version 0.0.16
+Hotfix for dataproxy uri
+
 ## Version 0.0.15
 Bump workspace fusion 0.20.0
 Bump workspace ag grid 0.3.8
