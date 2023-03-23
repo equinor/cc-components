@@ -5,7 +5,7 @@ import buildQuery from 'odata-query';
 
 const dataProxy = {
   clientId: '5a842df8-3238-415d-b168-9f16a6a6031b',
-  uri: 'https://pro-s-dataproxy-CI.azurewebsites.net',
+  uri: 'https://fusion-s-dataproxy-CI.azurewebsites.net',
   defaultScopes: ['5a842df8-3238-415d-b168-9f16a6a6031b/.default'],
 };
 
