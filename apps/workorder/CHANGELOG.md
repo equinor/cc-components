@@ -1,3 +1,7 @@
+## Version 0.0.12
+Bump workspace fusion 0.20.0
+Bump workspace ag grid 0.3.8
+
 ## Version 0.0.11
 (WIP) Connecting frontend to new WO app API
 
