@@ -51,7 +51,7 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
           </tr>
           <tr>
             <td>Clearing by</td>
-            <td>{stringCell(punch.cleardBy)}</td>
+            <td>{stringCell(punch.clearedBy)}</td>
           </tr>
           <tr>
             <td>Cleared date</td>

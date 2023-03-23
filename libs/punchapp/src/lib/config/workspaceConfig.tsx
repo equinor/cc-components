@@ -5,23 +5,39 @@ import { gardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
-import { testData } from './testData';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+  const ccApi = useHttpClient('cc-api');
+
   const pbi = usePBIOptions('cc-punch-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });
 
+  const getResponseAsync = async () => {
+    const res = await ccApi.fetch(`/api/contexts/${contextId}/punch`);
+    return res;
+  };
+
+  const responseParser = async (res: Response) => {
+    const resJson = await res.json();
+    return resJson.result;
+  };
+
   return (
     <Workspace
-      dataOptions={{ initialData: testData }}
+      dataOptions={{
+        getResponseAsync,
+        responseParser,
+        queryKey: ['PUNCH', contextId],
+      }}
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.punchItemNo,

@@ -1,3 +1,6 @@
+## Version 0.1.0
+Use new CC app API for data fetching
+
 ## Version 0.0.7
 Bump workspace fusion 0.20.0
 Bump workspace ag grid 0.3.8

@@ -97,7 +97,7 @@ export const tableConfig: GridConfig<Punch> = {
     },
     {
       field: 'Clearing by org',
-      valueGetter: (pkg) => pkg.data?.cleardBy,
+      valueGetter: (pkg) => pkg.data?.clearedBy,
       enableRowGroup: true,
       width: 150,
     },

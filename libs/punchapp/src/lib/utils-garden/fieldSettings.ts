@@ -6,47 +6,47 @@ import { getDateKey } from './getDateKey';
 
 export const fieldSettings: FieldSettings<Punch, ExtendedGardenFields> = {
   handoverPlan: {
-      label: 'Handover plan',
-      getKey: (item) => getDateKey(item.handoverPlan),
-      getColumnSort: sortByDate,
+    label: 'Handover plan',
+    getKey: (item) => getDateKey(item.handoverPlan),
+    getColumnSort: sortByDate,
   },
-  rfC_PlannedForecastDate: {
-      label: 'RFC plan',
-      getKey: (item) => getDateKey(item.rfC_PlannedForecastDate),
-      getColumnSort: sortByDate,
+  rfcPlannedForecastDate: {
+    label: 'RFC plan',
+    getKey: (item) => getDateKey(item.rfcPlannedForecastDate),
+    getColumnSort: sortByDate,
   },
-  rfO_PlannedForecastDate: {
-      label: 'RFO plan',
-      getKey: (item) => getDateKey(item.rfO_PlannedForecastDate),
-      getColumnSort: sortByDate,
+  rfoPlannedForecastDate: {
+    label: 'RFO plan',
+    getKey: (item) => getDateKey(item.rfoPlannedForecastDate),
+    getColumnSort: sortByDate,
   },
   dueDate: {
-      label: 'Due date',
-      getKey: (item) => getDateKey(item.dueDate),
-      getColumnSort: sortByDate,
+    label: 'Due date',
+    getKey: (item) => getDateKey(item.dueDate),
+    getColumnSort: sortByDate,
   },
   createdDate: {
-      label: 'Created date',
-      getKey: (item) => getDateKey(item.createdDate),
-      getColumnSort: sortByDate,
+    label: 'Created date',
+    getKey: (item) => getDateKey(item.createdDate),
+    getColumnSort: sortByDate,
   },
   clearedAtDate: {
-      label: 'Cleared date',
-      getKey: (item) => getDateKey(item.clearedAtDate),
-      getColumnSort: sortByDate,
+    label: 'Cleared date',
+    getKey: (item) => getDateKey(item.clearedAtDate),
+    getColumnSort: sortByDate,
   },
   verifiedAtDate: {
-      label: 'Verified date',
-      getKey: (item) => getDateKey(item.verifiedAtDate),
-      getColumnSort: sortByDate,
+    label: 'Verified date',
+    getKey: (item) => getDateKey(item.verifiedAtDate),
+    getColumnSort: sortByDate,
   },
-  cleardBy: {
-      label: 'Clearing by',
+  clearedBy: {
+    label: 'Clearing by',
   },
   commissioningPackageNo: {
-      label: 'Commpkg',
+    label: 'Commpkg',
   },
   system: {
-      label: 'System',
+    label: 'System',
   },
 };

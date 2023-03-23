@@ -7,8 +7,8 @@ export const getHighlightedColumn = (groupByKey: keyof Punch | ExtendedGardenFie
   switch (groupByKey) {
     case 'dueDate':
     case 'handoverPlan':
-    case 'rfC_PlannedForecastDate':
-    case 'rfO_PlannedForecastDate':
+    case 'rfcPlannedForecastDate':
+    case 'rfoPlannedForecastDate':
     case 'createdDate':
     case 'clearedAtDate':
     case 'verifiedAtDate':
