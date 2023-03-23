@@ -10,13 +10,13 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
   filterGroups: [
     {
       name: 'Commpkgno',
-      valueFormatter: ({ commpkgNo }) => commpkgNo,
+      valueFormatter: ({ commissioningPackageNo }) => commissioningPackageNo,
     },
-    {
-      name: 'Discipline',
-      valueFormatter: ({ mcDisciplineCodes }) => mcDisciplineCodes,
-      isQuickFilter: true,
-    },
+    // {
+    //   name: 'Discipline',
+    //   valueFormatter: ({ mcDisciplineCodes }) => mcDisciplineCodes,
+    //   isQuickFilter: true,
+    // },
 
     {
       name: 'Comm pkg status',
@@ -34,7 +34,7 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'MC status',
-      valueFormatter: ({ mcStatus }) => mcStatus,
+      valueFormatter: ({ mechanicalCompletionStatus }) => mechanicalCompletionStatus,
       isQuickFilter: true,
       customValueRender: (value) => {
         if (typeof value !== 'string') return <span>{value}</span>;
@@ -55,7 +55,7 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'Area',
-      valueFormatter: ({ area }) => area || null,
+      valueFormatter: ({ location }) => location || null,
     },
     {
       name: 'Phase',
@@ -82,12 +82,16 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'Planned RFC',
-      valueFormatter: ({ plannedStartDate, mcPkgsCount, mcPkgsRFCCShippedCount }) => {
-        const dateDiffs = daysDiff(new Date(plannedStartDate));
+      valueFormatter: ({
+        rfcPlannedDate,
+        mechanicalCompletionPkgsCount,
+        mechanicalCompletionPkgsRfccShippedCount,
+      }) => {
+        const dateDiffs = daysDiff(new Date(rfcPlannedDate ?? ''));
         if (
-          mcPkgsCount > 0 &&
-          mcPkgsRFCCShippedCount > 0 &&
-          mcPkgsCount !== mcPkgsRFCCShippedCount &&
+          mechanicalCompletionPkgsCount > 0 &&
+          mechanicalCompletionPkgsRfccShippedCount > 0 &&
+          mechanicalCompletionPkgsCount !== mechanicalCompletionPkgsRfccShippedCount &&
           dateDiffs.days <= 0
         ) {
           return 'Overdue';
@@ -98,12 +102,17 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'Forecast RFC',
-      valueFormatter: ({ forecastStartDate, mcPkgsCount, mcPkgsRFCCShippedCount }) => {
-        const dateDiffs = daysDiff(new Date(forecastStartDate));
+      valueFormatter: ({
+        rfcForecastDate,
+        mechanicalCompletionPkgsCount,
+        mechanicalCompletionPkgsRfccShippedCount,
+      }) => {
+        if (!rfcForecastDate) return 'Other';
+        const dateDiffs = daysDiff(new Date(rfcForecastDate));
         if (
-          mcPkgsCount > 0 &&
-          mcPkgsRFCCShippedCount > 0 &&
-          mcPkgsCount !== mcPkgsRFCCShippedCount &&
+          mechanicalCompletionPkgsCount > 0 &&
+          mechanicalCompletionPkgsRfccShippedCount > 0 &&
+          mechanicalCompletionPkgsCount !== mechanicalCompletionPkgsRfccShippedCount &&
           dateDiffs.days <= 0
         ) {
           return 'Overdue';
@@ -114,12 +123,17 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'Planned RFO',
-      valueFormatter: ({ rfocPlannedDate, mcPkgsRFOCShipped, mcPkgsCount }) => {
-        const dateDiffs = daysDiff(new Date(rfocPlannedDate));
+      valueFormatter: ({
+        rfoPlannedDate,
+        mechanicalCompletionPkgsRfocShippedCount,
+        mechanicalCompletionPkgsCount,
+      }) => {
+        if (!rfoPlannedDate) return 'Other';
+        const dateDiffs = daysDiff(new Date(rfoPlannedDate));
         if (
-          mcPkgsCount > 0 &&
-          mcPkgsRFOCShipped > 0 &&
-          mcPkgsCount !== mcPkgsRFOCShipped &&
+          mechanicalCompletionPkgsCount > 0 &&
+          mechanicalCompletionPkgsRfocShippedCount > 0 &&
+          mechanicalCompletionPkgsCount !== mechanicalCompletionPkgsRfocShippedCount &&
           dateDiffs.days <= 0
         ) {
           return 'Overdue';
@@ -130,12 +144,17 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
     {
       name: 'Actual RFO',
-      valueFormatter: ({ rfocActualDate, mcPkgsCount, mcPkgsRFOCShipped }) => {
-        const dateDiffs = daysDiff(new Date(rfocActualDate));
+      valueFormatter: ({
+        rfoActualDate,
+        mechanicalCompletionPkgsCount,
+        mechanicalCompletionPkgsRfocShippedCount,
+      }) => {
+        if (!rfoActualDate) return 'Other';
+        const dateDiffs = daysDiff(new Date(rfoActualDate));
         if (
-          mcPkgsCount > 0 &&
-          mcPkgsRFOCShipped > 0 &&
-          mcPkgsCount !== mcPkgsRFOCShipped &&
+          mechanicalCompletionPkgsCount > 0 &&
+          mechanicalCompletionPkgsRfocShippedCount > 0 &&
+          mechanicalCompletionPkgsCount !== mechanicalCompletionPkgsRfocShippedCount &&
           dateDiffs.days <= 0
         ) {
           return 'Overdue';

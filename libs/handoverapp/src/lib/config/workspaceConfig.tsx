@@ -30,7 +30,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     <Workspace
       workspaceOptions={{
         appKey: 'Handover',
-        getIdentifier: (item) => item.id,
+        getIdentifier: (item) => item.commissioningPackageId,
         defaultTab: 'garden',
       }}
       filterOptions={filterConfig}

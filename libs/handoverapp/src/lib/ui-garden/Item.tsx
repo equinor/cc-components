@@ -54,10 +54,11 @@ const HandoverItem = (
   );
   const textColor = getTextColor(status);
 
-  const mcPackageColor = getDotsColor(data.mcStatus);
-  const commStatusColor = getDotsColor(data.commpkgStatus);
+  const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
+  const commStatusColor = getDotsColor(data.commissioningPackageStatus);
 
-  const showWarningIcon = data.mcStatus === 'OS' && status === 'RFCC Accepted';
+  const showWarningIcon =
+    data.mechanicalCompletionStatus === 'OS' && status === 'RFCC Accepted';
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
@@ -112,7 +113,7 @@ const HandoverItem = (
           columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
-          popoverTitle={`Comm.pkg ${data.commpkgNo}`}
+          popoverTitle={`Comm.pkg ${data.commissioningPackageNo}`}
         >
           <PopoverContent data={data} itemOptions={options} />
         </PopoverWrapper>

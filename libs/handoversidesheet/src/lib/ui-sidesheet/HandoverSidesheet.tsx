@@ -92,7 +92,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props?.item?.commpkgNo || ''}
+        title={props?.item?.commissioningPackageNo || ''}
         applicationTitle={'Handover'}
         onClose={props.close}
       />
@@ -101,10 +101,10 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
           title="Compkg status"
           value={
             <StatusCircle
-              content={props?.item?.commpkgStatus || 'N/A'}
+              content={props?.item?.commissioningPackageStatus || 'N/A'}
               statusColor={
-                props?.item?.commpkgStatus
-                  ? statusColorMap[props.item.commpkgStatus]
+                props?.item?.commissioningPackageStatus
+                  ? statusColorMap[props.item.commissioningPackageStatus]
                   : 'transparent'
               }
             />
@@ -114,10 +114,10 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
           title="MC status"
           value={
             <StatusCircle
-              content={props?.item?.mcStatus || 'N/A'}
+              content={props?.item?.mechanicalCompletionStatus || 'N/A'}
               statusColor={
-                props?.item?.mcStatus
-                  ? statusColorMap[props.item.mcStatus]
+                props?.item?.mechanicalCompletionStatus
+                  ? statusColorMap[props.item.mechanicalCompletionStatus]
                   : 'transparent'
               }
             />
@@ -128,9 +128,11 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
           value={
             <StyledItemLink
               target="_blank"
-              href={proCoSysUrls.getCommPkgUrl(props?.item?.id || '')}
+              href={proCoSysUrls.getCommPkgUrl(
+                props?.item?.commissioningPackageUrlId || ''
+              )}
             >
-              {props?.item?.commpkgNo}
+              {props?.item?.commissioningPackageNo}
             </StyledItemLink>
           }
         />

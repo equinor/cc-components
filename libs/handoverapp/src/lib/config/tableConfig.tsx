@@ -15,8 +15,8 @@ export const tableConfig: GridConfig<HandoverPackage> = {
   columnDefinitions: [
     {
       field: 'Commpkgno',
-      valueGetter: (pkg) => pkg.data?.commpkgNo,
-      valueFormatter: (pkg) => pkg.data?.url ?? '',
+      valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+      valueFormatter: (pkg) => pkg.data?.commissioningPackageUrlId ?? '',
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
         if (!props.valueFormatted) {
           return null;
@@ -33,14 +33,14 @@ export const tableConfig: GridConfig<HandoverPackage> = {
       },
       width: 300,
     },
-    {
-      field: 'Disciplines',
-      valueGetter: (pkg) => pkg.data?.mcDisciplineCodes.join(',').replace(/,/g, ', '),
-      width: 150,
-    },
+    // {
+    //   field: 'Disciplines',
+    //   valueGetter: (pkg) => pkg.data?.mcDisciplineCodes.join(',').replace(/,/g, ', '),
+    //   width: 150,
+    // },
     {
       field: 'MC status',
-      valueGetter: (pkg) => pkg.data?.mcStatus,
+      valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
       cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
         if (props.node.group) return null;
         return (
@@ -57,7 +57,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     },
     {
       field: 'Comm status',
-      valueGetter: (pkg) => pkg.data?.commpkgStatus,
+      valueGetter: (pkg) => pkg.data?.commissioningPackageStatus,
       cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
         if (props.node.group) return null;
         return (
@@ -80,7 +80,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     },
     {
       field: 'Area',
-      valueGetter: (pkg) => pkg.data?.area,
+      valueGetter: (pkg) => pkg.data?.location,
       enableRowGroup: true,
       width: 135,
     },
@@ -107,7 +107,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     },
     {
       field: 'Planned RFC',
-      valueGetter: (pkg) => pkg.data?.plannedStartDate,
+      valueGetter: (pkg) => pkg.data?.rfcPlannedDate,
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
         if (props.node.group) return null;
         return <DateCell dateString={props.value} />;
@@ -116,7 +116,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     },
     {
       field: 'Forecast RFC',
-      valueGetter: (pkg) => pkg.data?.forecastStartDate,
+      valueGetter: (pkg) => pkg.data?.rfcForecastDate,
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
         if (props.node.group) return null;
         return <DateCell dateString={props.value} />;
@@ -125,7 +125,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     },
     {
       field: 'Planned RFO',
-      valueGetter: (pkg) => pkg.data?.rfocPlannedDate,
+      valueGetter: (pkg) => pkg.data?.rfoPlannedDate,
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
         if (props.node.group) return null;
         return <DateCell dateString={props.value} />;
@@ -134,7 +134,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     },
     {
       field: 'Forecast RFC',
-      valueGetter: (pkg) => pkg.data?.rfocForecastDate,
+      valueGetter: (pkg) => pkg.data?.rfoForecastDate,
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
         if (props.node.group) return null;
         return <DateCell dateString={props.value} />;

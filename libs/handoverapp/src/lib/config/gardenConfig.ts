@@ -15,7 +15,7 @@ export const gardenConfig: GardenConfig<
     horizontalGroupingAccessor: 'RFCC',
     verticalGroupingKeys: [],
   },
-  getDisplayName: (item) => item.commpkgNo,
+  getDisplayName: (item) => item.commissioningPackageNo,
   fieldSettings: fieldSettings,
   customGroupByKeys: {
     plannedForecast: 'Forecast',

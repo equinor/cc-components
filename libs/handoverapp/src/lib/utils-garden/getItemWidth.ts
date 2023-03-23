@@ -35,7 +35,9 @@ export const getItemWidth = (
       if (item[columnName]) {
         titleLength = item[columnName]?.toString().length ?? titleLength;
       }
-      return titleLength >= item.commpkgNo.length ? titleLength : item.commpkgNo.length;
+      return titleLength >= item.commissioningPackageNo.length
+        ? titleLength
+        : item.commissioningPackageNo.length;
     })
   );
   return Math.max(longestKey * 8 + 80, MIN_WIDTH);

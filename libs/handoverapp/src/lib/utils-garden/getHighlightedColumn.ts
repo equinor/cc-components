@@ -17,16 +17,16 @@ export const getHighlightedColumn = (
     customKeys?.plannedForecast
   );
   switch (groupByOption) {
-    case 'plannedFinishDate':
-    case 'forecastFinishDate':
-    case 'plannedStartDate':
-    case 'forecastStartDate':
-    case 'plannedTacDate':
-    case 'forecastTacDate':
-    case 'demolitionPlannedStartDate':
-    case 'demolitionForecastStartDate':
-    case 'demolitionPlannedFinishDate':
-    case 'demolitionForecastFinishDate':
+    case 'rfoPlannedDate':
+    case 'rfoForecastDate':
+    case 'rfcPlannedDate':
+    case 'rfcForecastDate':
+    case 'tacPlannedDate':
+    case 'tacForecastDate':
+    case 'dccPlannedDate':
+    case 'dccForecastDate':
+    case 'rfrcPlannedDate':
+    case 'rfrcForecastDate':
       return customKeys?.weeklyDaily === 'Daily'
         ? getYearAndWeekAndDayFromString(new Date().toString())
         : getYearAndWeekFromDate(new Date());

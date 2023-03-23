@@ -11,29 +11,29 @@ type McProgress = {
 const mcProgressMap: McProgress[] = [
   {
     color: () => '#d9eaf2',
-    accessor: (item) => item.mcPkgsCount,
+    accessor: (item) => item.mechanicalCompletionPkgsCount,
   }, // OS
   {
     color: (item) =>
-      item.rfccIsRejected ? colorMap[getStatus(item)] : colorMap['RFCC Sent'],
-    accessor: (item) => item.mcPkgsRFCCShippedCount,
+      item.isRfcRejected ? colorMap[getStatus(item)] : colorMap['RFCC Sent'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
   },
   {
     color: (item) => {
       const status = getStatus(item);
       if (status.indexOf('TAC') > -1) return colorMap[status];
-      return item.rfccIsRejected ? colorMap[status] : '#7cb342';
+      return item.isRfcRejected ? colorMap[status] : '#7cb342';
     },
-    accessor: (item) => item.mcPkgsRFCCSigned,
+    accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
   },
   {
     color: (item) =>
-      item.rfocIsRejected ? colorMap[getStatus(item)] : colorMap['RFOC Sent'],
-    accessor: (item) => item.mcPkgsRFOCShipped,
+      item.isRfoRejected ? colorMap[getStatus(item)] : colorMap['RFOC Sent'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
   },
   {
-    color: (item) => (item.rfocIsRejected ? colorMap[getStatus(item)] : '#0035bc'),
-    accessor: (item) => item.mcPkgsRFOCSigned,
+    color: (item) => (item.isRfoRejected ? colorMap[getStatus(item)] : '#0035bc'),
+    accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
   },
 ];
 const mcProgressPercentage = (
@@ -41,7 +41,11 @@ const mcProgressPercentage = (
   accessor: (item: HandoverPackage) => number
 ): number => {
   const count = accessor(item);
-  return count < 1 ? 0 : item.mcPkgsCount === 0 ? 0 : (count / item.mcPkgsCount) * 100;
+  return count < 1
+    ? 0
+    : item.mechanicalCompletionPkgsCount === 0
+    ? 0
+    : (count / item.mechanicalCompletionPkgsCount) * 100;
 };
 
 export const createProgressGradient = (

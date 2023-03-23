@@ -42,13 +42,13 @@ export const DetailsTab = ({
             <td>Comm Pkg Responsible</td>
             <td>{stringCell(commpkg.responsible)}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>Comm Pkg Discipline</td>
             <td>{stringCell(commpkg?.mcDisciplines?.join(',') || '')}</td>
-          </tr>
+          </tr> */}
           <tr>
             <td>Comm Pkg Area</td>
-            <td>{stringCell(commpkg.area)}</td>
+            <td>{stringCell(commpkg.location)}</td>
           </tr>
           <tr>
             <td>Comm Pkg Phase</td>
@@ -102,28 +102,28 @@ export const DetailsTab = ({
         <tbody>
           <tr>
             <td>RFCC (C01)</td>
-            <td>{stringCell(formatDateString(commpkg.plannedStartDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.forecastStartDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfcPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfcForecastDate))}</td>
           </tr>
           <tr>
             <td>TAC (C06)</td>
-            <td>{stringCell(formatDateString(commpkg.plannedTacDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.forecastTacDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.tacPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.tacForecastDate))}</td>
           </tr>
           <tr>
             <td>RFOC (C07)</td>
-            <td>{stringCell(formatDateString(commpkg.plannedFinishDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.forecastFinishDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfoPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfoForecastDate))}</td>
           </tr>
           <tr>
             <td>DCC (D01)</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionPlannedStartDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionForecastStartDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.dccPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.dccShippedDate))}</td>
           </tr>
           <tr>
             <td>RFRC (D03)</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionPlannedFinishDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionForecastFinishDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfrcPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfrcForecastDate))}</td>
           </tr>
         </tbody>
       </StyledTable>

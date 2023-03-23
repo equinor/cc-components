@@ -16,7 +16,7 @@ export const fieldSettings: FieldSettings<
   DCC: { label: 'DCC', getKey: getDateKey, getColumnSort: sortByNumber },
   RFRC: { label: 'RFRC', getKey: getDateKey, getColumnSort: sortByNumber },
   responsible: { label: 'Comm Pkg Responsible' },
-  area: { label: 'Comm Pkg Area' },
+  location: { label: 'Comm Pkg Area' },
   phase: { label: 'Comm Pkg Phase' },
   progress: {
     label: 'Comm Pkg Progress',

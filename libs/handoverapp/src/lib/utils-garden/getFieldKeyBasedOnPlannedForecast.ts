@@ -7,25 +7,21 @@ export const getFieldKeyBasedOnPlannedForecast = (
 ): keyof HandoverPackage => {
   switch (groupBy) {
     case 'RFOC':
-      return plannedForecast === 'Forecast' ? 'forecastFinishDate' : 'plannedFinishDate';
+      return plannedForecast === 'Forecast' ? 'rfoForecastDate' : 'rfoPlannedDate';
 
     case 'RFCC':
-      return plannedForecast === 'Forecast' ? 'forecastStartDate' : 'plannedStartDate';
+      return plannedForecast === 'Forecast' ? 'rfcForecastDate' : 'rfcPlannedDate';
 
     case 'TAC':
-      return plannedForecast === 'Forecast' ? 'forecastTacDate' : 'plannedTacDate';
+      return plannedForecast === 'Forecast' ? 'tacForecastDate' : 'tacPlannedDate';
 
     case 'DCC':
-      return plannedForecast === 'Forecast'
-        ? 'demolitionForecastStartDate'
-        : 'demolitionPlannedStartDate';
+      return plannedForecast === 'Forecast' ? 'dccForecastDate' : 'dccPlannedDate';
 
     case 'RFRC':
-      return plannedForecast === 'Forecast'
-        ? 'demolitionForecastFinishDate'
-        : 'demolitionPlannedFinishDate';
+      return plannedForecast === 'Forecast' ? 'rfrcForecastDate' : 'rfrcPlannedDate';
 
     default:
-      return 'plannedFinishDate';
+      return 'rfoPlannedDate';
   }
 };

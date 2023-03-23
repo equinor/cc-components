@@ -3,20 +3,20 @@ import type { KPIStatus } from '../types';
 
 export const getKPIStatus = (pkg: HandoverPackage): KPIStatus => {
   if (
-    pkg.mcPkgsRFOCSigned > 0 &&
-    pkg.mcPkgsCount > 0 &&
-    pkg.mcPkgsRFOCSigned === pkg.mcPkgsCount
+    pkg.mechanicalCompletionPkgsRfocSignedCount > 0 &&
+    pkg.mechanicalCompletionPkgsCount > 0 &&
+    pkg.mechanicalCompletionPkgsRfocSignedCount === pkg.mechanicalCompletionPkgsCount
   ) {
     return 'RFOC Accepted';
   }
   if (
-    pkg.mcPkgsRFOCShipped > 0 &&
-    pkg.mcPkgsCount > 0 &&
-    pkg.mcPkgsRFOCShipped === pkg.mcPkgsCount
+    pkg.mechanicalCompletionPkgsRfocShippedCount > 0 &&
+    pkg.mechanicalCompletionPkgsCount > 0 &&
+    pkg.mechanicalCompletionPkgsRfocShippedCount === pkg.mechanicalCompletionPkgsCount
   ) {
     return 'RFOC Sent';
   }
-  if (pkg.mcPkgsRFOCSigned > 0) {
+  if (pkg.mechanicalCompletionPkgsRfocSignedCount > 0) {
     return 'RFOC Partly';
   }
   return 'OS';
