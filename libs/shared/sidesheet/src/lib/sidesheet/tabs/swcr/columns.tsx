@@ -6,10 +6,10 @@ import { SwcrBase } from './types';
 export const columns: ColDef<SwcrBase>[] = [
   {
     field: '#',
-    valueGetter: (pkg) => pkg.data?.swcrNumber,
+    valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
     valueFormatter: (pkg) => {
-      if (pkg.data?.swcrId) {
-        return proCoSysUrls.getSwcrUrl(pkg.data.swcrId);
+      if (pkg.data?.softwareChangeRecordUrlId) {
+        return proCoSysUrls.getSwcrUrl(pkg.data.softwareChangeRecordUrlId);
       } else return '';
     },
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => {

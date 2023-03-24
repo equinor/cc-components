@@ -6,9 +6,9 @@ import { UnsignedTaskBase } from './types';
 export const columns: ColDef<UnsignedTaskBase>[] = [
   {
     field: '#',
-    valueGetter: (pkg) => pkg.data?.taskNumber,
+    valueGetter: (pkg) => pkg.data?.taskNo,
     valueFormatter: (pkg) =>
-      pkg.data?.taskId ? proCoSysUrls.getFormTypeUrl(pkg.data.taskId) : '',
+      pkg.data?.taskUrlId ? proCoSysUrls.getFormTypeUrl(pkg.data.taskUrlId) : '',
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => {
       if (props.valueFormatted) {
         return <LinkCell url={props.valueFormatted} urlText={props.value} />;

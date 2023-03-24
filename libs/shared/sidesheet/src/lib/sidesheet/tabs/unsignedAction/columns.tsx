@@ -6,9 +6,9 @@ import { UnsignedActionBase } from './types';
 export const columns: ColDef<UnsignedActionBase>[] = [
   {
     field: '#',
-    valueGetter: (pkg) => pkg.data?.actionNumber,
+    valueGetter: (pkg) => pkg.data?.actionNo,
     valueFormatter: (pkg) =>
-      pkg.data?.actionId ? proCoSysUrls.getFormTypeUrl(pkg.data.actionId) : '',
+      pkg.data?.actionUrlId ? proCoSysUrls.getFormTypeUrl(pkg.data.actionUrlId) : '',
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase>) => {
       if (props.valueFormatted) {
         return <LinkCell url={props.valueFormatted} urlText={props.value} />;

@@ -8,7 +8,7 @@ export const columns: ColDef<QueryBase>[] = [
     field: 'Document No.',
     valueGetter: (pkg) => pkg.data?.queryNumber,
     valueFormatter: (pkg) =>
-      pkg.data?.queryId ? proCoSysUrls.getDocumentUrl(pkg.data.queryId) : '',
+      pkg.data?.queryUrlId ? proCoSysUrls.getDocumentUrl(pkg.data.queryUrlId) : '',
     cellRenderer: (props: ICellRendererProps<QueryBase, string>) => {
       if (props.valueFormatted) {
         return <LinkCell url={props.valueFormatted} urlText={props.value} />;

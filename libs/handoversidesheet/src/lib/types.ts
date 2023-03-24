@@ -8,19 +8,18 @@ export type HandoverDetails = {
 } & HandoverChild;
 
 export type HandoverMcpkg = {
-  mcPkgNo: string;
-  mcPkgId: string;
-  description: string;
-  mcStatus: string;
-  rfccShippedActualDate: string;
-  rfccAcceptedActualDate: string;
-  rfocIsShipped: boolean;
-  rfocIsAccepted: boolean;
-  rfocIsRejected: boolean;
-  rfccIsShipped: boolean;
-  rfccIsAccepted: boolean;
-  rfccIsRejected: boolean;
-} & HandoverChild;
+  mechanicalCompletionPackageId: string;
+  mechanicalCompletionPackageUrlId: string;
+  mechanicalCompletionPackageNo: string;
+  mechanicalCompletionPackageStatus: string | null;
+  description: string | null;
+  rfoIsShipped: boolean | null;
+  rfoIsAccepted: boolean | null;
+  rfoIsRejected: boolean | null;
+  rfcIsShipped: boolean | null;
+  rfcIsAccepted: boolean | null;
+  rfcIsRejected: boolean | null;
+};
 
 export type HandoverNCR = {
   documentNumber: string;
@@ -31,56 +30,58 @@ export type HandoverNCR = {
 export type HandoverPunch = {
   tagNumber: string;
   tagId: string;
-  status: string;
-  description: string;
-  toBeClearedBy: string;
-  sorting: string;
-} & HandoverChild;
+  tagUrlId: string;
+  status: string | null;
+  description: string | null;
+  toBeClearedBy: string | null;
+  sorting: string | null;
+};
 
 export type HandoverQuery = {
   queryNumber: string;
   queryId: string;
-  type: string;
-  title: string;
-  status: string;
-  nextToSign: string;
+  queryUrlId: string;
+  title: string | null;
+  status: string | null;
+  nextToSign: string | null;
+  type: string | null;
 } & HandoverChild;
 
 export type HandoverSWCR = {
-  swcrNumber: string;
-  swcrId: string;
-  status: string;
-  description: string;
-  priority: string;
-} & HandoverChild;
+  softwareChangeRecordId: string;
+  softwareChangeRecordNo: string;
+  softwareChangeRecordUrlId: string;
+  status: string | null;
+  description: string | null;
+  priority: string | null;
+};
 
 export type HandoverUnsignedAction = {
-  actionNumber: string;
+  actionNo: string;
   actionId: string;
-  title: string;
-  description: string;
-} & HandoverChild;
+  actionUrlId: string;
+  title: string | null;
+  description: string | null;
+};
 
 export type HandoverUnsignedTask = {
-  taskNumber: string;
+  taskNo: string;
   taskId: string;
-  title: string;
-} & HandoverChild;
+  taskUrlId: string;
+  title: string | null;
+};
 
 export type HandoverWorkOrder = {
   workOrderNo: string;
   workOrderId: string;
-  workOrderStatus: string;
-  title: string;
-  discipline: string;
-  jobStatus: string;
-  plannedCompletionDate: string;
-  actualCompletionDate: string;
-  estimatedManHours: number;
-  remainingManHours: number;
-  workOrderStatusDescription: string;
-  description: string;
-  materialStatus: string;
-  materialStatusDescription: string;
-  projectProgress: number;
-} & HandoverChild;
+  workOrderUrlId: string;
+  description: string | null;
+  plannedCompletionDate: string | null;
+  actualCompletionDate: string | null;
+  discipline: string | null;
+  estimatedManHours: number | null;
+  expendedManHours?: number | null;
+  remainingManHours: number | null;
+  jobStatus: string | null;
+  projectProgress: number | null;
+};

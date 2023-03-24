@@ -12,10 +12,10 @@ import { McBase } from './types';
 export const columns: ColDef<McBase>[] = [
   {
     field: 'MC.Pkg',
-    valueGetter: (pkg) => pkg.data?.mcPkgNo,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     valueFormatter: (pkg) => {
-      if (pkg.data?.mcPkgId) {
-        return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
+      if (pkg.data?.mechanicalCompletionPackageUrlId) {
+        return proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageUrlId);
       } else return '';
     },
     cellRenderer: (props: ICellRendererProps<McBase>) => {
@@ -35,7 +35,7 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.mcStatus,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageStatus,
     width: 150,
   },
   {

@@ -1,18 +1,18 @@
-import { PackageStatus } from '../types';
+import { PackageStatus } from '@cc-components/shared/types';
 
 type RFOCBase = {
-  rfocIsAccepted: boolean | null;
-  rfocIsRejected: boolean | null;
-  rfocIsShipped: boolean | null;
+  rfoIsAccepted: boolean | null;
+  rfoIsRejected: boolean | null;
+  rfoIsShipped: boolean | null;
 };
 /**
  * Resolves the RFOC (Ready for Operation Certificate) status for an item.
  */
 export const getRFOCStatus = <T extends RFOCBase>(item: T): PackageStatus =>
-  item.rfocIsAccepted
+  item.rfoIsAccepted
     ? 'RFOC Accepted'
-    : item.rfocIsRejected
+    : item.rfoIsRejected
     ? 'RFOC Rejected'
-    : item.rfocIsShipped
+    : item.rfoIsShipped
     ? 'RFOC Sent'
     : 'OS';

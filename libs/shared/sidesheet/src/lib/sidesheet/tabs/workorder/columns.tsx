@@ -19,8 +19,8 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'WO',
       valueGetter: (pkg) => pkg.data?.workOrderNo,
       valueFormatter: (pkg) => {
-        if (pkg.data?.workOrderId) {
-          return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId);
+        if (pkg.data?.workOrderUrlId) {
+          return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId);
         } else {
           return '';
         }
@@ -36,7 +36,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Title',
-      valueGetter: (pkg) => pkg.data?.title,
+      valueGetter: (pkg) => pkg.data?.description,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
       },

@@ -23,6 +23,7 @@ import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
+import { useNcr } from '../utils-sidesheet/useHandoverResource';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 type HandoverProps = {
@@ -42,22 +43,22 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: mcPackages,
     dataIsFetching: isDataFetchingMc,
     error: mcError,
-  } = useHandoverResource(props.id, 'mcpkg');
+  } = useHandoverResource(props.id, 'mc-pkgs');
 
   const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
     useHandoverResource(props.id, 'details');
 
   const {
     data: ncrPackages,
-    dataIsFetching: isDataFetchingNcr,
+    isLoading: isDataFetchingNcr,
     error: ncrError,
-  } = useHandoverResource(props.id, 'ncr');
+  } = useNcr(props.item?.commissioningPackageUrlId);
 
   const {
     data: workOrderPackages,
     dataIsFetching: isDataFetchingWorkOrder,
     error: woError,
-  } = useHandoverResource(props.id, 'work-orders');
+  } = useHandoverResource(props.id, 'workorders');
 
   const {
     data: unsignedTasks,

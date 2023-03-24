@@ -1,6 +1,7 @@
 export type SwcrBase = {
-  swcrNumber: string;
-  swcrId: string;
+  softwareChangeRecordId: string;
+  softwareChangeRecordNo: string;
+  softwareChangeRecordUrlId: string;
   status: string | null;
   description: string | null;
   priority: string | null;

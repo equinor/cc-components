@@ -1,5 +1,6 @@
 export type UnsignedTaskBase = {
-  taskNumber: string;
+  taskNo: string;
   taskId: string;
+  taskUrlId: string;
   title: string | null;
 };

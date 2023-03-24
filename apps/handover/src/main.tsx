@@ -6,7 +6,14 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useContextId } from '@cc-components/shared/hooks';
 import { NoContext } from '@cc-components/shared/common';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 const HandoverApp = () => {
   const contextId = useContextId();
@@ -14,7 +21,7 @@ const HandoverApp = () => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
+        <div style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
           {contextId ? <WorkspaceWrapper contextId={contextId} /> : <NoContext />}
         </div>
       </QueryClientProvider>

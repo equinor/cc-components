@@ -16,9 +16,9 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const dataProxy = useHttpClient('data-proxy');
+  const ccApi = useHttpClient('cc-api');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
+    ccApi.fetch(`/api/contexts/${contextId}/handover`, {
       signal,
     });
 

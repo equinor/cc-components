@@ -1,14 +1,13 @@
 export type McBase = {
-  mcPkgNo: string;
-  mcPkgId: string;
+  mechanicalCompletionPackageId: string;
+  mechanicalCompletionPackageUrlId: string;
+  mechanicalCompletionPackageNo: string;
+  mechanicalCompletionPackageStatus: string | null;
   description: string | null;
-  mcStatus: string | null;
-  rfccShippedActualDate: string | null;
-  rfccAcceptedActualDate: string | null;
-  rfocIsShipped: boolean | null;
-  rfocIsAccepted: boolean | null;
-  rfocIsRejected: boolean | null;
-  rfccIsShipped: boolean | null;
-  rfccIsAccepted: boolean | null;
-  rfccIsRejected: boolean | null;
+  rfoIsShipped: boolean | null;
+  rfoIsAccepted: boolean | null;
+  rfoIsRejected: boolean | null;
+  rfcIsShipped: boolean | null;
+  rfcIsAccepted: boolean | null;
+  rfcIsRejected: boolean | null;
 };
