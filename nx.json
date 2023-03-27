@@ -12,6 +12,8 @@
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ],
     "sharedGlobals": []
@@ -32,6 +34,7 @@
         "default",
         "^production",
         "{workspaceRoot}/.storybook/**/*",
+        "!{projectRoot}/.storybook/**/*",
         "!{projectRoot}/.storybook/**/*"
       ]
     },
