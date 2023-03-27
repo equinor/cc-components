@@ -48,6 +48,12 @@
       "@cc-components/shared/common": ["libs/shared/common/src/index.ts"],
       "@cc-components/shared/hooks": ["libs/shared/hooks/src/index.ts"],
       "@cc-components/shared/mapping": ["libs/shared/mapping/src/index.ts"],
+      "@cc-components/shared/markdown-editor": [
+        "libs/shared/markdown-editor/src/index.ts"
+      ],
+      "@cc-components/shared/markdown-viewer": [
+        "libs/shared/markdown-viewer/src/index.ts"
+      ],
       "@cc-components/shared/pbi-helpers": ["libs/shared/pbi-helpers/src/index.ts"],
       "@cc-components/shared/sidesheet": ["libs/shared/sidesheet/src/index.ts"],
       "@cc-components/shared/table-helpers": ["libs/shared/table-helpers/src/index.ts"],
