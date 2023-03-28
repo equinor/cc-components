@@ -1,5 +1,5 @@
 ## Version 0.0.13
-Adjust
+Adjust WO endpoints
 
 ## Version 0.0.12
 Bump workspace fusion 0.20.0
