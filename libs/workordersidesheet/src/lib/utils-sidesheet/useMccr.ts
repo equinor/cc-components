@@ -10,7 +10,7 @@ const fetchMccr = async (
   signal?: AbortSignal
 ) => {
   const res = await ccClient.fetch(
-    `/api/work-orders/checklists?contextId=${contextId}&workOrderId=${packageId}`,
+    `/api/contexts/${contextId}/work-orders/${packageId}/checklists`,
     {
       signal,
     }

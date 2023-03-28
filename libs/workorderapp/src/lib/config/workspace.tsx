@@ -17,7 +17,7 @@ type WorkspaceWrapperProps = {
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const ccApp = useHttpClient('cc-app');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    ccApp.fetch(`/api/work-orders?contextId=${contextId}`, {
+    ccApp.fetch(`/api/contexts/${contextId}/work-orders`, {
       signal,
     });
   const pbi = usePBIOptions('workorder-analytics', {

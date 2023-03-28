@@ -10,7 +10,7 @@ const fetchMaterials = async (
   signal?: AbortSignal
 ) => {
   const res = await ccClient.fetch(
-    `/api/work-orders/materials?contextId=${contextId}&workOrderId=${packageId}`,
+    `/api/contexts/${contextId}/work-orders/${packageId}/materials`,
     {
       signal,
     }

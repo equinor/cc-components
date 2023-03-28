@@ -1,3 +1,6 @@
+## Version 0.0.13
+Adjust WO endpoints
+
 ## Version 0.0.12
 Bump workspace fusion 0.20.0
 Bump workspace ag grid 0.3.8
