@@ -6,7 +6,7 @@ import dts from 'vite-plugin-dts';
 import { join } from 'path';
 
 export default defineConfig({
-  base: '/cc-components',
+  base: '/cc-components/',
   cacheDir: '../../node_modules/.vite/storybook-host',
 
   plugins: [
