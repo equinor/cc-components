@@ -1,12 +1,81 @@
 {
-    "name": "@cc-components/shared",
-    "version": "0.0.1",
-    "type": "module",
-    "main": "./dist/src/index.js",
-    "module": "./dist/src/index.js",
-    "types": "./dist/src/index.d.ts",
-    "scripts": {
-      "build": "tsc -b"
+  "name": "@cc-components/shared",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "typesVersions": {
+    ">=4.2": {
+      ".": [
+        "dist/src/packages/index"
+      ],
+      "common": [
+        "dist/src/packages/common/index"
+      ],
+      "hooks": [
+        "dist/src/packages/hooks/index"
+      ],
+      "mapping": [
+        "dist/src/packages/mapping/index"
+      ],
+      "markdown-editor": [
+        "dist/src/packages/markdown-editor/index"
+      ],
+      "markdown-viewer": [
+        "dist/src/packages/markdown-viewer/index"
+      ],
+      "modal": [
+        "dist/src/packages/modal/index"
+      ],
+      "pbi-helpers": [
+        "dist/src/packages/pbi-helpers/index"
+      ],
+      "sidesheet": [
+        "dist/src/packages/sidesheet/index"
+      ],
+      "table-helpers": [
+        "dist/src/packages/table-helpers/index"
+      ],
+      "types": [
+        "dist/src/packages/types/index"
+      ],
+      "utils-dates": [
+        "dist/src/packages/utils-dates/index"
+      ],
+      "utils-formatting": [
+        "dist/src/packages/utils-formatting/index"
+      ],
+      "utils-sorting": [
+        "dist/src/packages/utils-sorting/index"
+      ],
+      "utils-statuses": [
+        "dist/src/packages/utils-statuses/index"
+      ],
+      "utils-typescript": [
+        "dist/src/packages/utils-typescript/index"
+      ]
     }
+  },
+  "exports": {
+    ".": "./dist/src/packages/index.js",
+    "./common": "./dist/src/packages/common/index.js",
+    "./hooks": "./dist/src/packages/hooks/index.js",
+    "./mapping": "./dist/src/packages/mapping/index.js",
+    "./markdown-editor": "./dist/src/packages/markdown-editor/index.js",
+    "./markdown-viewer": "./dist/src/packages/markdown-viewer/index.js",
+    "./modal": "./dist/src/packages/modal/index.js",
+    "./pbi-helpers": "./dist/src/packages/pbi-helpers/index.js",
+    "./sidesheet": "./dist/src/packages/sidesheet/index.js",
+    "./table-helpers": "./dist/src/packages/table-helpers/index.js",
+    "./types": "./dist/src/packages/types/index.js",
+    "./utils-dates": "./dist/src/packages/utils-dates/index.js",
+    "./utils-formatting": "./dist/src/packages/utils-formatting/index.js",
+    "./utils-sorting": "./dist/src/packages/utils-sorting/index.js",
+    "./utils-statuses": "./dist/src/packages/utils-statuses/index.js",
+    "./utils-typescript": "./dist/src/packages/utils-typescript/index.js"
   }
-  
+}

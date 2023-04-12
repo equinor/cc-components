@@ -327,55 +327,152 @@ importers:
         specifier: workspace:^
         version: link:../shared
 
-  libs/commissioningtaskapp: {}
+  libs/commissioningtaskapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/handoverapp: {}
+  libs/handoverapp:
+    dependencies:
+      '@cc-components/handovershared':
+        specifier: workspace:^
+        version: link:../handovershared
+      '@cc-components/handoversidesheet':
+        specifier: workspace:^
+        version: link:../handoversidesheet
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/handovershared: {}
+  libs/handovershared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/handoversidesheet: {}
+  libs/handoversidesheet:
+    dependencies:
+      '@cc-components/handovershared':
+        specifier: workspace:^
+        version: link:../handovershared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/jcainstallationapp: {}
+  libs/jcainstallationapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/jcaspoolsapp: {}
+  libs/jcaspoolsapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/jcaworkpreparationapp: {}
+  libs/jcaworkpreparationapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/loopapp: {}
+  libs/loopapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/loopshared: {}
+  libs/loopshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/loopsidesheet: {}
+  libs/loopsidesheet:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/mechanicalcompletionapp: {}
+  libs/mechanicalcompletionapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/mechanicalcompletionshared: {}
+  libs/mechanicalcompletionshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/mechanicalcompletionsidesheet: {}
+  libs/mechanicalcompletionsidesheet:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
   libs/plugins: {}
 
-  libs/preservationanalyticsapp: {}
+  libs/preservationanalyticsapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/punchapp: {}
+  libs/punchapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/punchshared: {}
+  libs/punchshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/punchsidesheet: {}
+  libs/punchsidesheet:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/queryapp: {}
+  libs/queryapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
   libs/shared: {}
 
   libs/storybook-host: {}
 
-  libs/swcrapp: {}
+  libs/swcrapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/swcrshared: {}
+  libs/swcrshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/swcrsidesheet: {}
+  libs/swcrsidesheet:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
-  libs/tagsapp: {}
+  libs/tagsapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
   libs/workorderapp:
     dependencies:
