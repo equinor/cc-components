@@ -25,21 +25,19 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const gardenConfig = useGardenConfig(contextId);
 
   return (
-    <div style={{ height: '100vh' }}>
-      <Workspace
-        workspaceOptions={{
-          appKey: 'Workorder',
-          getIdentifier: (item) => item.workOrderId,
-          defaultTab: 'garden',
-        }}
-        powerBiOptions={pbi}
-        filterOptions={filterConfig}
-        gardenOptions={gardenConfig}
-        gridOptions={tableConfig}
-        statusBarOptions={statusBarConfig}
-        sidesheetOptions={sidesheetConfig}
-        modules={[gridModule, gardenModule, powerBiModule]}
-      />
-    </div>
+    <Workspace
+      workspaceOptions={{
+        appKey: 'Workorder',
+        getIdentifier: (item) => item.workOrderId,
+        defaultTab: 'garden',
+      }}
+      powerBiOptions={pbi}
+      filterOptions={filterConfig}
+      gardenOptions={gardenConfig}
+      gridOptions={tableConfig}
+      statusBarOptions={statusBarConfig}
+      sidesheetOptions={sidesheetConfig}
+      modules={[gridModule, gardenModule, powerBiModule]}
+    />
   );
 };
