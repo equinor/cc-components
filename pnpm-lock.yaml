@@ -306,19 +306,61 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/handover: {}
+  apps/handover:
+    dependencies:
+      '@cc-components/handoverapp':
+        specifier: workspace:^
+        version: link:../../libs/handoverapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/jcainstallation: {}
+  apps/jcainstallation:
+    dependencies:
+      '@cc-components/jcainstallationapp':
+        specifier: workspace:^
+        version: link:../../libs/jcainstallationapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/jcaspools: {}
+  apps/jcaspools:
+    dependencies:
+      '@cc-components/jcaspoolsapp':
+        specifier: workspace:^
+        version: link:../../libs/jcaspoolsapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/jcaworkpreparation: {}
+  apps/jcaworkpreparation:
+    dependencies:
+      '@cc-components/jcaworkpreparationapp':
+        specifier: workspace:^
+        version: link:../../libs/jcaworkpreparationapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/loop: {}
 
-  apps/mechanicalcompletion: {}
+  apps/mechanicalcompletion:
+    dependencies:
+      '@cc-components/mechanicalcompletionapp':
+        specifier: workspace:^
+        version: link:../../libs/mechanicalcompletionapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/preservationanalytics: {}
+  apps/preservationanalytics:
+    dependencies:
+      '@cc-components/preservationanalyticsapp':
+        specifier: workspace:^
+        version: link:../../libs/preservationanalyticsapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/punch: {}
 

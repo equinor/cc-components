@@ -7,10 +7,14 @@
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
-    "build": "tsc --noEmit",
+    "build": "tsc -b",
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k jca-spools dist/bundle.zip",
     "postdeploy:spa": "fdev portal publish -e ci -k jca-spools"
+  },
+  "dependencies": {
+    "@cc-components/jcaspoolsapp": "workspace:^",
+    "@cc-components/shared": "workspace:^"
   }
 }
