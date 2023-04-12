@@ -270,7 +270,14 @@ importers:
         specifier: ^0.25.8
         version: 0.25.8(@vitest/ui@0.25.8)(jsdom@20.0.3)
 
-  apps/activities: {}
+  apps/activities:
+    dependencies:
+      '@cc-components/activitiesapp':
+        specifier: workspace:^
+        version: link:../../libs/activitiesapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/ccoverview: {}
 
