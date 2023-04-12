@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "packageManager": "pnpm@8.0.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "first-time-setup": "npm i -g pnpm@8.0.0 && pnpm i && pnpm build",
     "start": "nx serve",
     "build": "pnpm -r build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
