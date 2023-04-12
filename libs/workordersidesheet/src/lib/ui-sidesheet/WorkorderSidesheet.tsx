@@ -16,10 +16,9 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-} from '@cc-components/shared/sidesheet';
-import { StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls } from '@cc-components/shared/mapping';
-
+  StyledItemLink,
+  proCoSysUrls,
+} from '@cc-components/shared';
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;

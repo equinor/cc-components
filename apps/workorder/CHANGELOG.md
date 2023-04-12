@@ -1,3 +1,7 @@
+## Version 1.0.1
+
+Reduce bundle size by more than 50% by switching to pnpm.
+
 ## Version 1.0.0
 
 Workspace server side preview

@@ -2,9 +2,10 @@
   "name": "cc-components",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "nx serve",
-    "build": "nx build",
+    "build": "pnpm -r build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
     "storybook-build": "npx nx run storybook-host:build-storybook",
     "test": "nx test",
@@ -15,7 +16,6 @@
     "bump-ws-apps": "nx run-many --target=version --projects=$(node tools/projectsWithWSTag.js)",
     "postinstall": "node ./tools/scripts/patch-nx-cli.js"
   },
-  "private": true,
   "devDependencies": {
     "@astrojs/react": "^2.0.2",
     "@equinor/fusion-framework-cli": "^5.1.2",

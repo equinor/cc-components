@@ -1,4 +1,4 @@
-import { getYearAndWeekFromDate } from '@cc-components/shared/utils-dates';
+import { getYearAndWeekFromDate } from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { ExtendedGardenFields } from '../types';
 import { getGroupBy } from './getGroupBy';

@@ -1,4 +1,4 @@
-import { FollowUpStatuses } from '@cc-components/shared/types';
+import { FollowUpStatuses } from '@cc-components/shared';
 
 export const followUpColorMap: Record<FollowUpStatuses, string> = {
   [FollowUpStatuses.WOFinished]: '#1169d9',

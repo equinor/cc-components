@@ -1,11 +1,12 @@
-import { materialStatusMap } from '@cc-components/shared/mapping';
 import {
+  materialStatusMap,
   stringCell,
   StyledTabContent,
   StyledTable,
-} from '@cc-components/shared/sidesheet';
-import { formatDateString } from '@cc-components/shared/utils-dates';
-import { hasProperty } from '@cc-components/shared/utils-typescript';
+  formatDateString,
+  hasProperty,
+} from '@cc-components/shared';
+
 import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
 type DetailsTabProps = {
   workOrder: WorkOrder | undefined;
