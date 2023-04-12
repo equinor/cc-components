@@ -362,13 +362,41 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/punch: {}
+  apps/punch:
+    dependencies:
+      '@cc-components/punchapp':
+        specifier: workspace:^
+        version: link:../../libs/punchapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/query: {}
+  apps/query:
+    dependencies:
+      '@cc-components/queryapp':
+        specifier: workspace:^
+        version: link:../../libs/queryapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/swcr: {}
+  apps/swcr:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+      '@cc-components/swcrapp':
+        specifier: workspace:^
+        version: link:../../libs/swcrapp
 
-  apps/tags: {}
+  apps/tags:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+      '@cc-components/tagsapp':
+        specifier: workspace:^
+        version: link:../../libs/tagsapp
 
   apps/workorder:
     dependencies:
