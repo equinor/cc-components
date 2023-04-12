@@ -3,10 +3,16 @@
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
   "exports": {
     ".": {
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "dependencies": {
+    "@cc-components/shared": "workspace:^"
   }
 }
