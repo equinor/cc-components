@@ -297,7 +297,14 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/commissioningtask: {}
+  apps/commissioningtask:
+    dependencies:
+      '@cc-components/commissioningtaskapp':
+        specifier: workspace:^
+        version: link:../../libs/commissioningtaskapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/handover: {}
 
