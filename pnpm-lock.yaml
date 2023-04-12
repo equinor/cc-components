@@ -380,6 +380,12 @@ importers:
 
   libs/loopapp:
     dependencies:
+      '@cc-components/loopshared':
+        specifier: workspace:^
+        version: link:../loopshared
+      '@cc-components/loopsidesheet':
+        specifier: workspace:^
+        version: link:../loopsidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -392,12 +398,21 @@ importers:
 
   libs/loopsidesheet:
     dependencies:
+      '@cc-components/loopshared':
+        specifier: workspace:^
+        version: link:../loopshared
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
 
   libs/mechanicalcompletionapp:
     dependencies:
+      '@cc-components/mechanicalcompletionshared':
+        specifier: workspace:^
+        version: link:../mechanicalcompletionshared
+      '@cc-components/mechanicalcompletionsidesheet':
+        specifier: workspace:^
+        version: link:../mechanicalcompletionsidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -410,6 +425,9 @@ importers:
 
   libs/mechanicalcompletionsidesheet:
     dependencies:
+      '@cc-components/mechanicalcompletionshared':
+        specifier: workspace:^
+        version: link:../mechanicalcompletionshared
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -424,6 +442,12 @@ importers:
 
   libs/punchapp:
     dependencies:
+      '@cc-components/punchshared':
+        specifier: workspace:^
+        version: link:../punchshared
+      '@cc-components/punchsidesheet':
+        specifier: workspace:^
+        version: link:../punchsidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -436,6 +460,9 @@ importers:
 
   libs/punchsidesheet:
     dependencies:
+      '@cc-components/punchshared':
+        specifier: workspace:^
+        version: link:../punchshared
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -455,6 +482,12 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/swcrshared':
+        specifier: workspace:^
+        version: link:../swcrshared
+      '@cc-components/swcrsidesheet':
+        specifier: workspace:^
+        version: link:../swcrsidesheet
 
   libs/swcrshared:
     dependencies:
@@ -467,6 +500,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/swcrshared':
+        specifier: workspace:^
+        version: link:../swcrshared
 
   libs/tagsapp:
     dependencies:
