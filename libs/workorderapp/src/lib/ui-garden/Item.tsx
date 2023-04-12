@@ -2,7 +2,6 @@ import { FlagIcon, PopoverWrapper } from '@cc-components/shared/common';
 import { WorkOrder } from '@cc-components/workordershared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { ExtendedGardenFields } from '../types';
 import { getWorkOrderStatuses } from '../utils-garden';
 import {
   StyledStatusCircles,
@@ -13,9 +12,7 @@ import {
 } from './garden.styles';
 import { WorkOrderPopover } from './Popover';
 
-const WorkorderItem = (
-  props: CustomItemView<WorkOrder, ExtendedGardenFields>
-): JSX.Element => {
+const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
     null
@@ -33,9 +30,8 @@ const WorkorderItem = (
     rowStart,
     parentRef,
     width: itemWidth = 300,
-    controller: { getDisplayName, useCurrentGroupingKeys },
+    displayName,
   } = props;
-  const { horizontalGroupingAccessor } = useCurrentGroupingKeys();
 
   const {
     backgroundColor,
@@ -46,15 +42,8 @@ const WorkorderItem = (
     size,
     status,
     textColor,
-  } = useMemo(
-    () =>
-      getWorkOrderStatuses(
-        data,
-        horizontalGroupingAccessor as keyof WorkOrder | ExtendedGardenFields,
-        []
-      ),
-    [data, horizontalGroupingAccessor]
-  );
+    //TODO: group by keys
+  } = useMemo(() => getWorkOrderStatuses(data, 'disciplineCode', []), [data]);
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
@@ -82,7 +71,7 @@ const WorkorderItem = (
         >
           <StyledSizes size={size} color={textColor} />
           {data.holdBy && <FlagIcon color={textColor} />}
-          <StyledItemText>{getDisplayName(data)}</StyledItemText>
+          <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles matColor={matColor} mccrColor={mccrColor} />
         </StyledItemWrapper>
         {columnExpanded && data.description}

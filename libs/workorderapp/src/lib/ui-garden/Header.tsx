@@ -1,8 +1,7 @@
-import { WorkOrder } from '@cc-components/workordershared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import { getSubtitleHeader } from '../utils-garden';
+
 const HeaderContent = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,20 +15,16 @@ const Count = styled.span`
   font-size: 0.8rem;
   margin-left: 0.8em;
 `;
-const WorkOrderHeader = (props: CustomHeaderView<WorkOrder>) => {
-  const { columnIndex, garden, columnIsExpanded } = props;
-  const subtitleHeader = useMemo(
-    () => getSubtitleHeader(garden, columnIndex, columnIsExpanded, props?.groupByKey),
-    [garden, columnIndex, columnIsExpanded, props?.groupByKey]
-  );
+const WorkOrderHeader = (props: CustomHeaderView) => {
+  const { header } = props;
 
   return (
     <HeaderContent>
       <div>
-        {garden[columnIndex].value}
-        <div>{subtitleHeader}</div>
+        {header.name}
+        <div>{''}</div>
       </div>
-      <Count>({garden[columnIndex].count})</Count>
+      <Count>({header.count})</Count>
     </HeaderContent>
   );
 };
