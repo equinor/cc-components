@@ -8,6 +8,7 @@ import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useStatusBarConfig } from './statusBarConfig';
+import { useGardenConfig } from './gardenConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -21,6 +22,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const filterConfig = useFilterConfig(contextId);
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId);
 
   return (
     <div style={{ height: '100vh' }}>
@@ -32,7 +34,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         }}
         powerBiOptions={pbi}
         filterOptions={filterConfig}
-        // gardenOptions={gardenConfig}
+        gardenOptions={gardenConfig}
         gridOptions={tableConfig}
         statusBarOptions={statusBarConfig}
         sidesheetOptions={sidesheetConfig}
