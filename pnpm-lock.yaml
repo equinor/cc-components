@@ -279,9 +279,23 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/ccoverview: {}
+  apps/ccoverview:
+    dependencies:
+      '@cc-components/ccoverviewapp':
+        specifier: workspace:^
+        version: link:../../libs/ccoverviewapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
-  apps/checklist: {}
+  apps/checklist:
+    dependencies:
+      '@cc-components/checklistapp':
+        specifier: workspace:^
+        version: link:../../libs/checklistapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/commissioningtask: {}
 
