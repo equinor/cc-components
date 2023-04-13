@@ -1,7 +1,7 @@
 {
   "name": "workorder",
-  "version": "1.0.2",
-  "main": "./src/main.tsx",
+  "version": "1.0.3",
+  "main": "/src/main.tsx",
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
