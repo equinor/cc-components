@@ -8,6 +8,7 @@
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g pnpm@8.0.0 @equinor/fusion-framework-cli && pnpm i && pnpm build",
     "build": "pnpm -r build",
+    "build:fast": "pnpm --parallel -r build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
     "storybook-build": "npx nx run storybook-host:build-storybook",
     "test": "nx test",
