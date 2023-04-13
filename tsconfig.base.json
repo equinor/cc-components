@@ -14,6 +14,9 @@
     "lib": ["ES2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "paths": {
+      "@cc-components/plugins": ["libs/plugins/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp", "dist", "vite.config.ts"]
 }

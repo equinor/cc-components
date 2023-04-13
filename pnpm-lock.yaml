@@ -380,6 +380,24 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  apps/scopechangerequest11:
+    dependencies:
+      '@cc-components/scopechangerequest11app':
+        specifier: workspace:^
+        version: link:../../libs/scopechangerequest11app
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
+  apps/scopechangerequest14:
+    dependencies:
+      '@cc-components/scopechangerequest14app':
+        specifier: workspace:^
+        version: link:../../libs/scopechangerequest14app
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/swcr:
     dependencies:
       '@cc-components/shared':
@@ -569,6 +587,18 @@ importers:
         version: link:../shared
 
   libs/queryapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/scopechangerequest11app:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/scopechangerequest14app:
     dependencies:
       '@cc-components/shared':
         specifier: workspace:^

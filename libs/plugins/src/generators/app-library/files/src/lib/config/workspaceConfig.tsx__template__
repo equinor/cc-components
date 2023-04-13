@@ -9,6 +9,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     <Workspace
       workspaceOptions={{
         appKey: '<%= projectName %>',
+        getIdentifier: () => ""
       }}
     />
   );
