@@ -45,6 +45,7 @@
       "@cc-components/punchshared": ["libs/punchshared/src/index.ts"],
       "@cc-components/punchsidesheet": ["libs/punchsidesheet/src/index.ts"],
       "@cc-components/queryapp": ["libs/queryapp/src/index.ts"],
+      "@cc-components/scopechangerequestapp": ["libs/scopechangerequestapp/src/index.ts"],
       "@cc-components/shared/common": ["libs/shared/common/src/index.ts"],
       "@cc-components/shared/hooks": ["libs/shared/hooks/src/index.ts"],
       "@cc-components/shared/mapping": ["libs/shared/mapping/src/index.ts"],
