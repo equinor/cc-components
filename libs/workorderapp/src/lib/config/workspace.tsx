@@ -1,4 +1,4 @@
-import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
+import { usePBIOptions } from '@cc-components/shared';
 import Workspace from '@equinor/workspace-fusion';
 import { useFilterConfig } from './filterConfig';
 import { sidesheetConfig } from './sidesheetConfig';

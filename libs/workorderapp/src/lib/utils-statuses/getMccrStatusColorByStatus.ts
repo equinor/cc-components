@@ -1,5 +1,4 @@
-import { statusColorMap } from '@cc-components/shared/mapping';
-import { hasProperty } from '@cc-components/shared/utils-typescript';
+import { hasProperty, statusColorMap } from '@cc-components/shared';
 
 export const getMccrStatusColorByStatus = (mccrStatus: string | null): string => {
   if (!mccrStatus) {

@@ -4,13 +4,13 @@ import {
   ProgressCell,
   StatusCell,
   YearAndWeekCell,
-} from '@cc-components/shared/table-helpers';
+} from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { WorkOrder } from '@cc-components/workordershared';
-import { proCoSysUrls } from '@cc-components/shared/mapping';
+import { proCoSysUrls } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, unknown> => {

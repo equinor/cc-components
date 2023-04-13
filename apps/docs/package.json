@@ -1,0 +1,17 @@
+{
+  "name": "@cc-components/docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "build:prod": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "2.0.2",
+    "astro": "2.0.0"
+  }
+}

@@ -1,4 +1,4 @@
-import { FlagIcon, PopoverWrapper } from '@cc-components/shared/common';
+import { FlagIcon, PopoverWrapper } from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';

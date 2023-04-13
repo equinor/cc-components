@@ -1,4 +1,4 @@
-import { FollowUpStatuses } from '@cc-components/shared/types';
+import { FollowUpStatuses } from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { Kpi } from '../types';
 import { getFollowUpStatus } from '../utils-statuses';

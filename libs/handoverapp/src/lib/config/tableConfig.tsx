@@ -1,12 +1,7 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { statusColorMap } from '@cc-components/shared/mapping';
-import {
-  DateCell,
-  DescriptionCell,
-  LinkCell,
-  StatusCell,
-} from '@cc-components/shared/table-helpers';
-import { BaseStatus } from '@cc-components/shared/types';
+import { statusColorMap } from '@cc-components/shared';
+import { DateCell, DescriptionCell, LinkCell, StatusCell } from '@cc-components/shared';
+import { BaseStatus } from '@cc-components/shared';
 
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { GridConfig } from '@equinor/workspace-fusion/grid';

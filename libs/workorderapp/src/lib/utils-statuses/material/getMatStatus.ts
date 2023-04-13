@@ -1,4 +1,4 @@
-import { hasProperty } from '@cc-components/shared/utils-typescript';
+import { hasProperty } from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { MappedMaterialStatus } from '../../types';
 import { materialPackageStatusMap } from './material';

@@ -1,4 +1,4 @@
-import { useContextId } from '@cc-components/shared/hooks';
+import { useContextId } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
 import { WorkOrderMccr } from '../types';
