@@ -57,6 +57,9 @@
       ],
       "utils-typescript": [
         "dist/src/packages/utils-typescript/index"
+      ],
+      "workspace-config": [
+        "dist/src/packages/workspace-config/index"
       ]
     }
   },
@@ -76,6 +79,10 @@
     "./utils-formatting": "./dist/src/packages/utils-formatting/index.js",
     "./utils-sorting": "./dist/src/packages/utils-sorting/index.js",
     "./utils-statuses": "./dist/src/packages/utils-statuses/index.js",
-    "./utils-typescript": "./dist/src/packages/utils-typescript/index.js"
+    "./utils-typescript": "./dist/src/packages/utils-typescript/index.js",
+    "./workspace-config": "./dist/src/packages/workspace-config/index.js"
+  },
+  "dependencies": {
+    "@equinor/workspace-fusion": "1.0.0-alpha.5"
   }
 }
