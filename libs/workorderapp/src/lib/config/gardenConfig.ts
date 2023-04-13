@@ -1,10 +1,29 @@
 import { WorkOrder } from '@cc-components/workordershared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
+import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GardenHeader, GardenItem } from '../ui-garden';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
-export const useGardenConfig = (contextId: string): GardenConfig<WorkOrder, unknown> => {
+export const useGardenConfig = (
+  contextId: string
+): GardenConfig<WorkOrder, FilterStateGroup[]> => {
   const client = useHttpClient('cc-app');
+
+  const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
+    useGardenDataSource({
+      getBlockAsync: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
+      getGardenMeta: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden-meta`, requestArgs),
+      getHeader: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
+      getSubgroupItems: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/work-orders/subgroup-items`,
+          requestArgs
+        ),
+    });
 
   return {
     getDisplayName: (item) => item.workOrderNumber,
@@ -12,99 +31,10 @@ export const useGardenConfig = (contextId: string): GardenConfig<WorkOrder, unkn
       horizontalGroupingAccessor: 'DisciplineCode',
       verticalGroupingKeys: [],
     },
-    getBlockAsync: async (args, filters, signal) => {
-      const { columnEnd, columnStart, groupingKeys, rowEnd, rowStart } = args;
-
-      const res = await client.fetch(`/api/contexts/${contextId}/work-orders/garden`, {
-        method: 'POST',
-        signal,
-        headers: {
-          ['content-type']: 'application/json',
-        },
-        body: JSON.stringify({
-          columnStart,
-          columnEnd,
-          rowStart,
-          rowEnd,
-          groupingKeys,
-          filter: filters,
-        }),
-      });
-
-      return res.json();
-    },
-    getGardenMeta: async (keys, filters, signal) => {
-      const res = await client.fetch(
-        `/api/contexts/${contextId}/work-orders/garden-meta`,
-        {
-          method: 'POST',
-          signal,
-          headers: {
-            ['content-type']: 'application/json',
-          },
-          body: JSON.stringify({
-            groupingKeys: keys,
-            filter: filters,
-          }),
-        }
-      );
-
-      const meta = await res.json();
-
-      return {
-        ...meta,
-        rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
-        groupingOptions: meta.allGroupingOptions,
-      };
-    },
-    getHeader: async (args, filters, signal) => {
-      const { columnEnd, columnStart, groupingKeys } = args;
-
-      const res = await client.fetch(`/api/contexts/${contextId}/work-orders/garden`, {
-        method: 'POST',
-        signal,
-        headers: {
-          ['content-type']: 'application/json',
-        },
-        body: JSON.stringify({
-          columnStart,
-          columnEnd,
-          rowStart: 0,
-          rowEnd: 0,
-          groupingKeys,
-          filter: filters,
-        }),
-      });
-
-      return (await res.json()).map((s: any) => ({
-        ...s,
-        name: s.columnName,
-        count: s.totalItemsCount,
-      }));
-    },
-    getSubgroupItems: async (args, filter, signal) => {
-      const { columnName, subgroupName, groupingKeys } = args;
-
-      const res = await client.fetch(
-        `/api/contexts/${contextId}/work-orders/subgroup-items`,
-        {
-          method: 'POST',
-          signal,
-          headers: {
-            ['content-type']: 'application/json',
-          },
-          body: JSON.stringify({
-            columnName,
-            subGroupName: subgroupName,
-            groupingKeys,
-            filter: filter,
-          }),
-        }
-      );
-
-      return res.json();
-    },
-
+    getBlockAsync,
+    getGardenMeta,
+    getHeader,
+    getSubgroupItems,
     customViews: {
       customItemView: GardenItem,
       customHeaderView: GardenHeader,

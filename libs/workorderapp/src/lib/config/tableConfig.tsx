@@ -7,32 +7,26 @@ import {
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { WorkOrder } from '@cc-components/workordershared';
 import { proCoSysUrls } from '@cc-components/shared';
+import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const useTableConfig = (contextId: string): GridConfig<WorkOrder, unknown> => {
+export const useTableConfig = (
+  contextId: string
+): GridConfig<WorkOrder, FilterStateGroup[]> => {
   const client = useHttpClient('cc-app');
 
-  return {
-    getRows: async (params, filters) => {
-      const { startRow, endRow } = params.request;
+  const { getRows } = useGridDataSource(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/work-orders/grid`, req);
+    return (await res.json()).items;
+  });
 
-      const res = await client.fetch(`/api/contexts/${contextId}/work-orders/grid`, {
-        body: JSON.stringify({
-          startRow: startRow,
-          endRow,
-          filter: filters,
-        }),
-        headers: { ['content-type']: 'application/json' },
-        method: 'POST',
-      });
-      const data = await res.json();
-      params.success({ rowData: data.items });
-      return;
-    },
+  return {
+    getRows: getRows,
     columnDefinitions: [
       {
         field: 'Workorder',
