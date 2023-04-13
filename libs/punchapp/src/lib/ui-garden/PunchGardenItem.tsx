@@ -21,7 +21,7 @@ function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
     columnExpanded,
     onClick,
     isSelected,
-    controller: { getDisplayName },
+    displayName,
     width: itemWidth = 300,
   } = props;
   const statusColor = punchStatusColors[data.status];
@@ -39,7 +39,7 @@ function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
         isSelected={isSelected}
       >
         {data.materialRequired && <FlagIcon color={textColor} />}
-        <StyledItemText>{getDisplayName(data)}</StyledItemText>
+        <StyledItemText>{displayName}</StyledItemText>
         <StyledStatusCircles typeColor={punchTypeColor} />
       </StyledPunchItem>
       {columnExpanded && <>{data.description}</>}

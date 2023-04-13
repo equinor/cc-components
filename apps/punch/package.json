@@ -1,6 +1,6 @@
 {
   "name": "punch",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
@@ -11,10 +11,15 @@
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k punch dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k punch"
+    "postdeploy:spa": "fdev portal publish -e ci -k punch",
+    "shipit": "pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
   },
   "dependencies": {
     "@cc-components/punchapp": "workspace:^",
     "@cc-components/shared": "workspace:^"
-  }
+  },
+  "files": [
+    "dist/app-bundle.js",
+    "app-manifest.json"
+  ]
 }
