@@ -6,11 +6,13 @@
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc --noEmit",
+    "build": "tsc -b",
+    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
     "build:spa": "fusion-framework-cli app build",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k scopechangerequest dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k scopechangerequest"
+    "postdeploy:spa": "fdev portal publish -e ci -k scopechangerequest",
+    "shipit": "pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
   },
   "dependencies": {
     "@cc-components/scopechangerequestapp": "workspace:^",
