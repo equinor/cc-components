@@ -21,7 +21,7 @@ export const fieldSettings: FieldSettings<ScopeChangeRequest> = {
   },
   workflowStatus: {
     label: 'Workflow status',
-    getKey: (item) => getDateKey(item.workflowStatus),
+    getKey: (item) => item.workflowStatus,
     getColumnSort: (a, b) => {
       const aN = workflowStatusMap.get(a);
       const bN = workflowStatusMap.get(b);
