@@ -1,4 +1,3 @@
-export { statusBarConfig } from './statusBarConfig';
-export { filterConfig } from './filterConfig';
+export { useStatusBarConfig } from './statusBarConfig';
 export { WorkspaceWrapper } from './workspaceConfig';
 export { configure } from './frameworkConfig';
