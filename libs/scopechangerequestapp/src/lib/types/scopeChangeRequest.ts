@@ -28,8 +28,8 @@ export type ScopeChangeRequest = {
   revisionNumber: number;
   hasComments: boolean;
   hasPendingContributions: boolean;
-  currentWorkflowStep: CurrentWorkflowStep;
-  workflowSteps: WorkflowStep[];
+  currentWorkflowStep: CurrentWorkflowStep | null;
+  workflowSteps: WorkflowStep[] | null;
   attachments: Attachment[];
   systems: System[];
   commissioningPackages: CommissioningPackage[];

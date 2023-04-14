@@ -5,10 +5,15 @@ import { PendingContributions } from '../utils-table/PendingContributions';
 import { WorkflowCompact } from '../workflow/WorkflowCompact';
 import { StateCell } from '../utils-table/StateCell';
 import { getLastSigned } from '../utils-table/getLastSigned';
-import { group, check_circle_outlined, comment_chat } from '@equinor/eds-icons';
+import {
+  group,
+  check_circle_outlined,
+  comment_chat,
+  close_circle_outlined,
+} from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
 
-Icon.add({ group, comment_chat, check_circle_outlined });
+Icon.add({ group, comment_chat, check_circle_outlined, close_circle_outlined });
 
 function findNextToSign(sc: ScopeChangeRequest) {
   return (
@@ -68,7 +73,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
       field: 'Workflow',
       valueGetter: (pkg) => pkg.data?.workflowSteps,
       valueFormatter: (pkg) =>
-        pkg.data?.workflowSteps.map((step) => step.name).toString() ?? '',
+        pkg.data?.workflowSteps?.map((step) => step.name).toString() ?? '',
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
       ) => {
