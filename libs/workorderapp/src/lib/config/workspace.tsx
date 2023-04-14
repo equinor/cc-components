@@ -1,29 +1,34 @@
-import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { usePBIOptions } from '@cc-components/shared';
+import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
-import { contextConfig } from './contextConfig';
-import { filterConfig } from './filterConfig';
-import { gardenConfig } from './gardenConfig';
+
 import { sidesheetConfig } from './sidesheetConfig';
-import { statusBarConfig } from './statusBarConfig';
-import { tableConfig } from './tableConfig';
+
+import { useTableConfig } from './tableConfig';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useGardenConfig } from './gardenConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const ccApp = useHttpClient('cc-app');
-  const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    ccApp.fetch(`/api/contexts/${contextId}/work-orders`, {
-      signal,
-    });
   const pbi = usePBIOptions('workorder-analytics', {
     column: 'ProjectName',
     table: 'Dim_ProjectMaster',
   });
+  const client = useHttpClient('cc-app');
+
+  const filterConfig = useFilterConfig((req) =>
+    client.fetch(`/api/contexts/${contextId}/work-orders/filter-model`, req)
+  );
+  const tableConfig = useTableConfig(contextId);
+  const statusBarConfig = useStatusBarConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId);
+
   return (
     <Workspace
       workspaceOptions={{
@@ -36,16 +41,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
-      dataOptions={{
-        getResponseAsync,
-        responseParser: async (res) => {
-          const resJson = await res.json();
-          return resJson.result;
-        },
-        queryKey: ['workorder', contextId],
-      }}
       sidesheetOptions={sidesheetConfig}
-      contextOptions={contextConfig}
       modules={[gridModule, gardenModule, powerBiModule]}
     />
   );

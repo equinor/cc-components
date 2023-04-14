@@ -1,30 +1,46 @@
 import { WorkOrder } from '@cc-components/workordershared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { ExtendedGardenFields } from '../types';
+import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GardenHeader, GardenItem } from '../ui-garden';
-import { getHighlightedColumn, getItemWidth } from '../utils-garden';
-import { fieldSettings } from '../utils-garden/fieldSettings';
-import { sortPackages } from '../utils-garden/sortPackages';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
-export const gardenConfig: GardenConfig<WorkOrder, ExtendedGardenFields> = {
-  getDisplayName: (item) => item.workOrderNumber,
-  initialGrouping: { horizontalGroupingAccessor: 'fwp', verticalGroupingKeys: [] },
-  fieldSettings: fieldSettings,
-  customViews: {
-    customItemView: GardenItem,
-    customHeaderView: GardenHeader,
-  },
-  visuals: {
-    calculateItemWidth: getItemWidth,
-    highlightHorizontalColumn: getHighlightedColumn,
-    rowHeight: 30,
-  },
-  intercepters: {
-    postGroupSorting: (data, keys) => {
-      data.forEach(({ items }) => {
-        items = sortPackages(items, ...keys);
-      });
-      return data;
+export const useGardenConfig = (
+  contextId: string
+): GardenConfig<WorkOrder, FilterStateGroup[]> => {
+  const client = useHttpClient('cc-app');
+
+  const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
+    useGardenDataSource({
+      getBlockAsync: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
+      getGardenMeta: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden-meta`, requestArgs),
+      getHeader: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
+      getSubgroupItems: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/work-orders/subgroup-items`,
+          requestArgs
+        ),
+    });
+
+  return {
+    getDisplayName: (item) => item.workOrderNumber,
+    initialGrouping: {
+      horizontalGroupingAccessor: 'DisciplineCode',
+      verticalGroupingKeys: [],
     },
-  },
+    getBlockAsync,
+    getGardenMeta,
+    getHeader,
+    getSubgroupItems,
+    customViews: {
+      customItemView: GardenItem,
+      customHeaderView: GardenHeader,
+    },
+    visuals: {
+      rowHeight: 30,
+    },
+  };
 };

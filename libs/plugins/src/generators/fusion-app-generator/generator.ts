@@ -1,12 +1,13 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
+  installPackagesTask,
 } from '@nrwl/devkit';
+import doStuff from '../app-library/generator';
 import * as path from 'path';
 import { FusionAppGeneratorGeneratorSchema } from './schema';
 
@@ -53,52 +54,21 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   );
 }
 
-export default async function (tree: Tree, options: FusionAppGeneratorGeneratorSchema) {
+export default async function initGenerator(
+  tree: Tree,
+  options: FusionAppGeneratorGeneratorSchema
+) {
   const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(tree, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'application',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      serve: {
-        executor: 'nx:run-commands',
-        options: {
-          cwd: `apps/${normalizedOptions.projectName}`,
-          commands: [
-            {
-              command: 'fusion-framework-cli app dev',
-            },
-          ],
-        },
-      },
-      build: {
-        executor: 'nx:run-commands',
-        options: {
-          cwd: `apps/${normalizedOptions.projectName}`,
-          commands: [
-            {
-              command: 'tsc --noEmit',
-            },
-          ],
-        },
-      },
-      'build:spa': {
-        executor: 'nx:run-commands',
-        options: {
-          cwd: `apps/${normalizedOptions.projectName}`,
-          commands: [
-            {
-              command: 'fusion-framework-cli app build',
-            },
-          ],
-        },
-      },
-      version: {
-        executor: '@cc-components/plugins:version',
-      },
-    },
-    tags: normalizedOptions.parsedTags,
-  });
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
+
+  await doStuff(tree, {
+    name: `${options.name}app`,
+    directory: options.directory,
+    tags: options.tags,
+  });
+
+  return async () => {
+    installPackagesTask(tree, true, '.', 'pnpm');
+  };
 }

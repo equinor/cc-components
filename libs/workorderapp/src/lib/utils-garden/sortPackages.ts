@@ -1,4 +1,4 @@
-import { proCoSysStatusPriorityMap } from '@cc-components/shared/mapping';
+import { proCoSysStatusPriorityMap } from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { ExtendedGardenFields } from '../types';
 import { followUpStatusPriorityMap, getStatusFn } from '../utils-statuses';

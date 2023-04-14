@@ -1,14 +1,16 @@
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
+import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
-import { filterConfig } from './filterConfig';
-import { gardenConfig } from './gardenConfig';
+
 import { sidesheetConfig } from './sidesheetConfig';
-import { statusBarConfig } from './statusBarConfig';
-import { tableConfig } from './tableConfig';
+
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useTableConfig } from './tableConfig';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useGardenConfig } from './gardenConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -21,32 +23,24 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     table: 'Dim_ProjectMaster',
   });
 
-  const getResponseAsync = async () => {
-    const res = await ccApi.fetch(`/api/contexts/${contextId}/punch`);
-    return res;
-  };
-
-  const responseParser = async (res: Response) => {
-    const resJson = await res.json();
-    return resJson.result;
-  };
+  const filterConfig = useFilterConfig((req) =>
+    ccApi.fetch(`/api/contexts/${contextId}/punch/filter-model`, req)
+  );
+  const tableConfig = useTableConfig(contextId);
+  const statusbarConfig = useStatusBarConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId);
 
   return (
     <Workspace
-      dataOptions={{
-        getResponseAsync,
-        responseParser,
-        queryKey: ['PUNCH', contextId],
-      }}
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.punchItemNo,
         defaultTab: 'grid',
       }}
       filterOptions={filterConfig}
-      gardenOptions={gardenConfig}
       gridOptions={tableConfig}
-      statusBarOptions={statusBarConfig}
+      gardenOptions={gardenConfig}
+      statusBarOptions={statusbarConfig}
       sidesheetOptions={sidesheetConfig}
       powerBiOptions={pbi}
       modules={[gardenModule, gridModule, powerBiModule]}

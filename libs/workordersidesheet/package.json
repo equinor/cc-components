@@ -1,12 +1,15 @@
 {
   "name": "@cc-components/workordersidesheet",
   "version": "0.0.1",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@cc-components/shared": "workspace:^",
+    "@cc-components/workordershared": "workspace:^"
   }
 }

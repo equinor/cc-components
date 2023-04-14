@@ -15,9 +15,7 @@ const createProgressBackground = (progress: number) => {
   const standardColor = '#ffffff';
   return `linear-gradient(90deg, #d9eaf2 ${progress}%, ${standardColor} ${progress}%)`;
 };
-const LoopGardenItem = (
-  props: CustomItemView<Loop, ExtendedGardenFields, CustomGroupByKeys>
-) => {
+const LoopGardenItem = (props: CustomItemView<Loop>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
     null
@@ -34,7 +32,7 @@ const LoopGardenItem = (
     rowStart,
     columnStart,
     parentRef,
-    controller: { getDisplayName },
+    displayName,
   } = props;
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
@@ -60,7 +58,7 @@ const LoopGardenItem = (
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
         >
-          <StyledItemText>{getDisplayName(data).replace('@LOOP-', '')}</StyledItemText>
+          <StyledItemText>{displayName.replace('@LOOP-', '')}</StyledItemText>
           <StyledStatusCircles
             mcColor={
               data.loopContentStatus ? statusColorMap[data.loopContentStatus] : null

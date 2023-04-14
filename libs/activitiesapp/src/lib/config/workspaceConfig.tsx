@@ -1,4 +1,4 @@
-import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
+import { usePBIOptions } from '@cc-components/shared';
 import Workspace from '@equinor/workspace-fusion';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 

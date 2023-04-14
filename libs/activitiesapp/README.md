@@ -1,3 +1,0 @@
-# activitiesapp
-
-Add readme

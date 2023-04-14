@@ -1,12 +1,14 @@
 {
   "name": "@cc-components/queryapp",
   "version": "0.0.1",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "module": "./dist/src/index.js",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "dependencies": {
+    "@cc-components/shared": "workspace:^"
   }
 }

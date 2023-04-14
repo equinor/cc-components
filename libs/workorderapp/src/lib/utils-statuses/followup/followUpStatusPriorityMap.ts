@@ -1,4 +1,4 @@
-import { FollowUpStatuses } from '@cc-components/shared/types';
+import { FollowUpStatuses } from '@cc-components/shared';
 
 export const followUpStatusPriorityMap: Record<FollowUpStatuses, number> = {
   [FollowUpStatuses.MaterialAndOrWoNotAvailable]: 3,

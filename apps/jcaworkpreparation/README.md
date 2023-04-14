@@ -1,3 +1,0 @@
-# jcaworkpreparation
-
-Add readme

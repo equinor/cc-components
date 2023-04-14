@@ -1,29 +1,22 @@
-import { Punch } from '@cc-components/punchshared';
-import { numberFormat } from '@cc-components/shared/utils-formatting';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { getStatusBarData } from '../utils-status-bar';
-export const statusBarConfig: StatusBarConfig<Punch> = (data) => {
-  const kpis = getStatusBarData(data);
-  return [
-    {
-      title: 'Total punch',
-      value: numberFormat(kpis.totalPunch),
-    },
-    {
-      title: 'Open PB',
-      value: numberFormat(kpis.openPB),
-    },
-    {
-      title: 'Open PA',
-      value: numberFormat(kpis.openPA),
-    },
-    {
-      title: 'Open punch',
-      value: numberFormat(kpis.openPunch),
-    },
-    {
-      title: 'Cleared',
-      value: `${kpis.cleared}%`,
-    },
-  ];
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+
+export const useStatusBarConfig = (contextId: string): StatusBarConfig<unknown[]> => {
+  const client = useHttpClient('cc-api');
+
+  return async (filters, signal) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/punch/kpis`, {
+      method: 'POST',
+      body: JSON.stringify({
+        filter: filters,
+      }),
+      signal,
+      headers: {
+        ['content-type']: 'application/json',
+      },
+    });
+    return (await res.json()).map((s: any) => ({ ...s, title: s.name }));
+  };
 };
+
+export const statusBarConfig = {};
