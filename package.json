@@ -10,7 +10,8 @@
     "build": "pnpm -r build",
     "build:fast": "pnpm --parallel -r build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
-    "storybook-build": "npx nx run storybook-host:build-storybook"
+    "storybook-build": "npx nx run storybook-host:build-storybook",
+    "new:app": "nx generate @cc-components/plugins:fusion-app-generator"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^5.1.2",
