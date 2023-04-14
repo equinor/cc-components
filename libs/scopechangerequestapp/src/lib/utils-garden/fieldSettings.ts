@@ -1,6 +1,5 @@
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
 import { ScopeChangeRequest } from '../types';
-import { getDateKey } from './getDateKey';
 
 const workflowStatusMap = new Map([
   ['Initiate', 1],
