@@ -16,7 +16,7 @@
     "storybook-build": "npx nx run storybook-host:build-storybook"
   },
   "devDependencies": {
-    "@equinor/fusion-framework-cli": "^5.1.2",
+    "@equinor/fusion-framework-cli": "^5.1.16",
     "@equinor/fusion-observable": "^7.0.1",
     "@nrwl/cli": "15.7.1",
     "@nrwl/devkit": "15.7.1",
