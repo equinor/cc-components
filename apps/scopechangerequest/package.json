@@ -11,5 +11,9 @@
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k scopechangerequest dist/bundle.zip",
     "postdeploy:spa": "fdev portal publish -e ci -k scopechangerequest"
+  },
+  "dependencies": {
+    "@cc-components/scopechangerequestapp": "workspace:^",
+    "@cc-components/shared": "workspace:^"
   }
 }

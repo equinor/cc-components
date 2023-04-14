@@ -27,7 +27,7 @@ export const filterConfig: FilterConfig<ScopeChangeRequest> = {
     {
       name: 'Next to sign',
       valueFormatter: (scr) =>
-        scr.currentWorkflowStep?.criterias.find((x) => x.signedAtUtc === null)
+        scr.currentWorkflowStep?.criterias?.find((x) => x.signedAtUtc === null)
           ?.valueDescription ?? null,
     },
     {

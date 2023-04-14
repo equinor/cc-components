@@ -12,7 +12,7 @@ Icon.add({ group, comment_chat, check_circle_outlined });
 
 function findNextToSign(sc: ScopeChangeRequest) {
   return (
-    sc.currentWorkflowStep?.criterias.find((x) => x.signedAtUtc === null)
+    sc.currentWorkflowStep?.criterias?.find((x) => x.signedAtUtc === null)
       ?.valueDescription ?? null
   );
 }
@@ -81,7 +81,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Current step',
-      valueGetter: (pkg) => pkg.data?.currentWorkflowStep.name,
+      valueGetter: (pkg) => pkg.data?.currentWorkflowStep?.name,
       width: 180,
     },
     {

@@ -17,7 +17,7 @@ const workflowStatusMap = new Map([
 export const fieldSettings: FieldSettings<ScopeChangeRequest> = {
   currentWorkflowStep: {
     label: 'Current step',
-    getKey: (item) => item.currentWorkflowStep.name,
+    getKey: (item) => item?.currentWorkflowStep?.name,
   },
   workflowStatus: {
     label: 'Workflow status',
