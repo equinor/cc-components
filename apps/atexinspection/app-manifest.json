@@ -1,7 +1,7 @@
 {
   "name": "Atex inspection",
   "shortName": "atex",
-  "key": "atex-inspection",
+  "key": "atexinspection",
   "version": {
     "major": "0",
     "minor": "0",
