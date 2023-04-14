@@ -1,3 +1,10 @@
 {
-  "eslint.validate": ["json"]
+  "eslint.validate": [
+    "json"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#312F05",
+    "titleBar.activeBackground": "#454207",
+    "titleBar.activeForeground": "#FCFBE6"
+  }
 }
