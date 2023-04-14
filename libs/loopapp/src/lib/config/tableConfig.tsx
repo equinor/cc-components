@@ -1,5 +1,6 @@
 import { Loop, Status } from '@cc-components/loopshared';
 import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import {
   DateCell,
   DescriptionCell,
@@ -7,12 +8,22 @@ import {
   LinkCell,
   StatusCell,
 } from '@cc-components/shared/table-helpers';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 
-export const tableConfig = (): GridConfig<Loop> => {
+export const useTableConfig = (
+  contextId: string
+): GridConfig<Loop, FilterStateGroup[]> => {
+  const client = useHttpClient('cc-api');
+  const { getRows } = useGridDataSource(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/loop/grid`, req);
+    return (await res.json()).items;
+  });
   return {
+    getRows: getRows,
     columnDefinitions: [
       {
         field: 'Loop tag',

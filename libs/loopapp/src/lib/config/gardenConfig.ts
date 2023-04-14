@@ -1,22 +1,36 @@
 import { Loop } from '@cc-components/loopshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import { GardenItem } from '../ui-garden';
-import { fieldSettings, getHighlightedColumn, getItemWidth } from '../utils-garden';
+import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
-export const gardenConfig: GardenConfig<Loop, ExtendedGardenFields, CustomGroupByKeys> = {
-  getDisplayName: (item) => item.loopNo,
-  initialGrouping: { horizontalGroupingAccessor: 'RFC', verticalGroupingKeys: [] },
-  customGroupByKeys: {
-    plannedForecast: 'Planned',
-    weeklyDaily: 'Weekly',
-  },
-  fieldSettings: fieldSettings,
-  visuals: {
-    highlightHorizontalColumn: getHighlightedColumn,
-    calculateItemWidth: getItemWidth,
-  },
-  customViews: {
-    customItemView: GardenItem,
-  },
+export const useGardenConfig = (
+  contextId: string
+): GardenConfig<Loop, FilterStateGroup[]> => {
+  const client = useHttpClient('cc-api');
+  const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
+    useGardenDataSource({
+      getBlockAsync: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
+      getGardenMeta: (req) =>
+        client.fetch(`/api/contexts/${contextId}/loop/garden-meta`, req),
+      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
+      getSubgroupItems: (req) =>
+        client.fetch(`/api/contexts/${contextId}/loop/subgroup-items`, req),
+    });
+
+  return {
+    getBlockAsync,
+    getGardenMeta,
+    getHeader,
+    getSubgroupItems,
+    getDisplayName: (item) => item.loopNo,
+    initialGrouping: {
+      horizontalGroupingAccessor: 'Responsible',
+      verticalGroupingKeys: [],
+    },
+    customViews: {
+      customItemView: GardenItem,
+    },
+  };
 };

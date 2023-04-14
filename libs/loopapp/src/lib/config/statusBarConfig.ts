@@ -1,39 +1,21 @@
 import { Loop } from '@cc-components/loopshared';
-import { numberFormat } from '@cc-components/shared/utils-formatting';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { getStatusBarData } from '../utils-status-bar';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const statusBarConfig: StatusBarConfig<Loop> = (data) => {
-  const kpis = getStatusBarData(data);
+export const useStatusBarConfig = (contextId: string): StatusBarConfig<Loop[]> => {
+  const client = useHttpClient('cc-api');
 
-  return [
-    {
-      title: 'Loop tags',
-      value: numberFormat(kpis.uniqueLoopTags),
-    },
-    {
-      title: 'Checklists',
-      value: numberFormat(kpis.uniqueChecklists),
-    },
-    {
-      title: 'Checklist signed',
-      value: numberFormat(kpis.checklistsSigned),
-    },
-    {
-      title: 'Checklist not signed',
-      value: numberFormat(kpis.checklistsNotSigned),
-    },
-    {
-      title: 'Ready',
-      value: numberFormat(kpis.ready),
-    },
-    {
-      title: 'Overdue checklists',
-      value: numberFormat(kpis.overdueChecklists),
-    },
-    {
-      title: '% complete',
-      value: `${kpis.complete}%`,
-    },
-  ];
+  return async (filters, signal) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/loop/kpis`, {
+      method: 'POST',
+      body: JSON.stringify({
+        filter: filters,
+      }),
+      signal,
+      headers: {
+        ['content-type']: 'application/json',
+      },
+    });
+    return (await res.json()).map((s: any) => ({ ...s, title: s.name }));
+  };
 };
