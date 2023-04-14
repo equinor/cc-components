@@ -8,6 +8,8 @@
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g pnpm@8.0.0 @equinor/fusion-framework-cli && pnpm i && pnpm build",
     "build": "turbo run build",
+    "build:app": "turbo run build --filter",
+    "build:changed": "turbo run build --filter=[HEAD^1]",
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
     "storybook-build": "npx nx run storybook-host:build-storybook"
