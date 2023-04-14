@@ -22,9 +22,7 @@ CC applications that belong in this repository are:
 Each application will have its own library where every component, util and config is placed under. Some applications might have a separate 'app' (i.e. sidesheet) that requires some of the same types and components as the main application. Create a new library called `<name>shared` which contains the common application utilities. Common components and utilities used across many projects should be placed in the `shared` library.
 
 # TLDR
-
-- `nx generate @cc-components/plugins:fusion-app-generator <name>` For generating new applications, or
-- `pnpm new:app <name>`
+- `pnpm new:app <name>` For generating new applications
 
 # Setup
 
