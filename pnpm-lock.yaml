@@ -342,7 +342,14 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/loop: {}
+  apps/loop:
+    dependencies:
+      '@cc-components/loopapp':
+        specifier: workspace:^
+        version: link:../../libs/loopapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/mechanicalcompletion:
     dependencies:

@@ -7,11 +7,10 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g pnpm@8.0.0 @equinor/fusion-framework-cli && pnpm i && pnpm build",
-    "build": "pnpm -r build",
-    "build:fast": "pnpm --parallel -r build",
+    "build": "turbo run build",
+    "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
-    "storybook-build": "npx nx run storybook-host:build-storybook",
-    "new:app": "nx generate @cc-components/plugins:fusion-app-generator"
+    "storybook-build": "npx nx run storybook-host:build-storybook"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^5.1.2",
