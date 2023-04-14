@@ -5,7 +5,7 @@ import { fieldSettings } from '../utils-garden/fieldSettings';
 export const gardenConfig: GardenConfig<ScopeChangeRequest> = {
   getDisplayName: (item) => item.serialNumber,
   initialGrouping: {
-    horizontalGroupingAccessor: 'handoverPlan',
+    horizontalGroupingAccessor: 'state',
     verticalGroupingKeys: [],
   },
   fieldSettings: fieldSettings,

@@ -6,6 +6,8 @@ import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { tableConfig } from './tableConfig';
+import { gardenConfig } from './gardenConfig';
+import { filterConfig } from './filterConfig';
 
 const options: WorkspaceConfig<ScopeChangeRequest> = {
   appKey: 'scopechangerequestapp',
@@ -44,6 +46,8 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       }}
       powerBiOptions={pbi}
       gridOptions={tableConfig}
+      gardenOptions={gardenConfig}
+      filterOptions={filterConfig}
       modules={[gardenModule, gridModule, powerBiModule]}
     />
   );
