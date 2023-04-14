@@ -1,5 +1,4 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -9,7 +8,6 @@ import {
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { AppLibraryGeneratorSchema, NormalizedSchema } from './schema';
-import { updateBaseTsConfig } from './updateBaseTsconfig';
 
 function normalizeOptions(
   tree: Tree,
@@ -51,40 +49,6 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
 
 export default async function (tree: Tree, options: AppLibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
-  updateBaseTsConfig(tree, normalizedOptions);
-  addProjectConfiguration(tree, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'library',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      build: {
-        executor: '@nrwl/vite:build',
-        outputs: ['{options.outputPath}'],
-        defaultConfiguration: 'production',
-        options: {
-          outputPath: `dist/libs/${normalizedOptions.projectName}`,
-          configurations: {
-            development: {
-              mode: 'development',
-            },
-            production: {
-              mode: 'production',
-            },
-          },
-        },
-      },
-      lint: {
-        executor: '@nrwl/linter:eslint',
-        outputs: ['{options.outputFile}'],
-        options: {
-          lintFilePatterns: [
-            `libs/${normalizedOptions.projectName}/**/*.{ts,tsx,js,jsx}`,
-          ],
-        },
-      },
-    },
-    tags: normalizedOptions.parsedTags,
-  });
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
 }
