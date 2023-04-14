@@ -204,16 +204,16 @@ export const useTableConfig = (
       {
         field: 'Rem mhrs',
         valueGetter: (pkg) => pkg.data?.remainingManHours,
-        valueFormatter: (pkg) => pkg.context.maxRemHrs,
-        cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
-          if (props.node.group) return null;
-          return (
-            <EstimateCell
-              current={Number(props.value ?? '0')}
-              max={(props.valueFormatted as unknown as number) ?? 0}
-            />
-          );
-        },
+        // valueFormatter: (pkg) => pkg.context.maxRemHrs,
+        // cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
+        //   if (props.node.group) return null;
+        //   return (
+        //     <EstimateCell
+        //       current={Number(props.value ?? '0')}
+        //       max={(props.valueFormatted as unknown as number) ?? 0}
+        //     />
+        //   );
+        // },
       },
     ],
   };
