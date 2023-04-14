@@ -3,8 +3,8 @@
     "json"
   ],
   "workbench.colorCustomizations": {
-    "activityBar.background": "#312F05",
-    "titleBar.activeBackground": "#454207",
-    "titleBar.activeForeground": "#FCFBE6"
+    "activityBar.background": "#153401",
+    "titleBar.activeBackground": "#1D4902",
+    "titleBar.activeForeground": "#EEFEE4"
   }
 }
