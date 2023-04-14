@@ -5,10 +5,6 @@
     "types": ["node"],
     "rootDir": "."
   },
-  "files": [
-    "../../node_modules/@nrwl/react/typings/cssmodule.d.ts",
-    "../../node_modules/@nrwl/react/typings/image.d.ts"
-  ],
   "exclude": [
     "jest.config.ts",
     "**/*.spec.ts",
@@ -19,7 +15,8 @@
     "**/*.test.js",
     "**/*.spec.jsx",
     "**/*.test.jsx",
-    "dist"
+    "dist",
+    ".turbo"
   ],
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }
