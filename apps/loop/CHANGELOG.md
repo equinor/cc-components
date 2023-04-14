@@ -1,3 +1,7 @@
+## Version 0.1.1
+
+Fix crash in table when trying to calculate max hours
+
 ## Version 0.1.0
 
 Loop serverside new Fusion Data Gateway
