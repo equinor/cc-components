@@ -36,4 +36,4 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build --concurrency 1
+        run: pnpm ci:build

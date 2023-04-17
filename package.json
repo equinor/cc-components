@@ -8,6 +8,7 @@
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm build",
     "serve": "turbo run dev --filter",
+    "ci:build": "turbo run build --output-logs errors-only",
     "build": "turbo run build --output-logs errors-only --parallel",
     "build:app": "turbo run build --parallel --output-logs errors-only --filter",
     "build:changed": "turbo run build --since main --parallel --output-logs errors-only",
