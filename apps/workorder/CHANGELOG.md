@@ -1,3 +1,10 @@
+# Changelog
+
+## Version 1.0.6
+
+Update workspace to alpha.10
+Fixes garden crashing when filters change
+
 ## Version 1.0.5
 
 Update workspace to alpha.9
