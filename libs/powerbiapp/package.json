@@ -1,0 +1,15 @@
+{
+  "name": "@cc-components/powerbi",
+  "version": "0.0.1",
+  "type": "module",
+  "module": "./dist/src/index.js",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@cc-components/shared": "workspace:^",
+    "@equinor/workspace-fusion": "1.0.0-alpha.8"
+  }
+}

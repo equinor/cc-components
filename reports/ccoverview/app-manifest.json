@@ -1,0 +1,10 @@
+{
+  "name": "CC overview",
+  "shortName": "ccoverview",
+  "key": "ccoverview",
+  "version": {
+    "major": "0",
+    "minor": "0",
+    "patch": "5"
+  }
+}

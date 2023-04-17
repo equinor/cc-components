@@ -30,6 +30,14 @@ function normalizeOptions(
   const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`;
   const parsedTags = options.tags ? options.tags.split(',').map((s) => s.trim()) : [];
 
+  console.log(
+    `
+  projectDirectory: ${projectDirectory},
+  projectRoot: ${projectRoot},
+  `,
+    getWorkspaceLayout(tree)
+  );
+  throw new Error('');
   return {
     ...options,
     projectName,
@@ -59,6 +67,7 @@ export default async function initGenerator(
   options: FusionAppGeneratorGeneratorSchema
 ) {
   const normalizedOptions = normalizeOptions(tree, options);
+
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
 

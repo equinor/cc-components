@@ -1,3 +1,0 @@
-# checklistapp
-
-Add readme
