@@ -264,6 +264,15 @@ importers:
         specifier: ^0.25.8
         version: 0.25.8(@vitest/ui@0.25.8)(jsdom@20.0.3)
 
+  apps/a:
+    dependencies:
+      '@cc-components/aapp':
+        specifier: workspace:^
+        version: link:../../libs/aapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/docs:
     dependencies:
       '@astrojs/react':
@@ -335,6 +344,12 @@ importers:
       '@cc-components/workorderapp':
         specifier: workspace:^
         version: link:../../libs/workorderapp
+
+  libs/aapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
   libs/handoverapp:
     dependencies:
@@ -532,6 +547,33 @@ importers:
         specifier: workspace:^
         version: link:../workordershared
 
+  reports/JCA-reports/jcainstallation:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../../libs/shared
+
+  reports/JCA-reports/jcaspools:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../../libs/shared
+
+  reports/JCA-reports/jcaworkpreparation:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../../libs/shared
+
   reports/activities:
     dependencies:
       '@cc-components/powerbi':
@@ -569,33 +611,6 @@ importers:
         version: link:../../libs/shared
 
   reports/commissioningtask:
-    dependencies:
-      '@cc-components/powerbi':
-        specifier: workspace:^
-        version: link:../../libs/powerbiapp
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
-  reports/jcainstallation:
-    dependencies:
-      '@cc-components/powerbi':
-        specifier: workspace:^
-        version: link:../../libs/powerbiapp
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
-  reports/jcaspools:
-    dependencies:
-      '@cc-components/powerbi':
-        specifier: workspace:^
-        version: link:../../libs/powerbiapp
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
-  reports/jcaworkpreparation:
     dependencies:
       '@cc-components/powerbi':
         specifier: workspace:^

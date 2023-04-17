@@ -15,18 +15,10 @@
       },
       "x-prompt": "What name would you like to use?"
     },
-    "tags": {
-      "type": "string",
-      "alias": "t",
-      "description": "Use pbi if app is only PBI. Use ws if it's more than PBI",
-      "x-prompt": "Is it workspace or PBI only?",
-      "enum": ["pbi", "ws"],
-      "default": "ws"
-    },
     "directory": {
       "type": "string",
       "description": "A directory where the project is placed"
     }
   },
-  "required": ["name", "tags"]
+  "required": ["name"]
 }
