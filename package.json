@@ -10,7 +10,7 @@
     "serve": "turbo run dev --filter",
     "build": "turbo run build",
     "build:app": "turbo run build --filter",
-    "build:changed": "turbo run build --since HEAD^1",
+    "build:changed": "turbo run build --since main",
     "build:reports": "turbo run build --filter ./reports/** ",
     "build:apps": "turbo run build --filter ./apps/** ",
     "build:libs": "turbo run build --filter ./libs/* ",
