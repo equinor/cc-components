@@ -1,3 +1,0 @@
-# atexinspectionapp
-
-Add readme

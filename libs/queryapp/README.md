@@ -1,3 +1,0 @@
-# queryapp
-
-Add readme

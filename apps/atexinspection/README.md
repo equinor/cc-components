@@ -1,3 +1,0 @@
-# atexinspection
-
-Add readme
