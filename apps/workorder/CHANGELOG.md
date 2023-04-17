@@ -1,3 +1,7 @@
+## Version 1.0.5
+
+Update workspace to alpha.9
+
 ## Version 1.0.1
 
 Reduce bundle size by more than 50% by switching to pnpm.
