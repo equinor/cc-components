@@ -7,11 +7,15 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm build",
-    "build": "turbo run build",
     "serve": "turbo run dev --filter",
+    "build": "turbo run build",
     "build:app": "turbo run build --filter",
-    "build:changed": "turbo run build --filter=[HEAD^1]",
+    "build:changed": "turbo run build --since HEAD^1",
+    "build:reports": "turbo run build --filter ./reports/* ",
+    "build:apps": "turbo run build --filter ./apps/* ",
+    "build:libs": "turbo run build --filter ./libs/* ",
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
+    "new:report": "nx generate @cc-components/plugins:fusion-report-generator",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
     "storybook-build": "npx nx run storybook-host:build-storybook"
   },
