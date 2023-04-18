@@ -1,9 +1,9 @@
 import fs from 'fs';
+import { parsePackageJson } from './utils/parsePackageJson';
 
 function makeManifest() {
-  const blob = fs.readFileSync('./package.json');
-  const { version, name } = JSON.parse(blob.toString('utf8'));
-  const [major, minor, patch] = version.split('.');
+  const { version, name } = parsePackageJson('./package.json');
+  const { major, minor, patch } = splitVersions(version);
 
   const manifest = {
     name: name[0].toUpperCase() + name.slice(1),
@@ -26,6 +26,15 @@ function makeManifest() {
       `App manifest for ${name}@${major}.${minor}.${patch} successfully created`
     );
   });
+}
+
+function splitVersions(version) {
+  const [major, minor, patch] = version.split('.');
+  return {
+    major,
+    minor,
+    patch,
+  };
 }
 
 makeManifest();

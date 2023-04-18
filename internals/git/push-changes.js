@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 
-function commitRelease() {
+function pushChanges() {
   execSync('git push');
 }
 
-commitRelease();
+pushChanges();
