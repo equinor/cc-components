@@ -10,8 +10,8 @@
     "build": "tsc -b",
     "build:spa": "vite build && node ../../internals/make-app-manifest.js",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js dist/app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k workorder dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k workorder",
+    "deploy:spa": "fdev portal upload -e ci -k scopechangerequest dist/bundle.zip",
+    "postdeploy:spa": "fdev portal publish -e ci -k scopechangerequest",
     "bump": "pnpm version patch",
     "shipit": "pnpm bump && pnpm build && pnpm build:spa && node ../../internals/git/commit-release.js && pnpm windows-zip && pnpm deploy:spa && node ../../internals/git/push-changes.js"
   },
