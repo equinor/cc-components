@@ -4,7 +4,7 @@ import { parsePackageJson } from '../utils/parsePackageJson.js';
 function commitRelease() {
   const res = execSync('git branch --show-current');
 
-  if ('main' !== res.toString('utf-8')) {
+  if ('main' !== res.toString('utf-8').trim()) {
     invalidBranch();
   }
 
