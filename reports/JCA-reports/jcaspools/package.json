@@ -2,7 +2,7 @@
   "name": "jca-spools",
   "displayName": "Spools",
   "shortName": "spools",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
@@ -10,12 +10,12 @@
     "dev": "fusion-framework-cli app dev",
     "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, dist/app-manifest.json -DestinationPath dist/bundle.zip",
     "build": "tsc -b",
-    "build:spa": "vite build && node ../../internals/make-app-manifest.js",
+    "build:spa": "vite build && node ../../../internals/make-app-manifest.js",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k jca-spools dist/bundle.zip",
     "postdeploy:spa": "fdev portal publish -e ci -k jca-spools",
     "bump": "pnpm version patch",
-    "shipit": "pnpm bump && pnpm build && pnpm build:spa && node ../../internals/git/commit-release.js && pnpm windows-zip && pnpm deploy:spa && node ../../internals/git/push-changes.js"
+    "shipit": "pnpm bump && pnpm build && pnpm build:spa && node ../../../internals/git/commit-release.js && pnpm windows-zip && pnpm deploy:spa && node ../../../internals/git/push-changes.js"
   },
   "dependencies": {
     "@cc-components/powerbi": "workspace:^",
