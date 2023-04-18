@@ -6,7 +6,7 @@
   "packageManager": "pnpm@8.0.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "first-time-setup": "npm i -g pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm build",
+    "first-time-setup": "npm i -g vite pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm build",
     "serve": "turbo run dev --filter",
     "ci:build": "turbo run build --output-logs errors-only",
     "build": "turbo run build --output-logs errors-only --parallel",
@@ -18,7 +18,9 @@
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
     "new:report": "nx generate @cc-components/plugins:fusion-report-generator",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
-    "storybook-build": "npx nx run storybook-host:build-storybook"
+    "storybook-build": "npx nx run storybook-host:build-storybook",
+    "shipit:app": "turbo run shipit --filter",
+    "shipit:reports": "turbo run shipit --filter ./reports/**"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^5.1.16",

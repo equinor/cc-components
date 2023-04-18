@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
+    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, dist/app-manifest.json -DestinationPath dist/bundle.zip",
     "build": "tsc -b",
-    "build:spa": "fusion-framework-cli app build",
-    "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k punch dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k punch",
-    "shipit": "pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
+    "build:spa": "vite build && node ../../internals/make-app-manifest.js",
+    "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js dist/app-manifest.json",
+    "deploy:spa": "fdev portal upload -e ci -k workorder dist/bundle.zip",
+    "postdeploy:spa": "fdev portal publish -e ci -k workorder",
+    "bump": "pnpm version patch",
+    "shipit": "pnpm bump && pnpm build && pnpm build:spa && node ../../internals/git/commit-release.js && pnpm windows-zip && pnpm deploy:spa && node ../../internals/git/push-changes.js"
   },
   "dependencies": {
     "@cc-components/punchapp": "workspace:^",
