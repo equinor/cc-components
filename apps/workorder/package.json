@@ -1,13 +1,13 @@
 {
   "name": "workorder",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "/src/main.tsx",
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, dist/app-manifest.json -DestinationPath dist/bundle.zip",
     "build": "tsc -b",
-    "build:spa": "vite build && node ./build.js",
+    "build:spa": "vite build && node ../../internals/make-app-manifest.js",
     "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js dist/app-manifest.json",
     "deploy:spa": "fdev portal upload -e ci -k workorder dist/bundle.zip",
     "postdeploy:spa": "fdev portal publish -e ci -k workorder",
