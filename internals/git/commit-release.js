@@ -8,6 +8,7 @@ function commitRelease() {
     invalidBranch();
   }
 
+  execSync('git pull');
   execSync('git add .');
   const { name, version } = parsePackageJson('./package.json');
   const release = `${name}@${version}`;
