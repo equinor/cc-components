@@ -152,7 +152,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Change category',
-      valueGetter: (pkg) => pkg.data?.changeCategory.name,
+      valueGetter: (pkg) => pkg.data?.changeCategory?.name,
       width: 180,
     },
     {
@@ -172,7 +172,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Scope',
-      valueGetter: (pkg) => pkg.data?.scope.name,
+      valueGetter: (pkg) => pkg.data?.scope?.name,
       width: 140,
     },
     {
