@@ -264,15 +264,6 @@ importers:
         specifier: ^0.25.8
         version: 0.25.8(@vitest/ui@0.25.8)(jsdom@20.0.3)
 
-  apps/a:
-    dependencies:
-      '@cc-components/aapp':
-        specifier: workspace:^
-        version: link:../../libs/aapp
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
   apps/docs:
     dependencies:
       '@astrojs/react':
@@ -344,12 +335,6 @@ importers:
       '@cc-components/workorderapp':
         specifier: workspace:^
         version: link:../../libs/workorderapp
-
-  libs/aapp:
-    dependencies:
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
 
   libs/handoverapp:
     dependencies:
