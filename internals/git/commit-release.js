@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { parsePackageJson } from '../utils/parsePackageJson';
+import { parsePackageJson } from '../utils/parsePackageJson.js';
 
 function commitRelease() {
   const res = execSync('git branch --show-current');

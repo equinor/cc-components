@@ -10,6 +10,9 @@
     },
     "deploy": {
       "dependsOn": ["build"]
+    },
+    "shipit": {
+      "dependsOn": []
     }
   }
 }

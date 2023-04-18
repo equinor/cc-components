@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { parsePackageJson } from './utils/parsePackageJson';
+import { parsePackageJson } from './utils/parsePackageJson.js';
 
 function makeManifest() {
   const { version, name } = parsePackageJson('./package.json');
