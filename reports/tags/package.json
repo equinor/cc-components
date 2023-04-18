@@ -18,9 +18,5 @@
   "dependencies": {
     "@cc-components/powerbi": "workspace:^",
     "@cc-components/shared": "workspace:^"
-  },
-  "files": [
-    "dist/app-bundle.js",
-    "app-manifest.json"
-  ]
+  }
 }
