@@ -13,7 +13,7 @@
     "deploy:spa": "fdev portal upload -e ci -k workorder dist/bundle.zip",
     "postdeploy:spa": "fdev portal publish -e ci -k workorder",
     "bump": "pnpm version patch",
-    "shipit": "pnpm bump && pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
+    "shipit": "pnpm bump && pnpm build && pnpm build:spa && node ../../internals/commit-release.js && pnpm windows-zip && pnpm deploy:spa && node ../../internals/push-changes.js"
   },
   "dependencies": {
     "@cc-components/loopapp": "workspace:^",
