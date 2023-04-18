@@ -2,12 +2,16 @@ import fs from 'fs';
 import { parsePackageJson } from './utils/parsePackageJson.js';
 
 function makeManifest() {
-  const { version, name } = parsePackageJson('./package.json');
+  const { version, name, ...maybe } = parsePackageJson('./package.json');
   const { major, minor, patch } = splitVersions(version);
 
+  /** Some app-manifests have custom short and displaynames */
+  const shortName = maybe?.['shortName'] ?? name;
+  const displayName = maybe?.['displayName'] ?? name[0].toUpperCase() + name.slice(1);
+
   const manifest = {
-    name: name[0].toUpperCase() + name.slice(1),
-    shortName: name,
+    name: displayName,
+    shortName: shortName,
     key: name,
     version: {
       major: major,
