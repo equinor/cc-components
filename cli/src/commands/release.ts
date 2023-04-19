@@ -7,13 +7,17 @@ import { pullChanges } from './pull-changes.js';
 import { deployApp } from '../utils/deployApp.js';
 import { logBundleSize } from '../utils/logBundleSize.js';
 import { bundleApp } from '../utils/bundleApp.js';
+import { compileApp } from '../utils/compile.js';
+import ora from 'ora';
 
-export function release() {
+export function release(dry: boolean) {
   //Ensure latest changes have been pulled
   pullChanges();
 
   //Bump version
   patchVersion();
+
+  compileApp();
 
   //Vite build
   bundleApp();
@@ -27,12 +31,16 @@ export function release() {
   //zip bundle
   zipBundle();
 
-  //create commit
-  commitRelease();
+  if (!dry) {
+    //create commit
+    commitRelease();
 
-  //upload to fdev
-  deployApp();
+    //upload to fdev
+    deployApp();
 
-  //push commit
-  pushChanges();
+    //push commit
+    pushChanges();
+  } else {
+    ora().info('Skipping release').stop();
+  }
 }

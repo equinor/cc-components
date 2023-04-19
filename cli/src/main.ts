@@ -11,8 +11,11 @@ program.name('CC-components-cli');
 program.description('CLI for CC-components');
 program.version(pkgJson.version);
 
-program.command('release').action(() => {
-  release();
-});
+program
+  .command('release')
+  .option('-dry --dry', 'skip release', false)
+  .action(({ dry }) => {
+    release(dry as boolean);
+  });
 
 program.parse();
