@@ -35,14 +35,13 @@ export function commitRelease() {
 }
 
 function invalidBranch() {
-  return;
-  //   console.error(`
-  //   **************************************************************
-  //   Command failed!
-  //   Reason:
-  //   Commit releases can only be done from main branch
-  //   **************************************************************
+  console.error(`
+    **************************************************************
+    Command failed!
+    Reason:
+    Commit releases can only be done from main branch
+    **************************************************************
 
-  //   `);
-  //   throw new Error('Commit-releases can only be done from main branch');
+    `);
+  throw new Error('Commit-releases can only be done from main branch');
 }
