@@ -336,6 +336,12 @@ importers:
         specifier: workspace:^
         version: link:../../libs/workorderapp
 
+  cli:
+    dependencies:
+      commander:
+        specifier: ^10.0.1
+        version: 10.0.1
+
   libs/handoverapp:
     dependencies:
       '@cc-components/handovershared':
@@ -2564,7 +2570,7 @@ packages:
       '@equinor/fusion-framework-app': 6.0.12(@types/react@18.0.25)(odata-query@7.0.3)(react@18.2.0)
       '@equinor/fusion-observable': 7.0.3(@types/react@18.0.25)(react@18.2.0)
       '@vitejs/plugin-react': 3.1.0(vite@4.2.1)
-      commander: 10.0.0
+      commander: 10.0.1
       express: 4.18.2
       find-up: 6.3.0
       http-proxy-middleware: 2.0.6
@@ -11517,10 +11523,9 @@ packages:
   /comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
 
-  /commander@10.0.0:
-    resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}
+  /commander@10.0.1:
+    resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
     engines: {node: '>=14'}
-    dev: true
 
   /commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}

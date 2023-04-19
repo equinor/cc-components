@@ -1,7 +1,5 @@
 import { execSync } from 'child_process';
 
-function pushChanges() {
+export function pushChanges() {
   execSync('git push');
 }
-
-pushChanges();

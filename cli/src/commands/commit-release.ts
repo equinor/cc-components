@@ -1,7 +1,8 @@
 import { execSync } from 'child_process';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
+import { pushChanges } from './push-changes';
 
-function commitRelease() {
+export function commitRelease() {
   const res = execSync('git branch --show-current');
 
   if ('main' !== res.toString('utf-8').trim()) {
@@ -13,6 +14,14 @@ function commitRelease() {
   const release = `${name}@${version}`;
 
   execSync(`git commit -m \"chore: release ${release}\"`);
+
+  return () => {
+    const res = execSync('git branch --show-current');
+    if ('main' !== res.toString('utf-8').trim()) {
+      invalidBranch();
+    }
+    pushChanges();
+  };
 }
 
 function invalidBranch() {
@@ -26,5 +35,3 @@ function invalidBranch() {
   `);
   throw new Error('Commit-releases can only be done from main branch');
 }
-
-commitRelease();

@@ -1,0 +1,20 @@
+{
+  "name": "@cc-components/cli",
+  "version": "0.0.1",
+  "type": "module",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./bin/src/main.js",
+  "bin": {
+    "cc": "./bin/src/main.js",
+    "cc-components-cli": "./bin/main.js"
+  },
+  "scripts": {
+    "build:scripts": "tsc -p tsconfig.scripts.json"
+  },
+  "dependencies": {
+    "commander": "^10.0.1"
+  }
+}

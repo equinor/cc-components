@@ -1,8 +1,11 @@
 import fs from 'fs';
-import { parsePackageJson } from './utils/parsePackageJson.js';
+import { parsePackageJson } from '../utils/parsePackageJson.js';
 
-function makeManifest() {
-  const { version, name, ...maybe } = parsePackageJson('./package.json');
+export function makeManifest(path: string) {
+  const { version, name, ...maybe } = parsePackageJson(path);
+  if (!version || !name) {
+    throw new Error('Name or version missing in package.json');
+  }
   const { major, minor, patch } = splitVersions(version);
 
   /** Some app-manifests have custom short and displaynames */
@@ -22,7 +25,7 @@ function makeManifest() {
 
   const data = JSON.stringify(manifest, null, 2);
 
-  fs.writeFile('./dist/app-manifest.json', data, (err) => {
+  fs.writeFile('./dist/app-manifest.json', data, (err: unknown) => {
     if (err) {
       throw err;
     }
@@ -32,7 +35,7 @@ function makeManifest() {
   });
 }
 
-function splitVersions(version) {
+function splitVersions(version: string) {
   const [major, minor, patch] = version.split('.');
   return {
     major,
@@ -40,5 +43,3 @@ function splitVersions(version) {
     patch,
   };
 }
-
-makeManifest();
