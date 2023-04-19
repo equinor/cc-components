@@ -8,6 +8,8 @@ dist/
 *.d.ts
 **/dist/
 .turbo
+/bin
+bin/
 # dependencies
 node_modules
 

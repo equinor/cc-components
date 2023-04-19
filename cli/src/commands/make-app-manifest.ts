@@ -1,8 +1,12 @@
 import fs from 'fs';
-import { parsePackageJson } from './utils/parsePackageJson.js';
+import { parsePackageJson } from '../utils/parsePackageJson.js';
+import ora from 'ora';
 
-function makeManifest() {
-  const { version, name, ...maybe } = parsePackageJson('./package.json');
+export function makeManifest(path: string) {
+  const { version, name, ...maybe } = parsePackageJson(path);
+  if (!version || !name) {
+    throw new Error('Name or version missing in package.json');
+  }
   const { major, minor, patch } = splitVersions(version);
 
   /** Some app-manifests have custom short and displaynames */
@@ -22,17 +26,14 @@ function makeManifest() {
 
   const data = JSON.stringify(manifest, null, 2);
 
-  fs.writeFile('./dist/app-manifest.json', data, (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log(
-      `App manifest for ${name}@${major}.${minor}.${patch} successfully created`
-    );
-  });
+  fs.writeFileSync('./dist/app-manifest.json', data);
+
+  ora()
+    .start('Creating app manifest')
+    .succeed(`App manifest for ${name}@${major}.${minor}.${patch} successfully created`);
 }
 
-function splitVersions(version) {
+function splitVersions(version: string) {
   const [major, minor, patch] = version.split('.');
   return {
     major,
@@ -40,5 +41,3 @@ function splitVersions(version) {
     patch,
   };
 }
-
-makeManifest();
