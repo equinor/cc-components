@@ -3,19 +3,24 @@ import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 
 type IServerSideRowGetParams = Parameters<GridConfig<unknown, unknown>['getRows']>[0];
 
+type DataResponse<T> = {
+  rowData: T[];
+  rowCount: number | undefined;
+};
+
 /**
  *
  * @param req
  * @returns
  */
 export function useGridDataSource<TData>(
-  req: (requestArgs: RequestInit) => Promise<TData[]>
+  req: (requestArgs: RequestInit) => Promise<DataResponse<TData>>
 ) {
   return {
     getRows: async (params: IServerSideRowGetParams, filters: FilterStateGroup[]) => {
       const { startRow, endRow } = params.request;
 
-      const rowData = await req({
+      const response = await req({
         body: JSON.stringify({
           startRow: startRow,
           endRow,
@@ -25,7 +30,7 @@ export function useGridDataSource<TData>(
         method: 'POST',
       });
 
-      params.success({ rowData: rowData });
+      params.success({ rowData: response.rowData, rowCount: response.rowCount });
       return;
     },
   };
