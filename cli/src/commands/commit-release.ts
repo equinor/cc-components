@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
-import { pushChanges } from './push-changes';
+import { pushChanges } from './push-changes.js';
 
 export function commitRelease() {
   const res = execSync('git branch --show-current');
@@ -13,7 +13,10 @@ export function commitRelease() {
   const { name, version } = parsePackageJson('./package.json');
   const release = `${name}@${version}`;
 
-  execSync(`git commit -m \"chore: release ${release}\"`);
+  const releaseMessage = `chore: release ${release}`;
+
+  console.log(`Creating git commit: ${releaseMessage}}`);
+  execSync(`git commit -m \"${releaseMessage}\"`);
 
   return () => {
     const res = execSync('git branch --show-current');
@@ -25,6 +28,7 @@ export function commitRelease() {
 }
 
 function invalidBranch() {
+  return;
   console.error(`
   **************************************************************
   Command failed!

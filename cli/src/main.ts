@@ -4,9 +4,9 @@ import { Command } from 'commander';
 import pkgJson from '../package.json' assert { type: 'json' };
 
 import { makeManifest } from './commands/make-app-manifest.js';
-import { commitRelease } from './commands/commit-release';
-import { pushChanges } from './commands/push-changes';
-import { release } from './commands/release';
+import { commitRelease } from './commands/commit-release.js';
+import { pushChanges } from './commands/push-changes.js';
+import { release } from './commands/release.js';
 
 const program = new Command();
 
