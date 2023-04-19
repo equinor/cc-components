@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
+import ora from 'ora';
 
 export function makeManifest(path: string) {
   const { version, name, ...maybe } = parsePackageJson(path);
@@ -25,14 +26,11 @@ export function makeManifest(path: string) {
 
   const data = JSON.stringify(manifest, null, 2);
 
-  fs.writeFile('./dist/app-manifest.json', data, (err: unknown) => {
-    if (err) {
-      throw err;
-    }
-    console.log(
-      `App manifest for ${name}@${major}.${minor}.${patch} successfully created`
-    );
-  });
+  fs.writeFileSync('./dist/app-manifest.json', data);
+
+  ora()
+    .start('Creating app manifest')
+    .succeed(`App manifest for ${name}@${major}.${minor}.${patch} successfully created`);
 }
 
 function splitVersions(version: string) {
