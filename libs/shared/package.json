@@ -83,6 +83,7 @@
     "./workspace-config": "./dist/src/packages/workspace-config/index.js"
   },
   "dependencies": {
-    "@equinor/workspace-fusion": "1.0.0-alpha.5"
+    "@equinor/workspace-fusion": "1.0.0-alpha.5",
+    "markdown-to-jsx": "^7.2.0"
   }
 }
