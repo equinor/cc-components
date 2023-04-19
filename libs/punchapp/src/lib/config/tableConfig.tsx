@@ -18,7 +18,11 @@ export const useTableConfig = (
 
   const { getRows } = useGridDataSource(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
-    return (await res.json()).items;
+    const meta = (await res.json()) as { items: any[]; rowCount: number };
+    return {
+      rowCount: meta.rowCount,
+      rowData: meta.items,
+    };
   });
 
   return {

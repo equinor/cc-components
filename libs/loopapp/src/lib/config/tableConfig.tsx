@@ -4,7 +4,6 @@ import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import {
   DateCell,
   DescriptionCell,
-  EstimateCell,
   LinkCell,
   StatusCell,
 } from '@cc-components/shared/table-helpers';
@@ -20,7 +19,11 @@ export const useTableConfig = (
   const client = useHttpClient('cc-api');
   const { getRows } = useGridDataSource(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/loop/grid`, req);
-    return (await res.json()).items;
+    const meta = (await res.json()) as { items: any[]; rowCount: number };
+    return {
+      rowCount: meta.rowCount,
+      rowData: meta.items,
+    };
   });
   return {
     getRows: getRows,
