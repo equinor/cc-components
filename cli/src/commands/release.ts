@@ -1,19 +1,38 @@
-import { execSync } from 'child_process';
 import { commitRelease } from './commit-release.js';
+import { patchVersion } from '../utils/patchVersion.js';
 import { pushChanges } from './push-changes.js';
-import ora from 'ora';
+import { zipBundle } from './zip-bundle.js';
+import { makeManifest } from './make-app-manifest.js';
+import { pullChanges } from './pull-changes.js';
+import { deployApp } from '../utils/deployApp.js';
+import { logBundleSize } from '../utils/logBundleSize.js';
+import { bundleApp } from '../utils/bundleApp.js';
 
 export function release() {
-  //bump version
-  execSync('pnpm version patch');
-  //vite build
-  const spinner = ora('Bundling application').start();
-  execSync('vite build');
-  spinner.stop();
+  //Ensure latest changes have been pulled
+  pullChanges();
+
+  //Bump version
+  patchVersion();
+
+  //Vite build
+  bundleApp();
+
+  // Create manifest
+  makeManifest('./package.json');
+
+  //Log bundle size
+  logBundleSize();
+
+  //zip bundle
+  zipBundle();
+
   //create commit
   commitRelease();
-  //upload
-  console.log('Uploading to fdev something');
+
+  //upload to fdev
+  deployApp();
+
   //push commit
   pushChanges();
 }

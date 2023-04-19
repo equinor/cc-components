@@ -12,10 +12,14 @@
     "cc-components-cli": "./bin/main.js"
   },
   "scripts": {
-    "build:scripts": "tsc -p tsconfig.scripts.json"
+    "build": "tsc -b"
   },
   "dependencies": {
+    "adm-zip": "^0.5.10",
     "commander": "^10.0.1",
     "ora": "^6.3.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.0"
   }
 }
