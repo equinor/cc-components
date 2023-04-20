@@ -391,8 +391,8 @@ importers:
         specifier: workspace:^
         version: link:../shared
       '@equinor/workspace-fusion':
-        specifier: 1.0.0-alpha.10
-        version: 1.0.0-alpha.10(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
+        specifier: 1.0.0-alpha.14
+        version: 1.0.0-alpha.14(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
 
   libs/loopshared:
     dependencies:
@@ -459,8 +459,8 @@ importers:
         specifier: workspace:^
         version: link:../shared
       '@equinor/workspace-fusion':
-        specifier: 1.0.0-alpha.10
-        version: 1.0.0-alpha.10(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
+        specifier: 1.0.0-alpha.14
+        version: 1.0.0-alpha.14(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
 
   libs/punchshared:
     dependencies:
@@ -2986,9 +2986,9 @@ packages:
       ag-grid-enterprise: 28.2.1
       ag-grid-react: 28.2.1(ag-grid-community@28.2.1)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react-dom: 18.2.0(react@17.0.2)
       react-is: 18.2.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@17.0.2)
     dev: false
 
   /@equinor/workspace-ag-grid@1.0.0-alpha.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
@@ -3091,13 +3091,13 @@ packages:
       '@equinor/eds-tokens': 0.9.0
       '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react-dom: 18.2.0(react@17.0.2)
       react-error-boundary: 3.1.4(react@18.2.0)
       react-is: 18.2.0
       react-sortablejs: 6.1.4(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.0)
       react-virtual: 2.10.4(react@18.2.0)
       sortablejs: 1.15.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@17.0.2)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/sortablejs'
@@ -3169,43 +3169,6 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@1.0.0-alpha.10(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1):
-    resolution: {integrity: sha512-9ywU5qUDTEBAylhgnLwYFt72wOany4iEL5vvpFN+JhuUQtgTb4uMEkOotyCXFepYdZwkmDQowErkZolHt5boRQ==}
-    peerDependencies:
-      react-dom: '>= 16.8.0'
-      react-is: '>= 16.8.0'
-      styled-components: ^5.3.6
-    dependencies:
-      '@equinor/eds-core-react': 0.27.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/eds-icons': 0.17.0
-      '@equinor/eds-tokens': 0.9.0
-      '@equinor/workspace-ag-grid': 1.0.0-alpha.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-core': 1.0.0-alpha.1
-      '@equinor/workspace-filter': 1.0.0-alpha.3(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-garden': 1.0.0-alpha.4(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-powerbi': 1.0.0-alpha.1(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-react': 1.0.0-alpha.0(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-sidesheet': 0.1.5(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-status-bar': 0.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
-      '@types/react-dom': 18.0.9
-      history: 5.3.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-error-boundary: 3.1.4(react@18.2.0)
-      react-is: 18.2.0
-      rxjs: 7.8.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      vite-plugin-environment: 1.1.3(vite@4.2.1)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@types/sortablejs'
-      - immer
-      - react-native
-      - supports-color
-      - vite
-    dev: false
-
   /@equinor/workspace-fusion@1.0.0-alpha.11(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1):
     resolution: {integrity: sha512-XmIxu5tT9S8UpX8YVEvgG1tDraTUK7Pl9h54i2Mxd6l3AlAVN2kyZJwZj/NlMOPpasyvQqwYjJ9KbQgYUMc7KA==}
     peerDependencies:
@@ -3228,11 +3191,11 @@ packages:
       '@types/react-dom': 18.0.9
       history: 5.3.0
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react-dom: 18.2.0(react@17.0.2)
       react-error-boundary: 3.1.4(react@18.2.0)
       react-is: 18.2.0
       rxjs: 7.8.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@17.0.2)
       vite-plugin-environment: 1.1.3(vite@4.2.1)
     transitivePeerDependencies:
       - '@babel/core'
@@ -3427,36 +3390,6 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-powerbi@1.0.0-alpha.1(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-3xkuWC2nqC8+BWkVbOXpAe8iTdPYenq17s48XbkZxiRt4X/eCnMkvmJH19e9V7SuexSMoffX7p3GarCkC4aFUA==}
-    peerDependencies:
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-      react-is: '>= 16.8.0'
-      styled-components: ^5.3.5
-    dependencies:
-      '@equinor/eds-core-react': 0.28.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/eds-icons': 0.18.0
-      '@equinor/eds-tokens': 0.9.0
-      '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
-      markdown-to-jsx: 7.2.0(react@18.2.0)
-      powerbi-client: 2.22.2
-      powerbi-client-react: 1.3.5(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-error-boundary: 3.1.4(react@18.2.0)
-      react-is: 18.2.0
-      react-sortablejs: 6.1.4(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.0)
-      react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@types/sortablejs'
-      - react-native
-      - supports-color
-    dev: false
-
   /@equinor/workspace-powerbi@1.0.0-alpha.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
     resolution: {integrity: sha512-nOduXHPUZImvimO80Yp7tnCMdyxk96a8YzK89nBXiVXRAbSyZtyxVerm2juoJo/+CQjQRRnqx+evLRn5UDZWHw==}
     peerDependencies:
@@ -3578,9 +3511,9 @@ packages:
     dependencies:
       '@equinor/eds-tokens': 0.9.0
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react-dom: 18.2.0(react@17.0.2)
       react-is: 18.2.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@17.0.2)
     dev: false
 
   /@equinor/workspace-status-bar@0.0.15(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
@@ -4141,7 +4074,7 @@ packages:
       istanbul-lib-source-maps: 4.0.1
       istanbul-reports: 3.1.5
       jest-message-util: 28.1.3
-      jest-util: 28.1.1
+      jest-util: 28.1.3
       jest-worker: 28.1.3
       slash: 3.0.0
       string-length: 4.0.2
@@ -14154,7 +14087,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -15489,7 +15422,7 @@ packages:
       jest-regex-util: 28.0.2
       jest-resolve: 28.1.1
       jest-runner: 28.1.3
-      jest-util: 28.1.1
+      jest-util: 28.1.3
       jest-validate: 28.1.3
       micromatch: 4.0.5
       parse-json: 5.2.0
@@ -15695,7 +15628,7 @@ packages:
       graceful-fs: 4.2.11
       jest-haste-map: 28.1.3
       jest-pnp-resolver: 1.2.3(jest-resolve@28.1.1)
-      jest-util: 28.1.1
+      jest-util: 28.1.3
       jest-validate: 28.1.3
       resolve: 1.22.2
       resolve.exports: 1.1.0
@@ -19212,6 +19145,16 @@ packages:
       - supports-color
     dev: true
 
+  /react-dom@18.2.0(react@17.0.2):
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 17.0.2
+      scheduler: 0.23.0
+    dev: false
+
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -19384,6 +19327,14 @@ packages:
     dependencies:
       '@reach/observe-rect': 1.2.0
       react: 18.2.0
+    dev: false
+
+  /react@17.0.2:
+    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
     dev: false
 
   /react@18.2.0:
@@ -20987,6 +20938,30 @@ packages:
     dependencies:
       inline-style-parser: 0.1.1
     dev: true
+
+  /styled-components@5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@17.0.2):
+    resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
+    engines: {node: '>=10'}
+    requiresBuild: true
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+    dependencies:
+      '@babel/helper-module-imports': 7.21.4
+      '@babel/traverse': 7.21.4(supports-color@5.5.0)
+      '@emotion/is-prop-valid': 1.2.0
+      '@emotion/stylis': 0.8.5
+      '@emotion/unitless': 0.7.5
+      babel-plugin-styled-components: 2.1.1(styled-components@5.3.6)
+      css-to-react-native: 3.2.0
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.2
+      react-dom: 18.2.0(react@17.0.2)
+      react-is: 18.2.0
+      shallowequal: 1.1.0
+      supports-color: 5.5.0
+    dev: false
 
   /styled-components@5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
