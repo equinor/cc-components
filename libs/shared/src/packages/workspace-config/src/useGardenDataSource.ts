@@ -1,6 +1,20 @@
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GardenDataSource } from '@equinor/workspace-fusion/garden';
 
+type ApiGardenMeta = {
+  startIndex: number | null;
+  columnCount: number;
+  rowCount: number;
+  subGroupCount: number;
+  allGroupingOptions: string[];
+  validGroupingOptions: string[];
+};
+
+type ApiHeader = {
+  columnName: string;
+  totalItemsCount: number;
+};
+
 type GardenDataSourceArgs = {
   getBlockAsync: (req: RequestInit) => Promise<Response>;
   getGardenMeta: (req: RequestInit) => Promise<Response>;
@@ -27,6 +41,9 @@ export function useGardenDataSource(
       );
 
       const res = await requestBuilders.getBlockAsync(requestArgs);
+      if (!res.ok) {
+        throw new Error('Api error');
+      }
       return res.json();
     },
     getGardenMeta: async (keys, filters, signal) => {
@@ -39,9 +56,15 @@ export function useGardenDataSource(
       );
 
       const res = await requestBuilders.getGardenMeta(requestArgs);
-      const meta = await res.json();
+      if (!res.ok) {
+        throw new Error('Api error');
+      }
+      const meta: ApiGardenMeta = await res.json();
       return {
-        ...meta,
+        allGroupingOptions: meta.allGroupingOptions,
+        columnCount: meta.columnCount,
+        validGroupingOptions: meta.validGroupingOptions,
+        columnStart: meta.startIndex,
         rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
         groupingOptions: meta.allGroupingOptions,
       };
@@ -60,8 +83,10 @@ export function useGardenDataSource(
         signal
       );
       const res = await requestBuilders.getHeader(requestArgs);
-      return (await res.json()).map((s: any) => ({
-        ...s,
+      if (!res.ok) {
+        throw new Error('Api error');
+      }
+      return (await res.json()).map((s: ApiHeader) => ({
         name: s.columnName,
         count: s.totalItemsCount,
       }));
@@ -79,6 +104,9 @@ export function useGardenDataSource(
       );
 
       const res = await requestBuilders.getSubgroupItems(requestArgs);
+      if (!res.ok) {
+        throw new Error('Api error');
+      }
       return res.json();
     },
   };

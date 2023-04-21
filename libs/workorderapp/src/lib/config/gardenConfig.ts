@@ -28,7 +28,7 @@ export const useGardenConfig = (
   return {
     getDisplayName: (item) => item.workOrderNumber,
     initialGrouping: {
-      horizontalGroupingAccessor: 'DisciplineCode',
+      horizontalGroupingAccessor: 'FinalizingOfWorkordersAtSite',
       verticalGroupingKeys: [],
     },
     getBlockAsync,
