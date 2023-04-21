@@ -26,8 +26,8 @@ importers:
         specifier: ^0.3.8
         version: 0.3.8(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-fusion':
-        specifier: ^0.20.0
-        version: 0.20.0(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.0.1)
+        specifier: 0.20.2
+        version: 0.20.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.0.1)
       '@remirror/pm':
         specifier: ^2.0.4
         version: 2.0.4
@@ -2969,6 +2969,28 @@ packages:
       styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     dev: false
 
+  /@equinor/workspace-ag-grid@0.4.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-02xbGSiqUyh/ou/h8Ui94GXypwxv2LT/F9UqoTw3rIgc2bA8yEkDoSYsvH9r+o0GeHUrM7UxscuP7ENUb/ttAA==}
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+      styled-components: 5.3.6
+    dependencies:
+      '@ag-grid-community/client-side-row-model': 29.0.0
+      '@ag-grid-community/core': 29.2.0
+      '@ag-grid-enterprise/column-tool-panel': 29.0.0
+      '@equinor/eds-tokens': 0.9.0
+      '@equinor/workspace-observable-proxy': 0.2.4
+      ag-grid-community: 28.2.1
+      ag-grid-enterprise: 28.2.1
+      ag-grid-react: 28.2.1(ag-grid-community@28.2.1)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-is: 18.2.0
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    dev: false
+
   /@equinor/workspace-ag-grid@1.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
     resolution: {integrity: sha512-pSjX+Sf9NBLb5aIOFs+rYF0y+S1btgLOY8PNDLYiLPQvsSW8JtpsGecko/7z0Q2Jdbqe+Z3yLDThCsmPTizfHA==}
     peerDependencies:
@@ -3049,8 +3071,8 @@ packages:
       rxjs: 7.8.0
     dev: false
 
-  /@equinor/workspace-filter@0.0.16(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-lkNyG3qF83cyp4iQoisYhqcKwSJV9leRSLSKYN94w/8rR9T2Wm9wqC/RXg4nV10OGNTuw0BA7Ye9FQ0mfsFgJw==}
+  /@equinor/workspace-filter@0.0.17(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-RgVqJQ6H0kzHLVTc2yboFoD2riLmgDZ5imxOo2zEe8wgDuBOhXM/ptWD4VVCmoxobdqUSwCRKPjFpBqciNsaJA==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -3154,8 +3176,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-fusion@0.20.0(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.0.1):
-    resolution: {integrity: sha512-0IYFTHrU76q7BcT+h1gASdGEKk8Mh31p8I9YLv9Dv80arTWytyol8ldQBYy5VC/tyYfdrDX/yM9YRm+Pm0Pbww==}
+  /@equinor/workspace-fusion@0.20.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.0.1):
+    resolution: {integrity: sha512-OXKwlMxIw+YbM1kwDsrIuteRIMH5bT8thlNXlzk4BXUqP9Es+P04VxN55DTaBeru3rkAZdChJ8AXu09nnQsLhg==}
     peerDependencies:
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
@@ -3164,15 +3186,15 @@ packages:
       '@equinor/eds-core-react': 0.27.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
-      '@equinor/workspace-ag-grid': 0.3.8(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-ag-grid': 0.4.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-core': 0.1.4
-      '@equinor/workspace-filter': 0.0.16(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-filter': 0.0.17(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-garden': 0.7.7(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-powerbi': 0.2.10(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-react': 0.6.6(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-sidesheet': 0.1.5(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-status-bar': 0.0.12(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@tanstack/react-query': 4.23.0(react-dom@18.2.0)(react@18.2.0)
+      '@equinor/workspace-status-bar': 0.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
       '@types/react-dom': 18.0.9
       history: 5.3.0
       react: 18.2.0
@@ -3566,21 +3588,6 @@ packages:
       - '@babel/core'
       - styled-components
       - supports-color
-    dev: false
-
-  /@equinor/workspace-status-bar@0.0.12(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-+uGAxFq6Wej2VIZF/2kTOBLwrSRgViOk0sKDDRyotyBaVJ8aHcxTlktQhPrqpD6z3cELvqc0ZW9qn8h+js8qKA==}
-    peerDependencies:
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-      react-is: '>= 16.8.0'
-      styled-components: ^5.3.6
-    dependencies:
-      '@equinor/eds-tokens': 0.9.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-is: 18.2.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     dev: false
 
   /@equinor/workspace-status-bar@0.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
