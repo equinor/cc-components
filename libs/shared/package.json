@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsc -b"
   },
+  "sideEffects": false,
   "typesVersions": {
     ">=4.2": {
       ".": [
@@ -83,6 +84,11 @@
     "./workspace-config": "./dist/src/packages/workspace-config/index.js"
   },
   "dependencies": {
-    "@equinor/workspace-fusion": "1.0.0-alpha.5"
+    "@equinor/workspace-ag-grid": "0.3.8",
+    "@equinor/workspace-fusion": "1.0.0-alpha.5",
+    "@remirror/pm": "^2.0.4",
+    "@remirror/react": "^2.0.27",
+    "@remirror/styles": "^2.0.4",
+    "markdown-to-jsx": "^7.2.0"
   }
 }
