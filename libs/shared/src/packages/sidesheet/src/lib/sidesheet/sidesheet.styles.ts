@@ -8,4 +8,6 @@ export const StyledSideSheetContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto 1fr;
   overflow: hidden;
+  background: white;
+  overflow: hidden;
 `;
