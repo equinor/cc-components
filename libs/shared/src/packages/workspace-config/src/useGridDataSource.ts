@@ -20,18 +20,21 @@ export function useGridDataSource<TData>(
     getRows: async (params: IServerSideRowGetParams, filters: FilterStateGroup[]) => {
       const { startRow, endRow } = params.request;
 
-      const response = await req({
-        body: JSON.stringify({
-          startRow: startRow,
-          endRow,
-          filter: filters,
-        }),
-        headers: { ['content-type']: 'application/json' },
-        method: 'POST',
-      });
+      try {
+        const response = await req({
+          body: JSON.stringify({
+            startRow: startRow,
+            endRow,
+            filter: filters,
+          }),
+          headers: { ['content-type']: 'application/json' },
+          method: 'POST',
+        });
 
-      params.success({ rowData: response.rowData, rowCount: response.rowCount });
-      return;
+        params.success({ rowData: response.rowData, rowCount: response.rowCount });
+      } catch (e) {
+        params.fail();
+      }
     },
   };
 }
