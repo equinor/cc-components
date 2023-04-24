@@ -32,6 +32,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
 
   return (
     <Workspace
+      key={contextId}
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.punchItemNo,

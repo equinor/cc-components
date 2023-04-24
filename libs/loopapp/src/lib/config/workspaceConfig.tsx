@@ -29,6 +29,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const gardenConfig = useGardenConfig(contextId);
   return (
     <Workspace
+      key={contextId}
       workspaceOptions={{
         appKey: 'Loop',
         getIdentifier: (item) => item.checklistId,

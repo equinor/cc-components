@@ -48,6 +48,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
 
   return (
     <Workspace
+      key={contextId}
       workspaceOptions={{
         appKey: 'MC',
         getIdentifier: (item) => item.mcPkgId,
