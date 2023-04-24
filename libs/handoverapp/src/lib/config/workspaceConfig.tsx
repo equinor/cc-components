@@ -50,6 +50,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
 
   return (
     <Workspace
+      key={contextId}
       workspaceOptions={{
         appKey: 'Handover',
         getIdentifier: (item) => item.id,

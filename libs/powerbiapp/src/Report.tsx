@@ -25,6 +25,7 @@ export const Report = ({
 
   return (
     <Workspace
+      key={contextId}
       workspaceOptions={{
         appKey: appKey,
         getIdentifier: () => '',

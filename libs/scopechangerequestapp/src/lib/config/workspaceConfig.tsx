@@ -38,6 +38,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
 
   return (
     <Workspace
+      key={contextId}
       workspaceOptions={options}
       dataOptions={{
         getResponseAsync,
