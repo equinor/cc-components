@@ -212,5 +212,3 @@ export const useTableConfig = (
     ],
   };
 };
-
-export const tableConfig = {};
