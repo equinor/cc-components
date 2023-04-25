@@ -13,6 +13,7 @@ import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { WorkOrder } from '@cc-components/workordershared';
 import { proCoSysUrls } from '@cc-components/shared';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { defaultColDef } from '@cc-components/shared/table-helpers';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useTableConfig = (
@@ -31,6 +32,9 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
+    gridOptions: {
+      defaultColDef: defaultColDef,
+    },
     columnDefinitions: [
       {
         field: 'Workorder',
@@ -57,7 +61,6 @@ export const useTableConfig = (
       {
         field: 'Discipline',
         valueGetter: (pkg) => pkg.data?.disciplineCode,
-        // enableRowGroup: true,
         width: 150,
       },
       {
@@ -68,7 +71,6 @@ export const useTableConfig = (
       {
         field: 'Job status',
         valueGetter: (pkg) => pkg.data?.jobStatus,
-        // enableRowGroup: true,
         width: 150,
       },
       {
@@ -87,7 +89,6 @@ export const useTableConfig = (
             );
           } else return null;
         },
-        // enableRowGroup: true,
         width: 150,
       },
       {
@@ -107,7 +108,6 @@ export const useTableConfig = (
             );
           } else return null;
         },
-        // enableRowGroup: true,
         width: 100,
       },
       {
@@ -207,11 +207,8 @@ export const useTableConfig = (
             />
           );
         },
-        // enableRowGroup: true,
         width: 100,
       },
     ],
   };
 };
-
-export const tableConfig = {};

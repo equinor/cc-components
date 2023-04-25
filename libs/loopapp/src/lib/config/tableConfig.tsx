@@ -6,6 +6,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
+  defaultColDef,
 } from '@cc-components/shared/table-helpers';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
@@ -26,6 +27,9 @@ export const useTableConfig = (
     };
   });
   return {
+    gridOptions: {
+      defaultColDef: defaultColDef,
+    },
     getRows: getRows,
     columnDefinitions: [
       {

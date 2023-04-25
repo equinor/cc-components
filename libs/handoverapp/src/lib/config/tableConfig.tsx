@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { statusColorMap } from '@cc-components/shared';
+import { defaultColDef, statusColorMap } from '@cc-components/shared';
 import { DateCell, DescriptionCell, LinkCell, StatusCell } from '@cc-components/shared';
 import { BaseStatus } from '@cc-components/shared';
 
@@ -7,6 +7,7 @@ import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 
 export const tableConfig: GridConfig<HandoverPackage> = {
+  gridOptions: { defaultColDef: defaultColDef },
   columnDefinitions: [
     {
       field: 'Commpkgno',

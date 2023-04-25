@@ -5,10 +5,12 @@ import {
   LinkCell,
   StatusCell,
   YearAndWeekCell,
+  defaultColDef,
 } from '@cc-components/shared/table-helpers';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 
 export const tableConfig: GridConfig<McPackage> = {
+  gridOptions: { defaultColDef: defaultColDef },
   columnDefinitions: [
     {
       field: 'McpkgNo',

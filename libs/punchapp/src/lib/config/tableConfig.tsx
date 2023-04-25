@@ -4,6 +4,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
+  defaultColDef,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
@@ -27,6 +28,7 @@ export const useTableConfig = (
 
   return {
     getRows,
+    gridOptions: { defaultColDef: defaultColDef },
     columnDefinitions: [
       {
         field: 'Punch',
