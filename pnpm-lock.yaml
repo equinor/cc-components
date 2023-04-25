@@ -485,6 +485,9 @@ importers:
       '@remirror/styles':
         specifier: ^2.0.4
         version: 2.0.4(@emotion/react@11.10.6)(@types/react@18.0.25)(@types/styled-components@5.1.26)(react@18.2.0)(styled-components@5.3.6)
+      date-fns:
+        specifier: ^2.29.3
+        version: 2.29.3
       markdown-to-jsx:
         specifier: ^7.2.0
         version: 7.2.0(react@18.2.0)
@@ -12225,6 +12228,11 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
 
+  /date-fns@2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
+    dev: false
+
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     peerDependencies:
@@ -14015,7 +14023,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0

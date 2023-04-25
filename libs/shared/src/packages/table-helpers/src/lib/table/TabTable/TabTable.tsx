@@ -3,6 +3,8 @@ import { info_circle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { ColDef, ReactGrid } from '@equinor/workspace-ag-grid';
 import { InfoText, NoResourceData } from './tabTable.styles';
+import { defaultColDef } from '../../defaultColDef';
+
 type TabTableProps<T> = {
   packages: T[] | undefined;
   columns: ColDef<T>[];
@@ -11,7 +13,9 @@ type TabTableProps<T> = {
   resourceName: string;
   height?: number;
 };
+
 Icon.add({ info_circle });
+
 /**
  * Standard Table component using `ReactGrid` from workspace-ag-grid.
  * Use this if you need a table in a sidesheet tab.
@@ -40,5 +44,12 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
     );
   }
 
-  return <ReactGrid rowData={packages} colDefs={columns} height={height || 500} />;
+  return (
+    <ReactGrid
+      rowData={packages}
+      gridOptions={{ defaultColDef }}
+      colDefs={columns}
+      height={height || 500}
+    />
+  );
 };
