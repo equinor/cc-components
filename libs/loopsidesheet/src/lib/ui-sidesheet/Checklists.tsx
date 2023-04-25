@@ -3,7 +3,7 @@ import { LinkCell, StatusCell, TabTable } from '@cc-components/shared/table-help
 import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { ChecklistForLoop } from '../types';
-import { useGetChecklists, useGetWorkorders } from '../utils-sidesheet';
+import { useGetChecklists } from '../utils-sidesheet';
 
 const columns: ColDef<ChecklistForLoop>[] = [
   {
@@ -96,7 +96,7 @@ type ChecklistsProps = {
 };
 
 export const Checklists = ({ loopId }: ChecklistsProps) => {
-  const { data, error, isLoading } = useGetChecklists();
+  const { data, error, isLoading } = useGetChecklists(loopId);
 
   return (
     <div>

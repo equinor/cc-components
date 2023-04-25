@@ -61,7 +61,6 @@ export const useTableConfig = (
       {
         field: 'Discipline',
         valueGetter: (pkg) => pkg.data?.disciplineCode,
-        // enableRowGroup: true,
         width: 150,
       },
       {
@@ -72,7 +71,6 @@ export const useTableConfig = (
       {
         field: 'Job status',
         valueGetter: (pkg) => pkg.data?.jobStatus,
-        // enableRowGroup: true,
         width: 150,
       },
       {
@@ -91,7 +89,6 @@ export const useTableConfig = (
             );
           } else return null;
         },
-        // enableRowGroup: true,
         width: 150,
       },
       {
@@ -111,7 +108,6 @@ export const useTableConfig = (
             );
           } else return null;
         },
-        // enableRowGroup: true,
         width: 100,
       },
       {
@@ -211,7 +207,6 @@ export const useTableConfig = (
             />
           );
         },
-        // enableRowGroup: true,
         width: 100,
       },
     ],
