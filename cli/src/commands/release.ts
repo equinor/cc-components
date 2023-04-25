@@ -9,6 +9,7 @@ import { logBundleSize } from '../utils/logBundleSize.js';
 import { bundleApp } from '../utils/bundleApp.js';
 import { compileApp } from '../utils/compile.js';
 import ora from 'ora';
+import { createRelease } from './create-release.js';
 
 export function release(dry: boolean) {
   //Ensure latest changes have been pulled
@@ -40,6 +41,8 @@ export function release(dry: boolean) {
 
     //push commit
     pushChanges();
+
+    createRelease();
   } else {
     ora().info('Skipping release').stop();
   }
