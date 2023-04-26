@@ -5,7 +5,7 @@ import buildQuery from 'odata-query';
 
 const ccApp = {
   uri: 'https://backend-fusion-data-gateway-test.radix.equinor.com',
-  defaultScopes: ['api://2225e001-b04f-43ea-ac12-6fc3bbcf3a12/user_impersonation'],
+  defaultScopes: ['api://ed6de162-dd30-4757-95eb-0ffc8d34fbe0/access_as_user'],
 };
 
 export const configure = async (config: IAppConfigurator) => {
