@@ -7,7 +7,10 @@ import { gardenConfig } from './gardenConfig';
 import { contextConfig } from './contextConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
-import { FusionDataProxyError, UnathorizedPage } from '@cc-components/shared';
+import {
+  FusionDataProxyUnauthorized,
+  useErrorBoundaryTrigger,
+} from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
@@ -20,12 +23,13 @@ type WorkspaceWrapperProps = {
 };
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const [unauthorized, setUnauthorized] = useState<FusionDataProxyError | false>(false);
   const dataProxy = useHttpClient('data-proxy');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
     dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`, {
       signal,
     });
+
+  const trigger = useErrorBoundaryTrigger();
 
   const pbi = usePBIOptions('mc-analytics', {
     column: 'ProjectName',
@@ -34,17 +38,13 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
 
   const responseParser = async (response: Response) => {
     if (response.status === 403) {
-      setUnauthorized(await response.json());
+      trigger(new FusionDataProxyUnauthorized(await response.json()));
       throw new Error('');
     }
 
     const parsedResponse = JSON.parse(await response.text()) as McPackage[];
     return parsedResponse.sort(sortPackagesByStatus);
   };
-
-  if (unauthorized) {
-    return <UnathorizedPage error={unauthorized} />;
-  }
 
   return (
     <Workspace

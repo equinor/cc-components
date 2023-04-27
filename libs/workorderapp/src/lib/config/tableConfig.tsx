@@ -17,7 +17,8 @@ import { defaultColDef } from '@cc-components/shared/table-helpers';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useTableConfig = (
-  contextId: string
+  contextId: string,
+  boundaryTrigger?: () => void
 ): GridConfig<WorkOrder, FilterStateGroup[]> => {
   const client = useHttpClient('cc-app');
 
@@ -28,7 +29,7 @@ export const useTableConfig = (
       rowCount: meta.rowCount,
       rowData: meta.items,
     };
-  });
+  }, boundaryTrigger);
 
   return {
     getRows: getRows,

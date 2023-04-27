@@ -6,19 +6,23 @@ import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useGardenConfig = (
-  contextId: string
+  contextId: string,
+  boundaryTrigger: VoidFunction
 ): GardenConfig<Punch, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
-    useGardenDataSource({
-      getBlockAsync: (req) =>
-        client.fetch(`/api/contexts/${contextId}/punch/garden`, req),
-      getGardenMeta: (req) =>
-        client.fetch(`/api/contexts/${contextId}/punch/garden-meta`, req),
-      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/punch/garden`, req),
-      getSubgroupItems: (req) =>
-        client.fetch(`/api/contexts/${contextId}/punch/subgroup-items`, req),
-    });
+    useGardenDataSource(
+      {
+        getBlockAsync: (req) =>
+          client.fetch(`/api/contexts/${contextId}/punch/garden`, req),
+        getGardenMeta: (req) =>
+          client.fetch(`/api/contexts/${contextId}/punch/garden-meta`, req),
+        getHeader: (req) => client.fetch(`/api/contexts/${contextId}/punch/garden`, req),
+        getSubgroupItems: (req) =>
+          client.fetch(`/api/contexts/${contextId}/punch/subgroup-items`, req),
+      },
+      boundaryTrigger
+    );
 
   return {
     getBlockAsync,

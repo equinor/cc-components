@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { FusionDataProxyError } from '../types/fusionDataProxyError';
 import { error_outlined } from '@equinor/eds-icons';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 Icon.add({ error_outlined });
 
-export function GenericUnathorizedPage() {
+export function CCApiUnauthorized() {
   return (
     <StyledFusionError>
       <Icon
@@ -36,8 +35,4 @@ const StyledFusionError = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2em;
-`;
-
-const StyledList = styled.ul`
-  padding-inline-start: 1em;
 `;
