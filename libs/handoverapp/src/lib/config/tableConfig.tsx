@@ -10,7 +10,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
   gridOptions: { defaultColDef: defaultColDef },
   columnDefinitions: [
     {
-      field: 'Commpkgno',
+      field: 'Comm pkg',
       valueGetter: (pkg) => pkg.data?.commpkgNo,
       valueFormatter: (pkg) => pkg.data?.url ?? '',
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
