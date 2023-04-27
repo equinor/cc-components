@@ -6,11 +6,6 @@ import {
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 
-const ccApp = {
-  uri: 'https://backend-fusion-data-gateway-test.radix.equinor.com',
-  defaultScopes: ['api://ed6de162-dd30-4757-95eb-0ffc8d34fbe0/access_as_user'],
-};
-
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster']);
@@ -26,11 +21,20 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  console.debug(c.env.config?.environment);
+  const envConfig: WorkorderEnvConfig = c.env.config?.environment as WorkorderEnvConfig;
 
+  if (!envConfig) {
+    throw new Error('Failed to load environemnt config for workorder');
+  }
   config.configureHttpClient('cc-app', {
-    baseUri: ccApp.uri,
-    defaultScopes: ccApp.defaultScopes,
+    baseUri: envConfig?.uri,
+    defaultScopes: envConfig?.defaultScopes,
   });
+
   enableAgGrid(config);
+};
+
+type WorkorderEnvConfig = {
+  uri?: string;
+  defaultScopes?: string[];
 };
