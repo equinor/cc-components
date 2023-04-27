@@ -23,7 +23,8 @@ type GardenDataSourceArgs = {
 };
 
 export function useGardenDataSource(
-  requestBuilders: GardenDataSourceArgs
+  requestBuilders: GardenDataSourceArgs,
+  boundaryTrigger: VoidFunction
 ): GardenDataSource<FilterStateGroup[]> {
   return {
     getBlockAsync: async (args, filters, signal) => {
@@ -57,6 +58,7 @@ export function useGardenDataSource(
 
       const res = await requestBuilders.getGardenMeta(requestArgs);
       if (!res.ok) {
+        boundaryTrigger();
         throw new Error('Api error');
       }
       const meta: ApiGardenMeta = await res.json();

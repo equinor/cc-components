@@ -5,6 +5,7 @@ import { configure, WorkspaceWrapper } from '@cc-components/swcrapp';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useContextId } from '@cc-components/shared/hooks';
 import { NoContext } from '@cc-components/shared/common';
+import { AppErrorBoundary } from '@cc-components/shared';
 
 const queryClient = new QueryClient();
 const SwcrApp = () => {
@@ -13,9 +14,11 @@ const SwcrApp = () => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
-          {contextId ? <WorkspaceWrapper contextId={contextId} /> : <NoContext />}
-        </div>
+        <AppErrorBoundary>
+          <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
+            {contextId ? <WorkspaceWrapper contextId={contextId} /> : <NoContext />}
+          </div>
+        </AppErrorBoundary>
       </QueryClientProvider>
     </StrictMode>
   );
