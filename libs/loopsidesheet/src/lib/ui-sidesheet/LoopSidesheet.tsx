@@ -120,7 +120,6 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
             <Tabs.Tab>
               Work orders <TabTitle isLoading={isLoading} data={data} />
             </Tabs.Tab>
-            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <StyledPanels>
@@ -132,7 +131,6 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
           <Tabs.Panel>
             <WorkorderTab error={null} isFetching={false} workorders={data} />
           </Tabs.Panel>
-          <Tabs.Panel>Work in progress...</Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>

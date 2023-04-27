@@ -1,6 +1,6 @@
 {
   "name": "handover",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
