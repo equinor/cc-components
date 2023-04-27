@@ -26,8 +26,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  // c.env.config?.environment[]
-  console.log(c.env.config?.environment);
+  console.debug(c.env.config?.environment);
 
   config.configureHttpClient('cc-app', {
     baseUri: ccApp.uri,
