@@ -68,19 +68,13 @@ export type HandoverUnsignedTask = {
 } & HandoverChild;
 
 export type HandoverWorkOrder = {
-  workOrderNo: string;
-  workOrderId: string;
+  workOrderNumber: string;
   workOrderStatus: string;
-  title: string;
-  discipline: string;
-  jobStatus: string;
-  plannedCompletionDate: string;
-  actualCompletionDate: string;
-  estimatedManHours: number;
-  remainingManHours: number;
   workOrderStatusDescription: string;
   description: string;
   materialStatus: string;
   materialStatusDescription: string;
-  projectProgress: number;
+  projectProgress: string;
+  plannedStartDate: string;
+  plannedCompletionDate: string;
 } & HandoverChild;
