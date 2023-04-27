@@ -46,7 +46,11 @@ type LoopProps = {
 export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  const { data, error, isLoading } = useGetWorkorders();
+  if (!props.item) {
+    throw new Error('Loop undefined');
+  }
+
+  const { data, error, isLoading } = useGetWorkorders(props.item.loopNo);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
