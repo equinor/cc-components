@@ -64,7 +64,7 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
-    field: 'CommpkgNo.',
+    field: 'Comm pkg.',
     valueGetter: (pkg) => pkg.data?.commpkgNumber,
     valueFormatter: (pkg) =>
       pkg.data?.commpkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commpkgId) : '',

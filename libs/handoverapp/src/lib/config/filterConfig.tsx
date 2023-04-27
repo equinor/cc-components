@@ -9,7 +9,7 @@ import { getStatus } from '../utils-statuses/getStatus';
 export const filterConfig: FilterConfig<HandoverPackage> = {
   filterGroups: [
     {
-      name: 'Commpkgno',
+      name: 'Comm pkg',
       valueFormatter: ({ commpkgNo }) => commpkgNo,
     },
     {
