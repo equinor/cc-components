@@ -6,8 +6,8 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
-  defaultColDef,
 } from '@cc-components/shared/table-helpers';
+import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
@@ -28,9 +28,7 @@ export const useTableConfig = (
     };
   }, trigger);
   return {
-    gridOptions: {
-      defaultColDef: defaultColDef,
-    },
+    gridOptions: defaultGridOptions,
     getRows: getRows,
     columnDefinitions: [
       {

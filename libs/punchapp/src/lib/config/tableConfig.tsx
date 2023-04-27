@@ -4,10 +4,12 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
-  defaultColDef,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import {
+  useGridDataSource,
+  defaultGridOptions,
+} from '@cc-components/shared/workspace-config';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
@@ -35,7 +37,7 @@ export const useTableConfig = (
 
   return {
     getRows,
-    gridOptions: { defaultColDef: defaultColDef },
+    gridOptions: defaultGridOptions,
     columnDefinitions: [
       {
         field: 'Punch',

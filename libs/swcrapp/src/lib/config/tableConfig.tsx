@@ -1,15 +1,12 @@
 import { proCoSysUrls } from '@cc-components/shared/mapping';
-import {
-  DescriptionCell,
-  LinkCell,
-  defaultColDef,
-} from '@cc-components/shared/table-helpers';
+import { DescriptionCell, LinkCell } from '@cc-components/shared/table-helpers';
+import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
 
 export const tableConfig: GridConfig<SwcrPackage> = {
-  gridOptions: { defaultColDef: defaultColDef },
+  gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
       field: 'SWCRs',
