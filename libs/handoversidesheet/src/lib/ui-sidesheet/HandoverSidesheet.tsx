@@ -25,6 +25,7 @@ import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
+import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
@@ -185,7 +186,20 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab
-              workorders={workOrderPackages}
+              workorders={(workOrderPackages ?? []).map(
+                (workorder): WorkorderBase => ({
+                  ...workorder,
+                  workOrderNo: workorder.workOrderNumber,
+                  actualCompletionDate: '',
+                  discipline: '',
+                  estimatedManHours: null,
+                  jobStatus: '',
+                  remainingManHours: null,
+                  title: workorder.description,
+                  workOrderId: workorder.commpkgId,
+                  projectProgress: null,
+                })
+              )}
               isFetching={isDataFetchingWorkOrder}
               error={woError}
             />
