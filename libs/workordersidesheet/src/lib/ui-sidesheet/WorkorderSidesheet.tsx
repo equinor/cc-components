@@ -83,7 +83,6 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             <Tabs.Tab>
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
             </Tabs.Tab>
-            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -105,8 +104,6 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
               error={materialError instanceof Error ? materialError : null}
             />
           </Tabs.Panel>
-
-          <Tabs.Panel>3D coming soon</Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
