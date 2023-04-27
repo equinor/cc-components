@@ -11,10 +11,7 @@ import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import {
-  FusionDataProxyUnauthorized,
-  useErrorBoundaryTrigger,
-} from '@cc-components/shared';
+import { CCApiUnauthorizedError, useErrorBoundaryTrigger } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
@@ -23,19 +20,18 @@ export const useTableConfig = (
 
   const trigger = useErrorBoundaryTrigger();
 
-  const { getRows } = useGridDataSource(async (req) => {
-    const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
+  const { getRows } = useGridDataSource(
+    async (req) => {
+      const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
 
-    if (!res.ok) {
-      trigger(new FusionDataProxyUnauthorized(await res.json()));
-    }
-
-    const meta = (await res.json()) as { items: any[]; rowCount: number };
-    return {
-      rowCount: meta.rowCount,
-      rowData: meta.items,
-    };
-  });
+      const meta = (await res.json()) as { items: any[]; rowCount: number };
+      return {
+        rowCount: meta.rowCount,
+        rowData: meta.items,
+      };
+    },
+    () => trigger(new CCApiUnauthorizedError(''))
+  );
 
   return {
     getRows,
