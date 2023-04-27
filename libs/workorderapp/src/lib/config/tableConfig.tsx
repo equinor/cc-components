@@ -13,8 +13,8 @@ import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { WorkOrder } from '@cc-components/workordershared';
 import { proCoSysUrls } from '@cc-components/shared';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
-import { defaultColDef } from '@cc-components/shared/table-helpers';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
 export const useTableConfig = (
   contextId: string,
@@ -33,9 +33,7 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
-    gridOptions: {
-      defaultColDef: defaultColDef,
-    },
+    gridOptions: defaultGridOptions,
     columnDefinitions: [
       {
         field: 'Workorder',

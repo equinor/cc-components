@@ -3,7 +3,7 @@ import { info_circle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { ColDef, ReactGrid } from '@equinor/workspace-ag-grid';
 import { InfoText, NoResourceData } from './tabTable.styles';
-import { defaultColDef } from '../../defaultColDef';
+import { defaultColDef } from '../../../../../workspace-config/src/defaultColDef';
 
 type TabTableProps<T> = {
   packages: T[] | undefined;
