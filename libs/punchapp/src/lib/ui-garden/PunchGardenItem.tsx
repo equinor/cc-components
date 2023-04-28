@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import {
+  StyledDescription,
   StyledItemText,
   StyledPunchItem,
   StyledRoot,
@@ -42,7 +43,11 @@ function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
         <StyledItemText>{displayName}</StyledItemText>
         <StyledStatusCircles typeColor={punchTypeColor} />
       </StyledPunchItem>
-      {columnExpanded && <>{data.description}</>}
+      {columnExpanded && (
+        <StyledDescription title={data.description ?? ''}>
+          {data.description}
+        </StyledDescription>
+      )}
     </StyledRoot>
   );
 }
