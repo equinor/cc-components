@@ -12,6 +12,6 @@
     "@cc-components/shared": "workspace:^",
     "@cc-components/workordershared": "workspace:^",
     "@cc-components/workordersidesheet": "workspace:^",
-    "@equinor/workspace-fusion": "1.0.5"
+    "@equinor/workspace-fusion": "1.0.6-preview"
   }
 }

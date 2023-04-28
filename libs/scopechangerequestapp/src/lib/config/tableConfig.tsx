@@ -24,7 +24,8 @@ function findNextToSign(sc: ScopeChangeRequest) {
 }
 
 export const tableConfig: GridConfig<ScopeChangeRequest> = {
-  gridOptions: defaultGridOptions,
+  // gridOptions: defaultGridOptions,
+
   columnDefinitions: [
     {
       field: 'Id',
