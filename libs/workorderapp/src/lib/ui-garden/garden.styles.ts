@@ -104,4 +104,12 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   }
 `;
 
+export const StyledDescription = styled.p`
+  all: unset;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 //#endregion

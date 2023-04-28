@@ -29,6 +29,7 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   padding-right: 2px;
   outline: ${(props) => (props.isSelected ? '2px dashed green' : '')};
   outline-offset: ${(props) => (props.isSelected ? '2px' : '')};
+  width: 100%;
 `;
 
 export const StyledItemText = styled.div`
@@ -98,4 +99,12 @@ export const StyledNoStatus = styled.div<NoStatusProps>`
   border-radius: ${(props) => (props.size === 'small' ? '17px' : '21px')};
   height: ${(props) => (props.size === 'small' ? '16px' : '20px')};
   width: ${(props) => (props.size === 'small' ? '16px' : '20px')};
+`;
+
+export const StyledDescription = styled.p`
+  all: unset;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
