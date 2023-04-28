@@ -47,9 +47,9 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
   return (
     <ClientGrid
       rowData={packages}
-      gridOptions={defaultGridOptions}
       colDefs={columns}
       height={height || 500}
+      gridOptions={{ ...defaultGridOptions }}
     />
   );
 };
