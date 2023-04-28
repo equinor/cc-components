@@ -6,12 +6,11 @@ import {
   StatusCell,
   YearAndWeekCell,
 } from '@cc-components/shared/table-helpers';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 
 export const tableConfig: GridConfig<McPackage> = {
-  gridOptions: defaultGridOptions,
+  // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
       field: 'McpkgNo',
