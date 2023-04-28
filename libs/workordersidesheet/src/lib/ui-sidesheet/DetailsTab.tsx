@@ -13,6 +13,8 @@ type DetailsTabProps = {
 };
 export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null => {
   if (!workOrder) return null;
+  console.log(workOrder.actualStartupDate);
+  console.log(workOrder.actualFinishDate);
   return (
     <StyledTabContent>
       <h3>Details</h3>
@@ -20,13 +22,29 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null =
       <StyledTable>
         <tbody>
           <tr>
-            <td>Range</td>
+            <td>Planned range</td>
             <td>
               {stringCell(
                 `${formatDateString(workOrder.plannedStartupDate)} - ${formatDateString(
                   workOrder.plannedFinishDate
                 )}`
               )}
+            </td>
+          </tr>
+          <tr>
+            <td>Actual range</td>
+            <td>
+              {workOrder.actualStartupDate
+                ? `${formatDateString(workOrder.actualStartupDate)} - `
+                : 'Not started - '}
+              {workOrder.actualFinishDate
+                ? `${formatDateString(workOrder.actualFinishDate)}`
+                : 'Not finished'}
+              {/* {stringCell(
+                `${formatDateString(workOrder.actualStartupDate)} - ${formatDateString(
+                  workOrder.actualFinishDate
+                )}`
+              )} */}
             </td>
           </tr>
           <tr>
@@ -105,22 +123,6 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null =
           <tr>
             <td>Construction Comments</td>
             <td>{workOrder.constructionComments}</td>
-          </tr>
-          <tr>
-            <td>Actual start date</td>
-            <td>{workOrder.actualStartupDate}</td>
-          </tr>
-          <tr>
-            <td>Planned start date</td>
-            <td>{workOrder.plannedStartupDate}</td>
-          </tr>
-          <tr>
-            <td>Actual finish date</td>
-            <td>{workOrder.actualFinishDate}</td>
-          </tr>
-          <tr>
-            <td>Planned finish date</td>
-            <td>{workOrder.plannedFinishDate}</td>
           </tr>
         </tbody>
       </StyledTable>
