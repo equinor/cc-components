@@ -12,7 +12,7 @@ function tryFormat(value: unknown): string {
       if (Number.isNaN(maybeDate.valueOf())) {
         return value;
       }
-      return tryFormat(maybeDate);
+      return formatDate(maybeDate);
     }
 
     case 'number': {

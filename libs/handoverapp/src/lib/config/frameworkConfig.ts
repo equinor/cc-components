@@ -23,7 +23,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
 
   const envConfig: HandoverEnvConfig = c.env.config?.environment as HandoverEnvConfig;
 
-  if (!envConfig) {
+  if (!envConfig.uri) {
     throw new Error('Failed to load environemnt config for workorder');
   }
   config.configureHttpClient('data-proxy', {
