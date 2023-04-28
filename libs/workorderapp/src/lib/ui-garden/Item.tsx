@@ -74,7 +74,19 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
           <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles matColor={matColor} mccrColor={mccrColor} />
         </StyledItemWrapper>
-        {columnExpanded && data.description}
+        {columnExpanded && (
+          <div
+            title={data.description ?? ''}
+            style={{
+              width: '50%',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {data.description}
+          </div>
+        )}
       </StyledRoot>
       {isOpen && (
         <PopoverWrapper
