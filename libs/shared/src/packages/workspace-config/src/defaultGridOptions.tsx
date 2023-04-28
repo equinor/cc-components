@@ -29,4 +29,5 @@ const LoadingCellRenderer = memo(() => {
 export const defaultGridOptions: GridOptions = {
   loadingCellRenderer: LoadingCellRenderer,
   defaultColDef: defaultColDef,
+  serverSideInitialRowCount: 100,
 };
