@@ -33,7 +33,7 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
-    gridOptions: defaultGridOptions,
+    gridOptions: { ...defaultGridOptions },
     columnDefinitions: [
       {
         field: 'Workorder',
