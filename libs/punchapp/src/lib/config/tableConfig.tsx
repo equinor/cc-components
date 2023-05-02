@@ -37,7 +37,7 @@ export const useTableConfig = (
 
   return {
     getRows,
-    gridOptions: defaultGridOptions,
+    gridOptions: { ...defaultGridOptions },
     columnDefinitions: [
       {
         field: 'Punch',
