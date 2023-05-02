@@ -28,7 +28,7 @@ export const useTableConfig = (
     };
   }, trigger);
   return {
-    gridOptions: defaultGridOptions,
+    gridOptions: { ...defaultGridOptions },
     getRows: getRows,
     columnDefinitions: [
       {
