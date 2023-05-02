@@ -9,9 +9,10 @@
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "dependencies": {
+    "@ag-grid-enterprise/core": "28.2.1",
     "@cc-components/shared": "workspace:^",
     "@cc-components/workordershared": "workspace:^",
     "@cc-components/workordersidesheet": "workspace:^",
-    "@equinor/workspace-fusion": "1.0.6"
+    "@equinor/workspace-fusion": "1.0.8"
   }
 }
