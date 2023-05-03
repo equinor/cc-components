@@ -18,7 +18,7 @@ const MyApp = () => {
           {contextId ? (
             <Report
               appKey={'atexinspection'}
-              column={'ProjectName'}
+              column={'CVPID'}
               reportId={'atex-inspection-analytics'}
               table={'Dim_ProjectMaster'}
               contextId={contextId}
