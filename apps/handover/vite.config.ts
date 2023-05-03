@@ -10,6 +10,7 @@ export default defineConfig({
   appType: 'custom',
   build: {
     emptyOutDir: true,
+    minify: false,
     lib: {
       entry: './src/main.tsx',
       fileName: 'app-bundle',
