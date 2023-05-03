@@ -13,25 +13,37 @@ program.name('CC-components-cli');
 program.description('CLI for CC-components');
 program.version(pkgJson.version);
 
+export type VersionIncrement = 'major' | 'minor' | 'patch';
+
 program
   .command('release')
   .option('-dry --dry', 'skip release', false)
   .action(async ({ dry }) => {
-    setTimeout(async () => {
-      await prompt({
-        type: 'select',
-        name: 'value',
-        message: 'Choose an environment',
-        choices: [
-          { title: 'CI', value: 'ci' },
-          { title: 'Production', value: 'fprd' },
-          { title: 'QA', value: 'fqa', disabled: true },
-        ],
-        initial: 0,
-      }).then(async ({ value }) => {
-        await release(dry, value);
-      });
-    }, 5000);
+    const { value: env } = await prompt({
+      type: 'select',
+      name: 'value',
+      message: 'Choose an environment',
+      choices: [
+        { title: 'CI', value: 'ci' },
+        { title: 'Production', value: 'fprd' },
+        { title: 'QA', value: 'fqa', disabled: true },
+      ],
+      initial: 0,
+    });
+
+    const { value: versionInc } = await prompt({
+      type: 'select',
+      name: 'value',
+      message: 'Choose version bump',
+      choices: [
+        { title: 'Patch', value: 'patch' },
+        { title: 'Minor', value: 'minor' },
+        { title: 'Major', value: 'major' },
+      ],
+      initial: 0,
+    });
+
+    await release(true, env, versionInc);
   });
 
 await program.parseAsync();

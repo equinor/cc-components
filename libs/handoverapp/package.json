@@ -11,6 +11,7 @@
   "dependencies": {
     "@cc-components/handovershared": "workspace:^",
     "@cc-components/handoversidesheet": "workspace:^",
-    "@cc-components/shared": "workspace:^"
+    "@cc-components/shared": "workspace:^",
+    "@equinor/workspace-fusion": "0.20.4-alpha.3.0"
   }
 }
