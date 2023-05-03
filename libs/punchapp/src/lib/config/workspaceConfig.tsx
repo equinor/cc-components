@@ -23,7 +23,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const ccApi = useHttpClient('cc-api');
 
   const pbi = usePBIOptions('cc-punch-analytics', {
-    column: 'ProjectName',
+    column: 'CVPID',
     table: 'Dim_ProjectMaster',
   });
 

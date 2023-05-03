@@ -12,6 +12,6 @@
     "@cc-components/punchshared": "workspace:^",
     "@cc-components/punchsidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "1.0.6-preview"
+    "@equinor/workspace-fusion": "1.0.10"
   }
 }

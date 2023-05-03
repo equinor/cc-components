@@ -1,7 +1,7 @@
 import { PowerBiConfig } from '@equinor/workspace-fusion/power-bi';
 import { ReportMeta } from './ReportMeta';
 import { usePBIHelpers } from './usePBIHelpers';
-import { useContextTitle } from '../../../hooks/src/lib/useContextTitle';
+import { useContextCvpId } from '../../../hooks/src/lib/useContextTitle';
 
 export type Filters = {
   table: string;
@@ -15,7 +15,7 @@ export type Filters = {
  */
 export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConfig {
   const { getEmbed, getToken, getErrorMessage } = usePBIHelpers();
-  const title = useContextTitle();
+  const title = useContextCvpId();
 
   return {
     getEmbed,

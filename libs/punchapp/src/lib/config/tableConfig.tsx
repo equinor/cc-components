@@ -37,7 +37,7 @@ export const useTableConfig = (
 
   return {
     getRows,
-    gridOptions: defaultGridOptions,
+    gridOptions: { ...defaultGridOptions },
     columnDefinitions: [
       {
         field: 'Punch',
@@ -202,16 +202,16 @@ export const useTableConfig = (
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.workOrderUrlId
-            ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.workOrderUrlId
+        //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
         width: 150,
       },
       {
