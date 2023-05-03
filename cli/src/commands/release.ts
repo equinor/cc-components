@@ -10,7 +10,7 @@ import { bundleApp } from '../utils/bundleApp.js';
 import { compileApp } from '../utils/compile.js';
 import ora from 'ora';
 
-export function release(dry: boolean) {
+export async function release(dry: boolean, env: 'ci' | 'fqa' | 'fprd') {
   //Ensure latest changes have been pulled
   pullChanges();
 
@@ -36,7 +36,7 @@ export function release(dry: boolean) {
     commitRelease();
 
     //upload to fdev
-    deployApp();
+    await deployApp(env);
 
     //push commit
     pushChanges();
