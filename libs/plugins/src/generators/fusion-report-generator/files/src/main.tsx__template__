@@ -20,7 +20,7 @@ const MyApp = () => {
               appKey={"<%= projectName %>"}
               column={'CVPID'}
               reportId={''}
-              table={''}
+              table={'Dim_ProjectMaster'}
               contextId={contextId}
             />
           ) : (
