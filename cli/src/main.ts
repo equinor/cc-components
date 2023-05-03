@@ -43,7 +43,7 @@ program
       initial: 0,
     });
 
-    await release(true, env, versionInc);
+    await release(dry, env, versionInc);
   });
 
 await program.parseAsync();
