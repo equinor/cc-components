@@ -38,11 +38,6 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null =
               {workOrder.actualFinishDate
                 ? `${formatDateString(workOrder.actualFinishDate)}`
                 : 'Not finished'}
-              {/* {stringCell(
-                `${formatDateString(workOrder.actualStartupDate)} - ${formatDateString(
-                  workOrder.actualFinishDate
-                )}`
-              )} */}
             </td>
           </tr>
           <tr>
