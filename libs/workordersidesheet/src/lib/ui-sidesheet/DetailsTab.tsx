@@ -13,8 +13,6 @@ type DetailsTabProps = {
 };
 export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null => {
   if (!workOrder) return null;
-  console.log(workOrder.actualStartupDate);
-  console.log(workOrder.actualFinishDate);
   return (
     <StyledTabContent>
       <h3>Details</h3>
