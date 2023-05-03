@@ -32,7 +32,7 @@ export const filterConfig: FilterConfig<SwcrPackage> = {
     },
     {
       name: 'Supplier',
-      valueFormatter: ({ supplier }) => supplier,
+      valueFormatter: ({ supplier }) => (supplier ? supplier : null),
       isQuickFilter: true,
     },
     {
