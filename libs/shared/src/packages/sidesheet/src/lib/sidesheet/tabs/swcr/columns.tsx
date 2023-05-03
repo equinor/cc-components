@@ -9,16 +9,16 @@ export const columns: ColDef<SwcrBase>[] = [
   {
     field: '#',
     valueGetter: (pkg) => pkg.data?.swcrNumber,
-    valueFormatter: (pkg) => {
-      if (pkg.data?.swcrId) {
-        return proCoSysUrls.getSwcrUrl(pkg.data.swcrId);
-      } else return '';
-    },
-    cellRenderer: (props: ICellRendererProps<SwcrBase>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      } else return null;
-    },
+    // valueFormatter: (pkg) => {
+    //   if (pkg.data?.swcrId) {
+    //     return proCoSysUrls.getSwcrUrl(pkg.data.swcrId);
+    //   } else return '';
+    // },
+    // cellRenderer: (props: ICellRendererProps<SwcrBase>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+    //   } else return null;
+    // },
     width: 80,
   },
   {

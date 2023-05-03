@@ -8,13 +8,13 @@ export const columns: ColDef<UnsignedActionBase>[] = [
   {
     field: '#',
     valueGetter: (pkg) => pkg.data?.actionNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.actionId ? proCoSysUrls.getFormTypeUrl(pkg.data.actionId) : '',
-    cellRenderer: (props: ICellRendererProps<UnsignedActionBase>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      } else return null;
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.actionId ? proCoSysUrls.getFormTypeUrl(pkg.data.actionId) : '',
+    // cellRenderer: (props: ICellRendererProps<UnsignedActionBase>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+    //   } else return null;
+    // },
   },
   {
     field: 'Title',
