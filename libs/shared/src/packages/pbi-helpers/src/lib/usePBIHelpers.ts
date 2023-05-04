@@ -1,5 +1,7 @@
 import { useServiceDiscovery } from '../../../hooks/src/lib/useServiceDiscovery';
+import { IHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { EmbedInfo, EmbedToken, ReportInfo } from './types';
+import { useContextId } from '../../../hooks';
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
   return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;
@@ -15,9 +17,16 @@ const isEmbedToken = (embedToken: unknown): embedToken is EmbedToken => {
 
 export const usePBIHelpers = () => {
   const serviceDisco = useServiceDiscovery();
+  const contextId = useContextId();
 
   const getEmbed = async (reportUri: string, _token: string, signal?: AbortSignal) => {
+    if (!contextId) {
+      throw new Error('No context selected');
+    }
     const client = await serviceDisco.createClient('reports');
+
+    await checkAccess(client, contextId, reportUri);
+
     const res = await client.fetch(`reports/${reportUri}/config/embedinfo`, { signal });
     if (!res.ok) {
       throw new Error('', { cause: res });
@@ -67,3 +76,16 @@ export const usePBIHelpers = () => {
     getReportInfo,
   };
 };
+
+async function checkAccess(client: IHttpClient, contextId: string, reportUri: string) {
+  const contextType = 'ProjectMaster';
+
+  const res = await client.fetch(
+    `reports/${reportUri}/contexts/${contextId}/contexttypes/${contextType}/checkaccess`,
+    { method: 'OPTIONS' }
+  );
+
+  if (res.status === 403) {
+    throw res;
+  }
+}

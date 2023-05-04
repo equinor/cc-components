@@ -12,7 +12,7 @@ import {
   close_circle_outlined,
 } from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
-import { defaultColDef } from '@cc-components/shared/table-helpers';
+import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
 Icon.add({ group, comment_chat, check_circle_outlined, close_circle_outlined });
 
@@ -24,7 +24,8 @@ function findNextToSign(sc: ScopeChangeRequest) {
 }
 
 export const tableConfig: GridConfig<ScopeChangeRequest> = {
-  gridOptions: { defaultColDef: defaultColDef },
+  // gridOptions: defaultGridOptions,
+
   columnDefinitions: [
     {
       field: 'Id',

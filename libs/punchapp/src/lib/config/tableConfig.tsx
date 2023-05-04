@@ -4,31 +4,40 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
-  defaultColDef,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import {
+  useGridDataSource,
+  defaultGridOptions,
+} from '@cc-components/shared/workspace-config';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { CCApiUnauthorizedError, useErrorBoundaryTrigger } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Punch, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
 
-  const { getRows } = useGridDataSource(async (req) => {
-    const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
-    const meta = (await res.json()) as { items: any[]; rowCount: number };
-    return {
-      rowCount: meta.rowCount,
-      rowData: meta.items,
-    };
-  });
+  const trigger = useErrorBoundaryTrigger();
+
+  const { getRows } = useGridDataSource(
+    async (req) => {
+      const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
+
+      const meta = (await res.json()) as { items: any[]; rowCount: number };
+      return {
+        rowCount: meta.rowCount,
+        rowData: meta.items,
+      };
+    },
+    () => trigger(new CCApiUnauthorizedError(''))
+  );
 
   return {
     getRows,
-    gridOptions: { defaultColDef: defaultColDef },
+    gridOptions: { ...defaultGridOptions },
     columnDefinitions: [
       {
         field: 'Punch',
@@ -193,16 +202,16 @@ export const useTableConfig = (
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.workOrderUrlId
-            ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.workOrderUrlId
+        //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
         width: 150,
       },
       {

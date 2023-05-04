@@ -13,17 +13,17 @@ export const columns: ColDef<McBase>[] = [
   {
     field: 'MC.Pkg',
     valueGetter: (pkg) => pkg.data?.mcPkgNo,
-    valueFormatter: (pkg) => {
-      if (pkg.data?.mcPkgId) {
-        return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
-      } else return '';
-    },
-    cellRenderer: (props: ICellRendererProps<McBase>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      } else return null;
-    },
-    width: 100,
+    // valueFormatter: (pkg) => {
+    //   if (pkg.data?.mcPkgId) {
+    //     return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
+    //   } else return '';
+    // },
+    // cellRenderer: (props: ICellRendererProps<McBase>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+    //   } else return null;
+    // },
+    // width: 100,
   },
   {
     field: 'Title',

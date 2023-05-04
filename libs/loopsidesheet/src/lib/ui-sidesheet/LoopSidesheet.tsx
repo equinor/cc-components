@@ -46,7 +46,11 @@ type LoopProps = {
 export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  const { data, error, isLoading } = useGetWorkorders();
+  if (!props.item) {
+    throw new Error('Loop undefined');
+  }
+
+  const { data, error, isLoading } = useGetWorkorders(props.item.loopNo);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -116,7 +120,6 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
             <Tabs.Tab>
               Work orders <TabTitle isLoading={isLoading} data={data} />
             </Tabs.Tab>
-            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <StyledPanels>
@@ -128,7 +131,6 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
           <Tabs.Panel>
             <WorkorderTab error={null} isFetching={false} workorders={data} />
           </Tabs.Panel>
-          <Tabs.Panel>Work in progress...</Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>

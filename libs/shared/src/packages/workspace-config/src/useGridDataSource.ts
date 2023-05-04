@@ -14,7 +14,8 @@ type DataResponse<T> = {
  * @returns
  */
 export function useGridDataSource<TData>(
-  req: (requestArgs: RequestInit) => Promise<DataResponse<TData>>
+  req: (requestArgs: RequestInit) => Promise<DataResponse<TData>>,
+  boundaryTrigger?: VoidFunction
 ) {
   return {
     getRows: async (params: IServerSideRowGetParams, filters: FilterStateGroup[]) => {
@@ -33,6 +34,7 @@ export function useGridDataSource<TData>(
 
         params.success({ rowData: response.rowData, rowCount: response.rowCount });
       } catch (e) {
+        boundaryTrigger && boundaryTrigger();
         params.fail();
       }
     },

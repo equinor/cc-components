@@ -18,7 +18,7 @@ const MyApp = () => {
           {contextId ? (
             <Report
               appKey={'jcaworkpreparation'}
-              column={'ProjectName'}
+              column={'CVPID'}
               reportId={'pp-work-preparation'}
               table={'Dim_ProjectMaster'}
               contextId={contextId}

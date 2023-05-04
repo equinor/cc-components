@@ -1,15 +1,11 @@
 import { proCoSysUrls } from '@cc-components/shared/mapping';
-import {
-  DescriptionCell,
-  LinkCell,
-  defaultColDef,
-} from '@cc-components/shared/table-helpers';
+import { DescriptionCell, LinkCell } from '@cc-components/shared/table-helpers';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
 
 export const tableConfig: GridConfig<SwcrPackage> = {
-  gridOptions: { defaultColDef: defaultColDef },
+  // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
       field: 'SWCRs',
@@ -82,15 +78,25 @@ export const tableConfig: GridConfig<SwcrPackage> = {
           return null;
         } else {
           const keys = getNextSignatureRoleKeys(props.data, '');
-          return <div>{keys}</div>;
+          return (
+            <div
+              style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {keys}
+            </div>
+          );
         }
       },
-      width: 500,
+      width: 300,
     },
     {
       field: 'Supplier',
       valueGetter: (pkg) => pkg.data?.supplier,
-      width: 350,
+      width: 150,
     },
     {
       field: 'Types',

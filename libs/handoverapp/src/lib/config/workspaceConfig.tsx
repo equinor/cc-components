@@ -10,43 +10,40 @@ import { contextConfig } from './contextConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 import {
   usePBIOptions,
-  FusionDataProxyError,
-  UnathorizedPage,
+  useErrorBoundaryTrigger,
+  FusionDataProxyUnauthorized,
 } from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
-import { useState } from 'react';
 
 type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const [unauthorized, setUnauthorized] = useState<FusionDataProxyError | false>(false);
   const dataProxy = useHttpClient('data-proxy');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
     dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
       signal,
     });
 
+  const trigger = useErrorBoundaryTrigger();
+
   const pbi = usePBIOptions('handoveranalytics', {
-    column: 'ProjectName',
+    column: 'CVPID',
     table: 'Dim_ProjectMaster',
   });
 
   const responseParser = async (response: Response) => {
     if (response.status === 403) {
-      setUnauthorized(await response.json());
+      const error = await response.json();
+      trigger(new FusionDataProxyUnauthorized(error));
       throw new Error('');
     }
 
     const parsedResponse = JSON.parse(await response.text()) as HandoverPackage[];
     return parsedResponse.sort(sortPackagesByStatus);
   };
-
-  if (unauthorized) {
-    return <UnathorizedPage error={unauthorized} />;
-  }
 
   return (
     <Workspace

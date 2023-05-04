@@ -12,13 +12,13 @@ export const columns: ColDef<PunchBase>[] = [
   {
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.tagId ? proCoSysUrls.getPunchUrl(pkg.data.tagId) : '',
-    cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      } else return null;
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.tagId ? proCoSysUrls.getPunchUrl(pkg.data.tagId) : '',
+    // cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+    //   } else return null;
+    // },
     width: 100,
   },
   {

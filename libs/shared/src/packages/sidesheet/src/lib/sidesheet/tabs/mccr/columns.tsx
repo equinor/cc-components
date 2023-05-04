@@ -8,15 +8,15 @@ export const columns: ColDef<MccrBase>[] = [
   {
     field: 'TagNo.',
     valueGetter: (pkg) => pkg.data?.tagNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.tagId ? proCoSysUrls.getTagUrl(pkg.data.tagId) : '',
-    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-      if (!props.valueFormatted) {
-        return null;
-      } else {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.tagId ? proCoSysUrls.getTagUrl(pkg.data.tagId) : '',
+    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+    //   if (!props.valueFormatted) {
+    //     return null;
+    //   } else {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    // },
   },
   {
     field: 'Description',
@@ -30,15 +30,15 @@ export const columns: ColDef<MccrBase>[] = [
   {
     field: 'Type',
     valueGetter: (pkg) => pkg.data?.mccrType,
-    valueFormatter: (pkg) =>
-      pkg.data?.mccrId ? proCoSysUrls.getFormTypeUrl(pkg.data.mccrId) : '',
-    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-      if (!props.valueFormatted) {
-        return null;
-      } else {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.mccrId ? proCoSysUrls.getFormTypeUrl(pkg.data.mccrId) : '',
+    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+    //   if (!props.valueFormatted) {
+    //     return null;
+    //   } else {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    // },
   },
   {
     field: 'Status',
@@ -53,27 +53,27 @@ export const columns: ColDef<MccrBase>[] = [
   {
     field: 'McpkgNo.',
     valueGetter: (pkg) => pkg.data?.mcpkgNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
-    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-      if (!props.valueFormatted) {
-        return null;
-      } else {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
+    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+    //   if (!props.valueFormatted) {
+    //     return null;
+    //   } else {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    // },
   },
   {
-    field: 'CommpkgNo.',
+    field: 'Comm pkg.',
     valueGetter: (pkg) => pkg.data?.commpkgNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.commpkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commpkgId) : '',
-    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-      if (!props.valueFormatted) {
-        return null;
-      } else {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.commpkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commpkgId) : '',
+    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+    //   if (!props.valueFormatted) {
+    //     return null;
+    //   } else {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    // },
   },
 ];
