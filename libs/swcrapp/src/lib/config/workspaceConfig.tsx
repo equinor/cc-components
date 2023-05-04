@@ -29,7 +29,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   };
 
   const pbi = usePBIOptions('swcr-analytics', {
-    column: 'CVPID',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 

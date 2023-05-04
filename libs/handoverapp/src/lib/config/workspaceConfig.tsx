@@ -30,7 +30,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const trigger = useErrorBoundaryTrigger();
 
   const pbi = usePBIOptions('handoveranalytics', {
-    column: 'CVPID',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 

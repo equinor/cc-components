@@ -4,13 +4,12 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 export default defineConfig({
   plugins: [
     EnvironmentPlugin({
-      NODE_ENV: 'development',
+      NODE_ENV: 'production',
     }),
   ],
   appType: 'custom',
   build: {
     emptyOutDir: true,
-    minify: false,
     lib: {
       entry: './src/main.tsx',
       fileName: 'app-bundle',

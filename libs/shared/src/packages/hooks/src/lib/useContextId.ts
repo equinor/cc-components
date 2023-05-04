@@ -6,7 +6,7 @@ import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-
 export const useContextId = () => {
   try {
     const { currentContext } = useModuleCurrentContext();
-    return currentContext?.id;
+    return currentContext?.externalId;
   } catch {
     throw new Error(
       'UseModuleCurrentContext has to be called in the scope of Fusion framework with context enabled in config.'

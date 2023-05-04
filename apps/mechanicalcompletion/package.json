@@ -2,7 +2,7 @@
   "name": "mechanical-completion",
   "displayName": "Mechanical completion",
   "shortName": "mechanical-completion",
-  "version": "0.0.19",
+  "version": "0.0.22",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",

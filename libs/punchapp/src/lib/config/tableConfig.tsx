@@ -37,7 +37,16 @@ export const useTableConfig = (
 
   return {
     getRows,
-    gridOptions: { ...defaultGridOptions },
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
+        );
+      },
+    },
     columnDefinitions: [
       {
         field: 'Punch',
@@ -50,10 +59,10 @@ export const useTableConfig = (
           }
           return null;
         },
-        width: 100,
       },
       {
         field: 'Description',
+        colId: 'description',
         valueGetter: (pkg) => pkg.data?.description,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return <DescriptionCell description={props.value} />;
@@ -78,8 +87,6 @@ export const useTableConfig = (
             />
           );
         },
-
-        width: 100,
       },
       {
         field: 'Status',
@@ -99,37 +106,26 @@ export const useTableConfig = (
             />
           );
         },
-
-        width: 150,
       },
       {
         field: 'PL Sorting',
         valueGetter: (pkg) => pkg.data?.sorting,
-
-        width: 100,
       },
       {
         field: 'PL Type',
         valueGetter: (pkg) => pkg.data?.type,
-
-        width: 100,
       },
       {
         field: 'Estimate',
         valueGetter: (pkg) => pkg.data?.estimate,
-        width: 100,
       },
       {
         field: 'Raised by org',
         valueGetter: (pkg) => pkg.data?.raisedBy,
-
-        width: 150,
       },
       {
         field: 'Clearing by org',
         valueGetter: (pkg) => pkg.data?.clearedBy,
-
-        width: 150,
       },
       {
         field: 'Cleared',
@@ -137,7 +133,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString() : '';
         },
-        width: 100,
       },
       {
         field: 'Verified',
@@ -145,7 +140,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString() : '';
         },
-        width: 100,
       },
       {
         field: 'Handover plan',
@@ -153,7 +147,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString() : '';
         },
-        width: 110,
       },
       {
         field: 'Form type',
@@ -168,8 +161,6 @@ export const useTableConfig = (
           }
           return null;
         },
-
-        width: 100,
       },
       {
         field: 'Tag',
@@ -182,7 +173,6 @@ export const useTableConfig = (
           }
           return null;
         },
-        width: 150,
       },
       {
         field: 'Commpkg',
@@ -197,7 +187,6 @@ export const useTableConfig = (
           }
           return null;
         },
-        width: 150,
       },
       {
         field: 'Workorder',
@@ -212,13 +201,10 @@ export const useTableConfig = (
         //   }
         //   return null;
         // },
-        width: 150,
       },
       {
         field: 'Material required',
         valueGetter: (pkg) => pkg.data?.materialRequired,
-
-        width: 120,
       },
       {
         field: 'Material estimate',
@@ -226,7 +212,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString : '';
         },
-        width: 150,
       },
     ],
   };
