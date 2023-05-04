@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useContextId } from '../../../hooks';
+import { useExternalContextId } from '../../../hooks';
 import { CCApiUnauthorizedError } from '../classes/CCApiUnauthorizedError';
 import { CCApiUnauthorized } from './errors/CCApiUnauthorized';
 import { FDataProxyUnauthorized } from './errors/FDataProxyUnauthorized';
@@ -11,7 +11,7 @@ export type AppErrorBoundaryProps = {
   resetKeys?: string[];
 };
 export function AppErrorBoundary({ children, resetKeys = [] }: AppErrorBoundaryProps) {
-  const contextId = useContextId();
+  const contextId = useExternalContextId();
 
   return (
     <ErrorBoundary

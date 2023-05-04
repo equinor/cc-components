@@ -12,6 +12,7 @@ import {
   usePBIOptions,
   useErrorBoundaryTrigger,
   FusionDataProxyUnauthorized,
+  useContextId,
 } from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
@@ -21,6 +22,8 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+  const id = useContextId();
+
   const dataProxy = useHttpClient('data-proxy');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
     dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
