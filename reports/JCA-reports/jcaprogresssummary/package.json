@@ -1,5 +1,7 @@
 {
-  "name": "jcaprogresssummary",
+  "name": "jca-progress-summary",
+  "displayName": "Progress summary",
+  "shortName": "progress-summary",
   "version": "0.0.1",
   "main": "/src/main.tsx",
   "private": true,
@@ -7,12 +9,7 @@
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b",
-    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
-    "build:spa": "fusion-framework-cli app build",
-    "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k jca-reports-jcaprogresssummary dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k jca-reports-jcaprogresssummary",
-    "shipit": "pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
+    "shipit": "node ../../../cli/bin/src/main.js release"
   },
   "dependencies": {
     "@cc-components/powerbi": "workspace:^",
