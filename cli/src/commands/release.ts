@@ -4,18 +4,23 @@ import { pushChanges } from './push-changes.js';
 import { zipBundle } from './zip-bundle.js';
 import { makeManifest } from './make-app-manifest.js';
 import { pullChanges } from './pull-changes.js';
-import { deployApp } from '../utils/deployApp.js';
+import { FusionEnvironment, deployApp } from '../utils/deployApp.js';
 import { logBundleSize } from '../utils/logBundleSize.js';
 import { bundleApp } from '../utils/bundleApp.js';
 import { compileApp } from '../utils/compile.js';
 import ora from 'ora';
+import { VersionIncrement } from '../main.js';
 
-export function release(dry: boolean) {
+export async function release(
+  dry: boolean,
+  env: FusionEnvironment,
+  versionInc: VersionIncrement
+) {
   //Ensure latest changes have been pulled
   pullChanges();
 
   //Bump version
-  patchVersion();
+  patchVersion(versionInc);
 
   compileApp();
 
@@ -36,7 +41,7 @@ export function release(dry: boolean) {
     commitRelease();
 
     //upload to fdev
-    deployApp();
+    await deployApp(env);
 
     //push commit
     pushChanges();
