@@ -578,6 +578,15 @@ importers:
         specifier: workspace:^
         version: link:../../../libs/shared
 
+  reports/JCA-reports/jcaprogresssummary:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../../libs/shared
+
   reports/JCA-reports/jcaspools:
     dependencies:
       '@cc-components/powerbi':
