@@ -9,6 +9,7 @@ import {
   StyledItemWrapper,
   StyledRoot,
   StyledSizes,
+  StyledDescription,
 } from './garden.styles';
 import { WorkOrderPopover } from './Popover';
 
@@ -74,7 +75,11 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
           <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles matColor={matColor} mccrColor={mccrColor} />
         </StyledItemWrapper>
-        {columnExpanded && data.description}
+        {columnExpanded && (
+          <StyledDescription title={data.description ?? ''}>
+            {data.description}
+          </StyledDescription>
+        )}
       </StyledRoot>
       {isOpen && (
         <PopoverWrapper

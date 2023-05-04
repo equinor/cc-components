@@ -11,4 +11,4 @@ export * from './types';
 export * from './utils-dates';
 export * from './utils-formatting';
 export * from './utils-typescript';
-export * from './data-proxy';
+export * from './error-boundary';

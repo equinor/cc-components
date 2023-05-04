@@ -1,4 +1,8 @@
-import { usePBIOptions } from '@cc-components/shared';
+import {
+  CCApiUnauthorizedError,
+  useErrorBoundaryTrigger,
+  usePBIOptions,
+} from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
 
@@ -17,33 +21,42 @@ type WorkspaceWrapperProps = {
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const pbi = usePBIOptions('workorder-analytics', {
-    column: 'ProjectName',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
+
   const client = useHttpClient('cc-app');
+
+  const boundaryTrigger = useErrorBoundaryTrigger();
 
   const filterConfig = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/work-orders/filter-model`, req)
   );
-  const tableConfig = useTableConfig(contextId);
+  const tableConfig = useTableConfig(contextId, () =>
+    boundaryTrigger(new CCApiUnauthorizedError(''))
+  );
   const statusBarConfig = useStatusBarConfig(contextId);
-  const gardenConfig = useGardenConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId, () =>
+    boundaryTrigger(new CCApiUnauthorizedError(''))
+  );
 
   return (
-    <Workspace
-      key={contextId}
-      workspaceOptions={{
-        appKey: 'Workorder',
-        getIdentifier: (item) => item.workOrderId,
-        defaultTab: 'garden',
-      }}
-      powerBiOptions={pbi}
-      filterOptions={filterConfig}
-      gardenOptions={gardenConfig}
-      gridOptions={tableConfig}
-      statusBarOptions={statusBarConfig}
-      sidesheetOptions={sidesheetConfig}
-      modules={[gridModule, gardenModule, powerBiModule]}
-    />
+    <>
+      <Workspace
+        key={contextId}
+        workspaceOptions={{
+          appKey: 'Workorder',
+          getIdentifier: (item) => item.workOrderId,
+          defaultTab: 'grid',
+        }}
+        powerBiOptions={pbi}
+        filterOptions={filterConfig}
+        gardenOptions={gardenConfig}
+        gridOptions={tableConfig}
+        statusBarOptions={statusBarConfig}
+        sidesheetOptions={sidesheetConfig}
+        modules={[gridModule, gardenModule, powerBiModule]}
+      />
+    </>
   );
 };

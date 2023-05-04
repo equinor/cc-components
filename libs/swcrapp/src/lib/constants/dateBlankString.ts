@@ -1,1 +1,1 @@
-export const DATE_BLANKSTRING = 'No Date';
+export const DATE_BLANKSTRING = '';

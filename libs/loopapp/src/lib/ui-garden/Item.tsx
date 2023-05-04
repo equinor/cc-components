@@ -5,6 +5,7 @@ import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import {
+  StyledDescription,
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
@@ -67,7 +68,11 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
           />
         </StyledItemWrapper>
 
-        {columnExpanded && data.description}
+        {columnExpanded && (
+          <StyledDescription title={data.description ?? ''}>
+            {data.description}
+          </StyledDescription>
+        )}
       </StyledRoot>
 
       {isOpen && (

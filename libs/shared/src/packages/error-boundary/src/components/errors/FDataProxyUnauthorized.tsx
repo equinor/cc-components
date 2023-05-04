@@ -1,15 +1,30 @@
 import styled from 'styled-components';
-import { FusionDataProxyError } from '../types/fusionDataProxyError';
+
 import { error_outlined } from '@equinor/eds-icons';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 Icon.add({ error_outlined });
 
-type UnauthorizedErrorProps = {
+export interface FusionDataProxyError {
+  error: Error;
+}
+
+interface Error {
+  code: string;
+  message: string;
+  accessRequirements: AccessRequirement[];
+}
+
+interface AccessRequirement {
+  code: string;
+  description: string;
+}
+
+type FDataProxyUnauthorizedProps = {
   error: FusionDataProxyError;
 };
-export function UnathorizedPage({ error }: UnauthorizedErrorProps) {
+export function FDataProxyUnauthorized({ error }: FDataProxyUnauthorizedProps) {
   return (
     <StyledFusionError>
       <Icon

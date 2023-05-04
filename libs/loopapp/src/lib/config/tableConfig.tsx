@@ -6,8 +6,8 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
-  defaultColDef,
 } from '@cc-components/shared/table-helpers';
+import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
@@ -15,7 +15,8 @@ import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (
-  contextId: string
+  contextId: string,
+  trigger: VoidFunction
 ): GridConfig<Loop, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
   const { getRows } = useGridDataSource(async (req) => {
@@ -25,11 +26,9 @@ export const useTableConfig = (
       rowCount: meta.rowCount,
       rowData: meta.items,
     };
-  });
+  }, trigger);
   return {
-    gridOptions: {
-      defaultColDef: defaultColDef,
-    },
+    gridOptions: { ...defaultGridOptions },
     getRows: getRows,
     columnDefinitions: [
       {

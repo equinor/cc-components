@@ -9,13 +9,13 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
   {
     field: '#',
     valueGetter: (pkg) => pkg.data?.taskNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.taskId ? proCoSysUrls.getFormTypeUrl(pkg.data.taskId) : '',
-    cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      } else return null;
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.taskId ? proCoSysUrls.getFormTypeUrl(pkg.data.taskId) : '',
+    // cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+    //   } else return null;
+    // },
   },
   {
     field: 'Title',

@@ -35,6 +35,7 @@ export const StyledItemWrapper = styled.div<WorkOrderItemProps>`
   padding-right: 2px;
   outline: ${(props) => (props.isSelected ? '2px dashed green' : '')};
   outline-offset: ${(props) => (props.isSelected ? '2px' : '')};
+  width: 100%;
 
   ::before {
     position: absolute;
@@ -101,6 +102,14 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
     margin: 0px 1px;
     content: ' ';
   }
+`;
+
+export const StyledDescription = styled.p`
+  all: unset;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 //#endregion

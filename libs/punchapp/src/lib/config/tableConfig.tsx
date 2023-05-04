@@ -4,31 +4,49 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
-  defaultColDef,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import {
+  useGridDataSource,
+  defaultGridOptions,
+} from '@cc-components/shared/workspace-config';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { CCApiUnauthorizedError, useErrorBoundaryTrigger } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Punch, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
 
-  const { getRows } = useGridDataSource(async (req) => {
-    const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
-    const meta = (await res.json()) as { items: any[]; rowCount: number };
-    return {
-      rowCount: meta.rowCount,
-      rowData: meta.items,
-    };
-  });
+  const trigger = useErrorBoundaryTrigger();
+
+  const { getRows } = useGridDataSource(
+    async (req) => {
+      const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
+
+      const meta = (await res.json()) as { items: any[]; rowCount: number };
+      return {
+        rowCount: meta.rowCount,
+        rowData: meta.items,
+      };
+    },
+    () => trigger(new CCApiUnauthorizedError(''))
+  );
 
   return {
     getRows,
-    gridOptions: { defaultColDef: defaultColDef },
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
+        );
+      },
+    },
     columnDefinitions: [
       {
         field: 'Punch',
@@ -41,10 +59,10 @@ export const useTableConfig = (
           }
           return null;
         },
-        width: 100,
       },
       {
         field: 'Description',
+        colId: 'description',
         valueGetter: (pkg) => pkg.data?.description,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return <DescriptionCell description={props.value} />;
@@ -69,8 +87,6 @@ export const useTableConfig = (
             />
           );
         },
-
-        width: 100,
       },
       {
         field: 'Status',
@@ -90,37 +106,26 @@ export const useTableConfig = (
             />
           );
         },
-
-        width: 150,
       },
       {
         field: 'PL Sorting',
         valueGetter: (pkg) => pkg.data?.sorting,
-
-        width: 100,
       },
       {
         field: 'PL Type',
         valueGetter: (pkg) => pkg.data?.type,
-
-        width: 100,
       },
       {
         field: 'Estimate',
         valueGetter: (pkg) => pkg.data?.estimate,
-        width: 100,
       },
       {
         field: 'Raised by org',
         valueGetter: (pkg) => pkg.data?.raisedBy,
-
-        width: 150,
       },
       {
         field: 'Clearing by org',
         valueGetter: (pkg) => pkg.data?.clearedBy,
-
-        width: 150,
       },
       {
         field: 'Cleared',
@@ -128,7 +133,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString() : '';
         },
-        width: 100,
       },
       {
         field: 'Verified',
@@ -136,7 +140,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString() : '';
         },
-        width: 100,
       },
       {
         field: 'Handover plan',
@@ -144,7 +147,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString() : '';
         },
-        width: 110,
       },
       {
         field: 'Form type',
@@ -159,8 +161,6 @@ export const useTableConfig = (
           }
           return null;
         },
-
-        width: 100,
       },
       {
         field: 'Tag',
@@ -173,7 +173,6 @@ export const useTableConfig = (
           }
           return null;
         },
-        width: 150,
       },
       {
         field: 'Commpkg',
@@ -188,28 +187,24 @@ export const useTableConfig = (
           }
           return null;
         },
-        width: 150,
       },
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.workOrderUrlId
-            ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
-        width: 150,
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.workOrderUrlId
+        //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Material required',
         valueGetter: (pkg) => pkg.data?.materialRequired,
-
-        width: 120,
       },
       {
         field: 'Material estimate',
@@ -217,7 +212,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return props.value ? new Date(props.value).toLocaleDateString : '';
         },
-        width: 150,
       },
     ],
   };

@@ -8,13 +8,13 @@ export const columns: ColDef<NcrBase>[] = [
   {
     field: 'Document No.',
     valueGetter: (pkg) => pkg.data?.documentNumber,
-    valueFormatter: (pkg) =>
-      pkg.data?.documentId ? proCoSysUrls.getDocumentUrl(pkg.data.documentId) : '',
-    cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      } else return null;
-    },
+    // valueFormatter: (pkg) =>
+    //   pkg.data?.documentId ? proCoSysUrls.getDocumentUrl(pkg.data.documentId) : '',
+    // cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+    //   } else return null;
+    // },
   },
   {
     field: 'Title',

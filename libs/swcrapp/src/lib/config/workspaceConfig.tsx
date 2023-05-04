@@ -7,11 +7,13 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 import { sidesheetConfig } from './sidesheetConfig';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
-import { FusionDataProxyError, UnathorizedPage } from '@cc-components/shared';
+import {
+  FusionDataProxyUnauthorized,
+  useErrorBoundaryTrigger,
+} from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
-import { useState } from 'react';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { sortPackagesByStatusAndNumber } from '../utils-statuses';
 
@@ -19,7 +21,6 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const [unauthorized, setUnauthorized] = useState<FusionDataProxyError | false>(false);
   const dataProxy = useHttpClient('data-proxy');
 
   const getResponseAsync = async () => {
@@ -28,22 +29,20 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   };
 
   const pbi = usePBIOptions('swcr-analytics', {
-    column: 'ProjectName',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 
+  const trigger = useErrorBoundaryTrigger();
+
   const responseParser = async (response: Response) => {
     if (response.status === 403) {
-      setUnauthorized(await response.json());
+      trigger(new FusionDataProxyUnauthorized(await response.json()));
       throw new Error('');
     }
     const parsedResponse = JSON.parse(await response.text()) as SwcrPackage[];
     return parsedResponse.sort(sortPackagesByStatusAndNumber);
   };
-
-  if (unauthorized) {
-    return <UnathorizedPage error={unauthorized} />;
-  }
 
   return (
     <Workspace
