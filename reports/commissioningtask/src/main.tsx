@@ -18,7 +18,7 @@ const MyApp = () => {
           {contextId ? (
             <Report
               appKey={'commissioningtask'}
-              column={'CVPID'}
+              column={'ProjectMaster GUID'}
               reportId={'commissioning-task'}
               table={'Dim_ProjectMaster'}
               contextId={contextId}
