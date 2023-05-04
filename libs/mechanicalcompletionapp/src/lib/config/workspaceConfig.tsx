@@ -32,7 +32,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const trigger = useErrorBoundaryTrigger();
 
   const pbi = usePBIOptions('mc-analytics', {
-    column: 'CVPID',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 

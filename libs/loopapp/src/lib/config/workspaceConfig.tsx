@@ -21,7 +21,7 @@ type WorkspaceWrapperProps = {
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const pbi = usePBIOptions('loop-analytics', {
-    column: 'CVPID',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
   const client = useHttpClient('cc-api');
