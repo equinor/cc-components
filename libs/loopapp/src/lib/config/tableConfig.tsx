@@ -9,7 +9,6 @@ import {
 } from '@cc-components/shared/table-helpers';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
@@ -28,8 +27,18 @@ export const useTableConfig = (
     };
   }, trigger);
   return {
-    gridOptions: { ...defaultGridOptions },
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
+        );
+      },
+    },
     getRows: getRows,
+
     columnDefinitions: [
       {
         field: 'Loop tag',
@@ -42,10 +51,10 @@ export const useTableConfig = (
           }
           return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
         },
-        width: 200,
       },
       {
         field: 'Description',
+        colId: 'description',
         valueGetter: (pkg) => pkg.data?.description,
         cellRenderer: (props: ICellRendererProps<Loop, string>) => {
           return <DescriptionCell description={props.value} />;
@@ -56,7 +65,6 @@ export const useTableConfig = (
         field: 'System',
         valueGetter: (pkg) => pkg.data?.system,
         enableRowGroup: true,
-        width: 120,
       },
       {
         field: 'Comm pkg',
@@ -72,7 +80,6 @@ export const useTableConfig = (
             return null;
           }
         },
-        width: 150,
       },
       {
         field: 'MC pkg',
@@ -88,13 +95,11 @@ export const useTableConfig = (
             return null;
           }
         },
-        width: 130,
       },
       {
         field: 'Priority',
         valueGetter: (pkg) => pkg.data?.priority1,
         enableRowGroup: true,
-        width: 130,
       },
       {
         field: 'Planned/Forecast RFC',
@@ -103,7 +108,6 @@ export const useTableConfig = (
           if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
-        width: 250,
       },
       {
         field: 'Planned/Forecast RFO',
@@ -112,7 +116,6 @@ export const useTableConfig = (
           if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
-        width: 250,
       },
       {
         field: 'Checklist status',
@@ -132,25 +135,21 @@ export const useTableConfig = (
           );
         },
         enableRowGroup: true,
-        width: 180,
       },
       {
         field: 'Responsible',
         valueGetter: (pkg) => pkg.data?.responsible,
         enableRowGroup: true,
-        width: 150,
       },
       {
         field: 'Location',
         valueGetter: (pkg) => pkg.data?.location,
         enableRowGroup: true,
-        width: 150,
       },
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
         enableRowGroup: true,
-        width: 150,
       },
       {
         field: 'Signed',
@@ -159,7 +158,6 @@ export const useTableConfig = (
           if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
-        width: 150,
       },
       {
         field: 'Verified',
@@ -168,7 +166,6 @@ export const useTableConfig = (
           if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
-        width: 150,
       },
       {
         field: 'Content MC status',
@@ -188,7 +185,6 @@ export const useTableConfig = (
           );
         },
         enableRowGroup: true,
-        width: 200,
       },
       {
         field: 'Planned MC complete',
@@ -197,7 +193,6 @@ export const useTableConfig = (
           if (props.node.group) return null;
           return <DateCell dateString={props.value} />;
         },
-        width: 220,
       },
       // {
       //   field: 'Actual MC complete',
