@@ -1,5 +1,7 @@
 import {
+  CCApiAccessLoading,
   CCApiUnauthorizedError,
+  useCCApiAccessCheck,
   useErrorBoundaryTrigger,
   usePBIOptions,
 } from '@cc-components/shared';
@@ -37,6 +39,11 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const gardenConfig = useGardenConfig(contextId, () =>
     boundaryTrigger(new CCApiUnauthorizedError(''))
   );
+  const { isLoading } = useCCApiAccessCheck(contextId, ccApi, 'punch');
+
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
 
   return (
     <Workspace

@@ -1,5 +1,7 @@
 import {
+  CCApiAccessLoading,
   CCApiUnauthorizedError,
+  useCCApiAccessCheck,
   useErrorBoundaryTrigger,
   usePBIOptions,
 } from '@cc-components/shared';
@@ -20,12 +22,12 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+  const client = useHttpClient('cc-app');
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'work-orders');
   const pbi = usePBIOptions('workorder-analytics', {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
-
-  const client = useHttpClient('cc-app');
 
   const boundaryTrigger = useErrorBoundaryTrigger();
 
@@ -39,6 +41,10 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const gardenConfig = useGardenConfig(contextId, () =>
     boundaryTrigger(new CCApiUnauthorizedError(''))
   );
+
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
 
   return (
     <>
