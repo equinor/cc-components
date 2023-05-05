@@ -1,6 +1,7 @@
 import { Punch } from '@cc-components/punchshared';
 import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
 import {
+  DateCell,
   DescriptionCell,
   LinkCell,
   StatusCell,
@@ -131,21 +132,21 @@ export const useTableConfig = (
         field: 'Cleared',
         valueGetter: (pkg) => pkg.data?.clearedAtDate,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
       {
         field: 'Verified',
         valueGetter: (pkg) => pkg.data?.verifiedAtDate,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
       {
         field: 'Handover plan',
         valueGetter: (pkg) => pkg.data?.handoverPlan,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
       {
@@ -210,7 +211,7 @@ export const useTableConfig = (
         field: 'Material estimate',
         valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
     ],
