@@ -38,36 +38,39 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Form type"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
-            >
-              {props.item?.formularType}
-            </StyledItemLink>
+            props.item?.formularType ?? ''
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
+            // >
+            //   {props.item?.formularType}
+            // </StyledItemLink>
           }
         />
         <BannerItem
           title="Tag"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
-            >
-              {props.item?.tagNo}
-            </StyledItemLink>
+            props.item?.tagNo ?? 'N/A'
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
+            // >
+            //   {props.item?.tagNo}
+            // </StyledItemLink>
           }
         />
         <BannerItem
           title="Commpkg"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getCommPkgUrl(
-                props.item?.commissioningPackageUrlId || ''
-              )}
-            >
-              {props.item?.commissioningPackageNo}
-            </StyledItemLink>
+            props.item?.commissioningPackageNo ?? 'N/A'
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getCommPkgUrl(
+            //     props.item?.commissioningPackageUrlId || ''
+            //   )}
+            // >
+            //   {props.item?.commissioningPackageNo}
+            // </StyledItemLink>
           }
         />
       </StyledBanner>

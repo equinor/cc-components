@@ -38,15 +38,15 @@ export const useTableConfig = (
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNumber,
-        valueFormatter: (pkg) =>
-          pkg.data?.workOrderUrlId
-            ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-          if (props.valueFormatted) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          } else return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.workOrderUrlId
+        //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+        //   if (props.valueFormatted) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   } else return null;
+        // },
         width: 200,
       },
       {

@@ -14,35 +14,35 @@ const columns: ColDef<ChecklistForLoop>[] = [
   {
     field: 'Cmpkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-    valueFormatter: (pkg) => {
-      if (pkg.data?.commissioningPackageUrlId) {
-        return proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId);
-      }
-      return '';
-    },
-    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-      return null;
-    },
+    // valueFormatter: (pkg) => {
+    //   if (pkg.data?.commissioningPackageUrlId) {
+    //     return proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId);
+    //   }
+    //   return '';
+    // },
+    // cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    //   return null;
+    // },
     width: 120,
   },
   {
     headerName: 'MCpkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
-    valueFormatter: (pkg) => {
-      if (pkg.data?.mechanicalCompletionPackageUrlId) {
-        return proCoSysUrls.getCommPkgUrl(pkg.data.mechanicalCompletionPackageUrlId);
-      }
-      return '';
-    },
-    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-      return null;
-    },
+    // valueFormatter: (pkg) => {
+    //   if (pkg.data?.mechanicalCompletionPackageUrlId) {
+    //     return proCoSysUrls.getCommPkgUrl(pkg.data.mechanicalCompletionPackageUrlId);
+    //   }
+    //   return '';
+    // },
+    // cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    //   return null;
+    // },
     width: 130,
   },
   {
@@ -70,18 +70,18 @@ const columns: ColDef<ChecklistForLoop>[] = [
   {
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
-    valueFormatter: (pkg) => {
-      if (pkg.data?.checklistUrlId) {
-        return proCoSysUrls.getCommPkgUrl(pkg.data.checklistUrlId);
-      }
-      return '';
-    },
-    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
-      if (props.valueFormatted) {
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      }
-      return null;
-    },
+    // valueFormatter: (pkg) => {
+    //   if (pkg.data?.checklistUrlId) {
+    //     return proCoSysUrls.getCommPkgUrl(pkg.data.checklistUrlId);
+    //   }
+    //   return '';
+    // },
+    // cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+    //   if (props.valueFormatted) {
+    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    //   }
+    //   return null;
+    // },
     width: 140,
   },
   {
