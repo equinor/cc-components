@@ -11,14 +11,14 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       field: 'SWCRs',
       headerName: 'SWCRs',
       valueGetter: (pkg) => pkg.data?.swcrNo,
-      valueFormatter: (pkg) =>
-        pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
-      cellRenderer: (props: ICellRendererProps<SwcrPackage, string | null>) => {
-        if (!props.valueFormatted) {
-          return null;
-        }
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      },
+      // valueFormatter: (pkg) =>
+      //   pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
+      // cellRenderer: (props: ICellRendererProps<SwcrPackage, string | null>) => {
+      //   if (!props.valueFormatted) {
+      //     return null;
+      //   }
+      //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      // },
       width: 150,
     },
     {

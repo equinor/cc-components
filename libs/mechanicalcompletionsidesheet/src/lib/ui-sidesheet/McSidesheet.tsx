@@ -65,20 +65,22 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
         <BannerItem
           title="MC pkg"
           value={
-            <StyledItemLink href={proCoSysUrls.getMcUrl(props.id)} target="_blank">
-              {props.item?.mcPkgNumber ?? 'N/A'}
-            </StyledItemLink>
+            props.item?.mcPkgNumber ?? 'N/A'
+            // <StyledItemLink href={proCoSysUrls.getMcUrl(props.id)} target="_blank">
+            //   {props.item?.mcPkgNumber ?? 'N/A'}
+            // </StyledItemLink>
           }
         />
         <BannerItem
           title="Comm pkg"
           value={
-            <StyledItemLink
-              href={proCoSysUrls.getCommPkgUrl(props.item?.commPkgId ?? '')}
-              target="_blank"
-            >
-              {props.item?.commPkgNumber}
-            </StyledItemLink>
+            props.item?.commPkgNumber ?? 'N/A'
+            // <StyledItemLink
+            //   href={proCoSysUrls.getCommPkgUrl(props.item?.commPkgId ?? '')}
+            //   target="_blank"
+            // >
+            //   {props.item?.commPkgNumber}
+            // </StyledItemLink>
           }
         />
         <BannerItem

@@ -47,15 +47,15 @@ export const useTableConfig = (
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNumber,
-        valueFormatter: (pkg) =>
-          pkg.data?.workOrderUrlId
-            ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-          if (props.valueFormatted) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          } else return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.workOrderUrlId
+        //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+        //   if (props.valueFormatted) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   } else return null;
+        // },
       },
       {
         field: 'Description',
@@ -147,7 +147,6 @@ export const useTableConfig = (
       //       />
       //     );
       //   },
-      //   width: 150,
       // },
       // {
       //   field: 'Exp mhr',
@@ -162,8 +161,6 @@ export const useTableConfig = (
       //       />
       //     );
       //   },
-
-      //   width: 150,
       // },
       // {
       //   field: 'Rem mhr',
@@ -178,7 +175,6 @@ export const useTableConfig = (
       //       />
       //     );
       //   },
-      //   width: 150,
       // },
       {
         field: 'Progress',

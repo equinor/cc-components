@@ -43,14 +43,14 @@ export const useTableConfig = (
       {
         field: 'Loop tag',
         valueGetter: (pkg) => pkg.data?.loopNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.loopUrlId ? proCoSysUrls.getTagUrl(pkg.data.loopUrlId) : '',
-        cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
-          if (!props.valueFormatted) {
-            return null;
-          }
-          return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.loopUrlId ? proCoSysUrls.getTagUrl(pkg.data.loopUrlId) : '',
+        // cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+        //   if (!props.valueFormatted) {
+        //     return null;
+        //   }
+        //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+        // },
       },
       {
         field: 'Description',
@@ -69,32 +69,32 @@ export const useTableConfig = (
       {
         field: 'Comm pkg',
         valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.commissioningPackageId
-            ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-          if (props.valueFormatted) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          } else {
-            return null;
-          }
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.commissioningPackageId
+        //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+        //   if (props.valueFormatted) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   } else {
+        //     return null;
+        //   }
+        // },
       },
       {
         field: 'MC pkg',
         valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.mechanicalCompletionPackageId
-            ? proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-          if (props.valueFormatted) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          } else {
-            return null;
-          }
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.mechanicalCompletionPackageId
+        //     ? proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+        //   if (props.valueFormatted) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   } else {
+        //     return null;
+        //   }
+        // },
       },
       {
         field: 'Priority',
