@@ -80,35 +80,33 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         <BannerItem
           title="Cmpkg"
           value={
-            props.item?.commissioningPackageNo ? (
-              <StyledItemLink
-                target="_blank"
-                href={proCoSysUrls.getCommPkgUrl(
-                  props.item?.commissioningPackageUrlId ?? ''
-                )}
-              >
-                {props.item?.commissioningPackageNo}
-              </StyledItemLink>
-            ) : (
-              'N/A'
-            )
+            props.item?.commissioningPackageNo
+              ? props.item.commissioningPackageNo
+              : // <StyledItemLink
+                //   target="_blank"
+                //   href={proCoSysUrls.getCommPkgUrl(
+                //     props.item?.commissioningPackageUrlId ?? ''
+                //   )}
+                // >
+                //   {props.item?.commissioningPackageNo}
+                // </StyledItemLink>
+                'N/A'
           }
         />
         <BannerItem
           title="Mcpkg"
           value={
-            props.item?.mechanicalCompletionPackageNo ? (
-              <StyledItemLink
-                target="_blank"
-                href={proCoSysUrls.getMcUrl(
-                  props.item?.mechanicalCompletionPackageUrlId ?? ''
-                )}
-              >
-                {props.item?.mechanicalCompletionPackageNo}
-              </StyledItemLink>
-            ) : (
-              'N/A'
-            )
+            props.item?.mechanicalCompletionPackageNo
+              ? props.item.mechanicalCompletionPackageNo
+              : // <StyledItemLink
+                //   target="_blank"
+                //   href={proCoSysUrls.getMcUrl(
+                //     props.item?.mechanicalCompletionPackageUrlId ?? ''
+                //   )}
+                // >
+                //   {props.item?.mechanicalCompletionPackageNo}
+                // </StyledItemLink>
+                'N/A'
           }
         />
         <BannerItem title="Milestone" value={props.item?.priority1 || 'N/A'} />

@@ -2,6 +2,8 @@ import {
   usePBIOptions,
   useErrorBoundaryTrigger,
   CCApiUnauthorizedError,
+  useCCApiAccessCheck,
+  CCApiAccessLoading,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
@@ -25,6 +27,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     table: 'Dim_ProjectMaster',
   });
   const client = useHttpClient('cc-api');
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');
   const boundaryTrigger = useErrorBoundaryTrigger();
 
   const filterOptions = useFilterConfig((req) =>
@@ -37,6 +40,10 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const gardenConfig = useGardenConfig(contextId, () =>
     boundaryTrigger(new CCApiUnauthorizedError(''))
   );
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
+
   return (
     <Workspace
       key={contextId}

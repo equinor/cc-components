@@ -15,14 +15,14 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'McpkgNo',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
-      valueFormatter: (pkg) =>
-        pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        if (!props.valueFormatted) {
-          return null;
-        }
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      },
+      // valueFormatter: (pkg) =>
+      //   pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
+      // cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      //   if (!props.valueFormatted) {
+      //     return null;
+      //   }
+      //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      // },
       width: 100,
     },
     {
@@ -80,15 +80,15 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'Comm. package',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
-      valueFormatter: (pkg) =>
-        pkg.data?.commPkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commPkgId) : '',
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        if (!props.valueFormatted) {
-          return null;
-        } else {
-          return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-        }
-      },
+      // valueFormatter: (pkg) =>
+      //   pkg.data?.commPkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commPkgId) : '',
+      // cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      //   if (!props.valueFormatted) {
+      //     return null;
+      //   } else {
+      //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      //   }
+      // },
       width: 120,
     },
     {

@@ -52,14 +52,14 @@ export const useTableConfig = (
       {
         field: 'Punch',
         valueGetter: (pkg) => pkg.data?.punchItemNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Description',
@@ -152,42 +152,42 @@ export const useTableConfig = (
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
-        valueFormatter: (pkg) =>
-          pkg.data?.checklistUrlId
-            ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.checklistUrlId
+        //     ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Tag',
         valueGetter: (pkg) => pkg.data?.tagNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Commpkg',
         valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.commissioningPackageUrlId
-            ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.commissioningPackageUrlId
+        //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Workorder',
