@@ -127,13 +127,6 @@ export const useTableConfig = (
           return <YearAndWeekCell dateString={props.value} />;
         },
       },
-      {
-        field: 'Planned start',
-        valueGetter: (pkg) => pkg.data?.plannedStartupDate,
-        cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-          return <YearAndWeekCell dateString={props.value} />;
-        },
-      },
       // {
       //   field: 'Est mhr',
       //   valueFormatter: (pkg) => pkg.context.maxEstHrs,
