@@ -10,6 +10,8 @@ import { bundleApp } from '../utils/bundleApp.js';
 import { compileApp } from '../utils/compile.js';
 import ora from 'ora';
 import { VersionIncrement } from '../main.js';
+import { downloadCIBundle } from './download_zip_bundle.js';
+import { parsePackageJson } from '../utils/parsePackageJson.js';
 
 export async function release(
   dry: boolean,
@@ -25,7 +27,7 @@ export async function release(
   compileApp();
 
   //Vite build
-  bundleApp();
+  await prepareBundle(env);
 
   // Create manifest
   makeManifest('./package.json');
@@ -36,7 +38,7 @@ export async function release(
   //zip bundle
   zipBundle();
 
-  if (!dry) {
+  if (false) {
     //create commit
     commitRelease();
 
@@ -47,5 +49,21 @@ export async function release(
     pushChanges();
   } else {
     ora().info('Skipping release').stop();
+  }
+}
+
+async function prepareBundle(env: FusionEnvironment) {
+  const { name } = parsePackageJson();
+  if (!name) {
+    throw new Error('Missing name in package.json');
+  }
+  switch (env) {
+    case 'ci':
+    case 'fqa':
+      return bundleApp();
+
+    case 'fprd':
+      console.log('Download ci bundle');
+      return downloadCIBundle(name);
   }
 }
