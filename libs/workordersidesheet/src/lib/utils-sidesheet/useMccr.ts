@@ -15,9 +15,7 @@ const fetchMccr = async (
       signal,
     }
   );
-
   if (!res.ok) {
-    console.log('testetsetes');
     throw new Error('Failed to fetch Mccr');
   }
 
