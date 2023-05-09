@@ -2,4 +2,3 @@ packages:
   - 'libs/**'
   - 'apps/*'
   - 'reports/**'
-  - 'cli'
