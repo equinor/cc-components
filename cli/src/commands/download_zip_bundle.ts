@@ -9,7 +9,7 @@ export async function downloadCIBundle(appKey: string) {
     throw new ApiError('Failed to fetch bundle', res);
   }
   const content = await res.text();
-  writeFileSync('./app-bundle.js', content);
+  writeFileSync('./dist/app-bundle.js', content);
 }
 
 class ApiError extends Error {

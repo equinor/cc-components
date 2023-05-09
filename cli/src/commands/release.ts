@@ -38,7 +38,7 @@ export async function release(
   //zip bundle
   zipBundle();
 
-  if (false) {
+  if (!dry) {
     //create commit
     commitRelease();
 
