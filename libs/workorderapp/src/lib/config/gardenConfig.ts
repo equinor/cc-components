@@ -6,28 +6,24 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
 export const useGardenConfig = (
-  contextId: string,
-  boundaryTrigger: VoidFunction
+  contextId: string
 ): GardenConfig<WorkOrder, FilterStateGroup[]> => {
   const client = useHttpClient('cc-app');
 
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
-    useGardenDataSource(
-      {
-        getBlockAsync: (requestArgs) =>
-          client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
-        getGardenMeta: (requestArgs) =>
-          client.fetch(`/api/contexts/${contextId}/work-orders/garden-meta`, requestArgs),
-        getHeader: (requestArgs) =>
-          client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
-        getSubgroupItems: (requestArgs) =>
-          client.fetch(
-            `/api/contexts/${contextId}/work-orders/subgroup-items`,
-            requestArgs
-          ),
-      },
-      boundaryTrigger
-    );
+    useGardenDataSource({
+      getBlockAsync: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
+      getGardenMeta: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden-meta`, requestArgs),
+      getHeader: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/work-orders/garden`, requestArgs),
+      getSubgroupItems: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/work-orders/subgroup-items`,
+          requestArgs
+        ),
+    });
 
   return {
     getDisplayName: (item) => item.workOrderNumber,

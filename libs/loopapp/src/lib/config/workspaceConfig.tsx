@@ -1,7 +1,5 @@
 import {
   usePBIOptions,
-  useErrorBoundaryTrigger,
-  CCApiUnauthorizedError,
   useCCApiAccessCheck,
   CCApiAccessLoading,
 } from '@cc-components/shared';
@@ -28,18 +26,15 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   });
   const client = useHttpClient('cc-api');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');
-  const boundaryTrigger = useErrorBoundaryTrigger();
 
   const filterOptions = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/loop/filter-model`, req)
   );
-  const tableConfig = useTableConfig(contextId, () =>
-    boundaryTrigger(new CCApiUnauthorizedError(''))
-  );
+  const tableConfig = useTableConfig(contextId);
+
   const statusBarConfig = useStatusBarConfig(contextId);
-  const gardenConfig = useGardenConfig(contextId, () =>
-    boundaryTrigger(new CCApiUnauthorizedError(''))
-  );
+  const gardenConfig = useGardenConfig(contextId);
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }

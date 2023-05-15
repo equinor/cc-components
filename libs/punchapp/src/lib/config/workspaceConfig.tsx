@@ -1,8 +1,6 @@
 import {
   CCApiAccessLoading,
-  CCApiUnauthorizedError,
   useCCApiAccessCheck,
-  useErrorBoundaryTrigger,
   usePBIOptions,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
@@ -29,16 +27,12 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
     table: 'Dim_ProjectMaster',
   });
 
-  const boundaryTrigger = useErrorBoundaryTrigger();
-
   const filterConfig = useFilterConfig((req) =>
     ccApi.fetch(`/api/contexts/${contextId}/punch/filter-model`, req)
   );
   const tableConfig = useTableConfig(contextId);
   const statusbarConfig = useStatusBarConfig(contextId);
-  const gardenConfig = useGardenConfig(contextId, () =>
-    boundaryTrigger(new CCApiUnauthorizedError(''))
-  );
+  const gardenConfig = useGardenConfig(contextId);
   const { isLoading } = useCCApiAccessCheck(contextId, ccApi, 'punch');
 
   if (isLoading) {
