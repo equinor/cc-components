@@ -1,73 +1,68 @@
-import { HandoverPackage } from '@cc-components/handovershared';
-import { sortPackagesByStatus } from '../utils-statuses/sortPackagesByStatus';
-import Workspace from '@equinor/workspace-fusion';
-import { gardenConfig } from './gardenConfig';
-import { tableConfig } from './tableConfig';
-import { filterConfig } from './filterConfig';
-import { statusBarConfig } from './statusBarConfig';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { contextConfig } from './contextConfig';
-import { sidesheetConfig } from './sidesheetConfig';
 import {
-  usePBIOptions,
+  CCApiAccessLoading,
+  CCApiUnauthorizedError,
+  useCCApiAccessCheck,
   useErrorBoundaryTrigger,
-  FusionDataProxyUnauthorized,
-  useContextId,
+  usePBIOptions,
 } from '@cc-components/shared';
+import { useFilterConfig } from '@cc-components/shared/workspace-config';
+import Workspace from '@equinor/workspace-fusion';
+
+import { sidesheetConfig } from './sidesheetConfig';
+
+import { useTableConfig } from './tableConfig';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
-import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
+import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useGardenConfig } from './gardenConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const id = useContextId();
 
-  const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
-      signal,
-    });
-
-  const trigger = useErrorBoundaryTrigger();
+  const client = useHttpClient('cc-app'); //Sjekk resource key 
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
   const pbi = usePBIOptions('handoveranalytics', {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 
-  const responseParser = async (response: Response) => {
-    if (response.status === 403) {
-      const error = await response.json();
-      trigger(new FusionDataProxyUnauthorized(error));
-      throw new Error('');
-    }
+  const boundaryTrigger = useErrorBoundaryTrigger();
 
-    const parsedResponse = JSON.parse(await response.text()) as HandoverPackage[];
-    return parsedResponse.sort(sortPackagesByStatus);
-  };
+  const filterConfig = useFilterConfig((req) =>
+    client.fetch(`/api/contexts/${contextId}/handover/filter-model`, req)
+  );
+  const tableConfig = useTableConfig(contextId, () =>
+    boundaryTrigger(new CCApiUnauthorizedError(''))
+  );
+  const statusBarConfig = useStatusBarConfig(contextId);
+
+  const gardenConfig = useGardenConfig(contextId, () =>
+    boundaryTrigger(new CCApiUnauthorizedError(''))
+  );
+
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
 
   return (
     <Workspace
       key={contextId}
       workspaceOptions={{
         appKey: 'Handover',
-        getIdentifier: (item) => item.id,
+        getIdentifier: (item) => item.commissioningPackageId,
         defaultTab: 'garden',
       }}
+      powerBiOptions={pbi}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
-      powerBiOptions={pbi}
-      dataOptions={{
-        getResponseAsync,
-        responseParser,
-        queryKey: ['handover', contextId],
-      }}
-      contextOptions={contextConfig}
       modules={[gridModule, gardenModule, powerBiModule]}
     />
   );

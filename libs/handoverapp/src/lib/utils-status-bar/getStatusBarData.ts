@@ -15,17 +15,17 @@ export const getStatusBarData = (data: HandoverPackage[]): Record<KPI, number> =
 
       /** overdue */
       if (
-        curr.rfocActualDate === '' &&
-        curr.rfocPlannedDate !== '' &&
-        new Date(curr.rfocPlannedDate).getTime() < new Date().getTime()
+        curr.rfoActualDate === '' &&
+        curr.rfoPlannedDate !== null &&
+        new Date(curr.rfoPlannedDate).getTime() < new Date().getTime()
       ) {
         acc.overdue = acc.overdue + 1;
       }
 
       /** rfo vs target */
       if (
-        curr.rfocPlannedDate !== '' &&
-        new Date(curr.rfocPlannedDate).getTime() <= new Date().getTime()
+        curr.rfoPlannedDate !== null &&
+        new Date(curr.rfoPlannedDate).getTime() <= new Date().getTime()
       ) {
         acc.targetSum = acc.targetSum + 1;
       }

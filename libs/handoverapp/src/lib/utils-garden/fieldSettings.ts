@@ -1,4 +1,4 @@
-import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
+/*import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { getDateKey } from './getDateKey';
 import { getProgressKey } from './getProgressKey';
 import { FieldSettings } from '@equinor/workspace-fusion/garden';
@@ -28,3 +28,4 @@ export const fieldSettings: FieldSettings<
   priority2: { label: 'Commissioning Priority 2' },
   priority3: { label: 'Commissioning Priority 3' },
 };
+*/

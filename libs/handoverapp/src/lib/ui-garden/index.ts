@@ -1,2 +1,3 @@
 export { GardenHeader } from './Header';
-export { GardenGroupBy } from './GroupBy';
+export { GardenItem } from './Item';
+//export { GardenGroupBy } from './GroupBy';

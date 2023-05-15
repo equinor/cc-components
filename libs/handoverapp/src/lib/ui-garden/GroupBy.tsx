@@ -1,3 +1,4 @@
+/*
 import { Autocomplete } from '@equinor/eds-core-react';
 import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
 import { CustomGroupViewProps } from '@equinor/workspace-fusion/garden';
@@ -59,3 +60,4 @@ export const GardenGroupBy = (
     </StyledContainer>
   );
 };
+*/

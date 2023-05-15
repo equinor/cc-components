@@ -1,3 +1,4 @@
+/*
 import { HandoverPackage } from '@cc-components/handovershared';
 import {
   GardenGroups,
@@ -40,3 +41,4 @@ export const getItemWidth = (
   );
   return Math.max(longestKey * 8 + 80, MIN_WIDTH);
 };
+*/

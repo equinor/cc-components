@@ -6,6 +6,10 @@ import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { daysDiff, getFilterDateValues } from '../utils-filter';
 import { getStatus } from '../utils-statuses/getStatus';
 
+
+export declare const useFilterConfig: (req: (init: RequestInit) => Promise<Response>) => FilterConfig;
+
+/*
 export const filterConfig: FilterConfig<HandoverPackage> = {
   filterGroups: [
     {
@@ -146,3 +150,4 @@ export const filterConfig: FilterConfig<HandoverPackage> = {
     },
   ],
 };
+*/

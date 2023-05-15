@@ -1,1 +1,1 @@
-export { getStatusBarData } from './getStatusBarData';
+//export { getStatusBarData } from './getStatusBarData';
