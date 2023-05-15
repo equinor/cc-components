@@ -5,6 +5,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
+  StyledMonospace,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
 import {
@@ -52,6 +53,9 @@ export const useTableConfig = (
       {
         field: 'Punch',
         valueGetter: (pkg) => pkg.data?.punchItemNo,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.punchItemNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
         // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -119,6 +123,9 @@ export const useTableConfig = (
       {
         field: 'Estimate',
         valueGetter: (pkg) => pkg.data?.estimate,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.estimate}</StyledMonospace>;
+        },
       },
       {
         field: 'Raised by org',
@@ -166,6 +173,9 @@ export const useTableConfig = (
       {
         field: 'Tag',
         valueGetter: (pkg) => pkg.data?.tagNo,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.tagNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
         // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -178,6 +188,9 @@ export const useTableConfig = (
       {
         field: 'Commpkg',
         valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.commissioningPackageNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.commissioningPackageUrlId
         //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
@@ -192,6 +205,9 @@ export const useTableConfig = (
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNo,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.workOrderNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.workOrderUrlId
         //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)

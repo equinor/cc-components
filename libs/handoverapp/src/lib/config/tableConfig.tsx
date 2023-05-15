@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { statusColorMap } from '@cc-components/shared';
+import { StyledMonospace, statusColorMap } from '@cc-components/shared';
 import { DateCell, DescriptionCell, LinkCell, StatusCell } from '@cc-components/shared';
 import { BaseStatus } from '@cc-components/shared';
 
@@ -17,7 +17,11 @@ export const tableConfig: GridConfig<HandoverPackage> = {
         if (!props.valueFormatted) {
           return null;
         }
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+        return (
+          <StyledMonospace>
+            <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />{' '}
+          </StyledMonospace>
+        );
       },
       width: 150,
     },
@@ -77,12 +81,18 @@ export const tableConfig: GridConfig<HandoverPackage> = {
     {
       field: 'Area',
       valueGetter: (pkg) => pkg.data?.area,
+      cellRenderer: (props: ICellRendererProps<HandoverPackage, string>) => {
+        return <StyledMonospace>{props.data?.area}</StyledMonospace>;
+      },
       enableRowGroup: true,
       width: 135,
     },
     {
       field: 'System',
       valueGetter: (pkg) => pkg.data?.system,
+      cellRenderer: (props: ICellRendererProps<HandoverPackage, string>) => {
+        return <StyledMonospace>{props.data?.system}</StyledMonospace>;
+      },
       enableRowGroup: true,
       width: 150,
     },

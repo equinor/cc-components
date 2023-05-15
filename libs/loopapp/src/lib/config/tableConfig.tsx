@@ -6,6 +6,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
+  StyledMonospace,
 } from '@cc-components/shared/table-helpers';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
@@ -43,6 +44,9 @@ export const useTableConfig = (
       {
         field: 'Loop tag',
         valueGetter: (pkg) => pkg.data?.loopNo,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <StyledMonospace>{props.data?.loopNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.loopUrlId ? proCoSysUrls.getTagUrl(pkg.data.loopUrlId) : '',
         // cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -64,11 +68,17 @@ export const useTableConfig = (
       {
         field: 'System',
         valueGetter: (pkg) => pkg.data?.system,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <StyledMonospace>{props.data?.system}</StyledMonospace>;
+        },
         enableRowGroup: true,
       },
       {
         field: 'Comm pkg',
         valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <StyledMonospace>{props.data?.commissioningPackageNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.commissioningPackageId
         //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
@@ -84,6 +94,11 @@ export const useTableConfig = (
       {
         field: 'MC pkg',
         valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return (
+            <StyledMonospace>{props.data?.mechanicalCompletionPackageNo}</StyledMonospace>
+          );
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.mechanicalCompletionPackageId
         //     ? proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageId)
@@ -144,11 +159,17 @@ export const useTableConfig = (
       {
         field: 'Location',
         valueGetter: (pkg) => pkg.data?.location,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <StyledMonospace>{props.data?.location}</StyledMonospace>;
+        },
         enableRowGroup: true,
       },
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
+        cellRenderer: (props: ICellRendererProps<Loop, string>) => {
+          return <StyledMonospace>{props.data?.formularType}</StyledMonospace>;
+        },
         enableRowGroup: true,
       },
       {

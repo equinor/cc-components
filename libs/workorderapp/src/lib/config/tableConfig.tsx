@@ -4,6 +4,7 @@ import {
   ProgressCell,
   StatusCell,
   YearAndWeekCell,
+  StyledMonospace,
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
@@ -47,6 +48,9 @@ export const useTableConfig = (
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNumber,
+        cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+          return <StyledMonospace>{props.value}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.workOrderUrlId
         //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
@@ -77,6 +81,9 @@ export const useTableConfig = (
       {
         field: 'Job status',
         valueGetter: (pkg) => pkg.data?.jobStatus,
+        cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+          return <StyledMonospace>{props.data?.jobStatus}</StyledMonospace>;
+        },
       },
       {
         field: 'Material',

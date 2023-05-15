@@ -1,5 +1,9 @@
 import { proCoSysUrls } from '@cc-components/shared/mapping';
-import { DescriptionCell, LinkCell } from '@cc-components/shared/table-helpers';
+import {
+  DescriptionCell,
+  LinkCell,
+  StyledMonospace,
+} from '@cc-components/shared/table-helpers';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
@@ -11,6 +15,9 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       field: 'SWCRs',
       headerName: 'SWCRs',
       valueGetter: (pkg) => pkg.data?.swcrNo,
+      cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
+        return <StyledMonospace>{props.data?.swcrNo}</StyledMonospace>;
+      },
       // valueFormatter: (pkg) =>
       //   pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
       // cellRenderer: (props: ICellRendererProps<SwcrPackage, string | null>) => {
@@ -37,6 +44,9 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'System',
       valueGetter: (pkg) => pkg.data?.system,
+      cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
+        return <StyledMonospace>{props.data?.system}</StyledMonospace>;
+      },
       enableRowGroup: true,
       width: 150,
     },
@@ -49,7 +59,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'Next sign by',
       valueGetter: (pkg) => pkg.data?.nextToSign,
-
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
         if (!props.data) {
           return null;
@@ -126,6 +135,9 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     {
       field: 'Node',
       valueGetter: (pkg) => pkg.data?.node,
+      cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
+        return <StyledMonospace>{props.data?.node}</StyledMonospace>;
+      },
       width: 150,
     },
   ],
