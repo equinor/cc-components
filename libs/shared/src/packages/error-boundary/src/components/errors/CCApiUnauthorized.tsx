@@ -20,8 +20,7 @@ export function CCApiUnauthorized() {
         bold
         lines={2}
       >
-        Looks like you do not have access to the selected context or the selected context
-        is missing data
+        Looks like you do not have access to the selected context.
       </Typography>
     </StyledFusionError>
   );
