@@ -1,5 +1,5 @@
 import { Icon, Progress } from '@equinor/eds-core-react';
-import { info_circle } from '@equinor/eds-icons';
+import { info_circle, error_outlined } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { ColDef, ClientGrid } from '@equinor/workspace-ag-grid';
 import { InfoText, NoResourceData } from './tabTable.styles';
@@ -14,7 +14,7 @@ type TabTableProps<T> = {
   height?: number;
 };
 
-Icon.add({ info_circle });
+Icon.add({ info_circle, error_outlined });
 
 /**
  * Standard Table component using `ReactGrid` from workspace-ag-grid.
@@ -31,7 +31,20 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
     </NoResourceData>;
   }
 
-  if (error || packages === undefined || packages.length === 0) {
+  if (error) {
+    return (
+      <NoResourceData>
+        <Icon
+          name="error_outlined"
+          size={40}
+          color={tokens.colors.interactive.primary__resting.hsla}
+        />
+        <InfoText>{`Failed to load ${resourceName}`}</InfoText>
+      </NoResourceData>
+    );
+  }
+
+  if (packages === undefined || packages.length === 0) {
     return (
       <NoResourceData>
         <Icon
