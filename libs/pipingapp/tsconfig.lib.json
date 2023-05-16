@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./dist",
     "types": ["node"],
-    "rootDir": "."
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "paths": {"@a/mockdata": ["../../../responsePiping.json"]}
   },
   "exclude": [
     "**/*.spec.ts",

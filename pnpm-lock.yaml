@@ -453,9 +453,18 @@ importers:
 
   libs/pipingapp:
     dependencies:
+      '@cc-components/pipingshared':
+        specifier: workspace:^
+        version: link:../pipingshared
+      '@cc-components/pipingsidesheet':
+        specifier: workspace:^
+        version: link:../pipingsidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@equinor/workspace-fusion':
+        specifier: 1.0.10
+        version: 1.0.10(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
 
   libs/pipingshared:
     dependencies:

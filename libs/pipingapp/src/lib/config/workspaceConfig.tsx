@@ -1,4 +1,6 @@
 import Workspace from '@equinor/workspace-fusion';
+import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { tableConfig } from './tableConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -11,6 +13,8 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
         appKey: 'pipingapp',
         getIdentifier: () => '',
       }}
+      gridOptions={tableConfig}
+      modules={[gridModule]}
     />
   );
 };
