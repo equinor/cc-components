@@ -14,12 +14,12 @@ export const tableConfig: GridConfig<HandoverPackage> = {
       valueGetter: (pkg) => pkg.data?.commpkgNo,
       valueFormatter: (pkg) => pkg.data?.url ?? '',
       cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
-        if (!props.valueFormatted) {
+        if (!props.valueFormatted || !props.value) {
           return null;
         }
         return (
           <StyledMonospace>
-            <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />{' '}
+            <LinkCell url={props.valueFormatted} urlText={props.value} />{' '}
           </StyledMonospace>
         );
       },
