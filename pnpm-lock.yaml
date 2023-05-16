@@ -291,6 +291,15 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  apps/piping:
+    dependencies:
+      '@cc-components/pipingapp':
+        specifier: workspace:^
+        version: link:../../libs/pipingapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/punch:
     dependencies:
       '@cc-components/punchapp':
@@ -438,6 +447,24 @@ importers:
       '@cc-components/mechanicalcompletionshared':
         specifier: workspace:^
         version: link:../mechanicalcompletionshared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/pipingapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/pipingshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/pipingsidesheet:
+    dependencies:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
