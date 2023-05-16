@@ -12,6 +12,7 @@ import ora from 'ora';
 import { VersionIncrement } from '../main.js';
 import { downloadCIBundle } from './download_zip_bundle.js';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
+import { writeTraceFileAsync } from '../utils/writeTrace.js';
 
 export async function release(
   dry: boolean,
@@ -44,6 +45,8 @@ export async function release(
 
     //upload to fdev
     await deployApp(env);
+
+    await writeTraceFileAsync(env);
 
     //push commit
     pushChanges();
