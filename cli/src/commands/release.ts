@@ -17,13 +17,15 @@ import { writeTraceFileAsync } from '../utils/writeTrace.js';
 export async function release(
   dry: boolean,
   env: FusionEnvironment,
-  versionInc: VersionIncrement
+  versionInc: VersionIncrement | null
 ) {
   //Ensure latest changes have been pulled
   pullChanges();
 
-  //Bump version
-  patchVersion(versionInc);
+  if (versionInc) {
+    //Bump version
+    patchVersion(versionInc);
+  }
 
   compileApp();
 
