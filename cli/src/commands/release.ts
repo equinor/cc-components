@@ -42,13 +42,13 @@ export async function release(
   zipBundle();
 
   if (!dry) {
-    //create commit
-    commitRelease();
-
     //upload to fdev
     await deployApp(env);
 
     await writeTraceFileAsync(env);
+
+    //create commit
+    commitRelease();
 
     //push commit
     pushChanges();
