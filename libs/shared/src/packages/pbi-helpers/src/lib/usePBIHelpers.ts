@@ -1,7 +1,7 @@
 import { useServiceDiscovery } from '../../../hooks/src/lib/useServiceDiscovery';
 import { IHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { EmbedInfo, EmbedToken, ReportInfo } from './types';
-import { useContextId } from '../../../hooks';
+import { useExternalContextId } from '../../../hooks';
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
   return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;
@@ -17,7 +17,7 @@ const isEmbedToken = (embedToken: unknown): embedToken is EmbedToken => {
 
 export const usePBIHelpers = () => {
   const serviceDisco = useServiceDiscovery();
-  const contextId = useContextId();
+  const contextId = useExternalContextId();
 
   const getEmbed = async (reportUri: string, _token: string, signal?: AbortSignal) => {
     if (!contextId) {

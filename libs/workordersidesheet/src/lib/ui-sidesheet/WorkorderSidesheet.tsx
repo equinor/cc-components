@@ -62,12 +62,13 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="WO"
           value={
-            <StyledItemLink
-              href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
-              target="_blank"
-            >
-              {props?.item?.workOrderNumber}
-            </StyledItemLink>
+            props?.item?.workOrderNumber ?? 'N/A'
+            // <StyledItemLink
+            //   href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
+            //   target="_blank"
+            // >
+            //   {props?.item?.workOrderNumber}
+            // </StyledItemLink>
           }
         />
         <BannerItem title="Material status" value={'?'} />
@@ -94,14 +95,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             <MccrTab
               mccr={mccr}
               isFetching={isFetchingMccr}
-              error={mccrError instanceof Error ? mccrError : null}
+              error={mccrError as Error | null}
             />
           </Tabs.Panel>
           <Tabs.Panel>
             <MaterialTab
               material={material}
               isFetching={isFetchingMaterial}
-              error={materialError instanceof Error ? materialError : null}
+              error={materialError as Error | null}
             />
           </Tabs.Panel>
         </StyledPanels>

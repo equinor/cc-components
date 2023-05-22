@@ -22,7 +22,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const scopechangeApi = useHttpClient('scopechange');
 
   const pbi = usePBIOptions('pp-scope-change-analytics', {
-    column: 'CVPID',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 

@@ -1,7 +1,7 @@
 import {
   usePBIOptions,
-  useErrorBoundaryTrigger,
-  CCApiUnauthorizedError,
+  useCCApiAccessCheck,
+  CCApiAccessLoading,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
@@ -21,22 +21,24 @@ type WorkspaceWrapperProps = {
 
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   const pbi = usePBIOptions('loop-analytics', {
-    column: 'CVPID',
+    column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
   const client = useHttpClient('cc-api');
-  const boundaryTrigger = useErrorBoundaryTrigger();
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');
 
   const filterOptions = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/loop/filter-model`, req)
   );
-  const tableConfig = useTableConfig(contextId, () =>
-    boundaryTrigger(new CCApiUnauthorizedError(''))
-  );
+  const tableConfig = useTableConfig(contextId);
+
   const statusBarConfig = useStatusBarConfig(contextId);
-  const gardenConfig = useGardenConfig(contextId, () =>
-    boundaryTrigger(new CCApiUnauthorizedError(''))
-  );
+  const gardenConfig = useGardenConfig(contextId);
+
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
+
   return (
     <Workspace
       key={contextId}

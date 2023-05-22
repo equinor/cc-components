@@ -1,8 +1,8 @@
 import { Punch } from '@cc-components/punchshared';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
+  DateCell,
   DescriptionCell,
-  LinkCell,
   StatusCell,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
@@ -13,47 +13,50 @@ import {
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { CCApiUnauthorizedError, useErrorBoundaryTrigger } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Punch, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
 
-  const trigger = useErrorBoundaryTrigger();
+  const { getRows } = useGridDataSource(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
 
-  const { getRows } = useGridDataSource(
-    async (req) => {
-      const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
-
-      const meta = (await res.json()) as { items: any[]; rowCount: number };
-      return {
-        rowCount: meta.rowCount,
-        rowData: meta.items,
-      };
-    },
-    () => trigger(new CCApiUnauthorizedError(''))
-  );
+    const meta = (await res.json()) as { items: any[]; rowCount: number };
+    return {
+      rowCount: meta.rowCount,
+      rowData: meta.items,
+    };
+  });
 
   return {
     getRows,
-    gridOptions: { ...defaultGridOptions },
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
+        );
+      },
+    },
     columnDefinitions: [
       {
         field: 'Punch',
         valueGetter: (pkg) => pkg.data?.punchItemNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
-        width: 100,
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Description',
+        colId: 'description',
         valueGetter: (pkg) => pkg.data?.description,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
           return <DescriptionCell description={props.value} />;
@@ -78,8 +81,6 @@ export const useTableConfig = (
             />
           );
         },
-
-        width: 100,
       },
       {
         field: 'Status',
@@ -99,105 +100,87 @@ export const useTableConfig = (
             />
           );
         },
-
-        width: 150,
       },
       {
         field: 'PL Sorting',
         valueGetter: (pkg) => pkg.data?.sorting,
-
-        width: 100,
       },
       {
         field: 'PL Type',
         valueGetter: (pkg) => pkg.data?.type,
-
-        width: 100,
       },
       {
         field: 'Estimate',
         valueGetter: (pkg) => pkg.data?.estimate,
-        width: 100,
       },
       {
         field: 'Raised by org',
         valueGetter: (pkg) => pkg.data?.raisedBy,
-
-        width: 150,
       },
       {
         field: 'Clearing by org',
         valueGetter: (pkg) => pkg.data?.clearedBy,
-
-        width: 150,
       },
       {
         field: 'Cleared',
         valueGetter: (pkg) => pkg.data?.clearedAtDate,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
-        width: 100,
       },
       {
         field: 'Verified',
         valueGetter: (pkg) => pkg.data?.verifiedAtDate,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
-        width: 100,
       },
       {
         field: 'Handover plan',
         valueGetter: (pkg) => pkg.data?.handoverPlan,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
-        width: 110,
       },
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
-        valueFormatter: (pkg) =>
-          pkg.data?.checklistUrlId
-            ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
-
-        width: 100,
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.checklistUrlId
+        //     ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Tag',
         valueGetter: (pkg) => pkg.data?.tagNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
-        width: 150,
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Commpkg',
         valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.commissioningPackageUrlId
-            ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
-        width: 150,
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.commissioningPackageUrlId
+        //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Workorder',
@@ -212,21 +195,17 @@ export const useTableConfig = (
         //   }
         //   return null;
         // },
-        width: 150,
       },
       {
         field: 'Material required',
         valueGetter: (pkg) => pkg.data?.materialRequired,
-
-        width: 120,
       },
       {
         field: 'Material estimate',
         valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
-        width: 150,
       },
     ],
   };

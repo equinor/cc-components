@@ -11,14 +11,14 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       field: 'SWCRs',
       headerName: 'SWCRs',
       valueGetter: (pkg) => pkg.data?.swcrNo,
-      valueFormatter: (pkg) =>
-        pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
-      cellRenderer: (props: ICellRendererProps<SwcrPackage, string | null>) => {
-        if (!props.valueFormatted) {
-          return null;
-        }
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      },
+      // valueFormatter: (pkg) =>
+      //   pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
+      // cellRenderer: (props: ICellRendererProps<SwcrPackage, string | null>) => {
+      //   if (!props.valueFormatted) {
+      //     return null;
+      //   }
+      //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      // },
       width: 150,
     },
     {
@@ -78,15 +78,25 @@ export const tableConfig: GridConfig<SwcrPackage> = {
           return null;
         } else {
           const keys = getNextSignatureRoleKeys(props.data, '');
-          return <div>{keys}</div>;
+          return (
+            <div
+              style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {keys}
+            </div>
+          );
         }
       },
-      width: 500,
+      width: 300,
     },
     {
       field: 'Supplier',
       valueGetter: (pkg) => pkg.data?.supplier,
-      width: 350,
+      width: 150,
     },
     {
       field: 'Types',

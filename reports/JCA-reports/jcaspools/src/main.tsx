@@ -18,7 +18,7 @@ const MyApp = () => {
           {contextId ? (
             <Report
               appKey={'jcaspools'}
-              column={'CVPID'}
+              column={'ProjectMaster GUID'}
               reportId={'pp-spools-analytics'}
               //Dim_ProjectMaster does not exist in Report. data will show up for all projects if app is visible for project and user have access
               table={'Dim_ProjectMaster'}

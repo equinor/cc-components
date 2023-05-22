@@ -1,13 +1,13 @@
 {
   "name": "loop",
-  "version": "0.1.20",
+  "version": "0.1.23",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b",
-    "shipit": "node ../../cli/bin/src/main.js release"
+    "shipit": "npx ts-node --esm ../../cli/src/main.ts release"
   },
   "dependencies": {
     "@cc-components/loopapp": "workspace:^",

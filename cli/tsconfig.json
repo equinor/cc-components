@@ -2,9 +2,9 @@
   "compilerOptions": {
     "outDir": "bin",
     "rootDir": ".",
-    "target": "ES6",
+    "target": "ESNext",
     "module": "ESNext",
-    "lib": ["ES6", "ES2015", "DOM"],
+    "lib": ["ESNext", "DOM"],
     "strict": true,
     "types": ["node"],
     "esModuleInterop": true,

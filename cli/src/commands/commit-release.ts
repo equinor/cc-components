@@ -1,6 +1,5 @@
 import { execSync } from 'child_process';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
-import { pushChanges } from './push-changes.js';
 import ora from 'ora';
 
 export function commitRelease() {
@@ -24,17 +23,10 @@ export function commitRelease() {
   const spinner2 = ora().start('Comitting staged files');
   execSync(`git commit -m \"${releaseMessage}\"`);
   spinner2.succeed('Succesfully commited staged files');
-
-  return () => {
-    const res = execSync('git branch --show-current');
-    if ('main' !== res.toString('utf-8').trim()) {
-      invalidBranch();
-    }
-    pushChanges();
-  };
 }
 
 function invalidBranch() {
+  //TODO: reset package.json
   console.error(`
     **************************************************************
     Command failed!

@@ -2,14 +2,14 @@
   "name": "atexinspection",
   "displayName": "Atex inspection",
   "shortName": "atex",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b",
-    "shipit": "node ../../cli/bin/src/main.js release"
+    "shipit": "npx ts-node --esm ../../cli/src/main.ts release"
   },
   "dependencies": {
     "@cc-components/powerbi": "workspace:^",

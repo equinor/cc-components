@@ -13,6 +13,7 @@ import {
 } from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
+import { DateCell } from '@cc-components/shared/table-helpers';
 
 Icon.add({ group, comment_chat, check_circle_outlined, close_circle_outlined });
 
@@ -184,7 +185,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
       ) => {
-        return props.value ? new Date(props.value).toLocaleDateString() : '';
+        return props.value ? <DateCell dateString={props.value} /> : null;
       },
       width: 160,
     },
@@ -194,7 +195,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
       ) => {
-        return props.value ? new Date(props.value).toLocaleDateString() : '';
+        return props.value ? <DateCell dateString={props.value} /> : null;
       },
       width: 140,
     },
@@ -204,7 +205,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
       ) => {
-        return props.value ? new Date(props.value).toLocaleDateString() : '';
+        return props.value ? <DateCell dateString={props.value} /> : null;
       },
       width: 150,
     },

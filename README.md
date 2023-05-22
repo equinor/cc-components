@@ -19,6 +19,13 @@ CC applications that belong in this repository are:
 - [SWCR](https://github.com/equinor/cc-components/tree/main/apps/swcr)
 - [Workorder](https://github.com/equinor/cc-components/tree/main/apps/workorder)
 
+
+Coming soon:
+- [Scope change]()
+- [Piping workspace]()
+- [Heat trace workspace]()
+- [Release control]()
+
 Each application will have its own library where every component, util and config is placed under. Some applications might have a separate 'app' (i.e. sidesheet) that requires some of the same types and components as the main application. Create a new library called `<name>shared` which contains the common application utilities. Common components and utilities used across many projects should be placed in the `shared` library.
 
 # TLDR

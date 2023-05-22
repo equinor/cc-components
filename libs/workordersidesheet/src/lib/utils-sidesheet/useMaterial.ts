@@ -15,6 +15,11 @@ const fetchMaterials = async (
       signal,
     }
   );
+
+  if (!res.ok) {
+    throw new Error('failed to fetch materials');
+  }
+
   return (await res.json()) as WorkOrderMaterial[];
 };
 export const useMaterial = (packageId: string | null) => {
@@ -24,8 +29,8 @@ export const useMaterial = (packageId: string | null) => {
   const { data, isFetching, error } = useQuery({
     queryFn: (a) => fetchMaterials(ccApp, contextId, packageId, a.signal),
     queryKey: ['material', packageId],
+    useErrorBoundary: false,
   });
-
   return {
     material: data?.filter(
       (wo, i, list) => i === list.findIndex((w) => w.itemNumber === wo.itemNumber)

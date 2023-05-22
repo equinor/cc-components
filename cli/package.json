@@ -7,19 +7,19 @@
     "access": "public"
   },
   "main": "./bin/src/main.js",
-  "bin": {
-    "cc": "./bin/src/main.js",
-    "cc-components-cli": "./bin/main.js"
-  },
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
     "adm-zip": "^0.5.10",
     "commander": "^10.0.1",
-    "ora": "^6.3.0"
+    "open": "^9.1.0",
+    "ora": "^6.3.0",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@types/adm-zip": "^0.5.0"
+    "@types/adm-zip": "^0.5.0",
+    "@types/open": "^6.2.1",
+    "@types/prompts": "^2.4.4"
   }
 }

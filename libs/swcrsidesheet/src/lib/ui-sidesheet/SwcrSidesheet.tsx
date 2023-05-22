@@ -34,12 +34,13 @@ export const SwcrSidesheet = createWidget<SwcrProps>(({ props }) => {
         <BannerItem
           title="SWCR"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getSwcrUrl(props?.item?.swcrId || '')}
-            >
-              {props?.item?.swcrNo}
-            </StyledItemLink>
+            props?.item?.swcrNo ?? 'N/A'
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getSwcrUrl(props?.item?.swcrId || '')}
+            // >
+            //   {props?.item?.swcrNo}
+            // </StyledItemLink>
           }
         />
         <BannerItem

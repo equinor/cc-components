@@ -1,0 +1,22 @@
+{
+  "name": "jca-progress-summary",
+  "displayName": "Progress summary",
+  "shortName": "progress-summary",
+  "version": "0.0.1",
+  "main": "/src/main.tsx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "fusion-framework-cli app dev",
+    "build": "tsc -b",
+    "shipit": "npx ts-node --esm ../../../cli/src/main.ts release"
+  },
+  "dependencies": {
+    "@cc-components/powerbi": "workspace:^",
+    "@cc-components/shared": "workspace:^"
+  },
+  "files": [
+    "dist/app-bundle.js",
+    "app-manifest.json"
+  ]
+}
