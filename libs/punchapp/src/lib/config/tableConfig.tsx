@@ -1,9 +1,8 @@
 import { Punch } from '@cc-components/punchshared';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DateCell,
   DescriptionCell,
-  LinkCell,
   StatusCell,
   StyledMonospace,
 } from '@cc-components/shared/table-helpers';
@@ -15,27 +14,21 @@ import {
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { CCApiUnauthorizedError, useErrorBoundaryTrigger } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Punch, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
 
-  const trigger = useErrorBoundaryTrigger();
+  const { getRows } = useGridDataSource(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
 
-  const { getRows } = useGridDataSource(
-    async (req) => {
-      const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
-
-      const meta = (await res.json()) as { items: any[]; rowCount: number };
-      return {
-        rowCount: meta.rowCount,
-        rowData: meta.items,
-      };
-    },
-    () => trigger(new CCApiUnauthorizedError(''))
-  );
+    const meta = (await res.json()) as { items: any[]; rowCount: number };
+    return {
+      rowCount: meta.rowCount,
+      rowData: meta.items,
+    };
+  });
 
   return {
     getRows,

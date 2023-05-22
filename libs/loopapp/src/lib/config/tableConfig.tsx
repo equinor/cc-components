@@ -15,8 +15,7 @@ import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (
-  contextId: string,
-  trigger: VoidFunction
+  contextId: string
 ): GridConfig<Loop, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
   const { getRows } = useGridDataSource(async (req) => {
@@ -26,7 +25,7 @@ export const useTableConfig = (
       rowCount: meta.rowCount,
       rowData: meta.items,
     };
-  }, trigger);
+  });
   return {
     gridOptions: {
       ...defaultGridOptions,

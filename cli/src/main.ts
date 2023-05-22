@@ -31,19 +31,23 @@ program
       initial: 0,
     });
 
-    const { value: versionInc } = await prompt({
-      type: 'select',
-      name: 'value',
-      message: 'Choose version bump',
-      choices: [
-        { title: 'Patch', value: 'patch' },
-        { title: 'Minor', value: 'minor' },
-        { title: 'Major', value: 'major' },
-      ],
-      initial: 0,
-    });
+    if (env === 'ci') {
+      const { value: versionInc } = await prompt({
+        type: 'select',
+        name: 'value',
+        message: 'Choose version bump',
+        choices: [
+          { title: 'Patch', value: 'patch' },
+          { title: 'Minor', value: 'minor' },
+          { title: 'Major', value: 'major' },
+        ],
+        initial: 0,
+      });
 
-    await release(dry, env, versionInc);
+      await release(dry, env, versionInc);
+    } else {
+      await release(dry, env, null);
+    }
   });
 
 await program.parseAsync();

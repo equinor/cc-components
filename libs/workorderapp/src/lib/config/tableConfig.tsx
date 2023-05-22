@@ -12,14 +12,12 @@ import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { WorkOrder } from '@cc-components/workordershared';
-import { proCoSysUrls } from '@cc-components/shared';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
 export const useTableConfig = (
-  contextId: string,
-  boundaryTrigger?: () => void
+  contextId: string
 ): GridConfig<WorkOrder, FilterStateGroup[]> => {
   const client = useHttpClient('cc-app');
 
@@ -30,7 +28,7 @@ export const useTableConfig = (
       rowCount: meta.rowCount,
       rowData: meta.items,
     };
-  }, boundaryTrigger);
+  });
 
   return {
     getRows: getRows,
