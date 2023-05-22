@@ -1,32 +1,15 @@
 import { configure, WorkspaceWrapper } from '@cc-components/workorderapp';
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AppErrorBoundary, useContextId } from '@cc-components/shared';
-import { NoContext } from '@cc-components/shared';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+import { RootAppWrapper, useContextId } from '@cc-components/shared';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const WorkorderApp = () => {
-  const contextId = useContextId();
-
+  const client = useHttpClient('cc-app');
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <AppErrorBoundary>
-          <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
-            {contextId ? <WorkspaceWrapper contextId={contextId} /> : <NoContext />}
-          </div>
-        </AppErrorBoundary>
-      </QueryClientProvider>
-    </StrictMode>
+    <RootAppWrapper client={client}>
+      <WorkspaceWrapper />
+    </RootAppWrapper>
   );
 };
 
