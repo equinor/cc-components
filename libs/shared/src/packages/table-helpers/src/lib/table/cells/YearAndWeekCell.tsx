@@ -25,5 +25,9 @@ export const YearAndWeekCell = <T extends string | null>({
     [cellAttributeFunction, dateString]
   );
 
-  return <div {...attr}>{dateDisplay}</div>;
+  return (
+    <div style={{ fontVariantNumeric: 'tabular-nums' }} {...attr}>
+      {dateDisplay}
+    </div>
+  );
 };
