@@ -19,7 +19,7 @@ export const tableConfig: GridConfig<HandoverPackage> = {
         }
         return (
           <StyledMonospace>
-            <LinkCell url={props.valueFormatted} urlText={props.value} />{' '}
+            <LinkCell url={props.valueFormatted} urlText={props.value} />
           </StyledMonospace>
         );
       },
