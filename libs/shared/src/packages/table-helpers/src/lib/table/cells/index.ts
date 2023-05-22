@@ -5,3 +5,4 @@ export { EstimateCell } from './EstimateCell';
 export { LinkCell } from './LinkCell';
 export { StatusCell } from './StatusCell';
 export { YearAndWeekCell } from './YearAndWeekCell';
+export { StyledMonospace } from './Monospace';
