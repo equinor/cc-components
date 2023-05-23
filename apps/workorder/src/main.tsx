@@ -1,7 +1,7 @@
 import { configure, WorkspaceWrapper } from '@cc-components/workorderapp';
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { createRoot } from 'react-dom/client';
-import { RootAppWrapper, useContextId } from '@cc-components/shared';
+import { RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const WorkorderApp = () => {
