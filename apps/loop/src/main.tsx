@@ -1,16 +1,14 @@
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
 import { createRoot } from 'react-dom/client';
 import { configure, WorkspaceWrapper } from '@cc-components/loopapp';
-import { useContextId } from '@cc-components/shared/hooks';
 import { RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const LoopApp = () => {
-  const contextId = useContextId();
   const client = useHttpClient('cc-api');
   return (
     <RootAppWrapper client={client}>
-      <WorkspaceWrapper key={contextId} contextId={contextId} />
+      <WorkspaceWrapper />
     </RootAppWrapper>
   );
 };
