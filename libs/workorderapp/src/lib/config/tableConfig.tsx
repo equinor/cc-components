@@ -70,7 +70,7 @@ export const useTableConfig = (
       },
       {
         field: 'Discipline',
-        valueGetter: (pkg) => pkg.data?.disciplineCode,
+        valueGetter: (pkg) => pkg.data?.discipline,
       },
       {
         field: 'Milestone',
