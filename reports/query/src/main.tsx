@@ -1,34 +1,18 @@
 import { ComponentRenderArgs, makeComponent } from '@equinor/fusion-framework-react-app';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useContextId } from '@cc-components/shared/hooks';
-import { NoContext } from '@cc-components/shared/common';
+import { RootAppWrapper } from '@cc-components/shared';
 import { Report, configure } from '@cc-components/powerbi';
 
-const queryClient = new QueryClient();
-
-const MyApp = () => {
-  const contextId = useContextId();
-
+const Query = () => {
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
-          {contextId ? (
-            <Report
-              appKey={'query'}
-              column={'ProjectMaster GUID'}
-              reportId={'query-analytics'}
-              table={'Dim_ProjectMaster'}
-              contextId={contextId}
-            />
-          ) : (
-            <NoContext />
-          )}
-        </div>
-      </QueryClientProvider>
-    </StrictMode>
+    <RootAppWrapper client={null}>
+      <Report
+        appKey={'query'}
+        column={'ProjectMaster GUID'}
+        reportId={'query-analytics'}
+        table={'Dim_ProjectMaster'}
+      />
+    </RootAppWrapper>
   );
 };
 
@@ -41,7 +25,7 @@ export default function render(el: HTMLElement, args: ComponentRenderArgs) {
    * Second argu is the the render args (framework and env variables)
    * Third argument is the configuration callback
    */
-  const AppComponent = makeComponent(<MyApp />, args, configure);
+  const AppComponent = makeComponent(<Query />, args, configure);
 
   root.render(<AppComponent />);
 

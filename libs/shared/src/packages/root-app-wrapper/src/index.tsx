@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 export const RootAppWrapper = ({
   children,
   client,
-}: PropsWithChildren<{ client: IHttpClient }>) => {
+}: PropsWithChildren<{ client: IHttpClient | null }>) => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>

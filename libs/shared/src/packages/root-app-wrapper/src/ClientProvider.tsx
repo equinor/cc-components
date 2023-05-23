@@ -8,7 +8,7 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 export const ClientProvider = ({
   client,
   children,
-}: PropsWithChildren<{ client: IHttpClient }>) => {
+}: PropsWithChildren<{ client: IHttpClient | null }>) => {
   return <ClientContext.Provider value={client}>{children}</ClientContext.Provider>;
 };
 
