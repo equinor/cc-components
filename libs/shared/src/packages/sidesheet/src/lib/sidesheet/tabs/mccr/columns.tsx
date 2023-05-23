@@ -1,12 +1,15 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { MccrBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
+import { StatusCell } from '../../../../../../table-helpers/src/lib/table/cells/StatusCell';
+import { statusColorMap } from '../../../../../../mapping';
+import { BaseStatus } from '../../../../../../types';
 
 export const columns: ColDef<MccrBase>[] = [
   {
     field: 'TagNo.',
+    headerName: 'TagNo',
+    minWidth: 90,
     valueGetter: (pkg) => pkg.data?.tagNumber,
     // valueFormatter: (pkg) =>
     //   pkg.data?.tagId ? proCoSysUrls.getTagUrl(pkg.data.tagId) : '',
@@ -24,7 +27,7 @@ export const columns: ColDef<MccrBase>[] = [
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 250,
+    minWidth: 125,
     resizable: true,
   },
   {
@@ -43,12 +46,22 @@ export const columns: ColDef<MccrBase>[] = [
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
-    width: 120,
+    cellRenderer: (props: ICellRendererProps) => {
+      if (!props.value) return null;
+      const statusColor = statusColorMap[(props.value as BaseStatus) ?? 'OS'];
+      return (
+        <StatusCell
+          content={props.value}
+          cellAttributeFn={() => ({
+            style: { backgroundColor: statusColor },
+          })}
+        />
+      );
+    },
   },
   {
     field: 'Res',
     valueGetter: (pkg) => pkg.data?.mccrResponsible,
-    width: 120,
   },
   {
     field: 'McpkgNo.',
