@@ -1,6 +1,8 @@
 import {
   CCApiAccessLoading,
   useCCApiAccessCheck,
+  useContextId,
+  useHttpClient,
   usePBIOptions,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
@@ -11,16 +13,14 @@ import { sidesheetConfig } from './sidesheetConfig';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useGardenConfig } from './gardenConfig';
 
-type WorkspaceWrapperProps = {
-  contextId: string;
-};
-export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const ccApi = useHttpClient('cc-api');
+export const WorkspaceWrapper = () => {
+  const contextId = useContextId();
+  const ccApi = useHttpClient();
 
   const pbi = usePBIOptions('cc-punch-analytics', {
     column: 'ProjectMaster GUID',

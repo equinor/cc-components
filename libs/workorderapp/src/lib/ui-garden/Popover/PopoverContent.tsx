@@ -66,7 +66,7 @@ const WorkOrderPopoverWrapper = ({ data, itemOptions }: WorkOrderPopoverProps) =
         </StyledPopoverStatus>
         <h5>MCCR status</h5>
         <StyledPopoverStatus color={mccrColor}>
-          {['OS', 'PB', 'PA'].includes(data.mccrStatus || '') ? data.mccrStatus : 'OK'}
+          {!data.mccrStatus ? 'OS' : data.mccrStatus}
         </StyledPopoverStatus>
       </StyledStatuses>
     </StyledPopoverContainer>
