@@ -1,8 +1,9 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { MccrBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
+import { StatusCell } from '../../../../../../table-helpers/src/lib/table/cells/StatusCell';
+import { statusColorMap } from '../../../../../../mapping';
+import { BaseStatus } from '../../../../../../types';
 
 export const columns: ColDef<MccrBase>[] = [
   {
@@ -43,6 +44,18 @@ export const columns: ColDef<MccrBase>[] = [
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
+    cellRenderer: (props: ICellRendererProps) => {
+      if (!props.value) return null;
+      const statusColor = statusColorMap[(props.value as BaseStatus) ?? 'OS'];
+      return (
+        <StatusCell
+          content={props.value}
+          cellAttributeFn={() => ({
+            style: { backgroundColor: statusColor },
+          })}
+        />
+      );
+    },
     width: 120,
   },
   {
