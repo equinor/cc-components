@@ -5,6 +5,8 @@ import { CCApiUnauthorizedError } from '../classes/CCApiUnauthorizedError';
 import { CCApiUnauthorized } from './errors/CCApiUnauthorized';
 import { FDataProxyUnauthorized } from './errors/FDataProxyUnauthorized';
 import { FusionDataProxyUnauthorized } from '../classes/FusionDataProxyUnauthorized';
+import { NoSelectedContextError } from '../classes/NoSelectedContextError';
+import { NoContext } from '../../../common';
 
 export type AppErrorBoundaryProps = {
   children: ReactNode;
@@ -24,6 +26,11 @@ export function AppErrorBoundary({ children, resetKeys = [] }: AppErrorBoundaryP
         if (props.error instanceof FusionDataProxyUnauthorized) {
           return <FDataProxyUnauthorized error={props.error.error} />;
         }
+
+        if (props.error instanceof NoSelectedContextError) {
+          return <NoContext />;
+        }
+
         return <div>unknown error</div>;
       }}
     >
