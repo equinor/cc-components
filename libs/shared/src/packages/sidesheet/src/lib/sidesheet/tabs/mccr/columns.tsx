@@ -8,6 +8,8 @@ import { BaseStatus } from '../../../../../../types';
 export const columns: ColDef<MccrBase>[] = [
   {
     field: 'TagNo.',
+    headerName: 'TagNo',
+    minWidth: 90,
     valueGetter: (pkg) => pkg.data?.tagNumber,
     // valueFormatter: (pkg) =>
     //   pkg.data?.tagId ? proCoSysUrls.getTagUrl(pkg.data.tagId) : '',
@@ -25,7 +27,7 @@ export const columns: ColDef<MccrBase>[] = [
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 250,
+    minWidth: 125,
     resizable: true,
   },
   {
@@ -56,12 +58,10 @@ export const columns: ColDef<MccrBase>[] = [
         />
       );
     },
-    width: 120,
   },
   {
     field: 'Res',
     valueGetter: (pkg) => pkg.data?.mccrResponsible,
-    width: 120,
   },
   {
     field: 'McpkgNo.',
