@@ -17,6 +17,7 @@ export const columns: ColDef<MaterialBase>[] = [
     headerName: '#',
     minWidth: 90,
     valueGetter: (pkg) => pkg.data?.itemNumber,
+    valueFormatter: (pkg) => pkg.data?.itemNumber ?? '',
   },
   {
     field: 'Description',
