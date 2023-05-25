@@ -18,7 +18,10 @@ import {
   TabTitle,
   StyledItemLink,
   proCoSysUrls,
+  useHttpClient,
+  useContextId,
 } from '@cc-components/shared';
+import { useQuery } from '@tanstack/react-query';
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -42,6 +45,29 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
+  const client = useHttpClient();
+  const contextId = useContextId();
+  const { data: wo } = useQuery<WorkOrder>(
+    ['workorder', props.id],
+    async () => {
+      const res = await client.fetch(
+        `/api/contexts/${contextId}/work-orders/${props.id}`
+      );
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    },
+    {
+      suspense: true,
+      initialData: props.item,
+    }
+  );
+
+  if (!wo) {
+    throw new Error('Failed to get wo');
+  }
+
   const {
     material,
     isFetching: isFetchingMaterial,
@@ -54,7 +80,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props?.item?.description ?? ''}
+        title={wo.description ?? ''}
         applicationTitle={'Workorder'}
         onClose={props.closeSidesheet}
       />
@@ -62,7 +88,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="WO"
           value={
-            props?.item?.workOrderNumber ?? 'N/A'
+            wo.workOrderNumber ?? 'N/A'
             // <StyledItemLink
             //   href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
             //   target="_blank"
@@ -89,7 +115,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
 
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab workOrder={props?.item} />
+            <DetailsTab workOrder={wo} />
           </Tabs.Panel>
           <Tabs.Panel>
             <MccrTab
