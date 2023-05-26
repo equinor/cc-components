@@ -14,6 +14,9 @@ import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
+import { useQuery } from '@tanstack/react-query';
+import { useContextId, useHttpClient } from 'libs/shared/dist/src';
+
 type PunchProps = {
   id: string;
   item?: Punch;
@@ -27,10 +30,29 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
     ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };
 
+  const client = useHttpClient();
+  const contextId = useContextId();
+
+  const { data: punch } = useQuery(
+    ['punch', props.id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/punch/${props.id}`);
+      if (!res.ok) throw res;
+      return res.json();
+    },
+    {
+      suspense: true,
+    }
+  );
+
+  if (!punch) {
+    throw new Error('Failed to fetch punch');
+  }
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props.item?.punchItemNo || ''}
+        title={punch.punchItemNo || ''}
         applicationTitle={'Punch'}
         onClose={props.close}
       />
@@ -38,7 +60,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Form type"
           value={
-            props.item?.formularType ?? ''
+            punch.formularType ?? ''
             // <StyledItemLink
             //   target="_blank"
             //   href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
@@ -50,7 +72,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Tag"
           value={
-            props.item?.tagNo ?? 'N/A'
+            punch.tagNo ?? 'N/A'
             // <StyledItemLink
             //   target="_blank"
             //   href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
@@ -62,7 +84,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Commpkg"
           value={
-            props.item?.commissioningPackageNo ?? 'N/A'
+            punch.commissioningPackageNo ?? 'N/A'
             // <StyledItemLink
             //   target="_blank"
             //   href={proCoSysUrls.getCommPkgUrl(
@@ -83,7 +105,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
 
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab punch={props.item} />
+            <DetailsTab punch={punch} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
