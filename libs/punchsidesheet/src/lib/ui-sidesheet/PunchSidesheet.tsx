@@ -15,7 +15,7 @@ import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
-import { useContextId, useHttpClient } from 'libs/shared/dist/src';
+import { useContextId, useHttpClient } from '@cc-components/shared';
 
 type PunchProps = {
   id: string;
@@ -42,6 +42,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
     },
     {
       suspense: true,
+      initialData: props.item,
     }
   );
 
