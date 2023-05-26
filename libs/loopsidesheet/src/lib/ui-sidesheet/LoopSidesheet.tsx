@@ -19,8 +19,10 @@ import {
   TabTitle,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
+import { useQuery } from '@tanstack/react-query';
+import { useContextId, useHttpClient } from '@cc-components/shared';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -43,14 +45,31 @@ type LoopProps = {
   close: () => void;
 };
 
-export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
+export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  if (!props.item) {
+  const client = useHttpClient();
+  const contextId = useContextId();
+  const { data: loop } = useQuery<Loop>(
+    ['loop', props.id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/loop/${props.id}`);
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    },
+    {
+      suspense: true,
+      initialData: props.item,
+    }
+  );
+
+  if (!loop) {
     throw new Error('Loop undefined');
   }
 
-  const { data, error, isLoading } = useGetWorkorders(props.item.loopNo);
+  const { data, isLoading } = useGetWorkorders(loop.loopNo);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -59,7 +78,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${props?.item?.loopNo}, ${props?.item?.description}` || ''}
+        title={`${loop.loopNo}, ${loop.description}` || ''}
         onClose={props.close}
         applicationTitle="Loop"
       />
@@ -67,10 +86,10 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         <BannerItem
           title="Checklist status"
           value={
-            props.item?.status ? (
+            loop.status ? (
               <StatusCircle
-                content={props.item?.status}
-                statusColor={statusColorMap[props.item?.status]}
+                content={loop.status}
+                statusColor={statusColorMap[loop.status]}
               />
             ) : (
               'N/A'
@@ -80,8 +99,8 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         <BannerItem
           title="Cmpkg"
           value={
-            props.item?.commissioningPackageNo
-              ? props.item.commissioningPackageNo
+            loop.commissioningPackageNo
+              ? loop.commissioningPackageNo
               : // <StyledItemLink
                 //   target="_blank"
                 //   href={proCoSysUrls.getCommPkgUrl(
@@ -96,8 +115,8 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         <BannerItem
           title="Mcpkg"
           value={
-            props.item?.mechanicalCompletionPackageNo
-              ? props.item.mechanicalCompletionPackageNo
+            loop.mechanicalCompletionPackageNo
+              ? loop.mechanicalCompletionPackageNo
               : // <StyledItemLink
                 //   target="_blank"
                 //   href={proCoSysUrls.getMcUrl(
@@ -109,7 +128,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
                 'N/A'
           }
         />
-        <BannerItem title="Milestone" value={props.item?.priority1 || 'N/A'} />
+        <BannerItem title="Milestone" value={loop.priority1 || 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -122,9 +141,9 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         </StyledTabListWrapper>
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab loop={props.item} />
-            {props.item?.loopId && <Checklists loopId={props.item.loopId} />}
-            <ContentDetails loop={props.item} />
+            <DetailsTab loop={loop} />
+            {loop.loopId && <Checklists loopId={loop.loopId} />}
+            <ContentDetails loop={loop} />
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab error={null} isFetching={false} workorders={data} />
