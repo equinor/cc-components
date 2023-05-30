@@ -3,13 +3,14 @@ import { gardenConfig } from './gardenConfig';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
 import { tableConfig } from './tableConfig';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 import { sidesheetConfig } from './sidesheetConfig';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
 import {
   FusionDataProxyUnauthorized,
+  useContextId,
   useErrorBoundaryTrigger,
+  useHttpClient,
 } from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
@@ -17,12 +18,9 @@ import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { sortPackagesByStatusAndNumber } from '../utils-statuses';
 
-type WorkspaceWrapperProps = {
-  contextId: string;
-};
-export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-  const dataProxy = useHttpClient('data-proxy');
-
+export const WorkspaceWrapper = () => {
+  const dataProxy = useHttpClient();
+  const contextId = useContextId();
   const getResponseAsync = async () => {
     const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`);
     return swcrs;

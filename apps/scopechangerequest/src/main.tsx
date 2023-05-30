@@ -1,23 +1,13 @@
 import { configure, WorkspaceWrapper } from '@cc-components/scopechangerequestapp';
-import { StrictMode } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { NoContext } from '@cc-components/shared/common';
-import { createRender } from '@cc-components/shared';
-import { useContextId } from '@cc-components/shared/hooks';
-
-const queryClient = new QueryClient();
+import { createRender, RootAppWrapper } from '@cc-components/shared';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const MyApp = () => {
-  const contextId = useContextId();
-
+  const client = useHttpClient('scopechange');
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
-          {contextId ? <WorkspaceWrapper contextId={contextId} /> : <NoContext />}
-        </div>
-      </QueryClientProvider>
-    </StrictMode>
+    <RootAppWrapper client={client}>
+      <WorkspaceWrapper />
+    </RootAppWrapper>
   );
 };
 
