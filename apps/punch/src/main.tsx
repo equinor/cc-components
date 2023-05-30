@@ -11,5 +11,5 @@ const PunchApp = () => {
   );
 };
 
-export const render = createRender(PunchApp, configure);
+export const render = createRender(PunchApp, configure, 'Punch');
 export default render;

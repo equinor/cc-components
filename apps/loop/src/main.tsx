@@ -11,5 +11,5 @@ const LoopApp = () => {
   );
 };
 
-export const render = createRender(LoopApp, configure);
+export const render = createRender(LoopApp, configure, 'Loop');
 export default render;
