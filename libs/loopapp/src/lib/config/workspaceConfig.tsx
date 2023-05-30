@@ -2,10 +2,11 @@ import {
   usePBIOptions,
   useCCApiAccessCheck,
   CCApiAccessLoading,
+  useContextId,
+  useHttpClient,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './loopSidesheet';
 import { useStatusBarConfig } from './statusBarConfig';
@@ -15,16 +16,13 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 
-type WorkspaceWrapperProps = {
-  contextId: string;
-};
-
-export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+export const WorkspaceWrapper = () => {
+  const contextId = useContextId();
   const pbi = usePBIOptions('loop-analytics', {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
-  const client = useHttpClient('cc-api');
+  const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');
 
   const filterOptions = useFilterConfig((req) =>

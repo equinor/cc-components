@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { parsePackageJson } from './parsePackageJson.js';
 import { FusionEnvironment } from './deployApp.js';
+import { execSync } from 'child_process';
 
 export async function writeTraceFileAsync(env: FusionEnvironment) {
   let r: string = '';

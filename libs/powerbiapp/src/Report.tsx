@@ -1,23 +1,17 @@
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
+import { useContextId } from '@cc-components/shared';
 import Workspace from '@equinor/workspace-fusion';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 
 type WorkspaceWrapperProps = {
-  /** Some reports are context independent */
-  contextId?: string;
   reportId: string;
   column: string;
   table: string;
   appKey: string;
 };
 
-export const Report = ({
-  contextId,
-  appKey,
-  column,
-  reportId,
-  table,
-}: WorkspaceWrapperProps) => {
+export const Report = ({ appKey, column, reportId, table }: WorkspaceWrapperProps) => {
+  const contextId = useContextId();
   const pbi = usePBIOptions(reportId, {
     column: column,
     table: table,

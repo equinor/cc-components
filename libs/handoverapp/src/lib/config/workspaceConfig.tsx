@@ -5,7 +5,6 @@ import { gardenConfig } from './gardenConfig';
 import { tableConfig } from './tableConfig';
 import { filterConfig } from './filterConfig';
 import { statusBarConfig } from './statusBarConfig';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { contextConfig } from './contextConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 import {
@@ -13,20 +12,18 @@ import {
   useErrorBoundaryTrigger,
   FusionDataProxyUnauthorized,
   useContextId,
+  useHttpClient,
 } from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 
-type WorkspaceWrapperProps = {
-  contextId: string;
-};
-export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+export const WorkspaceWrapper = () => {
   const id = useContextId();
 
-  const dataProxy = useHttpClient('data-proxy');
+  const dataProxy = useHttpClient();
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    dataProxy.fetch(`/api/contexts/${contextId}/handover`, {
+    dataProxy.fetch(`/api/contexts/${id}/handover`, {
       signal,
     });
 
@@ -50,7 +47,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
 
   return (
     <Workspace
-      key={contextId}
+      key={id}
       workspaceOptions={{
         appKey: 'Handover',
         getIdentifier: (item) => item.id,
@@ -65,7 +62,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       dataOptions={{
         getResponseAsync,
         responseParser,
-        queryKey: ['handover', contextId],
+        queryKey: ['handover', id],
       }}
       contextOptions={contextConfig}
       modules={[gridModule, gardenModule, powerBiModule]}
