@@ -5,6 +5,8 @@ import {
 } from '@equinor/fusion-framework-react-app';
 import { createRoot } from 'react-dom/client';
 
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+
 /**
  * Facades the fusion-framework render setup, used in all apps
  * @param Comp Your app React.FC
@@ -16,6 +18,29 @@ export function createRender(
   configure: (config: IAppConfigurator, c: ComponentRenderArgs) => Promise<void>
 ) {
   return (el: HTMLElement, args: ComponentRenderArgs) => {
+    const connectionString = (args.env.config?.environment as { ai?: string })?.ai;
+
+    const teardown = (() => {
+      if (connectionString) {
+        console.log('application insights enabled');
+        const appInsights = new ApplicationInsights({
+          config: {
+            connectionString: connectionString,
+            enableResponseHeaderTracking: true,
+            enableDebug: true,
+            appId: 'workorder',
+          },
+        });
+        appInsights.loadAppInsights();
+        appInsights.trackPageView();
+        Object.assign(window, { ai: appInsights });
+        return () => {
+          console.log('Removing application insights');
+          appInsights.unload();
+        };
+      }
+    })();
+
     /** Create root from provided element */
     const root = createRoot(el);
 
@@ -29,6 +54,9 @@ export function createRender(
     root.render(<AppComponent />);
 
     /** Teardown */
-    return () => root.unmount();
+    return () => {
+      teardown && teardown();
+      root.unmount();
+    };
   };
 }
