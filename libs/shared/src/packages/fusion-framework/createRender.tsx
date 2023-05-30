@@ -15,7 +15,8 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
  */
 export function createRender(
   Comp: React.FC,
-  configure: (config: IAppConfigurator, c: ComponentRenderArgs) => Promise<void>
+  configure: (config: IAppConfigurator, c: ComponentRenderArgs) => Promise<void>,
+  appName: string = 'unknown'
 ) {
   return (el: HTMLElement, args: ComponentRenderArgs) => {
     const connectionString = (args.env.config?.environment as { ai?: string })?.ai;
@@ -27,12 +28,14 @@ export function createRender(
           config: {
             connectionString: connectionString,
             enableResponseHeaderTracking: true,
-            enableDebug: true,
-            appId: 'workorder',
           },
         });
         appInsights.loadAppInsights();
         appInsights.trackPageView();
+        appInsights.addTelemetryInitializer((envelope) => {
+          (envelope.tags as any)['ai.cloud.role'] = appName;
+          (envelope.tags as any)['ai.cloud.roleInstance'] = appName;
+        });
         Object.assign(window, { ai: appInsights });
         return () => {
           console.log('Removing application insights');

@@ -11,5 +11,5 @@ const MyApp = () => {
   );
 };
 
-export const render = createRender(MyApp, configure);
+export const render = createRender(MyApp, configure, 'Scope change request');
 export default render;
