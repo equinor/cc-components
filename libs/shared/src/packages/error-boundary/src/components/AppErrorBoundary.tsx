@@ -15,6 +15,8 @@ export type AppErrorBoundaryProps = {
 export function AppErrorBoundary({ children, resetKeys = [] }: AppErrorBoundaryProps) {
   const contextId = useExternalContextId();
 
+  if (!contextId) return <NoContext />;
+
   return (
     <ErrorBoundary
       resetKeys={[contextId, ...resetKeys]}
