@@ -4,6 +4,7 @@ import {
   ProgressCell,
   StatusCell,
   YearAndWeekCell,
+  StyledMonospace,
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
@@ -11,14 +12,12 @@ import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { GridConfig } from '@equinor/workspace-fusion/grid';
 import { WorkOrder } from '@cc-components/workordershared';
-import { proCoSysUrls } from '@cc-components/shared';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
 export const useTableConfig = (
-  contextId: string,
-  boundaryTrigger?: () => void
+  contextId: string
 ): GridConfig<WorkOrder, FilterStateGroup[]> => {
   const client = useHttpClient('cc-app');
 
@@ -29,28 +28,40 @@ export const useTableConfig = (
       rowCount: meta.rowCount,
       rowData: meta.items,
     };
-  }, boundaryTrigger);
+  });
 
   return {
     getRows: getRows,
-    gridOptions: { ...defaultGridOptions },
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
+        );
+      },
+    },
     columnDefinitions: [
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNumber,
-        valueFormatter: (pkg) =>
-          pkg.data?.workOrderUrlId
-            ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-            : '',
         cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-          if (props.valueFormatted) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          } else return null;
+          return <StyledMonospace>{props.value}</StyledMonospace>;
         },
-        width: 200,
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.workOrderUrlId
+        //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+        //   if (props.valueFormatted) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   } else return null;
+        // },
       },
       {
         field: 'Description',
+        colId: 'description',
         valueGetter: (pkg) => pkg.data?.description,
         cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
           return <DescriptionCell description={props.value} />;
@@ -59,18 +70,18 @@ export const useTableConfig = (
       },
       {
         field: 'Discipline',
-        valueGetter: (pkg) => pkg.data?.disciplineCode,
-        width: 150,
+        valueGetter: (pkg) => pkg.data?.discipline,
       },
       {
         field: 'Milestone',
         valueGetter: (pkg) => pkg.data?.milestone,
-        width: 150,
       },
       {
         field: 'Job status',
         valueGetter: (pkg) => pkg.data?.jobStatus,
-        width: 150,
+        cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+          return <StyledMonospace>{props.data?.jobStatus}</StyledMonospace>;
+        },
       },
       {
         field: 'Material',
@@ -88,7 +99,6 @@ export const useTableConfig = (
             );
           } else return null;
         },
-        width: 150,
       },
       {
         field: 'Hold',
@@ -107,7 +117,6 @@ export const useTableConfig = (
             );
           } else return null;
         },
-        width: 100,
       },
       {
         field: 'Planned start',
@@ -115,7 +124,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
           return <YearAndWeekCell dateString={props.value} />;
         },
-        width: 200,
       },
       {
         field: 'Planned finish',
@@ -123,15 +131,6 @@ export const useTableConfig = (
         cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
           return <YearAndWeekCell dateString={props.value} />;
         },
-        width: 200,
-      },
-      {
-        field: 'Planned start',
-        valueGetter: (pkg) => pkg.data?.plannedStartupDate,
-        cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-          return <YearAndWeekCell dateString={props.value} />;
-        },
-        width: 200,
       },
       // {
       //   field: 'Est mhr',
@@ -146,7 +145,6 @@ export const useTableConfig = (
       //       />
       //     );
       //   },
-      //   width: 150,
       // },
       // {
       //   field: 'Exp mhr',
@@ -161,8 +159,6 @@ export const useTableConfig = (
       //       />
       //     );
       //   },
-
-      //   width: 150,
       // },
       // {
       //   field: 'Rem mhr',
@@ -177,7 +173,6 @@ export const useTableConfig = (
       //       />
       //     );
       //   },
-      //   width: 150,
       // },
       {
         field: 'Progress',
@@ -189,7 +184,6 @@ export const useTableConfig = (
 
           return <ProgressCell percentWidth={Number(props.value)} />;
         },
-        width: 150,
       },
       {
         field: 'MC',
@@ -206,7 +200,6 @@ export const useTableConfig = (
             />
           );
         },
-        width: 100,
       },
     ],
   };

@@ -14,6 +14,9 @@ import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
+import { useQuery } from '@tanstack/react-query';
+import { useContextId, useHttpClient } from '@cc-components/shared';
+
 type PunchProps = {
   id: string;
   item?: Punch;
@@ -27,10 +30,30 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
     ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };
 
+  const client = useHttpClient();
+  const contextId = useContextId();
+
+  const { data: punch } = useQuery(
+    ['punch', props.id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/punch/${props.id}`);
+      if (!res.ok) throw res;
+      return res.json();
+    },
+    {
+      suspense: true,
+      initialData: props.item,
+    }
+  );
+
+  if (!punch) {
+    throw new Error('Failed to fetch punch');
+  }
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props.item?.punchItemNo || ''}
+        title={punch.punchItemNo || ''}
         applicationTitle={'Punch'}
         onClose={props.close}
       />
@@ -38,36 +61,39 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Form type"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
-            >
-              {props.item?.formularType}
-            </StyledItemLink>
+            punch.formularType ?? ''
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
+            // >
+            //   {props.item?.formularType}
+            // </StyledItemLink>
           }
         />
         <BannerItem
           title="Tag"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
-            >
-              {props.item?.tagNo}
-            </StyledItemLink>
+            punch.tagNo ?? 'N/A'
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
+            // >
+            //   {props.item?.tagNo}
+            // </StyledItemLink>
           }
         />
         <BannerItem
           title="Commpkg"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getCommPkgUrl(
-                props.item?.commissioningPackageUrlId || ''
-              )}
-            >
-              {props.item?.commissioningPackageNo}
-            </StyledItemLink>
+            punch.commissioningPackageNo ?? 'N/A'
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getCommPkgUrl(
+            //     props.item?.commissioningPackageUrlId || ''
+            //   )}
+            // >
+            //   {props.item?.commissioningPackageNo}
+            // </StyledItemLink>
           }
         />
       </StyledBanner>
@@ -80,7 +106,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
 
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab punch={props.item} />
+            <DetailsTab punch={punch} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

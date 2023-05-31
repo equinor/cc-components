@@ -4,6 +4,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
+  StyledMonospace,
   YearAndWeekCell,
 } from '@cc-components/shared/table-helpers';
 
@@ -15,14 +16,17 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'McpkgNo',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
-      valueFormatter: (pkg) =>
-        pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        if (!props.valueFormatted) {
-          return null;
-        }
-        return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
+        return <StyledMonospace>{props.data?.mcPkgNumber}</StyledMonospace>;
       },
+      // valueFormatter: (pkg) =>
+      //   pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
+      // cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      //   if (!props.valueFormatted) {
+      //     return null;
+      //   }
+      //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      // },
       width: 100,
     },
     {
@@ -74,26 +78,35 @@ export const tableConfig: GridConfig<McPackage> = {
     {
       field: 'Area',
       valueGetter: (pkg) => pkg.data?.area,
+      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
+        return <StyledMonospace>{props.data?.area}</StyledMonospace>;
+      },
       enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Comm. package',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
-      valueFormatter: (pkg) =>
-        pkg.data?.commPkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commPkgId) : '',
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        if (!props.valueFormatted) {
-          return null;
-        } else {
-          return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-        }
+      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
+        return <StyledMonospace>{props.data?.commPkgNumber}</StyledMonospace>;
       },
+      // valueFormatter: (pkg) =>
+      //   pkg.data?.commPkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commPkgId) : '',
+      // cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      //   if (!props.valueFormatted) {
+      //     return null;
+      //   } else {
+      //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      //   }
+      // },
       width: 120,
     },
     {
       field: 'System',
       valueGetter: (pkg) => pkg.data?.system,
+      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
+        return <StyledMonospace>{props.data?.system}</StyledMonospace>;
+      },
       enableRowGroup: true,
       width: 100,
     },

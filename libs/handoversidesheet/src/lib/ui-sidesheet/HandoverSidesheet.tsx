@@ -127,12 +127,13 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
         <BannerItem
           title="Commpkg"
           value={
-            <StyledItemLink
-              target="_blank"
-              href={proCoSysUrls.getCommPkgUrl(props?.item?.id || '')}
-            >
-              {props?.item?.commpkgNo}
-            </StyledItemLink>
+            props.item?.commpkgNo ? props.item.commpkgNo : 'N/A'
+            // <StyledItemLink
+            //   target="_blank"
+            //   href={proCoSysUrls.getCommPkgUrl(props?.item?.id || '')}
+            // >
+            //   {props?.item?.commpkgNo}
+            // </StyledItemLink>
           }
         />
       </StyledBanner>

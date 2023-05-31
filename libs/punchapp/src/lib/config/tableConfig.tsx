@@ -1,9 +1,10 @@
 import { Punch } from '@cc-components/punchshared';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
+  DateCell,
   DescriptionCell,
-  LinkCell,
   StatusCell,
+  StyledMonospace,
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
 import {
@@ -13,27 +14,21 @@ import {
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { CCApiUnauthorizedError, useErrorBoundaryTrigger } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Punch, FilterStateGroup[]> => {
   const client = useHttpClient('cc-api');
 
-  const trigger = useErrorBoundaryTrigger();
+  const { getRows } = useGridDataSource(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
 
-  const { getRows } = useGridDataSource(
-    async (req) => {
-      const res = await client.fetch(`/api/contexts/${contextId}/punch/grid`, req);
-
-      const meta = (await res.json()) as { items: any[]; rowCount: number };
-      return {
-        rowCount: meta.rowCount,
-        rowData: meta.items,
-      };
-    },
-    () => trigger(new CCApiUnauthorizedError(''))
-  );
+    const meta = (await res.json()) as { items: any[]; rowCount: number };
+    return {
+      rowCount: meta.rowCount,
+      rowData: meta.items,
+    };
+  });
 
   return {
     getRows,
@@ -51,14 +46,17 @@ export const useTableConfig = (
       {
         field: 'Punch',
         valueGetter: (pkg) => pkg.data?.punchItemNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.punchItemNo}</StyledMonospace>;
         },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Description',
@@ -118,6 +116,9 @@ export const useTableConfig = (
       {
         field: 'Estimate',
         valueGetter: (pkg) => pkg.data?.estimate,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.estimate}</StyledMonospace>;
+        },
       },
       {
         field: 'Raised by org',
@@ -131,66 +132,75 @@ export const useTableConfig = (
         field: 'Cleared',
         valueGetter: (pkg) => pkg.data?.clearedAtDate,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
       {
         field: 'Verified',
         valueGetter: (pkg) => pkg.data?.verifiedAtDate,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
       {
         field: 'Handover plan',
         valueGetter: (pkg) => pkg.data?.handoverPlan,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString() : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
       {
         field: 'Form type',
         valueGetter: (pkg) => pkg.data?.formularType,
-        valueFormatter: (pkg) =>
-          pkg.data?.checklistUrlId
-            ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
-        },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.checklistUrlId
+        //     ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Tag',
         valueGetter: (pkg) => pkg.data?.tagNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.tagNo}</StyledMonospace>;
         },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Commpkg',
         valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-        valueFormatter: (pkg) =>
-          pkg.data?.commissioningPackageUrlId
-            ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
-            : '',
-        cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          if (props.valueFormatted && props.value) {
-            return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-          }
-          return null;
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.commissioningPackageNo}</StyledMonospace>;
         },
+        // valueFormatter: (pkg) =>
+        //   pkg.data?.commissioningPackageUrlId
+        //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
+        //     : '',
+        // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+        //   if (props.valueFormatted && props.value) {
+        //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
+        //   }
+        //   return null;
+        // },
       },
       {
         field: 'Workorder',
         valueGetter: (pkg) => pkg.data?.workOrderNo,
+        cellRenderer: (props: ICellRendererProps<Punch, string>) => {
+          return <StyledMonospace>{props.data?.workOrderNo}</StyledMonospace>;
+        },
         // valueFormatter: (pkg) =>
         //   pkg.data?.workOrderUrlId
         //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
@@ -210,7 +220,7 @@ export const useTableConfig = (
         field: 'Material estimate',
         valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
         cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-          return props.value ? new Date(props.value).toLocaleDateString : '';
+          return props.value ? <DateCell dateString={props.value} /> : null;
         },
       },
     ],

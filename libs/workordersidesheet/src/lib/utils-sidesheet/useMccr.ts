@@ -15,6 +15,10 @@ const fetchMccr = async (
       signal,
     }
   );
+  if (!res.ok) {
+    throw new Error('Failed to fetch Mccr');
+  }
+
   return (await res.json()) as WorkOrderMccr[];
 };
 

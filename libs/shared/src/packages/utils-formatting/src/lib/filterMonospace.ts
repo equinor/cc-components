@@ -1,0 +1,18 @@
+export const filterMonospaceWhitelist = [
+  'Job Status',
+  'System',
+  'CommPk',
+  'CommPkg',
+  'Location',
+  'Material Status',
+  'Project',
+  'Area',
+  'Mc Package Phase',
+  'Subsystem',
+  'Remark',
+  'Form Type',
+  'Commissioning Priority 1',
+  'Priority',
+  'Switchboard',
+  'Circuit',
+];

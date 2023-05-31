@@ -1,13 +1,13 @@
 {
   "name": "punch",
-  "version": "0.2.20",
+  "version": "0.2.26",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b",
-    "shipit": "node ../../cli/bin/src/main.js release"
+    "shipit": "npx ts-node --esm ../../cli/src/main.ts release"
   },
   "dependencies": {
     "@cc-components/punchapp": "workspace:^",

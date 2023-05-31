@@ -26,6 +26,7 @@ export function commitRelease() {
 }
 
 function invalidBranch() {
+  //TODO: reset package.json
   console.error(`
     **************************************************************
     Command failed!

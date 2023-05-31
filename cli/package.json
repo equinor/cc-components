@@ -7,10 +7,6 @@
     "access": "public"
   },
   "main": "./bin/src/main.js",
-  "bin": {
-    "cc": "./bin/src/main.js",
-    "cc-components-cli": "./bin/main.js"
-  },
   "scripts": {
     "build": "tsc -b"
   },
