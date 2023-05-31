@@ -9,3 +9,5 @@ export const statusColorMap: Record<BaseStatus, string> = {
   PA: '#ff4081',
   OK: '#00c853',
 } as const;
+
+export const pipetestStatusColormap = { ...statusColorMap, IN: 'red' } as const;

@@ -1,13 +1,10 @@
-import { Loop } from '@cc-components/loopshared';
+import { Pipetest } from '@cc-components/pipingshared';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useState } from 'react';
-import { DetailsTab } from './DetailsTab';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
-import { Checklists } from './Checklists';
-import { ContentDetails } from './ContentDetails';
 import {
   BannerItem,
   SidesheetHeader,
@@ -19,7 +16,7 @@ import {
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 import { StatusCircle } from '@cc-components/shared/common';
-import { statusColorMap } from '@cc-components/shared/mapping';
+import { pipetestStatusColormap } from '@cc-components/shared/mapping';
 import { useQuery } from '@tanstack/react-query';
 import { useContextId, useHttpClient } from '@cc-components/shared';
 
@@ -38,21 +35,21 @@ export const StyledTabsList = styled(Tabs.List)`
   scroll-behavior: smooth;
 `;
 
-type LoopProps = {
+type PipingProps = {
   id: string;
-  item?: Loop;
+  item?: Pipetest;
   close: () => void;
 };
 
-export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
+export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data: loop } = useQuery<Loop>(
-    ['loop', props.id],
+  const { data: pipetest } = useQuery<Pipetest>(
+    ['piptest', props.id],
     async () => {
-      const res = await client.fetch(`/api/contexts/${contextId}/loop/${props.id}`);
+      const res = await client.fetch(`/api/contexts/${contextId}/piping/${props.id}`);
       if (!res.ok) {
         throw res;
       }
@@ -64,11 +61,11 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
     }
   );
 
-  if (!loop) {
+  if (!pipetest) {
     throw new Error('Loop undefined');
   }
 
-  const { data, isLoading } = useGetWorkorders(loop.loopNo);
+  const { data, isLoading } = useGetWorkorders(pipetest.name);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -77,80 +74,54 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${loop.loopNo}, ${loop.description}` || ''}
+        title={`${pipetest.name}, ${pipetest.description}` || ''}
         onClose={props.close}
-        applicationTitle="Loop"
+        applicationTitle="Piping"
       />
       <StyledBanner>
         <BannerItem
           title="Checklist status"
           value={
-            loop.status ? (
+            pipetest.shortformCompletionStatus ? (
               <StatusCircle
-                content={loop.status}
-                statusColor={statusColorMap[loop.status]}
+                content={pipetest.shortformCompletionStatus}
+                statusColor={pipetestStatusColormap[pipetest.shortformCompletionStatus]}
               />
             ) : (
               'N/A'
             )
           }
         ></BannerItem>
-        <BannerItem
-          title="Cmpkg"
-          value={
-            loop.commissioningPackageNo
-              ? loop.commissioningPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getCommPkgUrl(
-                //     props.item?.commissioningPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.commissioningPackageNo}
-                // </StyledItemLink>
-                'N/A'
-          }
-        />
-        <BannerItem
-          title="Mcpkg"
-          value={
-            loop.mechanicalCompletionPackageNo
-              ? loop.mechanicalCompletionPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getMcUrl(
-                //     props.item?.mechanicalCompletionPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.mechanicalCompletionPackageNo}
-                // </StyledItemLink>
-                'N/A'
-          }
-        />
-        <BannerItem title="Milestone" value={loop.priority1 || 'N/A'} />
+        <BannerItem title="Current step" value={pipetest.step ?? ''} />
+        <BannerItem title="Checklist status" value={'To be continued'} />
+        <BannerItem title="Piping RFC" value={pipetest.rfccPlanned || 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
-            <Tabs.Tab>Overview</Tabs.Tab>
+            <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
               Work orders <TabTitle isLoading={isLoading} data={data} />
             </Tabs.Tab>
+            <Tabs.Tab>Insulation</Tabs.Tab>
+            <Tabs.Tab>
+              Checklists <TabTitle isLoading={isLoading} data={data} />
+            </Tabs.Tab>
+            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <StyledPanels>
-          <Tabs.Panel>
-            <DetailsTab loop={loop} />
-            {loop.loopId && <Checklists loopId={loop.loopId} />}
-            <ContentDetails loop={loop} />
-          </Tabs.Panel>
+          <Tabs.Panel>Circuit diagram is coming</Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab error={null} isFetching={false} workorders={data} />
           </Tabs.Panel>
+          <Tabs.Panel>Insulation is coming</Tabs.Panel>
+          <Tabs.Panel>Checklist is coming</Tabs.Panel>
+          <Tabs.Panel>3D is coming</Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
   );
 });
 
-export default LoopSidesheet.render;
+export default PipingSidesheet.render;

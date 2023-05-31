@@ -9,6 +9,7 @@
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "dependencies": {
+    "@cc-components/pipingshared": "workspace:^",
     "@cc-components/shared": "workspace:^"
   }
 }

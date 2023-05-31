@@ -3,6 +3,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
+import { GardenItem } from '../ui-garden';
 
 export const useGardenConfig = (
   contextId: string

@@ -3,6 +3,7 @@ import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useTableConfig } from './tableConfig';
+import { useStatusBarConfig } from './statusBarConfig';
 
 type WorkspaceWrapperProps = {
   contextId: string;
@@ -17,7 +18,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
   // );
 
   const tableConfig = useTableConfig(contextId);
-  // const statusBarConfig = useStatusBarConfig(contextId);
+  const statusBarConfig = useStatusBarConfig(contextId);
   // const gardenConfig = useGardenConfig(contextId);
 
   // if (isLoading) {
@@ -34,7 +35,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       // filterOptions={filterOptions}
       // gardenOptions={gardenConfig}
       gridOptions={tableConfig}
-      // statusBarOptions={statusBarConfig}
+      statusBarOptions={statusBarConfig}
       modules={[gridModule]}
     />
   );
