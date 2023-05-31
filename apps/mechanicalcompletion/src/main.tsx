@@ -11,5 +11,5 @@ const McApp = () => {
   );
 };
 
-export const render = createRender(McApp, configure);
+export const render = createRender(McApp, configure, 'Mechanical completion');
 export default render;

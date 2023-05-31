@@ -10,5 +10,5 @@ const SwcrApp = () => {
   );
 };
 
-export const render = createRender(SwcrApp, configure);
+export const render = createRender(SwcrApp, configure, 'SWCR');
 export default render;
