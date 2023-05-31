@@ -1,10 +1,9 @@
 import { Loop, Status } from '@cc-components/loopshared';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { DataResponse, useGridDataSource } from '@cc-components/shared/workspace-config';
 import {
   DateCell,
   DescriptionCell,
-  LinkCell,
   StatusCell,
   StyledMonospace,
 } from '@cc-components/shared/table-helpers';
@@ -46,6 +45,7 @@ export const useTableConfig = (
 
 const columnDefinitions: ColDef<Loop>[] = [
   {
+    colId: 'LoopTag',
     field: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -62,7 +62,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     field: 'Description',
-    colId: 'description',
+    colId: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <DescriptionCell description={props.value} />;
@@ -70,14 +70,16 @@ const columnDefinitions: ColDef<Loop>[] = [
     width: 350,
   },
   {
+    colId: 'System',
     field: 'System',
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <StyledMonospace>{props.data?.system}</StyledMonospace>;
     },
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'CommPkgNo',
     field: 'Comm pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -96,6 +98,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     // },
   },
   {
+    colId: 'MCPkgNo',
     field: 'MC pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -116,11 +119,13 @@ const columnDefinitions: ColDef<Loop>[] = [
     // },
   },
   {
+    colId: 'Priority1',
     field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority1,
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'RfcPlannedForecastDate',
     field: 'Planned/Forecast RFC',
     valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -129,6 +134,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
+    colId: 'RfoPlannedForecastDate',
     field: 'Planned/Forecast RFO',
     valueGetter: (pkg) => pkg.data?.rfO_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -151,30 +157,34 @@ const columnDefinitions: ColDef<Loop>[] = [
         />
       );
     },
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'Responsible',
     field: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'Location',
     field: 'Location',
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <StyledMonospace>{props.data?.location}</StyledMonospace>;
     },
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'FormularType',
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <StyledMonospace>{props.data?.formularType}</StyledMonospace>;
     },
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'SignedDate',
     field: 'Signed',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -183,6 +193,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
+    colId: 'VerifiedDate',
     field: 'Verified',
     valueGetter: (pkg) => pkg.data?.verifiedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -205,9 +216,10 @@ const columnDefinitions: ColDef<Loop>[] = [
         />
       );
     },
-    enableRowGroup: true,
+    enableRowGroup: false,
   },
   {
+    colId: 'WoPlannedCompletionDate',
     field: 'Planned MC complete',
     valueGetter: (pkg) => pkg.data?.woPlannedCompletionDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -216,6 +228,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   // {
+  //   colId: "WoActualCompletionDate",
   //   field: 'Actual MC complete',
   //   valueGetter: (pkg) => pkg.data?.woActualCompletionDate,
   //   cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -224,6 +237,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   //   width: 150,
   // },
   {
+    colId: 'RemainingManHours',
     field: 'Rem mhrs',
     valueGetter: (pkg) => pkg.data?.remainingManHours,
     // valueFormatter: (pkg) => pkg.context.maxRemHrs,
