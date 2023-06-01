@@ -17,6 +17,10 @@ import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
+const preventSidesheet = {
+  cellClicked: () => {},
+};
+
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Punch, FilterStateGroup[]> => {
@@ -60,6 +64,7 @@ const columnDefinitions: ColDef<Punch>[] = [
       }
       return <LinkCell url={props.data.punchUrl} urlText={props.data.punchItemNo} />;
     },
+    ...preventSidesheet,
   },
   {
     field: 'Description',
@@ -159,6 +164,7 @@ const columnDefinitions: ColDef<Punch>[] = [
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
       return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
     },
+    ...preventSidesheet,
   },
   {
     field: 'Tag',
@@ -167,6 +173,7 @@ const columnDefinitions: ColDef<Punch>[] = [
       if (!props.data?.tagUrl || !props.data?.tagNo) return null;
       return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
     },
+    ...preventSidesheet,
   },
   {
     field: 'Commpkg',
@@ -183,6 +190,7 @@ const columnDefinitions: ColDef<Punch>[] = [
         />
       );
     },
+    ...preventSidesheet,
   },
   {
     field: 'Workorder',
@@ -191,6 +199,7 @@ const columnDefinitions: ColDef<Punch>[] = [
       if (!props.data?.workOrderNo || !props.data.workorderUrl) return null;
       return <LinkCell url={props.data.workorderUrl} urlText={props.data?.workOrderNo} />;
     },
+    ...preventSidesheet,
   },
   {
     field: 'Material required',
