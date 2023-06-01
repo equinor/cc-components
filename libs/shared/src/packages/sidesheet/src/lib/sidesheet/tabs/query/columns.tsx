@@ -8,7 +8,7 @@ import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/c
 export const columns: ColDef<QueryBase>[] = [
   {
     field: 'Document No.',
-    valueGetter: (pkg) => pkg.data?.queryNumber,
+    valueGetter: (pkg) => pkg.data?.queryNo,
     // valueFormatter: (pkg) =>
     //   pkg.data?.queryId ? proCoSysUrls.getDocumentUrl(pkg.data.queryId) : '',
     // cellRenderer: (props: ICellRendererProps<QueryBase, string>) => {
@@ -28,11 +28,11 @@ export const columns: ColDef<QueryBase>[] = [
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.status,
+    valueGetter: (pkg) => pkg.data?.queryStatus,
   },
   {
     field: 'Type',
-    valueGetter: (pkg) => pkg.data?.type,
+    valueGetter: (pkg) => pkg.data?.queryType,
     width: 100,
   },
   {

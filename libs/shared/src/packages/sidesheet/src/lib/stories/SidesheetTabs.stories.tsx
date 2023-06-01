@@ -169,20 +169,20 @@ export const Query = () => (
     isFetching={false}
     queries={[
       {
-        queryNumber: '53',
+        queryNo: '53',
         queryId: '269',
         title: 'Query title 1',
-        status: ' Query status 1',
+        queryStatus: ' Query status 1',
         nextToSign: 'Next to sign 1',
-        type: 'Query type 1',
+        queryType: 'Query type 1',
       },
       {
-        queryNumber: '35',
+        queryNo: '35',
         queryId: '637',
         title: 'Query title 2',
-        status: ' Query status 2',
+        queryStatus: ' Query status 2',
         nextToSign: 'Next to sign 2',
-        type: 'Query type 2',
+        queryType: 'Query type 2',
       },
     ]}
   />

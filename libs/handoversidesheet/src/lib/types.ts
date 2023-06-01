@@ -32,12 +32,12 @@ export type HandoverPunch = {
 } & HandoverChild;
 
 export type HandoverQuery = {
-  queryNumber: string;
+  queryNo: string;
   queryId: string;
-  type: string;
-  title: string;
-  status: string;
-  nextToSign: string;
+  title: string | null;
+  queryStatus: string | null;
+  nextToSign: string | null;
+  queryType: string | null;
 } & HandoverChild;
 
 export type HandoverSWCR = {

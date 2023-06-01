@@ -88,7 +88,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: queryPackages,
     dataIsFetching: isDataFetchingQuery,
     error: queryError,
-  } = useHandoverResource(props.id, 'query');
+  } = useHandoverResource(props.item.commissioningPackageUrlId, 'query');
 
   return (
     <StyledSideSheetContainer>
