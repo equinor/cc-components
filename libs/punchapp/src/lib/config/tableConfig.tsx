@@ -3,6 +3,7 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DateCell,
   DescriptionCell,
+  LinkCell,
   StatusCell,
   StyledMonospace,
 } from '@cc-components/shared/table-helpers';
@@ -53,17 +54,12 @@ const columnDefinitions: ColDef<Punch>[] = [
     colId: 'Punch',
     field: 'Punch',
     valueGetter: (pkg) => pkg.data?.punchItemNo,
-    cellRenderer: (props: ICellRendererProps<Punch, string>) => {
-      return <StyledMonospace>{props.data?.punchItemNo}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+      if (!props.data?.punchUrl || !props.data?.punchItemNo) {
+        return null;
+      }
+      return <LinkCell url={props.data.punchUrl} urlText={props.data.punchItemNo} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.punchItemNo ? proCoSysUrls.getPunchUrl(pkg.data.punchItemNo) : '',
-    // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-    //   if (props.valueFormatted && props.value) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   }
-    //   return null;
-    // },
   },
   {
     field: 'Description',
@@ -159,65 +155,42 @@ const columnDefinitions: ColDef<Punch>[] = [
   {
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.checklistUrlId
-    //     ? proCoSysUrls.getFormTypeUrl(pkg.data.checklistUrlId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-    //   if (props.valueFormatted && props.value) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   }
-    //   return null;
-    // },
+    cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+      if (!props.data?.formularType || !props.data.formTypeUrl) return null;
+      return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
+    },
   },
   {
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
-    cellRenderer: (props: ICellRendererProps<Punch, string>) => {
-      return <StyledMonospace>{props.data?.tagNo}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+      if (!props.data?.tagUrl || !props.data?.tagNo) return null;
+      return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.tagUrlId ? proCoSysUrls.getTagUrl(pkg.data.tagUrlId) : '',
-    // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-    //   if (props.valueFormatted && props.value) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   }
-    //   return null;
-    // },
   },
   {
     field: 'Commpkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-    cellRenderer: (props: ICellRendererProps<Punch, string>) => {
-      return <StyledMonospace>{props.data?.commissioningPackageNo}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+      if (!props.data?.commissioningPackageUrl || !props.data.commissioningPackageNo) {
+        return null;
+      }
+
+      return (
+        <LinkCell
+          url={`${props.data.commissioningPackageUrl}`}
+          urlText={props.data.commissioningPackageNo}
+        />
+      );
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.commissioningPackageUrlId
-    //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-    //   if (props.valueFormatted && props.value) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   }
-    //   return null;
-    // },
   },
   {
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNo,
-    cellRenderer: (props: ICellRendererProps<Punch, string>) => {
-      return <StyledMonospace>{props.data?.workOrderNo}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+      if (!props.data?.workOrderNo || !props.data.workorderUrl) return null;
+      return <LinkCell url={props.data.workorderUrl} urlText={props.data?.workOrderNo} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.workOrderUrlId
-    //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
-    //   if (props.valueFormatted && props.value) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   }
-    //   return null;
-    // },
   },
   {
     field: 'Material required',

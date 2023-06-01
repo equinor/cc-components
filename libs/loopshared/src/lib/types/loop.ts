@@ -1,5 +1,9 @@
 export type Status = 'OS' | 'OK' | 'PA' | 'PB';
 export type Loop = {
+  loopUrl: string;
+  commissioningPackageUrl: string;
+  mechanicalCompletionPackageUrl: string;
+  formTypeUrl: string;
   callOffNo: string | null;
   checklistId: string;
   checklistUrlId: string | null;
