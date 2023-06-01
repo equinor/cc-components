@@ -1,6 +1,12 @@
 export type PunchStatus = 'Open' | 'Closed' | 'Cleared not verified';
 
 export type Punch = {
+  formTypeUrl: string;
+  punchUrl: string;
+  commissioningPackageUrl: string;
+  mechanicalCompletionPackageUrl: string;
+  tagUrl: string;
+  workorderUrl: string;
   facility: string | null;
   project: string | null;
   punchItemNo: string;
