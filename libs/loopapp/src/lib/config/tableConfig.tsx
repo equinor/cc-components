@@ -14,8 +14,6 @@ import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 
-const procosysUrl = 'https://procosys.equinor.com';
-
 export const useTableConfig = (
   contextId: string
 ): GridConfig<Loop, FilterStateGroup[]> => {
