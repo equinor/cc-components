@@ -52,15 +52,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     field: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
-      if (!props.data?.loopUri) {
-        return null;
-      }
-      return (
-        <LinkCell
-          url={`${procosysUrl}/${props.data?.loopUri}`}
-          urlText={props.value ?? ''}
-        />
-      );
+      return <LinkCell url={props.data?.loopUrl ?? ''} urlText={props.value ?? ''} />;
     },
   },
   {
@@ -86,10 +78,10 @@ const columnDefinitions: ColDef<Loop>[] = [
     field: 'Comm pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      if (props.data?.commissioningPackageUri && props.data.commissioningPackageNo) {
+      if (props.data?.commissioningPackageUrl && props.data.commissioningPackageNo) {
         return (
           <LinkCell
-            url={`${procosysUrl}/${props.data.commissioningPackageUri}`}
+            url={props.data.commissioningPackageUrl}
             urlText={props.data.commissioningPackageNo}
           />
         );
@@ -104,12 +96,12 @@ const columnDefinitions: ColDef<Loop>[] = [
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (
-        props.data?.mechanicalCompletionPackageUri &&
+        props.data?.mechanicalCompletionPackageUrl &&
         props.data.mechanicalCompletionPackageNo
       ) {
         return (
           <LinkCell
-            url={`${procosysUrl}/${props.data.mechanicalCompletionPackageUri}`}
+            url={props.data.mechanicalCompletionPackageUrl}
             urlText={props.data.mechanicalCompletionPackageNo}
           />
         );
@@ -179,13 +171,8 @@ const columnDefinitions: ColDef<Loop>[] = [
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      if (!props.data?.formularType || !props.data.formTypeUri) return null;
-      return (
-        <LinkCell
-          url={`${procosysUrl}/${props.data.formTypeUri}`}
-          urlText={props.data.formularType}
-        />
-      );
+      if (!props.data?.formularType || !props.data.formTypeUrl) return null;
+      return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
     },
     enableRowGroup: false,
   },
