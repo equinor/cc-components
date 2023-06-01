@@ -1,1 +1,0 @@
-//export { getStatusBarData } from './getStatusBarData';

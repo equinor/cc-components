@@ -45,7 +45,7 @@ export const useTableConfig = (
         //valueFormatter: (pkg) => pkg.data?.url ?? '', TODO Sjekk URL
         cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
           if (!props.valueFormatted) {
-            return null;
+            return props.value;
           }
           return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
         },

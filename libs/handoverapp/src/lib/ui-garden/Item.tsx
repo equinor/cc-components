@@ -2,8 +2,7 @@ import { HandoverPackage } from '@cc-components/handovershared';
 import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared/common';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { ExtendedGardenFields, HandoverCustomGroupByKeys } from '../types';
-import { getDotsColor, getItemSize, getTextColor} from '../utils-garden';
+import { getDotsColor, getItemSize, getTextColor, getMaxVolumeFromData} from '../utils-garden';
 import { getStatus } from '../utils-statuses';
 import { createProgressGradient } from '../utils-statuses/mcProgress';
 import {
@@ -36,18 +35,8 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     columnStart,
     parentRef,
   } = props;
-  /*
-  const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
-    null
-  );
-
-  const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-/*sjekk volume
-  const { useContext, getDisplayName } = controller;
-  const context = useContext();
-  maxVolume*/
-  const size = getItemSize(50, 100 || 0);
+  //TODO Context.MAXSIZE
+  const size = getItemSize(data.volume, 100 || 0);
 
   const status = getStatus(data);
   const backgroundColor = useMemo(

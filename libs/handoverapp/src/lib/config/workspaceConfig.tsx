@@ -22,8 +22,7 @@ type WorkspaceWrapperProps = {
   contextId: string;
 };
 export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
-
-  const client = useHttpClient('cc-app'); //Sjekk resource key 
+  const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
   const pbi = usePBIOptions('handoveranalytics', {

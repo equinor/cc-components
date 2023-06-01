@@ -26,7 +26,11 @@ export const DetailsTab = ({
 
     return nextToSign?.length ? <div>{nextToSign[0].nextToSign}</div> : '';
   }, [nextToSign, dataIsFetching]);
-
+  /* TODO
+     <td>Comm Pkg Discipline</td>
+            <td>{"TBA"}</td>
+          </tr>
+          */
   return (
     <StyledTabContent>
       <h3>Details</h3>
