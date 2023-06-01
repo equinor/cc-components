@@ -43,9 +43,6 @@ export const useTableConfig = (
     getRows: getRows,
   };
 };
-const preventSidesheet = {
-  cellClicked: () => {},
-};
 
 const columnDefinitions: ColDef<Loop>[] = [
   {
@@ -55,7 +52,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       return <LinkCell url={props.data?.loopUrl ?? ''} urlText={props.value ?? ''} />;
     },
-    ...preventSidesheet,
+    onCellClicked: () => {},
   },
   {
     field: 'Description',
@@ -91,7 +88,7 @@ const columnDefinitions: ColDef<Loop>[] = [
         return null;
       }
     },
-    ...preventSidesheet,
+    onCellClicked: () => {},
   },
   {
     colId: 'MCPkgNo',
@@ -112,7 +109,7 @@ const columnDefinitions: ColDef<Loop>[] = [
         return null;
       }
     },
-    ...preventSidesheet,
+    onCellClicked: () => {},
   },
   {
     colId: 'Priority1',
@@ -178,7 +175,7 @@ const columnDefinitions: ColDef<Loop>[] = [
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
       return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
     },
-    ...preventSidesheet,
+    onCellClicked: () => {},
     enableRowGroup: false,
   },
   {
