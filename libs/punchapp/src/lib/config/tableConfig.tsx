@@ -50,6 +50,7 @@ export const useTableConfig = (
 
 const columnDefinitions: ColDef<Punch>[] = [
   {
+    colId: 'Punch',
     field: 'Punch',
     valueGetter: (pkg) => pkg.data?.punchItemNo,
     cellRenderer: (props: ICellRendererProps<Punch, string>) => {
