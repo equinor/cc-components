@@ -11,7 +11,7 @@ import { hasProperty } from '../../../../../../utils-typescript';
 export const columns: ColDef<PunchBase>[] = [
   {
     field: 'Tag',
-    valueGetter: (pkg) => pkg.data?.tagNumber,
+    valueGetter: (pkg) => pkg.data?.tagNo,
     // valueFormatter: (pkg) =>
     //   pkg.data?.tagId ? proCoSysUrls.getPunchUrl(pkg.data.tagId) : '',
     // cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
@@ -31,12 +31,12 @@ export const columns: ColDef<PunchBase>[] = [
   },
   {
     field: 'To be cleared by',
-    valueGetter: (pkg) => pkg.data?.toBeClearedBy,
+    valueGetter: (pkg) => pkg.data?.clearedBy,
     width: 250,
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.status,
+    valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return (
         <StatusCell

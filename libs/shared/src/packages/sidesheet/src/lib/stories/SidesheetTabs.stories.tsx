@@ -144,19 +144,19 @@ export const Punch = () => (
     isFetching={false}
     punches={[
       {
-        tagNumber: '958',
-        tagId: '657',
-        status: 'Punch status 1',
+        tagNo: '958',
+        tagUrlId: '657',
+        category: 'Punch status 1',
         description: 'Punch description 1',
-        toBeClearedBy: 'Unknown :(',
+        clearedBy: 'Unknown :(',
         sorting: 'Up and down',
       },
       {
-        tagNumber: '841',
-        tagId: '332',
-        status: 'Punch status 2',
+        tagNo: '841',
+        tagUrlId: '332',
+        category: 'Punch status 2',
         description: 'Punch description 2',
-        toBeClearedBy: 'Unknown :)',
+        clearedBy: 'Unknown :)',
         sorting: 'Down and up',
       },
     ]}
@@ -250,7 +250,7 @@ export const UnsignedTask = () => (
     ]}
   />
 );
-
+/*
 export const Workorder = () => (
   <WorkorderTab
     error={null}
@@ -286,3 +286,4 @@ export const Workorder = () => (
   />
 );
 //TODO: Add the rest of the preconfigured tables under here
+*/

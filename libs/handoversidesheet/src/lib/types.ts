@@ -12,8 +12,8 @@ export type HandoverMcpkg = {
   mcPkgId: string;
   description: string | null;
   mechanicalCompletionStatus: string | null;
-  rfO_Status : string | null;
-  rfC_Status : string |null;
+  rfO_Status: string | null;
+  rfC_Status: string | null;
 } & HandoverChild;
 
 export type HandoverNCR = {
@@ -23,12 +23,12 @@ export type HandoverNCR = {
 } & HandoverChild;
 
 export type HandoverPunch = {
-  tagNumber: string;
-  tagId: string;
-  status: string;
-  description: string;
-  toBeClearedBy: string;
-  sorting: string;
+  tagNo: string;
+  tagUrlId: string;
+  category: string | null;
+  description: string | null;
+  clearedBy: string | null;
+  sorting: string | null;
 } & HandoverChild;
 
 export type HandoverQuery = {
@@ -62,13 +62,15 @@ export type HandoverUnsignedTask = {
 } & HandoverChild;
 
 export type HandoverWorkOrder = {
+  actualCompletionDate: string | null;
+  discipline: string | null;
+  estimatedHours: number | null;
+  expendedHours?: number | null;
+  jobStatus: string | null;
+  plannedFinishDate: string | null;
+  projectProgress: number | null;
+  remainingHours: number | null;
+  description: string | null;
+  workOrderUrlId: string;
   workOrderNumber: string;
-  workOrderStatus: string;
-  workOrderStatusDescription: string;
-  description: string;
-  materialStatus: string;
-  materialStatusDescription: string;
-  projectProgress: string;
-  plannedStartDate: string;
-  plannedCompletionDate: string;
 } & HandoverChild;

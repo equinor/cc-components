@@ -58,7 +58,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: workOrderPackages,
     dataIsFetching: isDataFetchingWorkOrder,
     error: woError,
-  } = useHandoverResource(props.id, 'work-orders');
+  } = useHandoverResource(props.item.commissioningPackageUrlId, 'work-orders');
 
   const {
     data: unsignedTasks,
@@ -76,7 +76,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: punchPackages,
     dataIsFetching: isDataFetchingPunch,
     error: punchError,
-  } = useHandoverResource(props.id, 'punch');
+  } = useHandoverResource(props.item.commissioningPackageUrlId, 'punch');
 
   const {
     data: swcrPackages,
@@ -190,15 +190,16 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
-                  workOrderNo: workorder.workOrderNumber,
-                  actualCompletionDate: '',
-                  discipline: '',
-                  estimatedManHours: null,
-                  jobStatus: '',
-                  remainingManHours: null,
+                  workOrderNumber: workorder.workOrderNumber,
+                  actualCompletionDate: workorder.actualCompletionDate,
+                  plannedFinishDate: workorder.plannedFinishDate,
+                  discipline: workorder.discipline,
+                  estimatedHours: workorder.estimatedHours,
+                  jobStatus: workorder.jobStatus,
+                  remainingHours: workorder.remainingHours,
                   title: workorder.description,
-                  workOrderId: workorder.commpkgId,
-                  projectProgress: null,
+                  workOrderUrlId: workorder.commpkgId,
+                  projectProgress: workorder.projectProgress,
                 })
               )}
               isFetching={isDataFetchingWorkOrder}

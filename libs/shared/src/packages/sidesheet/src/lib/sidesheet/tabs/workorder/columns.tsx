@@ -16,7 +16,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
   return [
     {
       field: 'WO',
-      valueGetter: (pkg) => pkg.data?.workOrderNo,
+      valueGetter: (pkg) => pkg.data?.workOrderNumber,
       // valueFormatter: (pkg) => {
       //   if (pkg.data?.workOrderId) {
       //     return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId);
@@ -53,7 +53,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Plan. finish',
-      valueGetter: (pkg) => pkg.data?.plannedCompletionDate,
+      valueGetter: (pkg) => pkg.data?.plannedFinishDate,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
       },
@@ -81,7 +81,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Estimated',
-      valueGetter: (pkg) => pkg.data?.estimatedManHours,
+      valueGetter: (pkg) => pkg.data?.estimatedHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (estimateHoursMax === -1) {
           //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
@@ -101,7 +101,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Remaining',
-      valueGetter: (pkg) => pkg.data?.remainingManHours,
+      valueGetter: (pkg) => pkg.data?.remainingHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (remainingHoursMax === -1) {
           //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours

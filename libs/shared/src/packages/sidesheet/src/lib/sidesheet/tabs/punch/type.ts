@@ -1,8 +1,8 @@
 export type PunchBase = {
-  tagNumber: string;
-  tagId: string;
-  status: string | null;
+  tagNo: string;
+  tagUrlId: string;
+  category: string | null;
   description: string | null;
-  toBeClearedBy: string | null;
+  clearedBy: string | null;
   sorting: string | null;
 };
