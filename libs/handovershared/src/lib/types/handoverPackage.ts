@@ -12,7 +12,7 @@ export type HandoverPackage = {
   location: string | null;
   commissioningPackageNo: string;
   commissioningPackageId: string;
-  commissioningPackageUrlId: string | null;
+  commissioningPackageUrlId: string;
   commissioningPackageStatus: BaseStatus;
   description: string | null;
   //demolition

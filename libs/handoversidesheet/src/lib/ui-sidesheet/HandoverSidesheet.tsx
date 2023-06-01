@@ -28,7 +28,7 @@ import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
 type HandoverProps = {
   id: string;
-  item?: HandoverPackage;
+  item: HandoverPackage;
   close: () => void;
 };
 export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => {
@@ -43,7 +43,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: mcPackages,
     dataIsFetching: isDataFetchingMc,
     error: mcError,
-  } = useHandoverResource(props.id, 'mcpkg');
+  } = useHandoverResource(props.item.commissioningPackageUrlId, 'mcpkg');
 
   const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
     useHandoverResource(props.id, 'details');

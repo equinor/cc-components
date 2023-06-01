@@ -8,18 +8,12 @@ export type HandoverDetails = {
 } & HandoverChild;
 
 export type HandoverMcpkg = {
-  mcPkgNo: string;
+  mechanicalCompletionPackageNo: string;
   mcPkgId: string;
-  description: string;
-  mcStatus: string;
-  rfccShippedActualDate: string;
-  rfccAcceptedActualDate: string;
-  rfocIsShipped: boolean;
-  rfocIsAccepted: boolean;
-  rfocIsRejected: boolean;
-  rfccIsShipped: boolean;
-  rfccIsAccepted: boolean;
-  rfccIsRejected: boolean;
+  description: string | null;
+  mechanicalCompletionStatus: string | null;
+  rfO_Status : string | null;
+  rfC_Status : string |null;
 } & HandoverChild;
 
 export type HandoverNCR = {

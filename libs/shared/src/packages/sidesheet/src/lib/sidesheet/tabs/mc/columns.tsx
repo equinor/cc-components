@@ -12,7 +12,7 @@ import { getRFCCStatus, getRFOCStatus } from '../../../../../../utils-statuses';
 export const columns: ColDef<McBase>[] = [
   {
     field: 'MC.Pkg',
-    valueGetter: (pkg) => pkg.data?.mcPkgNo,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.mcPkgId) {
     //     return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
@@ -35,15 +35,15 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.mcStatus,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     width: 150,
   },
   {
     field: 'RFCC',
-    valueGetter: (pkg) => pkg.data && getRFCCStatus(pkg.data),
+    valueGetter: (pkg) => pkg.data?.rfC_Status,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
-        content={`${props.value}`.replace('RFCC', '')}
+        content={`${props.value}`}
         cellAttributeFn={() => ({
           style: {
             backgroundColor: props.value ? colorMap[props.value] : 'transparent',
@@ -55,10 +55,10 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     field: 'RFOC',
-    valueGetter: (pkg) => pkg.data && getRFOCStatus(pkg.data),
+    valueGetter: (pkg) => pkg.data?.rfO_Status,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
-        content={`${props.value}`.replace('RFOC', '')}
+        content={`${props.value}`}
         cellAttributeFn={() => ({
           style: { backgroundColor: props.value ? colorMap[props.value] : 'transparent' },
         })}
