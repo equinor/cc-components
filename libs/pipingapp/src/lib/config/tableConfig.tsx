@@ -8,8 +8,9 @@ import {
 import { DateCell, DescriptionCell, StyledMonospace } from '@cc-components/shared';
 import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generateCommaSeperatedStringArrayColumn';
 import { getHTList } from '../utils-table/tableHelpers';
-import data from '../../responsePiping.json' assert { type: 'json' };
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+
+import data from '../responsePiping.json' assert { type: 'json' };
 
 const pipetests: Pipetest[] = data as any;
 

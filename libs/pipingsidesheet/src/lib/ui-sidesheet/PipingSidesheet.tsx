@@ -18,7 +18,12 @@ import {
 import { StatusCircle } from '@cc-components/shared/common';
 import { pipetestStatusColormap } from '@cc-components/shared/mapping';
 import { useQuery } from '@tanstack/react-query';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
+
+import { Workorder } from '../types';
+import data from '../utils-sidesheet/workorderResponse.json' assert { type: 'json' };
+
+const workorders: Workorder[] = data as any;
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -46,26 +51,27 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
 
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data: pipetest } = useQuery<Pipetest>(
-    ['piptest', props.id],
-    async () => {
-      const res = await client.fetch(`/api/contexts/${contextId}/piping/${props.id}`);
-      if (!res.ok) {
-        throw res;
-      }
-      return res.json();
-    },
-    {
-      suspense: true,
-      initialData: props.item,
-    }
-  );
+  // const { data: pipetest } = useQuery<Pipetest>(
+  //   ['piping', props.id],
+  //   async () => {
+  //     const res = await client.fetch(`/api/contexts/${contextId}/piping/${props.id}`);
+  //     if (!res.ok) {
+  //       throw res;
+  //     }
+  //     return res.json();
+  //   },
+  //   {
+  //     suspense: true,
+  //     initialData: props.item,
+  //   }
+  // );
 
+  const pipetest = props.item;
   if (!pipetest) {
-    throw new Error('Loop undefined');
+    throw new Error('Pipetest undefined');
   }
 
-  const { data, isLoading } = useGetWorkorders(pipetest.name);
+  // const { data, isLoading } = useGetWorkorders(pipetest.name);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -79,6 +85,7 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
         applicationTitle="Piping"
       />
       <StyledBanner>
+        <BannerItem title="Current step" value={pipetest.step ?? ''} />
         <BannerItem
           title="Checklist status"
           value={
@@ -92,20 +99,23 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
             )
           }
         ></BannerItem>
-        <BannerItem title="Current step" value={pipetest.step ?? ''} />
-        <BannerItem title="Checklist status" value={'To be continued'} />
-        <BannerItem title="Piping RFC" value={pipetest.rfccPlanned || 'N/A'} />
+        <BannerItem
+          title="Piping RFC"
+          value={
+            pipetest.rfccPlanned ? <DateCell dateString={pipetest.rfccPlanned} /> : 'N/A'
+          }
+        />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
-              Work orders <TabTitle isLoading={isLoading} data={data} />
+              Work orders <TabTitle isLoading={false} data={workorders} />
             </Tabs.Tab>
             <Tabs.Tab>Insulation</Tabs.Tab>
             <Tabs.Tab>
-              Checklists <TabTitle isLoading={isLoading} data={data} />
+              Checklists <TabTitle isLoading={false} data={undefined} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>

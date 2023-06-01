@@ -11,12 +11,13 @@ export const useGardenConfig = (
   const client = useHttpClient('cc-api');
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({
-      getBlockAsync: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
+      getBlockAsync: (req) =>
+        client.fetch(`/api/contexts/${contextId}/piping/garden`, req),
       getGardenMeta: (req) =>
-        client.fetch(`/api/contexts/${contextId}/loop/garden-meta`, req),
-      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
+        client.fetch(`/api/contexts/${contextId}/piping/garden-meta`, req),
+      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/piping/garden`, req),
       getSubgroupItems: (req) =>
-        client.fetch(`/api/contexts/${contextId}/loop/subgroup-items`, req),
+        client.fetch(`/api/contexts/${contextId}/piping/subgroup-items`, req),
     });
 
   return {

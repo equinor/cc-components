@@ -6,7 +6,7 @@ export const useStatusBarConfig = (contextId: string): StatusBarConfig<Pipetest[
   const client = useHttpClient('cc-api');
 
   return async (filters, signal) => {
-    const res = await client.fetch(`/api/contexts/${contextId}/loop/kpis`, {
+    const res = await client.fetch(`/api/contexts/${contextId}/piping/kpis`, {
       method: 'POST',
       body: JSON.stringify({
         filter: filters,
