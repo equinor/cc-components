@@ -16,6 +16,7 @@ export const InsultaionTab = ({
 }: InsulationTabProps): JSX.Element => {
   return (
     <StyledContentWrapper>
+      {pipeInsulations ? <h3>Pipe insulations:</h3> : ''}
       <TabTable
         columns={insulationsColumns}
         error={error}
@@ -23,6 +24,7 @@ export const InsultaionTab = ({
         packages={pipeInsulations}
         resourceName="Pipe insulations"
       />
+      {boxInsulations ? <h4>Box insulations:</h4> : ''}
       <TabTable
         columns={insulationsColumns}
         error={error}
