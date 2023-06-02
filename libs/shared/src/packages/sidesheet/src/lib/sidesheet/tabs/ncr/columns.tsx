@@ -1,7 +1,6 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { NcrBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping';
 import { LinkCell, DescriptionCell } from '../../../../../../table-helpers';
 
 export const columns: ColDef<NcrBase>[] = [

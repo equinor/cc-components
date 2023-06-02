@@ -4,6 +4,7 @@ import { DataResponse, useGridDataSource } from '@cc-components/shared/workspace
 import {
   DateCell,
   DescriptionCell,
+  LinkCell,
   StatusCell,
   StyledMonospace,
 } from '@cc-components/shared/table-helpers';
@@ -48,17 +49,10 @@ const columnDefinitions: ColDef<Loop>[] = [
     colId: 'LoopTag',
     field: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
-    cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      return <StyledMonospace>{props.data?.loopNo}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
+      return <LinkCell url={props.data?.loopUrl ?? ''} urlText={props.value ?? ''} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.loopUrlId ? proCoSysUrls.getTagUrl(pkg.data.loopUrlId) : '',
-    // cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
-    //   if (!props.valueFormatted) {
-    //     return null;
-    //   }
-    //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    // },
+    onCellClicked: () => {},
   },
   {
     field: 'Description',
@@ -73,9 +67,9 @@ const columnDefinitions: ColDef<Loop>[] = [
     colId: 'System',
     field: 'System',
     valueGetter: (pkg) => pkg.data?.system,
-    cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      return <StyledMonospace>{props.data?.system}</StyledMonospace>;
-    },
+    cellRenderer: (props: ICellRendererProps<Loop, string>) => (
+      <StyledMonospace>{props.data?.system}</StyledMonospace>
+    ),
     enableRowGroup: false,
   },
   {
@@ -83,40 +77,39 @@ const columnDefinitions: ColDef<Loop>[] = [
     field: 'Comm pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      return <StyledMonospace>{props.data?.commissioningPackageNo}</StyledMonospace>;
+      if (props.data?.commissioningPackageUrl && props.data.commissioningPackageNo) {
+        return (
+          <LinkCell
+            url={props.data.commissioningPackageUrl}
+            urlText={props.data.commissioningPackageNo}
+          />
+        );
+      } else {
+        return null;
+      }
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.commissioningPackageId
-    //     ? proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else {
-    //     return null;
-    //   }
-    // },
+    onCellClicked: () => {},
   },
   {
     colId: 'MCPkgNo',
     field: 'MC pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      return (
-        <StyledMonospace>{props.data?.mechanicalCompletionPackageNo}</StyledMonospace>
-      );
+      if (
+        props.data?.mechanicalCompletionPackageUrl &&
+        props.data.mechanicalCompletionPackageNo
+      ) {
+        return (
+          <LinkCell
+            url={props.data.mechanicalCompletionPackageUrl}
+            urlText={props.data.mechanicalCompletionPackageNo}
+          />
+        );
+      } else {
+        return null;
+      }
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.mechanicalCompletionPackageId
-    //     ? proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else {
-    //     return null;
-    //   }
-    // },
+    onCellClicked: () => {},
   },
   {
     colId: 'Priority1',
@@ -179,8 +172,10 @@ const columnDefinitions: ColDef<Loop>[] = [
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
-      return <StyledMonospace>{props.data?.formularType}</StyledMonospace>;
+      if (!props.data?.formularType || !props.data.formTypeUrl) return null;
+      return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
     },
+    onCellClicked: () => {},
     enableRowGroup: false,
   },
   {
