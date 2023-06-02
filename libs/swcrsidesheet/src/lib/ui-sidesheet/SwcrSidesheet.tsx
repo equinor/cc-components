@@ -1,5 +1,4 @@
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls } from '@cc-components/shared/mapping';
 import {
   BannerItem,
   SidesheetHeader,

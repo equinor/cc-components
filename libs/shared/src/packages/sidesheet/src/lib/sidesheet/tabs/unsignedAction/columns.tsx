@@ -1,6 +1,5 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { UnsignedActionBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 //TODO: Fix url

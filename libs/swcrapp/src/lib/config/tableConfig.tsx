@@ -1,4 +1,3 @@
-import { proCoSysUrls } from '@cc-components/shared/mapping';
 import {
   DescriptionCell,
   LinkCell,

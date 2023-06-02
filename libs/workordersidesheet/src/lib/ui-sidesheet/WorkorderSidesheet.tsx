@@ -17,7 +17,6 @@ import {
   StyledTabs,
   TabTitle,
   StyledItemLink,
-  proCoSysUrls,
   useHttpClient,
   useContextId,
 } from '@cc-components/shared';

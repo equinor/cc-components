@@ -1,6 +1,5 @@
 import { Punch } from '@cc-components/punchshared';
 import { StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls } from '@cc-components/shared/mapping';
 import {
   BannerItem,
   SidesheetHeader,
@@ -27,7 +26,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
     setActiveTab(index);
-    ref && ref.current && ref.current.scrollTo({ left: index ** index });
+    ref.current && ref.current.scrollTo({ left: index ** index });
   };
 
   const client = useHttpClient();
