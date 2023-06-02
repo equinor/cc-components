@@ -22,6 +22,7 @@ import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
 
 import { Workorder } from '../types';
 import data from '../utils-sidesheet/workorderResponse.json' assert { type: 'json' };
+import { InsultaionTab } from './InsultaionTab';
 
 const workorders: Workorder[] = data as any;
 
@@ -113,7 +114,17 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
             <Tabs.Tab>
               Work orders <TabTitle isLoading={false} data={workorders} />
             </Tabs.Tab>
-            <Tabs.Tab>Insulation</Tabs.Tab>
+            <Tabs.Tab>
+              Insulation
+              <TabTitle
+                isLoading={false}
+                data={[
+                  ...(pipetest.pipeInsulationBoxes ?? []),
+                  ...(pipetest.insulationBoxes ?? []),
+                ]}
+                // data={pipetest.insulationBoxes}
+              />
+            </Tabs.Tab>
             <Tabs.Tab>
               Checklists <TabTitle isLoading={false} data={undefined} />
             </Tabs.Tab>
@@ -123,9 +134,16 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
         <StyledPanels>
           <Tabs.Panel>Circuit diagram is coming</Tabs.Panel>
           <Tabs.Panel>
-            <WorkorderTab error={null} isFetching={false} workorders={data} />
+            <WorkorderTab error={null} isFetching={false} workorders={workorders} />
           </Tabs.Panel>
-          <Tabs.Panel>Insulation is coming</Tabs.Panel>
+          <Tabs.Panel>
+            <InsultaionTab
+              error={null}
+              isFetching={false}
+              pipeInsulations={pipetest.pipeInsulationBoxes}
+              boxInsulations={pipetest.insulationBoxes}
+            />
+          </Tabs.Panel>
           <Tabs.Panel>Checklist is coming</Tabs.Panel>
           <Tabs.Panel>3D is coming</Tabs.Panel>
         </StyledPanels>
