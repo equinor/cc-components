@@ -1,5 +1,5 @@
 import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DescriptionCell,
   LinkCell,

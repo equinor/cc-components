@@ -1,6 +1,6 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   BannerItem,
   McTab,

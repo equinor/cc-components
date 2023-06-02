@@ -18,7 +18,7 @@ import { DetailsTab } from './DetailsTab';
 import { useMcResource } from '../utils-sidesheet';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 const StyledTabListWrapper = styled.div`
   overflow: hidden;

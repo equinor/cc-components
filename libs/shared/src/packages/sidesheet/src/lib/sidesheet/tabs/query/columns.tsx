@@ -2,7 +2,6 @@ import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { QueryBase } from './types';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 
 export const columns: ColDef<QueryBase>[] = [
