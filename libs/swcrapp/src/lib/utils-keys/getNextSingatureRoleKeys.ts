@@ -1,7 +1,7 @@
 import { GetKeyFunction } from '../types';
 import { nextToSignParallelRuleValidation } from './nextToSignParallelRuleValidation';
 import { DEFAULT_BLANKSTRING } from '../constants/defaultBlankString';
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 
 const getNextSignatureRoleKey = (nextToSign: string, ranking?: string): string => {
   if (!ranking?.length) ranking = '0';
@@ -14,7 +14,9 @@ const getNextSignatureRoleKey = (nextToSign: string, ranking?: string): string =
     : `${ranking}: ${nextSignatureRoleKey}`;
 };
 
-export const getNextSignatureRoleKeys: GetKeyFunction<SwcrPackage> = (item) =>
-  item.nextsToSign
-    .filter(nextToSignParallelRuleValidation)
-    .map((next) => getNextSignatureRoleKey(next, item.nextSignRanking));
+export const getNextSignatureRoleKeys: GetKeyFunction<SoftwareChangeRecord> = (
+  item
+) => [];
+// item.nextsToSign
+//   .filter(nextToSignParallelRuleValidation)
+//   .map((next) => getNextSignatureRoleKey(next, item.nextSignRanking));

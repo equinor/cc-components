@@ -1,20 +1,13 @@
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { ExtendedGardenFields } from '../types';
 import { GardenGrouped, GardenHeader, GardenItem } from '../ui-garden';
 import { customDescription } from '../utils-garden/customDescription';
-import { fieldSettings } from '../utils-garden/fieldSettings';
-import { getHighlighColumn } from '../utils-garden/getHighlightedColumn';
-import { getItemWidth } from '../utils-garden/getItemWidth';
 
-export const gardenConfig: GardenConfig<SwcrPackage, ExtendedGardenFields> = {
-  getDisplayName: (pkg) => pkg.swcrNo,
+export const gardenConfig: GardenConfig<SoftwareChangeRecord, ExtendedGardenFields> = {
   initialGrouping: { horizontalGroupingAccessor: 'dueAtDate', verticalGroupingKeys: [] },
-  fieldSettings: fieldSettings,
   visuals: {
-    calculateItemWidth: getItemWidth,
     rowHeight: 25,
-    highlightHorizontalColumn: getHighlighColumn,
     getDescription: customDescription,
   },
   customViews: {
@@ -22,4 +15,4 @@ export const gardenConfig: GardenConfig<SwcrPackage, ExtendedGardenFields> = {
     customHeaderView: GardenHeader,
     customGroupView: GardenGrouped,
   },
-};
+} as any;

@@ -4,7 +4,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const SwcrApp = () => {
   return (
-    <RootAppWrapper client={useHttpClient('data-proxy')}>
+    <RootAppWrapper client={useHttpClient('cc-api')}>
       <WorkspaceWrapper />
     </RootAppWrapper>
   );

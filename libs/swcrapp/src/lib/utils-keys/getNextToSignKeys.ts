@@ -1,6 +1,6 @@
 import { GetKeyFunction } from '../types';
 import { DEFAULT_BLANKSTRING } from '../constants/defaultBlankString';
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 const getNextToSignKey = (nextToSign: string, ranking?: string): string => {
   if (!ranking?.length) ranking = '0';
 
@@ -17,5 +17,5 @@ const getNextToSignKey = (nextToSign: string, ranking?: string): string => {
     ? nextToSignKey
     : `${ranking}: ${nextToSignKey}`;
 };
-export const getNextToSignKeys: GetKeyFunction<SwcrPackage> = (item) =>
-  item.nextsToSign.map((next) => getNextToSignKey(next, item.nextSignRanking));
+export const getNextToSignKeys: GetKeyFunction<SoftwareChangeRecord> = (item) => [];
+// item.nextsToSign.map((next) => getNextToSignKey(next, item.nextSignRanking));

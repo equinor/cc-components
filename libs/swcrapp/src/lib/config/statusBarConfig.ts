@@ -1,27 +1,23 @@
-import { numberFormat } from '@cc-components/shared/utils-formatting';
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { getStatusBarData } from '../utils-status-bar';
+import { useHttpClient } from '@cc-components/shared';
 
-export const statusBarConfig: StatusBarConfig<SwcrPackage> = (data) => {
-  const kpis = getStatusBarData(data);
+export const useStatusBarConfig = (
+  contextId: string
+): StatusBarConfig<SoftwareChangeRecord[]> => {
+  const client = useHttpClient();
 
-  return [
-    {
-      title: 'Total SWCRs',
-      value: numberFormat(kpis.allSwcrs),
-    },
-    {
-      title: 'Open',
-      value: numberFormat(kpis.openSwcrs),
-    },
-    {
-      title: 'Closed',
-      value: numberFormat(kpis.closedSwcrs),
-    },
-    {
-      title: '% Closed',
-      value: `${kpis.percentageClosedSwcrs}%`,
-    },
-  ];
+  return async (filters, signal) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/swcr/kpis`, {
+      method: 'POST',
+      body: JSON.stringify({
+        filter: filters,
+      }),
+      signal,
+      headers: {
+        ['content-type']: 'application/json',
+      },
+    });
+    return (await res.json()).map((s: any) => ({ ...s, title: s.name }));
+  };
 };

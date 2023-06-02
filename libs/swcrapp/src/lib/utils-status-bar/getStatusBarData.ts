@@ -1,4 +1,4 @@
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 
 type Kpi = {
   allSwcrs: number;
@@ -7,7 +7,7 @@ type Kpi = {
   percentageClosedSwcrs: string;
 };
 type PartialKpi = Pick<Kpi, 'openSwcrs' | 'closedSwcrs'>;
-export const getStatusBarData = (swcrs: SwcrPackage[]): Kpi => {
+export const getStatusBarData = (swcrs: SoftwareChangeRecord[]): Kpi => {
   const counts = swcrs.reduce(
     (acc, curr) => {
       if (curr.status !== 'Closed' && curr.status !== 'Closed - Rejected') {

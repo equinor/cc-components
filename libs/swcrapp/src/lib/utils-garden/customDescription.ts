@@ -1,9 +1,12 @@
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 import { GardenItem } from '@equinor/workspace-fusion/garden';
-export const customDescription = (swcr: SwcrPackage | GardenItem<SwcrPackage>) => {
+export const customDescription = (
+  swcr: SoftwareChangeRecord | GardenItem<SoftwareChangeRecord>
+) => {
   //TODO: TS check
-  const item = swcr as SwcrPackage;
+  const item = swcr as SoftwareChangeRecord;
   return `${item.title} ${
-    parseInt(item.estimatedManhours) > 0 ? `(${item.estimatedManhours}h)` : ''
+    ''
+    // parseInt(item.estimatedManhours) > 0 ? `(${item.estimatedManhours}h)` : ''
   }`;
 };

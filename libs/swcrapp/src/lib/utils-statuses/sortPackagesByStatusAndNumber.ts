@@ -1,9 +1,10 @@
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord, SwcrStatus } from '@cc-components/swcrshared';
 import { getSwcrStatusPriority } from './getSwcrStatusPriority';
 
 export const sortPackagesByStatusAndNumber = (
-  columnA: SwcrPackage,
-  columnB: SwcrPackage
+  columnA: SoftwareChangeRecord,
+  columnB: SoftwareChangeRecord
 ): number =>
-  getSwcrStatusPriority(columnA.status) - getSwcrStatusPriority(columnB.status) ||
-  parseInt(columnA.swcrNo) - parseInt(columnB.swcrNo);
+  getSwcrStatusPriority(columnA.status as SwcrStatus) -
+    getSwcrStatusPriority(columnB.status as SwcrStatus) ||
+  parseInt(columnA.softwareChangeRecordNo) - parseInt(columnB.softwareChangeRecordNo);

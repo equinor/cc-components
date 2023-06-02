@@ -1,21 +1,22 @@
-import { SwcrPackage } from '@cc-components/swcrshared';
+import { SoftwareChangeRecord } from '@cc-components/swcrshared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
 import { memo } from 'react';
 import { getMinorTitle, getTitle } from '../utils-garden/getHeaderValues';
 import { StyledHeaderContainer } from './garden.styles';
 
-const SwcrHeader = (props: CustomHeaderView<SwcrPackage>) => {
-  const { columnIndex, garden } = props;
-  const column = garden[columnIndex];
-  const { groupKey } = column;
-  const title = getTitle(groupKey, column);
+const SwcrHeader = (props: CustomHeaderView) => {
+  return <></>;
+  // const { columnIndex, garden } = props;
+  // const column = garden[columnIndex];
+  // const { groupKey } = column;
+  // const title = getTitle(groupKey, column);
 
-  return (
-    <StyledHeaderContainer>
-      <div>{getMinorTitle(groupKey, column)}</div>
-      <div>{title}</div>
-    </StyledHeaderContainer>
-  );
+  // return (
+  //   <StyledHeaderContainer>
+  //     <div>{getMinorTitle(groupKey, column)}</div>
+  //     <div>{title}</div>
+  //   </StyledHeaderContainer>
+  // );
 };
 
 export const GardenHeader = memo(SwcrHeader);

@@ -11,6 +11,7 @@
   "dependencies": {
     "@cc-components/shared": "workspace:^",
     "@cc-components/swcrshared": "workspace:^",
-    "@cc-components/swcrsidesheet": "workspace:^"
+    "@cc-components/swcrsidesheet": "workspace:^",
+    "@equinor/workspace-fusion": "^1.2.1"
   }
 }
