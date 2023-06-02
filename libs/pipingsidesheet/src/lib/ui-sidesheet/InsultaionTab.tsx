@@ -16,7 +16,7 @@ export const InsultaionTab = ({
 }: InsulationTabProps): JSX.Element => {
   return (
     <StyledContentWrapper>
-      {pipeInsulations ? <h3>Pipe insulations:</h3> : ''}
+      {pipeInsulations ? <h4>Pipe insulations:</h4> : ''}
       <TabTable
         columns={insulationsColumns}
         error={error}
