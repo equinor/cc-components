@@ -23,6 +23,7 @@ import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
 import { Workorder } from '../types';
 import data from '../utils-sidesheet/workorderResponse.json' assert { type: 'json' };
 import { InsultaionTab } from './InsultaionTab';
+import { ChecklistTab } from './ChecklistTab';
 
 const workorders: Workorder[] = data as any;
 
@@ -86,7 +87,7 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
         applicationTitle="Piping"
       />
       <StyledBanner>
-        <BannerItem title="Current step" value={pipetest.step ?? ''} />
+        <BannerItem title="Current step" value={pipetest.step} />
         <BannerItem
           title="Checklist status"
           value={
@@ -126,7 +127,7 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
               />
             </Tabs.Tab>
             <Tabs.Tab>
-              Checklists <TabTitle isLoading={false} data={undefined} />
+              Checklists <TabTitle isLoading={false} data={pipetest.checkLists} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
@@ -144,7 +145,13 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
               boxInsulations={pipetest.insulationBoxes}
             />
           </Tabs.Panel>
-          <Tabs.Panel>Checklist is coming</Tabs.Panel>
+          <Tabs.Panel>
+            <ChecklistTab
+              error={null}
+              isFetching={false}
+              checklists={pipetest.checkLists}
+            />
+          </Tabs.Panel>
           <Tabs.Panel>3D is coming</Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
