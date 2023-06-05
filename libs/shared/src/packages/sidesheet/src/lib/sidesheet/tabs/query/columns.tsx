@@ -16,7 +16,7 @@ export const columns: ColDef<QueryBase>[] = [
     //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
     //   } else return null;
     // },
-    width: 180,
+    minWidth: 200,
   },
   {
     field: 'Title',
@@ -24,7 +24,7 @@ export const columns: ColDef<QueryBase>[] = [
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 400,
+    minWidth: 200,
   },
   {
     field: 'Status',

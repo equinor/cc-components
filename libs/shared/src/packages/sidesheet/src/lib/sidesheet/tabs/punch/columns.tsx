@@ -12,14 +12,10 @@ export const columns: ColDef<PunchBase>[] = [
   {
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.tagId ? proCoSysUrls.getPunchUrl(pkg.data.tagId) : '',
-    // cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    width: 100,
+    cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
+      return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
+    },
+    minWidth: 150,
   },
   {
     field: 'Description',
@@ -27,7 +23,7 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 350,
+    minWidth: 200,
   },
   {
     field: 'To be cleared by',

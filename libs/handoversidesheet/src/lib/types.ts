@@ -14,6 +14,7 @@ export type HandoverMcpkg = {
   mechanicalCompletionStatus: string | null;
   rfO_Status: string | null;
   rfC_Status: string | null;
+  mechanicalCompletionPackageUrl: string;
 } & HandoverChild;
 
 export type HandoverNCR = {
@@ -29,6 +30,7 @@ export type HandoverPunch = {
   description: string | null;
   clearedBy: string | null;
   sorting: string | null;
+  tagUrl: string;
 } & HandoverChild;
 
 export type HandoverQuery = {

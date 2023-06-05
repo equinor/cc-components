@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 
 export const defaultColDef: ColDef = {
   valueFormatter: (a) => tryFormat(a.value),
+  resizable : true
 };
 
 function tryFormat(value: unknown): string {

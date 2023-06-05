@@ -63,8 +63,8 @@ export const DetailsTab = ({
             <td>{stringCell(commpkg.system)}</td>
           </tr>
           <tr>
-            <td>Comm Pkg Tags</td>
-            <td>{stringCell(commpkg.volume.toString())}</td>
+            <td>Comm Pkg Tags</td> 
+            <td>{stringCell(commpkg.volume ? commpkg.volume.toString() : '0')}</td>
           </tr>
           <tr>
             <td>Remark</td>

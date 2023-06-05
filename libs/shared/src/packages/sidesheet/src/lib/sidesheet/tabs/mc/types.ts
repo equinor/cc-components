@@ -5,4 +5,5 @@ export type McBase = {
   mechanicalCompletionStatus: string | null;
   rfO_Status : string | null;
   rfC_Status : string |null;
+  mechanicalCompletionPackageUrl: string;
 };

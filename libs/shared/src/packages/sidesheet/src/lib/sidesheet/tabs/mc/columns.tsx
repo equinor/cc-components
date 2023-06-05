@@ -13,17 +13,10 @@ export const columns: ColDef<McBase>[] = [
   {
     field: 'MC.Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.mcPkgId) {
-    //     return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
-    //   } else return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<McBase>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    // width: 100,
+    cellRenderer: (props: ICellRendererProps<McBase, string | null>) => {
+      return <LinkCell url={props.data?.mechanicalCompletionPackageUrl} urlText={props.data?.mechanicalCompletionPackageNo} />;
+    },
+    minWidth: 200,
   },
   {
     field: 'Title',
@@ -31,7 +24,7 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 250,
+    minWidth: 200,
   },
   {
     field: 'Status',

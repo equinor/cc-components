@@ -31,7 +31,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       //     return null;
       //   }
       // },
-      width: 130,
+      minWidth: 200,
     },
     {
       field: 'Title',
@@ -39,7 +39,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
       },
-      width: 300,
+      minWidth: 200,
     },
     {
       field: 'Discipline',

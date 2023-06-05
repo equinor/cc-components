@@ -14,6 +14,7 @@ import {
 export default {
   title: 'Sidesheet tabs',
 };
+/*
 
 export const Material = () => (
   <MaterialTab
@@ -146,6 +147,7 @@ export const Punch = () => (
       {
         tagNo: '958',
         tagUrlId: '657',
+        tagUrl:"12345678",
         category: 'Punch status 1',
         description: 'Punch description 1',
         clearedBy: 'Unknown :(',
@@ -154,6 +156,7 @@ export const Punch = () => (
       {
         tagNo: '841',
         tagUrlId: '332',
+        tagUrl:"12345678",
         category: 'Punch status 2',
         description: 'Punch description 2',
         clearedBy: 'Unknown :)',
@@ -250,7 +253,7 @@ export const UnsignedTask = () => (
     ]}
   />
 );
-/*
+
 export const Workorder = () => (
   <WorkorderTab
     error={null}
