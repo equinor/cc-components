@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
-import { WorkOrder } from '@cc-components/workordershared';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import {
@@ -19,6 +23,7 @@ import {
   StyledItemLink,
   useHttpClient,
   useContextId,
+  StatusCircle,
 } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 export const StyledTabListWrapper = styled.div`
@@ -96,8 +101,40 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             // </StyledItemLink>
           }
         />
-        <BannerItem title="Material status" value={'?'} />
-        <BannerItem title="MCCR status" value={'?'} />
+        <BannerItem
+          title="Material status"
+          value={
+            props.item?.materialStatus ? (
+              <StatusCircle
+                statusColor={
+                  props.item?.materialStatus
+                    ? getMatStatusColorByStatus(props.item.materialStatus)
+                    : 'transparent'
+                }
+                content={props.item?.materialStatus || 'N/A'}
+              />
+            ) : (
+              'N/A'
+            )
+          }
+        />
+        <BannerItem
+          title="MC status"
+          value={
+            props.item?.mccrStatus ? (
+              <StatusCircle
+                statusColor={
+                  props.item?.mccrStatus
+                    ? getMccrStatusColorByStatus(props.item.mccrStatus)
+                    : 'transparent'
+                }
+                content={props.item?.mccrStatus || 'N/A'}
+              />
+            ) : (
+              'N/A'
+            )
+          }
+        />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>

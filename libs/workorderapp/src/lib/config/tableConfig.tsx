@@ -9,9 +9,12 @@ import {
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
-import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
 import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
-import { WorkOrder } from '@cc-components/workordershared';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
