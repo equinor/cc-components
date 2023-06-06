@@ -7,16 +7,16 @@ import {
   StyledMonospace,
 } from '@cc-components/shared/table-helpers';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
+import { useHttpClient } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<SoftwareChangeRecord, FilterStateGroup[]> => {
-  const client = useHttpClient('cc-api');
+  const client = useHttpClient();
   const { getRows, colDefs } = useGridDataSource(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/swcr/grid`, req);
     const meta = (await res.json()) as DataResponse<SoftwareChangeRecord>;
@@ -69,11 +69,11 @@ const columnDefinitions: ColDef<SoftwareChangeRecord>[] = [
     colId: 'Title',
     field: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
-    cellRenderer: (
-      props: ICellRendererProps<SoftwareChangeRecord, string | undefined>
-    ) => {
-      return <DescriptionCell description={props?.value} />;
-    },
+    // cellRenderer: (
+    //   props: ICellRendererProps<SoftwareChangeRecord, string | undefined>
+    // ) => {
+    //   return <DescriptionCell description={props?.value} />;
+    // },
     width: 500,
   },
   {
@@ -86,9 +86,9 @@ const columnDefinitions: ColDef<SoftwareChangeRecord>[] = [
     colId: 'System',
     field: 'System',
     valueGetter: (pkg) => pkg.data?.functionalSystem,
-    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord, string>) => {
-      return <StyledMonospace>{props.data?.functionalSystem}</StyledMonospace>;
-    },
+    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord, string>) => (
+      <StyledMonospace>{props.data?.functionalSystem}</StyledMonospace>
+    ),
     enableRowGroup: true,
     width: 150,
   },
@@ -101,86 +101,93 @@ const columnDefinitions: ColDef<SoftwareChangeRecord>[] = [
   },
   {
     field: 'Next sign by',
+    colId: 'NextSignBy',
     valueGetter: (pkg) => pkg.data?.nextToSign,
-    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord>) => {
-      if (!props.data) {
-        return null;
-      } else {
-        const keys = getNextToSignKeys(props.data, '');
-        return (
-          <div
-            style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {keys}
-          </div>
-        );
-      }
-    },
+    // cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord>) => {
+    //   if (!props.data) {
+    //     return null;
+    //   } else {
+    //     const keys = getNextToSignKeys(props.data, '');
+    //     return (
+    //       <div
+    //         style={{
+    //           overflow: 'hidden',
+    //           textOverflow: 'ellipsis',
+    //           whiteSpace: 'nowrap',
+    //         }}
+    //       >
+    //         {keys}
+    //       </div>
+    //     );
+    //   }
+    // },
     width: 400,
   },
   {
     field: 'Next sign role',
+    colId: 'NextSignRole',
     valueGetter: (pkg) => pkg.data?.nextToSignRanking,
-    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord>) => {
-      if (!props.data) {
-        return null;
-      } else {
-        const keys = getNextSignatureRoleKeys(props.data, '');
-        return (
-          <div
-            style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {keys}
-          </div>
-        );
-      }
-    },
+    // cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord>) => {
+    //   if (!props.data) {
+    //     return null;
+    //   } else {
+    //     const keys = getNextSignatureRoleKeys(props.data, '');
+    //     return (
+    //       <div
+    //         style={{
+    //           overflow: 'hidden',
+    //           textOverflow: 'ellipsis',
+    //           whiteSpace: 'nowrap',
+    //         }}
+    //       >
+    //         {keys}
+    //       </div>
+    //     );
+    //   }
+    // },
     width: 300,
   },
   {
     field: 'Supplier',
+    colId: 'Supplier',
     valueGetter: (pkg) => pkg.data?.supplier,
     width: 150,
   },
-  {
-    field: 'Types',
-    // valueGetter: (pkg) => pkg.data?.types,
-    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord>) => {
-      if (!props.data) {
-        return null;
-      } else {
-        const keys = getTypeKeys(props.data, '');
-        return <div>{keys}</div>;
-      }
-    },
-    enableRowGroup: true,
-    width: 150,
-  },
+  // {
+  //   field: 'Types',
+  //   colId: 'Types',
+  //   // valueGetter: (pkg) => pkg.data?.types,
+  //   cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord>) => {
+  //     if (!props.data) {
+  //       return null;
+  //     } else {
+  //       const keys = getTypeKeys(props.data, '');
+  //       return <div>{keys}</div>;
+  //     }
+  //   },
+  //   enableRowGroup: true,
+  //   width: 150,
+  // },
   {
     field: 'Priority',
+    colId: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
     enableRowGroup: true,
     width: 150,
   },
   {
     field: 'Control System',
+    colId: 'ControlSystem',
     valueGetter: (pkg) => pkg.data?.controlSystem,
     width: 200,
   },
   {
     field: 'Node',
+    colId: 'Node',
     valueGetter: (pkg) => pkg.data?.node,
-    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord, string>) => {
-      return <StyledMonospace>{props.data?.node}</StyledMonospace>;
-    },
+    cellRenderer: (props: ICellRendererProps<SoftwareChangeRecord, string>) => (
+      <StyledMonospace>{props.data?.node}</StyledMonospace>
+    ),
     width: 150,
   },
 ];
