@@ -26,6 +26,8 @@ import {
   StatusCircle,
 } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -51,7 +53,11 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
 
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data: wo } = useQuery<WorkOrder>(
+  const {
+    data: wo,
+    error,
+    isLoading: isLoadingSidesheet,
+  } = useQuery<WorkOrder>(
     ['workorder', props.id],
     async () => {
       const res = await client.fetch(
@@ -68,8 +74,12 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
     }
   );
 
-  if (!wo) {
-    throw new Error('Failed to get wo');
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.closeSidesheet} />;
+  }
+
+  if (!wo || error) {
+    return <div>Failed to get Workorder with id: {props.id}</div>;
   }
 
   const {

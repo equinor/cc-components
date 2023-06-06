@@ -23,6 +23,7 @@ import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { useQuery } from '@tanstack/react-query';
 import { useContextId, useHttpClient } from '@cc-components/shared';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -50,7 +51,11 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
 
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data: loop } = useQuery<Loop>(
+  const {
+    data: loop,
+    error,
+    isLoading: isLoadingSidesheet,
+  } = useQuery<Loop>(
     ['loop', props.id],
     async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/loop/${props.id}`);
@@ -60,16 +65,21 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
       return res.json();
     },
     {
-      suspense: true,
-      initialData: props.item,
+      suspense: false,
+      // initialData: props.item,
+      useErrorBoundary: false,
     }
   );
 
-  if (!loop) {
-    throw new Error('Loop undefined');
+  const { data, isLoading } = useGetWorkorders(loop?.loopNo);
+
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.close} />;
   }
 
-  const { data, isLoading } = useGetWorkorders(loop.loopNo);
+  if (!loop || error) {
+    return <div>Failed to get Loop with id: {props.id}</div>;
+  }
 
   const handleChange = (index: number) => {
     setActiveTab(index);

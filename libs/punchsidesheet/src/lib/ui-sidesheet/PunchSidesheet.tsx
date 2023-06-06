@@ -15,6 +15,7 @@ import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
 import { useContextId, useHttpClient } from '@cc-components/shared';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
 type PunchProps = {
   id: string;
@@ -32,7 +33,11 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  const { data: punch } = useQuery(
+  const {
+    data: punch,
+    error,
+    isLoading: isLoadingSidesheet,
+  } = useQuery(
     ['punch', props.id],
     async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/punch/${props.id}`);
@@ -45,8 +50,12 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
     }
   );
 
-  if (!punch) {
-    throw new Error('Failed to fetch punch');
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.close} />;
+  }
+
+  if (!punch || error) {
+    return <div>Failed to get Punch with id: {props.id}</div>;
   }
 
   return (

@@ -3,7 +3,7 @@ import { useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { Workorder } from '../types';
 
-export const useGetWorkorders = (loopNo: string) => {
+export const useGetWorkorders = (loopNo: string | undefined) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
   const { data, isLoading, error } = useQuery<Workorder[], Error>(
@@ -17,7 +17,8 @@ export const useGetWorkorders = (loopNo: string) => {
         throw new Error();
       }
       return respons.json();
-    }
+    },
+    { enabled: !!loopNo }
   );
 
   return {
