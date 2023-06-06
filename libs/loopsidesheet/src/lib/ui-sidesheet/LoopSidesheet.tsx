@@ -53,7 +53,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
   const contextId = useContextId();
   const {
     data: loop,
-    error,
+    error: sidesheetError,
     isLoading: isLoadingSidesheet,
   } = useQuery<Loop>(
     ['loop', props.id],
@@ -71,13 +71,13 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
     }
   );
 
-  const { data, isLoading } = useGetWorkorders(loop?.loopNo);
+  const { data, isLoading, error } = useGetWorkorders(loop?.loopNo);
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;
   }
 
-  if (!loop || error) {
+  if (!loop || sidesheetError) {
     return <div>Failed to get Loop with id: {props.id}</div>;
   }
 
@@ -156,7 +156,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
             <ContentDetails loop={loop} />
           </Tabs.Panel>
           <Tabs.Panel>
-            <WorkorderTab error={null} isFetching={false} workorders={data} />
+            <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
