@@ -36,6 +36,7 @@ export type HandoverPunch = {
 export type HandoverQuery = {
   queryNo: string;
   queryId: string;
+  queryUrl: string;
   title: string | null;
   queryStatus: string | null;
   nextToSign: string | null;
