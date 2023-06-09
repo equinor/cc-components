@@ -31,6 +31,9 @@ Each application will have its own library where every component, util and confi
 # TLDR
 - `pnpm new:app <name>` For generating new applications
 
+# FQA
+- `pnpm build` doesnt work, try `pnpm ci:build`
+
 # Setup
 
 Install Node LTS and use npm for this project. After cloning the repo, install the project's dependencies and required tooling with `npm run install:init`. This will install all the project's dependencies as well as NX and fusion-framework-cli globally.
