@@ -1,6 +1,6 @@
 {
   "name": "loop",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
