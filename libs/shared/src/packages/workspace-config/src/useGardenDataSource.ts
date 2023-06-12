@@ -1,4 +1,4 @@
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenDataSource } from '@equinor/workspace-fusion/garden';
 
 type ApiGardenMeta = {
@@ -24,7 +24,7 @@ type GardenDataSourceArgs = {
 
 export function useGardenDataSource(
   requestBuilders: GardenDataSourceArgs
-): GardenDataSource<FilterStateGroup[]> {
+): GardenDataSource<FilterState> {
   return {
     getBlockAsync: async (args, filters, signal) => {
       const { columnEnd, columnStart, groupingKeys, rowEnd, rowStart } = args;

@@ -3,7 +3,7 @@ import {
   GridConfig,
   IServerSideGetRowsParams,
 } from '@equinor/workspace-fusion/grid';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { useState } from 'react';
 
 type IServerSideRowGetParams = Parameters<GridConfig<unknown, unknown>['getRows']>[0];
@@ -35,7 +35,7 @@ export function useGridDataSource<TData>(
 
   return {
     colDefs,
-    getRows: async (params: IServerSideRowGetParams, filters: FilterStateGroup[]) => {
+    getRows: async (params: IServerSideRowGetParams, filters: FilterState) => {
       const { startRow, endRow, sortModel } = params.request;
       const sortTarget = sortModel.at(0);
 
