@@ -138,7 +138,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
                 'N/A'
           }
         />
-        <BannerItem title="Milestone" value={loop.priority1 || 'N/A'} />
+        <BannerItem title="Priority" value={loop.priority1 || 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
