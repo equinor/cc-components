@@ -8,7 +8,7 @@ import {
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 import {
   WorkOrder,
@@ -19,9 +19,7 @@ import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<WorkOrder, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {
