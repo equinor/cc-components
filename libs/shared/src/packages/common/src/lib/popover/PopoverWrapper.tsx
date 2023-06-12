@@ -1,4 +1,5 @@
-import { Popover } from '@equinor/eds-core-react';
+import { Icon, Popover, Typography } from '@equinor/eds-core-react';
+import { tokens } from '@equinor/eds-tokens';
 import {
   MutableRefObject,
   PropsWithChildren,
@@ -23,6 +24,7 @@ type PopoverWrapperProps = {
   width: number;
   popoverTitle: string;
   parentRef: MutableRefObject<HTMLDivElement | null>;
+  close: VoidFunction;
 };
 
 /**
@@ -37,6 +39,7 @@ export const PopoverWrapper = ({
   parentRef,
   popoverTitle,
   children,
+  close,
 }: PropsWithChildren<PopoverWrapperProps>): JSX.Element | null => {
   const [placement, setPlacement] = useState<{ x: number; y: number }>({
     y: 30,
@@ -75,7 +78,22 @@ export const PopoverWrapper = ({
       }}
     >
       <StyledPopover open={isOpen} ref={ref}>
-        <Popover.Title>{popoverTitle}</Popover.Title>
+        <Popover.Title
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            margin: '0px 14px',
+          }}
+        >
+          <Typography as={'h2'}>{popoverTitle}</Typography>
+          <Icon
+            name="close"
+            onClick={() => close()}
+            color={tokens.colors.interactive.primary__resting.hex}
+          />
+        </Popover.Title>
+
         <Popover.Content>{children}</Popover.Content>
       </StyledPopover>
     </div>,
