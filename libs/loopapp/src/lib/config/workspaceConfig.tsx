@@ -41,7 +41,6 @@ export const WorkspaceWrapper = () => {
     <Workspace
       key={contextId}
       workspaceOptions={{
-        appKey: 'Loop',
         getIdentifier: (item) => item.checklistId,
         defaultTab: 'grid',
       }}

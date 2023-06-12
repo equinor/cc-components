@@ -43,7 +43,6 @@ export const WorkspaceWrapper = () => {
       <Workspace
         key={contextId}
         workspaceOptions={{
-          appKey: 'Workorder',
           getIdentifier: (item) => item.workOrderId,
           defaultTab: 'grid',
         }}

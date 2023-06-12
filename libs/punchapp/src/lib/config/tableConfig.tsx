@@ -13,13 +13,11 @@ import {
   defaultGridOptions,
   DataResponse,
 } from '@cc-components/shared/workspace-config';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<Punch, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState> => {
   const client = useHttpClient('cc-api');
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {

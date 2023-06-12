@@ -43,7 +43,6 @@ export const WorkspaceWrapper = () => {
     <Workspace
       key={contextId}
       workspaceOptions={{
-        appKey: 'Loop',
         getIdentifier: (item) => item.punchItemNo,
         defaultTab: 'grid',
       }}

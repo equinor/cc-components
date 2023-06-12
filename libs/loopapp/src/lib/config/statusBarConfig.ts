@@ -2,7 +2,7 @@ import { Loop } from '@cc-components/loopshared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const useStatusBarConfig = (contextId: string): StatusBarConfig<Loop[]> => {
+export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
   const client = useHttpClient('cc-api');
 
   return async (filters, signal) => {
