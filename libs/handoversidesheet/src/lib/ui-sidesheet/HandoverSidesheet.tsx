@@ -190,6 +190,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
+                  workOrderUrl: '',
                   workOrderNo: workorder.workOrderNumber,
                   actualCompletionDate: '',
                   discipline: '',
