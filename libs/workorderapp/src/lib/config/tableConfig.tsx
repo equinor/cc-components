@@ -84,7 +84,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'MilestoneCode',
     field: 'Milestone',
-    valueGetter: (pkg) => pkg.data?.milestone,
+    valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
     colId: 'JobStatus',
