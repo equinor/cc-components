@@ -1,3 +1,4 @@
+import { StyledMonospace } from './Monospace';
 import { StyledLink } from './cell.styles';
 
 type LinkCellProps = {
@@ -14,8 +15,10 @@ export const LinkCell = ({
   tooltipText = 'Open in ProCoSys',
 }: LinkCellProps): JSX.Element => {
   return (
-    <StyledLink href={url} target={'_blank'} rel="noreferrer" title={tooltipText}>
-      {urlText}
-    </StyledLink>
+    <StyledMonospace>
+      <StyledLink href={url} target={'_blank'} rel="noreferrer" title={tooltipText}>
+        {urlText}
+      </StyledLink>
+    </StyledMonospace>
   );
 };
