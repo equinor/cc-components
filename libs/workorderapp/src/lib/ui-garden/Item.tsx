@@ -57,11 +57,11 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
           textColor={textColor}
           background={progressBar}
           ref={anchorRef}
-          onMouseEnter={() => {
+          onMouseOver={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
             setHoverTimeout(setTimeout(() => setIsOpen(true), 1000));
           }}
-          onMouseLeave={() => {
+          onMouseOut={() => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
@@ -83,6 +83,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
       </StyledRoot>
       {isOpen && (
         <PopoverWrapper
+          close={() => setIsOpen(false)}
           popoverTitle={`Wo.Number: ${data.workOrderNumber}`}
           width={itemWidth}
           columnStart={columnStart}
