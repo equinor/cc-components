@@ -11,6 +11,7 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
+  WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
@@ -134,7 +135,21 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
             <WorkorderTab
               error={workOrderError}
               isFetching={isFetchingWorkOrders}
-              workorders={workOrders}
+              workorders={(workOrders ?? []).map(
+                (workorder): WorkorderBase => ({
+                  ...workorder,
+                  workOrderUrl: '',
+                  workOrderNo: workorder.workOrderNo,
+                  actualCompletionDate: '',
+                  discipline: '',
+                  estimatedManHours: null,
+                  jobStatus: '',
+                  remainingManHours: null,
+                  title: workorder.title,
+                  workOrderId: workorder.workOrderId,
+                  projectProgress: null,
+                })
+              )}
             />
           </Tabs.Panel>
           <Tabs.Panel>

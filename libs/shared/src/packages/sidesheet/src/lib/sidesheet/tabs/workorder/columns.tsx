@@ -16,20 +16,14 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     {
       field: 'WO',
       valueGetter: (pkg) => pkg.data?.workOrderNo,
-      // valueFormatter: (pkg) => {
-      //   if (pkg.data?.workOrderId) {
-      //     return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId);
-      //   } else {
-      //     return '';
-      //   }
-      // },
-      // cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-      //   if (props.valueFormatted) {
-      //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      //   } else {
-      //     return null;
-      //   }
-      // },
+      cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
+        if (!props.data?.workOrderUrl) {
+          return <div>{props.data?.workOrderNo}</div>;
+        }
+        return (
+          <LinkCell url={props.data?.workOrderUrl} urlText={props.data.workOrderNo} />
+        );
+      },
       width: 130,
     },
     {
