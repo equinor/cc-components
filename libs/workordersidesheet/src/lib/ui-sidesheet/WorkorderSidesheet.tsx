@@ -24,6 +24,7 @@ import {
   useHttpClient,
   useContextId,
   StatusCircle,
+  LinkCell,
 } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
@@ -102,13 +103,11 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="WO"
           value={
-            wo.workOrderNumber ?? 'N/A'
-            // <StyledItemLink
-            //   href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
-            //   target="_blank"
-            // >
-            //   {props?.item?.workOrderNumber}
-            // </StyledItemLink>
+            wo.workorderUrl ? (
+              <LinkCell url={wo.workorderUrl} urlText={wo.workOrderNumber} />
+            ) : (
+              wo.workOrderNumber
+            )
           }
         />
         <BannerItem
@@ -165,6 +164,7 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
           </Tabs.Panel>
           <Tabs.Panel>
             <MccrTab
+              //tror det må mappes slik som på handover og mc
               mccr={mccr}
               isFetching={isFetchingMccr}
               error={mccrError as Error | null}

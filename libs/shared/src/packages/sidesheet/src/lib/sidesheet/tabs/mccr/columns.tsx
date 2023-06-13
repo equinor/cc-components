@@ -1,9 +1,13 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { MccrBase } from './types';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
-import { StatusCell } from '../../../../../../table-helpers/src/lib/table/cells/StatusCell';
 import { statusColorMap } from '../../../../../../mapping';
 import { BaseStatus } from '../../../../../../types';
+import {
+  LinkCell,
+  StyledMonospace,
+  StatusCell,
+} from '../../../../../../table-helpers/src/lib/table/cells';
 
 export const columns: ColDef<MccrBase>[] = [
   {
@@ -11,15 +15,13 @@ export const columns: ColDef<MccrBase>[] = [
     headerName: 'TagNo',
     minWidth: 90,
     valueGetter: (pkg) => pkg.data?.tagNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.tagId ? proCoSysUrls.getTagUrl(pkg.data.tagId) : '',
-    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-    //   if (!props.valueFormatted) {
-    //     return null;
-    //   } else {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    // },
+    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+      if (!props.data?.tagUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      } else {
+        return <LinkCell url={props.data?.tagUrl} urlText={props.value ?? ''} />;
+      }
+    },
   },
   {
     field: 'Description',
@@ -64,29 +66,35 @@ export const columns: ColDef<MccrBase>[] = [
     valueGetter: (pkg) => pkg.data?.mccrResponsible,
   },
   {
-    field: 'McpkgNo.',
+    field: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mcpkgNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
-    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-    //   if (!props.valueFormatted) {
-    //     return null;
-    //   } else {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    // },
+    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+      if (!props.data?.mechanicalCompletionPackageUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      } else {
+        return (
+          <LinkCell
+            url={props.data?.mechanicalCompletionPackageUrl}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+    },
   },
   {
-    field: 'Comm pkg.',
+    field: 'Comm Pkg.',
     valueGetter: (pkg) => pkg.data?.commpkgNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.commpkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commpkgId) : '',
-    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-    //   if (!props.valueFormatted) {
-    //     return null;
-    //   } else {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    // },
+    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+      if (!props.data?.commissioningPackageUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      } else {
+        return (
+          <LinkCell
+            url={props.data?.commissioningPackageUrl}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+    },
   },
 ];
