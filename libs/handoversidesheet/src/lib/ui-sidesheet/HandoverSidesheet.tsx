@@ -16,6 +16,7 @@ import {
   TabTitle,
   UnsignedActionTab,
   UnsignedTaskTab,
+  WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 
@@ -25,7 +26,7 @@ import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
-import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
+
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
