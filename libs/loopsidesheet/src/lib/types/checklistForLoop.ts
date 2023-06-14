@@ -1,5 +1,5 @@
 export type ChecklistForLoop = {
-  checklistID: string;
+  checklistId: string;
   checklistUrlId: string;
   commissioningPackageId: string | null;
   commissioningPackageNo: string | null;
@@ -7,6 +7,7 @@ export type ChecklistForLoop = {
   facility: string;
   formularGroup: string | null;
   formularType: string | null;
+  loopId: string;
   mechanicalCompletionPackageId: string | null;
   mechanicalCompletionPackageNo: string | null;
   mechanicalCompletionPackageUrlId: string | null;
@@ -14,5 +15,4 @@ export type ChecklistForLoop = {
   project: string | null;
   responsible: string | null;
   status: string | null;
-  loopId: string;
 };

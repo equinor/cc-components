@@ -275,6 +275,7 @@ export const Workorder = () => (
         title: 'Workorder title 1',
         workOrderId: '950',
         workOrderNo: '590',
+        workOrderUrl: '',
       },
       {
         actualCompletionDate: 'Not sure',
@@ -288,6 +289,7 @@ export const Workorder = () => (
         title: 'Workorder title 2',
         workOrderId: '734',
         workOrderNo: '970',
+        workOrderUrl: '',
       },
     ]}
   />
