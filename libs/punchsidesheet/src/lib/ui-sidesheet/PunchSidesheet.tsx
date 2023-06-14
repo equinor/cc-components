@@ -42,7 +42,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
     async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/punch/${props.id}`);
       if (!res.ok) throw res;
-      return res.json();
+      return res.json() as Promise<Punch>;
     },
     {
       suspense: true,
@@ -69,47 +69,48 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Form type"
           value={
-            !props.item?.formTypeUrl || !props.item?.formularType ? (
+            !punch.formTypeUrl || !punch.formularType ? (
               ''
             ) : (
-              <LinkCell
-                url={props.item?.formTypeUrl}
-                urlText={props.item?.formularType}
-              />
+              <LinkCell url={punch.formTypeUrl} urlText={punch.formularType} />
             )
-            // punch.formularType ?? ''
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
-            // >
-            //   {props.item?.formularType}
-            // </StyledItemLink>
           }
         />
         <BannerItem
           title="Tag"
           value={
-            punch.tagNo ?? 'N/A'
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
-            // >
-            //   {props.item?.tagNo}
-            // </StyledItemLink>
+            !punch.tagUrl || !punch.tagNo ? (
+              ''
+            ) : (
+              <LinkCell url={punch.tagUrl} urlText={punch.tagNo} />
+            )
           }
         />
         <BannerItem
-          title="Commpkg"
+          title="Comm Pkg"
           value={
-            punch.commissioningPackageNo ?? 'N/A'
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getCommPkgUrl(
-            //     props.item?.commissioningPackageUrlId || ''
-            //   )}
-            // >
-            //   {props.item?.commissioningPackageNo}
-            // </StyledItemLink>
+            !punch.commissioningPackageUrl || !punch.commissioningPackageNo ? (
+              ''
+            ) : (
+              <LinkCell
+                url={punch.commissioningPackageUrl}
+                urlText={punch.commissioningPackageNo}
+              />
+            )
+          }
+        />
+        <BannerItem
+          title="MC Pkg"
+          value={
+            !punch.mechanicalCompletionPackageUrl ||
+            !punch.mechanicalCompletionPackageNo ? (
+              ''
+            ) : (
+              <LinkCell
+                url={punch.mechanicalCompletionPackageUrl}
+                urlText={punch.mechanicalCompletionPackageNo}
+              />
+            )
           }
         />
       </StyledBanner>
