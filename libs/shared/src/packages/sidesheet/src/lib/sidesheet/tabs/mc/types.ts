@@ -11,4 +11,5 @@ export type McBase = {
   rfccIsShipped: boolean | null;
   rfccIsAccepted: boolean | null;
   rfccIsRejected: boolean | null;
+  url: string;
 };

@@ -11,14 +11,13 @@ export const columns: ColDef<PunchBase>[] = [
   {
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.tagId ? proCoSysUrls.getPunchUrl(pkg.data.tagId) : '',
-    // cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    width: 100,
+    cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
+      if (props.data) {
+        return <LinkCell url={props.data.url} urlText={props.value} />;
+      } else return null;
+    },
+    minWidth: 100,
+    flex: 2,
   },
   {
     field: 'Description',
@@ -26,12 +25,14 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 350,
+    minWidth: 100,
+    flex: 2,
   },
   {
     field: 'To be cleared by',
     valueGetter: (pkg) => pkg.data?.toBeClearedBy,
-    width: 250,
+    minWidth: 50,
+    flex: 1,
   },
   {
     field: 'Status',
@@ -52,9 +53,13 @@ export const columns: ColDef<PunchBase>[] = [
         />
       );
     },
+    minWidth: 50,
+    flex: 1,
   },
   {
     field: 'Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
+    minWidth: 50,
+    flex: 1,
   },
 ];

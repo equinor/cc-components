@@ -212,7 +212,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   {
     colId: 'MaterialRequired',
     field: 'Material required',
-    valueGetter: (pkg) => pkg.data?.materialRequired,
+    valueGetter: (pkg) => (pkg.data?.materialRequired ? 'Yes' : 'No'),
   },
   {
     colId: 'MaterialEstimate',

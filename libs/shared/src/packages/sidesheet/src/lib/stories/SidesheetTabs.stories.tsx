@@ -70,6 +70,7 @@ export const Mc = () => (
         rfccIsShipped: true,
         rfccIsAccepted: true,
         rfccIsRejected: false,
+        url: '',
       },
       {
         mcPkgNo: '262',
@@ -84,6 +85,7 @@ export const Mc = () => (
         rfccIsShipped: true,
         rfccIsAccepted: true,
         rfccIsRejected: false,
+        url: '',
       },
     ]}
   />
@@ -165,11 +167,13 @@ export const Ncr = () => (
         documentId: '1',
         documentNumber: '123',
         title: 'One NCR',
+        url: '',
       },
       {
         documentId: '2',
         documentNumber: '321',
         title: 'Two NCR',
+        url: '',
       },
     ]}
   />
@@ -187,6 +191,7 @@ export const Punch = () => (
         description: 'Punch description 1',
         toBeClearedBy: 'Unknown :(',
         sorting: 'Up and down',
+        url: '',
       },
       {
         tagNumber: '841',
@@ -195,6 +200,7 @@ export const Punch = () => (
         description: 'Punch description 2',
         toBeClearedBy: 'Unknown :)',
         sorting: 'Down and up',
+        url: '',
       },
     ]}
   />
@@ -212,6 +218,7 @@ export const Query = () => (
         status: ' Query status 1',
         nextToSign: 'Next to sign 1',
         type: 'Query type 1',
+        url: '',
       },
       {
         queryNumber: '35',
@@ -220,6 +227,7 @@ export const Query = () => (
         status: ' Query status 2',
         nextToSign: 'Next to sign 2',
         type: 'Query type 2',
+        url: '',
       },
     ]}
   />
@@ -236,6 +244,7 @@ export const Swcr = () => (
         status: 'Swcr status 1',
         description: 'Swcr description 1',
         priority: 'Swcr priority 1',
+        url: '',
       },
       {
         swcrNumber: '366',
@@ -243,6 +252,7 @@ export const Swcr = () => (
         status: 'Swcr status 2',
         description: 'Swcr description 2',
         priority: 'Swcr priority 2',
+        url: '',
       },
     ]}
   />
@@ -258,12 +268,14 @@ export const UnsignedAction = () => (
         actionId: '168',
         title: 'Unsigned action title 1',
         description: 'Unsigned action description 1',
+        url: '',
       },
       {
         actionNumber: '639',
         actionId: '968',
         title: 'Unsigned action title 2',
         description: 'Unsigned action description 2',
+        url: '',
       },
     ]}
   />
@@ -278,11 +290,13 @@ export const UnsignedTask = () => (
         taskNumber: '742',
         taskId: '198',
         title: 'Unsigned task title 1',
+        url: '',
       },
       {
         taskNumber: '742',
         taskId: '198',
         title: 'Unsigned task title 2',
+        url: '',
       },
     ]}
   />
