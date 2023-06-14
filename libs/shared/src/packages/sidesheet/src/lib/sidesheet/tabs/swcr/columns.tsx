@@ -13,12 +13,14 @@ export const columns: ColDef<SwcrBase>[] = [
     //     return proCoSysUrls.getSwcrUrl(pkg.data.swcrId);
     //   } else return '';
     // },
-    // cellRenderer: (props: ICellRendererProps<SwcrBase>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    width: 80,
+    headerName: '#',
+    cellRenderer: (props: ICellRendererProps<SwcrBase>) => {
+      if (props.data) {
+        return <LinkCell url={props.data.url} urlText={props.value} />;
+      } else return null;
+    },
+    flex: 1,
+    minWidth: 50,
   },
   {
     field: 'Description',
@@ -26,16 +28,19 @@ export const columns: ColDef<SwcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 500,
+    flex: 1,
+    minWidth: 50,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    width: 150,
+    flex: 1,
+    minWidth: 50,
   },
   {
     field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
-    width: 180,
+    flex: 1,
+    minWidth: 50,
   },
 ];

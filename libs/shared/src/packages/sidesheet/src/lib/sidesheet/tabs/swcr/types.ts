@@ -4,4 +4,5 @@ export type SwcrBase = {
   status: string | null;
   description: string | null;
   priority: string | null;
+  url: string;
 };

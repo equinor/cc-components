@@ -138,16 +138,16 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
               workorders={(workOrders ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
-                  workOrderUrl: '',
-                  workOrderNo: workorder.workOrderNo,
+                  workOrderUrl: workorder.url,
+                  workOrderNo: workorder.workOrderNumber,
                   actualCompletionDate: '',
                   discipline: '',
                   estimatedManHours: null,
                   jobStatus: '',
                   remainingManHours: null,
-                  title: workorder.title,
+                  title: workorder.description,
                   workOrderId: workorder.workOrderId,
-                  projectProgress: null,
+                  projectProgress: workorder.projectProgress,
                 })
               )}
             />
