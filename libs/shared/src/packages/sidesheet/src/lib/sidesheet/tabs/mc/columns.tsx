@@ -12,17 +12,13 @@ export const columns: ColDef<McBase>[] = [
   {
     field: 'MC.Pkg',
     valueGetter: (pkg) => pkg.data?.mcPkgNo,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.mcPkgId) {
-    //     return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
-    //   } else return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<McBase>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    // width: 100,
+    cellRenderer: (props: ICellRendererProps<McBase>) => {
+      if (props.data) {
+        return <LinkCell url={props.data.url} urlText={props.value} />;
+      } else return null;
+    },
+    minWidth: 100,
+    flex: 2,
   },
   {
     field: 'Title',
@@ -30,12 +26,14 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 250,
+    minWidth: 100,
+    flex: 2,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.mcStatus,
-    width: 150,
+    minWidth: 100,
+    flex: 1,
   },
   {
     field: 'RFCC',
@@ -50,7 +48,8 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    width: 150,
+    minWidth: 100,
+    flex: 1,
   },
   {
     field: 'RFOC',
@@ -63,6 +62,7 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    width: 150,
+    minWidth: 100,
+    flex: 1,
   },
 ];
