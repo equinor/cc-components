@@ -164,7 +164,6 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
           </Tabs.Panel>
           <Tabs.Panel>
             <MccrTab
-              //tror det må mappes slik som på handover og mc
               mccr={mccr}
               isFetching={isFetchingMccr}
               error={mccrError as Error | null}
