@@ -5,4 +5,5 @@ export type PunchBase = {
   description: string | null;
   toBeClearedBy: string | null;
   sorting: string | null;
+  url: string;
 };
