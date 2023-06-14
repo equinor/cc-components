@@ -14,7 +14,7 @@ import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
 type PunchProps = {
@@ -69,7 +69,15 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Form type"
           value={
-            punch.formularType ?? ''
+            !props.item?.formTypeUrl || !props.item?.formularType ? (
+              ''
+            ) : (
+              <LinkCell
+                url={props.item?.formTypeUrl}
+                urlText={props.item?.formularType}
+              />
+            )
+            // punch.formularType ?? ''
             // <StyledItemLink
             //   target="_blank"
             //   href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
