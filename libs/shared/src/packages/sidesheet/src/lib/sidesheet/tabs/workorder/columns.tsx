@@ -17,20 +17,9 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     {
       field: 'WO',
       valueGetter: (pkg) => pkg.data?.workOrderNumber,
-      // valueFormatter: (pkg) => {
-      //   if (pkg.data?.workOrderId) {
-      //     return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId);
-      //   } else {
-      //     return '';
-      //   }
-      // },
-      // cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-      //   if (props.valueFormatted) {
-      //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      //   } else {
-      //     return null;
-      //   }
-      // },
+      cellRenderer: (props: ICellRendererProps<WorkorderBase, string | null>) => {
+        return <LinkCell url={props.data?.workorderUrl} urlText={props.data?.workOrderNumber} />;
+      },
       minWidth: 200,
     },
     {

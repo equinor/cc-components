@@ -44,8 +44,9 @@ export type HandoverQuery = {
 } & HandoverChild;
 
 export type HandoverSWCR = {
-  swcrNumber: string;
-  swcrId: string;
+  softwareChangeRecordNo: string;
+  softwareChangeRecordId: string;
+  softwareChangeRecordUrl: string;
   status: string;
   description: string;
   priority: string;
@@ -74,6 +75,7 @@ export type HandoverWorkOrder = {
   projectProgress: number | null;
   remainingHours: number | null;
   description: string | null;
+  workOrderUrl : string;
   workOrderUrlId: string;
   workOrderNumber: string;
 } & HandoverChild;

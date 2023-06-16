@@ -8,18 +8,11 @@ import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/c
 export const columns: ColDef<SwcrBase>[] = [
   {
     field: '#',
-    valueGetter: (pkg) => pkg.data?.swcrNumber,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.swcrId) {
-    //     return proCoSysUrls.getSwcrUrl(pkg.data.swcrId);
-    //   } else return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<SwcrBase>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    width: 80,
+    valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
+    cellRenderer: (props: ICellRendererProps<SwcrBase, string | null>) => {
+      return <LinkCell url={props.data?.softwareChangeRecordUrl} urlText={props.data?.softwareChangeRecordNo} />;
+    },
+    minWidth: 80,
   },
   {
     field: 'Description',
@@ -27,16 +20,16 @@ export const columns: ColDef<SwcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 500,
+    minWidth: 300,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
-    width: 180,
+    minWidth: 180,
   },
 ];

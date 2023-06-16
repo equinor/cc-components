@@ -82,7 +82,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: swcrPackages,
     dataIsFetching: isDataFetchingSwcr,
     error: swcrError,
-  } = useHandoverResource(props.id, 'swcr');
+  } = useHandoverResource(props.item.commissioningPackageUrlId, 'swcr');
 
   const {
     data: queryPackages,
@@ -198,7 +198,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
                   jobStatus: workorder.jobStatus,
                   remainingHours: workorder.remainingHours,
                   title: workorder.description,
-                  workOrderUrlId: workorder.commpkgId,
+                  workorderUrl: workorder.commpkgId,
                   projectProgress: workorder.projectProgress,
                 })
               )}
