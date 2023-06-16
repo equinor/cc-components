@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { StatusCircle } from '@cc-components/shared/common';
+import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   BannerItem,
@@ -16,6 +16,7 @@ import {
   TabTitle,
   UnsignedActionTab,
   UnsignedTaskTab,
+  WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 
@@ -25,7 +26,7 @@ import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
-import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
+
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
@@ -127,13 +128,9 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
         <BannerItem
           title="Commpkg"
           value={
-            props.item?.commpkgNo ? props.item.commpkgNo : 'N/A'
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getCommPkgUrl(props?.item?.id || '')}
-            // >
-            //   {props?.item?.commpkgNo}
-            // </StyledItemLink>
+            <StyledItemLink target="_blank" href={props?.item?.url}>
+              {props.item?.commpkgNo ? props.item.commpkgNo : 'N/A'}
+            </StyledItemLink>
           }
         />
       </StyledBanner>
@@ -145,8 +142,11 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               McPackages <TabTitle data={mcPackages} isLoading={isDataFetchingMc} />{' '}
             </Tabs.Tab>
             <Tabs.Tab>
-              Work Orders{' '}
-              <TabTitle data={workOrderPackages} isLoading={isDataFetchingWorkOrder} />{' '}
+              Work Orders
+              <TabTitle
+                data={workOrderPackages}
+                isLoading={isDataFetchingWorkOrder}
+              />{' '}
             </Tabs.Tab>
             <Tabs.Tab>
               Unsigned Tasks{' '}
@@ -190,6 +190,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
+                  workOrderUrl: workorder.url,
                   workOrderNo: workorder.workOrderNumber,
                   actualCompletionDate: '',
                   discipline: '',

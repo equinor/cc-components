@@ -5,4 +5,5 @@ export type McPunchItem = {
   status: string | null;
   toBeClearedBy: string | null;
   sorting: string | null;
+  url: string;
 };

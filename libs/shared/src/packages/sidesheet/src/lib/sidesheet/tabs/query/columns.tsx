@@ -8,13 +8,11 @@ export const columns: ColDef<QueryBase>[] = [
   {
     field: 'Document No.',
     valueGetter: (pkg) => pkg.data?.queryNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.queryId ? proCoSysUrls.getDocumentUrl(pkg.data.queryId) : '',
-    // cellRenderer: (props: ICellRendererProps<QueryBase, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
+    cellRenderer: (props: ICellRendererProps<QueryBase, string>) => {
+      if (props.data) {
+        return <LinkCell url={props.data.url} urlText={props.value} />;
+      } else return null;
+    },
     width: 180,
   },
   {
