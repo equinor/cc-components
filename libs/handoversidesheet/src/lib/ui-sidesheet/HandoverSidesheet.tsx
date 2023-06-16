@@ -1,6 +1,7 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+
 import {
   BannerItem,
   McTab,
@@ -19,19 +20,26 @@ import {
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 
-import { Tabs } from '@equinor/eds-core-react';
+import { CircularProgress, Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
+import {useQuery} from '@tanstack/react-query'
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useContextId } from '@cc-components/shared';
+
+
 type HandoverProps = {
   id: string;
-  item: HandoverPackage;
+  item?: HandoverPackage;
   close: () => void;
 };
-export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => {
+export const HandoverSidesheet = createWidget<HandoverProps>(({frame, props}) => <EnsureHandover {...props} />);
+
+const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   const [activeTab, setActiveTab] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
@@ -43,7 +51,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: mcPackages,
     dataIsFetching: isDataFetchingMc,
     error: mcError,
-  } = useHandoverResource(props.item.commissioningPackageUrlId, 'mcpkg');
+  } = useHandoverResource(props.id, 'mcpkg');
 
   const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
     useHandoverResource(props.id, 'details');
@@ -58,7 +66,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: workOrderPackages,
     dataIsFetching: isDataFetchingWorkOrder,
     error: woError,
-  } = useHandoverResource(props.item.commissioningPackageUrlId, 'work-orders');
+  } = useHandoverResource(props.id, 'work-orders');
 
   const {
     data: unsignedTasks,
@@ -76,19 +84,19 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     data: punchPackages,
     dataIsFetching: isDataFetchingPunch,
     error: punchError,
-  } = useHandoverResource(props.item.commissioningPackageUrlId, 'punch');
+  } = useHandoverResource(props.id, 'punch');
 
   const {
     data: swcrPackages,
     dataIsFetching: isDataFetchingSwcr,
     error: swcrError,
-  } = useHandoverResource(props.item.commissioningPackageUrlId, 'swcr');
+  } = useHandoverResource(props.id, 'swcr');
 
   const {
     data: queryPackages,
     dataIsFetching: isDataFetchingQuery,
     error: queryError,
-  } = useHandoverResource(props.item.commissioningPackageUrlId, 'query');
+  } = useHandoverResource(props.id, 'query');
 
   return (
     <StyledSideSheetContainer>
@@ -248,6 +256,32 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
+}
 
 export default HandoverSidesheet.render;
+
+function EnsureHandover({id, close, item}: HandoverProps){
+  const client = useHttpClient("cc-app");
+  const contextId = useContextId();
+  const {isLoading, data, error} = useQuery(["handover", id], async () => {
+    const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
+    if(!res.ok){
+      throw new Error(`Failed to get handover with id ${id}`)
+    }
+    return res.json() as Promise<HandoverPackage>;
+  }, {refetchOnWindowFocus: false});
+
+
+  if(isLoading){
+    return <div style={{display: "flex", height: "100%", width: "100%"}}><CircularProgress  size={48} /></div>
+  }
+
+
+  if(error || !data){
+    return <div>Something went wrong..</div>
+  }
+
+
+  return <HandoverSidesheetComponent id={id} item={data} close={close}></HandoverSidesheetComponent>
+
+}

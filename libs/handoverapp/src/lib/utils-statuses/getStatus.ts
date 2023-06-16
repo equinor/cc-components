@@ -3,7 +3,7 @@ import { PackageStatus } from '@cc-components/shared/types';
 
 export const getStatus = (item: HandoverPackage): PackageStatus => {
   if (
-    item.mechanicalCompletionPkgsRfccSignedCount > 0 &&
+    item.mechanicalCompletionPkgsRfocSignedCount > 0 &&
     item.mechanicalCompletionPkgsCount > 0 &&
     item.mechanicalCompletionPkgsRfocSignedCount === item.mechanicalCompletionPkgsCount
   )
@@ -25,8 +25,8 @@ export const getStatus = (item: HandoverPackage): PackageStatus => {
   if (item.isTacShipped) return 'TAC Rejected';
 
   if (
-    item.mechanicalCompletionPkgsRfccSignedCount &&
-    item.mechanicalCompletionPkgsCount &&
+    item.mechanicalCompletionPkgsRfccSignedCount > 0 &&
+    item.mechanicalCompletionPkgsCount > 0 &&
     item.mechanicalCompletionPkgsRfccSignedCount === item.mechanicalCompletionPkgsCount
   )
     return 'RFCC Accepted';

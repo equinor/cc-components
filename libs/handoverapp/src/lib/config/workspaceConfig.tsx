@@ -53,7 +53,7 @@ export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
       key={contextId}
       workspaceOptions={{
         appKey: 'Handover',
-        getIdentifier: (item) => item.commissioningPackageId,
+        getIdentifier: (item) => item.commissioningPackageUrlId,
         defaultTab: 'garden',
       }}
       powerBiOptions={pbi}
