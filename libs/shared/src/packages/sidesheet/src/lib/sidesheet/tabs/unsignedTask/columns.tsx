@@ -8,23 +8,23 @@ import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/c
 export const columns: ColDef<UnsignedTaskBase>[] = [
   {
     field: '#',
-    valueGetter: (pkg) => pkg.data?.taskNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.taskId ? proCoSysUrls.getFormTypeUrl(pkg.data.taskId) : '',
-    // cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
+    valueGetter: (pkg) => pkg.data?.taskId,
+    cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
+      return (
+        <LinkCell
+          url={props.data?.unsignedTaskUrl}
+          urlText={props.data?.taskId}
+        />
+      );
+    },
+    minWidth: 80,
   },
   {
     field: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
-    cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
-      return <DescriptionCell description={props.value} displayFullText />;
-    },
-    autoHeight: true,
-    wrapText: true,
-    width: 400,
+    cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => (
+      <DescriptionCell description={props.value} />
+    ),
+    minWidth: 300,
   },
 ];

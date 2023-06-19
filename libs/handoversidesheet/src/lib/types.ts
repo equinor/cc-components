@@ -60,9 +60,11 @@ export type HandoverUnsignedAction = {
 } & HandoverChild;
 
 export type HandoverUnsignedTask = {
-  taskNumber: string;
   taskId: string;
-  title: string;
+  title: string | null;
+  description: string;
+  unsignedTaskUrl: string;
+  commissioningPackageUrl: string;
 } & HandoverChild;
 
 export type HandoverWorkOrder = {
