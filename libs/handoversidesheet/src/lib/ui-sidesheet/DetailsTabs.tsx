@@ -7,30 +7,31 @@ import {
 import { formatDateString } from '@cc-components/shared/utils-dates';
 
 import { useMemo } from 'react';
+
 type HandoverDetails = {
   nextToSign: string;
 };
+
 type DetailsTabProps = {
   commpkg: HandoverPackage;
-  nextToSign: HandoverDetails[] | undefined;
-  dataIsFetching: boolean;
+  // nextToSign: HandoverDetails[] | undefined;
+  // dataIsFetching: boolean;
 };
 
-export const DetailsTab = ({
-  commpkg,
-  nextToSign,
-  dataIsFetching,
-}: DetailsTabProps): JSX.Element => {
-  const NextToSign = useMemo(() => {
-    if (dataIsFetching) return <>Loading...</>;
+export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
 
-    return nextToSign?.length ? <div>{nextToSign[0].nextToSign}</div> : '';
-  }, [nextToSign, dataIsFetching]);
-  /* TODO
-     <td>Comm Pkg Discipline</td>
-            <td>{"TBA"}</td>
-          </tr>
-          */
+  // export const DetailsTab = ({
+  //   commpkg,
+  //   nextToSign,
+  //   dataIsFetching,
+  // }: DetailsTabProps): JSX.Element => {
+    
+  //   const NextToSign = useMemo(() => {
+  //     if (dataIsFetching) return <>Loading...</>;
+  
+  //     return nextToSign?.length ? <div>{nextToSign[0].nextToSign}</div> : '';
+  //   }, [nextToSign, dataIsFetching]);
+
   return (
     <StyledTabContent>
       <h3>Details</h3>
@@ -87,10 +88,10 @@ export const DetailsTab = ({
             <td>{stringCell(`${commpkg.progress || 0}%`)}</td>
           </tr>
 
-          <tr>
+          {/* <tr>
             <td>Next to sign</td>
             <td>{NextToSign}</td>
-          </tr>
+          </tr> */}
         </tbody>
       </StyledTable>
 

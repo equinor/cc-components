@@ -27,17 +27,18 @@ import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
-import {useQuery} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useContextId } from '@cc-components/shared';
-
 
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
   close: () => void;
 };
-export const HandoverSidesheet = createWidget<HandoverProps>(({frame, props}) => <EnsureHandover {...props} />);
+export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => (
+  <EnsureHandover {...props} />
+));
 
 const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -52,15 +53,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     dataIsFetching: isDataFetchingMc,
     error: mcError,
   } = useHandoverResource(props.id, 'mcpkg');
-
-  const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
-    useHandoverResource(props.id, 'details');
-
-  const {
-    data: ncrPackages,
-    dataIsFetching: isDataFetchingNcr,
-    error: ncrError,
-  } = useHandoverResource(props.id, 'ncr');
 
   const {
     data: workOrderPackages,
@@ -97,6 +89,15 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     dataIsFetching: isDataFetchingQuery,
     error: queryError,
   } = useHandoverResource(props.id, 'query');
+
+  // const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
+  //   useHandoverResource(props.id, 'details');
+
+  // const {
+  //   data: ncrPackages,
+  //   dataIsFetching: isDataFetchingNcr,
+  //   error: ncrError,
+  // } = useHandoverResource(props.id, 'ncr');
 
   return (
     <StyledSideSheetContainer>
@@ -173,9 +174,9 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             <Tabs.Tab>
               SWCR <TabTitle data={swcrPackages} isLoading={isDataFetchingSwcr} />
             </Tabs.Tab>
-            <Tabs.Tab>
+            {/* <Tabs.Tab>
               NCr <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />
-            </Tabs.Tab>
+            </Tabs.Tab> */}
             <Tabs.Tab>
               Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
             </Tabs.Tab>
@@ -186,8 +187,8 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           <Tabs.Panel>
             <DetailsTab
               commpkg={props.item as HandoverPackage}
-              dataIsFetching={isDataFetchingDetails}
-              nextToSign={detailsData}
+              // dataIsFetching={isDataFetchingDetails}
+              // nextToSign={detailsData}
             />
           </Tabs.Panel>
           <Tabs.Panel>
@@ -242,9 +243,9 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               error={swcrError}
             />
           </Tabs.Panel>
-          <Tabs.Panel>
+          {/* <Tabs.Panel>
             <NcrTab ncrs={ncrPackages} isFetching={isDataFetchingNcr} error={ncrError} />
-          </Tabs.Panel>
+          </Tabs.Panel> */}
           <Tabs.Panel>
             <QueryTab
               queries={queryPackages}
@@ -256,32 +257,42 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-}
+};
 
 export default HandoverSidesheet.render;
 
-function EnsureHandover({id, close, item}: HandoverProps){
-  const client = useHttpClient("cc-app");
+function EnsureHandover({ id, close, item }: HandoverProps) {
+  const client = useHttpClient('cc-app');
   const contextId = useContextId();
-  const {isLoading, data, error} = useQuery(["handover", id], async () => {
-    const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
-    if(!res.ok){
-      throw new Error(`Failed to get handover with id ${id}`)
-    }
-    return res.json() as Promise<HandoverPackage>;
-  }, {refetchOnWindowFocus: false});
+  const { isLoading, data, error } = useQuery(
+    ['handover', id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
+      if (!res.ok) {
+        throw new Error(`Failed to get handover with id ${id}`);
+      }
+      return res.json() as Promise<HandoverPackage>;
+    },
+    { refetchOnWindowFocus: false }
+  );
 
-
-  if(isLoading){
-    return <div style={{display: "flex", height: "100%", width: "100%"}}><CircularProgress  size={48} /></div>
+  if (isLoading) {
+    return (
+      <div style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}>
+        <CircularProgress size={48} />
+      </div>
+    );
   }
 
-
-  if(error || !data){
-    return <div>Something went wrong..</div>
+  if (error || !data) {
+    return <div>Something went wrong..</div>;
   }
 
-
-  return <HandoverSidesheetComponent id={id} item={data} close={close}></HandoverSidesheetComponent>
-
+  return (
+    <HandoverSidesheetComponent
+      id={id}
+      item={data}
+      close={close}
+    ></HandoverSidesheetComponent>
+  );
 }
