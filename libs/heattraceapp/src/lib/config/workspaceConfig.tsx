@@ -6,7 +6,7 @@ import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useContextId } from '@cc-components/shared';
-// import { useGardenConfig } from './gardenConfig';
+import { useGardenConfig } from './gardenConfig';
 // import { sidesheetConfig } from './heattraceSidesheet';
 
 export const WorkspaceWrapper = () => {
@@ -20,7 +20,7 @@ export const WorkspaceWrapper = () => {
 
   const tableConfig = useTableConfig(contextId);
   // const statusBarConfig = useStatusBarConfig(contextId);
-  // const gardenConfig = useGardenConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId);
 
   // if (isLoading) {
   //   return <CCApiAccessLoading />;
@@ -29,16 +29,15 @@ export const WorkspaceWrapper = () => {
   return (
     <Workspace
       workspaceOptions={{
-        appKey: 'heattraceapp',
         getIdentifier: () => '',
         defaultTab: 'grid',
       }}
       // filterOptions={filterOptions}
-      // gardenOptions={gardenConfig}
+      gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       // statusBarOptions={statusBarConfig}
       // sidesheetOptions={sidesheetConfig}
-      modules={[gridModule]}
+      modules={[gridModule, gardenModule]}
     />
   );
 };

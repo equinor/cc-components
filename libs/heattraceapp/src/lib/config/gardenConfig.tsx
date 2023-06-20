@@ -1,13 +1,13 @@
 import { Heattrace } from '@cc-components/heattraceshared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
-import { GardenItem } from '../ui-garden';
+import { GardenItem } from '../ui-garden/';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 
 export const useGardenConfig = (
   contextId: string
-): GardenConfig<Heattrace, FilterStateGroup[]> => {
+): GardenConfig<Heattrace, FilterState> => {
   const client = useHttpClient('cc-api');
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({

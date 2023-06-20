@@ -1,6 +1,6 @@
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { CheckList, Heattrace } from '@cc-components/heattraceshared';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
   useGridDataSource,
@@ -14,9 +14,7 @@ import data from '../data.json' assert { type: 'json' };
 
 const pipetests: Heattrace[] = data as any;
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<Heattrace, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<Heattrace, FilterState> => {
   // const client = useHttpClient('cc-api');
   // const { getRows } = useGridDataSource(async (req) => {
   //   const res = await client.fetch(`/api/contexts/${contextId}/piping/grid`, req);
