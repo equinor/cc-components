@@ -2,7 +2,7 @@ import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { Pipetest } from 'libs/pipingshared/dist/src';
 
-export const useStatusBarConfig = (contextId: string): StatusBarConfig<Pipetest[]> => {
+export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
   const client = useHttpClient('cc-api');
 
   return async (filters, signal) => {
