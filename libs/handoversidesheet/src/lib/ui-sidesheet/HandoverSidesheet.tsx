@@ -1,6 +1,8 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { tokens } from '@equinor/eds-tokens';
+import { Icon } from '@equinor/eds-core-react';
 
 import {
   BannerItem,
@@ -30,6 +32,7 @@ import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/s
 import { useQuery } from '@tanstack/react-query';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useContextId } from '@cc-components/shared';
+import { info_circle, error_outlined } from '@equinor/eds-icons';
 
 type HandoverProps = {
   id: string;
@@ -39,6 +42,8 @@ type HandoverProps = {
 export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => (
   <EnsureHandover {...props} />
 ));
+
+Icon.add({ error_outlined });
 
 const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -278,14 +283,30 @@ function EnsureHandover({ id, close, item }: HandoverProps) {
 
   if (isLoading) {
     return (
-      <div style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}>
+      <div
+        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
+      >
         <CircularProgress size={48} />
       </div>
     );
   }
 
   if (error || !data) {
-    return <div>Something went wrong..</div>;
+    console.log(error)
+    return (
+      <div
+        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
+      >
+        <ErrorWrapper>
+          <Icon
+            name="error_outlined"
+            size={48}
+            color={tokens.colors.interactive.primary__resting.hsla}
+          />
+          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
+        </ErrorWrapper>
+      </div>
+    );
   }
 
   return (
@@ -296,3 +317,18 @@ function EnsureHandover({ id, close, item }: HandoverProps) {
     ></HandoverSidesheetComponent>
   );
 }
+
+import styled from 'styled-components';
+const ErrorWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ErrorMessage = styled.h3`
+  margin: 0;
+`;
