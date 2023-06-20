@@ -1,45 +1,45 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { getStatus, statusPriorityMap } from '../utils-statuses';
+import { statusPriorityMap } from '../utils-statuses';
 
 export const getSubtitleHeader = (
   items: HandoverPackage[],
   groupByKey: string | undefined
 ): string => {
   const totalLength = items.length;
-  const statusPriorities = items.map((commpkg) => statusPriorityMap[getStatus(commpkg)]);
+  const statusPriorities = items.map((commpkg) => statusPriorityMap[commpkg.commissioningPackageStatus]);
   switch (groupByKey) {
     case 'RFCC': {
       const rfcc = statusPriorities.filter(
-        (priority) => priority <= statusPriorityMap['RFCC Accepted']
+        (priority) => priority <= statusPriorityMap['RFC Accepted']
       ).length;
       return `RFCC ${rfcc}/${totalLength}`;
     }
 
     case 'RFOC': {
       const rfoc = statusPriorities.filter(
-        (priority) => priority <= statusPriorityMap['RFOC Accepted']
+        (priority) => priority <= statusPriorityMap['RFO Accepted']
       ).length;
       return `RFOC ${rfoc}/${totalLength}`;
     }
     case 'TAC': {
-      const tac = items.filter((commpkg) => getStatus(commpkg) === 'TAC Accepted').length;
+      const tac = items.filter((commpkg) => commpkg.commissioningPackageStatus === 'TAC Accepted').length;
       return `TAC ${tac}/${totalLength}`;
     }
 
     case 'DCC': {
-      const dcc = items.filter((commpkg) => getStatus(commpkg) === 'DCC Accepted').length;
+      const dcc = items.filter((commpkg) => commpkg.commissioningPackageStatus === 'DCC Accepted').length;
       return `DCC ${dcc}/${totalLength}`;
     }
 
     case 'RFRC': {
       const rfrc = items.filter(
-        (commpkg) => getStatus(commpkg) === 'RFRC Accepted'
+        (commpkg) => commpkg.commissioningPackageStatus === 'RFR Accepted'
       ).length;
       return `RFRC ${rfrc}/${totalLength}`;
     }
 
     default: {
-      const os = items.filter((commpkg) => getStatus(commpkg) === 'OS').length;
+      const os = items.filter((commpkg) => commpkg.commissioningPackageStatus === 'OS').length;
       return `OS ${os}/${totalLength}`;
     }
   }

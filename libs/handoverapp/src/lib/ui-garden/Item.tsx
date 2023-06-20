@@ -2,8 +2,8 @@ import { HandoverPackage } from '@cc-components/handovershared';
 import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared/common';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { getDotsColor, getItemSize, getTextColor, getMaxVolumeFromData} from '../utils-garden';
-import { getStatus } from '../utils-statuses';
+import { getDotsColor, getItemSize, getTextColor} from '../utils-garden';
+// import { getStatus } from '../utils-statuses';
 import { createProgressGradient } from '../utils-statuses/mcProgress';
 import {
   StyledItemText,
@@ -38,24 +38,24 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   //TODO Context.MAXSIZE
   const size = getItemSize(data.volume, 100 || 0);
 
-  const status = getStatus(data);
+  // const status = getStatus(data);
   const backgroundColor = useMemo(
-    () => createProgressGradient(data, status),
-    [data, status]
+    () => createProgressGradient(data, data.commissioningPackageStatus),
+    [data, data.commissioningPackageStatus]
   );
-  const textColor = getTextColor(status);
+  const textColor = getTextColor(data.commissioningPackageStatus);
 
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
   const commStatusColor = getDotsColor(data.commissioningPackageStatus);
 
-  const showWarningIcon = data.mechanicalCompletionStatus === 'OS' && status === 'RFCC Accepted';
+  const showWarningIcon = data.mechanicalCompletionStatus === 'OS' && data.commissioningPackageStatus === 'RFC Accepted';
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const options: ItemOptions = {
     size,
-    status,
+    status : data.commissioningPackageStatus,
     barColor: backgroundColor,
     textColor,
     mcPackageColor,

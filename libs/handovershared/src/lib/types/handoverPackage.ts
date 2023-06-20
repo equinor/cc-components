@@ -1,4 +1,4 @@
-import { BaseStatus } from '@cc-components/shared/types';
+import { BaseStatus, PackageStatus } from '@cc-components/shared/types';
 
 /**
  * DCC === demolitionStart
@@ -13,7 +13,7 @@ export type HandoverPackage = {
   commissioningPackageNo: string;
   commissioningPackageId: string;
   commissioningPackageUrlId: string;
-  commissioningPackageStatus: BaseStatus;
+  commissioningPackageStatus: PackageStatus;
   description: string | null;
   //demolition
   dccShippedDate: string | null;

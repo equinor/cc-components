@@ -1,7 +1,7 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { colorMap } from '@cc-components/shared/mapping';
 import { PackageStatus } from '@cc-components/shared/types';
-import { getStatus } from './getStatus';
+// import { getStatus } from './getStatus';
 
 type McProgress = {
   color: (item: HandoverPackage) => string;
@@ -15,24 +15,23 @@ const mcProgressMap: McProgress[] = [
   }, // OS
   {
     color: (item) =>
-      item.isRfcRejected ? colorMap[getStatus(item)] : colorMap['RFCC Sent'],
+      item.isRfcRejected ? colorMap[item.commissioningPackageStatus] : colorMap['RFC Sent'],
     accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
   },
   {
     color: (item) => {
-      const status = getStatus(item);
-      if (status.indexOf('TAC') > -1) return colorMap[status];
-      return item.isRfcRejected ? colorMap[status] : '#7cb342';
+      if (status.indexOf('TAC') > -1) return colorMap[item.commissioningPackageStatus];
+      return item.isRfcRejected ? colorMap[item.commissioningPackageStatus] : '#7cb342';
     },
     accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
   },
   {
     color: (item) =>
-      item.isRfoAccepted ? colorMap[getStatus(item)] : colorMap['RFOC Sent'],
+      item.isRfoAccepted ? colorMap[item.commissioningPackageStatus] : colorMap['RFO Sent'],
     accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
   },
   {
-    color: (item) => (item.isRfoAccepted ? colorMap[getStatus(item)] : '#0035bc'),
+    color: (item) => (item.isRfoAccepted ? colorMap[item.commissioningPackageStatus] : '#0035bc'),
     accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
   },
 ];
@@ -46,7 +45,7 @@ const mcProgressPercentage = (
 
 export const createProgressGradient = (
   data: HandoverPackage,
-  status: PackageStatus = getStatus(data)
+  status: PackageStatus = data.commissioningPackageStatus
 ): string => {
   const color = colorMap[status];
   let progressWidth = 0;
