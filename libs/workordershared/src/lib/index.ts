@@ -1,2 +1,2 @@
-export type { WorkOrder } from './types';
+export type { WorkOrder, MappedMaterialStatus } from './types';
 export * from './utils-statuses';

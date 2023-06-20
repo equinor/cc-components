@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
-import { WorkOrder } from '@cc-components/workordershared';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import {
@@ -19,8 +23,12 @@ import {
   StyledItemLink,
   useHttpClient,
   useContextId,
+  StatusCircle,
+  LinkCell,
 } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -46,7 +54,11 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
 
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data: wo } = useQuery<WorkOrder>(
+  const {
+    data: wo,
+    error,
+    isLoading: isLoadingSidesheet,
+  } = useQuery<WorkOrder>(
     ['workorder', props.id],
     async () => {
       const res = await client.fetch(
@@ -63,8 +75,12 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
     }
   );
 
-  if (!wo) {
-    throw new Error('Failed to get wo');
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.closeSidesheet} />;
+  }
+
+  if (!wo || error) {
+    return <div>Failed to get Workorder with id: {props.id}</div>;
   }
 
   const {
@@ -87,17 +103,47 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="WO"
           value={
-            wo.workOrderNumber ?? 'N/A'
-            // <StyledItemLink
-            //   href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
-            //   target="_blank"
-            // >
-            //   {props?.item?.workOrderNumber}
-            // </StyledItemLink>
+            wo.workorderUrl ? (
+              <LinkCell url={wo.workorderUrl} urlText={wo.workOrderNumber} />
+            ) : (
+              wo.workOrderNumber
+            )
           }
         />
-        <BannerItem title="Material status" value={'?'} />
-        <BannerItem title="MCCR status" value={'?'} />
+        <BannerItem
+          title="Material status"
+          value={
+            props.item?.materialStatus ? (
+              <StatusCircle
+                statusColor={
+                  props.item?.materialStatus
+                    ? getMatStatusColorByStatus(props.item.materialStatus)
+                    : 'transparent'
+                }
+                content={props.item?.materialStatus || 'N/A'}
+              />
+            ) : (
+              'N/A'
+            )
+          }
+        />
+        <BannerItem
+          title="MC status"
+          value={
+            props.item?.mccrStatus ? (
+              <StatusCircle
+                statusColor={
+                  props.item?.mccrStatus
+                    ? getMccrStatusColorByStatus(props.item.mccrStatus)
+                    : 'transparent'
+                }
+                content={props.item?.mccrStatus || 'N/A'}
+              />
+            ) : (
+              'N/A'
+            )
+          }
+        />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>

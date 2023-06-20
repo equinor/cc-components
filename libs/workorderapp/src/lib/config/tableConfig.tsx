@@ -8,17 +8,18 @@ import {
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
-import { getMatStatusColorByStatus, getMccrStatusColorByStatus } from '../utils-statuses';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
-import { WorkOrder } from '@cc-components/workordershared';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
 import { useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<WorkOrder, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {
@@ -54,17 +55,11 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      if (!props.data?.workorderUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      }
+      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.workOrderUrlId
-    //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
   },
   {
     field: 'Description',
@@ -83,7 +78,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'MilestoneCode',
     field: 'Milestone',
-    valueGetter: (pkg) => pkg.data?.milestone,
+    valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
     colId: 'JobStatus',

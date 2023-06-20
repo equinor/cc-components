@@ -21,7 +21,8 @@ import {
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { useQuery } from '@tanstack/react-query';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -49,7 +50,11 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
 
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data: loop } = useQuery<Loop>(
+  const {
+    data: loop,
+    error: sidesheetError,
+    isLoading: isLoadingSidesheet,
+  } = useQuery<Loop>(
     ['loop', props.id],
     async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/loop/${props.id}`);
@@ -59,16 +64,21 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
       return res.json();
     },
     {
-      suspense: true,
+      suspense: false,
       initialData: props.item,
+      useErrorBoundary: false,
     }
   );
 
-  if (!loop) {
-    throw new Error('Loop undefined');
+  const { data, isLoading, error } = useGetWorkorders(loop?.loopNo);
+
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.close} />;
   }
 
-  const { data, isLoading } = useGetWorkorders(loop.loopNo);
+  if (!loop || sidesheetError) {
+    return <div>Failed to get Loop with id: {props.id}</div>;
+  }
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -96,38 +106,32 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
           }
         ></BannerItem>
         <BannerItem
-          title="Cmpkg"
+          title="Comm Pkg"
           value={
-            loop.commissioningPackageNo
-              ? loop.commissioningPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getCommPkgUrl(
-                //     props.item?.commissioningPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.commissioningPackageNo}
-                // </StyledItemLink>
-                'N/A'
+            loop.commissioningPackageNo ? (
+              <LinkCell
+                url={loop.commissioningPackageUrl}
+                urlText={loop.commissioningPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
           }
         />
         <BannerItem
-          title="Mcpkg"
+          title="MC Pkg"
           value={
-            loop.mechanicalCompletionPackageNo
-              ? loop.mechanicalCompletionPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getMcUrl(
-                //     props.item?.mechanicalCompletionPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.mechanicalCompletionPackageNo}
-                // </StyledItemLink>
-                'N/A'
+            loop.mechanicalCompletionPackageNo ? (
+              <LinkCell
+                url={loop.mechanicalCompletionPackageUrl}
+                urlText={loop.mechanicalCompletionPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
           }
         />
-        <BannerItem title="Milestone" value={loop.priority1 || 'N/A'} />
+        <BannerItem title="Priority" value={loop.priority1 || 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -145,7 +149,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
             <ContentDetails loop={loop} />
           </Tabs.Panel>
           <Tabs.Panel>
-            <WorkorderTab error={null} isFetching={false} workorders={data} />
+            <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

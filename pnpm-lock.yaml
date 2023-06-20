@@ -412,8 +412,8 @@ importers:
         specifier: workspace:^
         version: link:../shared
       '@equinor/workspace-fusion':
-        specifier: 1.2.1
-        version: 1.2.1(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
+        specifier: 2.1.2
+        version: 2.1.2(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
 
   libs/loopshared:
     dependencies:
@@ -429,6 +429,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/mechanicalcompletionapp:
     dependencies:
@@ -510,8 +513,8 @@ importers:
         specifier: workspace:^
         version: link:../shared
       '@equinor/workspace-fusion':
-        specifier: 1.2.1
-        version: 1.2.1(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
+        specifier: 2.1.2
+        version: 2.1.2(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
 
   libs/punchshared:
     dependencies:
@@ -527,6 +530,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/scopechangerequestapp:
     dependencies:
@@ -540,8 +546,8 @@ importers:
         specifier: 1.0.4
         version: 1.0.4(@ag-grid-enterprise/core@28.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-fusion':
-        specifier: 1.1.13
-        version: 1.1.13(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
+        specifier: 2.0.1
+        version: 2.0.1(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
       '@remirror/pm':
         specifier: ^2.0.4
         version: 2.0.4
@@ -557,6 +563,19 @@ importers:
       markdown-to-jsx:
         specifier: ^7.2.0
         version: 7.2.0(react@18.2.0)
+
+  libs/sharedcomponents:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      styled-components:
+        specifier: 5.3.6
+        version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/storybook-host: {}
 
@@ -599,8 +618,8 @@ importers:
         specifier: workspace:^
         version: link:../workordersidesheet
       '@equinor/workspace-fusion':
-        specifier: 1.2.1
-        version: 1.2.1(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
+        specifier: 2.1.2
+        version: 2.1.2(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1)
 
   libs/workordershared:
     dependencies:
@@ -613,6 +632,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
@@ -3303,8 +3325,35 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-filter@1.1.4(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-tK69SO6PeqyRMJr3VHdiwvFLr5Oxe4O2c98HodJZ9Ne3ajuz5JrFWE2fs/84gH/V5S7msXUA4QAaMiSvdUUxCA==}
+  /@equinor/workspace-filter@2.0.1(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-eeuitlzX/zY/V/DrhGd2P+fVbl74bingOwF/SHkAb0zpCVwTQjUu9RDy7YWlyplbUvKwGurtzdQ1vi3OesDLLw==}
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+      styled-components: ^5.3.5
+    dependencies:
+      '@equinor/eds-core-react': 0.28.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/eds-icons': 0.18.0
+      '@equinor/eds-tokens': 0.9.0
+      '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 3.1.4(react@18.2.0)
+      react-is: 18.2.0
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.0)
+      react-virtual: 2.10.4(react@18.2.0)
+      sortablejs: 1.15.0
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/sortablejs'
+      - react-native
+      - supports-color
+    dev: false
+
+  /@equinor/workspace-filter@2.0.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-/ofq2VjSOYQSys8Cm0k9t1KdlloaUv5xhNIsYQrI6f1aqmWpGw1+YXylHRf66p1lCEin7PwD3yvxiXABO091MA==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
@@ -3469,8 +3518,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@1.1.13(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1):
-    resolution: {integrity: sha512-9RjQGDOV9/D0mPY/QOLVmphnvLYF3B+f7kYUd6oI0W4+WA+xV7ICFhUeEWT0yL9cLv8+OnHCZmdEJOC5wExQQw==}
+  /@equinor/workspace-fusion@2.0.1(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1):
+    resolution: {integrity: sha512-74B+dNZ8lpOKpyz9W3Rpf0pqJKx22PwLNObjDVgd/7pVlieEtmFT61I5wf1s5qUych/B+I3DwRVHXVpe51nWOw==}
     peerDependencies:
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
@@ -3481,10 +3530,10 @@ packages:
       '@equinor/eds-tokens': 0.9.0
       '@equinor/workspace-ag-grid': 1.0.4(@ag-grid-enterprise/core@28.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-core': 1.0.0
-      '@equinor/workspace-filter': 1.1.4(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-garden': 1.0.1(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-filter': 2.0.1(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-garden': 1.1.0-preview(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-powerbi': 1.0.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-react': 1.0.2(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-react': 1.0.3(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
       '@types/react-dom': 18.0.9
       history: 5.3.0
@@ -3505,8 +3554,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@1.2.1(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1):
-    resolution: {integrity: sha512-OSwyfRD2+sNv7ar74IguS+1q61jAEvJI/OZZWkEwX23S1SASRo1C8JQWET6Zya42xTGJe30NLOFKSs3ZmcNdnQ==}
+  /@equinor/workspace-fusion@2.1.2(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.2.1):
+    resolution: {integrity: sha512-YEirbCo1Q5piJfi/dObRV9Y+aShVmpOwKWiRDGx0jHq03LNKAKnG81uOU2VBZicZZE+IjhnTsclNMr8e7jE0fg==}
     peerDependencies:
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
@@ -3517,10 +3566,10 @@ packages:
       '@equinor/eds-tokens': 0.9.0
       '@equinor/workspace-ag-grid': 1.0.4(@ag-grid-enterprise/core@28.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-core': 1.0.0
-      '@equinor/workspace-filter': 1.1.4(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-garden': 1.1.0-preview(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-filter': 2.0.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-garden': 2.0.1(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-powerbi': 1.0.2(@babel/core@7.21.4)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-react': 1.0.2(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-react': 1.0.3(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.29.1(react-dom@18.2.0)(react@18.2.0)
       '@types/react-dom': 18.0.9
       history: 5.3.0
@@ -3819,8 +3868,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-react@1.0.2(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-tOFZ2f2+ZxCWtSTu3IADxaRO9e8ZV9lOCsX0GEpaFbaatABk/2bGKRWPceV3i4AlD6Pqw6h88iMIgMsP5dXROQ==}
+  /@equinor/workspace-react@1.0.3(@babel/core@7.21.4)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-UkBGhqQ0/oLM9lEzR6t0CqbLPodCuLDgaU6Ydj2BXDC1t6zrC89NNUCYb7qlhMM/3lfNh3DP4lCYnx8qUqr9CA==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'

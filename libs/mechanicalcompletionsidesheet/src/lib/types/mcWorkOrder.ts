@@ -7,7 +7,8 @@ export type McWorkOrder = {
   plannedCompletionDate: string | null;
   projectProgress: number | null;
   remainingManHours: number | null;
-  title: string | null;
+  description: string | null;
   workOrderId: string;
-  workOrderNo: string;
+  workOrderNumber: string;
+  url: string;
 };

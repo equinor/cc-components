@@ -14,7 +14,8 @@ import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
 type PunchProps = {
   id: string;
@@ -32,12 +33,16 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  const { data: punch } = useQuery(
+  const {
+    data: punch,
+    error,
+    isLoading: isLoadingSidesheet,
+  } = useQuery(
     ['punch', props.id],
     async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/punch/${props.id}`);
       if (!res.ok) throw res;
-      return res.json();
+      return res.json() as Promise<Punch>;
     },
     {
       suspense: true,
@@ -45,8 +50,12 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
     }
   );
 
-  if (!punch) {
-    throw new Error('Failed to fetch punch');
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.close} />;
+  }
+
+  if (!punch || error) {
+    return <div>Failed to get Punch with id: {props.id}</div>;
   }
 
   return (
@@ -60,39 +69,48 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
         <BannerItem
           title="Form type"
           value={
-            punch.formularType ?? ''
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getFormTypeUrl(props.item?.checklistUrlId || '')}
-            // >
-            //   {props.item?.formularType}
-            // </StyledItemLink>
+            !punch.formTypeUrl || !punch.formularType ? (
+              ''
+            ) : (
+              <LinkCell url={punch.formTypeUrl} urlText={punch.formularType} />
+            )
           }
         />
         <BannerItem
           title="Tag"
           value={
-            punch.tagNo ?? 'N/A'
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getTagUrl(props.item?.tagUrlId || '')}
-            // >
-            //   {props.item?.tagNo}
-            // </StyledItemLink>
+            !punch.tagUrl || !punch.tagNo ? (
+              ''
+            ) : (
+              <LinkCell url={punch.tagUrl} urlText={punch.tagNo} />
+            )
           }
         />
         <BannerItem
-          title="Commpkg"
+          title="Comm Pkg"
           value={
-            punch.commissioningPackageNo ?? 'N/A'
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getCommPkgUrl(
-            //     props.item?.commissioningPackageUrlId || ''
-            //   )}
-            // >
-            //   {props.item?.commissioningPackageNo}
-            // </StyledItemLink>
+            !punch.commissioningPackageUrl || !punch.commissioningPackageNo ? (
+              ''
+            ) : (
+              <LinkCell
+                url={punch.commissioningPackageUrl}
+                urlText={punch.commissioningPackageNo}
+              />
+            )
+          }
+        />
+        <BannerItem
+          title="MC Pkg"
+          value={
+            !punch.mechanicalCompletionPackageUrl ||
+            !punch.mechanicalCompletionPackageNo ? (
+              ''
+            ) : (
+              <LinkCell
+                url={punch.mechanicalCompletionPackageUrl}
+                urlText={punch.mechanicalCompletionPackageNo}
+              />
+            )
           }
         />
       </StyledBanner>
