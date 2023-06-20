@@ -1,6 +1,6 @@
 import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { CheckList, Pipetest } from '@cc-components/pipingshared';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
   useGridDataSource,
@@ -14,9 +14,7 @@ import data from '../responsePiping.json' assert { type: 'json' };
 
 const pipetests: Pipetest[] = data as any;
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<Pipetest, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterState> => {
   // const client = useHttpClient('cc-api');
   // const { getRows } = useGridDataSource(async (req) => {
   //   const res = await client.fetch(`/api/contexts/${contextId}/piping/grid`, req);
