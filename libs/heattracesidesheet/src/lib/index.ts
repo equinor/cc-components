@@ -1,1 +1,1 @@
-export { WorkspaceWrapper, configure } from './config';
+export * from './ui-sidesheet';

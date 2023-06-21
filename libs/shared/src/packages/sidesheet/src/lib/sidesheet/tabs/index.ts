@@ -10,4 +10,4 @@ export * from './details';
 export * from './material';
 export * from './mccr';
 export { TabsWrapper } from './TabList';
-export { StyledTabs, StyledPanels } from './tabs.styles';
+export * from './tabs.styles';

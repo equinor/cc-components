@@ -31,7 +31,7 @@ export interface Pipetest {
   hasIsolatedEquipment: boolean;
 }
 
-export interface CheckList {
+export type CheckList = {
   revision?: string;
   isHeatTrace: boolean;
   signedDate?: string;
@@ -45,7 +45,7 @@ export interface CheckList {
   formularType: string;
   formularGroup: string;
   status: string;
-}
+};
 
 export interface InsulationBox {
   objectNo: string;
