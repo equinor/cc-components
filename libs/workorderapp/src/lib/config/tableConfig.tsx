@@ -55,17 +55,11 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      if (!props.data?.workorderUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      }
+      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.workOrderUrlId
-    //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
   },
   {
     field: 'Description',

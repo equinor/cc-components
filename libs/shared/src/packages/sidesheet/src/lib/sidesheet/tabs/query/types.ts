@@ -5,4 +5,5 @@ export type QueryBase = {
   status: string | null;
   nextToSign: string | null;
   type: string | null;
+  url: string;
 };
