@@ -33,4 +33,5 @@ export const defaultGridOptions: GridOptions = {
   onFirstDataRendered: (e) => {
     e.columnApi.autoSizeColumns(e.columnApi.getAllDisplayedColumns());
   },
+  rowStyle: { fontSize: '14px' },
 };

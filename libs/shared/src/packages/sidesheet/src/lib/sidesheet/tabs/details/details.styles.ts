@@ -25,6 +25,7 @@ export const StyledTable = styled.table`
   td {
     border-bottom: 1px solid ${tokens.colors.ui.background__medium.hex};
     padding: 8px;
+    font-size: 14px;
 
     &:first-child {
       width: 240px;
