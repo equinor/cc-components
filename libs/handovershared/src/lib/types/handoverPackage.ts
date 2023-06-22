@@ -44,7 +44,7 @@ export type HandoverPackage = {
   priority1: string | null;
   priority2: string | null;
   priority3: string | null;
-  progress: string | null;
+  progress: number | null;
   projectIdentifier: string | null;
   projectDescription: string | null;
   remark: string | null;

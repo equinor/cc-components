@@ -27,11 +27,11 @@ const mcProgressMap: McProgress[] = [
   },
   {
     color: (item) =>
-      item.isRfoAccepted ? colorMap[item.commissioningPackageStatus] : colorMap['RFO Sent'],
+      item.isRfoRejected ? colorMap[item.commissioningPackageStatus] : colorMap['RFO Sent'],
     accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
   },
   {
-    color: (item) => (item.isRfoAccepted ? colorMap[item.commissioningPackageStatus] : '#0035bc'),
+    color: (item) => (item.isRfoRejected ? colorMap[item.commissioningPackageStatus] : '#0035bc'),
     accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
   },
 ];
