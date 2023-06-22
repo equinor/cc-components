@@ -68,11 +68,11 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
       <StyledRoot>
         <StyledItemWrapper
           ref={anchorRef}
-          onMouseEnter={() => {
+          onMouseOver={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
             setHoverTimeout(setTimeout(() => setIsOpen(true), 700));
           }}
-          onMouseLeave={() => {
+          onMouseOut={() => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
@@ -98,6 +98,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
 
       {isOpen && (
         <PopoverWrapper
+          close={() => setIsOpen(false)}
           isOpen={isOpen}
           rowStart={rowStart}
           columnStart={columnStart}

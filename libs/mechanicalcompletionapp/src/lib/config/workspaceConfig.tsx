@@ -9,6 +9,7 @@ import { sidesheetConfig } from './sidesheetConfig';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
 import {
   FusionDataProxyUnauthorized,
+  useContextId,
   useErrorBoundaryTrigger,
 } from '@cc-components/shared';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
@@ -16,13 +17,9 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { sortPackagesByStatus } from '../utils-statuses/sortPackagesByStatus';
-import { useState } from 'react';
 
-type WorkspaceWrapperProps = {
-  contextId: string;
-};
-
-export const WorkspaceWrapper = ({ contextId }: WorkspaceWrapperProps) => {
+export const WorkspaceWrapper = () => {
+  const contextId = useContextId();
   const dataProxy = useHttpClient('data-proxy');
   const getResponseAsync = async (signal: AbortSignal | undefined) =>
     dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`, {

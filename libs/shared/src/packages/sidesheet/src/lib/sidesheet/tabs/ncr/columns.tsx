@@ -1,20 +1,19 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { NcrBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping';
 import { LinkCell, DescriptionCell } from '../../../../../../table-helpers';
 
 export const columns: ColDef<NcrBase>[] = [
   {
     field: 'Document No.',
     valueGetter: (pkg) => pkg.data?.documentNumber,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.documentId ? proCoSysUrls.getDocumentUrl(pkg.data.documentId) : '',
-    // cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
+    cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
+      if (props.data) {
+        return <LinkCell url={props.data.url} urlText={props.value} />;
+      } else return null;
+    },
+    minWidth: 200,
+    flex: 1,
   },
   {
     field: 'Title',
@@ -22,8 +21,7 @@ export const columns: ColDef<NcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<NcrBase, string | null>) => {
       return <DescriptionCell description={props.value} displayFullText />;
     },
-    autoHeight: true,
-    wrapText: true,
-    width: 400,
+    minWidth: 200,
+    flex: 2,
   },
 ];

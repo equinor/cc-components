@@ -19,6 +19,7 @@ import {
   TabTitle,
   UnsignedActionTab,
   UnsignedTaskTab,
+  WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 
@@ -159,8 +160,11 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               McPackages <TabTitle data={mcPackages} isLoading={isDataFetchingMc} />{' '}
             </Tabs.Tab>
             <Tabs.Tab>
-              Work Orders{' '}
-              <TabTitle data={workOrderPackages} isLoading={isDataFetchingWorkOrder} />{' '}
+              Work Orders
+              <TabTitle
+                data={workOrderPackages}
+                isLoading={isDataFetchingWorkOrder}
+              />{' '}
             </Tabs.Tab>
             <Tabs.Tab>
               Unsigned Tasks{' '}

@@ -1,4 +1,5 @@
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
+import { filterMonospaceWhitelist } from '../../utils-formatting';
 
 /**
  * Simplify workspace filter config
@@ -15,6 +16,7 @@ export const useFilterConfig = (
   req: (init: RequestInit) => Promise<Response>
 ): FilterConfig => {
   return {
+    styles: { monospaceGroups: filterMonospaceWhitelist },
     dataSource: {
       getFilterMeta: async (state, signal) => {
         const res = await req({

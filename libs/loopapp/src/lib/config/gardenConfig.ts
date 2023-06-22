@@ -1,28 +1,21 @@
 import { Loop } from '@cc-components/loopshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenItem } from '../ui-garden';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
-export const useGardenConfig = (
-  contextId: string,
-  boundaryTrigger: VoidFunction
-): GardenConfig<Loop, FilterStateGroup[]> => {
+export const useGardenConfig = (contextId: string): GardenConfig<Loop, FilterState> => {
   const client = useHttpClient('cc-api');
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
-    useGardenDataSource(
-      {
-        getBlockAsync: (req) =>
-          client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
-        getGardenMeta: (req) =>
-          client.fetch(`/api/contexts/${contextId}/loop/garden-meta`, req),
-        getHeader: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
-        getSubgroupItems: (req) =>
-          client.fetch(`/api/contexts/${contextId}/loop/subgroup-items`, req),
-      },
-      boundaryTrigger
-    );
+    useGardenDataSource({
+      getBlockAsync: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
+      getGardenMeta: (req) =>
+        client.fetch(`/api/contexts/${contextId}/loop/garden-meta`, req),
+      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/loop/garden`, req),
+      getSubgroupItems: (req) =>
+        client.fetch(`/api/contexts/${contextId}/loop/subgroup-items`, req),
+    });
 
   return {
     getBlockAsync,

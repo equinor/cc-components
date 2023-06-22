@@ -12,17 +12,20 @@ import ora from 'ora';
 import { VersionIncrement } from '../main.js';
 import { downloadCIBundle } from './download_zip_bundle.js';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
+import { writeTraceFileAsync } from '../utils/writeTrace.js';
 
 export async function release(
   dry: boolean,
   env: FusionEnvironment,
-  versionInc: VersionIncrement
+  versionInc: VersionIncrement | null
 ) {
   //Ensure latest changes have been pulled
   pullChanges();
 
-  //Bump version
-  patchVersion(versionInc);
+  if (versionInc) {
+    //Bump version
+    patchVersion(versionInc);
+  }
 
   compileApp();
 
@@ -39,11 +42,13 @@ export async function release(
   zipBundle();
 
   if (!dry) {
-    //create commit
-    commitRelease();
-
     //upload to fdev
     await deployApp(env);
+
+    await writeTraceFileAsync(env);
+
+    //create commit
+    commitRelease();
 
     //push commit
     pushChanges();

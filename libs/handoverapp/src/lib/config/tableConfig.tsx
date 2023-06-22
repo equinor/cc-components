@@ -1,5 +1,5 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { statusColorMap } from '@cc-components/shared';
+import { StyledMonospace, statusColorMap } from '@cc-components/shared';
 import { DateCell, DescriptionCell, LinkCell, StatusCell } from '@cc-components/shared';
 import { BaseStatus } from '@cc-components/shared';
 

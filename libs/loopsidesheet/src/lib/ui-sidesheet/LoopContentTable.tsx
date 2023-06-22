@@ -1,5 +1,5 @@
 import { Loop } from '@cc-components/loopshared';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DescriptionCell,
   LinkCell,

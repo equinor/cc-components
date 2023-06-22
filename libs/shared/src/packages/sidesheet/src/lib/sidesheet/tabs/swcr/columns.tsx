@@ -1,7 +1,6 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { SwcrBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 
@@ -20,16 +19,19 @@ export const columns: ColDef<SwcrBase>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    minWidth: 300,
+    flex: 1,
+    minWidth: 50,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    minWidth: 150,
+    flex: 1,
+    minWidth: 50,
   },
   {
     field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
-    minWidth: 180,
+    flex: 1,
+    minWidth: 50,
   },
 ];

@@ -3,4 +3,5 @@ export type UnsignedActionBase = {
   actionId: string;
   title: string | null;
   description: string | null;
+  url: string;
 };

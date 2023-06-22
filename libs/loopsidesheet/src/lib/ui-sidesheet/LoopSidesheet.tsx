@@ -19,8 +19,11 @@ import {
   TabTitle,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
+import { useQuery } from '@tanstack/react-query';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -43,14 +46,40 @@ type LoopProps = {
   close: () => void;
 };
 
-export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
+export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  if (!props.item) {
-    throw new Error('Loop undefined');
+  const client = useHttpClient();
+  const contextId = useContextId();
+  const {
+    data: loop,
+    error: sidesheetError,
+    isLoading: isLoadingSidesheet,
+  } = useQuery<Loop>(
+    ['loop', props.id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/loop/${props.id}`);
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json();
+    },
+    {
+      suspense: false,
+      initialData: props.item,
+      useErrorBoundary: false,
+    }
+  );
+
+  const { data, isLoading, error } = useGetWorkorders(loop?.loopNo);
+
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.close} />;
   }
 
-  const { data, error, isLoading } = useGetWorkorders(props.item.loopNo);
+  if (!loop || sidesheetError) {
+    return <div>Failed to get Loop with id: {props.id}</div>;
+  }
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -59,7 +88,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${props?.item?.loopNo}, ${props?.item?.description}` || ''}
+        title={`${loop.loopNo}, ${loop.description}` || ''}
         onClose={props.close}
         applicationTitle="Loop"
       />
@@ -67,10 +96,10 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         <BannerItem
           title="Checklist status"
           value={
-            props.item?.status ? (
+            loop.status ? (
               <StatusCircle
-                content={props.item?.status}
-                statusColor={statusColorMap[props.item?.status]}
+                content={loop.status}
+                statusColor={statusColorMap[loop.status]}
               />
             ) : (
               'N/A'
@@ -78,38 +107,32 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
           }
         ></BannerItem>
         <BannerItem
-          title="Cmpkg"
+          title="Comm Pkg"
           value={
-            props.item?.commissioningPackageNo
-              ? props.item.commissioningPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getCommPkgUrl(
-                //     props.item?.commissioningPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.commissioningPackageNo}
-                // </StyledItemLink>
-                'N/A'
+            loop.commissioningPackageNo ? (
+              <LinkCell
+                url={loop.commissioningPackageUrl}
+                urlText={loop.commissioningPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
           }
         />
         <BannerItem
-          title="Mcpkg"
+          title="MC Pkg"
           value={
-            props.item?.mechanicalCompletionPackageNo
-              ? props.item.mechanicalCompletionPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getMcUrl(
-                //     props.item?.mechanicalCompletionPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.mechanicalCompletionPackageNo}
-                // </StyledItemLink>
-                'N/A'
+            loop.mechanicalCompletionPackageNo ? (
+              <LinkCell
+                url={loop.mechanicalCompletionPackageUrl}
+                urlText={loop.mechanicalCompletionPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
           }
         />
-        <BannerItem title="Milestone" value={props.item?.priority1 || 'N/A'} />
+        <BannerItem title="Priority" value={loop.priority1 || 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -122,12 +145,12 @@ export const LoopSidesheet = createWidget<LoopProps>(({ frame, props }) => {
         </StyledTabListWrapper>
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab loop={props.item} />
-            {props.item?.loopId && <Checklists loopId={props.item.loopId} />}
-            <ContentDetails loop={props.item} />
+            <DetailsTab loop={loop} />
+            {loop.loopId && <Checklists loopId={loop.loopId} />}
+            <ContentDetails loop={loop} />
           </Tabs.Panel>
           <Tabs.Panel>
-            <WorkorderTab error={null} isFetching={false} workorders={data} />
+            <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

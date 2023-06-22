@@ -10,6 +10,8 @@
   "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@cc-components/punchshared": "workspace:^",
-    "@cc-components/shared": "workspace:^"
+    "@cc-components/shared": "workspace:^",
+    "@cc-components/sharedcomponents": "workspace:^"
+
   }
 }

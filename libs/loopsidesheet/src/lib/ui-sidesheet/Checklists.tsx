@@ -1,4 +1,4 @@
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { LinkCell, StatusCell, TabTable } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
@@ -12,7 +12,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
     width: 120,
   },
   {
-    field: 'Cmpkg',
+    field: 'Comm Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.commissioningPackageUrlId) {

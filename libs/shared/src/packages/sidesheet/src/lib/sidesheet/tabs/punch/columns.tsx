@@ -1,7 +1,6 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { PunchBase } from './type';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { statusColorMap } from '../../../../../../mapping';
@@ -23,7 +22,8 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    minWidth: 200,
+    minWidth: 100,
+    flex: 2,
   },
   {
     field: 'To be cleared by',
@@ -49,9 +49,13 @@ export const columns: ColDef<PunchBase>[] = [
         />
       );
     },
+    minWidth: 50,
+    flex: 1,
   },
   {
     field: 'Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
+    minWidth: 50,
+    flex: 1,
   },
 ];

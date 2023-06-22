@@ -24,11 +24,14 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {
   const { columns, error, isFetching, packages, resourceName, height } = props;
+
   if (isFetching) {
-    <NoResourceData>
-      <Progress.Circular />
-      <InfoText>{`Fetching ${resourceName}`}</InfoText>
-    </NoResourceData>;
+    return (
+      <NoResourceData>
+        <Progress.Circular />
+        <InfoText>{`Fetching ${resourceName}`}</InfoText>
+      </NoResourceData>
+    );
   }
 
   if (error) {

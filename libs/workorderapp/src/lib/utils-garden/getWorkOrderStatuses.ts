@@ -1,11 +1,13 @@
 import { FollowUpStatuses, ProcosysStatuses, hasProperty } from '@cc-components/shared';
-import { WorkOrder } from '@cc-components/workordershared';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
 import { ExtendedGardenFields } from '../types';
 import {
   getColorBasedOnGroupBy,
   getMatStatus,
-  getMatStatusColorByStatus,
-  getMccrStatusColorByStatus,
   getStatusFn,
   getTextColorByStatus,
 } from '../utils-statuses';

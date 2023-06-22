@@ -47,6 +47,7 @@ export const StyledProgressNumber = styled.div`
   line-height: normal;
 `;
 export const StyledLink = styled.a`
+  font-variant-numeric: tabular-nums;
   color: ${tokens.colors.interactive.primary__resting.hex};
   text-decoration: none;
   :hover {

@@ -11,6 +11,7 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
+  WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
@@ -18,7 +19,7 @@ import { DetailsTab } from './DetailsTab';
 import { useMcResource } from '../utils-sidesheet';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -134,7 +135,21 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
             <WorkorderTab
               error={workOrderError}
               isFetching={isFetchingWorkOrders}
-              workorders={workOrders}
+              workorders={(workOrders ?? []).map(
+                (workorder): WorkorderBase => ({
+                  ...workorder,
+                  workOrderUrl: workorder.url,
+                  workOrderNo: workorder.workOrderNumber,
+                  actualCompletionDate: '',
+                  discipline: '',
+                  estimatedManHours: null,
+                  jobStatus: '',
+                  remainingManHours: null,
+                  title: workorder.description,
+                  workOrderId: workorder.workOrderId,
+                  projectProgress: workorder.projectProgress,
+                })
+              )}
             />
           </Tabs.Panel>
           <Tabs.Panel>

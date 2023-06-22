@@ -1,7 +1,6 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { McBase } from './types';
-import { proCoSysUrls } from '../../../../../../mapping/src/lib/procosys/procosysUrls';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { colorMap } from '../../../../../../mapping';
@@ -24,12 +23,14 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    minWidth: 200,
+    minWidth: 100,
+    flex: 2,
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
-    width: 150,
+    valueGetter: (pkg) => pkg.data?.mcStatus,
+    minWidth: 100,
+    flex: 1,
   },
   {
     field: 'RFCC',
@@ -44,7 +45,8 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    width: 150,
+    minWidth: 100,
+    flex: 1,
   },
   {
     field: 'RFOC',
@@ -57,6 +59,7 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    width: 150,
+    minWidth: 100,
+    flex: 1,
   },
 ];
