@@ -28,7 +28,7 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.mcStatus,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     minWidth: 100,
     flex: 1,
   },

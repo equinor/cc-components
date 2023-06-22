@@ -1,13 +1,12 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { proCoSysUrls, statusColorMap } from '@cc-components/shared/mapping';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { tokens } from '@equinor/eds-tokens';
 import { Icon } from '@equinor/eds-core-react';
 
 import {
   BannerItem,
   McTab,
-  NcrTab,
   PunchTab,
   QueryTab,
   SidesheetHeader,
@@ -29,11 +28,10 @@ import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
-import { WorkorderBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/workorder/types';
 import { useQuery } from '@tanstack/react-query';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
-import { info_circle, error_outlined } from '@equinor/eds-icons';
+import { BaseStatus, useContextId } from '@cc-components/shared';
+import { error_outlined } from '@equinor/eds-icons';
 
 type HandoverProps = {
   id: string;
@@ -120,7 +118,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               content={props?.item?.commissioningPackageStatus || 'N/A'}
               statusColor={
                 props?.item?.commissioningPackageStatus
-                  ? statusColorMap[props.item.commissioningPackageStatus]
+                  ? statusColorMap[props.item.commissioningPackageStatus as BaseStatus]
                   : 'transparent'
               }
             />

@@ -1,14 +1,13 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenHeader, GardenItem } from '../ui-garden';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
 export const useGardenConfig = (
   contextId: string,
-  boundaryTrigger: VoidFunction
-): GardenConfig<HandoverPackage, FilterStateGroup[]> => {
+): GardenConfig<HandoverPackage, FilterState> => {
   const client = useHttpClient('cc-app');
 
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
@@ -26,7 +25,6 @@ export const useGardenConfig = (
             requestArgs
           ),
       },
-      boundaryTrigger
     );
 
   return {
