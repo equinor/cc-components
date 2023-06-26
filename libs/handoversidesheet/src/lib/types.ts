@@ -53,10 +53,11 @@ export type HandoverSWCR = {
 } & HandoverChild;
 
 export type HandoverUnsignedAction = {
-  actionNumber: string;
-  actionId: string;
+  actionNo: string;
+  commissioningPackageUrlId: string;
   title: string;
   description: string;
+  unsignedTaskUrl: string;
 } & HandoverChild;
 
 export type HandoverUnsignedTask = {

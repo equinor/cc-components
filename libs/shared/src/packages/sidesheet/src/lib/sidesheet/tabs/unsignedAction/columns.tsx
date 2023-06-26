@@ -6,10 +6,10 @@ import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/c
 export const columns: ColDef<UnsignedActionBase>[] = [
   {
     field: '#',
-    valueGetter: (pkg) => pkg.data?.actionNumber,
+    valueGetter: (pkg) => pkg.data?.actionNo,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase>) => {
       if (props.data) {
-        return <LinkCell url={props.data.url} urlText={props.value} />;
+        return <LinkCell url={props.data.unsignedTaskUrl} urlText={props.value} />;
       } else return null;
     },
     flex: 1,
@@ -17,11 +17,11 @@ export const columns: ColDef<UnsignedActionBase>[] = [
   },
   {
     field: 'Title',
-    valueGetter: (pkg) => pkg.data?.description,
+    valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase, string | null>) => {
       return <DescriptionCell description={props.value} displayFullText />;
     },
     flex: 1,
-    minWidth: 100,
+    minWidth: 150,
   },
 ];
