@@ -49,7 +49,7 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
           </tr>
           <tr> 
             <td>Comm Pkg Discipline</td>
-            <td>{"TBA"}</td>
+            <td>{stringCell(commpkg.mcDisciplines)}</td>
           </tr>
           <tr>
             <td>Comm Pkg Area</td>

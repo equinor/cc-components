@@ -46,7 +46,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   const textColor = getTextColor(data.commissioningPackageStatus);
 
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
-  const commStatusColor = getDotsColor(data.commissioningPackageStatus);
+  const commStatusColor = getDotsColor(data.dynamicCommissioningStatus);
 
   const showWarningIcon = data.mechanicalCompletionStatus === 'OS' && data.commissioningPackageStatus === 'RFC Accepted';
 

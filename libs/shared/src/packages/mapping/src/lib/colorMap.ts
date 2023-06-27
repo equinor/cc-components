@@ -8,7 +8,7 @@ export const colorMap: Record<PackageStatus, string> = {
   'RFO Rejected': '#FF3B3B',
   'RFC Sent': '#C5E1A5',
   'RFC Accepted': '#7CB342',
-  'RFC Partly signed': '#BE773F',
+  'RFC Partly signed': '#A1CA74',
   'RFC Rejected': '#FF3B3B',
   'TAC Sent': '#EDB882',
   'TAC Accepted': '#E77422',

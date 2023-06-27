@@ -62,4 +62,6 @@ export type HandoverPackage = {
   subSystem: string | null;
   volume: number;
   hasUnsignedActions: string | null;
+  dynamicCommissioningStatus : BaseStatus;
+  mcDisciplines: string | null;
 };

@@ -115,10 +115,10 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           title="Compkg status"
           value={
             <StatusCircle
-              content={props?.item?.commissioningPackageStatus || 'N/A'}
+              content={props?.item?.dynamicCommissioningStatus || 'N/A'}
               statusColor={
                 props?.item?.commissioningPackageStatus
-                  ? statusColorMap[props.item.commissioningPackageStatus as BaseStatus]
+                  ? statusColorMap[props.item.dynamicCommissioningStatus]
                   : 'transparent'
               }
             />
