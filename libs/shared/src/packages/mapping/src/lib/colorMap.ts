@@ -4,9 +4,11 @@ import { PackageStatus } from '../../../types/src/lib/packageStatus';
 export const colorMap: Record<PackageStatus, string> = {
   'No status': '#d1d1d1',
   'RFO Sent': '#09CCF2',
+  'RFO Partly Signed':'#0581D7',
   'RFO Accepted': '#0035BC',
   'RFO Rejected': '#FF3B3B',
   'RFC Sent': '#C5E1A5',
+  'RFC Partly Sent' : '#A1CA74',
   'RFC Accepted': '#7CB342',
   'RFC Partly signed': '#A1CA74',
   'RFC Rejected': '#FF3B3B',

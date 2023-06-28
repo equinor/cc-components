@@ -15,28 +15,23 @@ const mcProgressMap: McProgress[] = [
   }, // OS
   {
     color: (item) =>
-      item.isRfcRejected
-        ? colorMap[item.dynamicCommissioningStatus]
-        : colorMap['RFC Sent'],
+      item.isRfcRejected ? colorMap[item.commissioningPackageStatus] : colorMap['RFC Sent'],
     accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
   },
   {
     color: (item) => {
-      if (status.indexOf('TAC') > -1) return colorMap[item.dynamicCommissioningStatus];
-      return item.isRfcRejected ? colorMap[item.dynamicCommissioningStatus] : '#7cb342';
+      if (status.indexOf('TAC') > -1) return colorMap[item.commissioningPackageStatus];
+      return item.isRfcRejected ? colorMap[item.commissioningPackageStatus] : '#7cb342';
     },
     accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
   },
   {
     color: (item) =>
-      item.isRfoRejected
-        ? colorMap[item.dynamicCommissioningStatus]
-        : colorMap['RFO Sent'],
+      item.isRfoRejected ? colorMap[item.commissioningPackageStatus] : colorMap['RFO Sent'],
     accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
   },
   {
-    color: (item) =>
-      item.isRfoRejected ? colorMap[item.dynamicCommissioningStatus] : '#0035bc',
+    color: (item) => (item.isRfoRejected ? colorMap[item.commissioningPackageStatus] : '#0035bc'),
     accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
   },
 ];
@@ -45,11 +40,7 @@ const mcProgressPercentage = (
   accessor: (item: HandoverPackage) => number
 ): number => {
   const count = accessor(item);
-  return count < 1
-    ? 0
-    : item.mechanicalCompletionPkgsCount === 0
-    ? 0
-    : (count / item.mechanicalCompletionPkgsCount) * 100;
+  return count < 1 ? 0 : item.mechanicalCompletionPkgsCount === 0 ? 0 : (count / item.mechanicalCompletionPkgsCount) * 100;
 };
 
 export const createProgressGradient = (
@@ -64,12 +55,12 @@ export const createProgressGradient = (
     const width = mcProgressPercentage(item, mcProgress.accessor);
     if (width === 0) return;
     progressWidth = Math.floor(width);
-    progressColor = mcProgress.color(item);
+    progressColor = colorMap[status]
   };
 
   mcProgressMap.forEach((mcProgress) => renderMcProgress(data, mcProgress));
 
   return progressWidth === 100 || progressWidth === 0
     ? color
-    : `linear-gradient(90deg,${progressColor} ${progressWidth}%,${color} ${progressWidth}%)`;
+    : `linear-gradient(90deg,${colorMap[data.commissioningPackageStatus]} ${progressWidth}%,#d9eaf2 ${progressWidth}%)`;
 };

@@ -30,7 +30,7 @@ export const useGardenConfig = (
   return {
     getDisplayName: (item) => item.commissioningPackageNo,
     initialGrouping: {
-      horizontalGroupingAccessor: 'Responsible',
+      horizontalGroupingAccessor: 'Priority1',
       verticalGroupingKeys: [],
     },
     getBlockAsync,
