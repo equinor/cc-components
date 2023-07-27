@@ -13,7 +13,7 @@ export const columns: ColDef<UnsignedActionBase>[] = [
       } else return null;
     },
     flex: 1,
-    minWidth: 100,
+    minWidth: 150,
   },
   {
     field: 'Title',
@@ -22,6 +22,6 @@ export const columns: ColDef<UnsignedActionBase>[] = [
       return <DescriptionCell description={props.value} displayFullText />;
     },
     flex: 1,
-    minWidth: 150,
+    minWidth: 300,
   },
 ];

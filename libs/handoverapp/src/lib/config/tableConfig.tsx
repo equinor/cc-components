@@ -58,6 +58,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     field: 'Description',
+    colId : "Description",
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -66,11 +67,15 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     field: 'Disciplines',
-    //valueGetter: (pkg) => pkg.data?.mcDisciplineCodes.join(',').replace(/,/g, ', '),
+    valueGetter: (pkg) => pkg.data?.mcDisciplines,
+    cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
+      return <DescriptionCell description={props.value} />;
+    },
     width: 150,
   },
   {
     field: 'MC status',
+    colId : "MCStatus",
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
       if (props.node.group) return null;
@@ -88,6 +93,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     field: 'Comm status',
+    colId : "CommStatus",
     valueGetter: (pkg) => pkg.data?.commissioningPackageStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
       if (props.node.group) return null;
@@ -105,39 +111,46 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     field: 'Responsible',
+    colId : "Responsible",
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: true,
     width: 150,
   },
   {
     field: 'Area', //AREA
+    colId : "Area",
     valueGetter: (pkg) => pkg.data?.location,
     enableRowGroup: true,
     width: 135,
   },
   {
     field: 'System',
+    colId : "System",
     valueGetter: (pkg) => pkg.data?.system,
     enableRowGroup: true,
     width: 150,
   },
   {
     field: 'Priority 1',
+    colId : "Priority1",
     valueGetter: (pkg) => pkg.data?.priority1,
     width: 150,
   },
   {
     field: 'Priority 2',
+    colId : "Priority2",
     valueGetter: (pkg) => pkg.data?.priority2,
     width: 150,
   },
   {
     field: 'Priority 3',
+    colId : "Priority3",
     valueGetter: (pkg) => pkg.data?.priority3,
     width: 150,
   },
   {
     field: 'Planned RFC',
+    colId : "PlannedRFC",
     valueGetter: (pkg) => pkg.data?.rfrcPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
@@ -147,6 +160,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     field: 'Forecast RFC',
+    colId : "ForecastRFC",
     valueGetter: (pkg) => pkg.data?.rfcForecastDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
@@ -156,6 +170,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     field: 'Planned RFO',
+    colId : "PlannedRFO",
     valueGetter: (pkg) => pkg.data?.rfoPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
@@ -164,8 +179,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     width: 180,
   },
   {
-    field: 'Forecast RFC',
-    valueGetter: (pkg) => pkg.data?.rfcForecastDate,
+    field: 'Actual RFO',
+    colId : "ActualRFO",
+    valueGetter: (pkg) => pkg.data?.rfoActualDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;

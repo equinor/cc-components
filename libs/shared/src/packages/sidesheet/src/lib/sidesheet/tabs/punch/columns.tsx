@@ -22,13 +22,13 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    minWidth: 100,
+    minWidth: 200,
     flex: 2,
   },
   {
     field: 'To be cleared by',
     valueGetter: (pkg) => pkg.data?.clearedBy,
-    width: 250,
+    width: 160,
   },
   {
     field: 'Status',
@@ -49,13 +49,13 @@ export const columns: ColDef<PunchBase>[] = [
         />
       );
     },
-    minWidth: 50,
+    minWidth: 100,
     flex: 1,
   },
   {
     field: 'Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
-    minWidth: 50,
+    minWidth: 100,
     flex: 1,
   },
 ];

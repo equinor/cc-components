@@ -16,7 +16,7 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
         />
       );
     },
-    minWidth: 80,
+    minWidth: 150,
   },
   {
     field: 'Title',
@@ -24,6 +24,7 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => (
       <DescriptionCell description={props.value} />
     ),
+    flex: 1,
     minWidth: 300,
   },
 ];

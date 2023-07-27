@@ -3,6 +3,7 @@ export type PackageStatus =
   | 'PB'
   | 'RFO Accepted'
   | 'RFC Partly sent'
+  | 'RFO Partly signed'
   | 'RFO Sent'
   | 'RFO Rejected'
   | 'RFO Partly signed'
