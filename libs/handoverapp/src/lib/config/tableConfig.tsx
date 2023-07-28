@@ -47,7 +47,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     field: 'Comm pkg',
     colId : "CommPkgNo",
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-    //valueFormatter: (pkg) => pkg.data?.url ?? '', TODO Sjekk URL
+    valueFormatter: (pkg) => pkg.data?.commissioningPackageUrl ?? '', 
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (!props.valueFormatted) {
         return props.value;

@@ -14,6 +14,7 @@ export type HandoverPackage = {
   commissioningPackageId: string;
   commissioningPackageUrlId: string;
   commissioningPackageStatus: PackageStatus;
+  commissioningPackageUrl: string;
   description: string | null;
   //demolition
   dccShippedDate: string | null;
