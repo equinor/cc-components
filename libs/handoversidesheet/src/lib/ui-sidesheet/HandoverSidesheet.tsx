@@ -214,7 +214,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
                   jobStatus: workorder.jobStatus,
                   remainingHours: workorder.remainingHours,
                   title: workorder.description,
-                  workorderUrl: workorder.commpkgId,
+                  workOrderUrl: workorder.commpkgId,
                   projectProgress: workorder.projectProgress,
                 })
               )}

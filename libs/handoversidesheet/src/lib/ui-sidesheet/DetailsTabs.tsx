@@ -4,6 +4,7 @@ import {
   StyledTabContent,
   StyledTable,
 } from '@cc-components/shared/sidesheet';
+import { LinkCell } from '@cc-components/shared/table-helpers';
 import { formatDateString } from '@cc-components/shared/utils-dates';
 
 import { useMemo } from 'react';
@@ -19,16 +20,15 @@ type DetailsTabProps = {
 };
 
 export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
-
   // export const DetailsTab = ({
   //   commpkg,
   //   nextToSign,
   //   dataIsFetching,
   // }: DetailsTabProps): JSX.Element => {
-    
+
   //   const NextToSign = useMemo(() => {
   //     if (dataIsFetching) return <>Loading...</>;
-  
+
   //     return nextToSign?.length ? <div>{nextToSign[0].nextToSign}</div> : '';
   //   }, [nextToSign, dataIsFetching]);
 
@@ -47,7 +47,7 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>Comm Pkg Responsible</td>
             <td>{stringCell(commpkg.responsible)}</td>
           </tr>
-          <tr> 
+          <tr>
             <td>Comm Pkg Discipline</td>
             <td>{stringCell(commpkg.mcDisciplines)}</td>
           </tr>
@@ -64,7 +64,7 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>{stringCell(commpkg.system)}</td>
           </tr>
           <tr>
-            <td>Comm Pkg Tags</td> 
+            <td>Comm Pkg Tags</td>
             <td>{stringCell(commpkg.volume ? commpkg.volume.toString() : '0')}</td>
           </tr>
           <tr>
@@ -87,11 +87,16 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>Comm Pkg Progress</td>
             <td>{stringCell(`${commpkg.progress || 0}%`)}</td>
           </tr>
-
-          {/* <tr>
-            <td>Next to sign</td>
-            <td>{NextToSign}</td>
-          </tr> */}
+          <tr>
+            <td>ProCoSys URL</td>
+            <td>
+              <LinkCell
+                url={commpkg.commissioningPackageUrl ?? ''}
+                urlText={commpkg.commissioningPackageUrl ?? ''}
+              />
+              ;
+            </td>
+          </tr>
         </tbody>
       </StyledTable>
 

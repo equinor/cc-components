@@ -15,7 +15,7 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase, string | null>) => {
       return <LinkCell url={props.data?.mechanicalCompletionPackageUrl} urlText={props.data?.mechanicalCompletionPackageNo} />;
     },
-    minWidth: 200,
+    minWidth: 150,
   },
   {
     field: 'Title',
@@ -23,7 +23,7 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    minWidth: 100,
+    minWidth: 150,
     flex: 2,
   },
   {
