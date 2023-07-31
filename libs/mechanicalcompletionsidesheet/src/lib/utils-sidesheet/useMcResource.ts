@@ -2,10 +2,11 @@ import { useCallback } from 'react';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { McNcr, McPunchItem, McWorkOrder } from '../types';
 import { useContextId, usePackageResource } from '@cc-components/shared/hooks';
+import { PunchBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/punch/type';
 type McResourceTypeMap = {
   ncr: McNcr;
   'work-orders': McWorkOrder;
-  punch: McPunchItem;
+  punch: PunchBase;
 };
 export const useMcResource = <T extends keyof McResourceTypeMap>(
   packageId: string,
