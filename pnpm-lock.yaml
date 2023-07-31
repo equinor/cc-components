@@ -690,6 +690,15 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  reports/projectsafetybarriers:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   reports/query:
     dependencies:
       '@cc-components/powerbi':
