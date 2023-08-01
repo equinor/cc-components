@@ -103,8 +103,8 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="WO"
           value={
-            wo.workorderUrl ? (
-              <LinkCell url={wo.workorderUrl} urlText={wo.workOrderNumber} />
+            wo.workOrderUrl ? (
+              <LinkCell url={wo.workOrderUrl} urlText={wo.workOrderNumber} />
             ) : (
               wo.workOrderNumber
             )
