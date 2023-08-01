@@ -29,6 +29,16 @@ export const columns: ColDef<McBase>[] = [
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
+    cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
+      <StatusCell
+        content={`${props.value}`}
+        cellAttributeFn={() => ({
+          style: {
+            backgroundColor: props.value ? colorMap[props.value] : 'transparent',
+          },
+        })}
+      />
+    ),
     minWidth: 100,
     flex: 1,
   },

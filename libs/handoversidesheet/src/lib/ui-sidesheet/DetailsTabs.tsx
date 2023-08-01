@@ -73,15 +73,15 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>Commissioning Priority 1</td>
-            <td>{stringCell(`${commpkg.priority1} - ${commpkg.priority1}`)}</td>
+            <td>{stringCell(commpkg.priority1 ? commpkg.priority1.toString() : '-')}</td>
           </tr>
           <tr>
             <td>Commissioning Priority 2</td>
-            <td>{stringCell(`${commpkg.priority2} - ${commpkg.priority2}`)}</td>
+            <td>{stringCell(commpkg.priority2 ? commpkg.priority2.toString() : '-')}</td>
           </tr>
           <tr>
             <td>Commissioning Priority 3</td>
-            <td>{stringCell(`${commpkg.priority3} - ${commpkg.priority3}`)}</td>
+            <td>{stringCell(commpkg.priority3 ? commpkg.priority3.toString() : '-')}</td>
           </tr>
           <tr>
             <td>Comm Pkg Progress</td>
