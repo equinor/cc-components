@@ -31,7 +31,9 @@ export const defaultGridOptions: GridOptions = {
   defaultColDef: defaultColDef,
   serverSideInitialRowCount: 100,
   onFirstDataRendered: (e) => {
-    e.columnApi.autoSizeColumns(e.columnApi.getAllDisplayedColumns());
+    e.columnApi.autoSizeColumns(
+      e.columnApi.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
+    );
   },
   rowStyle: { fontSize: '14px' },
 };
