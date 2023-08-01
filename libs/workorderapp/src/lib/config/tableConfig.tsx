@@ -55,10 +55,10 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-      if (!props.data?.workorderUrl) {
+      if (!props.data?.workOrderUrl) {
         return <StyledMonospace>{props.value}</StyledMonospace>;
       }
-      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
+      return <LinkCell url={props.data?.workOrderUrl} urlText={props.value} />;
     },
   },
   {
