@@ -1,12 +1,12 @@
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
+import { WorkorderBase, useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { Workorder } from '../types';
 
 export const useGetWorkorders = (loopNo: string | undefined) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
-  const { data, isLoading, error } = useQuery<Workorder[], Error>(
+  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
     ['loop', loopNo, 'workorders'],
     async ({ signal }) => {
       const respons = await client.fetch(
