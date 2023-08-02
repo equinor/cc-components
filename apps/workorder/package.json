@@ -1,6 +1,6 @@
 {
   "name": "workorder",
-  "version": "1.0.62",
+  "version": "1.1.0",
   "main": "/src/main.tsx",
   "type": "module",
   "scripts": {
