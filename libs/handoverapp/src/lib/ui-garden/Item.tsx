@@ -38,7 +38,6 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   //TODO Context.MAXSIZE
   const size = getItemSize(data.volume, 100 || 0);
 
-  // const status = getStatus(data);
   const backgroundColor = useMemo(
     () => createProgressGradient(data, data.commissioningPackageStatus),
     [data, data.commissioningPackageStatus]
@@ -48,14 +47,16 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
   const commStatusColor = getDotsColor(data.dynamicCommissioningStatus);
 
-  const showWarningIcon = data.mechanicalCompletionStatus === 'OS' && data.commissioningPackageStatus === 'RFC Accepted';
+  const showWarningIcon =
+    data.mechanicalCompletionStatus === 'OS' &&
+    data.commissioningPackageStatus === 'RFC Accepted';
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const options: ItemOptions = {
     size,
-    status : data.commissioningPackageStatus,
+    status: data.commissioningPackageStatus,
     barColor: backgroundColor,
     textColor,
     mcPackageColor,

@@ -78,7 +78,7 @@ export const PopoverContent = ({
 
         <h5>CommPkg status</h5>
         <StyledPopoverStatus color={commStatusColor}> 
-          {//TODO dette stinker
+          {
           ['OS', 'OK', 'PA'].includes(data.dynamicCommissioningStatus) ? data.dynamicCommissioningStatus : 'PB'}
         </StyledPopoverStatus>
       </StyledStatuses>
