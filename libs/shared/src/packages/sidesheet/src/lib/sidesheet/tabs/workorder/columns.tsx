@@ -8,10 +8,10 @@ import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/Li
 import { ProgressCell } from '../../../../../../table-helpers/src/lib/table/cells/ProgressCell';
 import { WorkorderBase } from './types';
 
-export const columns = (): ColDef<WorkorderBase>[] => {
-  let estimateHoursMax = -1;
-  let remainingHoursMax = -1;
-
+export const columns = (
+  maxEstimatedHours: number | null,
+  maxRemainingHours: number | null
+): ColDef<WorkorderBase>[] => {
   return [
     {
       field: 'WO',
@@ -76,16 +76,15 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'Estimated',
       valueGetter: (pkg) => pkg.data?.estimatedHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        if (estimateHoursMax === -1) {
-          //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
+        if (maxEstimatedHours === null) {
           const maxCount = 0;
-          estimateHoursMax = maxCount;
+          maxEstimatedHours = maxCount;
         }
         return (
           <Center>
             <EstimateCell
               current={Number(props.value === null ? 0 : props.value)}
-              max={estimateHoursMax}
+              max={maxEstimatedHours}
             />
           </Center>
         );
@@ -96,16 +95,15 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'Remaining',
       valueGetter: (pkg) => pkg.data?.remainingHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        if (remainingHoursMax === -1) {
-          //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
+        if (maxRemainingHours === null) {
           const maxCount = 0;
-          remainingHoursMax = maxCount;
+          maxRemainingHours = maxCount;
         }
         return (
           <Center>
             <EstimateCell
               current={Number(props.value === null ? 0 : props.value)}
-              max={remainingHoursMax}
+              max={maxRemainingHours}
             />
           </Center>
         );

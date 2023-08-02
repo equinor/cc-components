@@ -12,23 +12,24 @@ import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 
+import { useHttpClient } from '@cc-components/shared';
 import {
+  GridColumnOption,
   defaultGridOptions,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useTableConfig = (
   contextId: string
 ): GridConfig<HandoverPackage, FilterState> => {
-  const client = useHttpClient('cc-app');
+  const client = useHttpClient();
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/handover/grid`, req);
     const meta = (await res.json()) as {
       items: any[];
       rowCount: number;
-      columnDefinitions: any;
+      columnDefinitions: GridColumnOption[];
     };
     return {
       rowCount: meta.rowCount,
@@ -65,7 +66,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       }
       return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
     },
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Description',
@@ -74,7 +75,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 300,
+    minWidth: 300,
   },
   {
     field: 'Disciplines',
@@ -82,7 +83,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'MC status',
@@ -100,7 +101,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       );
     },
     enableRowGroup: true,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Comm status',
@@ -118,46 +119,46 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       );
     },
     enableRowGroup: true,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Responsible',
     colId: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: true,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Area', //AREA
     colId: 'Area',
     valueGetter: (pkg) => pkg.data?.location,
     enableRowGroup: true,
-    width: 135,
+    minWidth: 135,
   },
   {
     field: 'System',
     colId: 'System',
     valueGetter: (pkg) => pkg.data?.system,
     enableRowGroup: true,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Priority 1',
     colId: 'Priority1',
     valueGetter: (pkg) => pkg.data?.priority1,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Priority 2',
     colId: 'Priority2',
     valueGetter: (pkg) => pkg.data?.priority2,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Priority 3',
     colId: 'Priority3',
     valueGetter: (pkg) => pkg.data?.priority3,
-    width: 150,
+    minWidth: 150,
   },
   {
     field: 'Planned RFC',
@@ -167,7 +168,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
     },
-    width: 180,
+    minWidth: 180,
   },
   {
     field: 'Forecast RFC',
@@ -177,7 +178,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
     },
-    width: 180,
+    minWidth: 180,
   },
   {
     field: 'Planned RFO',
@@ -187,7 +188,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
     },
-    width: 180,
+    minWidth: 180,
   },
   {
     field: 'Actual RFO',
@@ -197,6 +198,6 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
     },
-    width: 180,
+    minWidth: 180,
   },
 ];

@@ -23,7 +23,8 @@ import {
 } from '@cc-components/shared/sidesheet';
 
 import { useContextId } from '@cc-components/shared';
-import { CircularProgress, Tabs } from '@equinor/eds-core-react';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import { Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createWidget } from '@equinor/workspace-sidesheet';
@@ -261,13 +262,7 @@ function EnsureHandover({ id, close, item }: HandoverProps) {
   );
 
   if (isLoading) {
-    return (
-      <div
-        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
-      >
-        <CircularProgress size={48} />
-      </div>
-    );
+    return <SidesheetSkeleton close={close} />;
   }
 
   if (error || !data) {
