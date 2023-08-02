@@ -10,9 +10,13 @@ import {
 } from '@cc-components/shared/table-helpers';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { MenuModule, ColumnsToolPanelModule } from '@equinor/workspace-ag-grid/modules';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  GridConfig,
+  MenuModule,
+  ColumnsToolPanelModule,
+  ICellRendererProps,
+} from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 
 export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState> => {

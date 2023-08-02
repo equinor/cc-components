@@ -7,9 +7,14 @@ import {
   StyledMonospace,
 } from '@cc-components/shared';
 import { tokens } from '@equinor/eds-tokens';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  GridConfig,
+  MenuModule,
+  ColumnsToolPanelModule,
+  ICellRendererProps,
+} from '@equinor/workspace-fusion/grid';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
@@ -39,6 +44,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
       ...defaultGridOptions,
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
