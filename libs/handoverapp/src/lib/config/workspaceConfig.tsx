@@ -5,15 +5,15 @@ import {
   usePBIOptions,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import Workspace from '@equinor/workspace-fusion';
-import { sidesheetConfig } from './sidesheetConfig';
-import { useTableConfig } from './tableConfig';
-import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useStatusBarConfig } from './statusBarConfig';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { useGardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './sidesheetConfig';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useTableConfig } from './tableConfig';
 
 
 export const WorkspaceWrapper = () => {

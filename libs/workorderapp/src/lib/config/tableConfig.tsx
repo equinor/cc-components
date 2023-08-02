@@ -3,21 +3,20 @@ import {
   LinkCell,
   ProgressCell,
   StatusCell,
-  YearAndWeekCell,
   StyledMonospace,
+  YearAndWeekCell,
 } from '@cc-components/shared';
-import { tokens } from '@equinor/eds-tokens';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import { defaultGridOptions, useGridDataSource } from '@cc-components/shared/workspace-config';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { tokens } from '@equinor/eds-tokens';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
+import { ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');

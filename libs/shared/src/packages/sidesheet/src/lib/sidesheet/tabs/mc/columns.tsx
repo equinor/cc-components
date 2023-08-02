@@ -1,12 +1,11 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
-import { McBase } from './types';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { colorMap } from '../../../../../../mapping';
 import { StatusCell } from '../../../../../../table-helpers';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { PackageStatus } from '../../../../../../types';
-import { getRFCCStatus, getRFOCStatus } from '../../../../../../utils-statuses';
+import { McBase } from './types';
 
 export const columns: ColDef<McBase>[] = [
   {

@@ -1,7 +1,7 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { colorMap } from '@cc-components/shared/mapping';
 import { PackageStatus } from '@cc-components/shared/types';
-// import { getStatus } from './getStatus';
+
 
 type McProgress = {
   color: (item: HandoverPackage) => string;

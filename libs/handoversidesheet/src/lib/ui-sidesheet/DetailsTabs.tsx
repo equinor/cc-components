@@ -7,7 +7,6 @@ import {
 import { LinkCell } from '@cc-components/shared/table-helpers';
 import { formatDateString } from '@cc-components/shared/utils-dates';
 
-import { useMemo } from 'react';
 
 type HandoverDetails = {
   nextToSign: string;

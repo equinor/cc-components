@@ -1,8 +1,8 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
-import { tokens } from '@equinor/eds-tokens';
 import { Icon } from '@equinor/eds-core-react';
+import { tokens } from '@equinor/eds-tokens';
 
 import {
   BannerItem,
@@ -22,16 +22,16 @@ import {
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 
+import { useContextId } from '@cc-components/shared';
 import { CircularProgress, Tabs } from '@equinor/eds-core-react';
+import { error_outlined } from '@equinor/eds-icons';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createWidget } from '@equinor/workspace-sidesheet';
+import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
-import { useQuery } from '@tanstack/react-query';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { BaseStatus, useContextId } from '@cc-components/shared';
-import { error_outlined } from '@equinor/eds-icons';
 
 type HandoverProps = {
   id: string;

@@ -1,12 +1,12 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import styled from 'styled-components';
 
-import { WorkorderBase } from './types';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { DateCell } from '../../../../../../table-helpers/src/lib/table/cells/DateCell';
-import { ProgressCell } from '../../../../../../table-helpers/src/lib/table/cells/ProgressCell';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { EstimateCell } from '../../../../../../table-helpers/src/lib/table/cells/EstimateCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
+import { ProgressCell } from '../../../../../../table-helpers/src/lib/table/cells/ProgressCell';
+import { WorkorderBase } from './types';
 
 export const columns = (): ColDef<WorkorderBase>[] => {
   let estimateHoursMax = -1;

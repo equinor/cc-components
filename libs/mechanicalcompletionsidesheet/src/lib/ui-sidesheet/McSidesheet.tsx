@@ -1,6 +1,6 @@
-import { Tabs } from '@equinor/eds-core-react';
-import { useState } from 'react';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   BannerItem,
   NcrTab,
@@ -14,13 +14,13 @@ import {
   WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { DetailsTab } from './DetailsTab';
-import { useMcResource } from '../utils-sidesheet';
-import styled from 'styled-components';
+import { Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { statusColorMap } from '@cc-components/shared/mapping';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { createWidget } from '@equinor/workspace-sidesheet';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { useMcResource } from '../utils-sidesheet';
+import { DetailsTab } from './DetailsTab';
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;

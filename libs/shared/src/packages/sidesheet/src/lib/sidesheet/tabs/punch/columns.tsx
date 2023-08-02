@@ -1,11 +1,11 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
-import { PunchBase } from './type';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { statusColorMap } from '../../../../../../mapping';
 import { StatusCell } from '../../../../../../table-helpers';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { hasProperty } from '../../../../../../utils-typescript';
+import { PunchBase } from './type';
 
 export const columns: ColDef<PunchBase>[] = [
   {

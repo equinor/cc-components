@@ -1,5 +1,5 @@
-import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 
 export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
   const client = useHttpClient('cc-app');

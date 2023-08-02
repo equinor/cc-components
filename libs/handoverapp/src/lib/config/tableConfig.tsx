@@ -1,15 +1,12 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { StyledMonospace, statusColorMap } from '@cc-components/shared';
-import { DateCell, DescriptionCell, LinkCell, StatusCell } from '@cc-components/shared';
-import { BaseStatus } from '@cc-components/shared';
+import { BaseStatus, DateCell, DescriptionCell, LinkCell, StatusCell, statusColorMap } from '@cc-components/shared';
 
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
+import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
 
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { defaultGridOptions, useGridDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 
 export const useTableConfig = (
   contextId: string

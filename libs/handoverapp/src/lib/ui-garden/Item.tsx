@@ -2,8 +2,8 @@ import { HandoverPackage } from '@cc-components/handovershared';
 import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared/common';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { getDotsColor, getItemSize, getTextColor} from '../utils-garden';
-// import { getStatus } from '../utils-statuses';
+import { getDotsColor, getItemSize, getTextColor } from '../utils-garden';
+
 import { createProgressGradient } from '../utils-statuses/mcProgress';
 import {
   StyledItemText,

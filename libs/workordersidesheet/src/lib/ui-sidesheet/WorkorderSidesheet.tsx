@@ -1,33 +1,32 @@
-import { createWidget } from '@equinor/workspace-sidesheet';
-import { useState } from 'react';
-import { Tabs } from '@equinor/eds-core-react';
-import styled from 'styled-components';
-import { tokens } from '@equinor/eds-tokens';
-import {
-  WorkOrder,
-  getMatStatusColorByStatus,
-  getMccrStatusColorByStatus,
-} from '@cc-components/workordershared';
-import { useMaterial, useMccr } from '../utils-sidesheet';
-import { DetailsTab } from './DetailsTab';
 import {
   BannerItem,
+  LinkCell,
   MaterialTab,
   MccrTab,
   SidesheetHeader,
+  StatusCircle,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-  StyledItemLink,
-  useHttpClient,
   useContextId,
-  StatusCircle,
-  LinkCell,
+  useHttpClient
 } from '@cc-components/shared';
-import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
+import { Tabs } from '@equinor/eds-core-react';
+import { tokens } from '@equinor/eds-tokens';
+import { createWidget } from '@equinor/workspace-sidesheet';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { useMaterial, useMccr } from '../utils-sidesheet';
+import { DetailsTab } from './DetailsTab';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;

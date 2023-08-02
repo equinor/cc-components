@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { McNcr, McPunchItem, McWorkOrder } from '../types';
 import { useContextId, usePackageResource } from '@cc-components/shared/hooks';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { PunchBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/punch/type';
+import { useCallback } from 'react';
+import { McNcr, McWorkOrder } from '../types';
 type McResourceTypeMap = {
   ncr: McNcr;
   'work-orders': McWorkOrder;
