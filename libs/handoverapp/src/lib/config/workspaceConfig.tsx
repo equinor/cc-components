@@ -15,9 +15,8 @@ import { sidesheetConfig } from './sidesheetConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useTableConfig } from './tableConfig';
 
-
 export const WorkspaceWrapper = () => {
-  const contextId = useContextId()
+  const contextId = useContextId();
   const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 

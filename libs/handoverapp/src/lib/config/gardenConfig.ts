@@ -6,26 +6,21 @@ import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { GardenHeader, GardenItem } from '../ui-garden';
 
 export const useGardenConfig = (
-  contextId: string,
+  contextId: string
 ): GardenConfig<HandoverPackage, FilterState> => {
   const client = useHttpClient('cc-app');
 
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
-    useGardenDataSource(
-      {
-        getBlockAsync: (requestArgs) =>
-          client.fetch(`/api/contexts/${contextId}/handover/garden`, requestArgs),
-        getGardenMeta: (requestArgs) =>
-          client.fetch(`/api/contexts/${contextId}/handover/garden-meta`, requestArgs),
-        getHeader: (requestArgs) =>
-          client.fetch(`/api/contexts/${contextId}/handover/garden`, requestArgs),
-        getSubgroupItems: (requestArgs) =>
-          client.fetch(
-            `/api/contexts/${contextId}/handover/subgroup-items`,
-            requestArgs
-          ),
-      },
-    );
+    useGardenDataSource({
+      getBlockAsync: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/handover/garden`, requestArgs),
+      getGardenMeta: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/handover/garden-meta`, requestArgs),
+      getHeader: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/handover/garden`, requestArgs),
+      getSubgroupItems: (requestArgs) =>
+        client.fetch(`/api/contexts/${contextId}/handover/subgroup-items`, requestArgs),
+    });
 
   return {
     getDisplayName: (item) => item.commissioningPackageNo,

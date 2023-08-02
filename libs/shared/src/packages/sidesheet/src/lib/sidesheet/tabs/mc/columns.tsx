@@ -12,7 +12,12 @@ export const columns: ColDef<McBase>[] = [
     field: 'MC.Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<McBase, string | null>) => {
-      return <LinkCell url={props.data?.mechanicalCompletionPackageUrl} urlText={props.data?.mechanicalCompletionPackageNo} />;
+      return (
+        <LinkCell
+          url={props.data?.mechanicalCompletionPackageUrl}
+          urlText={props.data?.mechanicalCompletionPackageNo}
+        />
+      );
     },
     minWidth: 150,
   },

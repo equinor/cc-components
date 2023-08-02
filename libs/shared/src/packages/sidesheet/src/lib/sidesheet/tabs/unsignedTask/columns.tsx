@@ -9,12 +9,7 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     field: '#',
     valueGetter: (pkg) => pkg.data?.taskId,
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
-      return (
-        <LinkCell
-          url={props.data?.unsignedTaskUrl}
-          urlText={props.data?.taskId}
-        />
-      );
+      return <LinkCell url={props.data?.unsignedTaskUrl} urlText={props.data?.taskId} />;
     },
     minWidth: 150,
   },

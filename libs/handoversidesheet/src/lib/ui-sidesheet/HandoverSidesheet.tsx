@@ -94,15 +94,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     error: queryError,
   } = useHandoverResource(props.id, 'query');
 
-  // const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
-  //   useHandoverResource(props.id, 'details');
-
-  // const {
-  //   data: ncrPackages,
-  //   dataIsFetching: isDataFetchingNcr,
-  //   error: ncrError,
-  // } = useHandoverResource(props.id, 'ncr');
-
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
@@ -141,12 +132,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           title="Commpkg"
           value={
             props.item?.commissioningPackageNo ? props.item.commissioningPackageNo : 'N/A'
-            // <StyledItemLink
-            //   target="_blank"
-            //   href={proCoSysUrls.getCommPkgUrl(props?.item?.id || '')}
-            // >
-            //   {props?.item?.commpkgNo}
-            // </StyledItemLink>
           }
         />
       </StyledBanner>
@@ -181,9 +166,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             <Tabs.Tab>
               SWCR <TabTitle data={swcrPackages} isLoading={isDataFetchingSwcr} />
             </Tabs.Tab>
-            {/* <Tabs.Tab>
-              NCr <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />
-            </Tabs.Tab> */}
+
             <Tabs.Tab>
               Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
             </Tabs.Tab>
@@ -192,11 +175,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
 
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab
-              commpkg={props.item as HandoverPackage}
-              // dataIsFetching={isDataFetchingDetails}
-              // nextToSign={detailsData}
-            />
+            <DetailsTab commpkg={props.item as HandoverPackage} />
           </Tabs.Panel>
           <Tabs.Panel>
             <McTab mc={mcPackages} isFetching={isDataFetchingMc} error={mcError} />
@@ -250,9 +229,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               error={swcrError}
             />
           </Tabs.Panel>
-          {/* <Tabs.Panel>
-            <NcrTab ncrs={ncrPackages} isFetching={isDataFetchingNcr} error={ncrError} />
-          </Tabs.Panel> */}
+
           <Tabs.Panel>
             <QueryTab
               queries={queryPackages}
@@ -294,7 +271,7 @@ function EnsureHandover({ id, close, item }: HandoverProps) {
   }
 
   if (error || !data) {
-    console.log(error)
+    console.log(error);
     return (
       <div
         style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}

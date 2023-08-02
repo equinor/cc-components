@@ -7,30 +7,11 @@ import {
 import { LinkCell } from '@cc-components/shared/table-helpers';
 import { formatDateString } from '@cc-components/shared/utils-dates';
 
-
-type HandoverDetails = {
-  nextToSign: string;
-};
-
 type DetailsTabProps = {
   commpkg: HandoverPackage;
-  // nextToSign: HandoverDetails[] | undefined;
-  // dataIsFetching: boolean;
 };
 
 export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
-  // export const DetailsTab = ({
-  //   commpkg,
-  //   nextToSign,
-  //   dataIsFetching,
-  // }: DetailsTabProps): JSX.Element => {
-
-  //   const NextToSign = useMemo(() => {
-  //     if (dataIsFetching) return <>Loading...</>;
-
-  //     return nextToSign?.length ? <div>{nextToSign[0].nextToSign}</div> : '';
-  //   }, [nextToSign, dataIsFetching]);
-
   return (
     <StyledTabContent>
       <h3>Details</h3>

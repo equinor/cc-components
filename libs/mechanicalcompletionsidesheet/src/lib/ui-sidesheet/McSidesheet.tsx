@@ -148,7 +148,7 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
                   title: workorder.description,
                   workOrderUrlId: workorder.workOrderId,
                   projectProgress: workorder.projectProgress,
-                  plannedFinishDate: workorder.plannedCompletionDate
+                  plannedFinishDate: workorder.plannedCompletionDate,
                 })
               )}
             />

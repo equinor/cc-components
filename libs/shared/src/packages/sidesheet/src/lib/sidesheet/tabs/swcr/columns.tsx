@@ -9,9 +9,14 @@ export const columns: ColDef<SwcrBase>[] = [
     field: '#',
     valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
     cellRenderer: (props: ICellRendererProps<SwcrBase, string | null>) => {
-      return <LinkCell url={props.data?.softwareChangeRecordUrl} urlText={props.data?.softwareChangeRecordNo} />;
+      return (
+        <LinkCell
+          url={props.data?.softwareChangeRecordUrl}
+          urlText={props.data?.softwareChangeRecordNo}
+        />
+      );
     },
-    minWidth: 80,
+    minWidth: 100,
   },
   {
     field: 'Description',
@@ -20,18 +25,18 @@ export const columns: ColDef<SwcrBase>[] = [
       <DescriptionCell description={props.value} />
     ),
     flex: 1,
-    minWidth: 50,
+    minWidth: 200,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     flex: 1,
-    minWidth: 50,
+    minWidth: 100,
   },
   {
     field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
     flex: 1,
-    minWidth: 50,
+    minWidth: 100,
   },
 ];

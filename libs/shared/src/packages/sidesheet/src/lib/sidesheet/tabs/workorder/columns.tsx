@@ -17,7 +17,12 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       field: 'WO',
       valueGetter: (pkg) => pkg.data?.workOrderNumber,
       cellRenderer: (props: ICellRendererProps<WorkorderBase, string | null>) => {
-        return <LinkCell url={props.data?.workOrderUrl} urlText={props.data?.workOrderNumber} />;
+        return (
+          <LinkCell
+            url={props.data?.workOrderUrl}
+            urlText={props.data?.workOrderNumber}
+          />
+        );
       },
       minWidth: 200,
     },
