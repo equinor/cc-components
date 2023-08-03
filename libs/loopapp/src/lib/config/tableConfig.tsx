@@ -10,8 +10,13 @@ import {
 } from '@cc-components/shared/table-helpers';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  GridConfig,
+  MenuModule,
+  ColumnsToolPanelModule,
+  ICellRendererProps,
+} from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 
 export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState> => {
@@ -30,15 +35,9 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     columnDefinitions: colDefs as [ColDef<Loop>, ...ColDef<Loop>[]],
     gridOptions: {
       ...defaultGridOptions,
-      onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
-        );
-      },
     },
     getRows: getRows,
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 

@@ -14,7 +14,13 @@ import {
   DataResponse,
 } from '@cc-components/shared/workspace-config';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+  ColumnsToolPanelModule,
+} from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState> => {
@@ -44,6 +50,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
       },
     },
     columnDefinitions: colDefs as [ColDef<Punch>, ...ColDef<Punch>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 

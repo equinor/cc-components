@@ -6,7 +6,10 @@ import {
   StyledMonospace,
   YearAndWeekCell,
 } from '@cc-components/shared';
-import { defaultGridOptions, useGridDataSource } from '@cc-components/shared/workspace-config';
+import {
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
@@ -14,9 +17,14 @@ import {
 } from '@cc-components/workordershared';
 import { tokens } from '@equinor/eds-tokens';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
@@ -36,15 +44,9 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     getRows: getRows,
     gridOptions: {
       ...defaultGridOptions,
-      onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
-        );
-      },
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
