@@ -26,7 +26,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   if (!envConfig.uri) {
     throw new Error('Failed to load environemnt config for workorder');
   }
-  config.configureHttpClient('data-proxy', {
+  config.configureHttpClient('cc-app', {
     baseUri: envConfig?.uri,
     defaultScopes: envConfig?.defaultScopes,
   });

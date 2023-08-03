@@ -35,7 +35,7 @@ export const useHandoverResource = <T extends keyof HandoverResourceTypeMap>(
   packageId: string,
   packageType: T
 ): UseHandoverResource<T> => {
-  const dataProxy = useHttpClient('data-proxy');
+  const dataProxy = useHttpClient('cc-app');
   const contextId = useContextId();
   const getData = useCallback(
     async (id: string, signal?: AbortSignal) => {

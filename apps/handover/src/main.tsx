@@ -3,7 +3,7 @@ import { createRender, RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const HandoverApp = () => {
-  const client = useHttpClient('data-proxy');
+  const client = useHttpClient('cc-app');
   return (
     <RootAppWrapper client={client}>
       <WorkspaceWrapper />

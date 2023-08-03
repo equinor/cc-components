@@ -14,6 +14,7 @@ import {
 export default {
   title: 'Sidesheet tabs',
 };
+/*
 
 export const Material = () => (
   <MaterialTab
@@ -58,34 +59,25 @@ export const Mc = () => (
     isFetching={false}
     mc={[
       {
-        mcPkgNo: '585',
+        mechanicalCompletionPackageNo: '585',
         mcPkgId: '358',
         description: 'Mc description 1',
-        mcStatus: 'Mc status 1',
+        mechanicalCompletionStatus: 'Mc status 1',
         rfccShippedActualDate: '',
         rfccAcceptedActualDate: '',
-        rfocIsShipped: true,
-        rfocIsAccepted: false,
-        rfocIsRejected: true,
-        rfccIsShipped: true,
-        rfccIsAccepted: true,
-        rfccIsRejected: false,
-        url: '',
+        rfO_Status: 'Accepted',
+        rfC_Status: 'Accepted',
       },
       {
-        mcPkgNo: '262',
+        mechanicalCompletionPackageNo: '262',
         mcPkgId: '657',
         description: 'Mc description 2',
-        mcStatus: 'Mc status 2',
+        mechanicalCompletionStatus: 'Mc status 2',
         rfccShippedActualDate: '',
         rfccAcceptedActualDate: '',
-        rfocIsShipped: true,
-        rfocIsAccepted: true,
+        rfO_Status: 'Accepted',
+        rfC_Status: 'Accepted',
         rfocIsRejected: false,
-        rfccIsShipped: true,
-        rfccIsAccepted: true,
-        rfccIsRejected: false,
-        url: '',
       },
     ]}
   />
@@ -185,20 +177,22 @@ export const Punch = () => (
     isFetching={false}
     punches={[
       {
-        tagNumber: '958',
-        tagId: '657',
-        status: 'Punch status 1',
+        tagNo: '958',
+        tagUrlId: '657',
+        tagUrl:"12345678",
+        category: 'Punch status 1',
         description: 'Punch description 1',
-        toBeClearedBy: 'Unknown :(',
+        clearedBy: 'Unknown :(',
         sorting: 'Up and down',
         url: '',
       },
       {
-        tagNumber: '841',
-        tagId: '332',
-        status: 'Punch status 2',
+        tagNo: '841',
+        tagUrlId: '332',
+        tagUrl:"12345678",
+        category: 'Punch status 2',
         description: 'Punch description 2',
-        toBeClearedBy: 'Unknown :)',
+        clearedBy: 'Unknown :)',
         sorting: 'Down and up',
         url: '',
       },
@@ -212,22 +206,20 @@ export const Query = () => (
     isFetching={false}
     queries={[
       {
-        queryNumber: '53',
+        queryNo: '53',
         queryId: '269',
         title: 'Query title 1',
-        status: ' Query status 1',
+        queryStatus: ' Query status 1',
         nextToSign: 'Next to sign 1',
-        type: 'Query type 1',
-        url: '',
+        queryType: 'Query type 1',
       },
       {
-        queryNumber: '35',
+        queryNo: '35',
         queryId: '637',
         title: 'Query title 2',
-        status: ' Query status 2',
+        queryStatus: ' Query status 2',
         nextToSign: 'Next to sign 2',
-        type: 'Query type 2',
-        url: '',
+        queryType: 'Query type 2',
       },
     ]}
   />
@@ -339,3 +331,4 @@ export const Workorder = () => (
   />
 );
 //TODO: Add the rest of the preconfigured tables under here
+*/
