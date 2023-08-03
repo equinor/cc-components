@@ -24,10 +24,7 @@ export const useGardenConfig = (
 
   return {
     getDisplayName: (item) => item.commissioningPackageNo,
-    initialGrouping: {
-      horizontalGroupingAccessor: 'Priority1',
-      verticalGroupingKeys: [],
-    },
+    initialGrouping: ['Priority1'],
     getBlockAsync,
     getGardenMeta,
     getHeader,
