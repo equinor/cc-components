@@ -1,21 +1,28 @@
-import { HandoverPackage } from '@cc-components/handovershared';
 import { CustomHeaderView } from '@equinor/workspace-fusion/garden';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
-import { getSubtitleHeader } from '../utils-garden';
+import { tokens } from '@equinor/eds-tokens';
+
 const HeaderContent = styled.div`
   font-weight: 600;
 `;
-const HandoverGardenHeader = (props: CustomHeaderView<HandoverPackage>) => {
-  const { columnIndex, garden } = props;
-  const subHeader = useMemo(
-    () => getSubtitleHeader(garden[columnIndex].items, props?.groupByKey),
-    [columnIndex, garden, props?.groupByKey]
-  );
+
+const Count = styled.span`
+  color: ${tokens.colors.text.static_icons__default};
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin-left: 0.8em;
+`;
+
+const HandoverGardenHeader = (props: CustomHeaderView) => {
+  const { header } = props;
+
   return (
     <HeaderContent>
-      {garden[columnIndex].value}
-      <div>{subHeader}</div>
+      <div>
+        {header.name} 
+      </div>
+      <Count>({header.count})</Count>
     </HeaderContent>
   );
 };

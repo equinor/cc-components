@@ -1,8 +1,0 @@
-type FilterDateValues = 'Next 2 weeks' | 'Next 2-4 weeks' | 'Other';
-export const getFilterDateValues = (daysDiff: number): FilterDateValues => {
-  return daysDiff <= 14 && daysDiff > 0
-    ? 'Next 2 weeks'
-    : daysDiff <= 28 && daysDiff > 14
-    ? 'Next 2-4 weeks'
-    : 'Other';
-};
