@@ -3,26 +3,28 @@ import {
   LinkCell,
   ProgressCell,
   StatusCell,
-  YearAndWeekCell,
   StyledMonospace,
+  YearAndWeekCell,
 } from '@cc-components/shared';
-import { tokens } from '@equinor/eds-tokens';
-import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
-  ColDef,
-  GridConfig,
-  MenuModule,
-  ColumnsToolPanelModule,
-  ICellRendererProps,
-} from '@equinor/workspace-fusion/grid';
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { tokens } from '@equinor/eds-tokens';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
@@ -54,10 +56,10 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-      if (!props.data?.workorderUrl) {
+      if (!props.data?.workOrderUrl) {
         return <StyledMonospace>{props.value}</StyledMonospace>;
       }
-      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
+      return <LinkCell url={props.data?.workOrderUrl} urlText={props.value} />;
     },
   },
   {

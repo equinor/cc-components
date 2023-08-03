@@ -10,9 +10,9 @@ type RFOCBase = {
  */
 export const getRFOCStatus = <T extends RFOCBase>(item: T): PackageStatus =>
   item.rfocIsAccepted
-    ? 'RFOC Accepted'
+    ? 'RFO Accepted'
     : item.rfocIsRejected
-    ? 'RFOC Rejected'
+    ? 'RFO Rejected'
     : item.rfocIsShipped
-    ? 'RFOC Sent'
+    ? 'RFO Sent'
     : 'OS';

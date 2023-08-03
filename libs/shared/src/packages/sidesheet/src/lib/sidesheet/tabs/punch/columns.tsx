@@ -1,23 +1,20 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
-import { PunchBase } from './type';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { statusColorMap } from '../../../../../../mapping';
 import { StatusCell } from '../../../../../../table-helpers';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { hasProperty } from '../../../../../../utils-typescript';
+import { PunchBase } from './type';
 
 export const columns: ColDef<PunchBase>[] = [
   {
     field: 'Tag',
-    valueGetter: (pkg) => pkg.data?.tagNumber,
-    cellRenderer: (props: ICellRendererProps<PunchBase, string>) => {
-      if (props.data) {
-        return <LinkCell url={props.data.url} urlText={props.value} />;
-      } else return null;
+    valueGetter: (pkg) => pkg.data?.tagNo,
+    cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
+      return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
     },
-    minWidth: 100,
-    flex: 2,
+    minWidth: 150,
   },
   {
     field: 'Description',
@@ -25,18 +22,17 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    minWidth: 100,
+    minWidth: 200,
     flex: 2,
   },
   {
     field: 'To be cleared by',
-    valueGetter: (pkg) => pkg.data?.toBeClearedBy,
-    minWidth: 50,
-    flex: 1,
+    valueGetter: (pkg) => pkg.data?.clearedBy,
+    width: 160,
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.status,
+    valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return (
         <StatusCell
@@ -53,13 +49,13 @@ export const columns: ColDef<PunchBase>[] = [
         />
       );
     },
-    minWidth: 50,
+    minWidth: 100,
     flex: 1,
   },
   {
     field: 'Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
-    minWidth: 50,
+    minWidth: 100,
     flex: 1,
   },
 ];
