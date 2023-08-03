@@ -1,10 +1,12 @@
 import { HandoverPackage } from '@cc-components/handovershared';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
+import { Icon } from '@equinor/eds-core-react';
+import { tokens } from '@equinor/eds-tokens';
+
 import {
   BannerItem,
   McTab,
-  NcrTab,
   PunchTab,
   QueryTab,
   SidesheetHeader,
@@ -20,8 +22,13 @@ import {
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
 
+import { useContextId } from '@cc-components/shared';
+import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
+import { error_outlined } from '@equinor/eds-icons';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createWidget } from '@equinor/workspace-sidesheet';
+import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
@@ -32,7 +39,13 @@ type HandoverProps = {
   item?: HandoverPackage;
   close: () => void;
 };
-export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => {
+export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => (
+  <EnsureHandover {...props} />
+));
+
+Icon.add({ error_outlined });
+
+const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   const [activeTab, setActiveTab] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
@@ -45,15 +58,6 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
     dataIsFetching: isDataFetchingMc,
     error: mcError,
   } = useHandoverResource(props.id, 'mcpkg');
-
-  const { data: detailsData, dataIsFetching: isDataFetchingDetails } =
-    useHandoverResource(props.id, 'details');
-
-  const {
-    data: ncrPackages,
-    dataIsFetching: isDataFetchingNcr,
-    error: ncrError,
-  } = useHandoverResource(props.id, 'ncr');
 
   const {
     data: workOrderPackages,
@@ -94,7 +98,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props?.item?.commpkgNo || ''}
+        title={props?.item?.commissioningPackageNo || ''}
         applicationTitle={'Handover'}
         onClose={props.close}
       />
@@ -103,10 +107,10 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
           title="Compkg status"
           value={
             <StatusCircle
-              content={props?.item?.commpkgStatus || 'N/A'}
+              content={props?.item?.dynamicCommissioningStatus || 'N/A'}
               statusColor={
-                props?.item?.commpkgStatus
-                  ? statusColorMap[props.item.commpkgStatus]
+                props?.item?.commissioningPackageStatus
+                  ? statusColorMap[props.item.dynamicCommissioningStatus]
                   : 'transparent'
               }
             />
@@ -116,10 +120,10 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
           title="MC status"
           value={
             <StatusCircle
-              content={props?.item?.mcStatus || 'N/A'}
+              content={props?.item?.mechanicalCompletionStatus || 'N/A'}
               statusColor={
-                props?.item?.mcStatus
-                  ? statusColorMap[props.item.mcStatus]
+                props?.item?.mechanicalCompletionStatus
+                  ? statusColorMap[props.item.mechanicalCompletionStatus]
                   : 'transparent'
               }
             />
@@ -128,9 +132,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
         <BannerItem
           title="Commpkg"
           value={
-            <StyledItemLink target="_blank" href={props?.item?.url}>
-              {props.item?.commpkgNo ? props.item.commpkgNo : 'N/A'}
-            </StyledItemLink>
+            props.item?.commissioningPackageNo ? props.item.commissioningPackageNo : 'N/A'
           }
         />
       </StyledBanner>
@@ -165,9 +167,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
             <Tabs.Tab>
               SWCR <TabTitle data={swcrPackages} isLoading={isDataFetchingSwcr} />
             </Tabs.Tab>
-            <Tabs.Tab>
-              NCr <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />
-            </Tabs.Tab>
+
             <Tabs.Tab>
               Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
             </Tabs.Tab>
@@ -176,11 +176,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
 
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab
-              commpkg={props.item as HandoverPackage}
-              dataIsFetching={isDataFetchingDetails}
-              nextToSign={detailsData}
-            />
+            <DetailsTab commpkg={props.item as HandoverPackage} />
           </Tabs.Panel>
           <Tabs.Panel>
             <McTab mc={mcPackages} isFetching={isDataFetchingMc} error={mcError} />
@@ -190,16 +186,16 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
-                  workOrderUrl: workorder.url,
-                  workOrderNo: workorder.workOrderNumber,
-                  actualCompletionDate: '',
-                  discipline: '',
-                  estimatedManHours: null,
-                  jobStatus: '',
-                  remainingManHours: null,
+                  workOrderNumber: workorder.workOrderNumber,
+                  actualCompletionDate: workorder.actualCompletionDate,
+                  plannedFinishDate: workorder.plannedFinishDate,
+                  discipline: workorder.discipline,
+                  estimatedHours: workorder.estimatedHours,
+                  jobStatus: workorder.jobStatus,
+                  remainingHours: workorder.remainingHours,
                   title: workorder.description,
-                  workOrderId: workorder.commpkgId,
-                  projectProgress: null,
+                  workOrderUrl: workorder.commpkgId,
+                  projectProgress: workorder.projectProgress,
                 })
               )}
               isFetching={isDataFetchingWorkOrder}
@@ -234,9 +230,7 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
               error={swcrError}
             />
           </Tabs.Panel>
-          <Tabs.Panel>
-            <NcrTab ncrs={ncrPackages} isFetching={isDataFetchingNcr} error={ncrError} />
-          </Tabs.Panel>
+
           <Tabs.Panel>
             <QueryTab
               queries={queryPackages}
@@ -248,6 +242,67 @@ export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) 
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
+};
 
 export default HandoverSidesheet.render;
+
+function EnsureHandover({ id, close, item }: HandoverProps) {
+  const client = useHttpClient('cc-app');
+  const contextId = useContextId();
+  const { isLoading, data, error } = useQuery(
+    ['handover', id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
+      if (!res.ok) {
+        throw new Error(`Failed to get handover with id ${id}`);
+      }
+      return res.json() as Promise<HandoverPackage>;
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  if (isLoading) {
+    return <SidesheetSkeleton close={close} />;
+  }
+
+  if (error || !data) {
+    console.log(error);
+    return (
+      <div
+        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
+      >
+        <ErrorWrapper>
+          <Icon
+            name="error_outlined"
+            size={48}
+            color={tokens.colors.interactive.primary__resting.hsla}
+          />
+          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
+        </ErrorWrapper>
+      </div>
+    );
+  }
+
+  return (
+    <HandoverSidesheetComponent
+      id={id}
+      item={data}
+      close={close}
+    ></HandoverSidesheetComponent>
+  );
+}
+
+import styled from 'styled-components';
+const ErrorWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ErrorMessage = styled.h3`
+  margin: 0;
+`;

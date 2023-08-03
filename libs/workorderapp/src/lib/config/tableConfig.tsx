@@ -3,21 +3,28 @@ import {
   LinkCell,
   ProgressCell,
   StatusCell,
-  YearAndWeekCell,
   StyledMonospace,
+  YearAndWeekCell,
 } from '@cc-components/shared';
-import { tokens } from '@equinor/eds-tokens';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { tokens } from '@equinor/eds-tokens';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
@@ -37,15 +44,9 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     getRows: getRows,
     gridOptions: {
       ...defaultGridOptions,
-      onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
-        );
-      },
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
@@ -55,10 +56,10 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-      if (!props.data?.workorderUrl) {
+      if (!props.data?.workOrderUrl) {
         return <StyledMonospace>{props.value}</StyledMonospace>;
       }
-      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
+      return <LinkCell url={props.data?.workOrderUrl} urlText={props.value} />;
     },
   },
   {
