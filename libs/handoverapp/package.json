@@ -12,6 +12,6 @@
     "@cc-components/handovershared": "workspace:^",
     "@cc-components/handoversidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "^2.2.2"
+    "@equinor/workspace-fusion": "^3.0.0"
   }
 }
