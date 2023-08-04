@@ -42,7 +42,7 @@ export const StyledTabsList = styled(Tabs.List)`
 
 type LoopProps = {
   id: string;
-  item?: Loop;
+  item: Loop | null;
   close: () => void;
 };
 
@@ -66,7 +66,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
     },
     {
       suspense: false,
-      initialData: props.item,
+      initialData: props.item ?? undefined,
       useErrorBoundary: false,
     }
   );
