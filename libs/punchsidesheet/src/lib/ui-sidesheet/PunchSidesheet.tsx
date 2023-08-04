@@ -1,5 +1,4 @@
 import { Punch } from '@cc-components/punchshared';
-import { StyledItemLink } from '@cc-components/shared/common';
 import {
   BannerItem,
   SidesheetHeader,
@@ -45,8 +44,9 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
       return res.json() as Promise<Punch>;
     },
     {
-      suspense: true,
-      initialData: props.item,
+      suspense: false,
+      initialData: props.item ?? undefined,
+      useErrorBoundary: false,
     }
   );
 
