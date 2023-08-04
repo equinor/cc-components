@@ -42,7 +42,7 @@ export const StyledTabsList = styled(Tabs.List)`
 
 type LoopProps = {
   id: string;
-  item: Loop | null;
+  item?: Loop;
   close: () => void;
 };
 
