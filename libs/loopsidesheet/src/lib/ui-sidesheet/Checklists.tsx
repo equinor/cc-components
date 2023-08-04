@@ -9,11 +9,18 @@ const columns: ColDef<ChecklistForLoop>[] = [
   {
     field: 'Group',
     valueGetter: (pkg) => pkg.data?.formularGroup,
-    width: 120,
+    width: 100,
   },
   {
     field: 'Comm Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      return props.value ? (
+        <LinkCell url={props.data?.commissioningPackageUrl} urlText={props.value} />
+      ) : (
+        'N/A'
+      );
+    },
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.commissioningPackageUrlId) {
     //     return proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId);
@@ -26,11 +33,21 @@ const columns: ColDef<ChecklistForLoop>[] = [
     //   }
     //   return null;
     // },
-    width: 120,
+    width: 100,
   },
   {
-    headerName: 'MCpkg',
+    headerName: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      return props.value ? (
+        <LinkCell
+          url={props.data?.mechanicalCompletionPackageUrl}
+          urlText={props.value}
+        />
+      ) : (
+        'N/A'
+      );
+    },
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.mechanicalCompletionPackageUrlId) {
     //     return proCoSysUrls.getCommPkgUrl(pkg.data.mechanicalCompletionPackageUrlId);
@@ -43,7 +60,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
     //   }
     //   return null;
     // },
-    width: 130,
+    width: 100,
   },
   {
     field: 'Checklist status',
@@ -65,11 +82,18 @@ const columns: ColDef<ChecklistForLoop>[] = [
       }
       return null;
     },
-    width: 140,
+    width: 100,
   },
   {
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
+    cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
+      return props.value ? (
+        <LinkCell url={props.data?.checklistUrl} urlText={props.value} />
+      ) : (
+        'N/A'
+      );
+    },
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.checklistUrlId) {
     //     return proCoSysUrls.getCommPkgUrl(pkg.data.checklistUrlId);
@@ -82,12 +106,12 @@ const columns: ColDef<ChecklistForLoop>[] = [
     //   }
     //   return null;
     // },
-    width: 140,
+    width: 100,
   },
   {
     field: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
-    width: 150,
+    width: 100,
   },
 ];
 
