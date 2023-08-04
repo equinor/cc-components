@@ -21,18 +21,6 @@ const columns: ColDef<ChecklistForLoop>[] = [
         'N/A'
       );
     },
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.commissioningPackageUrlId) {
-    //     return proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId);
-    //   }
-    //   return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    //   return null;
-    // },
     width: 100,
   },
   {
@@ -48,18 +36,6 @@ const columns: ColDef<ChecklistForLoop>[] = [
         'N/A'
       );
     },
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.mechanicalCompletionPackageUrlId) {
-    //     return proCoSysUrls.getCommPkgUrl(pkg.data.mechanicalCompletionPackageUrlId);
-    //   }
-    //   return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    //   return null;
-    // },
     width: 100,
   },
   {
@@ -94,18 +70,6 @@ const columns: ColDef<ChecklistForLoop>[] = [
         'N/A'
       );
     },
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.checklistUrlId) {
-    //     return proCoSysUrls.getCommPkgUrl(pkg.data.checklistUrlId);
-    //   }
-    //   return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    //   return null;
-    // },
     width: 100,
   },
   {
