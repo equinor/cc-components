@@ -5,10 +5,6 @@ import { SidesheetConfig } from '@equinor/workspace-fusion/sidesheet';
 export const sidesheetConfig: SidesheetConfig<Loop> = {
   type: 'default',
   DetailsSidesheet: (props) => (
-    <LoopSidesheet.Component
-      id={props.id}
-      item={props.item}
-      close={props.controller.close}
-    />
+    <LoopSidesheet.Component id={props.id} item={props.item} close={props.close} />
   ),
 };
