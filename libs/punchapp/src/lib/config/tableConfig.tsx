@@ -145,6 +145,11 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => pkg.data?.clearedBy,
   },
   {
+    colId: 'Priority',
+    field: 'priority',
+    valueGetter: (o) => o.data?.priority,
+  },
+  {
     colId: 'Cleared',
     field: 'Cleared',
     valueGetter: (pkg) => pkg.data?.clearedAtDate,
