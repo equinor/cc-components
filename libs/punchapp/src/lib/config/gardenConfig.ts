@@ -24,10 +24,7 @@ export const useGardenConfig = (contextId: string): GardenConfig<Punch, FilterSt
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.punchItemNo,
-    initialGrouping: {
-      horizontalGroupingAccessor: 'System',
-      verticalGroupingKeys: [],
-    },
+    initialGrouping: ['System'],
     visuals: {
       rowHeight: 25,
     },
