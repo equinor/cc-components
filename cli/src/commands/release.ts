@@ -13,8 +13,8 @@ import { VersionIncrement } from '../main.js';
 import { downloadCIBundle } from './download_zip_bundle.js';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
 import { writeTraceFileAsync } from '../utils/writeTrace.js';
-import { chdir, execPath } from 'process';
-import { exec, execSync } from 'child_process';
+import { chdir, cwd } from 'process';
+import { execSync } from 'child_process';
 
 export async function release(
   dry: boolean,
@@ -79,7 +79,10 @@ async function prepareBundle(env: FusionEnvironment) {
 
 async function ensureProjectBuilds() {
   const spinner = ora('Building project').start();
-  chdir('../../');
+  const appDir = cwd();
+  const rootDir = '../../';
+  chdir(rootDir);
   execSync(`pnpm ci:build`);
+  chdir(appDir);
   spinner.stop();
 }
