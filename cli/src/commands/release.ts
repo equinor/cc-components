@@ -13,6 +13,8 @@ import { VersionIncrement } from '../main.js';
 import { downloadCIBundle } from './download_zip_bundle.js';
 import { parsePackageJson } from '../utils/parsePackageJson.js';
 import { writeTraceFileAsync } from '../utils/writeTrace.js';
+import { chdir, execPath } from 'process';
+import { exec, execSync } from 'child_process';
 
 export async function release(
   dry: boolean,
@@ -28,6 +30,8 @@ export async function release(
   }
 
   compileApp();
+
+  await ensureProjectBuilds();
 
   //Vite build
   await prepareBundle(env);
@@ -71,4 +75,11 @@ async function prepareBundle(env: FusionEnvironment) {
       console.log('Download ci bundle');
       return downloadCIBundle(name);
   }
+}
+
+async function ensureProjectBuilds() {
+  const spinner = ora('Building project').start();
+  chdir('../../');
+  execSync(`pnpm ci:build`);
+  spinner.stop();
 }
