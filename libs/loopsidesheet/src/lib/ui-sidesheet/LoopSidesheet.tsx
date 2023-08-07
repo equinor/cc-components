@@ -66,7 +66,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
     },
     {
       suspense: false,
-      initialData: props.item,
+      initialData: props.item ?? undefined,
       useErrorBoundary: false,
     }
   );
