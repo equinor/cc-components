@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc -b",
+    "build": "tsc -b -f",
     "shipit": "npx ts-node --esm ../../cli/src/main.ts release"
   },
   "dependencies": {
