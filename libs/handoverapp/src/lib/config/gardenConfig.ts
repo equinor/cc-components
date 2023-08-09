@@ -34,7 +34,7 @@ export const useGardenConfig = (
       customHeaderView: GardenHeader,
     },
     visuals: {
-      rowHeight: 30,
+      rowHeight: 31,
     },
   };
 };
