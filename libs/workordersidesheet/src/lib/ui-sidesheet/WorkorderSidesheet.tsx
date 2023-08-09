@@ -11,7 +11,7 @@ import {
   StyledTabs,
   TabTitle,
   useContextId,
-  useHttpClient
+  useHttpClient,
 } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import {
@@ -51,8 +51,15 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
+  const {
+    material,
+    isFetching: isFetchingMaterial,
+    error: materialError,
+  } = useMaterial(props.id);
+
   const client = useHttpClient();
   const contextId = useContextId();
+
   const {
     data: wo,
     error,
@@ -69,8 +76,9 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
       return res.json();
     },
     {
-      suspense: true,
-      initialData: props.item,
+      suspense: false,
+      useErrorBoundary: false,
+      initialData: props.item ?? undefined,
     }
   );
 
@@ -81,12 +89,6 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   if (!wo || error) {
     return <div>Failed to get Workorder with id: {props.id}</div>;
   }
-
-  const {
-    material,
-    isFetching: isFetchingMaterial,
-    error: materialError,
-  } = useMaterial(props.id);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
