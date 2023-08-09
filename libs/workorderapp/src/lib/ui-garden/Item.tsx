@@ -46,12 +46,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
     textColor,
     //TODO: group by keys
   } = useMemo(
-    () =>
-      getWorkOrderStatuses(
-        data,
-        groupingKeys.horizontalGroupingAccessor,
-        groupingKeys.verticalGroupingKeys
-      ),
+    () => getWorkOrderStatuses(data, groupingKeys.at(0)!, groupingKeys.slice(1)),
     [data]
   );
 
