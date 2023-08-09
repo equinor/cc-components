@@ -16,7 +16,7 @@ jobs:
         with:
           workspace: '*'
           to: HEAD^1
-          from: main -- # Check for changes since previous commit (feel free to put a branch name instead in the form of origin/<branchName>)
+          from: origin/main # Check for changes since previous commit (feel free to put a branch name instead in the form of origin/<branchName>)
 
       # Do something more meaningful here, like push to NPM, do heavy computing, etc.
       - name: Validate Action Output
