@@ -14,7 +14,7 @@ jobs:
         id: changedAction
         uses: Trampoline-CX/action-turbo-changed@v1
         with:
-          workspace: ''
+          workspace: '@'
           from: HEAD^1 # Check for changes since previous commit (feel free to put a branch name instead in the form of origin/<branchName>)
 
       # Do something more meaningful here, like push to NPM, do heavy computing, etc.
