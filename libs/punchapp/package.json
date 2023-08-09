@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b -f"
   },
   "module": "./dist/src/index.js",
   "main": "./dist/src/index.js",
@@ -12,6 +12,6 @@
     "@cc-components/punchshared": "workspace:^",
     "@cc-components/punchsidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "^2.2.2"
+    "@equinor/workspace-fusion": "^3.0.2"
   }
 }

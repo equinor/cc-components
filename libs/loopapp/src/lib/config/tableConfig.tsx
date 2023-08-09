@@ -89,7 +89,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'MCPkgNo',
-    field: 'MC pkg',
+    field: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (
@@ -133,6 +133,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
+    colId: 'CLStatus',
     field: 'Checklist status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {

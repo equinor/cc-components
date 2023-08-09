@@ -1,19 +1,17 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
-import { QueryBase } from './types';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
+import { QueryBase } from './types';
 
 export const columns: ColDef<QueryBase>[] = [
   {
     field: 'Document No.',
-    valueGetter: (pkg) => pkg.data?.queryNumber,
-    cellRenderer: (props: ICellRendererProps<QueryBase, string>) => {
-      if (props.data) {
-        return <LinkCell url={props.data.url} urlText={props.value} />;
-      } else return null;
+    valueGetter: (pkg) => pkg.data?.queryNo,
+    cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
+      return <LinkCell url={props.data?.queryUrl} urlText={props.data?.queryNo} />;
     },
-    width: 180,
+    minWidth: 200,
   },
   {
     field: 'Title',
@@ -21,15 +19,15 @@ export const columns: ColDef<QueryBase>[] = [
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    width: 400,
+    minWidth: 200,
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.status,
+    valueGetter: (pkg) => pkg.data?.queryStatus,
   },
   {
     field: 'Type',
-    valueGetter: (pkg) => pkg.data?.type,
+    valueGetter: (pkg) => pkg.data?.queryType,
     width: 100,
   },
   {

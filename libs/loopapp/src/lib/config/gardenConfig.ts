@@ -23,10 +23,7 @@ export const useGardenConfig = (contextId: string): GardenConfig<Loop, FilterSta
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.loopNo,
-    initialGrouping: {
-      horizontalGroupingAccessor: 'Responsible',
-      verticalGroupingKeys: [],
-    },
+    initialGrouping: ['Responsible'],
     customViews: {
       customItemView: GardenItem,
     },
