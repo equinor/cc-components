@@ -30,4 +30,4 @@ jobs:
         id: changedAction
         uses: ./
         with:
-          turbo-command: idk --token ${{ env.FUSION_TOKEN }} --since origin/main
+          turbo-command: idk --since origin/main -- --token ${{ env.FUSION_TOKEN }}
