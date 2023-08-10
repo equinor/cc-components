@@ -13,9 +13,6 @@ import {
 } from '@cc-components/shared';
 import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generateCommaSeperatedStringArrayColumn';
 import { getHTList } from '../utils-table/tableHelpers';
-// import data from '../data.json' assert { type: 'json' };
-
-// const pipetests: Heattrace[] = data as any;
 
 export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterState> => {
   const client = useHttpClient();
