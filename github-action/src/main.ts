@@ -22,21 +22,21 @@ const run = async (): Promise<void> => {
 
     debug(`Running command: ${turboCommand} in directory ${workingDirectory}`);
 
-    const json = execSync(`npx turbo run ${turboCommand} --dry-run=json`, {
+    const json = execSync(`npx turbo run ${turboCommand}`, {
       cwd: cwd,
       encoding: 'utf-8',
     });
 
-    debug(`Output from Turborepo: ${json}`);
+    // debug(`Output from Turborepo: ${json}`);
 
-    const parsedOutput = JSON.parse(json);
+    // const parsedOutput = JSON.parse(json);
 
-    debug(`Packages that changed ${parsedOutput.packages.toString()}`);
-    notice(`Packages that changed ${parsedOutput.packages.toString()}`);
+    // debug(`Packages that changed ${parsedOutput.packages.toString()}`);
+    // notice(`Packages that changed ${parsedOutput.packages.toString()}`);
 
-    const changed = !!parsedOutput.packages.length;
+    // const changed = !!parsedOutput.packages.length;
 
-    setOutput('changed', changed);
+    // setOutput('changed', changed);
   } catch (error) {
     if (error instanceof Error || typeof error === 'string') {
       setFailed(error);
