@@ -7,6 +7,7 @@ import {
   setOutput,
   setCommandEcho,
   notice,
+  setSecret,
 } from '@actions/core';
 import * as github from '@actions/github';
 
@@ -14,6 +15,7 @@ const run = async (): Promise<void> => {
   try {
     setCommandEcho(true);
     const turboCommand = getInput('turbo-command', { required: true });
+    setSecret(turboCommand);
     const workingDirectory = getInput('working-directory', { required: false }) ?? './';
 
     const cwd = join(process.cwd(), workingDirectory);

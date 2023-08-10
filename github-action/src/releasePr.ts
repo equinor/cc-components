@@ -10,6 +10,7 @@ import AdmZip from 'adm-zip';
 import { HttpClient } from '@actions/http-client';
 import { OutgoingHttpHeaders } from 'http';
 import { Readable } from 'stream';
+import { setSecret } from '@actions/core';
 
 const program = new Command();
 
@@ -22,6 +23,7 @@ program
     if (!args.token) {
       throw new Error('Missing az token');
     }
+    setSecret(args.token);
     release(args.token);
   });
 
