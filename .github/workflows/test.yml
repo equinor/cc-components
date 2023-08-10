@@ -1,6 +1,6 @@
 name: 'build-test'
 on: # rebuild any PRs and main branch changes
-  push:
+  pull_request:
 
 jobs:
   changed: # make sure the action works on a clean machine without building
