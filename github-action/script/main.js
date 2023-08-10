@@ -17,7 +17,7 @@ const run = async () => {
     const workingDirectory = getInput('working-directory', { required: false }) ?? './';
     const cwd = join(process.cwd(), workingDirectory);
     debug(`Running command: ${turboCommand} in directory ${workingDirectory}`);
-    const json = execSync(`npx turbo run ${turboCommand} --dry-run=json`, {
+    const json = execSync(`npx turbo run ${turboCommand}`, {
       cwd: cwd,
       encoding: 'utf-8',
     });
