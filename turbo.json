@@ -10,6 +10,9 @@
     },
     "shipit": {
       "dependsOn": ["build"]
+    },
+    "idk": {
+      "dependsOn": ["build"]
     }
   }
 }
