@@ -23,6 +23,7 @@ program
 });
 await program.parseAsync();
 export async function release(token) {
+    execSync('echo releasing app');
     notice('building app');
     execSync('tsc -b -f');
     notice('building project');
