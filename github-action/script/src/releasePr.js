@@ -8,7 +8,7 @@ import { resolve } from 'path';
 import AdmZip from 'adm-zip';
 import { HttpClient } from '@actions/http-client';
 import { Readable } from 'stream';
-import { setSecret } from '@actions/core';
+import { notice, setSecret } from '@actions/core';
 const program = new Command();
 program.name('Release');
 program
@@ -23,18 +23,18 @@ program
 });
 await program.parseAsync();
 export async function release(token) {
-    console.log('building app');
+    notice('building app');
     execSync('tsc -b -f');
-    console.log('building project');
+    notice('building project');
     ensureProjectBuilds();
     //   //Vite build
-    console.log('bundling application');
+    notice('bundling application');
     prepareBundle();
     //   // Create manifest
-    console.log('making manifest');
+    notice('making manifest');
     makeManifest('./package.json');
     //   //zip bundle
-    console.log('zipping bundle');
+    notice('zipping bundle');
     const zipped = zipBundle();
     const r = parsePackageJson();
     await uploadBundle(token, r.name, zipped);
@@ -48,7 +48,7 @@ async function uploadBundle(token, appKey, zipped) {
     };
     const stream = Readable.from(zipped.toBuffer());
     const r = await client.sendStream('POST', `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/versions`, stream, headers);
-    console.log(`bundle uploaded with status code ${r.message.statusCode}`);
+    notice(`bundle uploaded with status code ${r.message.statusCode}`);
     if (r.message.statusCode !== 200) {
         throw new Error('Bundle failed to upload, fatal error');
     }

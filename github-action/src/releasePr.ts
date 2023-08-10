@@ -10,7 +10,7 @@ import AdmZip from 'adm-zip';
 import { HttpClient } from '@actions/http-client';
 import { OutgoingHttpHeaders } from 'http';
 import { Readable } from 'stream';
-import { setSecret } from '@actions/core';
+import { notice, setSecret } from '@actions/core';
 
 const program = new Command();
 
@@ -30,22 +30,22 @@ program
 await program.parseAsync();
 
 export async function release(token: string) {
-  console.log('building app');
+  notice('building app');
   execSync('tsc -b -f');
 
-  console.log('building project');
+  notice('building project');
   ensureProjectBuilds();
 
   //   //Vite build
-  console.log('bundling application');
+  notice('bundling application');
   prepareBundle();
 
   //   // Create manifest
-  console.log('making manifest');
+  notice('making manifest');
   makeManifest('./package.json');
 
   //   //zip bundle
-  console.log('zipping bundle');
+  notice('zipping bundle');
   const zipped = zipBundle();
 
   const r = parsePackageJson();
@@ -71,7 +71,7 @@ async function uploadBundle(token: string, appKey: string, zipped: AdmZip) {
     headers
   );
 
-  console.log(`bundle uploaded with status code ${r.message.statusCode}`);
+  notice(`bundle uploaded with status code ${r.message.statusCode}`);
   if (r.message.statusCode !== 200) {
     throw new Error('Bundle failed to upload, fatal error');
   }
