@@ -1,6 +1,13 @@
 import { execSync } from 'child_process';
 import { join } from 'path';
-import { getInput, debug, setFailed, setOutput, setCommandEcho } from '@actions/core';
+import {
+  getInput,
+  debug,
+  setFailed,
+  setOutput,
+  setCommandEcho,
+  notice,
+} from '@actions/core';
 import * as github from '@actions/github';
 
 const run = async (): Promise<void> => {
@@ -23,6 +30,7 @@ const run = async (): Promise<void> => {
     const parsedOutput = JSON.parse(json);
 
     debug(`Packages that changed ${parsedOutput.packages.toString()}`);
+    notice(`Packages that changed ${parsedOutput.packages.toString()}`);
 
     const changed = !!parsedOutput.packages.length;
 
