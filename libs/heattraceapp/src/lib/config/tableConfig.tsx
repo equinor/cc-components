@@ -1,38 +1,35 @@
-import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { CheckList, Heattrace } from '@cc-components/heattraceshared';
+import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { CheckList, HeatTrace } from '@cc-components/heattraceshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
-import { DateCell, DescriptionCell, StyledMonospace } from '@cc-components/shared';
+import {
+  DateCell,
+  DescriptionCell,
+  StyledMonospace,
+  useHttpClient,
+} from '@cc-components/shared';
 import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generateCommaSeperatedStringArrayColumn';
 import { getHTList } from '../utils-table/tableHelpers';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+// import data from '../data.json' assert { type: 'json' };
 
-import data from '../data.json' assert { type: 'json' };
+// const pipetests: Heattrace[] = data as any;
 
-const pipetests: Heattrace[] = data as any;
+export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterState> => {
+  const client = useHttpClient();
 
-export const useTableConfig = (contextId: string): GridConfig<Heattrace, FilterState> => {
-  // const client = useHttpClient('cc-api');
-  // const { getRows } = useGridDataSource(async (req) => {
-  //   const res = await client.fetch(`/api/contexts/${contextId}/piping/grid`, req);
-  //   const meta = (await res.json()) as { items: any[]; rowCount: number };
-  //   return {
-  //     rowCount: meta.rowCount,
-  //     rowData: meta.items,
-  //   };
-  // });
+  const { getRows, colDefs } = useGridDataSource<HeatTrace>(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/heat-trace/grid`, req);
+    const meta = await res.json();
 
-  //Temp solution while waiting on api
-  const getRows = async (args: any) => {
-    const { request, success } = args;
-    success({
-      rowCount: pipetests.length,
-      rowData: pipetests.slice(request.startRow, (request.endRow ?? 0) + 1),
-    });
-  };
+    return {
+      rowCount: meta.rowCount,
+      items: meta.items,
+      columnDefinitions: meta.columnDefinitions,
+    };
+  }, columnDefinitions);
   return {
     gridOptions: {
       ...defaultGridOptions,
@@ -45,55 +42,59 @@ export const useTableConfig = (contextId: string): GridConfig<Heattrace, FilterS
       },
     },
     getRows: getRows,
-    columnDefinitions: [
-      {
-        field: 'Heattrace',
-        valueGetter: (pkg) => 'Tag name',
-        cellRenderer: (props: ICellRendererProps<Heattrace, string>) => {
-          return <StyledMonospace>{props.value}</StyledMonospace>;
-        },
-      },
-      {
-        field: 'Description',
-        colId: 'description',
-        valueGetter: (pkg) => 'Skal mulig bort',
-        cellRenderer: (props: ICellRendererProps<Heattrace, string | null>) => {
-          return <DescriptionCell description={props.value} />;
-        },
-        width: 300,
-      },
-      { field: 'Priority', valueGetter: (pkg) => 'Usikker' },
-      {
-        field: 'Location',
-        valueGetter: (pkg) => 'Tag location',
-        cellRenderer: (props: ICellRendererProps<Heattrace, string>) => {
-          return <StyledMonospace>{props.value}</StyledMonospace>;
-        },
-      },
-      { field: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
-      { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
-      {
-        field: 'RFC',
-        valueGetter: (pkg) => 'RFC',
-        cellRenderer: (
-          props: ICellRendererProps<Heattrace, string | null | undefined>
-        ) => {
-          return props.value ? <DateCell dateString={props.value} /> : null;
-        },
-      },
-      {
-        field: 'Pipetests',
-        valueGetter: (pkg) => 'Pipetests',
-        cellRenderer: (props: ICellRendererProps<Heattrace, CheckList[]>) => {
-          if (!props.value) return null;
-          return props.value;
-          // (
-          //   <StyledMonospace>
-          //     {generateCommaSeperatedStringArrayColumn(getHTList(props.value))}
-          //   </StyledMonospace>
-          // );
-        },
-      },
-    ],
+    columnDefinitions: colDefs as [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]],
   };
 };
+
+const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
+  {
+    colId: 'HeatTraceCableNo',
+    field: 'Heat Trace',
+    valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
+      return <StyledMonospace>{props.value}</StyledMonospace>;
+    },
+  },
+  {
+    colId: 'HeatTraceCableDescription',
+    field: 'Description',
+    valueGetter: (pkg) => pkg.data?.heatTraceCableDescription,
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string | null>) => {
+      return <DescriptionCell description={props.value} />;
+    },
+    width: 300,
+  },
+  //Think it should be priority1, but priority1 has no data
+  { colId: 'Priority1', field: 'Priority', valueGetter: (pkg) => pkg.data?.priority2 },
+  {
+    colId: 'Location',
+    field: 'Location',
+    valueGetter: (pkg) => pkg.data?.location,
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
+      return <StyledMonospace>{props.value}</StyledMonospace>;
+    },
+  },
+  { field: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
+  { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
+  // think this column only belongs to piptest
+  {
+    field: 'RFC',
+    valueGetter: (pkg) => 'RFC',
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string | null | undefined>) => {
+      return props.value ? <DateCell dateString={props.value} /> : null;
+    },
+  },
+  {
+    field: 'Pipetests',
+    valueGetter: (pkg) => pkg.data?.pipetest,
+    cellRenderer: (props: ICellRendererProps<HeatTrace, CheckList[]>) => {
+      if (!props.value) return null;
+      return props.value;
+      // (
+      //   <StyledMonospace>
+      //     {generateCommaSeperatedStringArrayColumn(getHTList(props.value))}
+      //   </StyledMonospace>
+      // );
+    },
+  },
+];

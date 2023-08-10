@@ -10,7 +10,12 @@ import {
 
 import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
 import { useHttpClient } from '@cc-components/shared';
 import {
@@ -40,6 +45,7 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
+    modules: [MenuModule, ColumnsToolPanelModule],
     columnDefinitions: colDefs as any,
     gridOptions: {
       ...defaultGridOptions,

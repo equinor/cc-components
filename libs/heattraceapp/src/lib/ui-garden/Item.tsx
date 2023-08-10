@@ -8,9 +8,9 @@ import {
   StyledRoot,
   StyledStatusCircles,
 } from './garden.styles';
-import { Heattrace } from '@cc-components/heattraceshared';
+import { HeatTrace } from '@cc-components/heattraceshared';
 
-const HeattraceGardenItem = (props: CustomItemView<Heattrace>) => {
+const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
     null

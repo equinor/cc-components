@@ -8,7 +8,7 @@ export const sidesheetConfig: SidesheetConfig<WorkOrder> = {
     <WorkorderSidesheet.Component
       id={props.id}
       item={props.item}
-      closeSidesheet={props.controller.close}
+      closeSidesheet={props.close}
     />
   ),
 };

@@ -1,11 +1,11 @@
 {
   "name": "workorder",
-  "version": "1.1.0",
+  "version": "1.2.3",
   "main": "/src/main.tsx",
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc -b",
+    "build": "tsc -b -f",
     "shipit": "npx ts-node --esm ../../cli/src/main.ts release"
   },
   "dependencies": {

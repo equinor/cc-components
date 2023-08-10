@@ -1,12 +1,12 @@
 {
   "name": "handover",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc -b",
+    "build": "tsc -b -f",
     "shipit": "npx ts-node --esm ../../cli/src/main.ts release"
   },
   "dependencies": {

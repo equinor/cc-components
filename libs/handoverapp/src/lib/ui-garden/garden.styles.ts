@@ -54,6 +54,7 @@ export const StyledSizes = styled.div<SizesProps>`
 `;
 
 export const StyledItemText = styled.div`
+  font-variant-numeric: tabular-nums;
   grid-column: 2/3;
   white-space: nowrap;
   overflow: hidden;
