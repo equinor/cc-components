@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0 # Required to fetch range
 
       - name: Install Dependencies
-        run: npm i -g pnpm
+        run: npm i -g pnpm && pnpm i
 
       # Run the action on the yarn-workspaces example
       - name: Test Action
