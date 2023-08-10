@@ -1,4 +1,4 @@
-import { Heattrace } from '@cc-components/heattraceshared';
+import { HeatTrace } from '@cc-components/heattraceshared';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
@@ -42,13 +42,13 @@ export const StyledTabsList = styled(Tabs.List)`
   scroll-behavior: smooth;
 `;
 
-type HeattraceProps = {
+type HeatTraceProps = {
   id: string;
-  item?: Heattrace;
+  item?: HeatTrace;
   close: () => void;
 };
 
-export const HeattraceSidesheet = createWidget<HeattraceProps>(({ props }) => {
+export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const client = useHttpClient();
