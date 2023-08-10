@@ -22,6 +22,8 @@ const run = async (): Promise<void> => {
 
     const parsedOutput = JSON.parse(json);
 
+    debug(`Packages that changed ${parsedOutput.packages.toString()}`);
+
     const changed = !!parsedOutput.packages.length;
 
     setOutput('changed', changed);
