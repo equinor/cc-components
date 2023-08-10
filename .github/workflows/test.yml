@@ -19,4 +19,4 @@ jobs:
         id: changedAction
         uses: ./
         with:
-          turbo-command: build
+          turbo-command: build --since main
