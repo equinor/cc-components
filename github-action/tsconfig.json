@@ -11,7 +11,7 @@
     "lib": ["ES2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "outDir": "dist"
+    "outDir": "script"
   },
   "exclude": ["node_modules"]
 }

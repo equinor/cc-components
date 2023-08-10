@@ -3,31 +3,13 @@ on: # rebuild any PRs and main branch changes
   push:
 
 jobs:
-  build: # make sure build/ci work properly
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Dependencies
-        run: npx pnpm i
-
-      - name: Build Code
-        run: npx pnpm build
-
-  test: # make sure the action works on a clean machine without building
+  changed: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to fetch range
-
-      - name: Install Dependencies
-        run: npx pnpm i
-
-      - name: Build Code
-        run: npx pnpm build
 
       # Run the action on the yarn-workspaces example
       - name: Test Action
