@@ -18,7 +18,7 @@ export const WorkspaceWrapper = () => {
   );
 
   const tableConfig = useTableConfig(contextId);
-  // const statusBarConfig = useStatusBarConfig(contextId);
+  const statusBarConfig = useStatusBarConfig(contextId);
   // const gardenConfig = useGardenConfig(contextId);
 
   // if (isLoading) {
@@ -34,7 +34,7 @@ export const WorkspaceWrapper = () => {
       filterOptions={filterOptions}
       // gardenOptions={gardenConfig}
       gridOptions={tableConfig}
-      // statusBarOptions={statusBarConfig}
+      statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
       modules={[gridModule]}
     />
