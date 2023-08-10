@@ -13,12 +13,6 @@ const run = async () => {
             cwd: cwd,
             encoding: 'utf-8',
         });
-        // debug(`Output from Turborepo: ${json}`);
-        // const parsedOutput = JSON.parse(json);
-        // debug(`Packages that changed ${parsedOutput.packages.toString()}`);
-        // notice(`Packages that changed ${parsedOutput.packages.toString()}`);
-        // const changed = !!parsedOutput.packages.length;
-        // setOutput('changed', changed);
     }
     catch (error) {
         if (error instanceof Error || typeof error === 'string') {
