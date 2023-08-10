@@ -2,9 +2,12 @@ name: 'Turbo Changed'
 description: 'A Github Action making it easy to check if a local workspace changed using Turborepo.'
 author: 'Gustav-Eikaas'
 inputs:
-  since:
-    required: false
+  turbo-command:
+    required: true
     description: 'Branch or commit to diff against (defaults to main)'
+  working-directory:
+    required: false
+    description: 'Defaults to ./'
 outputs:
   changed:
     description: 'True if the workspace changed, otherwise false.'
