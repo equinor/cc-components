@@ -11,7 +11,7 @@
     "shipit": {
       "dependsOn": ["build"]
     },
-    "idk": {
+    "pr:deploy": {
       "dependsOn": []
     }
   }

@@ -1,4 +1,4 @@
-name: 'build-test'
+name: 'Deploy PR build'
 on: # rebuild any PRs and main branch changes
   pull_request:
 permissions: write-all
@@ -28,6 +28,6 @@ jobs:
       - name: Build monorepo
         run: pnpm ci:build
 
-      - name: 'deploy'
+      - name: 'Deploy affected apps to Fusion'
         shell: bash
-        run: npx turbo run idk --since origin/main -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.number }}
+        run: npx turbo run pr:deploy --since origin/main -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.number }}
