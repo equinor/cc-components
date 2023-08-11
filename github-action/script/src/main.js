@@ -12,6 +12,7 @@ const run = async () => {
         const json = execSync(`npx turbo run ${turboCommand}`, {
             cwd: cwd,
             encoding: 'utf-8',
+            stdio: 'inherit',
         });
     }
     catch (error) {

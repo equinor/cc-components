@@ -25,6 +25,7 @@ const run = async (): Promise<void> => {
     const json = execSync(`npx turbo run ${turboCommand}`, {
       cwd: cwd,
       encoding: 'utf-8',
+      stdio: 'inherit',
     });
   } catch (error) {
     if (error instanceof Error || typeof error === 'string') {
