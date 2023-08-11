@@ -80,12 +80,15 @@ async function uploadBundle(
     throw new Error('Bundle failed to upload, fatal error');
   }
 
-  //   /** Publish bundle */
-  //   const publishResponse = await client.post(
-  //     `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/publish`,
-  //     '',
-  //     headers
-  //   );
+  /** Publish bundle */
+  const publishResponse = await client.post(
+    `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/publish`,
+    '',
+    headers
+  );
+  if (publishResponse.message.statusCode !== 200) {
+    throw new Error(JSON.stringify(publishResponse.message));
+  }
 
   await patchWithPrNumber(prNumber, token, appKey);
 }
