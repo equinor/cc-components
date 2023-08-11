@@ -44,6 +44,13 @@ export function createRender(
       }
     })();
 
+    const possiblePrNumber = (args.env.config?.environment as any)?.pr;
+
+    if (possiblePrNumber) {
+      console.log(`creating pr ${possiblePrNumber}`);
+      createPrLabel(possiblePrNumber, el);
+    }
+
     /** Create root from provided element */
     const root = createRoot(el);
 
@@ -62,4 +69,39 @@ export function createRender(
       root.unmount();
     };
   };
+}
+
+function createPrLabel(prNumber: string, el: HTMLElement): VoidFunction {
+  const child = document.createElement('div');
+  child.id = '123';
+  document.body.appendChild(child);
+
+  const root = createRoot(child);
+
+  root.render(<PRLabel prNumber={prNumber} />);
+
+  return () => {
+    root.unmount();
+    child.remove();
+  };
+}
+
+function PRLabel({ prNumber }: { prNumber: string }) {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        fontSize: '24px',
+        border: '1px solid grey',
+        background: 'orange',
+        padding: '10px',
+      }}
+    >
+      <a href={`https://github.com/equinor/cc-components/pull/${prNumber}`}>
+        PR: #{prNumber}
+      </a>
+    </div>
+  );
 }

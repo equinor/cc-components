@@ -81,6 +81,8 @@ async function uploadBundle(token: string, appKey: string, zipped: AdmZip) {
   //     '',
   //     headers
   //   );
+
+  await patchWithPrNumber('59', token, appKey);
 }
 
 function prepareBundle() {
@@ -89,14 +91,6 @@ function prepareBundle() {
     throw new Error('Missing name in package.json');
   }
   execSync('npx vite build --logLevel silent', { stdio: 'inherit' });
-}
-
-function ensureProjectBuilds() {
-  const appDir = cwd();
-  const rootDir = '../../';
-  chdir(rootDir);
-  execSync(`pnpm ci:build`, { stdio: 'inherit' });
-  chdir(appDir);
 }
 
 export function makeManifest(path: string) {
@@ -147,4 +141,28 @@ export function zipBundle() {
 
   zip.writeZip('./dist/bundle.zip');
   return zip;
+}
+
+async function patchWithPrNumber(prNumber: string, token: string, appKey: string) {
+  const client = new HttpClient();
+
+  //Download current config
+  const res = await client.get(
+    `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/config`
+  );
+  if (res.message.statusCode !== 200) {
+    throw new Error('Failed to fetch client config');
+  }
+  const config = JSON.parse(await res.readBody());
+  config.environment = { ...config.environment, pr: prNumber };
+  //append pr
+
+  //patch
+  const patchResponse = await client.put(
+    `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/config`,
+    JSON.stringify(config)
+  );
+  if (patchResponse.message.statusCode !== 200) {
+    throw new Error('Failed to patch client config with pr number');
+  }
 }
