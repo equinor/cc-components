@@ -32,7 +32,7 @@ await program.parseAsync();
 export async function release(token: string) {
   execSync('echo releasing app');
   notice('building app');
-  execSync('tsc -b -f');
+  execSync('tsc -b -f', { stdio: 'inherit' });
 
   notice('building project');
   ensureProjectBuilds();
