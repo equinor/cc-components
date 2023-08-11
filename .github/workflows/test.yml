@@ -28,10 +28,3 @@ jobs:
       - name: 'deploy'
         shell: bash
         run: npx turbo run idk --since origin/main -- --token ${{ env.FUSION_TOKEN }}
-
-      # # Run the action on the yarn-workspaces example
-      # - name: Test Action
-      #   id: changedAction
-      #   uses: ./
-      #   with:
-      #     turbo-command: idk --since origin/main -- --token ${{ env.FUSION_TOKEN }}
