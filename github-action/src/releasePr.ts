@@ -148,6 +148,7 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
 
   const headers: OutgoingHttpHeaders = {
     ['Authorization']: `Bearer ${token}`,
+    ['Content-Type']: 'application/json',
   };
 
   //Download current config
