@@ -10,10 +10,6 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'QA Required')
     runs-on: ubuntu-latest
     steps:
-      - name: Build monorepo
-        shell: bash
-        run: echo ${{ github.event}}
-
       - name: 'Login to Azure'
         uses: azure/login@v1
         with:
