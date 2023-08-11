@@ -169,6 +169,8 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
     headers
   );
   if (patchResponse.message.statusCode !== 200) {
-    throw new Error('Failed to patch client config with pr number');
+    throw new Error(
+      `Failed to patch client config with pr number, ${await patchResponse.readBody()}`
+    );
   }
 }
