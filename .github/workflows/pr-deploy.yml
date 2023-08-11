@@ -1,9 +1,13 @@
 name: 'Deploy PR build'
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
+    branches:
+      - main
+
 permissions: write-all
 jobs:
   aquire-token:
+    if: contains(github.event.pull_request.labels.*.name, 'QA Required')
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
