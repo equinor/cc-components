@@ -30,12 +30,11 @@ program
 await program.parseAsync();
 
 export async function release(token: string) {
-  execSync('echo releasing app');
-  notice('building app');
-  execSync('tsc -b -f', { stdio: 'inherit' });
-
   notice('building project');
   ensureProjectBuilds();
+
+  notice('building app');
+  execSync('tsc -b -f', { stdio: 'inherit' });
 
   //   //Vite build
   notice('bundling application');
@@ -97,7 +96,7 @@ function ensureProjectBuilds() {
   const appDir = cwd();
   const rootDir = '../../';
   chdir(rootDir);
-  execSync(`pnpm ci:build`);
+  execSync(`pnpm ci:build`, { stdio: 'inherit' });
   chdir(appDir);
 }
 
