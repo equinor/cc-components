@@ -6,6 +6,8 @@ import {
 import { createRoot } from 'react-dom/client';
 
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { useState } from 'react';
+import { Button } from '@equinor/eds-core-react';
 
 /**
  * Facades the fusion-framework render setup, used in all apps
@@ -87,21 +89,29 @@ function createPrLabel(prNumber: string, el: HTMLElement): VoidFunction {
 }
 
 function PRLabel({ prNumber }: { prNumber: string }) {
+  const [isOpen, setIsOpen] = useState(true);
+  if (!isOpen) return null;
   return (
     <div
       style={{
         position: 'absolute',
-        bottom: 0,
-        right: 0,
+        top: 0,
+        right: `${Math.round(window.innerWidth / 2)}px`,
         fontSize: '24px',
         border: '1px solid grey',
         background: 'orange',
         padding: '10px',
+        display: 'flex',
+        gap: '10px',
+        alignItems: 'center',
       }}
     >
       <a href={`https://github.com/equinor/cc-components/pull/${prNumber}`}>
         PR: #{prNumber}
       </a>
+      <Button variant="ghost_icon" onClick={() => setIsOpen(false)}>
+        X
+      </Button>
     </div>
   );
 }
