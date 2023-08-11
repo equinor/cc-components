@@ -448,6 +448,10 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/mechanicalcompletionapp:
     dependencies:
@@ -475,6 +479,10 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/plugins: {}
 
@@ -519,6 +527,10 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/scopechangerequestapp:
     dependencies:
@@ -591,6 +603,10 @@ importers:
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/workorderapp:
     dependencies:
@@ -624,6 +640,10 @@ importers:
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   reports/JCA-reports/jcainstallation:
     dependencies:
