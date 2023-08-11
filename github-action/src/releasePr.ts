@@ -30,25 +30,24 @@ program
 await program.parseAsync();
 
 export async function release(token: string) {
-  notice('building project');
-  ensureProjectBuilds();
-
-  notice('building app');
-  execSync('tsc -b -f', { stdio: 'inherit' });
-
-  //   //Vite build
+  // Vite build
   notice('bundling application');
   prepareBundle();
 
-  //   // Create manifest
+  // Create manifest
   notice('making manifest');
   makeManifest('./package.json');
 
-  //   //zip bundle
+  // zip bundle
   notice('zipping bundle');
   const zipped = zipBundle();
 
   const r = parsePackageJson();
+  if (!r.name) {
+    throw new Error(
+      `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
+    );
+  }
 
   await uploadBundle(token, r.name, zipped);
 }
@@ -89,7 +88,7 @@ function prepareBundle() {
   if (!name) {
     throw new Error('Missing name in package.json');
   }
-  execSync('vite build --logLevel silent');
+  execSync('npx vite build --logLevel silent', { stdio: 'inherit' });
 }
 
 function ensureProjectBuilds() {
