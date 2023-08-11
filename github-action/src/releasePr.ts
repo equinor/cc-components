@@ -2,7 +2,6 @@
 
 import { Command } from 'commander';
 import fs from 'fs';
-import { chdir, cwd } from 'process';
 import { execSync } from 'child_process';
 import { parsePackageJson } from './parsePackageJson.js';
 import { resolve } from 'path';
@@ -19,17 +18,18 @@ program.name('Release');
 program
   .command('release')
   .option('-T, --token <token>', 'change the working directory')
+  .option('-pr --pr <pr>', 'Pr number')
   .action(async (args) => {
     if (!args.token) {
       throw new Error('Missing az token');
     }
     setSecret(args.token);
-    release(args.token);
+    release(args.token, args.pr);
   });
 
 await program.parseAsync();
 
-export async function release(token: string) {
+export async function release(token: string, prNumber: string) {
   // Vite build
   notice('bundling application');
   prepareBundle();
@@ -49,10 +49,15 @@ export async function release(token: string) {
     );
   }
 
-  await uploadBundle(token, r.name, zipped);
+  await uploadBundle(token, r.name, zipped, prNumber);
 }
 
-async function uploadBundle(token: string, appKey: string, zipped: AdmZip) {
+async function uploadBundle(
+  token: string,
+  appKey: string,
+  zipped: AdmZip,
+  prNumber: string
+) {
   const client = new HttpClient();
 
   const headers: OutgoingHttpHeaders = {
@@ -82,7 +87,7 @@ async function uploadBundle(token: string, appKey: string, zipped: AdmZip) {
   //     headers
   //   );
 
-  await patchWithPrNumber('59', token, appKey);
+  await patchWithPrNumber(prNumber, token, appKey);
 }
 
 function prepareBundle() {

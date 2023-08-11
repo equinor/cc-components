@@ -30,4 +30,4 @@ jobs:
 
       - name: 'deploy'
         shell: bash
-        run: npx turbo run idk --since origin/main -- --token ${{ env.FUSION_TOKEN }}
+        run: npx turbo run idk --since origin/main -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.number }}
