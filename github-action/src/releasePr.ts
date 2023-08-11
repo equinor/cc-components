@@ -146,9 +146,14 @@ export function zipBundle() {
 async function patchWithPrNumber(prNumber: string, token: string, appKey: string) {
   const client = new HttpClient();
 
+  const headers: OutgoingHttpHeaders = {
+    ['Authorization']: `Bearer ${token}`,
+  };
+
   //Download current config
   const res = await client.get(
-    `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/config`
+    `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/config`,
+    headers
   );
   if (res.message.statusCode !== 200) {
     throw new Error('Failed to fetch client config');
@@ -160,7 +165,8 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
   //patch
   const patchResponse = await client.put(
     `https://fusion-s-portal-ci.azurewebsites.net/api/apps/${appKey}/config`,
-    JSON.stringify(config)
+    JSON.stringify(config),
+    headers
   );
   if (patchResponse.message.statusCode !== 200) {
     throw new Error('Failed to patch client config with pr number');
