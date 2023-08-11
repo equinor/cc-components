@@ -95,7 +95,7 @@ function PRLabel({ prNumber }: { prNumber: string }) {
     <div
       style={{
         position: 'absolute',
-        top: 0,
+        top: '48px',
         right: `${Math.round(window.innerWidth / 2)}px`,
         fontSize: '24px',
         border: '1px solid grey',
@@ -104,6 +104,7 @@ function PRLabel({ prNumber }: { prNumber: string }) {
         display: 'flex',
         gap: '10px',
         alignItems: 'center',
+        zIndex: 10,
       }}
     >
       <a href={`https://github.com/equinor/cc-components/pull/${prNumber}`}>
