@@ -48,9 +48,11 @@ export function createRender(
 
     const possiblePrNumber = (args.env.config?.environment as any)?.pr;
 
+    let cleanup = () => {};
+
     if (possiblePrNumber) {
       console.log(`creating pr ${possiblePrNumber}`);
-      createPrLabel(possiblePrNumber, el);
+      cleanup = createPrLabel(possiblePrNumber, el);
     }
 
     /** Create root from provided element */
@@ -69,6 +71,7 @@ export function createRender(
     return () => {
       teardown && teardown();
       root.unmount();
+      cleanup();
     };
   };
 }
