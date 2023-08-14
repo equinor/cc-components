@@ -37,4 +37,4 @@ jobs:
 
       - name: 'Deploy affected apps to Fusion CI'
         shell: bash
-        run: npx turbo run pr:deploy --since origin/main -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.pull_request.number }}
+        run: npx turbo run pr:deploy --since origin/main --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.pull_request.number }}

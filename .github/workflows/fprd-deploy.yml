@@ -33,4 +33,4 @@ jobs:
 
       - name: 'Deploy affected apps to Fusion PROD'
         shell: bash
-        run: npx turbo run fprd:deploy --since ${{github.event.before}} -- --token ${{ env.FUSION_TOKEN }}
+        run: npx turbo run fprd:deploy --since ${{github.event.before}} --concurrency 1 -- --token ${{ env.FUSION_TOKEN }}
