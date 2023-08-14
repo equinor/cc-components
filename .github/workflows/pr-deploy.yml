@@ -10,7 +10,7 @@ permissions: write-all
 jobs:
   aquire-token:
     # only run if pull request is approved and QA is required
-    if: (contains(github.event.pull_request.labels.*.name, 'QA Required') && (github.event.review.state == 'approved'))
+    if: contains(github.event.pull_request.labels.*.name, 'QA Required')
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
