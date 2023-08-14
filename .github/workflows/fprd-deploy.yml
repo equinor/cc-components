@@ -31,6 +31,6 @@ jobs:
       - name: Build monorepo
         run: pnpm ci:build
 
-      - name: 'Deploy affected apps to Fusion'
+      - name: 'Deploy affected apps to Fusion PROD'
         shell: bash
         run: npx turbo run fprd:deploy --since ${{github.event.before}} -- --token ${{ env.FUSION_TOKEN }}
