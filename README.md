@@ -19,8 +19,8 @@ CC applications that belong in this repository are:
 - [SWCR](https://github.com/equinor/cc-components/tree/main/apps/swcr)
 - [Workorder](https://github.com/equinor/cc-components/tree/main/apps/workorder)
 
-
 Coming soon:
+
 - [Scope change]()
 - [Piping workspace]()
 - [Heat trace workspace]()
@@ -29,19 +29,24 @@ Coming soon:
 Each application will have its own library where every component, util and config is placed under. Some applications might have a separate 'app' (i.e. sidesheet) that requires some of the same types and components as the main application. Create a new library called `<name>shared` which contains the common application utilities. Common components and utilities used across many projects should be placed in the `shared` library.
 
 # TLDR
+
 - `pnpm new:app <name>` For generating new applications
 
 # FQA
+
 - `pnpm build` doesnt work, try `pnpm ci:build`
 
 # Setup
 
 Install Node LTS and use npm for this project. After cloning the repo, install the project's dependencies and required tooling with `npm run install:init`. This will install all the project's dependencies as well as NX and fusion-framework-cli globally.
 
-# NX
+# Release
 
-This project uses NX as its build tool. Download the NX extension (called Nx Console) in VSCode to get some better support for when creating new libraries and apps.
-To build a library or app download the nx npm package globally (npm i nx -g), and use the command `nx run <name>:build`, to serve an app use the command `nx run <name>:serve`. `<name>` can be loop, handover, swcr etc..
+When a PR is created and the QA Required label is attached the build will automatically be deployed to the CI env.
+When the PR is merged to main the build will be automatically published to production. To prevent an app from being released to production, create an empty `prod.skip` file and place it in `/apps/${appname}` folder.
+
+PR -> CI
+main -> PROD
 
 # Docs
 

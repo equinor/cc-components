@@ -13,6 +13,9 @@
     },
     "pr:deploy": {
       "dependsOn": []
+    },
+    "fprd:deploy": {
+      "dependsOn": []
     }
   }
 }
