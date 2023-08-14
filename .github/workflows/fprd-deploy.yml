@@ -1,16 +1,12 @@
-name: 'Deploy PR build'
+name: 'Deploy PROD build'
 on:
-  pull_request:
+  push:
     branches:
       - main
-  pull_request_review:
-    types: ['submitted']
 
 permissions: write-all
 jobs:
-  deploy-affected-ci:
-    # only run if pull request is approved and QA is required
-    if: contains(github.event.pull_request.labels.*.name, 'QA Required')
+  deploy-affected-prod:
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
@@ -22,7 +18,7 @@ jobs:
 
       - name: 'Obtain token for upload'
         shell: bash
-        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
+        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_PROD_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,6 +31,6 @@ jobs:
       - name: Build monorepo
         run: pnpm ci:build
 
-      - name: 'Deploy affected apps to Fusion CI'
+      - name: 'Deploy affected apps to Fusion PROD'
         shell: bash
-        run: npx turbo run pr:deploy --since origin/main --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.pull_request.number }}
+        run: npx turbo run fprd:deploy --since ${{github.event.before}} --concurrency 1 -- --token ${{ env.FUSION_TOKEN }}

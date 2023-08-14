@@ -1,8 +1,10 @@
+import { parsePackageJson } from './parsePackageJson.js';
 import fs from 'fs';
-import { parsePackageJson } from '../utils/parsePackageJson.js';
-import ora from 'ora';
+import { notice } from '@actions/core';
 
 export function makeManifest(path: string) {
+  // Create manifest
+  notice('making manifest');
   const { version, name, ...maybe } = parsePackageJson(path);
   if (!version || !name) {
     throw new Error('Name or version missing in package.json');
@@ -27,10 +29,6 @@ export function makeManifest(path: string) {
   const data = JSON.stringify(manifest, null, 2);
 
   fs.writeFileSync('./dist/app-manifest.json', data);
-
-  ora()
-    .start('Creating app manifest')
-    .succeed(`App manifest for ${name}@${major}.${minor}.${patch} successfully created`);
 }
 
 function splitVersions(version: string) {
