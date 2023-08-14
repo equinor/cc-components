@@ -9,7 +9,7 @@ on:
 permissions: write-all
 jobs:
   aquire-token:
-    if: contains(github.event.pull_request.labels.*.name, 'QA Required') && github.event.review.state == 'approved'
+    if: (contains(github.event.pull_request.labels.*.name, 'QA Required') && (github.event.review.state == 'approved'))
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
