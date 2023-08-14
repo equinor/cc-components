@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { readdirSync } from 'fs';
 import { Command } from 'commander';
-import { notice, setSecret } from '@actions/core';
+import { setSecret, warning } from '@actions/core';
 
 import { parsePackageJson } from './utils/parsePackageJson.js';
 import { prepareBundle } from './utils/prepareBundle.js';
@@ -37,7 +37,7 @@ export async function release(token: string) {
   }
 
   if (shouldSkipProd()) {
-    notice(`Prod skipped for ${r.name} because a prod.skip file was found`);
+    warning(`Prod skipped for ${r.name} because a prod.skip file was found`);
     return;
   }
 
