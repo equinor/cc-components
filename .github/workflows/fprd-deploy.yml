@@ -6,7 +6,7 @@ on:
 
 permissions: write-all
 jobs:
-  aquire-token:
+  deploy-affected-prod:
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
