@@ -6,6 +6,8 @@ import {
 import { createRoot } from 'react-dom/client';
 
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { useState } from 'react';
+import { Button } from '@equinor/eds-core-react';
 
 /**
  * Facades the fusion-framework render setup, used in all apps
@@ -44,6 +46,15 @@ export function createRender(
       }
     })();
 
+    const possiblePrNumber = (args.env.config?.environment as any)?.pr;
+
+    let cleanup = () => {};
+
+    if (possiblePrNumber) {
+      console.log(`creating pr ${possiblePrNumber}`);
+      cleanup = createPrLabel(possiblePrNumber, el);
+    }
+
     /** Create root from provided element */
     const root = createRoot(el);
 
@@ -60,6 +71,51 @@ export function createRender(
     return () => {
       teardown && teardown();
       root.unmount();
+      cleanup();
     };
   };
+}
+
+function createPrLabel(prNumber: string, el: HTMLElement): VoidFunction {
+  const child = document.createElement('div');
+  child.id = '123';
+  document.body.appendChild(child);
+
+  const root = createRoot(child);
+
+  root.render(<PRLabel prNumber={prNumber} />);
+
+  return () => {
+    root.unmount();
+    child.remove();
+  };
+}
+
+function PRLabel({ prNumber }: { prNumber: string }) {
+  const [isOpen, setIsOpen] = useState(true);
+  if (!isOpen) return null;
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: '48px',
+        right: `${Math.round(window.innerWidth / 2)}px`,
+        fontSize: '24px',
+        border: '1px solid grey',
+        background: 'orange',
+        padding: '10px',
+        display: 'flex',
+        gap: '10px',
+        alignItems: 'center',
+        zIndex: 10,
+      }}
+    >
+      <a href={`https://github.com/equinor/cc-components/pull/${prNumber}`}>
+        PR: #{prNumber}
+      </a>
+      <Button variant="ghost_icon" onClick={() => setIsOpen(false)}>
+        X
+      </Button>
+    </div>
+  );
 }

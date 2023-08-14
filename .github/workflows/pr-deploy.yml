@@ -1,0 +1,40 @@
+name: 'Deploy PR build'
+on:
+  pull_request:
+    branches:
+      - main
+  pull_request_review:
+    types: ['submitted']
+
+permissions: write-all
+jobs:
+  aquire-token:
+    # only run if pull request is approved and QA is required
+    if: contains(github.event.pull_request.labels.*.name, 'QA Required')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Login to Azure'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: 'Obtain token for upload'
+        shell: bash
+        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to fetch range
+
+      - name: Install Dependencies
+        run: npm i -g pnpm typescript && pnpm i
+
+      - name: Build monorepo
+        run: pnpm ci:build
+
+      - name: 'Deploy affected apps to Fusion'
+        shell: bash
+        run: npx turbo run pr:deploy --since origin/main -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.pull_request.number }}

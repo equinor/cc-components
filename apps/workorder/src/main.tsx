@@ -12,4 +12,5 @@ const WorkorderApp = () => {
 };
 
 export const render = createRender(WorkorderApp, configure, 'Workorder');
+
 export default render;

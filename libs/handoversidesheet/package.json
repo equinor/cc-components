@@ -12,5 +12,8 @@
     "@cc-components/handovershared": "workspace:^",
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/styled-components": "5.1.26"
   }
 }

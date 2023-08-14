@@ -3,7 +3,7 @@ import { createWidget } from '@equinor/workspace-sidesheet';
 
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
-import { Tabs } from '@equinor/eds-core-react';
+import { TabListProps, Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
@@ -25,12 +25,12 @@ import { useQuery } from '@tanstack/react-query';
 import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
-export const StyledTabListWrapper = styled.div`
+export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
-export const StyledTabsList = styled(Tabs.List)`
+export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
