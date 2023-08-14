@@ -3,11 +3,13 @@ on:
   pull_request:
     branches:
       - main
+  pull_request_review:
+    types: ['submitted']
 
 permissions: write-all
 jobs:
   aquire-token:
-    if: contains(github.event.pull_request.labels.*.name, 'QA Required')
+    if: contains(github.event.pull_request.labels.*.name, 'QA Required') && github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
