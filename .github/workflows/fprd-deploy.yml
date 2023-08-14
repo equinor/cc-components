@@ -1,8 +1,8 @@
 name: 'Deploy PROD build'
 on:
-  pull_request:
-    # branches:
-    #   - main
+  push:
+    branches:
+      - main
 
 permissions: write-all
 jobs:
