@@ -335,6 +335,9 @@ importers:
 
   cli:
     dependencies:
+      '@actions/http-client':
+        specifier: ^2.1.1
+        version: 2.1.1
       adm-zip:
         specifier: ^0.5.10
         version: 0.5.10
@@ -360,6 +363,21 @@ importers:
       '@types/prompts':
         specifier: ^2.4.4
         version: 2.4.4
+
+  github-action:
+    dependencies:
+      '@actions/core':
+        specifier: ^1.10.0
+        version: 1.10.0
+      '@actions/github':
+        specifier: ^5.1.1
+        version: 5.1.1
+      adm-zip:
+        specifier: ^0.5.10
+        version: 0.5.10
+      commander:
+        specifier: 11.0.0
+        version: 11.0.0
 
   libs/handoverapp:
     dependencies:
@@ -393,6 +411,10 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/loopapp:
     dependencies:
@@ -426,6 +448,10 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/mechanicalcompletionapp:
     dependencies:
@@ -453,6 +479,10 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/plugins: {}
 
@@ -497,6 +527,10 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/scopechangerequestapp:
     dependencies:
@@ -569,6 +603,10 @@ importers:
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   libs/workorderapp:
     dependencies:
@@ -602,6 +640,10 @@ importers:
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
+    devDependencies:
+      '@types/styled-components':
+        specifier: 5.1.26
+        version: 5.1.26
 
   reports/JCA-reports/jcainstallation:
     dependencies:
@@ -730,6 +772,30 @@ importers:
         version: link:../../libs/shared
 
 packages:
+
+  /@actions/core@1.10.0:
+    resolution: {integrity: sha512-2aZDDa3zrrZbP5ZYg159sNoLRb61nQ7awl5pSvIq5Qpj81vwDzdMRKzkWJGJuwVvWpvZKx7vspJALyvaaIQyug==}
+    dependencies:
+      '@actions/http-client': 2.1.1
+      uuid: 8.3.2
+    dev: false
+
+  /@actions/github@5.1.1:
+    resolution: {integrity: sha512-Nk59rMDoJaV+mHCOJPXuvB1zIbomlKS0dmSIqPGxd0enAXBnOfn4VWF+CGtRCwXZG9Epa54tZA7VIRlJDS8A6g==}
+    dependencies:
+      '@actions/http-client': 2.1.1
+      '@octokit/core': 3.6.0
+      '@octokit/plugin-paginate-rest': 2.21.3(@octokit/core@3.6.0)
+      '@octokit/plugin-rest-endpoint-methods': 5.16.2(@octokit/core@3.6.0)
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@actions/http-client@2.1.1:
+    resolution: {integrity: sha512-qhrkRMB40bbbLo7gF+0vu+X+UawOvQQqNAA/5Unx774RS8poaOhThDOG6BGmxvAnxhQnDp2BG/ZUm65xZILTpw==}
+    dependencies:
+      tunnel: 0.0.6
+    dev: false
 
   /@ag-grid-community/client-side-row-model@28.1.1:
     resolution: {integrity: sha512-5lzXsdNzMQjRWYTI9VLn9KjhSyTc6TPBf63CoBWsBxxG5pSRbtKCVsx512SDxiRYZsrf/B/zImVyvHCoTBZ+Dg==}
@@ -5862,6 +5928,94 @@ packages:
     resolution: {integrity: sha512-tCP6ggbtgIL4hPM5goVFSjL51jH/BLl/yBLy98wAV9a2L/Sn9iS3abfprPeQw6/nan5lLaz4Vz8ZP37LKh+xfQ==}
     dependencies:
       svgmoji: 3.2.0
+    dev: false
+
+  /@octokit/auth-token@2.5.0:
+    resolution: {integrity: sha512-r5FVUJCOLl19AxiuZD2VRZ/ORjp/4IN98Of6YJoJOkY75CIBuYfmiNHGrDwXr+aLGG55igl9QrxX3hbiXlLb+g==}
+    dependencies:
+      '@octokit/types': 6.41.0
+    dev: false
+
+  /@octokit/core@3.6.0:
+    resolution: {integrity: sha512-7RKRKuA4xTjMhY+eG3jthb3hlZCsOwg3rztWh75Xc+ShDWOfDDATWbeZpAHBNRpm4Tv9WgBMOy1zEJYXG6NJ7Q==}
+    dependencies:
+      '@octokit/auth-token': 2.5.0
+      '@octokit/graphql': 4.8.0
+      '@octokit/request': 5.6.3
+      '@octokit/request-error': 2.1.0
+      '@octokit/types': 6.41.0
+      before-after-hook: 2.2.3
+      universal-user-agent: 6.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@octokit/endpoint@6.0.12:
+    resolution: {integrity: sha512-lF3puPwkQWGfkMClXb4k/eUT/nZKQfxinRWJrdZaJO85Dqwo/G0yOC434Jr2ojwafWJMYqFGFa5ms4jJUgujdA==}
+    dependencies:
+      '@octokit/types': 6.41.0
+      is-plain-object: 5.0.0
+      universal-user-agent: 6.0.0
+    dev: false
+
+  /@octokit/graphql@4.8.0:
+    resolution: {integrity: sha512-0gv+qLSBLKF0z8TKaSKTsS39scVKF9dbMxJpj3U0vC7wjNWFuIpL/z76Qe2fiuCbDRcJSavkXsVtMS6/dtQQsg==}
+    dependencies:
+      '@octokit/request': 5.6.3
+      '@octokit/types': 6.41.0
+      universal-user-agent: 6.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@octokit/openapi-types@12.11.0:
+    resolution: {integrity: sha512-VsXyi8peyRq9PqIz/tpqiL2w3w80OgVMwBHltTml3LmVvXiphgeqmY9mvBw9Wu7e0QWk/fqD37ux8yP5uVekyQ==}
+    dev: false
+
+  /@octokit/plugin-paginate-rest@2.21.3(@octokit/core@3.6.0):
+    resolution: {integrity: sha512-aCZTEf0y2h3OLbrgKkrfFdjRL6eSOo8komneVQJnYecAxIej7Bafor2xhuDJOIFau4pk0i/P28/XgtbyPF0ZHw==}
+    peerDependencies:
+      '@octokit/core': '>=2'
+    dependencies:
+      '@octokit/core': 3.6.0
+      '@octokit/types': 6.41.0
+    dev: false
+
+  /@octokit/plugin-rest-endpoint-methods@5.16.2(@octokit/core@3.6.0):
+    resolution: {integrity: sha512-8QFz29Fg5jDuTPXVtey05BLm7OB+M8fnvE64RNegzX7U+5NUXcOcnpTIK0YfSHBg8gYd0oxIq3IZTe9SfPZiRw==}
+    peerDependencies:
+      '@octokit/core': '>=3'
+    dependencies:
+      '@octokit/core': 3.6.0
+      '@octokit/types': 6.41.0
+      deprecation: 2.3.1
+    dev: false
+
+  /@octokit/request-error@2.1.0:
+    resolution: {integrity: sha512-1VIvgXxs9WHSjicsRwq8PlR2LR2x6DwsJAaFgzdi0JfJoGSO8mYI/cHJQ+9FbN21aa+DrgNLnwObmyeSC8Rmpg==}
+    dependencies:
+      '@octokit/types': 6.41.0
+      deprecation: 2.3.1
+      once: 1.4.0
+    dev: false
+
+  /@octokit/request@5.6.3:
+    resolution: {integrity: sha512-bFJl0I1KVc9jYTe9tdGGpAMPy32dLBXXo1dS/YwSCTL/2nd9XeHsY616RE3HPXDVk+a+dBuzyz5YdlXwcDTr2A==}
+    dependencies:
+      '@octokit/endpoint': 6.0.12
+      '@octokit/request-error': 2.1.0
+      '@octokit/types': 6.41.0
+      is-plain-object: 5.0.0
+      node-fetch: 2.6.9
+      universal-user-agent: 6.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@octokit/types@6.41.0:
+    resolution: {integrity: sha512-eJ2jbzjdijiL3B4PrSQaSjuF2sPEQPVCPzBvTHJD9Nz+9dw2SGH4K4xeQJ77YfTq5bRQ+bD8wT11JbeDPmxmGg==}
+    dependencies:
+      '@octokit/openapi-types': 12.11.0
     dev: false
 
   /@parcel/watcher@2.0.4:
@@ -11263,6 +11417,10 @@ packages:
       safe-buffer: 5.1.2
     dev: true
 
+  /before-after-hook@2.2.3:
+    resolution: {integrity: sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==}
+    dev: false
+
   /better-opn@2.1.1:
     resolution: {integrity: sha512-kIPXZS5qwyKiX/HcRvDYfmBQUa8XP17I0mYZZ0y4UhpYOSvtsLHDYqmomS+Mj20aDvD3knEiQ0ecQy2nhio3yA==}
     engines: {node: '>8.0.0'}
@@ -12098,6 +12256,11 @@ packages:
     resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
     engines: {node: '>=14'}
 
+  /commander@11.0.0:
+    resolution: {integrity: sha512-9HMlXtt/BNoYr8ooyjjNRdIilOTkVJXB+GhxMTtOKwk0R4j4lS4NpjuqmRxroBfnfTSHQIHQB7wryHhXarNjmQ==}
+    engines: {node: '>=16'}
+    dev: false
+
   /commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
     dev: true
@@ -12826,6 +12989,10 @@ packages:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /deprecation@2.3.1:
+    resolution: {integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==}
+    dev: false
 
   /dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
@@ -15708,7 +15875,6 @@ packages:
   /is-plain-object@5.0.0:
     resolution: {integrity: sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /is-potential-custom-element-name@1.0.1:
     resolution: {integrity: sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==}
@@ -17829,7 +17995,6 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
-    dev: true
 
   /node-gyp-build@4.6.0:
     resolution: {integrity: sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==}
@@ -21986,7 +22151,6 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
-    dev: true
 
   /tr46@3.0.0:
     resolution: {integrity: sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==}
@@ -22155,6 +22319,11 @@ packages:
   /tty-browserify@0.0.0:
     resolution: {integrity: sha512-JVa5ijo+j/sOoHGjw0sxw734b1LhBkQ3bvUGNdxnVXDCX81Yx7TFgnZygxrIIWn23hbfTaMYLwRmAxFyDuFmIw==}
     dev: true
+
+  /tunnel@0.0.6:
+    resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
+    engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
+    dev: false
 
   /turbo-darwin-64@1.9.1:
     resolution: {integrity: sha512-IX/Ph4CO80lFKd9pPx3BWpN2dynt6mcUFifyuHUNVkOP1Usza/G9YuZnKQFG6wUwKJbx40morFLjk1TTeLe04w==}
@@ -22521,6 +22690,10 @@ packages:
       '@types/unist': 2.0.6
       unist-util-is: 5.2.1
       unist-util-visit-parents: 5.1.3
+
+  /universal-user-agent@6.0.0:
+    resolution: {integrity: sha512-isyNax3wXoKaulPDZWHQqbmIx1k2tb9fb3GGDBRxCscfYV2Ch7WxPArBsFEG8s/safwXTT7H4QGhaIkTp9447w==}
+    dev: false
 
   /universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -23117,7 +23290,6 @@ packages:
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
-    dev: true
 
   /webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
@@ -23284,7 +23456,6 @@ packages:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-    dev: true
 
   /which-boxed-primitive@1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

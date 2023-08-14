@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@cc-components/workordershared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^"
+    "@cc-components/sharedcomponents": "workspace:^",
+    "@cc-components/workordershared": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/styled-components": "5.1.26"
   }
 }
