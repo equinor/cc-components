@@ -1,6 +1,6 @@
 | Key                                                                                                                         | Display name            | Production           | Halt reason                         |
 | --------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- | ----------------------------------- |
-| [https://github.com/equinor/cc-components/blob/main/apps/handover/README.md](handover)                                      | handover                | Temporarily disabled | Paused due to serverside migration. |
+| [handover](https://github.com/equinor/cc-components/blob/main/apps/handover/README.md)                                      | handover                | Temporarily disabled | Paused due to serverside migration. |
 | [https://github.com/equinor/cc-components/blob/main/apps/loop/README.md](loop)                                              | loop                    | Yes                  |                                     |
 | [https://github.com/equinor/cc-components/blob/main/apps/mechanicalcompletion/README.md](mechanical-completion)             | Mechanical completion   | Yes                  |                                     |
 | [https://github.com/equinor/cc-components/blob/main/apps/punch/README.md](punch)                                            | punch                   | Yes                  |                                     |
