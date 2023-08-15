@@ -1,8 +1,8 @@
-name: 'Deploy PROD build'
+name: 'Generate applist'
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
 
 permissions: write-all
 jobs:
@@ -26,6 +26,6 @@ jobs:
       - name: Install Dependencies
         run: npm i -g typescript && pnpm install
 
-      - name: 'Deploy affected apps to Fusion PROD'
+      - name: 'Generate applist and push readme commit'
         shell: bash
         run: pnpm applist --token ${{ secrets.GITHUB_TOKEN }}
