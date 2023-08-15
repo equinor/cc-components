@@ -1,3 +1,4 @@
+## Apps
 | Key                                                                                                                         | Display name            | Production           | Halt reason                         |
 | --------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- | ----------------------------------- |
 | [handover](https://github.com/equinor/cc-components/blob/main/apps/handover/README.md)                                      | handover                | Temporarily disabled | Paused due to serverside migration. |
