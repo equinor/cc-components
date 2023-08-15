@@ -1,83 +1,23 @@
-Key: handover
-Name: handover
-Production: ⚠️
-
-Key: loop
-Name: loop
-Production: ✅
-
-Key: mechanical-completion
-Name: Mechanical completion
-Production: ✅
-
-Key: punch
-Name: punch
-Production: ✅
-
-Key: scopechangerequest
-Name: scopechangerequest
-Production: ⚠️
-
-Key: swcr
-Name: SWCR
-Production: ✅
-
-Key: workorder
-Name: workorder
-Production: ✅
-
-Key: activities
-Name: activities
-Production: ✅
-
-Key: atexinspection
-Name: Atex inspection
-Production: ✅
-
-Key: ccoverview
-Name: CC overview
-Production: ✅
-
-Key: checklist
-Name: checklist
-Production: ✅
-
-Key: commissioning-task
-Name: Commissioning task
-Production: ✅
-
-Key: jca-installation
-Name: Installation
-Production: ⚠️
-
-Key: jca-progress-summary
-Name: Progress summary
-Production: ⚠️
-
-Key: jca-spools
-Name: Spools
-Production: ⚠️
-
-Key: jca-work-preparation
-Name: Work Preparation
-Production: ⚠️
-
-Key: preservation-workspace
-Name: Preservation
-Production: ⚠️
-
-Key: projectsafetybarriers
-Name: Project Safety Barriers
-Production: ✅
-
-Key: query-workspace
-Name: Query workspace
-Production: ⚠️
-
-Key: schedule-viewer
-Name: Schedule viewer
-Production: ⚠️
-
-Key: tags
-Name: tags
-Production: ✅
+| Key                    | Display name            | Production           |
+| ---------------------- | ----------------------- | -------------------- |
+| handover               | handover                | Temporarily disabled |
+| loop                   | loop                    | Yes                  |
+| mechanical-completion  | Mechanical completion   | Yes                  |
+| punch                  | punch                   | Yes                  |
+| scopechangerequest     | scopechangerequest      | Temporarily disabled |
+| swcr                   | SWCR                    | Yes                  |
+| workorder              | workorder               | Yes                  |
+| activities             | activities              | Yes                  |
+| atexinspection         | Atex inspection         | Yes                  |
+| ccoverview             | CC overview             | Yes                  |
+| checklist              | checklist               | Yes                  |
+| commissioning-task     | Commissioning task      | Yes                  |
+| jca-installation       | Installation            | Temporarily disabled |
+| jca-progress-summary   | Progress summary        | Temporarily disabled |
+| jca-spools             | Spools                  | Temporarily disabled |
+| jca-work-preparation   | Work Preparation        | Temporarily disabled |
+| preservation-workspace | Preservation            | Temporarily disabled |
+| projectsafetybarriers  | Project Safety Barriers | Yes                  |
+| query-workspace        | Query workspace         | Temporarily disabled |
+| schedule-viewer        | Schedule viewer         | Temporarily disabled |
+| tags                   | tags                    | Yes                  |
