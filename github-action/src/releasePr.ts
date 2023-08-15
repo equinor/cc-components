@@ -31,7 +31,9 @@ program
 await program.parseAsync();
 
 export async function release(token: string, prNumber: string) {
-  logInfo('Testing cyan message');
+  logInfo("Deployment succesful", "Green");
+  console.log("Some random normal message"),
+  logInfo("Uh-oh 403 sp dead", "Red")
   // prepareBundle();
 
   // makeManifest('./package.json');
@@ -79,28 +81,28 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
   }
 }
 
-// const ColorReset = '\x1b[0m';
+const ColorReset = '\x1b[0m';
+type TextColor =
+  | 'Red'
+  | 'Green'
+  | 'Black'
+  | 'Yellow'
+  | 'Blue'
+  | 'Magenta'
+  | 'Cyan'
+  | 'White';
 
-// enum TextEffect {
-//   Bright = '\x1b[1m',
-//   Dim = '\x1b[2m',
-//   Underscore = '\x1b[4m',
-//   Blink = '\x1b[5m',
-//   Reverse = '\x1b[7m',
-//   Hidden = '\x1b[8m',
-// }
+const textColor = {
+  Red: '\x1b[31m',
+  Black: '\x1b[30m',
+  Green: '\x1b[32m',
+  Yellow: '\x1b[33m',
+  Blue: '\x1b[34m',
+  Magenta: '\x1b[35m',
+  Cyan: '\x1b[36m',
+  White: '\x1b[37m',
+} satisfies Record<TextColor, string>;
 
-// enum ForegroundColor {
-//   Black = '\x1b[30m',
-//   Red = '\x1b[31m',
-//   Green = '\x1b[32m',
-//   Yellow = '\x1b[33m',
-//   Blue = '\x1b[34m',
-//   Magenta = '\x1b[35m',
-//   Cyan = '\x1b[36m',
-//   White = '\x1b[37m',
-// }
-
-export function logInfo(message: string): void {
-  console.log(`\x1b[32m${message}`);
+export function logInfo(message: string, color: TextColor): void {
+  console.log(`${textColor[color]}${message}${ColorReset}`);
 }
