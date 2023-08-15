@@ -35,7 +35,7 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <DescriptionCell description={props.value} />;
       },
-      width: 193,
+      width: 300,
     },
     {
       field: 'Discipline',
@@ -67,13 +67,13 @@ export const tableConfig: GridConfig<McPackage> = {
       field: 'Responsible',
       valueGetter: (pkg) => pkg.data?.responsible,
       enableRowGroup: true,
-      width: 157,
+      width: 150,
     },
     {
       field: 'Phase',
       valueGetter: (pkg) => pkg.data?.phase,
       enableRowGroup: true,
-      width: 119,
+      width: 150,
     },
     {
       field: 'Area',
@@ -82,7 +82,7 @@ export const tableConfig: GridConfig<McPackage> = {
         return <StyledMonospace>{props.data?.area}</StyledMonospace>;
       },
       enableRowGroup: true,
-      width: 110,
+      width: 150,
     },
     {
       field: 'Comm. package',
@@ -116,7 +116,7 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 247,
+      width: 250,
     },
     {
       field: 'Actual M-01 Actual Date',
@@ -124,7 +124,7 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 247,
+      width: 250,
     },
     {
       field: 'Planned M-03 RFC',
@@ -140,25 +140,25 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 198,
+      width: 200,
     },
     {
       field: 'Comm Pri1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
-      width: 152,
+      width: 155,
     },
     {
       field: 'Comm Pri2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
-      width: 152,
+      width: 155,
     },
     {
       field: 'Comm Pri3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,
-      width: 152,
+      width: 155,
     },
   ],
 };
