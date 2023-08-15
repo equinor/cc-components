@@ -15,4 +15,5 @@ const Query = () => {
 };
 
 export const render = createRender(Query, configure);
+
 export default render;
