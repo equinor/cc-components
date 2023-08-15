@@ -49,7 +49,7 @@ export function useGardenDataSource(
     getGardenMeta: async (keys, filters, signal) => {
       const requestArgs = createRequestBody(
         {
-          groupingKeys: keys,
+          groupingKeys: keys.groupingKeys,
           filter: filters,
         },
         signal
