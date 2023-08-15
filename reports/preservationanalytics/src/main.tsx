@@ -15,4 +15,5 @@ const Preservation = () => {
 };
 
 export const render = createRender(Preservation, configure);
+
 export default render;
