@@ -9,30 +9,7 @@ import { prepareBundle } from './utils/prepareBundle.js';
 import { makeManifest } from './utils/makeManifest.js';
 import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
-const ColorReset = '\x1b[0m';
-type TextColor =
-  | 'Red'
-  | 'Green'
-  | 'Black'
-  | 'Yellow'
-  | 'Blue'
-  | 'Magenta'
-  | 'Cyan'
-  | 'White';
-
-const textColor = {
-  Red: '\x1b[31m',
-  Black: '\x1b[30m',
-  Green: '\x1b[32m',
-  Yellow: '\x1b[33m',
-  Blue: '\x1b[34m',
-  Magenta: '\x1b[35m',
-  Cyan: '\x1b[36m',
-  White: '\x1b[37m',
-} satisfies Record<TextColor, string>;
-
-
-
+import { logInfo } from './utils/logInfo.js';
 
 const ciUrl = 'https://fusion-s-portal-ci.azurewebsites.net';
 
@@ -55,24 +32,17 @@ program
 await program.parseAsync();
 
 export async function release(token: string, prNumber: string) {
-  logInfo("Deployment succesful", "Green");
-  console.log("Some random normal message"),
-  logInfo("Uh-oh 403 sp dead", "Red")
-  // prepareBundle();
-
-  // makeManifest('./package.json');
-
-  // const zipped = zipBundle();
-
-  // const r = parsePackageJson();
-  // if (!r.name) {
-  //   throw new Error(
-  //     `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
-  //   );
-  // }
-
-  // await uploadBundle(ciUrl, token, r.name, zipped);
-  // await patchWithPrNumber(prNumber, token, r.name);
+  prepareBundle();
+  makeManifest('./package.json');
+  const zipped = zipBundle();
+  const r = parsePackageJson();
+  if (!r.name) {
+    throw new Error(
+      `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
+    );
+  }
+  await uploadBundle(ciUrl, token, r.name, zipped);
+  await patchWithPrNumber(prNumber, token, r.name);
 }
 
 async function patchWithPrNumber(prNumber: string, token: string, appKey: string) {
@@ -86,6 +56,7 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
   //Download current config
   const res = await client.get(`${ciUrl}/api/apps/${appKey}/config`, headers);
   if (res.message.statusCode !== 200) {
+    logInfo(`Failed to fetch client config, Code: ${res.message.statusCode}`, 'Red');
     throw new Error('Failed to fetch client config');
   }
   const config = JSON.parse(await res.readBody());
@@ -99,13 +70,16 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
     headers
   );
   if (patchResponse.message.statusCode !== 200) {
+    logInfo(
+      `Failed to patch client config with pr number, Code: ${patchResponse.message.statusCode}`,
+      'Red'
+    );
     throw new Error(
       `Failed to patch client config with pr number, ${await patchResponse.readBody()}`
     );
   }
-}
-
-
-function logInfo(message: string, color: TextColor): void {
-  console.log(`${textColor[color]}${message}${ColorReset}`);
+  logInfo(
+    `Sucessfully patched client config for ${appKey} with pr number ${prNumber}`,
+    'Green'
+  );
 }
