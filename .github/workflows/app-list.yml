@@ -1,12 +1,12 @@
 name: 'Generate applist'
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - test
 
 permissions: write-all
 jobs:
-  deploy-affected-prod:
+  generate-applist:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
