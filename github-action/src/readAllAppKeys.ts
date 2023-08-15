@@ -1,6 +1,4 @@
 import { readFileSync, readdirSync, existsSync } from 'fs';
-import { resolve } from 'path';
-import { chdir } from 'process';
 import { PackageJson } from './utils/parsePackageJson.js';
 
 /**
@@ -8,12 +6,11 @@ import { PackageJson } from './utils/parsePackageJson.js';
  * This will be useful for fdev admins patching
  */
 export function readAllAppKeys() {
-  const rootDir = resolve(import.meta.url.replace('file:///', ''), '../../../');
+  const rootDir = '/home/runner/work/cc-components/cc-components/';
   const appKeys: AppInfo[] = [
     ...traverseAppsDirectory('apps', rootDir),
     ...traverseAppsDirectory('reports', rootDir),
   ];
-  chdir(rootDir);
   return appKeys;
 }
 
