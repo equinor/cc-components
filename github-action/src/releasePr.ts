@@ -31,21 +31,22 @@ program
 await program.parseAsync();
 
 export async function release(token: string, prNumber: string) {
-  prepareBundle();
+  logInfo('Testing cyan message');
+  // prepareBundle();
 
-  makeManifest('./package.json');
+  // makeManifest('./package.json');
 
-  const zipped = zipBundle();
+  // const zipped = zipBundle();
 
-  const r = parsePackageJson();
-  if (!r.name) {
-    throw new Error(
-      `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
-    );
-  }
+  // const r = parsePackageJson();
+  // if (!r.name) {
+  //   throw new Error(
+  //     `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
+  //   );
+  // }
 
-  await uploadBundle(ciUrl, token, r.name, zipped);
-  await patchWithPrNumber(prNumber, token, r.name);
+  // await uploadBundle(ciUrl, token, r.name, zipped);
+  // await patchWithPrNumber(prNumber, token, r.name);
 }
 
 async function patchWithPrNumber(prNumber: string, token: string, appKey: string) {
@@ -76,4 +77,31 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
       `Failed to patch client config with pr number, ${await patchResponse.readBody()}`
     );
   }
+}
+
+const ColorReset = '\x1b[0m';
+
+enum TextEffect {
+  Bright = '\x1b[1m',
+  Dim = '\x1b[2m',
+  Underscore = '\x1b[4m',
+  Blink = '\x1b[5m',
+  Reverse = '\x1b[7m',
+  Hidden = '\x1b[8m',
+}
+
+enum ForegroundColor {
+  Black = '\x1b[30m',
+  Red = '\x1b[31m',
+  Green = '\x1b[32m',
+  Yellow = '\x1b[33m',
+  Blue = '\x1b[34m',
+  Magenta = '\x1b[35m',
+  Cyan = '\x1b[36m',
+  White = '\x1b[37m',
+}
+
+export function logInfo(message: string): void {
+  const textFormat = `${TextEffect.Underscore}${ForegroundColor.Cyan}`;
+  console.log(`${textFormat}${message}${ColorReset}`);
 }
