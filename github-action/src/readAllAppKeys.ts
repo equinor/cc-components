@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from 'fs';
+import { readFileSync, readdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 import { chdir } from 'process';
 import { PackageJson } from './utils/parsePackageJson.js';
@@ -9,7 +9,7 @@ import { PackageJson } from './utils/parsePackageJson.js';
  */
 export function readAllAppKeys() {
   const rootDir = resolve(import.meta.url.replace('file:///', ''), '../../../');
-  const appKeys: string[] = [
+  const appKeys: AppInfo[] = [
     ...traverseAppsDirectory('apps', rootDir),
     ...traverseAppsDirectory('reports', rootDir),
   ];
@@ -17,8 +17,16 @@ export function readAllAppKeys() {
   return appKeys;
 }
 
+export type AppInfo = {
+  key: string;
+  displayName: string;
+  prodSkip: boolean;
+  skipReason: string | null;
+  readme: string;
+};
+
 function traverseAppsDirectory(folderName = 'apps', rootDir: string) {
-  const keys: string[] = [];
+  const keys: AppInfo[] = [];
   const appsFolder = readdirSync(`${rootDir}/${folderName}`);
   appsFolder
     //Exclude hidden files, .gitkeep etc...
@@ -34,7 +42,14 @@ function traverseAppsDirectory(folderName = 'apps', rootDir: string) {
           console.warn(`Skipping ${content.name}, @ not allowed`);
           return;
         }
-        keys.push(content.name);
+        const prodSkipInfo = checkProdSkip(rootDir, folderName, s);
+        keys.push({
+          key: content.name,
+          displayName: content?.displayName ?? content.name,
+          prodSkip: prodSkipInfo.prodSkip,
+          skipReason: prodSkipInfo.reason ?? '',
+          readme: `https://github.com/equinor/cc-components/blob/main/${folderName}/${s}/README.md`,
+        });
       } catch (e) {
         const possibleSubDirFolder = `${rootDir}/${folderName}/${s}`;
         if (!isSubDir(possibleSubDirFolder)) {
@@ -45,6 +60,20 @@ function traverseAppsDirectory(folderName = 'apps', rootDir: string) {
       }
     });
   return keys;
+}
+
+function checkProdSkip(
+  rootDir: string,
+  folderName: string,
+  app: string
+): { prodSkip: boolean; reason: string | null } {
+  const prodSkipPath = `${rootDir}/${folderName}/${app}/prod.skip`;
+  const prodSkipExists = existsSync(prodSkipPath);
+  if (!prodSkipExists) {
+    return { prodSkip: false, reason: null };
+  }
+  const reason = readFileSync(prodSkipPath);
+  return { prodSkip: true, reason: reason.toString('utf-8') };
 }
 
 function isSubDir(dir: string) {

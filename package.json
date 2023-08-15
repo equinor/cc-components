@@ -21,7 +21,8 @@
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
     "storybook-build": "npx nx run storybook-host:build-storybook",
     "shipit:app": "turbo run shipit --filter",
-    "shipit:reports": "turbo run shipit --filter ./reports/**"
+    "shipit:reports": "turbo run shipit --filter ./reports/**",
+    "applist": "npx ts-node --esm github-action/src/generateAppList.ts applist"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^5.1.16",

@@ -1,0 +1,31 @@
+name: 'Deploy PROD build'
+on:
+  push:
+    branches:
+      - main
+
+permissions: write-all
+jobs:
+  deploy-affected-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to fetch range
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: npm i -g typescript && pnpm install
+
+      - name: 'Deploy affected apps to Fusion PROD'
+        shell: bash
+        run: pnpm applist --token ${{ secrets.GITHUB_TOKEN }}
