@@ -4,7 +4,7 @@ import { HttpClient } from '@actions/http-client';
 import { OutgoingHttpHeaders } from 'http';
 import { Readable } from 'stream';
 import { notice } from '@actions/core';
-import { logInfo } from './logInfo';
+import { logInfo } from './logInfo.js';
 
 export async function uploadBundle(
   baseUrl: string,
