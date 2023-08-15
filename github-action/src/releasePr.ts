@@ -9,6 +9,7 @@ import { prepareBundle } from './utils/prepareBundle.js';
 import { makeManifest } from './utils/makeManifest.js';
 import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
+import { logInfo } from './utils/logInfo.js';
 
 const ciUrl = 'https://fusion-s-portal-ci.azurewebsites.net';
 
@@ -32,18 +33,14 @@ await program.parseAsync();
 
 export async function release(token: string, prNumber: string) {
   prepareBundle();
-
   makeManifest('./package.json');
-
   const zipped = zipBundle();
-
   const r = parsePackageJson();
   if (!r.name) {
     throw new Error(
       `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
     );
   }
-
   await uploadBundle(ciUrl, token, r.name, zipped);
   await patchWithPrNumber(prNumber, token, r.name);
 }
@@ -59,6 +56,7 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
   //Download current config
   const res = await client.get(`${ciUrl}/api/apps/${appKey}/config`, headers);
   if (res.message.statusCode !== 200) {
+    logInfo(`Failed to fetch client config, Code: ${res.message.statusCode}`, 'Red');
     throw new Error('Failed to fetch client config');
   }
   const config = JSON.parse(await res.readBody());
@@ -72,8 +70,16 @@ async function patchWithPrNumber(prNumber: string, token: string, appKey: string
     headers
   );
   if (patchResponse.message.statusCode !== 200) {
+    logInfo(
+      `Failed to patch client config with pr number, Code: ${patchResponse.message.statusCode}`,
+      'Red'
+    );
     throw new Error(
       `Failed to patch client config with pr number, ${await patchResponse.readBody()}`
     );
   }
+  logInfo(
+    `Sucessfully patched client config for ${appKey} with pr number ${prNumber}`,
+    'Green'
+  );
 }
