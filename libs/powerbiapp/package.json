@@ -10,6 +10,6 @@
   },
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "1.0.0-alpha.11"
+    "@equinor/workspace-fusion": "4.0.2"
   }
 }
