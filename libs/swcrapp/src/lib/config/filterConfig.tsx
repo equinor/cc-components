@@ -52,8 +52,8 @@ export const filterConfig: FilterConfig<SwcrPackage> = {
     },
     {
       name: 'Priority',
-      valueFormatter: ({ priority }) => priority,
-      defaultHidden: true,
+      valueFormatter: ({ priority }) => (priority ? priority : null),
+      defaultHidden: false,
     },
     {
       name: 'Control system',
