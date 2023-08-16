@@ -1,5 +1,41 @@
+# CC Applications
+
+## Strategy
+
+[Trunk based development](https://trunkbaseddevelopment.com/)
+
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+[Continous Integration](https://trunkbaseddevelopment.com/continuous-integration/)
+
+[Continous Delivery](https://trunkbaseddevelopment.com/continuous-delivery/)
+
+## Getting started
+
+Run the following command `npm run first-time-setup`
+To run an app run the following command `pnpm serve <appname>`
+
+## Deployment
+
+CI -> (Create) PR with label QA/UAT
+
+PROD -> Merge on main
+
+## Creating a new Fusion app
+
+1. Create the app in [Fusion CI](https://admin.ci.fusion-dev.net/apps) & [Fusion PROD](https://admin.fprd.fusion-dev.net/apps) NB!! enable the `hide` option
+2. Add the Service principal as admin on the app for CI/CD to work [In both Fusion CI and Fusion PROD].
+3. Create the app locally in CC-components, run the following command `pnpm new:app` or `pnpm new:report`
+4. Create a PR and label it QA/UAT (Action will run and deploy the app to CI)
+5. Onboard the app to the project portal [HowTo](https://github.com/equinor/lighthouse/blob/main/docs/project-portal/administration.md)
+
+## Development
+
+[HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
+HMR is disabled due to an error in dependency resolution resulting in massive bundle sizes
 
 ## Apps
+
 | Key                                                                                                                         | Display name            | Production           | Halt reason                         |
 | --------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- | ----------------------------------- |
 | [handover](https://github.com/equinor/cc-components/blob/main/apps/handover/README.md)                                      | handover                | Temporarily disabled | Paused due to serverside migration. |
