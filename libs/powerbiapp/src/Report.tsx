@@ -10,7 +10,7 @@ type WorkspaceWrapperProps = {
   appKey: string;
 };
 
-export const Report = ({ appKey, column, reportId, table }: WorkspaceWrapperProps) => {
+export const Report = ({ column, reportId, table }: WorkspaceWrapperProps) => {
   const contextId = useContextId();
   const pbi = usePBIOptions(reportId, {
     column: column,
@@ -21,7 +21,6 @@ export const Report = ({ appKey, column, reportId, table }: WorkspaceWrapperProp
     <Workspace
       key={contextId}
       workspaceOptions={{
-        appKey: appKey,
         getIdentifier: () => '',
       }}
       powerBiOptions={pbi}
