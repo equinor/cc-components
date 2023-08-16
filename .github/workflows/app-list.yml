@@ -1,8 +1,7 @@
 name: 'Generate applist'
 on:
-  push:
-    branches:
-      - test
+  pull_request:
+    branches: ['main']
 
 permissions: write-all
 jobs:
