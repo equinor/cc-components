@@ -1,5 +1,6 @@
 ---
 name: Bug Report
+about: A bug has occurred
 description: File a bug report
 title: "[<App name>]::bug: "
 labels: ["bug", "QA/UAT"]
