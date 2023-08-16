@@ -17,21 +17,21 @@ To run an app run the following command `pnpm serve <appname>`
 
 ## Deployment
 
-CI -> PR with label QA/UAT
+CI -> (Create) PR with label QA/UAT
 
 PROD -> Merge on main
 
 ## Creating a new Fusion app
 
 1. Create the app in [Fusion CI](https://admin.ci.fusion-dev.net/apps) & [Fusion PROD](https://admin.fprd.fusion-dev.net/apps) NB!! enable the `hide` option
-2. Add the Service principal as admin on the app for CI/CD to work.
+2. Add the Service principal as admin on the app for CI/CD to work [In both Fusion CI and Fusion PROD].
 3. Create the app locally in CC-components, run the following command `pnpm new:app` or `pnpm new:report`
 4. Create a PR and label it QA/UAT (Action will run and deploy the app to CI)
 5. Onboard the app to the project portal
 
 ## Development
 
-HMR does not work. To apply changes stop the server and run `pnpm serve <app>`
+[HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
 HMR is disabled due to an error in dependency resolution resulting in massive bundle sizes
 
 ## Apps
