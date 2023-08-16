@@ -10,7 +10,7 @@ permissions: write-all
 jobs:
   deploy-affected-ci:
     # only run if pull request is approved and QA is required
-    if: contains(github.event.pull_request.labels.*.name, 'QA Required')
+    if: contains(github.event.pull_request.labels.*.name, 'QA/UAT')
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
