@@ -1,3 +1,4 @@
+---
 name: Bug Report
 description: File a bug report
 title: "[<App name>]::bug: "
@@ -45,3 +46,4 @@ body:
       value: "A bug happened!"
     validations:
       required: true
+---
