@@ -3,6 +3,8 @@ import { AppInfo, readAllAppKeys } from './readAllAppKeys.js';
 import { Octokit } from '@octokit/core';
 import { Command } from 'commander';
 import { markdownTable } from 'markdown-table';
+import { execSync } from 'child_process';
+import { writeFileSync } from 'fs';
 
 const program = new Command();
 
@@ -53,7 +55,13 @@ async function patchReadme(token: string) {
       startIndex === -1 ? rawContent : rawContent.slice(0, startIndex)
     }\n## Apps\n${formatAppKeys(readAllAppKeys())}`;
 
-    commitNewReadme(client, path, sha, encoding, updatedContent);
+    writeFileSync('./readme.md', updatedContent);
+
+    // commitNewReadme(client, path, sha, encoding, updatedContent);
+    execSync(
+      "git checkout main && git add ./readme.md && git commit -m 'Update readme' && git push -f",
+      { stdio: 'inherit' }
+    );
   } catch (e) {
     console.log(e);
   }
