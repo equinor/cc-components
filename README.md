@@ -27,7 +27,7 @@ PROD -> Merge on main
 2. Add the Service principal as admin on the app for CI/CD to work [In both Fusion CI and Fusion PROD].
 3. Create the app locally in CC-components, run the following command `pnpm new:app` or `pnpm new:report`
 4. Create a PR and label it QA/UAT (Action will run and deploy the app to CI)
-5. Onboard the app to the project portal
+5. Onboard the app to the project portal [HowTo](https://github.com/equinor/lighthouse/blob/main/docs/project-portal/administration.md)
 
 ## Development
 
