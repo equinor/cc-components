@@ -13,6 +13,9 @@ jobs:
         with:
           fetch-depth: 0 # Required to fetch range
 
+      - run: git config --global user.email "Readmebot@bs.com"
+      - run: git config --global user.name "ReadmeBot"
+
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
