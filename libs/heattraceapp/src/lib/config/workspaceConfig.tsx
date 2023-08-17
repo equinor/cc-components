@@ -4,14 +4,19 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import {
+  CCApiAccessLoading,
+  useCCApiAccessCheck,
+  useContextId,
+  useHttpClient,
+} from '@cc-components/shared';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './heattraceSidesheet';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
   const client = useHttpClient();
-  // const { isLoading } = useCCApiAccessCheck(contextId, client, 'heattrace');
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'heat-trace');
 
   const filterOptions = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/heat-trace/filter-model`, req)
@@ -21,9 +26,9 @@ export const WorkspaceWrapper = () => {
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
-  // if (isLoading) {
-  //   return <CCApiAccessLoading />;
-  // }
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
 
   return (
     <Workspace
