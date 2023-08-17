@@ -49,7 +49,7 @@ export function useGardenDataSource(
     getGardenMeta: async (keys, filters, signal) => {
       const requestArgs = createRequestBody(
         {
-          groupingKeys: keys,
+          groupingKeys: keys.groupingKeys,
           filter: filters,
         },
         signal
@@ -61,7 +61,11 @@ export function useGardenDataSource(
       }
       const meta: ApiGardenMeta = await res.json();
       return {
-        allGroupingOptions: meta.allGroupingOptions,
+        allGroupingOptions: meta.allGroupingOptions.map((s) => ({
+          dimension: null,
+          type: null,
+          groupingKey: s,
+        })),
         columnCount: meta.columnCount,
         validGroupingOptions: meta.validGroupingOptions,
         columnStart: meta.startIndex,

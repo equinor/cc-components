@@ -27,10 +27,7 @@ export const useGardenConfig = (
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.heatTraceCableNo,
-    initialGrouping: {
-      horizontalGroupingAccessor: 'Priority1',
-      verticalGroupingKeys: [],
-    },
+    initialGrouping: ['Priority1'],
     customViews: {
       customItemView: GardenItem,
     },
