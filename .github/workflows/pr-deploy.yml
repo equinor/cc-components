@@ -1,16 +1,13 @@
 name: 'Deploy PR build'
 on:
-  pull_request:
-    branches:
-      - main
-  pull_request_review:
-    types: ['submitted']
+  issue_comment:
+    types: [created]
 
 permissions: write-all
 jobs:
   deploy-affected-ci:
     # only run if pull request is approved and QA is required
-    if: contains(github.event.pull_request.labels.*.name, 'QA/UAT')
+    if: contains(github.event.comment.body, 'deploy test')
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
