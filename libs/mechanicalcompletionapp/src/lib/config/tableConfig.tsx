@@ -27,7 +27,7 @@ export const tableConfig: GridConfig<McPackage> = {
       //   }
       //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
       // },
-      width: 100,
+      width: 140,
     },
     {
       field: 'Description',
@@ -41,7 +41,7 @@ export const tableConfig: GridConfig<McPackage> = {
       field: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
       enableRowGroup: true,
-      width: 100,
+      width: 144,
     },
     {
       field: 'MC Status',
@@ -61,7 +61,7 @@ export const tableConfig: GridConfig<McPackage> = {
         );
       },
       enableRowGroup: true,
-      width: 100,
+      width: 150,
     },
     {
       field: 'Responsible',
@@ -99,7 +99,7 @@ export const tableConfig: GridConfig<McPackage> = {
       //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
       //   }
       // },
-      width: 120,
+      width: 185,
     },
     {
       field: 'System',
@@ -108,7 +108,7 @@ export const tableConfig: GridConfig<McPackage> = {
         return <StyledMonospace>{props.data?.system}</StyledMonospace>;
       },
       enableRowGroup: true,
-      width: 100,
+      width: 125,
     },
     {
       field: 'Planned M-01 Final Punch',
@@ -116,7 +116,7 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 200,
+      width: 250,
     },
     {
       field: 'Actual M-01 Actual Date',
@@ -124,7 +124,7 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 200,
+      width: 250,
     },
     {
       field: 'Planned M-03 RFC',
@@ -132,7 +132,7 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 150,
+      width: 210,
     },
     {
       field: 'Actual M-03 RFC',
@@ -140,25 +140,25 @@ export const tableConfig: GridConfig<McPackage> = {
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
       },
-      width: 150,
+      width: 200,
     },
     {
       field: 'Comm Pri1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
-      width: 100,
+      width: 155,
     },
     {
       field: 'Comm Pri2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
-      width: 100,
+      width: 155,
     },
     {
       field: 'Comm Pri3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,
-      width: 100,
+      width: 155,
     },
   ],
 };
