@@ -1,4 +1,5 @@
 import { pipetestStatusColormap } from '@cc-components/shared/mapping';
+import { PopoverWrapper } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import {
@@ -9,6 +10,7 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { HeatTrace } from '@cc-components/heattraceshared';
+import { getHeatTraceStatuses } from '../utils-garden/getHeatTraceStatuses';
 
 const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,7 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   );
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
+
   const {
     data,
     onClick,
@@ -30,6 +33,11 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
     displayName,
   } = props;
 
+  const {
+    backgroundColor,
+    textColor,
+    //TODO: group by keys
+  } = useMemo(() => getHeatTraceStatuses(data), [data]);
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
@@ -46,15 +54,16 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
-          backgroundColor={'green'}
+          backgroundColor={backgroundColor}
+          color={textColor}
           onClick={onClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
         >
-          <StyledItemText>{displayName.replace('@PIPETEST-', '')}</StyledItemText>
+          <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles
             mcColor={
-              'blue'
+              'yellow'
               // data.shortformCompletionStatus
               //   ? pipetestStatusColormap[data.shortformCompletionStatus]
               //   : null
@@ -69,24 +78,23 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
         </StyledItemWrapper>
 
         {columnExpanded && (
-          <StyledDescription title={'data.description' ?? ''}>
-            data.description
+          <StyledDescription title={data.heatTraceCableDescription ?? ''}>
+            {data.heatTraceCableDescription}
           </StyledDescription>
         )}
       </StyledRoot>
 
-      {/* {isOpen && (
+      {isOpen && (
         <PopoverWrapper
           isOpen={isOpen}
           rowStart={rowStart}
           columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
-          popoverTitle={`${data.loopNo}`}
-        >
-          <PopoverContent loop={data} />
-        </PopoverWrapper>
-      )} */}
+          popoverTitle={`${data.heatTraceCableDescription}`}
+          close={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 };

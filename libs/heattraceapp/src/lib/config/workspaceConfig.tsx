@@ -19,7 +19,7 @@ export const WorkspaceWrapper = () => {
 
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
-  // const gardenConfig = useGardenConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId);
 
   // if (isLoading) {
   //   return <CCApiAccessLoading />;
@@ -32,11 +32,11 @@ export const WorkspaceWrapper = () => {
         defaultTab: 'grid',
       }}
       filterOptions={filterOptions}
-      // gardenOptions={gardenConfig}
+      gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
-      modules={[gridModule]}
+      modules={[gridModule, gardenModule]}
     />
   );
 };

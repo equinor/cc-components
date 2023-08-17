@@ -1,10 +1,10 @@
-import ora from 'ora';
 import { resolve } from 'path';
 import AdmZip from 'adm-zip';
+import { notice } from '@actions/core';
 
 export function zipBundle() {
-  const spinner = ora().start('Zipping bundle');
-
+  // zip bundle
+  notice('zipping bundle');
   const appManifestPath = resolve('./dist/app-manifest.json');
   const bundlePath = resolve('./dist/app-bundle.js');
 
@@ -15,6 +15,5 @@ export function zipBundle() {
   zip.addLocalFile(bundlePath);
 
   zip.writeZip('./dist/bundle.zip');
-
-  spinner.succeed('Bundle zipped');
+  return zip;
 }

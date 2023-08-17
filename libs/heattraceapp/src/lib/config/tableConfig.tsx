@@ -11,8 +11,6 @@ import {
   StyledMonospace,
   useHttpClient,
 } from '@cc-components/shared';
-import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generateCommaSeperatedStringArrayColumn';
-import { getHTList } from '../utils-table/tableHelpers';
 
 export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterState> => {
   const client = useHttpClient();
