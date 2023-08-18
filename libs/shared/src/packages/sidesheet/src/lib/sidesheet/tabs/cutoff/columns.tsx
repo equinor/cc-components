@@ -21,10 +21,6 @@ export const columns: ColDef<CutoffBase>[] = [
     },
   },
   {
-    field: 'Project',
-    valueGetter: (pkg) => pkg.data?.project,
-  },
-  {
     field: 'Milestone',
     valueGetter: (pkg) => pkg.data?.milestone,
   },
