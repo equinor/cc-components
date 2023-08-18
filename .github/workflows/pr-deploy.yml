@@ -44,10 +44,6 @@ jobs:
       - name: Install Dependencies
         run: npm i -g typescript && pnpm install
 
-      - name: debug
-        run: echo ${{toJson(github.event)}}
-        shell: bash
-
       - name: Build monorepo
         run: pnpm ci:build
 
