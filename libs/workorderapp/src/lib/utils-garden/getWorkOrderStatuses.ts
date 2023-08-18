@@ -22,6 +22,7 @@ type PackageStatusReturn = {
   progressBar: string;
   status: ProcosysStatuses | FollowUpStatuses;
 };
+
 export const getWorkOrderStatuses = (
   data: WorkOrder,
   gardenKey: string,

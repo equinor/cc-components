@@ -10,4 +10,11 @@ export type CutoffBase = {
   milestone: string;
   subMilestone: string | null;
   responsible: string | null;
+  projectProgress: number | null;
+  estimatedManHours: number;
+  expendedManHours: number;
+  remainingManHours: string | null;
+  earnedManHours: number;
+  expendedManHoursLastWeek: number;
+  earnedManHoursLastWeek: number;
 };
