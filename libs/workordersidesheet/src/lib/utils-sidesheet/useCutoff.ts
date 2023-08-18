@@ -18,8 +18,18 @@ const fetchCutoff = async (
   if (!res.ok) {
     throw new Error('failed to fetch cutoff');
   }
+  const data = (await res.json()) as WorkOrderCutoff[];
+  const cutoffs: WorkOrderCutoff[] = [];
+  let current = '';
+  data.forEach((v, i, a) => {
+    const value = cutoffToString(v);
 
-  return (await res.json()) as WorkOrderCutoff[];
+    if (value !== current) {
+      cutoffs.push(v);
+      current = value;
+    }
+  });
+  return cutoffs;
 };
 export const useCutoff = (packageId: string | null) => {
   const ccApp = useHttpClient();
@@ -31,9 +41,20 @@ export const useCutoff = (packageId: string | null) => {
     useErrorBoundary: false,
   });
   return {
-    //Rip performance
     data,
     isLoading,
     error,
   };
 };
+
+function cutoffToString(wo: WorkOrderCutoff) {
+  const value: WorkOrderCutoff = {
+    ...wo,
+    sourceIdentity: '',
+    updatedDate: '',
+    cutoffDate: '',
+    cutoffWeek: '',
+  };
+
+  return JSON.stringify(value);
+}
