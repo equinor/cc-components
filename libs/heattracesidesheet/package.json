@@ -10,7 +10,6 @@
   "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@cc-components/heattraceshared": "workspace:^",
-    "@equinor/workspace-fusion": "1.0.10"
+    "@cc-components/heattraceshared": "workspace:^"
   }
 }

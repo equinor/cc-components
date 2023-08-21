@@ -6,7 +6,9 @@ type ApiGardenMeta = {
   columnCount: number;
   rowCount: number;
   subGroupCount: number;
-  allGroupingOptions: string[];
+  allGroupingOptions:
+    | string[]
+    | { groupingKey: string; dimension: string[] | null; type: string[] | null }[];
   validGroupingOptions: string[];
 };
 
@@ -60,17 +62,29 @@ export function useGardenDataSource(
         throw new Error('Api error');
       }
       const meta: ApiGardenMeta = await res.json();
+
+      const possibleItem = meta.allGroupingOptions.at(0);
+
+      //TODO: remove when api is migrated
+      const groupingOptions: {
+        groupingKey: string;
+        dimension: string[] | null;
+        type: string[] | null;
+      }[] =
+        typeof possibleItem === 'string'
+          ? meta.allGroupingOptions.map((s) => ({
+              dimension: null,
+              type: null,
+              groupingKey: s as string,
+            }))
+          : (meta.allGroupingOptions as any);
+
       return {
-        allGroupingOptions: meta.allGroupingOptions.map((s) => ({
-          dimension: null,
-          type: null,
-          groupingKey: s,
-        })),
+        allGroupingOptions: groupingOptions,
         columnCount: meta.columnCount,
         validGroupingOptions: meta.validGroupingOptions,
         columnStart: meta.startIndex,
         rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
-        groupingOptions: meta.allGroupingOptions,
       };
     },
     getHeader: async (args, filters, signal) => {

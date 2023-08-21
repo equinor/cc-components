@@ -1,16 +1,15 @@
 name: 'Deploy PR build'
 on:
   pull_request:
-    branches:
-      - main
-  pull_request_review:
-    types: ['submitted']
+    types: [opened]
+  issue_comment:
+    types: [created]
 
 permissions: write-all
 jobs:
   deploy-affected-ci:
     # only run if pull request is approved and QA is required
-    if: contains(github.event.pull_request.labels.*.name, 'QA/UAT')
+    if: contains(github.event.comment.body, 'deploy test')
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
@@ -24,10 +23,14 @@ jobs:
         shell: bash
         run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
 
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: xt0rted/pull-request-comment-branch@v2
+        id: comment-branch
+
+      - uses: actions/checkout@v3
+        if: success()
         with:
-          fetch-depth: 0 # Required to fetch range
+          ref: ${{ steps.comment-branch.outputs.head_ref }}
+          fetch-depth: 0
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
@@ -49,4 +52,15 @@ jobs:
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.pull_request.number }}
+        run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.issue.number }}
+
+      - name: Comment pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Deployed! 🚀'
+            })
