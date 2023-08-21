@@ -17,7 +17,7 @@ To run an app run the following command `pnpm serve <appname>`
 
 ## Deployment
 
-CI -> (Create) PR with label QA/UAT
+CI -> Comment on pr with 'deploy test', 
 
 PROD -> Merge on main
 

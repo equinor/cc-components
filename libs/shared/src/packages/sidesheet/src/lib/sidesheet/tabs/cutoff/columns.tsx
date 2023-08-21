@@ -1,6 +1,6 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { CutoffBase } from './types';
-import { DateCell, DescriptionCell } from '../../../../../../table-helpers';
+import { DateCell, DescriptionCell, ProgressCell } from '../../../../../../table-helpers';
 
 export const columns: ColDef<CutoffBase>[] = [
   {
@@ -19,10 +19,6 @@ export const columns: ColDef<CutoffBase>[] = [
     cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-  },
-  {
-    field: 'Project',
-    valueGetter: (pkg) => pkg.data?.project,
   },
   {
     field: 'Milestone',
@@ -58,9 +54,45 @@ export const columns: ColDef<CutoffBase>[] = [
       <DateCell dateString={props.data?.plannedCompletionDate} />
     ),
   },
-
   {
     field: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
+  },
+  {
+    field: 'Project progress',
+
+    cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => (
+      <ProgressCell percentWidth={Math.round(props.data?.projectProgress ?? 0)} />
+    ),
+  },
+
+  {
+    field: 'Expended mhrs',
+    valueGetter: (pkg) =>
+      pkg.data?.expendedManHours ? Math.round(pkg.data?.expendedManHours) : '',
+  },
+  {
+    field: 'Estimated mmhrs',
+    valueGetter: (pkg) =>
+      pkg.data?.estimatedManHours ? Math.round(pkg.data?.estimatedManHours) : '',
+  },
+  {
+    field: 'Earned mhrs',
+    valueGetter: (pkg) =>
+      pkg.data?.earnedManHours ? Math.round(pkg.data?.earnedManHours) : '',
+  },
+  {
+    field: 'Expended LW',
+    valueGetter: (pkg) =>
+      pkg.data?.expendedManHoursLastWeek
+        ? Math.round(pkg.data?.expendedManHoursLastWeek)
+        : '',
+  },
+  {
+    field: 'Earned LW',
+    valueGetter: (pkg) =>
+      pkg.data?.earnedManHoursLastWeek
+        ? Math.round(pkg.data?.earnedManHoursLastWeek)
+        : '',
   },
 ];
