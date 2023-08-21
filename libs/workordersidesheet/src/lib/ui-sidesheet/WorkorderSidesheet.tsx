@@ -1,5 +1,6 @@
 import {
   BannerItem,
+  CutoffTab,
   LinkCell,
   MaterialTab,
   MccrTab,
@@ -27,6 +28,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
+import { useCutoff } from '../utils-sidesheet/useCutoff';
 
 export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
   overflow: hidden;
@@ -56,6 +58,8 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
     isFetching: isFetchingMaterial,
     error: materialError,
   } = useMaterial(props.id);
+
+  const { data: cutoffList, error: cutoffError, isLoading } = useCutoff(props.id);
 
   const client = useHttpClient();
   const contextId = useContextId();
@@ -156,6 +160,9 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             <Tabs.Tab>
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -175,6 +182,13 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
               material={material}
               isFetching={isFetchingMaterial}
               error={materialError as Error | null}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <CutoffTab
+              cutoff={cutoffList}
+              isFetching={isLoading}
+              error={cutoffError as Error | null}
             />
           </Tabs.Panel>
         </StyledPanels>
