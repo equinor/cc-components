@@ -24,6 +24,7 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 import { useQuery } from '@tanstack/react-query';
 import { useContextId, useHttpClient } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import { FusionModelViewer } from '@cc-components/modelviewer';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -147,6 +148,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
             <Tabs.Tab>
               Work orders <TabTitle isLoading={isLoading} data={data} />
             </Tabs.Tab>
+            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <StyledPanels>
@@ -157,6 +159,9 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <FusionModelViewer />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

@@ -24,8 +24,8 @@
     "shipit:reports": "turbo run shipit --filter ./reports/**"
   },
   "devDependencies": {
-    "@equinor/fusion-framework-cli": "^5.1.16",
-    "@equinor/fusion-observable": "^7.0.1",
+    "@equinor/fusion-framework-cli": "^7.0.11",
+    "@equinor/fusion-observable": "^8.0.2",
     "@nrwl/cli": "15.7.1",
     "@nrwl/devkit": "15.7.1",
     "@nrwl/eslint-plugin-nx": "15.7.1",
@@ -92,8 +92,8 @@
     "@equinor/eds-icons": "^0.17.0",
     "@equinor/eds-tokens": "^0.9.0",
     "@equinor/fusion-framework-module-ag-grid": "^4.0.0",
-    "@equinor/fusion-framework-react-app": "^3.0.9",
-    "@equinor/fusion-framework-react-module-context": "^4.0.1",
+    "@equinor/fusion-framework-react-app": "^4.1.0",
+    "@equinor/fusion-framework-react-module-context": "^6.0.8",
     "@equinor/workspace-fusion": "0.20.4-alpha.6.0",
     "@equinor/workspace-sidesheet": "^0.1.6",
     "@microsoft/applicationinsights-web": "^3.0.2",

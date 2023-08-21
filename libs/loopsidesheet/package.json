@@ -12,6 +12,6 @@
     "@cc-components/loopshared": "workspace:^",
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
-    "@equinor/fusion-model-viewer": "workspace:^"
+    "@cc-components/modelviewer": "workspace:^"
   }
 }

@@ -14,7 +14,6 @@ export const DetailsTab = ({ loop }: DetailsTabProps): JSX.Element | null => {
   return (
     <StyledTabContent>
       <h3>Details</h3>
-
       <StyledTable>
         <tbody>
           <tr>

@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "allowJs": false,
+      "esModuleInterop": false,
+      "allowSyntheticDefaultImports": true,
+      "noImplicitOverride": true,
+      "strict": true,
+      "outDir": "./dist",
+      "rootDir": ".",
+      "declaration": true
+    },
+    "exclude": ["dist"],
+    "extends": "../../tsconfig.base.json",
+  }
+  

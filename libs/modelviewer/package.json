@@ -1,0 +1,36 @@
+{
+  "name": "@cc-components/modelviewer",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "sideEffects": false,
+  "typesVersions": {
+    ">=4.2": {
+      ".": [
+        "./dist/src/index.js"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./dist/src/index.js"
+  },
+  "dependencies": {
+    "@equinor/echo-3d-viewer": "^0.0.1",
+    "@cognite/reveal": "4.2.2",
+    "rxjs": "^7.5.7"
+  },
+  "devDependencies": {
+    "@equinor/fusion-framework-module": "^4.2.1",
+    "@equinor/fusion-framework-react-app": "^4.1.1",
+    "react": "18.2.0",
+    "@types/three": "0.149.0"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
+  }
+}
