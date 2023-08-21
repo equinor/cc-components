@@ -94,7 +94,7 @@
     "@equinor/fusion-framework-module-ag-grid": "^4.0.0",
     "@equinor/fusion-framework-react-app": "^3.0.9",
     "@equinor/fusion-framework-react-module-context": "^4.0.1",
-    "@equinor/workspace-fusion": "4.0.3",
+    "@equinor/workspace-fusion": "4.0.4",
     "@equinor/workspace-sidesheet": "^0.1.6",
     "@microsoft/applicationinsights-web": "^3.0.2",
     "@swc/helpers": "0.4.14",
