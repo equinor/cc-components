@@ -2,3 +2,6 @@
 
 /dist
 /coverage
+**/osd.json
+node_modules
+**/*.yaml

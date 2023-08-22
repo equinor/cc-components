@@ -270,6 +270,15 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@types/node@18.11.9)
 
+  apps/electrical-consumers:
+    dependencies:
+      '@cc-components/electrical-consumersapp':
+        specifier: workspace:^
+        version: link:../../libs/electrical-consumersapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/handover:
     dependencies:
       '@cc-components/handoverapp':
@@ -347,6 +356,15 @@ importers:
       commander:
         specifier: 11.0.0
         version: 11.0.0
+
+  libs/electrical-consumersapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/handoverapp:
     dependencies:
