@@ -68,41 +68,18 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${heattrace.heatTraceCableNo}, ${heattrace.heatTraceCableDescription}`}
+        title={`${heattrace.heatTraceCableNo} - ${heattrace.heatTraceCableDescription}`}
         onClose={props.close}
         applicationTitle="Heat Trace"
       />
       <StyledBanner>
+        <BannerItem title="Checklist status" value={heattrace.status} />
         <BannerItem
-          title="Current step"
-          value="heattrace.step"
-          // value={heattrace.step}
-        />
-        <BannerItem
-          title="Checklist status"
-          value="heattrace.shortform"
-          // {
-          // heattrace.shortformCompletionStatus ? (
-          // <StatusCircle
-          //     content={heattrace.shortformCompletionStatus}
-          //     statusColor={pipetestStatusColormap[heattrace.shortformCompletionStatus]}
-          //   />
-          // ) : (
-          //   'N/A'
-          // )
-          // }
+          title="Comm Pkg"
+          value={heattrace.commissioningPackageNo}
         ></BannerItem>
-        <BannerItem
-          title="Heattrace RFC"
-          value="heattrace.rffcplanned"
-          // {
-          // heattrace.rfccPlanned ? (
-          //   <DateCell dateString={heattrace.rfccPlanned} />
-          //   ) : (
-          //     'N/A'
-          //   )
-          // }
-        />
+        <BannerItem title="MC Pkg" value={heattrace.mechanicalCompletionPackageNo} />
+        <BannerItem title="Priority1" value={heattrace.priority1 || '(Blank)'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -112,12 +89,7 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
               Work orders <TabTitle isLoading={false} data={workorders} />
             </Tabs.Tab>
             <Tabs.Tab>
-              Checklists{' '}
-              <TabTitle
-                isLoading={false}
-                data={[]}
-                // data={heattrace.checkLists}
-              />
+              Checklists <TabTitle isLoading={false} data={[]} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>

@@ -33,7 +33,7 @@ export const WorkspaceWrapper = () => {
   return (
     <Workspace
       workspaceOptions={{
-        getIdentifier: () => '',
+        getIdentifier: (ht) => ht.heatTraceCableNo,
         defaultTab: 'grid',
       }}
       filterOptions={filterOptions}

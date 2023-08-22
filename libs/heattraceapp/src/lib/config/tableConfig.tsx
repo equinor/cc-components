@@ -44,7 +44,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
 const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   {
     colId: 'HeatTraceCableNo',
-    field: 'Heat Trace',
+    field: 'Tag',
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
@@ -59,8 +59,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     },
     width: 300,
   },
-  //Think it should be priority1, but priority1 has no data
-  { colId: 'Priority1', field: 'Priority', valueGetter: (pkg) => pkg.data?.priority2 },
+  { colId: 'Priority1', field: 'Priority1', valueGetter: (pkg) => pkg.data?.priority1 },
   {
     colId: 'Location',
     field: 'Location',
@@ -69,9 +68,9 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
-  { field: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
+  // Need to implement the visual checklistStatus
+  { field: 'Checklist status', valueGetter: (pkg) => pkg.data?.status },
   { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
-  // think this column only belongs to piptest
   {
     field: 'RFC',
     valueGetter: (pkg) => 'RFC',
