@@ -53,27 +53,13 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
 
   const client = useHttpClient();
   const contextId = useContextId();
-  // const { data: pipetest } = useQuery<Pipetest>(
-  //   ['piping', props.id],
-  //   async () => {
-  //     const res = await client.fetch(`/api/contexts/${contextId}/piping/${props.id}`);
-  //     if (!res.ok) {
-  //       throw res;
-  //     }
-  //     return res.json();
-  //   },
-  //   {
-  //     suspense: true,
-  //     initialData: props.item,
-  //   }
-  // );
 
   const heattrace = props.item;
   if (!heattrace) {
-    throw new Error('Pipetest undefined');
+    throw new Error('Heat Trace undefined');
   }
 
-  // const { data, isLoading } = useGetWorkorders(pipetest.name);
+  // const { data, isLoading } = useGetWorkorders(heattrace.heatTraceCableNo);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -82,10 +68,9 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title="heattrace.name, heattrace.descri"
-        // title={`${heattrace.name}, ${heattrace.description}` || ''}
+        title={`${heattrace.heatTraceCableNo}, ${heattrace.heatTraceCableDescription}`}
         onClose={props.close}
-        applicationTitle="Piping"
+        applicationTitle="Heat Trace"
       />
       <StyledBanner>
         <BannerItem

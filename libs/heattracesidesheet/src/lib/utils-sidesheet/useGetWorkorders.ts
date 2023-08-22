@@ -3,14 +3,14 @@ import { useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { Workorder } from '../types';
 
-export const useGetWorkorders = (pipetestName: string) => {
+export const useGetWorkorders = (heatTraceCabelNo: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
   const { data, isLoading, error } = useQuery<Workorder[], Error>(
-    ['heattrace', pipetestName, 'workorders'],
+    ['heat-trace', heatTraceCabelNo, 'workorders'],
     async ({ signal }) => {
       const respons = await client.fetch(
-        `/api/contexts/${contextId}/heattrace/${pipetestName}/workorders`,
+        `/api/contexts/${contextId}/heat-trace/${heatTraceCabelNo}/workorders`,
         { signal }
       );
       if (!respons.ok) {
