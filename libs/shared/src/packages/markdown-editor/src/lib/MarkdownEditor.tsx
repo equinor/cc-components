@@ -69,7 +69,7 @@ export const MarkdownEditor: FC<PropsWithChildren<MarkdownEditorProps>> = ({
   initialContent,
   ...rest
 }) => {
-  const extensions = useCallback(
+  const extensions: any = useCallback(
     () => [
       new PlaceholderExtension({ placeholder }),
       new BoldExtension(),
