@@ -427,8 +427,6 @@ importers:
         specifier: 5.1.26
         version: 5.1.26
 
-  libs/storybook-host: {}
-
   libs/swcrapp:
     dependencies:
       '@cc-components/shared':
