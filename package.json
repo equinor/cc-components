@@ -18,16 +18,12 @@
     "build:libs": "turbo run build --filter ./libs/* --parallel --output-logs errors-only",
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
     "new:report": "nx generate @cc-components/plugins:fusion-report-generator",
-    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider nx run storybook-host:storybook",
-    "storybook-build": "npx nx run storybook-host:build-storybook",
     "shipit:app": "turbo run shipit --filter",
     "shipit:reports": "turbo run shipit --filter ./reports/**"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^5.1.16",
     "@nrwl/devkit": "15.7.1",
-    "@storybook/react": "^7.3.2",
-    "@storybook/types": "^7.3.2",
     "@swc-node/register": "1.4.2",
     "@swc/core": "1.3.35",
     "@types/html-escaper": "^3.0.0",
