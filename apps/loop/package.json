@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@cc-components/loopapp": "workspace:^",
-    "@cc-components/shared": "workspace:^",
-    "@cc-components/modelviewer": "workspace:^"
+    "@cc-components/shared": "workspace:^"
   }
 }

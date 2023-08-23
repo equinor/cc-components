@@ -300,6 +300,18 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  apps/modelviewer:
+    dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../../libs/modelviewer
+      '@cc-components/modelviewerapp':
+        specifier: workspace:^
+        version: link:../../libs/modelviewerapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/punch:
     dependencies:
       '@cc-components/punchapp':
@@ -483,6 +495,15 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+
+  libs/modelviewerapp:
+    dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
 
   libs/plugins: {}
 

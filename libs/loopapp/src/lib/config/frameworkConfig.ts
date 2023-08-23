@@ -33,16 +33,6 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
-  enableModelViewer(config, (builder) => {
-    builder.setHierarchyClientConfig({
-      baseUrl: 'https://app-echo-hierarchy-dev.azurewebsites.net',
-      scope: 'ebc04930-bf9c-43e5-98bc-bc90865600b8/user_impersonation',
-    });
-    builder.setModelClientConfig({
-      baseUrl: 'https://app-echomodeldist-dev.azurewebsites.net',
-      scope: 'd484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation',
-    });
-  });
 };
 
 type LoopEnvConfig = {
