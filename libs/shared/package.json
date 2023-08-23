@@ -94,10 +94,6 @@
     "@remirror/styles": "^2.0.4",
     "date-fns": "^2.29.3",
     "markdown-to-jsx": "^7.2.0",
-    "@storybook/react": "^7.3.2",
     "remirror": "^2.0.36"
-  },
-  "devDependencies": {
-    "@storybook/types": "7.3.2"
   }
 }
