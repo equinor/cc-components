@@ -1,11 +1,12 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   TabTable,
   DescriptionCell as DCell,
   YearAndWeekCell as YWCell,
   StatusCell as SCell,
 } from '../table';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import '@storybook/types'
 
 export default {
   title: 'Table Cells',
