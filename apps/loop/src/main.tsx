@@ -4,7 +4,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { FusionModelViewer } from '@cc-components/modelviewer';
 
 const LoopApp = () => {
-  const client = useHttpClient('cc-api');
+  //const client = useHttpClient('cc-api');
   return (
     <FusionModelViewer />
     // <RootAppWrapper client={client}>

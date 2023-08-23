@@ -155,7 +155,6 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
             <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
           </Tabs.Panel>
           <Tabs.Panel>
-            <FusionModelViewer />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
