@@ -13,13 +13,17 @@ import {
   defaultGridOptions,
   DataResponse,
 } from '@cc-components/shared/workspace-config';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+  ColumnsToolPanelModule,
+} from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<Punch, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState> => {
   const client = useHttpClient('cc-api');
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {
@@ -46,6 +50,7 @@ export const useTableConfig = (
       },
     },
     columnDefinitions: colDefs as [ColDef<Punch>, ...ColDef<Punch>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
@@ -72,6 +77,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     width: 300,
   },
   {
+    colId: 'Category',
     field: 'Category',
     valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -91,6 +97,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'Status',
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -110,14 +117,17 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'PLSorting',
     field: 'PL Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
   },
   {
+    colId: 'PLType',
     field: 'PL Type',
     valueGetter: (pkg) => pkg.data?.type,
   },
   {
+    colId: 'Estimate',
     field: 'Estimate',
     valueGetter: (pkg) => pkg.data?.estimate,
     cellRenderer: (props: ICellRendererProps<Punch, string>) => {
@@ -125,14 +135,22 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'RaisedByOrg',
     field: 'Raised by org',
     valueGetter: (pkg) => pkg.data?.raisedBy,
   },
   {
+    colId: 'ClearingByOrg',
     field: 'Clearing by org',
     valueGetter: (pkg) => pkg.data?.clearedBy,
   },
   {
+    colId: 'Priority',
+    field: 'priority',
+    valueGetter: (o) => o.data?.priority,
+  },
+  {
+    colId: 'Cleared',
     field: 'Cleared',
     valueGetter: (pkg) => pkg.data?.clearedAtDate,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -140,6 +158,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'Verified',
     field: 'Verified',
     valueGetter: (pkg) => pkg.data?.verifiedAtDate,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -147,6 +166,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'HandoverPlan',
     field: 'Handover plan',
     valueGetter: (pkg) => pkg.data?.handoverPlan,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -154,6 +174,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'FormType',
     field: 'Form type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -163,6 +184,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
+    colId: 'Tag',
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -172,6 +194,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
+    colId: 'CommPkg',
     field: 'Commpkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -189,6 +212,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
+    colId: 'WorkOrder',
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -198,10 +222,12 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
+    colId: 'MaterialRequired',
     field: 'Material required',
-    valueGetter: (pkg) => pkg.data?.materialRequired,
+    valueGetter: (pkg) => (pkg.data?.materialRequired ? 'Yes' : 'No'),
   },
   {
+    colId: 'MaterialEstimate',
     field: 'Material estimate',
     valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {

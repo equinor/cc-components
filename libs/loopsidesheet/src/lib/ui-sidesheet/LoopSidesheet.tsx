@@ -3,7 +3,7 @@ import { createWidget } from '@equinor/workspace-sidesheet';
 
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
-import { Tabs } from '@equinor/eds-core-react';
+import { TabListProps, Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
@@ -22,16 +22,16 @@ import {
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { useQuery } from '@tanstack/react-query';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { FusionModelViewer } from '@cc-components/modelviewer';
 
-export const StyledTabListWrapper = styled.div`
+export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
-export const StyledTabsList = styled(Tabs.List)`
+export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -67,8 +67,8 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
     },
     {
       suspense: false,
-      initialData: props.item,
       useErrorBoundary: false,
+      initialData: props.item ?? undefined,
     }
   );
 
@@ -108,38 +108,32 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
           }
         ></BannerItem>
         <BannerItem
-          title="Cmpkg"
+          title="Comm Pkg"
           value={
-            loop.commissioningPackageNo
-              ? loop.commissioningPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getCommPkgUrl(
-                //     props.item?.commissioningPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.commissioningPackageNo}
-                // </StyledItemLink>
-                'N/A'
+            loop.commissioningPackageNo ? (
+              <LinkCell
+                url={loop.commissioningPackageUrl}
+                urlText={loop.commissioningPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
           }
         />
         <BannerItem
-          title="Mcpkg"
+          title="MC Pkg"
           value={
-            loop.mechanicalCompletionPackageNo
-              ? loop.mechanicalCompletionPackageNo
-              : // <StyledItemLink
-                //   target="_blank"
-                //   href={proCoSysUrls.getMcUrl(
-                //     props.item?.mechanicalCompletionPackageUrlId ?? ''
-                //   )}
-                // >
-                //   {props.item?.mechanicalCompletionPackageNo}
-                // </StyledItemLink>
-                'N/A'
+            loop.mechanicalCompletionPackageNo ? (
+              <LinkCell
+                url={loop.mechanicalCompletionPackageUrl}
+                urlText={loop.mechanicalCompletionPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
           }
         />
-        <BannerItem title="Milestone" value={loop.priority1 || 'N/A'} />
+        <BannerItem title="Priority" value={loop.priority1 || 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>

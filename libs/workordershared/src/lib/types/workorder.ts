@@ -1,6 +1,9 @@
 export type WorkOrder = {
+  actualCompletionDate: string | null;
   actualFinishDate: string | null;
   actualStartupDate: string | null;
+  commissioningPackageUrl: string | null;
+  commissioningPackageUrlId: string | null;
   commpkgNumber: string | null;
   commpkgId: string | null;
   constructionComments: string | null;
@@ -21,7 +24,7 @@ export type WorkOrder = {
   plannedStartupDate: string | null;
   projectDescription: string | null;
   projectIdentifier: string | null;
-  projectProgress: string | null;
+  projectProgress: number | null;
   remainingHours: string | null;
   responsible: string | null;
   responsibleCode: string | null;
@@ -35,7 +38,8 @@ export type WorkOrder = {
   w8ActualDate: string | null;
   w9ActualDate: string | null;
   w10ActualDate: string | null;
+  workOrderNumber: string;
   workOrderId: string;
   workOrderUrlId: string;
-  workOrderNumber: string;
+  workorderUrl: string | null;
 };

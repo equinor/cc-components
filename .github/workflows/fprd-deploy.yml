@@ -1,0 +1,39 @@
+name: 'Deploy PROD build'
+on:
+  push:
+    branches:
+      - main
+
+permissions: write-all
+jobs:
+  deploy-affected-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Login to Azure'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_PROD_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: 'Obtain token for upload'
+        shell: bash
+        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_PROD_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required to fetch range
+
+      - name: Install Dependencies
+        run: npm i -g pnpm typescript && pnpm i
+
+      - name: Build monorepo
+        run: pnpm ci:build
+
+      - name: 'Deploy affected apps to Fusion PROD'
+        shell: bash
+        env:
+          #Runs out of memory when bundling more apps otherwise even though concurrency is 1
+          NODE_OPTIONS: '--max_old_space_size=4096'
+        run: npx turbo run fprd:deploy --since ${{github.event.before}} --concurrency 1 -- --token ${{ env.FUSION_TOKEN }}

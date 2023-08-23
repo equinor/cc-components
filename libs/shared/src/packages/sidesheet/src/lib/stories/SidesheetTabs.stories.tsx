@@ -14,6 +14,7 @@ import {
 export default {
   title: 'Sidesheet tabs',
 };
+/*
 
 export const Material = () => (
   <MaterialTab
@@ -58,32 +59,25 @@ export const Mc = () => (
     isFetching={false}
     mc={[
       {
-        mcPkgNo: '585',
+        mechanicalCompletionPackageNo: '585',
         mcPkgId: '358',
         description: 'Mc description 1',
-        mcStatus: 'Mc status 1',
+        mechanicalCompletionStatus: 'Mc status 1',
         rfccShippedActualDate: '',
         rfccAcceptedActualDate: '',
-        rfocIsShipped: true,
-        rfocIsAccepted: false,
-        rfocIsRejected: true,
-        rfccIsShipped: true,
-        rfccIsAccepted: true,
-        rfccIsRejected: false,
+        rfO_Status: 'Accepted',
+        rfC_Status: 'Accepted',
       },
       {
-        mcPkgNo: '262',
+        mechanicalCompletionPackageNo: '262',
         mcPkgId: '657',
         description: 'Mc description 2',
-        mcStatus: 'Mc status 2',
+        mechanicalCompletionStatus: 'Mc status 2',
         rfccShippedActualDate: '',
         rfccAcceptedActualDate: '',
-        rfocIsShipped: true,
-        rfocIsAccepted: true,
+        rfO_Status: 'Accepted',
+        rfC_Status: 'Accepted',
         rfocIsRejected: false,
-        rfccIsShipped: true,
-        rfccIsAccepted: true,
-        rfccIsRejected: false,
       },
     ]}
   />
@@ -95,32 +89,62 @@ export const Mccr = () => (
     isFetching={false}
     mccr={[
       {
-        workOrderId: '953',
-        tagNumber: '837',
-        tagId: '731',
-        description: 'Mccr description 1',
-        mccrType: 'Mccr type 1',
-        mccrStatus: 'Mccr status 1',
-        mccrResponsible: 'Mccr responsible 1',
-        mccrId: '818',
-        mcpkgNumber: '943',
-        mcPkgId: '266',
-        commpkgId: '639',
-        commpkgNumber: '797',
+        commissioningPackageId: 'eac31fa6-2780-01bc-e053-2410000a10d9',
+        commissioningPackageUrl:
+          'https://procosys.equinor.com/JOHAN_CASTBERG/Completion#CommPkg|111883186',
+        commissioningPackageUrlId: '111883186',
+        commpkgId: 'eac31fa6-2780-01bc-e053-2410000a10d9',
+        commpkgNumber: '2350-M01',
+        description: 'Heat Trace B-Test 2304-L005',
+        facility: 'JCA',
+        mcPkgId: 'eac31fae-d51c-01bc-e053-2410000a10d9',
+        mccrId: 'ed187f41-fca2-c84b-e053-2810000a69dd',
+        mccrResponsible: 'KSI',
+        mccrStatus: 'OK',
+        mccrType: 'ELE19.2JCA',
+        mccrUrlId: '24157060',
+        mcpkgNumber: '2350-E003',
+        mechanicalCompletionPackageUrl:
+          'https://procosys.equinor.com/JOHAN_CASTBERG/Completion#McPkg|114866568',
+        mechanicalCompletionPackageUrlId: '114866568',
+        project: 'L.O532C.002',
+        tagId: 'edf5c7dd-62e5-2006-e053-2710000ad705',
+        tagNumber: 'HT230407D',
+        tagUrl: 'https://procosys.equinor.com/JOHAN_CASTBERG/Completion#Tag|114435803',
+        tagUrlId: '114435803',
+        workOrderId: 'edf5c7f9-d729-2006-e053-2710000ad705',
+        workOrderUrl:
+          'https://procosys.equinor.com/JOHAN_CASTBERG/WorkOrders/WorkOrder#id=115025714',
+        workOrderUrlId: '115025714',
       },
       {
-        workOrderId: '141',
-        tagNumber: '555',
-        tagId: '185',
-        description: 'Mccr description 2',
-        mccrType: 'Mccr type 2',
-        mccrStatus: 'Mccr status 2',
-        mccrResponsible: 'Mccr responsible 2',
-        mccrId: '545',
-        mcpkgNumber: '842',
-        mcPkgId: '485',
-        commpkgId: '844',
-        commpkgNumber: '127',
+        commissioningPackageId: 'eac31fa6-2780-01bc-e053-2410000a10d9',
+        commissioningPackageUrl:
+          'https://procosys.equinor.com/JOHAN_CASTBERG/Completion#CommPkg|111883186',
+        commissioningPackageUrlId: '111883186',
+        commpkgId: 'eac31fa6-2780-01bc-e053-2410000a10d9',
+        commpkgNumber: '2350-M01',
+        description: 'Heat Trace B-Test 2304-L005',
+        facility: 'JCA',
+        mcPkgId: 'eac31fae-d51c-01bc-e053-2410000a10d9',
+        mccrId: 'ed187f41-fc92-c84b-e053-2810000a69dd',
+        mccrResponsible: 'KSI',
+        mccrStatus: 'OK',
+        mccrType: 'ELE19.2JCA',
+        mccrUrlId: '24157044',
+        mcpkgNumber: '2350-E003',
+        mechanicalCompletionPackageUrl:
+          'https://procosys.equinor.com/JOHAN_CASTBERG/Completion#McPkg|114866568',
+        mechanicalCompletionPackageUrlId: '114866568',
+        project: 'L.O532C.002',
+        tagId: 'edf5c7dd-62e0-2006-e053-2710000ad705',
+        tagNumber: 'HT230405B',
+        tagUrl: 'https://procosys.equinor.com/JOHAN_CASTBERG/Completion#Tag|114435798',
+        tagUrlId: '114435798',
+        workOrderId: 'edf5c7f9-d729-2006-e053-2710000ad705',
+        workOrderUrl:
+          'https://procosys.equinor.com/JOHAN_CASTBERG/WorkOrders/WorkOrder#id=115025714',
+        workOrderUrlId: '115025714',
       },
     ]}
   />
@@ -135,11 +159,13 @@ export const Ncr = () => (
         documentId: '1',
         documentNumber: '123',
         title: 'One NCR',
+        url: '',
       },
       {
         documentId: '2',
         documentNumber: '321',
         title: 'Two NCR',
+        url: '',
       },
     ]}
   />
@@ -151,20 +177,24 @@ export const Punch = () => (
     isFetching={false}
     punches={[
       {
-        tagNumber: '958',
-        tagId: '657',
-        status: 'Punch status 1',
+        tagNo: '958',
+        tagUrlId: '657',
+        tagUrl:"12345678",
+        category: 'Punch status 1',
         description: 'Punch description 1',
-        toBeClearedBy: 'Unknown :(',
+        clearedBy: 'Unknown :(',
         sorting: 'Up and down',
+        url: '',
       },
       {
-        tagNumber: '841',
-        tagId: '332',
-        status: 'Punch status 2',
+        tagNo: '841',
+        tagUrlId: '332',
+        tagUrl:"12345678",
+        category: 'Punch status 2',
         description: 'Punch description 2',
-        toBeClearedBy: 'Unknown :)',
+        clearedBy: 'Unknown :)',
         sorting: 'Down and up',
+        url: '',
       },
     ]}
   />
@@ -176,20 +206,20 @@ export const Query = () => (
     isFetching={false}
     queries={[
       {
-        queryNumber: '53',
+        queryNo: '53',
         queryId: '269',
         title: 'Query title 1',
-        status: ' Query status 1',
+        queryStatus: ' Query status 1',
         nextToSign: 'Next to sign 1',
-        type: 'Query type 1',
+        queryType: 'Query type 1',
       },
       {
-        queryNumber: '35',
+        queryNo: '35',
         queryId: '637',
         title: 'Query title 2',
-        status: ' Query status 2',
+        queryStatus: ' Query status 2',
         nextToSign: 'Next to sign 2',
-        type: 'Query type 2',
+        queryType: 'Query type 2',
       },
     ]}
   />
@@ -206,6 +236,7 @@ export const Swcr = () => (
         status: 'Swcr status 1',
         description: 'Swcr description 1',
         priority: 'Swcr priority 1',
+        url: '',
       },
       {
         swcrNumber: '366',
@@ -213,6 +244,7 @@ export const Swcr = () => (
         status: 'Swcr status 2',
         description: 'Swcr description 2',
         priority: 'Swcr priority 2',
+        url: '',
       },
     ]}
   />
@@ -228,12 +260,14 @@ export const UnsignedAction = () => (
         actionId: '168',
         title: 'Unsigned action title 1',
         description: 'Unsigned action description 1',
+        url: '',
       },
       {
         actionNumber: '639',
         actionId: '968',
         title: 'Unsigned action title 2',
         description: 'Unsigned action description 2',
+        url: '',
       },
     ]}
   />
@@ -248,11 +282,13 @@ export const UnsignedTask = () => (
         taskNumber: '742',
         taskId: '198',
         title: 'Unsigned task title 1',
+        url: '',
       },
       {
         taskNumber: '742',
         taskId: '198',
         title: 'Unsigned task title 2',
+        url: '',
       },
     ]}
   />
@@ -275,6 +311,7 @@ export const Workorder = () => (
         title: 'Workorder title 1',
         workOrderId: '950',
         workOrderNo: '590',
+        workOrderUrl: '',
       },
       {
         actualCompletionDate: 'Not sure',
@@ -288,8 +325,10 @@ export const Workorder = () => (
         title: 'Workorder title 2',
         workOrderId: '734',
         workOrderNo: '970',
+        workOrderUrl: '',
       },
     ]}
   />
 );
 //TODO: Add the rest of the preconfigured tables under here
+*/

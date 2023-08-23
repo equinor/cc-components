@@ -93,6 +93,7 @@ const McGardenItem = (
       </StyledRoot>
       {isOpen && (
         <PopoverWrapper
+          close={() => setIsOpen(false)}
           isOpen={isOpen}
           width={itemWidth}
           parentRef={parentRef}

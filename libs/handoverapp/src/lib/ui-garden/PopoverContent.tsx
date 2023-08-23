@@ -73,12 +73,16 @@ export const PopoverContent = ({
       <StyledStatuses>
         <h5>MC status</h5>
         <StyledPopoverStatus color={mcPackageColor}>
-          {['OS', 'OK', 'PA'].includes(data.mcStatus) ? data.mcStatus : 'PB'}
+          {['OS', 'OK', 'PA'].includes(data.mechanicalCompletionStatus)
+            ? data.mechanicalCompletionStatus
+            : 'PB'}
         </StyledPopoverStatus>
 
         <h5>CommPkg status</h5>
         <StyledPopoverStatus color={commStatusColor}>
-          {['OS', 'OK', 'PA'].includes(data.commpkgStatus) ? data.commpkgStatus : 'PB'}
+          {['OS', 'OK', 'PA'].includes(data.dynamicCommissioningStatus)
+            ? data.dynamicCommissioningStatus
+            : 'PB'}
         </StyledPopoverStatus>
       </StyledStatuses>
     </StyledPopoverContainer>

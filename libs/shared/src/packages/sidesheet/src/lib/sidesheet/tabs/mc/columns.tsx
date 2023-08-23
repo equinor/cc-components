@@ -1,28 +1,25 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
-import { McBase } from './types';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { colorMap } from '../../../../../../mapping';
 import { StatusCell } from '../../../../../../table-helpers';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { PackageStatus } from '../../../../../../types';
-import { getRFCCStatus, getRFOCStatus } from '../../../../../../utils-statuses';
+import { McBase } from './types';
 
 export const columns: ColDef<McBase>[] = [
   {
     field: 'MC.Pkg',
-    valueGetter: (pkg) => pkg.data?.mcPkgNo,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.mcPkgId) {
-    //     return proCoSysUrls.getMcUrl(pkg.data.mcPkgId);
-    //   } else return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<McBase>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
-    // width: 100,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
+    cellRenderer: (props: ICellRendererProps<McBase, string | null>) => {
+      return (
+        <LinkCell
+          url={props.data?.mechanicalCompletionPackageUrl}
+          urlText={props.data?.mechanicalCompletionPackageNo}
+        />
+      );
+    },
+    minWidth: 150,
   },
   {
     field: 'Title',
@@ -30,19 +27,15 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    width: 250,
+    minWidth: 150,
+    flex: 2,
   },
   {
     field: 'Status',
-    valueGetter: (pkg) => pkg.data?.mcStatus,
-    width: 150,
-  },
-  {
-    field: 'RFCC',
-    valueGetter: (pkg) => pkg.data && getRFCCStatus(pkg.data),
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
-        content={`${props.value}`.replace('RFCC', '')}
+        content={`${props.value}`}
         cellAttributeFn={() => ({
           style: {
             backgroundColor: props.value ? colorMap[props.value] : 'transparent',
@@ -50,19 +43,37 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    width: 150,
+    minWidth: 100,
+    flex: 1,
+  },
+  {
+    field: 'RFCC',
+    valueGetter: (pkg) => pkg.data?.rfC_Status,
+    cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
+      <StatusCell
+        content={`${props.value}`}
+        cellAttributeFn={() => ({
+          style: {
+            backgroundColor: props.value ? colorMap[props.value] : 'transparent',
+          },
+        })}
+      />
+    ),
+    minWidth: 100,
+    flex: 1,
   },
   {
     field: 'RFOC',
-    valueGetter: (pkg) => pkg.data && getRFOCStatus(pkg.data),
+    valueGetter: (pkg) => pkg.data?.rfO_Status,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
-        content={`${props.value}`.replace('RFOC', '')}
+        content={`${props.value}`}
         cellAttributeFn={() => ({
           style: { backgroundColor: props.value ? colorMap[props.value] : 'transparent' },
         })}
       />
     ),
-    width: 150,
+    minWidth: 100,
+    flex: 1,
   },
 ];

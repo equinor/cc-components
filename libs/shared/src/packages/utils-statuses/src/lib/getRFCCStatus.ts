@@ -10,9 +10,9 @@ type RFCCBase = {
  */
 export const getRFCCStatus = <T extends RFCCBase>(item: T): PackageStatus =>
   item.rfccIsAccepted
-    ? 'RFCC Accepted'
+    ? 'RFC Accepted'
     : item.rfccIsRejected
-    ? 'RFCC Rejected'
+    ? 'RFC Rejected'
     : item.rfccIsShipped
-    ? 'RFCC Sent'
+    ? 'RFC Sent'
     : 'OS';

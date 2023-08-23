@@ -3,25 +3,30 @@ import {
   LinkCell,
   ProgressCell,
   StatusCell,
-  YearAndWeekCell,
   StyledMonospace,
+  YearAndWeekCell,
 } from '@cc-components/shared';
-import { tokens } from '@equinor/eds-tokens';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { tokens } from '@equinor/eds-tokens';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<WorkOrder, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {
@@ -39,15 +44,9 @@ export const useTableConfig = (
     getRows: getRows,
     gridOptions: {
       ...defaultGridOptions,
-      onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
-        );
-      },
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
@@ -57,17 +56,11 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     field: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      if (!props.data?.workorderUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      }
+      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
     },
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.workOrderUrlId
-    //     ? proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderUrlId)
-    //     : '',
-    // cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //   } else return null;
-    // },
   },
   {
     field: 'Description',
@@ -86,7 +79,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'MilestoneCode',
     field: 'Milestone',
-    valueGetter: (pkg) => pkg.data?.milestone,
+    valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
     colId: 'JobStatus',
@@ -204,6 +197,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
+    colId: 'MCStatus',
     field: 'MC',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {

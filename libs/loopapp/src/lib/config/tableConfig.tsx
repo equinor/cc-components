@@ -10,13 +10,16 @@ import {
 } from '@cc-components/shared/table-helpers';
 import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  ColDef,
+  GridConfig,
+  MenuModule,
+  ColumnsToolPanelModule,
+  ICellRendererProps,
+} from '@equinor/workspace-fusion/grid';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 
-export const useTableConfig = (
-  contextId: string
-): GridConfig<Loop, FilterStateGroup[]> => {
+export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState> => {
   const client = useHttpClient('cc-api');
   const { getRows, colDefs } = useGridDataSource(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/loop/grid`, req);
@@ -32,15 +35,9 @@ export const useTableConfig = (
     columnDefinitions: colDefs as [ColDef<Loop>, ...ColDef<Loop>[]],
     gridOptions: {
       ...defaultGridOptions,
-      onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
-        );
-      },
     },
     getRows: getRows,
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
@@ -92,7 +89,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'MCPkgNo',
-    field: 'MC pkg',
+    field: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (
@@ -136,6 +133,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
+    colId: 'CLStatus',
     field: 'Checklist status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {

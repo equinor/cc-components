@@ -31,6 +31,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
     rowStart,
     parentRef,
     width: itemWidth = 300,
+    groupingKeys,
     displayName,
   } = props;
 
@@ -44,7 +45,10 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
     status,
     textColor,
     //TODO: group by keys
-  } = useMemo(() => getWorkOrderStatuses(data, 'disciplineCode', []), [data]);
+  } = useMemo(
+    () => getWorkOrderStatuses(data, groupingKeys.at(0)!, groupingKeys.slice(1)),
+    [data]
+  );
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
@@ -57,11 +61,11 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
           textColor={textColor}
           background={progressBar}
           ref={anchorRef}
-          onMouseEnter={() => {
+          onMouseOver={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
             setHoverTimeout(setTimeout(() => setIsOpen(true), 1000));
           }}
-          onMouseLeave={() => {
+          onMouseOut={() => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
@@ -83,6 +87,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
       </StyledRoot>
       {isOpen && (
         <PopoverWrapper
+          close={() => setIsOpen(false)}
           popoverTitle={`Wo.Number: ${data.workOrderNumber}`}
           width={itemWidth}
           columnStart={columnStart}

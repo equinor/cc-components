@@ -1,0 +1,19 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022", "dom"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "script"
+  },
+  "exclude": ["node_modules"]
+}

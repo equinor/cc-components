@@ -1,36 +1,30 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import styled from 'styled-components';
 
-import { WorkorderBase } from './types';
-import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { DateCell } from '../../../../../../table-helpers/src/lib/table/cells/DateCell';
-import { ProgressCell } from '../../../../../../table-helpers/src/lib/table/cells/ProgressCell';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { EstimateCell } from '../../../../../../table-helpers/src/lib/table/cells/EstimateCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
+import { ProgressCell } from '../../../../../../table-helpers/src/lib/table/cells/ProgressCell';
+import { WorkorderBase } from './types';
 
-export const columns = (): ColDef<WorkorderBase>[] => {
-  let estimateHoursMax = -1;
-  let remainingHoursMax = -1;
-
+export const columns = (
+  maxEstimatedHours: number | null,
+  maxRemainingHours: number | null
+): ColDef<WorkorderBase>[] => {
   return [
     {
       field: 'WO',
-      valueGetter: (pkg) => pkg.data?.workOrderNo,
-      // valueFormatter: (pkg) => {
-      //   if (pkg.data?.workOrderId) {
-      //     return proCoSysUrls.getWorkOrderUrl(pkg.data.workOrderId);
-      //   } else {
-      //     return '';
-      //   }
-      // },
-      // cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-      //   if (props.valueFormatted) {
-      //     return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-      //   } else {
-      //     return null;
-      //   }
-      // },
-      width: 130,
+      valueGetter: (pkg) => pkg.data?.workOrderNumber,
+      cellRenderer: (props: ICellRendererProps<WorkorderBase, string | null>) => {
+        return (
+          <LinkCell
+            url={props.data?.workOrderUrl}
+            urlText={props.data?.workOrderNumber}
+          />
+        );
+      },
+      minWidth: 200,
     },
     {
       field: 'Title',
@@ -38,7 +32,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
       },
-      width: 300,
+      minWidth: 200,
     },
     {
       field: 'Discipline',
@@ -52,7 +46,7 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Plan. finish',
-      valueGetter: (pkg) => pkg.data?.plannedCompletionDate,
+      valueGetter: (pkg) => pkg.data?.plannedFinishDate,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
       },
@@ -80,18 +74,17 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Estimated',
-      valueGetter: (pkg) => pkg.data?.estimatedManHours,
+      valueGetter: (pkg) => pkg.data?.estimatedHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        if (estimateHoursMax === -1) {
-          //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
+        if (maxEstimatedHours === null) {
           const maxCount = 0;
-          estimateHoursMax = maxCount;
+          maxEstimatedHours = maxCount;
         }
         return (
           <Center>
             <EstimateCell
               current={Number(props.value === null ? 0 : props.value)}
-              max={estimateHoursMax}
+              max={maxEstimatedHours}
             />
           </Center>
         );
@@ -100,18 +93,17 @@ export const columns = (): ColDef<WorkorderBase>[] => {
     },
     {
       field: 'Remaining',
-      valueGetter: (pkg) => pkg.data?.remainingManHours,
+      valueGetter: (pkg) => pkg.data?.remainingHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        if (remainingHoursMax === -1) {
-          //TODO: Get all rows for current column, map through it and calculate the max estimatedManHours
+        if (maxRemainingHours === null) {
           const maxCount = 0;
-          remainingHoursMax = maxCount;
+          maxRemainingHours = maxCount;
         }
         return (
           <Center>
             <EstimateCell
               current={Number(props.value === null ? 0 : props.value)}
-              max={remainingHoursMax}
+              max={maxRemainingHours}
             />
           </Center>
         );

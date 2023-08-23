@@ -1,13 +1,11 @@
 import { Punch } from '@cc-components/punchshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import PunchGardenItem from '../ui-garden/PunchGardenItem';
-import { FilterStateGroup } from '@equinor/workspace-fusion/filter';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const useGardenConfig = (
-  contextId: string
-): GardenConfig<Punch, FilterStateGroup[]> => {
+export const useGardenConfig = (contextId: string): GardenConfig<Punch, FilterState> => {
   const client = useHttpClient('cc-api');
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({
@@ -26,10 +24,7 @@ export const useGardenConfig = (
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.punchItemNo,
-    initialGrouping: {
-      horizontalGroupingAccessor: 'System',
-      verticalGroupingKeys: [],
-    },
+    initialGrouping: ['System'],
     visuals: {
       rowHeight: 25,
     },

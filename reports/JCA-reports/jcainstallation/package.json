@@ -8,8 +8,9 @@
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc -b",
-    "shipit": "npx ts-node --esm ../../../cli/src/main.ts release"
+    "build": "tsc -b -f",
+    "pr:deploy": "npx ts-node --esm ../../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "npx ts-node --esm ../../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
     "@cc-components/powerbi": "workspace:^",

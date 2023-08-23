@@ -1,5 +1,7 @@
 export type UnsignedTaskBase = {
-  taskNumber: string;
   taskId: string;
   title: string | null;
+  description: string;
+  unsignedTaskUrl: string;
+  commissioningPackageUrl: string;
 };

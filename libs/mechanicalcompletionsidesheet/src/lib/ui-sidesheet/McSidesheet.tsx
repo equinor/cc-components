@@ -1,6 +1,6 @@
-import { Tabs } from '@equinor/eds-core-react';
-import { useState } from 'react';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import { StatusCircle } from '@cc-components/shared/common';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   BannerItem,
   NcrTab,
@@ -11,15 +11,16 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
+  WorkorderBase,
   WorkorderTab,
 } from '@cc-components/shared/sidesheet';
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { DetailsTab } from './DetailsTab';
-import { useMcResource } from '../utils-sidesheet';
-import styled from 'styled-components';
+import { Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { statusColorMap } from '@cc-components/shared/mapping';
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { createWidget } from '@equinor/workspace-sidesheet';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { useMcResource } from '../utils-sidesheet';
+import { DetailsTab } from './DetailsTab';
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -134,7 +135,22 @@ export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
             <WorkorderTab
               error={workOrderError}
               isFetching={isFetchingWorkOrders}
-              workorders={workOrders}
+              workorders={(workOrders ?? []).map(
+                (workorder): WorkorderBase => ({
+                  ...workorder,
+                  workOrderUrl: workorder.url,
+                  workOrderNumber: workorder.workOrderNumber,
+                  actualCompletionDate: '',
+                  discipline: '',
+                  estimatedHours: null,
+                  jobStatus: '',
+                  remainingHours: null,
+                  title: workorder.description,
+                  workOrderUrlId: workorder.workOrderId,
+                  projectProgress: workorder.projectProgress,
+                  plannedFinishDate: workorder.plannedCompletionDate,
+                })
+              )}
             />
           </Tabs.Panel>
           <Tabs.Panel>

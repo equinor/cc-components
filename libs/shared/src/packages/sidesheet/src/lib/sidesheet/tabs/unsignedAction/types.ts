@@ -1,6 +1,7 @@
 export type UnsignedActionBase = {
-  actionNumber: string;
-  actionId: string;
-  title: string | null;
-  description: string | null;
+  actionNo: string;
+  commissioningPackageUrlId: string;
+  title: string;
+  description: string;
+  unsignedTaskUrl: string;
 };

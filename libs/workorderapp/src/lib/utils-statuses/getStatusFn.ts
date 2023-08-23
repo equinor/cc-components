@@ -1,5 +1,4 @@
-import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
-import { ExtendedGardenFields } from '../types';
+import { getWoStatus } from '@cc-components/workordershared';
 import { getFollowUpStatus } from './followup';
 
 /**
@@ -8,6 +7,6 @@ import { getFollowUpStatus } from './followup';
  * "wp" will return a different status function that the rest of the grouping options.
  */
 export const getStatusFn = (
-  groupBy: keyof WorkOrder | ExtendedGardenFields
+  groupBy: string
 ): typeof getWoStatus | typeof getFollowUpStatus =>
-  groupBy === 'wp' ? getWoStatus : getFollowUpStatus;
+  groupBy === 'WorkorderProduction' ? getWoStatus : getFollowUpStatus;

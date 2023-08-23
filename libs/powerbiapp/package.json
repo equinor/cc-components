@@ -6,10 +6,10 @@
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b -f"
   },
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "1.0.0-alpha.11"
+    "@equinor/workspace-fusion": "4.0.2"
   }
 }

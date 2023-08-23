@@ -1,39 +1,41 @@
-import { createWidget } from '@equinor/workspace-sidesheet';
-import { useState } from 'react';
-import { Tabs } from '@equinor/eds-core-react';
-import styled from 'styled-components';
-import { tokens } from '@equinor/eds-tokens';
-import {
-  WorkOrder,
-  getMatStatusColorByStatus,
-  getMccrStatusColorByStatus,
-} from '@cc-components/workordershared';
-import { useMaterial, useMccr } from '../utils-sidesheet';
-import { DetailsTab } from './DetailsTab';
 import {
   BannerItem,
+  CutoffTab,
+  LinkCell,
   MaterialTab,
   MccrTab,
   SidesheetHeader,
+  StatusCircle,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-  StyledItemLink,
-  useHttpClient,
   useContextId,
-  StatusCircle,
+  useHttpClient,
 } from '@cc-components/shared';
-import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import {
+  WorkOrder,
+  getMatStatusColorByStatus,
+  getMccrStatusColorByStatus,
+} from '@cc-components/workordershared';
+import { TabListProps, Tabs } from '@equinor/eds-core-react';
+import { tokens } from '@equinor/eds-tokens';
+import { createWidget } from '@equinor/workspace-sidesheet';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { useMaterial, useMccr } from '../utils-sidesheet';
+import { DetailsTab } from './DetailsTab';
+import { useCutoff } from '../utils-sidesheet/useCutoff';
 
-export const StyledTabListWrapper = styled.div`
+export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
-export const StyledTabsList = styled(Tabs.List)`
+export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -51,8 +53,17 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
+  const {
+    material,
+    isFetching: isFetchingMaterial,
+    error: materialError,
+  } = useMaterial(props.id);
+
+  const { data: cutoffList, error: cutoffError, isLoading } = useCutoff(props.id);
+
   const client = useHttpClient();
   const contextId = useContextId();
+
   const {
     data: wo,
     error,
@@ -69,8 +80,9 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
       return res.json();
     },
     {
-      suspense: true,
-      initialData: props.item,
+      suspense: false,
+      useErrorBoundary: false,
+      initialData: props.item ?? undefined,
     }
   );
 
@@ -81,12 +93,6 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   if (!wo || error) {
     return <div>Failed to get Workorder with id: {props.id}</div>;
   }
-
-  const {
-    material,
-    isFetching: isFetchingMaterial,
-    error: materialError,
-  } = useMaterial(props.id);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -102,13 +108,11 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="WO"
           value={
-            wo.workOrderNumber ?? 'N/A'
-            // <StyledItemLink
-            //   href={proCoSysUrls.getWorkOrderUrl(props?.item?.workOrderUrlId ?? '')}
-            //   target="_blank"
-            // >
-            //   {props?.item?.workOrderNumber}
-            // </StyledItemLink>
+            wo.workorderUrl ? (
+              <LinkCell url={wo.workorderUrl} urlText={wo.workOrderNumber} />
+            ) : (
+              wo.workOrderNumber
+            )
           }
         />
         <BannerItem
@@ -156,6 +160,9 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             <Tabs.Tab>
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -175,6 +182,13 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
               material={material}
               isFetching={isFetchingMaterial}
               error={materialError as Error | null}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <CutoffTab
+              cutoff={cutoffList}
+              isFetching={isLoading}
+              error={cutoffError as Error | null}
             />
           </Tabs.Panel>
         </StyledPanels>

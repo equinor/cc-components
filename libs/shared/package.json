@@ -7,7 +7,7 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b -f"
   },
   "sideEffects": false,
   "typesVersions": {
@@ -86,7 +86,6 @@
   },
   "dependencies": {
     "@equinor/workspace-ag-grid": "1.0.4",
-    "@equinor/workspace-fusion": "1.1.13",
     "@remirror/pm": "^2.0.4",
     "@remirror/react": "^2.0.27",
     "@remirror/styles": "^2.0.4",
