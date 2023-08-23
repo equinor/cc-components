@@ -85,11 +85,15 @@
     "./workspace-config": "./dist/src/packages/workspace-config/index.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@equinor/workspace-ag-grid": "1.0.4",
-    "@remirror/pm": "^2.0.4",
+    "@remirror/pm": "^2.0.8",
     "@remirror/react": "^2.0.27",
+    "@remirror/react-editors": "^1.0.38",
     "@remirror/styles": "^2.0.4",
     "date-fns": "^2.29.3",
-    "markdown-to-jsx": "^7.2.0"
+    "markdown-to-jsx": "^7.2.0",
+    "remirror": "^2.0.36"
   }
 }
