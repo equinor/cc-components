@@ -1,6 +1,6 @@
 # CC Applications
 
-## Technology stac
+## Technology stack
 
 [React](https://react.dev/)
 
