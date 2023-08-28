@@ -1,36 +1,35 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
+import { Button, CircularProgress, Dialog } from '@equinor/eds-core-react';
 import { useAppModules } from '@equinor/fusion-framework-react-app';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import styled from 'styled-components';
 import { ModuleViewer } from './modules';
 import ModelSelectionDialog from './modules/modelSelectionDialog';
-import styled from 'styled-components';
-import {
-  Button,
-  Checkbox,
-  Radio,
-  CircularProgress,
-  Dialog,
-} from '@equinor/eds-core-react';
-import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
-import { useQuery } from '@tanstack/react-query';
 
 type FusionModelViewerProps = {
+  plantName: string;
   plantCode: string;
   tags?: string[];
 };
 
-export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) => {
+export const FusionModelViewer = ({
+  plantName,
+  plantCode,
+  tags,
+}: FusionModelViewerProps) => {
   const viewerRef = useRef<HTMLCanvasElement>(null);
   const moduleViewer = useAppModules<[ModuleViewer]>().moduleViewer;
   const [isSetup, setIsSetup] = useState(false);
-  const [rememberChecked, updateChecked] = useState(true);
   const [showSelector, setShowModelDialog] = useState(true);
-
-  const handleModelSelection = (selectedId: number) => {
-    handleGoToModel(selectedId);
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   const updateShowSelector = (show: boolean) => {
     setShowModelDialog(show);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   const {
@@ -50,6 +49,7 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
     }
   );
 
+  //Setup modelviewer
   useEffect(() => {
     (async () => {
       if (!viewerRef.current || isSetup) return;
@@ -67,6 +67,7 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
     return models?.length !== 0;
   }, [models, error]);
 
+  //Init model if locally stored / remembered.
   useEffect(() => {
     if (hasAccess) {
       const localModelId = moduleViewer.getLocalModel(plantCode);
@@ -82,7 +83,8 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
     }
   }, [models, plantCode]);
 
-  function handleGoToModel(selectedId : number) {
+  //Load model on click
+  const handleGoToModel = (selectedId: number, rememberChecked: boolean) => {
     moduleViewer.loadModelById(selectedId);
     if (rememberChecked) {
       const selectedModel = models?.find((model) => model.id === selectedId);
@@ -91,25 +93,20 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
       }
     }
     updateShowSelector(false);
-  }
+  };
 
   useEffect(() => {
     moduleViewer.setTagsSelection(tags);
   }, [tags]);
 
-  function show() {
+  const showModelSelector = () => {
     updateShowSelector(!showSelector);
-  }
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClose = () => {
-    setIsOpen(false);
   };
 
   return (
     <>
       <ViewerWrapper>
-        <Button onClick={show}>Show Selector</Button>
+        <Button onClick={showModelSelector}>Show Selector</Button>
         <StyledCanvas
           ref={viewerRef}
           onContextMenu={(e) => {
@@ -127,22 +124,24 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
               <Dialog.Title>No access</Dialog.Title>
             </Dialog.Header>
             <Dialog.CustomContent>
-              You don't have access to any 3D Models for this plant. Search for "Echo
-              ******" in Access IT to apply for access. Access IT requires Equinor Network
-              connection.
+              <p>
+                You don't have access to any 3D Models for this plant. <br /> Search for
+                "Echo
+                {' ' + plantName}" in Access IT to apply for access.
+                <br /> Access IT requires Equinor Network connection.
+              </p>
             </Dialog.CustomContent>
             <Dialog.Actions>
               <Button onClick={handleClose}>OK</Button>
             </Dialog.Actions>
           </Dialog>
 
-              <ModelSelectionDialog
-                showSelector={showSelector}
-                models={models}
-                handleModelSelection={handleModelSelection}
-                handleGoToModel={handleGoToModel}
-              />
-
+          <ModelSelectionDialog
+            showSelector={showSelector}
+            models={models!}
+            handleGoToModel={handleGoToModel}
+            updateShowSelector={updateShowSelector}
+          />
         </>
       )}
     </>
@@ -151,7 +150,7 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
 
 const StyledCanvas = styled.canvas``;
 
-export const ViewerWrapper = styled.div`
+const ViewerWrapper = styled.div`
   height: calc(100vh - 90px);
   > .reveal-viewer-spinner {
     display: none;

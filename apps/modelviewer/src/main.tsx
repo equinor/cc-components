@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <FusionModelViewer plantCode="jca" />
+      <FusionModelViewer plantName="Johan Castberg" plantCode="jca" />
     </QueryClientProvider>
   );
 };

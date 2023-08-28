@@ -1,85 +1,71 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Checkbox,
-  Radio,
-  CircularProgress,
-  Dialog,
-} from '@equinor/eds-core-react';
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
+import { Button, Checkbox, Dialog, Radio } from '@equinor/eds-core-react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ModuleViewer } from './module';
 
 interface ModelSelectionDialogProps {
   showSelector: boolean;
-  models?: AssetMetadataSimpleDto[];
-  handleModelSelection: (selectedId: number) => void;
-  handleGoToModel: (selectedId: number) => void;
+  models: AssetMetadataSimpleDto[]; // Ensure 'models' are always provided
+  handleGoToModel: (selectedId: number, rememberChecked: boolean) => void;
+  updateShowSelector: (show: boolean) => void;
 }
 
 const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({
   showSelector,
   models,
-  handleModelSelection,
   handleGoToModel,
+  updateShowSelector,
 }) => {
   const [rememberChecked, setRememberChecked] = useState(false);
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
 
-  const onChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedModelId(Number(event.target.value));
-  };
-
-  const updateChecked = (checked: boolean) => {
-    setRememberChecked(checked);
-  };
-
-  const handleGoClick = () => {
-    handleGoToModel(selectedModelId)
-  };
-
-  function ModelSelector({ models }: { models: AssetMetadataSimpleDto[] }) {
-    return (
-      <UnstyledList>
-        {models.map((model) => (
-          <li>
-            <Radio
-              key={model.id}
-              label={model.platformSectionLabel}
-              name="models"
-              value={model.id}
-              checked={selectedModelId === model.id}
-              onChange={onChangeRadio}
-            />
-          </li>
-        ))}
-      </UnstyledList>
-    );
-  }
+  const ModelSelector: React.FC<{ models: AssetMetadataSimpleDto[] }> = ({ models }) => (
+    <UnstyledList>
+      {models.map((model) => (
+        <li key={model.id}>
+          <Radio
+            label={model.platformSectionLabel}
+            name="models"
+            value={model.id}
+            checked={selectedModelId === model.id}
+            onChange={(e) => setSelectedModelId(Number(e.target.value))}
+          />
+        </li>
+      ))}
+    </UnstyledList>
+  );
 
   return (
-    <Dialog open={showSelector}>
+    <Dialog open={showSelector} style={{ width: 'auto' }}>
       <Dialog.Header>
         <Dialog.Title>Select Model</Dialog.Title>
       </Dialog.Header>
       <Dialog.CustomContent>
         <Selection>
-          Multiple models are available. Please choose a model to view.
-          <div>
-            <ModelSelector models={models!} />
-          </div>
+          <p>Multiple models are available. Please choose a model to view.</p>
+          <ModelSelector models={models} />
           <Checkbox
             label="Remember Selection"
-            onChange={(e) => updateChecked(e.target.checked)}
+            onChange={(e) => setRememberChecked(e.target.checked)}
             checked={rememberChecked}
           />
         </Selection>
       </Dialog.CustomContent>
       <Dialog.Actions>
-        <Button onClick={handleGoClick} disabled={selectedModelId === -1}>
+        <Button
+          onClick={() => {
+            handleGoToModel(selectedModelId, rememberChecked);
+          }}
+          disabled={selectedModelId === -1}
+        >
           Go
         </Button>
-        <Button onClick={handleGoClick} variant="ghost">
+        <Button
+          variant="ghost"
+          onClick={() => {
+            updateShowSelector(false);
+          }}
+        >
           Cancel
         </Button>
       </Dialog.Actions>
@@ -96,6 +82,8 @@ const Selection = styled.div`
   padding: 1rem;
 `;
 
-const UnstyledList = styled.div`
+const UnstyledList = styled.ul`
   list-style: none;
+  padding: 0;
+  margin: 0;
 `;
