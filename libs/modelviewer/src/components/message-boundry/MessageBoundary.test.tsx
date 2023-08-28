@@ -51,6 +51,7 @@ describe('MessageBoundary', async () => {
     const el = await screen.findByTestId('fallback');
 
     expect(el.innerHTML).toContain('test');
+    expect(el.innerHTML).toContain('Unknown');
   });
   test('Should be able to handle string', async () => {
     render(
@@ -61,5 +62,6 @@ describe('MessageBoundary', async () => {
     const el = await screen.findByTestId('fallback');
 
     expect(el.innerHTML).toContain('This is an Error');
+    expect(el.innerHTML).toContain('Error');
   });
 });
