@@ -2,6 +2,7 @@ import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { Button, Checkbox, Dialog, Radio } from '@equinor/eds-core-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useError, useInfo } from '../hooks/useMessageBoundary';
 
 interface ModelSelectionDialogProps {
   showSelector: boolean;
@@ -18,6 +19,7 @@ const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({
 }) => {
   const [rememberChecked, setRememberChecked] = useState(false);
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
+  const { setError } = useError();
 
   const ModelSelector: React.FC<{ models: AssetMetadataSimpleDto[] }> = ({ models }) => (
     <UnstyledList>

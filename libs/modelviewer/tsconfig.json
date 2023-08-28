@@ -4,7 +4,7 @@
       "allowJs": false,
       "esModuleInterop": false,
       "allowSyntheticDefaultImports": true,
-      "noImplicitOverride": true,
+      "noImplicitOverride": false,
       "strict": true,
       "outDir": "./dist",
       "rootDir": ".",
