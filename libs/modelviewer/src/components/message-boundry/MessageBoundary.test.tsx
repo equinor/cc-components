@@ -53,7 +53,7 @@ describe('MessageBoundary', async () => {
     expect(el.innerHTML).toContain('test');
     expect(el.innerHTML).toContain('Unknown');
   });
-  test('Should be able to handle string', async () => {
+  test('Should be able to handle error by setError from useError Hook', async () => {
     render(
       <MessageBoundary fallbackComponent={Fallback}>
         <MessageComponentWithHook />
