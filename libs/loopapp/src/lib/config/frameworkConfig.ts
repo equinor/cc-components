@@ -1,4 +1,3 @@
-import { enableModelViewer } from '@cc-components/modelviewer';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import {
   ComponentRenderArgs,
