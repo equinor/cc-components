@@ -6,18 +6,8 @@
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
-    "build": "tsc -b"
-  },
-  "sideEffects": false,
-  "typesVersions": {
-    ">=4.2": {
-      ".": [
-        "./dist/src/index.js"
-      ]
-    }
-  },
-  "exports": {
-    ".": "./dist/src/index.js"
+    "build": "tsc -b -f",
+    "test": "vitest"
   },
   "dependencies": {
     "@equinor/echo-3d-viewer": "^0.0.1",

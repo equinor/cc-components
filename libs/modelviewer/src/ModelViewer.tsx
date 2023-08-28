@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppModules } from '@equinor/fusion-framework-react-app';
 import { ModuleViewer } from './modules';
 import styled from 'styled-components';
 import { useModelsMeta } from './hooks/useModelsMeta';
 import { Layer } from './modules/services/modelsService';
+import MessageBoundary from './components/message-boundry/MessageBoundary';
+import { useError, useInfo } from './hooks/useMessageBoundary';
 
 const StyledCanvas = styled.canvas``;
 export const Wrapper = styled.div`
@@ -47,38 +49,47 @@ export const FusionModelViewer = ({ plantCode, tags }: FusionModelViewerProps) =
   // Echo3dViewer Teardown
 
   return (
-    <Wrapper>
-      <button
-        onClick={() => {
-          moduleViewer.modelsService?.getLayers().then((layers) => {
-            console.log('layers', layers);
-            setLayers(layers);
-          });
-        }}
-      >
-        getLayers
-      </button>
-      <div>
-        {layers.map((layer) => (
-          <button
-            onClick={() => {
-              moduleViewer.modelsService?.currentModel?.assignStyledNodeCollection(
-                layer.nodeCollection,
-                { renderGhosted: true }
-              );
-            }}
-          >
-            {layer.type} - {layer.label}
-          </button>
-        ))}
-      </div>
+    <MessageBoundary
+      fallbackComponent={({ title, message }) => (
+        // Todo: add proper fallback component
+        <div>
+          <h1>{title}</h1>
+          <p>{message}</p>
+        </div>
+      )}
+    >
+      <Wrapper>
+        <button
+          onClick={() => {
+            moduleViewer.modelsService?.getLayers().then((layers) => {
+              setLayers(layers);
+            });
+          }}
+        >
+          getLayers
+        </button>
+        <div>
+          {layers.map((layer) => (
+            <button
+              onClick={() => {
+                moduleViewer.modelsService?.currentModel?.assignStyledNodeCollection(
+                  layer.nodeCollection,
+                  { renderGhosted: true }
+                );
+              }}
+            >
+              {layer.type} - {layer.label}
+            </button>
+          ))}
+        </div>
 
-      <StyledCanvas
-        ref={viewerRef}
-        onContextMenu={(e) => {
-          e.preventDefault(); // Prevent the 'right-click-menu' from showing on the canvas
-        }}
-      />
-    </Wrapper>
+        <StyledCanvas
+          ref={viewerRef}
+          onContextMenu={(e) => {
+            e.preventDefault(); // Prevent the 'right-click-menu' from showing on the canvas
+          }}
+        />
+      </Wrapper>
+    </MessageBoundary>
   );
 };
