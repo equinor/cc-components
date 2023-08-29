@@ -147,11 +147,11 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@types/node@18.11.9)
 
-  apps/electrical-consumers:
+  apps/electricalconsumers:
     dependencies:
-      '@cc-components/electrical-consumersapp':
+      '@cc-components/electricalconsumersapp':
         specifier: workspace:^
-        version: link:../../libs/electrical-consumersapp
+        version: link:../../libs/electricalconsumersapp
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../../libs/shared
@@ -234,7 +234,7 @@ importers:
         specifier: 11.0.0
         version: 11.0.0
 
-  libs/electrical-consumersapp:
+  libs/electricalconsumersapp:
     dependencies:
       '@cc-components/shared':
         specifier: workspace:^
