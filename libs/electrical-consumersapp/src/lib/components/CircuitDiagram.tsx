@@ -29,6 +29,9 @@ function Switchboard({ network }: { network: ElectricalNetwork }) {
         background: tokens.colors.ui.background__light.hex,
         border: `1px solid ${tokens.colors.ui.background__medium.hex}`,
         width: '110px',
+        display: 'flex',
+        alignItems: 'flex-start',
+        padding: '10px 5px 0px 5px',
       }}
     >
       <div>{network.name}</div>
