@@ -1,5 +1,18 @@
 # CC Applications
 
+## Technology stack
+
+[React](https://react.dev/)
+
+[Turbo](https://turbo.build/)
+
+[Typescript](https://www.typescriptlang.org/)
+
+[Vite](https://vitejs.dev/)
+
+[PNPM](https://pnpm.io/)
+
+
 ## Strategy
 
 [Trunk based development](https://trunkbaseddevelopment.com/)
