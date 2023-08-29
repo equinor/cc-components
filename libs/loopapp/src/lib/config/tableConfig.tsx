@@ -74,8 +74,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CommPkgNo',
-    field: 'Commisioning Package Number',
-    headerTooltip: 'Comm pkg',
+    field: 'Comm Pkg',
+    headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (props.data?.commissioningPackageUrl && props.data.commissioningPackageNo) {
@@ -93,8 +93,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'MCPkgNo',
-    field: 'Mechanical Completion Package Number',
-    headerTooltip: 'MC Package',
+    field: 'MC Pkg',
+    headerTooltip: 'Mechanical Completion Package Number',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (
@@ -115,7 +115,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Priority1',
-    field: 'Priority',
+    field: 'Priority 1',
     headerTooltip: 'Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
     enableRowGroup: false,

@@ -14,7 +14,7 @@ export const tableConfig: GridConfig<McPackage> = {
   // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
-      field: 'McpkgNo',
+      field: 'MC Pkg',
       headerTooltip: 'Mechanical Package Number',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -92,8 +92,8 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 150,
     },
     {
-      field: 'Comm. package',
-      headerTooltip: 'Commisioning Package Number',
+      field: 'Comm Pkg',
+      headerTooltip: 'Commissioning Package Number',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.commPkgNumber}</StyledMonospace>;
@@ -157,21 +157,21 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Comm Pri1',
-      headerTooltip: 'Commisioning Priority 1',
+      headerTooltip: 'Commissioning Priority 1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
       width: 155,
     },
     {
       field: 'Comm Pri2',
-      headerTooltip: 'Commisioning Priority 2',
+      headerTooltip: 'Commissioning Priority 2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
       width: 155,
     },
     {
       field: 'Comm Pri3',
-      headerTooltip: 'Commisioning Priority 3',
+      headerTooltip: 'Commissioning Priority 3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,
       width: 155,
