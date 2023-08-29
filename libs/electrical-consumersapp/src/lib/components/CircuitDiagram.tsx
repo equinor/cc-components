@@ -46,21 +46,36 @@ const StyledHTCable = styled.div`
   gap: 1ch;
   border-bottom: 2px dashed rgb(61, 61, 61);
   width: fit-content;
+  white-space: nowrap;
+  ::after {
+    width: 12px;
+    height: 12px;
+    border: 1px solid white;
+    background-color: ${(props) => 'black'};
+    border-radius: 50%;
+    margin: 0px 1px;
+    content: ' ';
+    position: relative;
+    left: 1ch;
+    top: 1.5ch;
+  }
 `;
 
+const StyledJunctionBox = styled.div`
+  display: flex;
+  flex: 1 1 0%;
+  width: 60px;
+  box-sizing: border-box;
+  min-height: 60px;
+  border: 1px solid ${tokens.colors.ui.background__light.hex};
+`;
+
+function JunctionBox({ network }: { network: ElectricalNetwork }) {
+  return <StyledJunctionBox>{network.name}</StyledJunctionBox>;
+}
+
 export const HTCable = ({ network }: { network: ElectricalNetwork }) => {
-  return (
-    <StyledHTCable
-      style={{
-        display: 'flex',
-        gap: '1ch',
-        borderBottom: '2px dashed rgb(61, 61, 61)',
-        width: 'fit-content',
-      }}
-    >
-      {network.name}
-    </StyledHTCable>
-  );
+  return <StyledHTCable>{network.name}</StyledHTCable>;
 };
 
 function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
@@ -100,7 +115,7 @@ function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
     case 'K_BOX': {
       return (
         <Item>
-          <Name>{network.name}</Name>
+          <JunctionBox network={network} />
 
           <ChildWrapper>
             {network.children.map((s) => (
