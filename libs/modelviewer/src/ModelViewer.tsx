@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { ModuleViewer } from './modules';
 import ModelSelectionDialog from './modules/modelSelectionDialog';
+import AccessDialog from './modules/accessDialog';
 import MessageBoundary from './components/message-boundry/MessageBoundary';
 import { useError, useInfo } from './hooks/useMessageBoundary';
 
@@ -16,41 +17,31 @@ type FusionModelViewerProps = {
 };
 
 export const FusionModelViewer = (props: FusionModelViewerProps) => {
- return (
-  <MessageBoundary
-  fallbackComponent={({ title, message }) => (
-    // Todo: add proper fallback component
-    <div>
-      <h1>{title}</h1>
-      <p>{message}</p>
-    </div>
-  )}
-  >
-    <ModelViewer {...props}/>
-  </MessageBoundary>
- )
-}
+  return (
+    <MessageBoundary
+      fallbackComponent={({ title, message }) => (
+        // Todo: add proper fallback component
+        <div>
+          <h1>{title}</h1>
+          <p>{message}</p>
+        </div>
+      )}
+    >
+      <ModelViewer {...props} />
+    </MessageBoundary>
+  );
+};
 
-
- const ModelViewer = ({
-  plantName,
-  plantCode,
-  tags,
-}: FusionModelViewerProps) => {
+const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => {
   const viewerRef = useRef<HTMLCanvasElement>(null);
   const moduleViewer = useAppModules<[ModuleViewer]>().moduleViewer;
   const [isSetup, setIsSetup] = useState(false);
-  const [showSelector, setShowModelDialog] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
+  const [showSelector, setShowModelDialog] = useState(false);
   const { setError } = useError();
   const updateShowSelector = (show: boolean) => {
     setShowModelDialog(show);
   };
-  
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-  
+
   const {
     data: models,
     isLoading,
@@ -66,22 +57,22 @@ export const FusionModelViewer = (props: FusionModelViewerProps) => {
       enabled: isSetup,
       refetchOnWindowFocus: false,
     }
-    );
-    
-    //Setup modelviewer
-    useEffect(() => {
-      (async () => {
-        if (!viewerRef.current || isSetup) return;
-        await moduleViewer.setup({ canvas: viewerRef.current }).finally(() => {
-          setIsSetup(true);
-        });
-      })();
-    }, [moduleViewer]);
-    
-    const hasAccess = useMemo(() => {
-      if (error) {
-        const myError = error as Error;
-        setError(myError?.message || "No access" )
+  );
+
+  //Setup modelviewer
+  useEffect(() => {
+    (async () => {
+      if (!viewerRef.current || isSetup) return;
+      await moduleViewer.setup({ canvas: viewerRef.current }).finally(() => {
+        setIsSetup(true);
+      });
+    })();
+  }, [moduleViewer]);
+
+  const hasAccess = useMemo(() => {
+    if (error) {
+      const myError = error as Error;
+      setError(myError?.message || 'No access');
     }
     return models?.length !== 0;
   }, [models, error]);
@@ -96,10 +87,11 @@ export const FusionModelViewer = (props: FusionModelViewerProps) => {
         );
         if (selectedModel?.id) {
           moduleViewer.loadModelById(selectedModel.id);
-          updateShowSelector(false);
         }
       }
+      updateShowSelector(true);
     }
+    updateShowSelector(false);
   }, [models, plantCode]);
 
   //Load model on click
@@ -124,50 +116,33 @@ export const FusionModelViewer = (props: FusionModelViewerProps) => {
 
   return (
     <>
-        <ViewerWrapper>
-          <Button onClick={showModelSelector}>Show Selector</Button>
-          <StyledCanvas
-            ref={viewerRef}
-            onContextMenu={(e) => { 
-              e.preventDefault(); // Prevent the right-click menu on the canvas
-            }}
+      <ViewerWrapper>
+        <Button onClick={showModelSelector}>Show Selector</Button>
+        <StyledCanvas
+          ref={viewerRef}
+          onContextMenu={(e) => {
+            e.preventDefault(); // Prevent the right-click menu on the canvas
+          }}
+        />
+      </ViewerWrapper>
+
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <AccessDialog hasAccess={hasAccess} plantName={plantName} />
+
+          <ModelSelectionDialog
+            showSelector={showSelector}
+            models={models!}
+            handleGoToModel={handleGoToModel}
+            updateShowSelector={updateShowSelector}
           />
-        </ViewerWrapper>
-
-        {isLoading ? (
-          <CircularProgress />
-        ) : (
-          <>
-            <Dialog open={!hasAccess}>
-              <Dialog.Header>
-                <Dialog.Title>No access</Dialog.Title>
-              </Dialog.Header>
-              <Dialog.CustomContent>
-                <p>
-                  You don't have access to any 3D Models for this plant. <br /> Search for
-                  "Echo
-                  {' ' + plantName}" in Access IT to apply for access.
-                  <br /> Access IT requires Equinor Network connection.
-                </p>
-              </Dialog.CustomContent>
-              <Dialog.Actions>
-                <Button onClick={handleClose}>OK</Button>
-              </Dialog.Actions>
-            </Dialog>
-
-            <ModelSelectionDialog
-              showSelector={showSelector}
-              models={models!}
-              handleGoToModel={handleGoToModel}
-              updateShowSelector={updateShowSelector}
-            />
-          </>
-        )}
+        </>
+      )}
     </>
   );
 };
-
-
 
 const StyledCanvas = styled.canvas``;
 
