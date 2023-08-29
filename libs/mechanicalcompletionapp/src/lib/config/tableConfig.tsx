@@ -15,7 +15,7 @@ export const tableConfig: GridConfig<McPackage> = {
   columnDefinitions: [
     {
       field: 'MC Pkg',
-      headerTooltip: 'Mechanical Package Number',
+      headerTooltip: 'Mechanical Completion Package Number',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.mcPkgNumber}</StyledMonospace>;
