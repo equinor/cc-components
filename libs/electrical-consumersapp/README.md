@@ -1,3 +1,0 @@
-# electrical-consumersapp
-
-Add readme
