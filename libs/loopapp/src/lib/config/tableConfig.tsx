@@ -74,7 +74,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CommPkgNo',
-    field: 'Comm pkg',
+    field: 'Commisioning Package Number',
     headerTooltip: 'Comm pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -93,7 +93,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'MCPkgNo',
-    field: 'MC Pkg',
+    field: 'Mechanical Completion Package Number',
     headerTooltip: 'MC Package',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -116,7 +116,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'Priority1',
     field: 'Priority',
-    headerTooltip: 'Priority',
+    headerTooltip: 'Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
     enableRowGroup: false,
   },
@@ -179,7 +179,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'FormularType',
     field: 'Form type',
-    headerTooltip: 'Form type',
+    headerTooltip: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
@@ -191,7 +191,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'SignedDate',
     field: 'Signed',
-    headerTooltip: 'Singed',
+    headerTooltip: 'Singed Date',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -201,7 +201,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'VerifiedDate',
     field: 'Verified',
-    headerTooltip: 'Verified',
+    headerTooltip: 'Verified Date',
     valueGetter: (pkg) => pkg.data?.verifiedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;

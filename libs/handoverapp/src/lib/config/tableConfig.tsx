@@ -64,7 +64,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   {
     field: 'Comm pkg',
     colId: 'CommPkgNo',
-    headerTooltip: 'Comm Package Number',
+    headerTooltip: 'Commisioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     valueFormatter: (pkg) => pkg.data?.commissioningPackageUrl ?? '',
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
@@ -97,7 +97,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   {
     field: 'MC status',
     colId: 'MCStatus',
-    headerTooltip: 'MC Status',
+    headerTooltip: 'Mechanical Completion Status',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
       if (props.node.group) return null;
@@ -116,7 +116,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   {
     field: 'Comm status',
     colId: 'CommStatus',
-    headerTooltip: 'Comm Status',
+    headerTooltip: 'Commisioning Status',
     valueGetter: (pkg) => pkg.data?.commissioningPackageStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
       if (props.node.group) return null;

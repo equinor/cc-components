@@ -54,6 +54,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'WorkOrderNumber',
     field: 'Workorder',
+    headerTooltip: 'Workorder Number',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
       if (!props.data?.workorderUrl) {
@@ -195,7 +196,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'ProjectProgress',
     field: 'Progress',
-    headerTooltip: 'Progress',
+    headerTooltip: 'Project Progress',
     valueGetter: (pkg) => pkg.data?.projectProgress,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value || Number(props.value) === 0) {
@@ -208,7 +209,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'MCStatus',
     field: 'MC',
-    headerTooltip: 'MC Status',
+    headerTooltip: 'Mechanical Completion Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value) return null;

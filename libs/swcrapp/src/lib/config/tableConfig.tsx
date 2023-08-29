@@ -12,7 +12,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
   columnDefinitions: [
     {
       field: 'SWCRs',
-      headerName: 'SWCRs',
+      headerName: 'Software Change Requests',
       valueGetter: (pkg) => pkg.data?.swcrNo,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
         return <StyledMonospace>{props.data?.swcrNo}</StyledMonospace>;

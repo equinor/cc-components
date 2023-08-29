@@ -211,7 +211,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   {
     colId: 'CommPkg',
     field: 'Commpkg',
-    headerTooltip: 'Comm Package',
+    headerTooltip: 'Commpisioning Package',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.commissioningPackageUrl || !props.data.commissioningPackageNo) {

@@ -15,7 +15,7 @@ export const tableConfig: GridConfig<McPackage> = {
   columnDefinitions: [
     {
       field: 'McpkgNo',
-      headerTooltip: 'MC Package Number',
+      headerTooltip: 'Mechanical Package Number',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.mcPkgNumber}</StyledMonospace>;
@@ -48,7 +48,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'MC Status',
-      headerTooltip: 'MC Status',
+      headerTooltip: 'Mechanical Completion Status',
       valueGetter: (pkg) => pkg.data?.mcStatus,
       cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
         return (
@@ -93,7 +93,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Comm. package',
-      headerTooltip: 'Comm. Package',
+      headerTooltip: 'Commisioning Package Number',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.commPkgNumber}</StyledMonospace>;
@@ -157,21 +157,21 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Comm Pri1',
-      headerTooltip: 'Comm Priority 1',
+      headerTooltip: 'Commisioning Priority 1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
       width: 155,
     },
     {
       field: 'Comm Pri2',
-      headerTooltip: 'Comm Priority 2',
+      headerTooltip: 'Commisioning Priority 2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
       width: 155,
     },
     {
       field: 'Comm Pri3',
-      headerTooltip: 'Comm Priority 3',
+      headerTooltip: 'Commisioning Priority 3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,
       width: 155,
