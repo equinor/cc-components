@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { useError } from '../hooks/useMessageBoundary';
 import { IModuleViewerProvider } from '../modules/provider';
+import { useModelViewerContext } from './modelViewerProvider';
 
 type ModelContextType = {
   hasAccess: boolean;
@@ -29,16 +30,14 @@ const ModelContext = createContext<ModelContextType>({
 
 export const ModelContextProvider = ({
   children,
-  isSetup,
   plantCode,
-  modelViewer,
 }: PropsWithChildren<{
-  isSetup: boolean;
   plantCode: string;
-  modelViewer: IModuleViewerProvider;
 }>) => {
   const [showSelector, setShowModelDialog] = useState(true);
   const { setError } = useError();
+
+  const { modelViewer, isSetup } = useModelViewerContext();
 
   const {
     data: models,
@@ -48,7 +47,7 @@ export const ModelContextProvider = ({
   } = useQuery<AssetMetadataSimpleDto[]>(
     ['models', plantCode],
     async () => {
-      const data = await modelViewer.getModelsForPlant(plantCode);
+      const data = await modelViewer!.getModelsForPlant(plantCode);
       return data;
     },
     {
@@ -65,13 +64,13 @@ export const ModelContextProvider = ({
   //init setup from local store
   useEffect(() => {
     if (hasAccess) {
-      const localModelId = modelViewer.getLocalModel(plantCode);
+      const localModelId = modelViewer!.getLocalModel(plantCode);
       if (localModelId !== undefined) {
         const selectedModel = models!.find(
           (model) => model.platformSectionId === localModelId
         );
         if (selectedModel?.id) {
-          modelViewer.loadModelById(selectedModel.id);
+          modelViewer!.loadModelById(selectedModel.id);
           setShowModelDialog(false);
           return;
         }
