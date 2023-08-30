@@ -11,16 +11,16 @@ import { ModuleViewer } from '../modules';
 import { IModuleViewerProvider } from '../modules/provider';
 
 type modelViewerContextType = {
-    modelViewer: IModuleViewerProvider | null;
-    viewerRef: React.RefObject<HTMLCanvasElement> | null;
-    isSetup: boolean;
-  };
-  
-  const modelViewerContext = createContext<modelViewerContextType>({
-    modelViewer: null,
-    viewerRef: null,
-    isSetup: false,
-  });
+  modelViewer: IModuleViewerProvider | null;
+  viewerRef: React.RefObject<HTMLCanvasElement> | null;
+  isSetup: boolean;
+};
+
+const modelViewerContext = createContext<modelViewerContextType>({
+  modelViewer: null,
+  viewerRef: null,
+  isSetup: false,
+});
 
 export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
   const viewerRef = useRef<HTMLCanvasElement>(null);

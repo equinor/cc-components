@@ -1,4 +1,3 @@
-import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { IModuleViewerProvider } from '../modules/provider';
 import { useModelContext } from '../providers/modelsProvider';
 

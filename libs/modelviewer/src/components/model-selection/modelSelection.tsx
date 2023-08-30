@@ -1,10 +1,8 @@
-import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { useModelContext } from '../../providers/modelsProvider';
 import { useModelViewerContext } from '../../providers/modelViewerProvider';
-import { IModuleViewerProvider } from '../../modules/provider';
+import { useModelContext } from '../../providers/modelsProvider';
 import AccessDialog from '../access-dialog/accessDialog';
 import ModelSelectionDialog from '../model-selection-dialog/modelSelectionDialog';
 

@@ -9,7 +9,6 @@ import {
   useState,
 } from 'react';
 import { useError } from '../hooks/useMessageBoundary';
-import { IModuleViewerProvider } from '../modules/provider';
 import { useModelViewerContext } from './modelViewerProvider';
 
 type ModelContextType = {

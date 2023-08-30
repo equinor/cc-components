@@ -1,8 +1,8 @@
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
-import { Button, Checkbox, Dialog, Radio } from '@equinor/eds-core-react';
+import { Button, Checkbox, Dialog } from '@equinor/eds-core-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useError, useInfo } from '../../hooks/useMessageBoundary';
+import { useError } from '../../hooks/useMessageBoundary';
 import { useModelSelection } from '../../hooks/useModelSelection';
 import { useModelContext } from '../../providers/modelsProvider';
 import ModelSelectionlist from '../model-selecton-list/modelSelectionList';

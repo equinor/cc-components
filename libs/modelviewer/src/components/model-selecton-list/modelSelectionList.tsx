@@ -1,8 +1,7 @@
+import { Radio } from '@equinor/eds-core-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { useModelContext } from '../../providers/modelsProvider';
-import { Radio } from '@equinor/eds-core-react';
 
 interface ModelSelectionListProps {
   onModelSelect: (id: number) => void;
