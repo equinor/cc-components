@@ -8,7 +8,11 @@ type ApiGardenMeta = {
   subGroupCount: number;
   allGroupingOptions:
     | string[]
-    | { groupingKey: string; dimension: string[] | null; type: string[] | null }[];
+    | {
+        groupingKey: string;
+        timeInterval: string[] | null;
+        dateVariant: string[] | null;
+      }[];
   validGroupingOptions: string[];
 };
 
@@ -68,13 +72,13 @@ export function useGardenDataSource(
       //TODO: remove when api is migrated
       const groupingOptions: {
         groupingKey: string;
-        dimension: string[] | null;
-        type: string[] | null;
+        timeInterval: string[] | null;
+        dateVariant: string[] | null;
       }[] =
         typeof possibleItem === 'string'
           ? meta.allGroupingOptions.map((s) => ({
-              dimension: null,
-              type: null,
+              timeInterval: null,
+              dateVariant: null,
               groupingKey: s as string,
             }))
           : (meta.allGroupingOptions as any);
