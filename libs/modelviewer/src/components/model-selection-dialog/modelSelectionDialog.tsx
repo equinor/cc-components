@@ -2,40 +2,26 @@ import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { Button, Checkbox, Dialog, Radio } from '@equinor/eds-core-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useError, useInfo } from '../hooks/useMessageBoundary';
+import { useError, useInfo } from '../../hooks/useMessageBoundary';
+import { useModelSelection } from '../../hooks/useModelSelection';
+import { useModelContext } from '../../providers/modelsProvider';
+import ModelSelectionlist from '../model-selecton-list/modelSelectionList';
 
 interface ModelSelectionDialogProps {
-  showSelector: boolean;
-  models: AssetMetadataSimpleDto[]; // Ensure 'models' are always provided
-  handleGoToModel: (selectedId: number, rememberChecked: boolean) => void;
-  updateShowSelector: (show: boolean) => void;
+  models: AssetMetadataSimpleDto[];
+  modelViewer: any;
 }
 
-const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({
-  showSelector,
-  models,
-  handleGoToModel,
-  updateShowSelector,
-}) => {
-  const [rememberChecked, setRememberChecked] = useState(false);
+const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({ modelViewer }) => {
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
-  const { setError } = useError();
 
-  const ModelSelector: React.FC<{ models: AssetMetadataSimpleDto[] }> = ({ models }) => (
-    <UnstyledList>
-      {models.map((model) => (
-        <li key={model.id}>
-          <Radio
-            label={model.platformSectionLabel}
-            name="models"
-            value={model.id}
-            checked={selectedModelId === model.id}
-            onChange={(e) => setSelectedModelId(Number(e.target.value))}
-          />
-        </li>
-      ))}
-    </UnstyledList>
-  );
+  const handleModelSelect = (id: number) => {
+    setSelectedModelId(id);
+  };
+  const { handleGoToModel } = useModelSelection(modelViewer);
+  const [rememberChecked, setRememberChecked] = useState(false);
+  const { models, setShowModelDialog, showSelector } = useModelContext();
+  const { setError } = useError();
 
   return (
     <Dialog open={showSelector} style={{ width: 'auto' }}>
@@ -45,7 +31,7 @@ const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({
       <Dialog.CustomContent>
         <Selection>
           <p>Multiple models are available. Please choose a model to view.</p>
-          <ModelSelector models={models} />
+          <ModelSelectionlist onModelSelect={handleModelSelect} />
           <Checkbox
             label="Remember Selection"
             onChange={(e) => setRememberChecked(e.target.checked)}
@@ -65,7 +51,7 @@ const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({
         <Button
           variant="ghost"
           onClick={() => {
-            updateShowSelector(false);
+            setShowModelDialog(false);
           }}
         >
           Cancel
@@ -82,10 +68,4 @@ const Selection = styled.div`
   flex-direction: column;
   width: 300px;
   padding: 1rem;
-`;
-
-const UnstyledList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
 `;
