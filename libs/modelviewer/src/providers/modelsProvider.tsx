@@ -17,6 +17,7 @@ type ModelContextType = {
   models: AssetMetadataSimpleDto[] | undefined;
   setShowModelDialog: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
+  localModelId: number;
 };
 
 const ModelContext = createContext<ModelContextType>({
@@ -25,6 +26,7 @@ const ModelContext = createContext<ModelContextType>({
   models: [],
   setShowModelDialog: () => {},
   isLoading: false,
+  localModelId: 0,
 });
 
 export const ModelContextProvider = ({
@@ -33,7 +35,8 @@ export const ModelContextProvider = ({
 }: PropsWithChildren<{
   plantCode: string;
 }>) => {
-  const [showSelector, setShowModelDialog] = useState(true);
+  const [showSelector, setShowModelDialog] = useState(false);
+  const [localModelId, setLocalModelId] = useState(0);
   const { setError } = useError();
 
   const { modelViewer, isSetup } = useModelViewerContext();
@@ -70,6 +73,7 @@ export const ModelContextProvider = ({
         );
         if (selectedModel?.id) {
           modelViewer!.loadModelById(selectedModel.id);
+          setLocalModelId(selectedModel.id);
           setShowModelDialog(false);
           return;
         }
@@ -85,6 +89,7 @@ export const ModelContextProvider = ({
         models,
         setShowModelDialog,
         isLoading,
+        localModelId,
       }}
     >
       {children}

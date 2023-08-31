@@ -1,8 +1,7 @@
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { Button, Checkbox, Dialog } from '@equinor/eds-core-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useError } from '../../hooks/useMessageBoundary';
 import { useModelSelection } from '../../hooks/useModelSelection';
 import { useModelContext } from '../../providers/modelsProvider';
 import ModelSelectionlist from '../model-selecton-list/modelSelectionList';
@@ -20,8 +19,13 @@ const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({ modelViewer
   };
   const { handleGoToModel } = useModelSelection(modelViewer);
   const [rememberChecked, setRememberChecked] = useState(false);
-  const { models, setShowModelDialog, showSelector } = useModelContext();
-  const { setError } = useError();
+  const { setShowModelDialog, showSelector, localModelId } = useModelContext();
+
+  useEffect(() => {
+    if (localModelId) {
+      setRememberChecked(true);
+    }
+  }, [localModelId]);
 
   return (
     <Dialog open={showSelector} style={{ width: 'auto' }}>
