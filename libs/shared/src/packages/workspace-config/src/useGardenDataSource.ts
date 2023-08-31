@@ -40,6 +40,8 @@ export function useGardenDataSource(
           columnEnd,
           rowStart,
           rowEnd,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           groupingKeys,
           filter: filters,
         },
@@ -56,6 +58,8 @@ export function useGardenDataSource(
       const requestArgs = createRequestBody(
         {
           groupingKeys: keys.groupingKeys,
+          dateVariant: keys.dateVariant,
+          timeInterval: keys.timeInterval,
           filter: filters,
         },
         signal
@@ -100,6 +104,8 @@ export function useGardenDataSource(
           rowStart: 0,
           rowEnd: 0,
           groupingKeys,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           filter: filters,
         },
         signal
@@ -120,6 +126,8 @@ export function useGardenDataSource(
           columnName,
           subGroupName: subgroupName,
           groupingKeys,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           filter: filter,
         },
         signal
