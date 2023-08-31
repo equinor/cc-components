@@ -11,6 +11,7 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
+  useCloseSidesheetOnContextChange,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
@@ -24,7 +25,7 @@ import { TabListProps, Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
@@ -50,6 +51,7 @@ type WorkorderProps = {
   closeSidesheet: () => void;
 };
 export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }) => {
+  useCloseSidesheetOnContextChange(props.closeSidesheet);
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
