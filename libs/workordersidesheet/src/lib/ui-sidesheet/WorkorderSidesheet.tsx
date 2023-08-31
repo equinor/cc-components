@@ -46,7 +46,6 @@ export const StyledTabsList = styled(Tabs.List)`
 `;
 
 export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
-  useCloseSidesheetOnContextChange(props.closeSidesheet);
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
