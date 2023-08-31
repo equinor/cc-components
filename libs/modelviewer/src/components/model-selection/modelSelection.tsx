@@ -33,10 +33,9 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
         <CircularProgress />
       ) : (
         <>
-          {/* Replace AccessDialog and ModelSelectionDialog with actual components */}
           <AccessDialog hasAccess={hasAccess} plantName={plantName} />
-          {models !== undefined && (
-            <ModelSelectionDialog models={models} modelViewer={modelViewer} />
+          {models!.length > 0 && (
+            <ModelSelectionDialog models={models!} modelViewer={modelViewer} />
           )}
         </>
       )}
