@@ -8,6 +8,9 @@ type BaseProps<T> = {
   closeSidesheet: VoidFunction;
 };
 
+/**
+ * TODO: Internalize createWidget from @equinor/workspace-sidesheet
+ */
 export function createWidget<T>(
   Comp: (props: { props: BaseProps<T> }) => JSX.Element,
   resizeOptions?: {
