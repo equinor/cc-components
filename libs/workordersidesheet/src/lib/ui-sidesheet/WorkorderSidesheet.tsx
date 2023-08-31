@@ -11,7 +11,6 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-  useCloseSidesheetOnContextChange,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
