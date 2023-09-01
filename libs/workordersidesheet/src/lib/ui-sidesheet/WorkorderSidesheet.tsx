@@ -20,7 +20,7 @@ import {
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { Tabs } from '@equinor/eds-core-react';
+import { TabListProps, Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import { createWidget } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
@@ -29,14 +29,13 @@ import styled from 'styled-components';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
-import 'styled-components';
 
-export const StyledTabListWrapper = styled.div`
+export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
-export const StyledTabsList = styled(Tabs.List)`
+export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
