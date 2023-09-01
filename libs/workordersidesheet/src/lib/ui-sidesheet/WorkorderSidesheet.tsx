@@ -29,6 +29,7 @@ import styled from 'styled-components';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
+import 'styled-components';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
