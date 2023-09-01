@@ -50,7 +50,7 @@ export function Test({ item }: { item: ElectricalConsumer }) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '700px',
+        height: '100%',
         margin: '20px',
       }}
     >
@@ -60,7 +60,14 @@ export function Test({ item }: { item: ElectricalConsumer }) {
 }
 
 export type ElectricalNetwork = {
-  eleSymbolCode: 'K_BOX' | 'HT_KAB' | 'KURS' | 'TAVLE' | 'KABEL';
+  eleSymbolCode:
+    | 'K_BOX'
+    | 'HT_KAB'
+    | 'KURS'
+    | 'TAVLE'
+    | 'KABEL'
+    | 'VARME'
+    | ({} & string);
   type: string;
   name: string;
   urlPath: string;

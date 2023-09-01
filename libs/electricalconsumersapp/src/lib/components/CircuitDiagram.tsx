@@ -4,7 +4,14 @@ import { tokens } from '@equinor/eds-tokens';
 
 export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
   return (
-    <div style={{ display: 'flex', width: '100%', overflow: 'auto' }}>
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        overflow: 'auto',
+        fontSize: '12px',
+      }}
+    >
       <Switchboard network={network} />
       <Wrapper
         style={{
@@ -31,7 +38,10 @@ function Switchboard({ network }: { network: ElectricalNetwork }) {
         width: '110px',
         display: 'flex',
         alignItems: 'flex-start',
+        flexDirection: 'column',
+        gap: '50px',
         padding: '10px 5px 0px 5px',
+        borderRadius: '10px',
       }}
     >
       <div>{network.name}</div>
@@ -47,6 +57,7 @@ function Switchboard({ network }: { network: ElectricalNetwork }) {
 const StyledHTCable = styled.div`
   display: flex;
   gap: 1ch;
+  padding-left: 10px;
   border-bottom: 2px dashed rgb(61, 61, 61);
   width: fit-content;
   white-space: nowrap;
@@ -66,11 +77,13 @@ const StyledHTCable = styled.div`
 
 const StyledJunctionBox = styled.div`
   display: flex;
-  flex: 1 1 0%;
-  width: 60px;
   box-sizing: border-box;
   min-height: 60px;
-  border: 1px solid ${tokens.colors.ui.background__light.hex};
+  white-space: nowrap;
+  padding: 10px 5px 0px 5px;
+  /* border: 1px solid ${tokens.colors.ui.background__light.hex}; */
+  border: 1px solid black;
+  border-radius: 10px;
 `;
 
 function JunctionBox({ network }: { network: ElectricalNetwork }) {
@@ -142,12 +155,47 @@ function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
         </Item>
       );
     }
+
+    case 'VARME': {
+      return (
+        <Item>
+          <StyledWarm>{network.name}</StyledWarm>
+
+          <ChildWrapper>
+            {network.children.map((s) => (
+              <ItemStuffThing network={s} key={s.name} />
+            ))}
+          </ChildWrapper>
+        </Item>
+      );
+    }
+
+    default:
+      console.log(network.eleSymbolCode);
+      return (
+        <Item>
+          <Name>{network.name}</Name>
+
+          <ChildWrapper>
+            {network.children.map((s) => (
+              <ItemStuffThing network={s} key={s.name} />
+            ))}
+          </ChildWrapper>
+        </Item>
+      );
   }
 }
 
 function Cable({ name }: { name: string }) {
   return (
-    <div style={{ borderBottom: '1px solid black', height: '3ch', whiteSpace: 'nowrap' }}>
+    <div
+      style={{
+        borderBottom: '1px solid black',
+        height: '5ch',
+        whiteSpace: 'nowrap',
+        padding: '0px 10px',
+      }}
+    >
       {name}
     </div>
   );
@@ -166,14 +214,27 @@ const Item = styled.div`
 `;
 
 const Name = styled.div`
-  border: 2px solid black;
+  border: 1px solid black;
   height: 100%;
   min-width: 75px;
+  border-radius: 5px;
+`;
+
+const StyledWarm = styled.div`
+  border: 1px dashed black;
+  height: 100%;
+  min-width: 75px;
+  border-radius: 5px;
 `;
 
 const ChildWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
+`;
+
+//Filler div to place scrollbar at the bottom of screen
+const CircuitDiagramFillerDiv = styled.div`
+  height: 100vh;
 `;
