@@ -32,7 +32,6 @@ const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => 
       <ModelViewerContextProvider>
         <ModelContextProvider plantCode={plantCode}>
           <ModelSelection plantName={plantName}>
-            <Canvas />
           </ModelSelection>
         </ModelContextProvider>
       </ModelViewerContextProvider>

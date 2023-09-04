@@ -21,35 +21,21 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
   };
 
   if (isLoading) {
-    return (
-      <ViewerWrapper>
-        {children}
-        <CircularProgress />
-      </ViewerWrapper>
-    );
+    return <CircularProgress />;
   }
 
   return (
     <div>
-      <ViewerWrapper>
-        <Button onClick={showModelSelector}>Show Selector</Button>
-        {children}
+      <Button onClick={showModelSelector}>Show Selector</Button>
+      {children}
 
-        {models && models.length > 0 ? (
-          <ModelSelectionDialog models={models} />
-        ) : (
-          <AccessDialog hasAccess={hasAccess} plantName={plantName} />
-        )}
-      </ViewerWrapper>
+      {models && models.length > 0 ? (
+        <ModelSelectionDialog models={models} />
+      ) : (
+        <AccessDialog hasAccess={hasAccess} plantName={plantName} />
+      )}
     </div>
   );
 };
 
 export default ModelSelection;
-
-const ViewerWrapper = styled.div`
-  height: calc(100vh - 90px);
-  > .reveal-viewer-spinner {
-    display: none;
-  }
-`;
