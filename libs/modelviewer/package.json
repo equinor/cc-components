@@ -7,7 +7,9 @@
   "types": "./dist/src/index.d.ts",
   "scripts": {
     "build": "tsc -b -f",
-    "test": "vitest"
+    "test": "vitest",
+    "test:silent": "vitest --silent --run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@equinor/echo-3d-viewer": "^0.0.1",

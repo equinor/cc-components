@@ -53,13 +53,25 @@ export class ModelService {
     this.model = new BehaviorSubject<CogniteCadModel | undefined>(undefined);
   }
 
-  private getLocalModelId() {
-    const localModelId = localStorage.getItem(LOCAL_MODEL_ID_KEY);
-    return localModelId ? Number(localModelId) : undefined;
+  getLocalModel(plantCode : string) {
+    const localModelsJson = localStorage.getItem(LOCAL_MODEL_ID_KEY);
+    if (localModelsJson) {
+      const localModels = JSON.parse(localModelsJson);
+      return localModels[plantCode] || undefined;
+    }
+    return undefined;
   }
 
-  private setLocalModelID(modelId: number) {
-    localStorage.setItem(LOCAL_MODEL_ID_KEY, modelId.toString());
+  setLocalModel(model : AssetMetadataSimpleDto) {
+    const plantCode = model.plantCode;
+    const platformSectionId = model.platformSectionId;
+
+    const existingModelsJson = localStorage.getItem(LOCAL_MODEL_ID_KEY);
+    const existingModels = existingModelsJson ? JSON.parse(existingModelsJson) : {};
+
+    existingModels[plantCode] = platformSectionId;
+
+    localStorage.setItem(LOCAL_MODEL_ID_KEY, JSON.stringify(existingModels));
   }
 
   private async _getModels() {
@@ -237,13 +249,20 @@ export class ModelService {
     return defaultModel ?? availableModelsForPlant[0];
   }
 
+  async getModels() {
+    return await this._getModels();
+  }
+
+  /*
   async loadModel(plantCode: string, options?: ViewerOptions) {
     const modelId = this.getLocalModelId();
     await this.setModelsByPlantCode(plantCode, modelId, options);
   }
+*/
 
   async loadModelById(modelId: number, options?: ViewerOptions) {
-    const model = this.findModelById(this.userModelsMeta, modelId);
-    this.loadModelInViewer(model, options);
+    const userModels = await this.setUserModels();
+    const model = this.findModelById(userModels, modelId);
+    this._loadModel(model, options);
   }
 }

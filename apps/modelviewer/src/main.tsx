@@ -1,12 +1,15 @@
 import { configure } from '@cc-components/modelviewerapp';
-import { FusionModelViewer} from '@cc-components/modelviewer'
+import { FusionModelViewer } from '@cc-components/modelviewer';
 import { createRender } from '@cc-components/shared';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const App = () => {
+  const queryClient = new QueryClient();
+
   return (
-
-      <FusionModelViewer  plantCode='jca'/>
-
+    <QueryClientProvider client={queryClient}>
+      <FusionModelViewer plantName="Johan Castberg" plantCode="jca" />
+    </QueryClientProvider>
   );
 };
 

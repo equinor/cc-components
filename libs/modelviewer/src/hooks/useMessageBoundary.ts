@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   ErrorMessage,
@@ -16,16 +16,15 @@ export const useMessageBoundary = () => {
     ErrorMessage | WaringMessage | InfoMessage | undefined
   >();
 
-  const setMessageItem = (
-    item?: ErrorMessage | InfoMessage | WaringMessage,
-    options?: MessageOptions
-  ) => {
+  const setMessageItem = (item?: ErrorMessage | InfoMessage | WaringMessage) => {
     setItem(item);
-
-    if (!options?.shouldNotThrow && item) {
-      throw item;
-    }
   };
+
+  useEffect(() => {
+    if (messageItem) {
+      throw messageItem;
+    }
+  }, [messageItem]);
 
   return {
     setMessageItem,
@@ -35,8 +34,8 @@ export const useMessageBoundary = () => {
 
 export const useInfo = () => {
   const { setMessageItem, messageItem } = useMessageBoundary();
-  const setInfo = (message: string, options?: MessageOptions) => {
-    setMessageItem({ message, name: 'Message', type: MessageType.Info }, options);
+  const setInfo = (message: string) => {
+    setMessageItem({ message, name: 'Message', type: MessageType.Info });
   };
 
   const infoMessage = useMemo(() => {
@@ -51,8 +50,8 @@ export const useInfo = () => {
 
 export const useWarning = () => {
   const { setMessageItem, messageItem } = useMessageBoundary();
-  const setWarning = (message: string, options?: MessageOptions) => {
-    setMessageItem({ message, name: 'Message', type: MessageType.Warning }, options);
+  const setWarning = (message: string) => {
+    setMessageItem({ message, name: 'Message', type: MessageType.Warning });
   };
 
   const warningMessage = useMemo(() => {
@@ -67,8 +66,8 @@ export const useWarning = () => {
 
 export const useError = () => {
   const { setMessageItem, messageItem } = useMessageBoundary();
-  const setError = (message: string, options?: MessageOptions) => {
-    setMessageItem({ message, name: 'Error', type: MessageType.Error }, options);
+  const setError = (message: string) => {
+    setMessageItem({ message, name: 'Error', type: MessageType.Error });
   };
 
   const errorMessage = useMemo(() => {
