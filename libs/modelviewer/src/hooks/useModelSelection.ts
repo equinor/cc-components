@@ -1,17 +1,13 @@
-import { IModuleViewerProvider } from '../modules/provider';
 import { useModelContext } from '../providers/modelsProvider';
 
-export const useModelSelection = (
-  modelViewer: IModuleViewerProvider //JAH
-) => {
-  //Model selected
-  const { models, setShowModelDialog } = useModelContext();
+export const useModelSelection = () => {
+  const { models, setShowModelDialog, loadModelById, setLocalModel } = useModelContext();
   const handleGoToModel = (selectedId: number, rememberChecked: boolean) => {
-    modelViewer.loadModelById(selectedId);
+    loadModelById(selectedId);
     if (rememberChecked) {
       const selectedModel = models?.find((model) => model.id === selectedId);
       if (selectedModel) {
-        modelViewer.setLocalModel(selectedModel);
+        setLocalModel(selectedModel);
       }
     }
     setShowModelDialog(false);

@@ -5,14 +5,23 @@ const Canvas = ({}) => {
   const { viewerRef } = useModelViewerContext();
 
   return (
-    <StyledCanvas
-      ref={viewerRef}
-      onContextMenu={(e) => {
-        e.preventDefault(); // Prevent the right-click menu on the canvas
-      }}
-    />
+    <ViewerWrapper>
+      <StyledCanvas
+        ref={viewerRef}
+        onContextMenu={(e) => {
+          e.preventDefault(); // Prevent the right-click menu on the canvas
+        }}
+      />
+    </ViewerWrapper>
   );
 };
 
 export default Canvas;
 const StyledCanvas = styled.canvas``;
+
+const ViewerWrapper = styled.div`
+  height: calc(100vh - 90px);
+  > .reveal-viewer-spinner {
+    display: none;
+  }
+`;

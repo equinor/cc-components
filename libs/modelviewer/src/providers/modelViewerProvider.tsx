@@ -8,43 +8,55 @@ import {
   useState,
 } from 'react';
 import { ModuleViewer } from '../modules';
-import { IModuleViewerProvider } from '../modules/provider';
 
-type modelViewerContextType = {
-  modelViewer: IModuleViewerProvider | null;
-  viewerRef: React.RefObject<HTMLCanvasElement> | null;
-  isSetup: boolean;
+import { IModuleViewerProvider } from '../modules/provider';
+import {
+  Echo3dViewer,
+  ModelsClient,
+  HierarchyClient,
+  EchoSetupObject,
+} from '@equinor/echo-3d-viewer';
+import Canvas from '../components/canvas/canvas';
+
+type ModelViewerContextType = {
+  viewer?: Echo3dViewer;
+  modelApiClient?: ModelsClient;
+  hierarchyApiClient?: HierarchyClient;
+  echoInstance?: EchoSetupObject;
+  viewerRef?: React.RefObject<HTMLCanvasElement>;
 };
 
-const modelViewerContext = createContext<modelViewerContextType>({
-  modelViewer: null,
-  viewerRef: null,
-  isSetup: false,
-});
+const modelViewerContext = createContext<ModelViewerContextType>({});
 
 export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
   const viewerRef = useRef<HTMLCanvasElement>(null);
-  const modelViewer = useAppModules<[ModuleViewer]>().moduleViewer;
+  const viewerInstance = useAppModules<[ModuleViewer]>().moduleViewer;
+
   const [isSetup, setIsSetup] = useState(false);
 
   useEffect(() => {
     (async () => {
       if (!viewerRef.current || isSetup) return;
-      await modelViewer.setup({ canvas: viewerRef.current }).finally(() => {
+      await viewerInstance.setup({ canvas: viewerRef.current }).finally(() => {
         setIsSetup(true);
       });
     })();
-  }, [modelViewer]);
+  }, [viewerInstance]);
+
+  const { viewer, modelApiClient, hierarchyApiClient, echoInstance } = viewerInstance;
 
   return (
     <modelViewerContext.Provider
       value={{
-        modelViewer,
+        viewer,
+        modelApiClient,
+        hierarchyApiClient,
+        echoInstance,
         viewerRef,
-        isSetup,
       }}
     >
       {children}
+      <Canvas />
     </modelViewerContext.Provider>
   );
 };
