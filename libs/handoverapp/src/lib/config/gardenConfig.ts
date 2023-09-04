@@ -24,7 +24,9 @@ export const useGardenConfig = (
 
   return {
     getDisplayName: (item) => item.commissioningPackageNo,
-    initialGrouping: ['Priority1'],
+    initialGrouping: ['RFOC'],
+    initialDateVariant: 'Planned',
+    initialTimeInterval: 'Weekly',
     getBlockAsync,
     getGardenMeta,
     getHeader,

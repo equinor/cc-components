@@ -1,4 +1,4 @@
-import { RemirrorThemeType } from 'remirror';
+import { RemirrorThemeType } from '@remirror/theme';
 
 export const theme: RemirrorThemeType = {
   space: {
