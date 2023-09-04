@@ -4,22 +4,22 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModelSelection } from '../../hooks/useModelSelection';
 import { useModelContext } from '../../providers/modelsProvider';
-import ModelSelectionlist from '../model-selecton-list/modelSelectionList';
+import ModelSelectionList from '../model-selection-list/modelSelectionList';
 
 interface ModelSelectionDialogProps {
   models: AssetMetadataSimpleDto[];
-  modelViewer: any;
 }
 
-const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({ modelViewer }) => {
+const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = () => {
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
 
   const handleModelSelect = (id: number) => {
     setSelectedModelId(id);
   };
-  const { handleGoToModel } = useModelSelection(modelViewer);
+
   const [rememberChecked, setRememberChecked] = useState(false);
   const { setShowModelDialog, showSelector, localModelId } = useModelContext();
+  const { handleGoToModel } = useModelSelection();
 
   useEffect(() => {
     if (localModelId) {
@@ -35,7 +35,7 @@ const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = ({ modelViewer
       <Dialog.CustomContent>
         <Selection>
           <p>Multiple models are available. Please choose a model to view.</p>
-          <ModelSelectionlist onModelSelect={handleModelSelect} />
+          <ModelSelectionList onModelSelect={handleModelSelect} />
           <Checkbox
             label="Remember Selection"
             onChange={(e) => setRememberChecked(e.target.checked)}

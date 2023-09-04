@@ -1,7 +1,6 @@
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { useModelViewerContext } from '../../providers/modelViewerProvider';
 import { useModelContext } from '../../providers/modelsProvider';
 import AccessDialog from '../access-dialog/accessDialog';
 import ModelSelectionDialog from '../model-selection-dialog/modelSelectionDialog';
@@ -17,28 +16,31 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
   const { hasAccess, showSelector, models, setShowModelDialog, isLoading } =
     useModelContext();
 
-  const { modelViewer } = useModelViewerContext();
-
   const showModelSelector = () => {
     setShowModelDialog(!showSelector);
   };
+
+  if (isLoading) {
+    return (
+      <ViewerWrapper>
+        {children}
+        <CircularProgress />
+      </ViewerWrapper>
+    );
+  }
 
   return (
     <div>
       <ViewerWrapper>
         <Button onClick={showModelSelector}>Show Selector</Button>
         {children}
-      </ViewerWrapper>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <>
+
+        {models && models.length > 0 ? (
+          <ModelSelectionDialog models={models} />
+        ) : (
           <AccessDialog hasAccess={hasAccess} plantName={plantName} />
-          {models!.length > 0 && (
-            <ModelSelectionDialog models={models!} modelViewer={modelViewer} />
-          )}
-        </>
-      )}
+        )}
+      </ViewerWrapper>
     </div>
   );
 };
