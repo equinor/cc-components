@@ -13,8 +13,14 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
   children,
   plantName,
 }) => {
-  const { hasAccess, showSelector, models, setShowModelDialog, isLoading } =
-    useModelContext();
+  const {
+    hasAccess,
+    showSelector,
+    models,
+    setShowModelDialog,
+    isLoading,
+    currenModelMeta,
+  } = useModelContext();
 
   const showModelSelector = () => {
     setShowModelDialog(!showSelector);
@@ -26,7 +32,14 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
 
   return (
     <div>
-      <Button onClick={showModelSelector}>Show Selector</Button>
+      <div
+        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+      >
+        <Button onClick={showModelSelector}>Show Selector</Button>
+        <h5>
+          {currenModelMeta?.platformNameLabel} - {currenModelMeta?.platformSectionLabel}
+        </h5>
+      </div>
       {children}
 
       {models && models.length > 0 ? (

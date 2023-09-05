@@ -10,16 +10,17 @@ import {
 } from 'react';
 import { useModelViewerContext } from './modelViewerProvider';
 import { ModelService, ViewerOptions } from '../services/modelsService';
+import { CogniteCadModel } from '@cognite/reveal';
 
 type ModelContextType = {
   hasAccess: boolean;
   showSelector: boolean;
   models: AssetMetadataSimpleDto[] | undefined;
   setShowModelDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  loadModelById: (modelId: number, options?: ViewerOptions) => Promise<void>;
+  loadModelById: (modelId: number, options?: ViewerOptions) => Promise<CogniteCadModel>;
   setLocalModel(model: AssetMetadataSimpleDto): void;
   isLoading: boolean;
-  localModelId: number;
+  currenModelMeta?: AssetMetadataSimpleDto;
 };
 
 const ModelContext = createContext({} as ModelContextType);
@@ -31,7 +32,8 @@ export const ModelContextProvider = ({
   plantCode: string;
 }>) => {
   const [showSelector, setShowModelDialog] = useState(false);
-  const [localModelId, setLocalModelId] = useState(0);
+  const [currenModelMeta, setCurrenModelMeta] = useState<AssetMetadataSimpleDto>();
+
   const { viewer, modelApiClient } = useModelViewerContext();
 
   const modelService = useMemo(() => {
@@ -60,6 +62,15 @@ export const ModelContextProvider = ({
     return models?.length !== 0;
   }, [models]);
 
+  useEffect(() => {
+    if (!modelService) return;
+
+    const sub = modelService.modelMeta$.subscribe(setCurrenModelMeta);
+    return () => {
+      sub.unsubscribe();
+    };
+  }, [modelService]);
+
   //init setup from local store
   useEffect(() => {
     if (hasAccess) {
@@ -70,7 +81,6 @@ export const ModelContextProvider = ({
         );
         if (selectedModel?.id) {
           modelService?.loadModelById(selectedModel.id);
-          setLocalModelId(selectedModel.id);
           setShowModelDialog(false);
           return;
         }
@@ -102,7 +112,7 @@ export const ModelContextProvider = ({
         loadModelById,
         setLocalModel,
         isLoading,
-        localModelId,
+        currenModelMeta,
       }}
     >
       {children}
