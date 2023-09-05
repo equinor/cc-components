@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { ElectricalNetwork } from '../config/ElectricalSidesheet';
 import { tokens } from '@equinor/eds-tokens';
+import { useState } from 'react';
 
 export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
   return (
@@ -47,7 +48,13 @@ function Switchboard({ network }: { network: ElectricalNetwork }) {
       <div>{network.name}</div>
       <div>
         {network.children.map((s) => (
-          <div key={s.name}>{s.name}</div>
+          <div
+            key={s.name}
+            style={{ display: 'flex', whiteSpace: 'nowrap', width: 'fit-content' }}
+          >
+            {s.name}
+            {s.isSafetyCritical ? <CriticalLineVisual /> : null}
+          </div>
         ))}
       </div>
     </div>
@@ -81,8 +88,8 @@ const StyledJunctionBox = styled.div`
   min-height: 60px;
   white-space: nowrap;
   padding: 10px 5px 0px 5px;
-  /* border: 1px solid ${tokens.colors.ui.background__light.hex}; */
-  border: 1px solid black;
+  border: 1px solid ${tokens.colors.ui.background__medium.hex};
+  /* border: 1px solid black; */
   border-radius: 10px;
 `;
 
@@ -91,7 +98,13 @@ function JunctionBox({ network }: { network: ElectricalNetwork }) {
 }
 
 export const HTCable = ({ network }: { network: ElectricalNetwork }) => {
-  return <StyledHTCable>{network.name}</StyledHTCable>;
+  return (
+    <>
+      <StyledHTCable>
+        {network.name} {network.isSafetyCritical ? <CriticalLineVisual /> : null}
+      </StyledHTCable>
+    </>
+  );
 };
 
 function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
@@ -159,7 +172,7 @@ function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
     case 'VARME': {
       return (
         <Item>
-          <StyledWarm>{network.name}</StyledWarm>
+          <StyledSpaceHeater>{network.name}</StyledSpaceHeater>
 
           <ChildWrapper>
             {network.children.map((s) => (
@@ -171,7 +184,6 @@ function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
     }
 
     default:
-      console.log(network.eleSymbolCode);
       return (
         <Item>
           <Name>{network.name}</Name>
@@ -201,8 +213,71 @@ function Cable({ name }: { name: string }) {
   );
 }
 
+const CriticalLineVisual = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+
+  return (
+    <>
+      <TestDotWrapper onMouseOver={onOpen} onMouseLeave={onClose}>
+        <CriticalLineVisualStyle>
+          <TestDotCircleText>CL</TestDotCircleText>
+          {isOpen && (
+            <div>
+              <CircuitDiagramPopover>{'Heating Critical Line'}</CircuitDiagramPopover>
+            </div>
+          )}
+        </CriticalLineVisualStyle>
+      </TestDotWrapper>
+    </>
+  );
+};
+
+const TestDotWrapper = styled.span`
+  display: flex;
+  flex-direction: horizontal;
+  flex: 1;
+  justify-content: center;
+  padding-bottom: 3px;
+`;
+
+const CriticalLineVisualStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 30px;
+  height: 14px;
+  margin-right: 2px;
+  color: ${tokens.colors.interactive.danger__resting.hex};
+  background-color: ${tokens.colors.ui.background__light.hex};
+  border: 1px solid;
+  border-color: ${tokens.colors.interactive.danger__resting.hex};
+  margin-left: 8px;
+`;
+
+export const TestDotCircleText = styled.div`
+  font-size: 16px;
+  font-weight: 400, regular;
+  cursor: default;
+`;
+
+const CircuitDiagramPopover = styled.div<{ cornerButton?: boolean }>`
+  position: absolute;
+  z-index: 100;
+  color: #fff;
+  background-color: #121212;
+  padding: 5px 5px;
+  border-radius: 4px;
+  margin-top: ${(p) => (p.cornerButton ? '40px' : '10px')};
+  right: ${(p) => (p.cornerButton ? '0px' : null)};
+`;
+
 const Wrapper = styled.div`
   display: grid;
+  gap: 2em;
 `;
 
 const Item = styled.div`
@@ -220,11 +295,15 @@ const Name = styled.div`
   border-radius: 5px;
 `;
 
-const StyledWarm = styled.div`
-  border: 1px dashed black;
-  height: 100%;
-  min-width: 75px;
-  border-radius: 5px;
+const StyledSpaceHeater = styled.div`
+  display: flex;
+  width: fit-content;
+  border: 1px solid ${tokens.colors.ui.background__medium.hex};
+  border-radius: 10px;
+  padding: 10px 5px 0px 5px;
+  min-height: 60px;
+  box-sizing: border-box;
+  white-space: nowrap;
 `;
 
 const ChildWrapper = styled.div`
