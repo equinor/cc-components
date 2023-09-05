@@ -18,14 +18,14 @@ const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = () => {
   };
 
   const [rememberChecked, setRememberChecked] = useState(false);
-  const { setShowModelDialog, showSelector, localModelId } = useModelContext();
+  const { setShowModelDialog, showSelector, currenModelMeta } = useModelContext();
   const { handleGoToModel } = useModelSelection();
 
   useEffect(() => {
-    if (localModelId) {
+    if (currenModelMeta) {
       setRememberChecked(true);
     }
-  }, [localModelId]);
+  }, [currenModelMeta]);
 
   return (
     <Dialog open={showSelector} style={{ width: 'auto' }}>
