@@ -48,10 +48,15 @@ export const ActionsMenu = () => {
     <>
       <WrapperActionsBar>
         <ActionsBar>
-          <Button variant="ghost_icon" onClick={showModelSelector}>
+          <Button
+            variant="ghost_icon"
+            onClick={() => {
+              console.log();
+            }}
+          >
             <Icon
               name={'crop'}
-              color={false ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+              color={true ? tokens.colors.text.static_icons__secondary.rgba : undefined}
             />
           </Button>
           <Button
@@ -62,7 +67,7 @@ export const ActionsMenu = () => {
           >
             <Icon
               name={'visibility'}
-              color={false ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+              color={true ? tokens.colors.text.static_icons__secondary.rgba : undefined}
             />
           </Button>
 
