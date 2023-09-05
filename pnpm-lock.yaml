@@ -149,7 +149,7 @@ importers:
 
   apps/electricalconsumers:
     dependencies:
-      '@cc-components/electricalconsumersapp':
+      '@cc-components/electrical-consumersapp':
         specifier: workspace:^
         version: link:../../libs/electricalconsumersapp
       '@cc-components/shared':
