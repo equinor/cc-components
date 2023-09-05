@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { ElectricalNetwork } from '../config/ElectricalSidesheet';
 import { tokens } from '@equinor/eds-tokens';
 import { useState } from 'react';
+import { heat_trace, cable, junction_box, circuit } from '@equinor/eds-icons';
+import { Icon } from '@equinor/eds-core-react';
+
+Icon.add({ heat_trace, cable, junction_box, circuit });
 
 export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
   return (
@@ -45,29 +49,68 @@ function Switchboard({ network }: { network: ElectricalNetwork }) {
         borderRadius: '10px',
       }}
     >
-      <div>{network.name}</div>
+      <SwtichBoardItems>
+        {network.name} <SwitchBoardIcon />
+      </SwtichBoardItems>
       <div>
         {network.children.map((s) => (
-          <div
-            key={s.name}
-            style={{ display: 'flex', whiteSpace: 'nowrap', width: 'fit-content' }}
-          >
-            {s.name}
+          <StyledCircuitItems key={s.name}>
+            {s.name} <Icon name={circuit.name} />
             {s.isSafetyCritical ? <CriticalLineVisual /> : null}
-          </div>
+          </StyledCircuitItems>
         ))}
       </div>
     </div>
   );
 }
 
+const SwtichBoardItems = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+`;
+
+const SwitchBoardIcon = () => {
+  return (
+    <>
+      <svg
+        width="2rem"
+        height="1.8rem"
+        viewBox="0 0 56 57"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ rotate: '0deg;' }}
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M2 2.002v52.5h52.5v-52.5H2zm3.5 49v-45.5H51v45.5H5.5z"
+          fill="#243746"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M45.25 10.502h-34c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75h34c.97 0 1.75-.78 1.75-1.75s-.78-1.75-1.75-1.75zM45.25 18.502h-34c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75h34c.97 0 1.75-.78 1.75-1.75s-.78-1.75-1.75-1.75zM45.25 26.502h-34c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75h34c.97 0 1.75-.78 1.75-1.75s-.78-1.75-1.75-1.75z"
+          fill="#243746"
+        ></path>
+      </svg>
+    </>
+  );
+};
+const StyledCircuitItems = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+`;
+
 const StyledHTCable = styled.div`
   display: flex;
   gap: 1ch;
-  padding-left: 10px;
+  padding: 0px 10px;
   border-bottom: 2px dashed rgb(61, 61, 61);
   width: fit-content;
   white-space: nowrap;
+  align-items: center;
   ::after {
     width: 12px;
     height: 12px;
@@ -77,13 +120,12 @@ const StyledHTCable = styled.div`
     margin: 0px 1px;
     content: ' ';
     position: relative;
-    left: 1ch;
-    top: 1.5ch;
+    left: 2ch;
+    top: 2ch;
   }
 `;
 
 const StyledJunctionBox = styled.div`
-  display: flex;
   box-sizing: border-box;
   min-height: 60px;
   white-space: nowrap;
@@ -93,15 +135,29 @@ const StyledJunctionBox = styled.div`
   border-radius: 10px;
 `;
 
+const StyledJunctionBoxItems = styled.div`
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  gap: 1ch;
+`;
+
 function JunctionBox({ network }: { network: ElectricalNetwork }) {
-  return <StyledJunctionBox>{network.name}</StyledJunctionBox>;
+  return (
+    <StyledJunctionBox>
+      <StyledJunctionBoxItems>
+        {network.name} <Icon name={junction_box.name} />
+      </StyledJunctionBoxItems>
+    </StyledJunctionBox>
+  );
 }
 
 export const HTCable = ({ network }: { network: ElectricalNetwork }) => {
   return (
     <>
       <StyledHTCable>
-        {network.name} {network.isSafetyCritical ? <CriticalLineVisual /> : null}
+        {network.name} <Icon name={heat_trace.name} />{' '}
+        {network.isSafetyCritical ? <CriticalLineVisual /> : null}
       </StyledHTCable>
     </>
   );
@@ -172,7 +228,35 @@ function ItemStuffThing({ network }: { network: ElectricalNetwork }) {
     case 'VARME': {
       return (
         <Item>
-          <StyledSpaceHeater>{network.name}</StyledSpaceHeater>
+          <StyledSpaceHeater>
+            {network.name}{' '}
+            <svg
+              width="2rem"
+              height="1.8rem"
+              viewBox="0 0 56 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ rotate: '0deg' }}
+            >
+              <g
+                clip-path="url(#varme_svg__clip0_1814_4864)"
+                stroke="#132634"
+                stroke-width="3.3"
+              >
+                <path stroke-linecap="round" d="M1.65 28.684h52.7"></path>
+                <path fill="#ffffff" d="M8.65 17.65h38.7v20.7H8.65z"></path>
+                <path
+                  stroke-linecap="round"
+                  d="M18.15 17.984v20.033M27.55 17.984v20.033M37.451 17.984v20.033"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="varme_svg__clip0_1814_4864">
+                  <path fill="#fff" d="M0 0h56v56H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </StyledSpaceHeater>
 
           <ChildWrapper>
             {network.children.map((s) => (
@@ -202,13 +286,16 @@ function Cable({ name }: { name: string }) {
   return (
     <div
       style={{
-        borderBottom: '1px solid black',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1ch',
+        borderBottom: '2px solid black',
         height: '5ch',
         whiteSpace: 'nowrap',
         padding: '0px 10px',
       }}
     >
-      {name}
+      {name} <Icon name={cable.name} />
     </div>
   );
 }
@@ -249,13 +336,11 @@ const CriticalLineVisualStyle = styled.div`
   justify-content: center;
   text-align: center;
   width: 30px;
-  height: 14px;
-  margin-right: 2px;
+  height: 18px;
   color: ${tokens.colors.interactive.danger__resting.hex};
   background-color: ${tokens.colors.ui.background__light.hex};
   border: 1px solid;
   border-color: ${tokens.colors.interactive.danger__resting.hex};
-  margin-left: 8px;
 `;
 
 export const TestDotCircleText = styled.div`
