@@ -11,7 +11,7 @@
     "fprd:deploy": "npx ts-node --esm ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
-    "@cc-components/electricalconsumersapp": "workspace:^",
+    "@cc-components/electrical-consumersapp": "workspace:^",
     "@cc-components/shared": "workspace:^"
   }
 }
