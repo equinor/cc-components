@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/electrical-consumersapp';
+import { configure, WorkspaceWrapper } from '@cc-components/electricalconsumersapp';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 
