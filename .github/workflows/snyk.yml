@@ -2,7 +2,7 @@ name: PNPM-PR-Snyk-Check
 
 on:
   pull_request:
-    types: [opened, reopened, synchronized]
+    types: [opened, reopened, synchronize]
   push:
 
 jobs:
@@ -17,6 +17,7 @@ jobs:
         with:
           snykToken: ${{ secrets.SNYK_TOKEN }}
           snykOrganization: Fusion Project Portal
+          pnpmLockfilePath: './pnpm-lock.yaml'
           # snykArguments: "--severity-threshold=high"
           # breakBuild: false
           # fullScan: false
