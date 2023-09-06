@@ -18,7 +18,6 @@ jobs:
         uses: snyk-tech-services/github-actions-pnpm-snyk@master
         with:
           snykToken: ${{ secrets.SNYK_TOKEN }}
-          pnpmLockfilePath: 'tests/fixtures/with-tslint/'
           snykOrganization: Fusion Project Portal
           # snykArguments: "--severity-threshold=high"
           # breakBuild: false
