@@ -1,6 +1,5 @@
-import { Button, CircularProgress } from '@equinor/eds-core-react';
+import { CircularProgress } from '@equinor/eds-core-react';
 import React, { PropsWithChildren } from 'react';
-import styled from 'styled-components';
 import { useModelContext } from '../../providers/modelsProvider';
 import AccessDialog from '../access-dialog/accessDialog';
 import ModelSelectionDialog from '../model-selection-dialog/modelSelectionDialog';
@@ -13,18 +12,7 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
   children,
   plantName,
 }) => {
-  const {
-    hasAccess,
-    showSelector,
-    models,
-    setShowModelDialog,
-    isLoading,
-    currenModelMeta,
-  } = useModelContext();
-
-  const showModelSelector = () => {
-    setShowModelDialog(!showSelector);
-  };
+  const { hasAccess, models, isLoading, currenModelMeta } = useModelContext();
 
   if (isLoading) {
     return <CircularProgress />;
@@ -35,7 +23,6 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
       <div
         style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
       >
-        <Button onClick={showModelSelector}>Show Selector</Button>
         <h5>
           {currenModelMeta?.platformNameLabel} - {currenModelMeta?.platformSectionLabel}
         </h5>

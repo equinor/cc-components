@@ -1,4 +1,4 @@
-import Canvas from './components/canvas/canvas';
+import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
 import { ModelViewerContextProvider } from './providers/modelViewerProvider';
@@ -32,6 +32,7 @@ const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => 
       <ModelViewerContextProvider>
         <ModelContextProvider plantCode={plantCode}>
           <ModelSelection plantName={plantName}>
+            <ActionsMenu />
           </ModelSelection>
         </ModelContextProvider>
       </ModelViewerContextProvider>

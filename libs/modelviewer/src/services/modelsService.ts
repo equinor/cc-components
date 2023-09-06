@@ -122,6 +122,7 @@ export class ModelService {
       modelMeta,
       options.enableSelectionByPicking
     );
+    this.#model$.next(model);
     this.#initializeCamera(model);
     return model;
   }
