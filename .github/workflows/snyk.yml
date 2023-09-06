@@ -4,8 +4,6 @@ on:
   pull_request:
     types: [opened, reopened, synchronized]
   push:
-    branches:
-      - main
 
 jobs:
   pnpm_snyk_check:
