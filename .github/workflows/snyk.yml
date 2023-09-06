@@ -17,7 +17,7 @@ jobs:
         with:
           snykToken: ${{ secrets.SNYK_TOKEN }}
           snykOrganization: Fusion Project Portal
-          pnpmLockfilePath: './pnpm-lock.yaml'
+          pnpmLockfilePath: './'
           # snykArguments: "--severity-threshold=high"
           # breakBuild: false
           # fullScan: false
