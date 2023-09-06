@@ -1,11 +1,16 @@
 import { Component, FC, ReactNode } from 'react';
-import { ErrorMessage, InfoMessage, MessageType, WaringMessage } from '../../type/general-types';
+import {
+  ErrorMessage,
+  InfoMessage,
+  MessageType,
+  WaringMessage,
+} from '../../types/general-types';
 
 export interface MessageBoundaryState {
   hasMessage?: boolean;
   message?: string;
   title?: string;
-  type?: MessageType | "Unknown"
+  type?: MessageType | 'Unknown';
   item?: ErrorMessage | InfoMessage | WaringMessage | string;
 }
 
@@ -31,10 +36,21 @@ class MessageBoundary extends Component<Props, MessageBoundaryState> {
 
   componentDidCatch(item: ErrorMessage | InfoMessage | WaringMessage) {
     if (typeof item === 'string') {
-      this.setState({ hasMessage: true, message: item, title: 'Unknown', type: "Unknown" });
+      this.setState({
+        hasMessage: true,
+        message: item,
+        title: 'Unknown',
+        type: 'Unknown',
+      });
       return;
     }
-    this.setState({ hasMessage: true, message: item.message, title: item.name, item, type: item.type });
+    this.setState({
+      hasMessage: true,
+      message: item.message,
+      title: item.name,
+      item,
+      type: item.type,
+    });
   }
 
   render() {

@@ -2,12 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { act, renderHook } from '@testing-library/react-hooks';
 
 import { useError, useInfo, useWarning } from './useMessageBoundary';
-import {
-  ErrorMessage,
-  InfoMessage,
-  MessageType,
-  WaringMessage,
-} from '../type/general-types';
+import { MessageType } from '../types/general-types';
 
 describe('useError', () => {
   test('Should have error message', () => {
