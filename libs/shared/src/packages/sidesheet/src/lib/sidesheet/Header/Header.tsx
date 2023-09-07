@@ -20,6 +20,14 @@ const StyledTitle = styled.div`
   overflow: hidden;
   white-space: nowrap;
 `;
+
+const StyledDescription = styled.div`
+  font-size: 18px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 const StyledApplicationTitle = styled.div`
   font-size: 12px;
   white-space: nowrap;
@@ -46,6 +54,7 @@ const StyledButton = styled.div`
 `;
 type HeaderProps = {
   title: string;
+  description?: string;
   applicationTitle: string;
   color?: string;
   onClose: VoidFunction;
@@ -56,6 +65,7 @@ type HeaderProps = {
  */
 export const SidesheetHeader = ({
   title,
+  description,
   applicationTitle,
   color,
   onClose,
@@ -65,6 +75,7 @@ export const SidesheetHeader = ({
       <StyledColor defaultValue={color} />
       <StyledWrapTitles>
         <StyledTitle> {title}</StyledTitle>
+        <StyledDescription> {description}</StyledDescription>
         <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
       </StyledWrapTitles>
       <StyledButton>
