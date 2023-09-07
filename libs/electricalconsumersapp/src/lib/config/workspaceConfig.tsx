@@ -20,6 +20,8 @@ export type ElectricalConsumer = {
   tagStatus: string;
   componentType: any;
   eleSymbolCode: any;
+  mechanicalCompletionPackageNo: string | null;
+  commissioningPackageNo: string | null;
 };
 
 export const WorkspaceWrapper = () => {

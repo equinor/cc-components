@@ -59,6 +59,12 @@ const columnDefinitions: ColDef<ElectricalConsumer>[] = [
     field: 'tagNo',
   },
   {
+    field: 'commissioningPackageNo',
+  },
+  {
+    field: 'mechanicalCompletionPackageNo',
+  },
+  {
     field: 'instCode',
   },
   {
