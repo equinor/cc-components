@@ -1,9 +1,6 @@
-import { PropsWithChildren, createContext, useContext, useEffect, useMemo } from 'react';
-import { useModelViewerContext } from './modelViewerProvider';
+import { PropsWithChildren, createContext, useContext } from 'react';
 
 import { useModelContext } from './modelsProvider';
-import { SelectionService } from '../services/selectionService';
-import { InvertedNodeCollection, NodeCollection } from '@cognite/reveal';
 
 interface ActionContextState {
   hideModel(): void;
@@ -13,18 +10,22 @@ interface ActionContextState {
 const ActionContext = createContext({} as ActionContextState);
 
 export const ActionContextProvider = ({ children }: PropsWithChildren) => {
-  const { hierarchyApiClient, viewer } = useModelViewerContext();
-  const { model } = useModelContext();
+  const { getModel } = useModelContext();
 
   const hideModel = () => {
-    const appearance = model?.getDefaultNodeAppearance();
-    //  const unassignedNodes = new InvertedNodeCollection(model, );
-    model?.setDefaultNodeAppearance({ ...appearance, visible: false });
+    const model = getModel();
+    if (model) {
+      const appearance = model.getDefaultNodeAppearance();
+      model.setDefaultNodeAppearance({ ...appearance, visible: false });
+    }
   };
 
   const showModel = () => {
-    const appearance = model?.getDefaultNodeAppearance();
-    model?.setDefaultNodeAppearance({ ...appearance, visible: true });
+    const model = getModel();
+    if (model) {
+      const appearance = model.getDefaultNodeAppearance();
+      model.setDefaultNodeAppearance({ ...appearance, visible: true });
+    }
   };
 
   return (

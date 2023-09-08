@@ -15,7 +15,8 @@ import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
   selectNodesByTagColor(tags: TagColor[]): Promise<void>;
-  toggleOrbit(): void;
+  orbit(): void;
+  firstPerson(): void;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -24,15 +25,15 @@ export const SelectionContextProvider = ({
   children,
   tags,
 }: PropsWithChildren<{ tags: string[] }>) => {
-  const { hierarchyApiClient, viewer } = useModelViewerContext();
-  const { modelMeta, model } = useModelContext();
+  const { echoInstance } = useModelViewerContext();
+  const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
 
   const selectionService = useMemo(() => {
-    if (modelMeta && hierarchyApiClient && viewer && model) {
-      return new SelectionService(modelMeta, model, hierarchyApiClient, viewer);
+    if (modelMeta && echoInstance) {
+      return new SelectionService(modelMeta, echoInstance);
     }
-  }, [modelMeta, hierarchyApiClient, model, viewer]);
+  }, [modelMeta, echoInstance]);
 
   useEffect(() => {
     if (tags && selectionService) selectionService.selectNodesByTags(tags);
@@ -48,19 +49,17 @@ export const SelectionContextProvider = ({
     });
     setCurrentNodes(nodes);
     if (nodes) selectionService?.clipModelByNodes(nodes, true);
-
-    // get Nodes without selecting them
-    //selectionService?.getNodesByTags(tags.map((t) => t.tag));
-
-    // Clipping model
-    // const centerPos = selectionService?.getCenterFromNodes(nodes);
-    // if (centerPos) selectionService?.toggleObitSelection(centerPos);
   };
 
-  const toggleOrbit = () => {
-    if (currentNodes) {
-      selectionService?.toggleObitSelection(currentNodes);
+  const orbit = () => {
+    if (currentNodes && selectionService) {
+      const target = selectionService.getCenterFromNodes(currentNodes);
+      selectionService.cameraObitTarget(target);
     }
+  };
+
+  const firstPerson = () => {
+    selectionService?.cameraFirstPerson();
   };
 
   return (
@@ -68,7 +67,8 @@ export const SelectionContextProvider = ({
       value={{
         selectNodesByTags,
         selectNodesByTagColor,
-        toggleOrbit,
+        orbit,
+        firstPerson,
       }}
     >
       {children}
@@ -81,8 +81,3 @@ export const useSelectionContext = () => {
   if (!context) throw new Error('Context provider not found!');
   return context;
 };
-function getCombinedAAbbsFromNodes(
-  nodes: import('@equinor/echo-3d-viewer').HierarchyNodeModel[] | undefined
-) {
-  throw new Error('Function not implemented.');
-}
