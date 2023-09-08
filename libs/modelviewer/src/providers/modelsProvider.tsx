@@ -18,11 +18,14 @@ type ModelContextType = {
   showSelector: boolean;
   models: AssetMetadataSimpleDto[] | undefined;
   setShowModelDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  loadModelById: (modelId: number, options?: ViewerOptions) => Promise<CogniteCadModel>;
+  loadModelById: (
+    modelId: number,
+    options?: ViewerOptions
+  ) => Promise<AssetMetadataSimpleDto>;
   setLocalModel(model: AssetMetadataSimpleDto): void;
   isLoading: boolean;
   modelMeta?: AssetMetadataSimpleDto;
-  model?: CogniteCadModel;
+  getModel(): CogniteCadModel | undefined;
 };
 
 const ModelContext = createContext({} as ModelContextType);
@@ -35,26 +38,14 @@ export const ModelContextProvider = ({
 }>) => {
   const [showSelector, setShowModelDialog] = useState(false);
   const [modelMeta, setModelMeta] = useState<AssetMetadataSimpleDto>();
-  const [model, setModel] = useState<CogniteCadModel>();
 
-  const { viewer, modelApiClient } = useModelViewerContext();
+  const { echoInstance } = useModelViewerContext();
 
   const modelService = useMemo(() => {
-    if (modelApiClient && viewer) {
-      return new ModelService({ modelApiClient, viewer });
+    if (echoInstance) {
+      return new ModelService(echoInstance);
     }
-  }, [modelApiClient && viewer]);
-
-  useEffect(() => {
-    if (!modelService) return;
-    const sub = new Subscription();
-    sub.add(modelService.modelMeta$.subscribe(setModelMeta));
-    sub.add(modelService.model$.subscribe(setModel));
-
-    return () => {
-      sub.unsubscribe();
-    };
-  }, [modelService]);
+  }, [echoInstance]);
 
   const { data: models, isLoading } = useQuery<AssetMetadataSimpleDto[]>(
     ['models', plantCode],
@@ -85,7 +76,9 @@ export const ModelContextProvider = ({
           (model) => model.platformSectionId === localModelId
         );
         if (selectedModel?.id) {
-          modelService?.loadModelById(selectedModel.id);
+          modelService
+            ?.loadModelById(selectedModel.id)
+            .then((modelMeta) => setModelMeta(modelMeta));
           setShowModelDialog(false);
           return;
         }
@@ -95,16 +88,18 @@ export const ModelContextProvider = ({
   }, [models, plantCode]);
 
   const loadModelById = async (modelId: number, options?: ViewerOptions) => {
-    if (!modelService) {
-      throw new Error('No model service provided');
-    }
-    return modelService?.loadModelById(modelId, options);
+    if (!modelService) throw new Error('No Model Service');
+
+    const modelMeta = await modelService.loadModelById(modelId, options);
+    setModelMeta(modelMeta);
+    return modelMeta;
   };
+
   const setLocalModel = (model: AssetMetadataSimpleDto) => {
-    if (!modelService) {
-      throw new Error('No model service provided');
-    }
     return modelService?.setLocalModel(model);
+  };
+  const getModel = () => {
+    return modelService?.model;
   };
 
   return (
@@ -118,7 +113,7 @@ export const ModelContextProvider = ({
         setLocalModel,
         isLoading,
         modelMeta,
-        model,
+        getModel,
       }}
     >
       {children}
