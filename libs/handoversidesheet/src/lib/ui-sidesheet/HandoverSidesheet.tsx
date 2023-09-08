@@ -99,6 +99,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={props?.item?.commissioningPackageNo || ''}
+        description={props?.item?.description || ''}
         applicationTitle={'Handover'}
         onClose={props.close}
       />

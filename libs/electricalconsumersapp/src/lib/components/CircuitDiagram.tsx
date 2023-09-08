@@ -148,7 +148,7 @@ const StyledHTCable = styled.div`
     content: ' ';
     position: relative;
     left: 2ch;
-    top: 2ch;
+    top: 1.5ch;
   }
 `;
 
