@@ -10,9 +10,9 @@ import {
   useHttpClient,
   StyledPanels,
   TabTitle,
+  CircuitDiagram,
 } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
-import { CircuitDiagram } from '../components/CircuitDiagram';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { useState } from 'react';
 import { TabListProps, Tabs } from '@equinor/eds-core-react';
