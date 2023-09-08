@@ -38,7 +38,7 @@ export const WorkspaceWrapper = () => {
     <Workspace<ElectricalConsumer>
       key={contextId}
       workspaceOptions={{
-        getIdentifier: (e) => e.tagNo + e.instCode,
+        getIdentifier: (e) => encodeURIComponent(`${e.tagNo}_${e.instCode}`),
       }}
       filterOptions={filterConfig}
       sidesheetOptions={{
