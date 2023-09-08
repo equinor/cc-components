@@ -1,8 +1,7 @@
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { ElectricalConsumer } from './workspaceConfig';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { useContextId, useHttpClient, CircuitDiagram } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
-import { CircuitDiagram } from '../components/CircuitDiagram';
 
 export const ElectricalSidesheet = createWidget<{
   close: VoidFunction;
