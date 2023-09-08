@@ -10,12 +10,15 @@ import { tokens } from '@equinor/eds-tokens';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModelContext } from '../../providers/modelsProvider';
+import { useSelectionContext } from '../../providers/selectionProvider';
 import { useActions } from '../../providers/actionProvider';
 
 export const ActionsMenu = () => {
   Icon.add({ crop, visibility, color_palette, fullscreen, more_horizontal });
 
   const { showSelector, setShowModelDialog } = useModelContext();
+  const { toggleClipping, isClipped, fitToScreen, toggleShowNodesNotInSelection } =
+    useSelectionContext();
 
   const showModelSelector = () => {
     setShowModelDialog(!showSelector);
@@ -55,12 +58,14 @@ export const ActionsMenu = () => {
           <Button
             variant="ghost_icon"
             onClick={() => {
-              console.log();
+              toggleClipping();
             }}
           >
             <Icon
               name={'crop'}
-              color={true ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+              color={
+                isClipped ? tokens.colors.text.static_icons__secondary.rgba : undefined
+              }
             />
           </Button>
           <Button
@@ -79,7 +84,7 @@ export const ActionsMenu = () => {
           <Button
             variant="ghost_icon"
             onClick={() => {
-              console.log();
+              toggleShowNodesNotInSelection();
             }}
           >
             <Icon
@@ -91,7 +96,7 @@ export const ActionsMenu = () => {
             title="View selection"
             variant="ghost_icon"
             onClick={() => {
-              console.log();
+              fitToScreen();
             }}
           >
             <Icon

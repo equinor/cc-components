@@ -16,6 +16,10 @@ interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
   selectNodesByTagColor(tags: TagColor[]): Promise<void>;
   toggleOrbit(): void;
+  toggleClipping(): void;
+  isClipped: boolean;
+  fitToScreen(): void;
+  toggleShowNodesNotInSelection(): void;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -27,6 +31,9 @@ export const SelectionContextProvider = ({
   const { hierarchyApiClient, viewer } = useModelViewerContext();
   const { modelMeta, model } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
+  const [isClipped, setClipped] = useState<boolean>(true);
+  const [isShowNodesNotInSelection, setisShowNodesNotInSelection] =
+    useState<boolean>(true);
 
   const selectionService = useMemo(() => {
     if (modelMeta && hierarchyApiClient && viewer && model) {
@@ -39,7 +46,11 @@ export const SelectionContextProvider = ({
   }, [tags, selectionService]);
 
   const selectNodesByTags = async (tags: string[]) => {
-    await selectionService?.selectNodesByTags(tags);
+    const nodes = await selectionService?.selectNodesByTags(tags, {
+      fitToSelection: true,
+    });
+    setCurrentNodes(nodes);
+    if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
   };
 
   const selectNodesByTagColor = async (tags: TagColor[]) => {
@@ -47,7 +58,7 @@ export const SelectionContextProvider = ({
       fitToSelection: true,
     });
     setCurrentNodes(nodes);
-    if (nodes) selectionService?.clipModelByNodes(nodes, true);
+    if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
 
     // get Nodes without selecting them
     //selectionService?.getNodesByTags(tags.map((t) => t.tag));
@@ -63,12 +74,36 @@ export const SelectionContextProvider = ({
     }
   };
 
+  const toggleClipping = () => {
+    if (currentNodes) {
+      selectionService?.clipModelByNodes(currentNodes, isClipped);
+      setClipped(!isClipped);
+    }
+  };
+
+  const fitToScreen = () => {
+    if (currentNodes) {
+      selectionService?.fitCameraToNodeSelection(currentNodes);
+    }
+  };
+
+  const toggleShowNodesNotInSelection = () => {
+    if (currentNodes) {
+      selectionService?.showNodesNotInSelection(currentNodes, isShowNodesNotInSelection);
+      setisShowNodesNotInSelection(!isShowNodesNotInSelection);
+    }
+  };
+
   return (
     <SelectionContext.Provider
       value={{
         selectNodesByTags,
         selectNodesByTagColor,
         toggleOrbit,
+        toggleClipping,
+        isClipped,
+        fitToScreen,
+        toggleShowNodesNotInSelection,
       }}
     >
       {children}

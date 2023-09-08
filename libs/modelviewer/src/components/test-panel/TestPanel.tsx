@@ -40,7 +40,15 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
             }}
             style={{ height: '25px' }}
           >
-            Set Selection
+            Set Selection with color
+          </button>
+          <button
+            onClick={() => {
+              selectNodesByTags(mockedTagList);
+            }}
+            style={{ height: '25px' }}
+          >
+            Set Selection with tags
           </button>
           <button
             onClick={() => {

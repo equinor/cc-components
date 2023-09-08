@@ -145,6 +145,16 @@ export class SelectionService {
     return newAppearance;
   }
 
+  async showNodesNotInSelection(nodes: HierarchyNodeModel[], show: boolean) {
+    const newAppearance = {
+      visible: show,
+    };
+    this.assignStyletToInvertedNodeCollection(
+      this.getNodeCollectionFromHierarchyNodeModel(nodes),
+      newAppearance
+    );
+  }
+
   getNodeCollectionsMap(nodes: HierarchyNodeModel[], tagColors: TagColor[]) {
     return tagColors.reduce((nodeCollectionsMap, tagColor) => {
       const key = tagColor.color.getHexString();
