@@ -22,7 +22,7 @@ import {
 } from '@cc-components/workordershared';
 import { TabListProps, Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -41,15 +41,10 @@ export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.
     width: 0;
     height: 0;
   }
-
   scroll-behavior: smooth;
 `;
-type WorkorderProps = {
-  id: string;
-  item?: WorkOrder;
-  closeSidesheet: () => void;
-};
-export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }) => {
+
+export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
@@ -118,14 +113,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="Material status"
           value={
-            props.item?.materialStatus ? (
+            wo?.materialStatus ? (
               <StatusCircle
                 statusColor={
-                  props.item?.materialStatus
-                    ? getMatStatusColorByStatus(props.item.materialStatus)
+                  wo?.materialStatus
+                    ? getMatStatusColorByStatus(wo.materialStatus)
                     : 'transparent'
                 }
-                content={props.item?.materialStatus || 'N/A'}
+                content={wo?.materialStatus || 'N/A'}
               />
             ) : (
               'N/A'
@@ -135,14 +130,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="MC status"
           value={
-            props.item?.mccrStatus ? (
+            wo?.mccrStatus ? (
               <StatusCircle
                 statusColor={
-                  props.item?.mccrStatus
-                    ? getMccrStatusColorByStatus(props.item.mccrStatus)
+                  wo?.mccrStatus
+                    ? getMccrStatusColorByStatus(wo.mccrStatus)
                     : 'transparent'
                 }
-                content={props.item?.mccrStatus || 'N/A'}
+                content={wo?.mccrStatus || 'N/A'}
               />
             ) : (
               'N/A'

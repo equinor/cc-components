@@ -8,7 +8,7 @@ import {
   StyledTabs,
 } from '@cc-components/shared/sidesheet';
 import { Tabs } from '@equinor/eds-core-react';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
@@ -16,12 +16,7 @@ import { useQuery } from '@tanstack/react-query';
 import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 
-type PunchProps = {
-  id: string;
-  item?: Punch;
-  close: () => void;
-};
-export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
+export const PunchSidesheet = createWidget<Punch>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
@@ -51,7 +46,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
   );
 
   if (isLoadingSidesheet) {
-    return <SidesheetSkeleton close={props.close} />;
+    return <SidesheetSkeleton close={props.closeSidesheet} />;
   }
 
   if (!punch || error) {
@@ -63,7 +58,7 @@ export const PunchSidesheet = createWidget<PunchProps>(({ props }) => {
       <SidesheetHeader
         title={punch.punchItemNo || ''}
         applicationTitle={'Punch'}
-        onClose={props.close}
+        onClose={props.closeSidesheet}
       />
       <StyledBanner>
         <BannerItem
