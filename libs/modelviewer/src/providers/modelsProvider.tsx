@@ -11,6 +11,7 @@ import {
 import { useModelViewerContext } from './modelViewerProvider';
 import { ModelService, ViewerOptions } from '../services/modelsService';
 import { CogniteCadModel } from '@cognite/reveal';
+import { Subscription } from 'rxjs';
 
 type ModelContextType = {
   hasAccess: boolean;
@@ -20,7 +21,8 @@ type ModelContextType = {
   loadModelById: (modelId: number, options?: ViewerOptions) => Promise<CogniteCadModel>;
   setLocalModel(model: AssetMetadataSimpleDto): void;
   isLoading: boolean;
-  currenModelMeta?: AssetMetadataSimpleDto;
+  modelMeta?: AssetMetadataSimpleDto;
+  model?: CogniteCadModel;
 };
 
 const ModelContext = createContext({} as ModelContextType);
@@ -32,7 +34,8 @@ export const ModelContextProvider = ({
   plantCode: string;
 }>) => {
   const [showSelector, setShowModelDialog] = useState(false);
-  const [currenModelMeta, setCurrenModelMeta] = useState<AssetMetadataSimpleDto>();
+  const [modelMeta, setModelMeta] = useState<AssetMetadataSimpleDto>();
+  const [model, setModel] = useState<CogniteCadModel>();
 
   const { viewer, modelApiClient } = useModelViewerContext();
 
@@ -41,6 +44,17 @@ export const ModelContextProvider = ({
       return new ModelService({ modelApiClient, viewer });
     }
   }, [modelApiClient && viewer]);
+
+  useEffect(() => {
+    if (!modelService) return;
+    const sub = new Subscription();
+    sub.add(modelService.modelMeta$.subscribe(setModelMeta));
+    sub.add(modelService.model$.subscribe(setModel));
+
+    return () => {
+      sub.unsubscribe();
+    };
+  }, [modelService]);
 
   const { data: models, isLoading } = useQuery<AssetMetadataSimpleDto[]>(
     ['models', plantCode],
@@ -61,15 +75,6 @@ export const ModelContextProvider = ({
   const hasAccess = useMemo(() => {
     return models?.length !== 0;
   }, [models]);
-
-  useEffect(() => {
-    if (!modelService) return;
-
-    const sub = modelService.modelMeta$.subscribe(setCurrenModelMeta);
-    return () => {
-      sub.unsubscribe();
-    };
-  }, [modelService]);
 
   //init setup from local store
   useEffect(() => {
@@ -112,7 +117,8 @@ export const ModelContextProvider = ({
         loadModelById,
         setLocalModel,
         isLoading,
-        currenModelMeta,
+        modelMeta,
+        model,
       }}
     >
       {children}

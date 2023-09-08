@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
+import { TestPanel } from './components/test-panel/TestPanel';
 import { ModelViewerContextProvider } from './providers/modelViewerProvider';
 import { ModelContextProvider } from './providers/modelsProvider';
+import { SelectionContextProvider } from './providers/selectionProvider';
+import { ActionContextProvider } from './providers/actionProvider';
 
 type FusionModelViewerProps = {
   plantName: string;
@@ -27,13 +31,19 @@ export const FusionModelViewer = (props: FusionModelViewerProps) => {
 };
 
 const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => {
+  const [tagList, setTagList] = useState<string[]>([]);
   return (
     <>
       <ModelViewerContextProvider>
         <ModelContextProvider plantCode={plantCode}>
-          <ModelSelection plantName={plantName}>
-            <ActionsMenu />
-          </ModelSelection>
+          <SelectionContextProvider tags={tagList}>
+            <ActionContextProvider>
+              <ModelSelection plantName={plantName}>
+                <ActionsMenu />
+                <TestPanel setTags={(tags: string[]) => setTagList(tags)} />
+              </ModelSelection>
+            </ActionContextProvider>
+          </SelectionContextProvider>
         </ModelContextProvider>
       </ModelViewerContextProvider>
     </>

@@ -9,13 +9,13 @@ interface ModelSelectionListProps {
 
 const ModelSelectionList: React.FC<ModelSelectionListProps> = ({ onModelSelect }) => {
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
-  const { models, currenModelMeta } = useModelContext();
+  const { models, modelMeta } = useModelContext();
 
   useEffect(() => {
-    if (currenModelMeta) {
-      setSelectedModelId(currenModelMeta.id);
+    if (modelMeta) {
+      setSelectedModelId(modelMeta.id);
     }
-  }, [currenModelMeta]);
+  }, [modelMeta]);
 
   return (
     <UnstyledList>

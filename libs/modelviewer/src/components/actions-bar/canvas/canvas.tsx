@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useModelViewerContext } from '../../providers/modelViewerProvider';
+import { useModelViewerContext } from '../../../providers/modelViewerProvider';
 
 const Canvas = ({}) => {
   const { viewerRef } = useModelViewerContext();

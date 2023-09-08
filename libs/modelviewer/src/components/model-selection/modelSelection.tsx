@@ -12,7 +12,7 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
   children,
   plantName,
 }) => {
-  const { hasAccess, models, isLoading, currenModelMeta } = useModelContext();
+  const { hasAccess, models, isLoading, modelMeta } = useModelContext();
 
   if (isLoading) {
     return <CircularProgress />;
@@ -24,7 +24,7 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
         style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
       >
         <h5>
-          {currenModelMeta?.platformNameLabel} - {currenModelMeta?.platformSectionLabel}
+          {modelMeta?.platformNameLabel} - {modelMeta?.platformSectionLabel}
         </h5>
       </div>
       {children}

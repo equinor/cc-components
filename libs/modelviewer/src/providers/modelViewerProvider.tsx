@@ -16,7 +16,7 @@ import {
   HierarchyClient,
   EchoSetupObject,
 } from '@equinor/echo-3d-viewer';
-import Canvas from '../components/canvas/canvas';
+import Canvas from '../components/actions-bar/canvas/canvas';
 
 type ModelViewerContextType = {
   viewer?: Echo3dViewer;
@@ -55,8 +55,8 @@ export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
         viewerRef,
       }}
     >
-      {children}
       <Canvas />
+      {children}
     </modelViewerContext.Provider>
   );
 };

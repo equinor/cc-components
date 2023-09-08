@@ -7,16 +7,13 @@ import {
   visibility,
 } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModelContext } from '../../providers/modelsProvider';
+import { useActions } from '../../providers/actionProvider';
 
 export const ActionsMenu = () => {
-  Icon.add({ crop });
-  Icon.add({ visibility });
-  Icon.add({ color_palette });
-  Icon.add({ fullscreen });
-  Icon.add({ more_horizontal });
+  Icon.add({ crop, visibility, color_palette, fullscreen, more_horizontal });
 
   const { showSelector, setShowModelDialog } = useModelContext();
 
@@ -26,8 +23,15 @@ export const ActionsMenu = () => {
 
   const options = ['Change Model', 'Model Action 2', 'Model Action 3'];
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const { showModel, hideModel } = useActions();
+
+  useEffect(() => {
+    isVisible ? showModel() : hideModel();
+  }, [isVisible, showModel, hideModel]);
 
   const handleMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
@@ -63,6 +67,7 @@ export const ActionsMenu = () => {
             variant="ghost_icon"
             onClick={() => {
               console.log();
+              setIsVisible((s) => !s);
             }}
           >
             <Icon
@@ -145,5 +150,5 @@ export const WrapperActionsBar = styled.div`
   justify-content: center;
   bottom: 50px;
   width: 100%;
-  z-index: 10;
+  /* z-index: 10; */
 `;
