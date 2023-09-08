@@ -9,7 +9,9 @@ import {
 import CameraControls, {
   AabbModel,
   AssetMetadataSimpleDto,
+  CameraControlsExtended,
   Echo3dViewer,
+  EchoSetupObject,
   HierarchyClient,
   HierarchyNodeModel,
   SelectedNodeInformation,
@@ -37,12 +39,22 @@ export interface SelectNodesByTagOptions {
 }
 
 export class SelectionService {
-  constructor(
-    private modelMeta: AssetMetadataSimpleDto,
-    private model: CogniteCadModel,
-    private hierarchyClient: HierarchyClient,
-    private viewer: Echo3dViewer
-  ) {}
+  private hierarchyClient: HierarchyClient;
+  private viewer: Echo3dViewer;
+
+  constructor(private modelMeta: AssetMetadataSimpleDto, echoInstance: EchoSetupObject) {
+    this.hierarchyClient = echoInstance.hierarchyApiClient;
+    this.viewer = echoInstance.viewer;
+  }
+
+  get model(): CogniteCadModel {
+    const currentModel = this.viewer.getModel(
+      this.modelMeta.id,
+      this.modelMeta.revisionNumber
+    );
+    if (!currentModel) throw new Error('No model Awaitable for SelectionService');
+    return currentModel;
+  }
 
   getCombinedAAbbsFromNodes(nodes: HierarchyNodeModel[]): AabbModel | null {
     const aabbs = nodes.reduce((allAabbs: AabbModel[], highlightedNode) => {
@@ -135,9 +147,7 @@ export class SelectionService {
   }
 
   resetStyleToNodeAppearance(appearance?: NodeAppearance) {
-    const newAppearance = appearance || {
-      renderGhosted: true,
-    };
+    const newAppearance = appearance || this.model.getDefaultNodeAppearance();
     this.model.styledNodeCollections.forEach((nodeCollection) =>
       this.model.assignStyledNodeCollection(nodeCollection.nodeCollection, newAppearance)
     );
@@ -200,9 +210,10 @@ export class SelectionService {
   }
 
   getCenterFromNodes(nodes?: HierarchyNodeModel[]) {
-    if (!nodes) return;
+    if (!nodes) return new Vector3(0, 0, 0);
+
     const aabb = this.getCombinedAAbbsFromNodes(nodes);
-    if (aabb) return get3dPositionFromAabbMinMaxValues(aabb);
+    return aabb ? get3dPositionFromAabbMinMaxValues(aabb) : new Vector3(0, 0, 0);
   }
 
   fitCameraToNodeSelection(
@@ -245,14 +256,23 @@ export class SelectionService {
     }
   }
 
-  toggleObitSelection(nodes: HierarchyNodeModel[]) {
-    const target = this.getCenterFromNodes(nodes);
-    const pos = this.viewer.cameraManager.getCamera().position.clone();
-    const control = this.viewer.initializeOrbitControls(pos, target);
-    const box = this.getBoxFromNodes(nodes);
+  cameraObitTarget(target: Vector3) {
+    const camera = this.viewer.cameraManager.getCamera();
+    const cameraManager = this.viewer.getCameraManager();
 
-    box && control.fitToBox(box, true);
+    cameraManager.initializeOrbitControls(camera.position, target);
+  }
 
-    this.viewer.getCameraManager().setControls(control);
+  cameraFirstPerson() {
+    const camera = this.viewer.cameraManager.getCamera();
+
+    const cameraManager = this.viewer.getCameraManager();
+
+    const controls = cameraManager.getControls();
+    if (controls instanceof CameraControlsExtended) {
+      const target = controls.getTarget(new Vector3());
+
+      cameraManager.initializeFirstPersonControlsUsingTarget(camera.position, target);
+    }
   }
 }

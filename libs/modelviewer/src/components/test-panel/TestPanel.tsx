@@ -21,7 +21,8 @@ const mockedTagColorList = [
 ];
 
 export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) => {
-  const { selectNodesByTags, selectNodesByTagColor, toggleOrbit } = useSelectionContext();
+  const { selectNodesByTagColor, selectNodesByTags, orbit, firstPerson } =
+    useSelectionContext();
   return (
     <TestPanelWrapper>
       <div
@@ -68,11 +69,19 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
           </button>
           <button
             onClick={() => {
-              toggleOrbit();
+              orbit();
             }}
             style={{ height: '25px' }}
           >
             Orbit
+          </button>
+          <button
+            onClick={() => {
+              firstPerson();
+            }}
+            style={{ height: '25px' }}
+          >
+            Firs Person
           </button>
         </div>
       </div>

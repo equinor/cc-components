@@ -2,9 +2,10 @@ import { CogniteCadModel, TreeIndexNodeCollection } from '@cognite/reveal';
 import {
   AssetMetadataSimpleDto,
   Echo3dViewer,
+  EchoSetupObject,
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
-import { BehaviorSubject, Observable } from 'rxjs';
+
 import { Color, type Box3 } from 'three';
 
 export type ViewerOptions = {
@@ -26,35 +27,14 @@ export class ModelService {
   #modelApiClient: ModelsClient;
   #viewer: Echo3dViewer;
 
-  #modelMeta$: BehaviorSubject<AssetMetadataSimpleDto | undefined>;
-  #userModelsMeta$: AssetMetadataSimpleDto[];
+  #userModelsMeta: AssetMetadataSimpleDto[];
+  model: CogniteCadModel | undefined;
 
-  #model$: BehaviorSubject<CogniteCadModel | undefined>;
+  constructor(echoInstance: EchoSetupObject) {
+    this.#modelApiClient = echoInstance.modelApiClient;
+    this.#viewer = echoInstance.viewer;
 
-  get currentModel(): CogniteCadModel | undefined {
-    return this.#model$.value;
-  }
-
-  get currentModelMeta(): AssetMetadataSimpleDto | undefined {
-    return this.#modelMeta$.value;
-  }
-
-  get modelMeta$(): Observable<AssetMetadataSimpleDto | undefined> {
-    return this.#modelMeta$.asObservable();
-  }
-
-  get model$(): Observable<CogniteCadModel | undefined> {
-    return this.#model$.asObservable();
-  }
-
-  constructor(args: { modelApiClient: ModelsClient; viewer: Echo3dViewer }) {
-    this.#modelApiClient = args.modelApiClient;
-    this.#viewer = args.viewer;
-
-    this.#userModelsMeta$ = [];
-
-    this.#model$ = new BehaviorSubject<CogniteCadModel | undefined>(undefined);
-    this.#modelMeta$ = new BehaviorSubject<AssetMetadataSimpleDto | undefined>(undefined);
+    this.#userModelsMeta = [];
   }
 
   async #getModelsMeta() {
@@ -75,9 +55,9 @@ export class ModelService {
   }
 
   async #setUserModels() {
-    if (this.#userModelsMeta$.length > 0) return this.#userModelsMeta$;
-    this.#userModelsMeta$ = await this.#getModelsMeta();
-    return this.#userModelsMeta$;
+    if (this.#userModelsMeta.length > 0) return this.#userModelsMeta;
+    this.#userModelsMeta = await this.#getModelsMeta();
+    return this.#userModelsMeta;
   }
 
   #filterModelsByPlantCode(models: AssetMetadataSimpleDto[], plantCode: string) {
@@ -100,32 +80,32 @@ export class ModelService {
   }
 
   async #loadModel(
-    modelMeta?: AssetMetadataSimpleDto,
+    modelMeta: AssetMetadataSimpleDto,
     options?: {
       enableSelectionByPicking?: boolean | undefined;
       bounds?: Box3 | undefined;
     }
   ) {
-    if (this.#model$.value) {
-      this.#viewer.removeModel(this.#model$.value);
-    }
-
-    if (!modelMeta) {
-      throw new Error('No model selected!');
+    if (this.model) {
+      this.#viewer.removeModel(this.model);
+      this.model = undefined;
     }
 
     if (!options) {
       options = { enableSelectionByPicking: true };
     }
 
-    const model = await this.#viewer.loadModel(
+    this.model = await this.#viewer.loadModel(
       modelMeta,
       options.enableSelectionByPicking
     );
-    this.#model$.next(model);
-    this.#initializeCamera(model);
-    model.setDefaultNodeAppearance({ color: new Color(2, 2, 2) });
-    return model;
+
+    if (this.model) {
+      this.#initializeCamera(this.model);
+      this.model.setDefaultNodeAppearance({ color: new Color(2, 2, 2) });
+    }
+
+    return this.model;
   }
 
   #findModelById(models: AssetMetadataSimpleDto[], modelId?: number) {
@@ -140,11 +120,16 @@ export class ModelService {
   async loadModelById(
     modelId: number,
     options?: ViewerOptions
-  ): Promise<CogniteCadModel> {
+  ): Promise<AssetMetadataSimpleDto> {
     const userModels = await this.#setUserModels();
     const modelMeta = this.#findModelById(userModels, modelId);
-    this.#modelMeta$.next(modelMeta);
-    return this.#loadModel(modelMeta, options);
+
+    if (!modelMeta) {
+      throw new Error('No model selected!');
+    }
+
+    this.#loadModel(modelMeta, options);
+    return modelMeta;
   }
 
   getLocalModel(plantCode: string): string | undefined {

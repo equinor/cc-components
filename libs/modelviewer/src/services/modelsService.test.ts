@@ -3,6 +3,7 @@ import { describe, test, expect, beforeAll, vi } from 'vitest';
 import {
   AssetMetadataSimpleDto,
   Echo3dViewer,
+  EchoSetupObject,
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
 import { ModelService } from './modelsService';
@@ -10,10 +11,6 @@ import { ModelService } from './modelsService';
 import { TestScheduler } from 'rxjs/testing';
 import { CameraConfiguration, CogniteCadModel } from '@cognite/reveal';
 import { Vector3 } from 'three';
-
-const testScheduler = new TestScheduler((actual, expected) => {
-  expect(actual).deep.equal(expected);
-});
 
 const position = new Vector3(1, 2, 3);
 const target = new Vector3(0, 0, 0);
@@ -25,7 +22,12 @@ const getCameraConfiguration = vi
 const loadModel = vi
   .fn()
   .mockImplementation(
-    () => ({ getCameraConfiguration, modelId: 123 } as unknown as CogniteCadModel)
+    () =>
+      ({
+        getCameraConfiguration,
+        modelId: 123,
+        setDefaultNodeAppearance: vi.fn(),
+      } as unknown as CogniteCadModel)
   );
 const removeModel = vi.fn();
 
@@ -91,12 +93,7 @@ describe('ModelService', async () => {
   const modelService = new ModelService({
     viewer: viewerMock,
     modelApiClient: modelApiClientMock,
-  });
-
-  test('Should all be undefined', async () => {
-    expect(modelService.currentModel).toBe(undefined);
-    expect(modelService.currentModelMeta).toBe(undefined);
-  });
+  } as EchoSetupObject);
 
   test('should set local model', () => {
     const model = {
@@ -149,7 +146,7 @@ describe('ModelService', async () => {
 
     expect(listModels).toBeCalled();
     expect(removeModel).not.toBeCalled();
-    expect(model.modelId).toBe(modelId);
+    expect(model.id).toBe(modelId);
   });
 
   test('should update model meta observable', async () => {
@@ -157,10 +154,6 @@ describe('ModelService', async () => {
 
     const model = await modelService.loadModelById(modelId);
 
-    testScheduler.run(({ expectObservable }) => {
-      expectObservable(modelService.modelMeta$).toBe('a', { a: modelsMeta[0] });
-    });
-
-    expect(model.modelId).toBe(modelId);
+    expect(model.id).toBe(modelId);
   });
 });
