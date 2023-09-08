@@ -67,22 +67,6 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
           >
             Set B
           </button>
-          <button
-            onClick={() => {
-              orbit();
-            }}
-            style={{ height: '25px' }}
-          >
-            Orbit
-          </button>
-          <button
-            onClick={() => {
-              firstPerson();
-            }}
-            style={{ height: '25px' }}
-          >
-            Firs Person
-          </button>
         </div>
       </div>
     </TestPanelWrapper>

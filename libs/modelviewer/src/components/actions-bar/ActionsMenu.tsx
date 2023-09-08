@@ -5,42 +5,50 @@ import {
   fullscreen,
   more_horizontal,
   visibility,
+  rotate_3d,
 } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useModelContext } from '../../providers/modelsProvider';
 import { useSelectionContext } from '../../providers/selectionProvider';
-import { useActions } from '../../providers/actionProvider';
 
 export const ActionsMenu = () => {
-  Icon.add({ crop, visibility, color_palette, fullscreen, more_horizontal });
+  Icon.add({ crop, visibility, color_palette, fullscreen, more_horizontal, rotate_3d });
 
   const { showSelector, setShowModelDialog } = useModelContext();
-  const { toggleClipping, isClipped, fitToScreen, toggleShowNodesNotInSelection } =
-    useSelectionContext();
+  const {
+    toggleClipping,
+    isClipped,
+    fitToScreen,
+    toggleShowNodesNotInSelection,
+    orbit,
+    firstPerson,
+  } = useSelectionContext();
+
+  const [isOrbit, setIsOrbit] = useState(false);
+
+  const [colorPaletteIsOpen, setColorPaletteIsOpen] = useState<boolean>(false);
+  const [colorPaletteAnchorEl, setColorPaletteAnchorEl] =
+    useState<HTMLButtonElement | null>(null);
+  const [selectedColorPaletteIndex, setSelectedColorPaletteIndex] = useState(0);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const colorPaletteOptions = ['Color Option 1', 'Color Option 2', 'Color Option 3'];
 
   const showModelSelector = () => {
     setShowModelDialog(!showSelector);
   };
 
-  const options = ['Change Model', 'Model Action 2', 'Model Action 3'];
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const { showModel, hideModel } = useActions();
-
-  useEffect(() => {
-    isVisible ? showModel() : hideModel();
-  }, [isVisible, showModel, hideModel]);
+  const optionsSettings = ['Change Model', 'Model Action 2', 'Model Action 3'];
 
   const handleMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
     setSelectedIndex(index);
 
-    if (options[index] === 'Change Model') {
+    if (optionsSettings[index] === 'Change Model') {
       showModelSelector();
     }
   };
@@ -51,12 +59,36 @@ export const ActionsMenu = () => {
     setIsOpen(false);
   };
 
+  const toggleCameraMode = () => {
+    if (isOrbit) {
+      firstPerson();
+    } else {
+      orbit();
+    }
+    setIsOrbit(!isOrbit);
+  };
+
+  const handleColorPaletteMenuItemClick = (event: React.MouseEvent, index: number) => {
+    event.stopPropagation();
+    setSelectedColorPaletteIndex(index);
+    // if (colorPaletteOptions[index] === 'Color Option 1') {}
+  };
+
+  const openColorPaletteMenu = () => {
+    setColorPaletteIsOpen(true);
+  };
+
+  const closeColorPaletteMenu = () => {
+    setColorPaletteIsOpen(false);
+  };
+
   return (
     <>
       <WrapperActionsBar>
         <ActionsBar>
           <Button
             variant="ghost_icon"
+            title="Crop Selection"
             onClick={() => {
               toggleClipping();
             }}
@@ -70,9 +102,10 @@ export const ActionsMenu = () => {
           </Button>
           <Button
             variant="ghost_icon"
+            title="Show selection only"
             onClick={() => {
               console.log();
-              setIsVisible((s) => !s);
+              toggleShowNodesNotInSelection();
             }}
           >
             <Icon
@@ -83,17 +116,40 @@ export const ActionsMenu = () => {
 
           <Button
             variant="ghost_icon"
+            title="Change color palette"
             onClick={() => {
-              toggleShowNodesNotInSelection();
+              openColorPaletteMenu();
             }}
+            ref={setColorPaletteAnchorEl}
           >
             <Icon
               name={'color_palette'}
               color={false ? undefined : tokens.colors.text.static_icons__secondary.rgba}
             />
           </Button>
+          <Menu
+            open={colorPaletteIsOpen}
+            id="menu-color-palette"
+            aria-labelledby="anchor-color-palette"
+            onClose={closeColorPaletteMenu}
+            anchorEl={colorPaletteAnchorEl}
+          >
+            {colorPaletteOptions.map((option, index) => (
+              <Menu.Item
+                key={option}
+                // Placeholder: disabling the third option just as an example
+                disabled={index === 2}
+                onClick={(event: React.MouseEvent) =>
+                  handleColorPaletteMenuItemClick(event, index)
+                }
+              >
+                {option}
+              </Menu.Item>
+            ))}
+          </Menu>
+
           <Button
-            title="View selection"
+            title="Fit to screen"
             variant="ghost_icon"
             onClick={() => {
               fitToScreen();
@@ -102,6 +158,20 @@ export const ActionsMenu = () => {
             <Icon
               name={'fullscreen'}
               color={tokens.colors.text.static_icons__secondary.rgba}
+            />
+          </Button>
+          <Button
+            title="Free Camera / Orbit"
+            variant="ghost_icon"
+            onClick={() => {
+              toggleCameraMode();
+            }}
+          >
+            <Icon
+              name={'rotate_3d'}
+              color={
+                !isOrbit ? tokens.colors.text.static_icons__secondary.rgba : undefined
+              }
             />
           </Button>
           <Button
@@ -122,7 +192,7 @@ export const ActionsMenu = () => {
             onClose={closeMenu}
             anchorEl={anchorEl}
           >
-            {options.map((option, index) => (
+            {optionsSettings.map((option, index) => (
               <Menu.Item
                 key={option}
                 disabled={index === 2}

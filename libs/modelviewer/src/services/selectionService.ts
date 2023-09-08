@@ -145,7 +145,6 @@ export class SelectionService {
       this.getNodeCollectionFromHierarchyNodeModel(nodes)
     );
   }
-
   resetStyleToNodeAppearance(appearance?: NodeAppearance) {
     const newAppearance = appearance || this.model.getDefaultNodeAppearance();
     this.model.styledNodeCollections.forEach((nodeCollection) =>
