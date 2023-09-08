@@ -29,7 +29,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     onClick,
     columnExpanded,
     depth,
-    width: itemWidth = 300,
+    width: itemWidth = 100,
     isSelected,
     rowStart,
     columnStart,
@@ -80,7 +80,10 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
           backgroundColor={backgroundColor}
           textColor={textColor}
           onClick={onClick}
-          style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
+          style={{
+            width: `${columnExpanded ? 100 : width}%`,
+            maxWidth: columnExpanded ? '200px' : maxWidth,
+          }}
           isSelected={isSelected}
         >
           {showWarningIcon && (
@@ -94,7 +97,11 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
           <StyledStatusCircles mcColor={mcPackageColor} commColor={commStatusColor} />
         </StyledItemWrapper>
 
-        {columnExpanded && data.description}
+        {columnExpanded && (
+          <StyledItemText title={data.description ?? ''}>
+            {data.description}
+          </StyledItemText>
+        )}
       </StyledRoot>
 
       {isOpen && (
