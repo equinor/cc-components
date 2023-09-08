@@ -5,7 +5,7 @@ import {
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { type Box3 } from 'three';
+import { Color, type Box3 } from 'three';
 
 export type ViewerOptions = {
   enableSelectionByPicking?: boolean | undefined;
@@ -124,6 +124,7 @@ export class ModelService {
     );
     this.#model$.next(model);
     this.#initializeCamera(model);
+    model.setDefaultNodeAppearance({ color: new Color(2, 2, 2) });
     return model;
   }
 

@@ -5,7 +5,7 @@ import {
   InfoMessage,
   MessageType,
   WaringMessage,
-} from '../type/general-types';
+} from '../types/general-types';
 
 type MessageOptions = {
   shouldNotThrow: boolean;

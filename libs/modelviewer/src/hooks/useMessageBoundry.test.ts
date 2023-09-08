@@ -7,7 +7,7 @@ import {
   InfoMessage,
   MessageType,
   WaringMessage,
-} from '../type/general-types';
+} from '../types/general-types';
 
 describe('useError', () => {
   test('Should have error message', () => {
