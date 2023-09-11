@@ -8,11 +8,11 @@ import {
 } from 'react';
 import { useModelViewerContext } from './modelViewerProvider';
 
-import { useModelContext } from './modelsProvider';
-import { SelectionService, TagColor } from '../services/selectionService';
-import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
+import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Color } from 'three';
+import { SelectionService, TagColor } from '../services/selectionService';
+import { useModelContext } from './modelsProvider';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
@@ -20,7 +20,11 @@ interface SelectionContextState {
   orbit(): void;
   toggleClipping(): void;
   isClipped: boolean;
+  isOrbit: boolean;
+  isFocus: boolean;
   fitToScreen(): void;
+  toggleFocus(): void;
+  toggleCameraMode(): void;
   toggleShowNodesNotInSelection(): void;
   firstPerson(): void;
   assignGrayscaleToInvertedNodeCollection(): void;
@@ -38,6 +42,8 @@ export const SelectionContextProvider = ({
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
   const [isClipped, setClipped] = useState<boolean>(true);
+  const [isOrbit, setIsOrbit] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const [isShowNodesNotInSelection, setisShowNodesNotInSelection] =
     useState<boolean>(true);
 
@@ -65,13 +71,6 @@ export const SelectionContextProvider = ({
     });
     setCurrentNodes(nodes);
     if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
-
-    // get Nodes without selecting them
-    //selectionService?.getNodesByTags(tags.map((t) => t.tag));
-
-    // Clipping model
-    // const centerPos = selectionService?.getCenterFromNodes(nodes);
-    // if (centerPos) selectionService?.toggleObitSelection(centerPos);
   };
 
   const orbit = () => {
@@ -92,6 +91,20 @@ export const SelectionContextProvider = ({
     if (currentNodes) {
       selectionService?.fitCameraToNodeSelection(currentNodes);
     }
+  };
+
+  const toggleCameraMode = () => {
+    if (isOrbit) {
+      firstPerson();
+    } else {
+      orbit();
+    }
+    setIsOrbit(!isOrbit);
+  };
+
+  const toggleFocus = () => {
+    toggleShowNodesNotInSelection();
+    setIsFocus(!isFocus);
   };
 
   const assignGrayscaleToInvertedNodeCollection = () => {
@@ -159,11 +172,15 @@ export const SelectionContextProvider = ({
         firstPerson,
         toggleClipping,
         isClipped,
+        isOrbit,
+        isFocus,
         fitToScreen,
+        toggleFocus,
         toggleShowNodesNotInSelection,
         assignGrayscaleToInvertedNodeCollection,
         assignDefaultColorToInvertedNodeCollection,
         assignOutlineToInvertedNodeCollection,
+        toggleCameraMode,
       }}
     >
       {children}
