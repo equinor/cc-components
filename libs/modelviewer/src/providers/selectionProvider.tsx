@@ -11,6 +11,8 @@ import { useModelViewerContext } from './modelViewerProvider';
 import { useModelContext } from './modelsProvider';
 import { SelectionService, TagColor } from '../services/selectionService';
 import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
+import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
+import { Color } from 'three';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
@@ -21,6 +23,9 @@ interface SelectionContextState {
   fitToScreen(): void;
   toggleShowNodesNotInSelection(): void;
   firstPerson(): void;
+  assignGrayscaleToInvertedNodeCollection(): void;
+  assignDefaultColorToInvertedNodeCollection(): void;
+  assignOutlineToInvertedNodeCollection(): void;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -89,6 +94,51 @@ export const SelectionContextProvider = ({
     }
   };
 
+  const assignGrayscaleToInvertedNodeCollection = () => {
+    if (currentNodes) {
+      const appearance: NodeAppearance = {
+        color: new Color(128, 128, 128),
+        outlineColor: NodeOutlineColor.NoOutline,
+        renderGhosted: false,
+      };
+      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
+      selectionService?.assignStyletToInvertedNodeCollection(
+        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
+        appearance
+      );
+    }
+  };
+
+  const assignDefaultColorToInvertedNodeCollection = () => {
+    if (currentNodes) {
+      const appearance: NodeAppearance = {
+        color: new Color(0, 0, 0),
+        outlineColor: NodeOutlineColor.NoOutline,
+        renderGhosted: false,
+      };
+      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
+      selectionService?.assignStyletToInvertedNodeCollection(
+        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
+        appearance
+      );
+    }
+  };
+
+  const assignOutlineToInvertedNodeCollection = () => {
+    if (currentNodes) {
+      const appearance: NodeAppearance = {
+        outlineColor: NodeOutlineColor.Red,
+        color: new Color(10, 10, 10),
+        renderGhosted: false,
+      };
+      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
+      selectionService?.assignStyletToInvertedNodeCollection(
+        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
+        appearance
+      );
+    }
+  };
+
   const toggleShowNodesNotInSelection = () => {
     if (currentNodes) {
       selectionService?.showNodesNotInSelection(currentNodes, isShowNodesNotInSelection);
@@ -111,6 +161,9 @@ export const SelectionContextProvider = ({
         isClipped,
         fitToScreen,
         toggleShowNodesNotInSelection,
+        assignGrayscaleToInvertedNodeCollection,
+        assignDefaultColorToInvertedNodeCollection,
+        assignOutlineToInvertedNodeCollection,
       }}
     >
       {children}

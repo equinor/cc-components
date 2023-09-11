@@ -24,6 +24,9 @@ export const ActionsMenu = () => {
     toggleShowNodesNotInSelection,
     orbit,
     firstPerson,
+    assignGrayscaleToInvertedNodeCollection,
+    assignDefaultColorToInvertedNodeCollection,
+    assignOutlineToInvertedNodeCollection,
   } = useSelectionContext();
 
   const [isOrbit, setIsOrbit] = useState(false);
@@ -36,7 +39,7 @@ export const ActionsMenu = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const colorPaletteOptions = ['Color Option 1', 'Color Option 2', 'Color Option 3'];
+  const colorPaletteOptions = ['Grayscale', 'Default', 'Outline'];
 
   const showModelSelector = () => {
     setShowModelDialog(!showSelector);
@@ -71,7 +74,15 @@ export const ActionsMenu = () => {
   const handleColorPaletteMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
     setSelectedColorPaletteIndex(index);
-    // if (colorPaletteOptions[index] === 'Color Option 1') {}
+    if (colorPaletteOptions[index] === 'Grayscale') {
+      assignGrayscaleToInvertedNodeCollection();
+    }
+    if (colorPaletteOptions[index] === 'Default') {
+      assignDefaultColorToInvertedNodeCollection();
+    }
+    if (colorPaletteOptions[index] === 'Outline') {
+      assignOutlineToInvertedNodeCollection();
+    }
   };
 
   const openColorPaletteMenu = () => {
@@ -137,8 +148,6 @@ export const ActionsMenu = () => {
             {colorPaletteOptions.map((option, index) => (
               <Menu.Item
                 key={option}
-                // Placeholder: disabling the third option just as an example
-                disabled={index === 2}
                 onClick={(event: React.MouseEvent) =>
                   handleColorPaletteMenuItemClick(event, index)
                 }
