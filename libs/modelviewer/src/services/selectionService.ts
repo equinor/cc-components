@@ -20,8 +20,8 @@ import CameraControls, {
   getNumericRange,
 } from '@equinor/echo-3d-viewer';
 import { get3dPositionFromAabbMinMaxValues } from '@equinor/echo-3d-viewer/dist/src/utils/calculationUtils';
-import { Box3, Color, Vector3 } from 'three';
 import * as THREE from 'three';
+import { Box3, Color, Vector3 } from 'three';
 
 CameraControls.install({ THREE });
 

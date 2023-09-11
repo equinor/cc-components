@@ -1,9 +1,8 @@
+import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
 import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
-
+import { Color } from 'three';
 import { useModelContext } from './modelsProvider';
 import { useSelectionContext } from './selectionProvider';
-import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
-import { Color } from 'three';
 
 interface ActionContextState {
   hideModel(): void;
@@ -32,7 +31,7 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
 
   const [isOrbit, setIsOrbit] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
-  const [isShowNodesNotInSelection, setisShowNodesNotInSelection] =
+  const [isShowNodesNotInSelection, setIsShowNodesNotInSelection] =
     useState<boolean>(true);
 
   const currentNodes = useMemo(() => {
@@ -141,7 +140,7 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
   const toggleShowNodesNotInSelection = () => {
     if (currentNodes) {
       selectionService?.showNodesNotInSelection(currentNodes, isShowNodesNotInSelection);
-      setisShowNodesNotInSelection(!isShowNodesNotInSelection);
+      setIsShowNodesNotInSelection(!isShowNodesNotInSelection);
     }
   };
 

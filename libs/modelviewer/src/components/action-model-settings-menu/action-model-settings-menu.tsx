@@ -10,8 +10,6 @@ export const ModelSettingsMenu = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   const showModelSelector = () => {
     setShowModelDialog(!showSelector);
   };
@@ -20,8 +18,6 @@ export const ModelSettingsMenu = () => {
 
   const handleMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
-    setSelectedIndex(index);
-
     if (optionsSettings[index] === 'Change Model') {
       showModelSelector();
     }

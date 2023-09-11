@@ -15,13 +15,12 @@ export const ColorPaletteMenu = () => {
   const [colorPaletteIsOpen, setColorPaletteIsOpen] = useState<boolean>(false);
   const [colorPaletteAnchorEl, setColorPaletteAnchorEl] =
     useState<HTMLButtonElement | null>(null);
-  const [selectedColorPaletteIndex, setSelectedColorPaletteIndex] = useState(0);
 
   const colorPaletteOptions = ['Grayscale', 'Default', 'Outline'];
 
   const handleColorPaletteMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
-    setSelectedColorPaletteIndex(index);
+
     if (colorPaletteOptions[index] === 'Grayscale') {
       assignGrayscaleToInvertedNodeCollection();
     }

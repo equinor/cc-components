@@ -8,9 +8,7 @@ import {
 } from 'react';
 import { useModelViewerContext } from './modelViewerProvider';
 
-import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
 import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
-import { Color } from 'three';
 import { SelectionService, TagColor } from '../services/selectionService';
 import { useModelContext } from './modelsProvider';
 

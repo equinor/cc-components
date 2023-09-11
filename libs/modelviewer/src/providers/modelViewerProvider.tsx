@@ -9,12 +9,11 @@ import {
 } from 'react';
 import { ModuleViewer } from '../modules';
 
-import { IModuleViewerProvider } from '../modules/provider';
 import {
   Echo3dViewer,
-  ModelsClient,
-  HierarchyClient,
   EchoSetupObject,
+  HierarchyClient,
+  ModelsClient,
 } from '@equinor/echo-3d-viewer';
 import Canvas from '../components/actions-bar/canvas/canvas';
 
