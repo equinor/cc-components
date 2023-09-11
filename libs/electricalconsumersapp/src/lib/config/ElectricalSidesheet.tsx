@@ -11,6 +11,7 @@ import {
   StyledPanels,
   TabTitle,
   CircuitDiagram,
+  ElectricalNetwork,
 } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
@@ -64,8 +65,7 @@ export function Test({
   const client = useHttpClient();
   const context = useContextId();
 
-  const facility = id.split('_').at(1);
-  const itemId = id.split('_').at(0);
+  const [itemId, facility] = id.split('_');
 
   if (!facility || !itemId) {
     closeSidesheet();
@@ -141,75 +141,9 @@ export function Test({
         </StyledTabListWrapper>
 
         <StyledPanels>
-          <Tabs.Panel>
-            {elenetwork && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
-                  margin: '20px',
-                }}
-              >
-                <CircuitDiagram network={elenetwork} />
-              </div>
-            )}
-          </Tabs.Panel>
+          <Tabs.Panel>{elenetwork && <CircuitDiagram network={elenetwork} />}</Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
   );
 }
-
-export type ElectricalNetwork = {
-  eleSymbolCode:
-    | 'K_BOX'
-    | 'HT_KAB'
-    | 'KURS'
-    | 'TAVLE'
-    | 'KABEL'
-    | 'VARME'
-    | ({} & string);
-  type: string;
-  name: string;
-  urlPath: string;
-  busId: string | null;
-  tagNoSwb: string | null;
-  cubicleId: string | null;
-  drawerId: string | null;
-  status: string | null;
-  tagStatus: string;
-  description: string | null;
-  hasChildren: boolean;
-  isHighlighted: boolean;
-  isSafetyCritical: boolean;
-  fuseSize: string | null;
-  locationCode: string | null;
-  phases: string | null;
-  htrcTypeCode: string | null;
-  installedLength: string | null;
-  cableSize: string | null;
-  eleNetId: ElenetId | null;
-  tags: Tag[];
-  children: ElectricalNetwork[];
-};
-
-export interface ElenetId {
-  instCode: string;
-  tagNo: string;
-  cubicleId: string;
-  drawerId: string | null;
-  branchId: number;
-}
-
-export type Tag = {
-  tagNo: string;
-  urlPath: string;
-  tagStatus: string;
-  cableSize: any;
-  cableType: any;
-  cableCode: any;
-  cableLengthInst: any;
-  isHighlighted: boolean;
-  isSafetyCritical: boolean;
-};

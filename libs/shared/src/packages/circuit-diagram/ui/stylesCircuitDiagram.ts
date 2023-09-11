@@ -9,7 +9,16 @@ export const StyledSwitchboardWrapper = styled.div`
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
   gap: 5ch;
   padding: 10px 5px 0px 5px;
+  margin-bottom: -15px;
   border-radius: 10px;
+  position: relative;
+`;
+
+export const StyledCircuitDiagramWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 20px;
 `;
 
 export const StyledCircuitDiagram = styled.div`
@@ -18,6 +27,7 @@ export const StyledCircuitDiagram = styled.div`
   overflow: auto;
   font-size: 12px;
   padding: 20px;
+  position: relative;
 `;
 
 export const StyledCircuitNameAndIcon = styled.div`
@@ -103,19 +113,37 @@ export const StyledPopover = styled.div<{ cornerButton?: boolean }>`
   right: ${(p) => (p.cornerButton ? '0px' : null)};
 `;
 
-export const StyledSwitchboardChildren = styled.div<{ networkChildrenLength: number }>`
+export const StyledSwitchboardChildren = styled.div`
   display: grid;
   gap: 2em;
-  grid-template-rows: ${({ networkChildrenLength }) =>
-    new Array(networkChildrenLength).fill('1fr').join(' ')};
+  &:nth-child(2) {
+    padding-top: 60px;
+  }
 `;
 
-export const Item = styled.div`
+export const StyledItem = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
   min-width: 200px;
   max-width: 1000px;
+`;
+
+export const StyledFirstItem = styled.div<{ svg: string }>`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  min-width: 200px;
+  max-width: 1000px;
+  position: relative;
+  ::before {
+    width: 50px;
+    height: 20px;
+    background: null;
+    position: absolute;
+    left: -100px;
+    top: 1.5ch;
+  }
 `;
 
 export const Name = styled.div`

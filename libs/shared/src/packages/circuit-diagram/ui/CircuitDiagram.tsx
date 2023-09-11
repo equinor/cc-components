@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import {
+  MutableRefObject,
+  ReactNode,
+  forwardRef,
+  startTransition,
+  useRef,
+  useState,
+} from 'react';
 import { heat_trace, cable, junction_box, circuit } from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
 import { ElectricalNetwork } from '../types/ElectricalNetwork';
 import {
   ChildWrapper,
-  Item,
+  StyledFirstItem,
+  StyledItem,
   Name,
   StyledCable,
   StyledCircuitDiagram,
-  StyledCircuitNameAndIcon,
+  StyledCircuitDiagramWrapper,
   StyledCriticalLine,
   StyledHTCable,
   StyledJunctionBox,
@@ -17,94 +25,168 @@ import {
   StyledSpaceHeater,
   StyledSwitchboardChildren,
   StyledSwitchboardWrapper,
+  StyledCircuitNameAndIcon,
 } from './stylesCircuitDiagram';
+import { mock } from './mockData';
 
 Icon.add({ heat_trace, cable, junction_box, circuit });
 
+type CircuitRef = Record<string, HTMLDivElement>;
+
 export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
+  // const network = mock;
+
+  const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
   return (
-    <StyledCircuitDiagram>
-      <Switchboard network={network} />
-      <StyledSwitchboardChildren networkChildrenLength={network.children.length}>
-        {network.children
-          .map((s) => s.children)
-          .flat()
-          .map((s) => (
-            <ElectricalComponent network={s} key={s.name} />
-          ))}
-      </StyledSwitchboardChildren>
-    </StyledCircuitDiagram>
+    <StyledCircuitDiagramWrapper>
+      <StyledCircuitDiagram>
+        <Switchboard network={network} circuitRef={circuitRef} />
+        <StyledSwitchboardChildren>
+          {network.children.map((circuit) => {
+            return (
+              <>
+                {circuit.children.map((circuitChildren) => (
+                  <ElectricalComponent
+                    ref={(element: HTMLDivElement) => {
+                      if (!element) return;
+                      setCircuitRef((old) => {
+                        const isPresent = old?.[circuit.name] === element;
+                        if (isPresent) return old;
+                        return Object.assign({ [circuit.name]: element }, old);
+                      });
+                    }}
+                    network={circuitChildren}
+                    key={circuitChildren.name}
+                    circuitName={circuit.name}
+                  />
+                ))}
+              </>
+            );
+          })}
+        </StyledSwitchboardChildren>
+      </StyledCircuitDiagram>
+    </StyledCircuitDiagramWrapper>
   );
 }
 
-function Switchboard({ network }: { network: ElectricalNetwork }) {
+function Switchboard({
+  network,
+  circuitRef,
+}: {
+  network: ElectricalNetwork;
+  circuitRef: CircuitRef;
+}) {
   return (
     <StyledSwitchboardWrapper>
       <StyledNetworkNameAndIcon>
         {network.name} <SwitchBoardIcon />
       </StyledNetworkNameAndIcon>
-      {network.children.map((s) => (
-        <StyledCircuitNameAndIcon key={s.name}>
-          {s.name} <Icon name={circuit.name} />
-          {s.isSafetyCritical ? <CriticalLine /> : null}
-        </StyledCircuitNameAndIcon>
-      ))}
+      {network.children.map((s) => {
+        const maybeRef = circuitRef?.[s.name];
+        console.log(maybeRef);
+        console.log(s.name, circuitRef);
+        return (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'absolute',
+              top: maybeRef?.offsetTop - 10 ?? 0,
+              width: '100%',
+              left: 0,
+            }}
+          >
+            <StyledCircuitNameAndIcon key={s.name}>
+              {s.name} <Icon name={circuit.name} />
+              {s.isSafetyCritical ? <CriticalLine /> : null}
+            </StyledCircuitNameAndIcon>
+          </div>
+        );
+      })}
     </StyledSwitchboardWrapper>
   );
 }
 
-function ElectricalComponent({ network }: { network: ElectricalNetwork }) {
-  switch (network.eleSymbolCode) {
-    case 'HT_KAB': {
-      return <HTCable network={network} />;
+const MaybeFirst = forwardRef<
+  HTMLDivElement,
+  { circuitName: string | null; children: ReactNode }
+>(({ circuitName, children }, ref) => (
+  <>
+    {circuitName ? (
+      <StyledFirstItem
+        ref={ref}
+        svg={`%3Csvg xmlns='
+      http://www.w3.org/2000/svg'%3E%3Cpath
+      d='M12 2a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zM4.707 5.707a1 1 0 0 0 0 1.414l3.847 3.847a4.002 4.002 0 0 0 2.454 5.908A.998.998 0 0 0 11 17v4a1 1 0 0 0 2 0v-4a.998.998 0 0 0-.008-.124 4.002 4.002 0 1 0-3.024-7.322L6.12 5.707a1 1 0 0 0-1.414 0zM14 13a2 2 0 1 1-4 0 2 2 0 0 1 4 0z'%3E%3C/path%3E%3C/svg%3E`}
+      >
+        {children}
+      </StyledFirstItem>
+    ) : (
+      <StyledItem>{children}</StyledItem>
+    )}
+  </>
+));
+
+type ElectricalComponentProps = {
+  network: ElectricalNetwork;
+  circuitName: string | null;
+};
+
+const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>(
+  ({ circuitName, network }, ref) => {
+    switch (network.eleSymbolCode) {
+      case 'HT_KAB': {
+        return <HTCable network={network} />;
+      }
+
+      case 'VARME': {
+        return <SpaceHeater network={network} />;
+      }
+
+      case 'KABEL': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Cable network={network} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent network={s} key={s.name} circuitName={null} />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'K_BOX': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <JunctionBox network={network} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent network={s} key={s.name} circuitName={null} />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      default:
+        return (
+          <StyledItem>
+            <Name>{network.name}</Name>
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent network={s} key={s.name} circuitName={null} />
+              ))}
+            </ChildWrapper>
+          </StyledItem>
+        );
     }
-
-    case 'VARME': {
-      return <SpaceHeater network={network} />;
-    }
-
-    case 'KABEL': {
-      return (
-        <Item>
-          <Cable network={network} />
-
-          <ChildWrapper>
-            {network.children.map((s) => (
-              <ElectricalComponent network={s} key={s.name} />
-            ))}
-          </ChildWrapper>
-        </Item>
-      );
-    }
-
-    case 'K_BOX': {
-      return (
-        <Item>
-          <JunctionBox network={network} />
-
-          <ChildWrapper>
-            {network.children.map((s) => (
-              <ElectricalComponent network={s} key={s.name} />
-            ))}
-          </ChildWrapper>
-        </Item>
-      );
-    }
-
-    default:
-      return (
-        <Item>
-          <Name>{network.name}</Name>
-
-          <ChildWrapper>
-            {network.children.map((s) => (
-              <ElectricalComponent network={s} key={s.name} />
-            ))}
-          </ChildWrapper>
-        </Item>
-      );
   }
-}
+);
 
 export const HTCable = ({ network }: { network: ElectricalNetwork }) => {
   return (

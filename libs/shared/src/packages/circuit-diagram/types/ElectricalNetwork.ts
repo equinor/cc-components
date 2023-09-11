@@ -9,7 +9,7 @@ export type ElectricalNetwork = {
     | ({} & string);
   type: string;
   name: string;
-  urlPath: string;
+  urlPath: string | null;
   busId: string | null;
   tagNoSwb: string | null;
   cubicleId: string | null;
@@ -29,14 +29,19 @@ export type ElectricalNetwork = {
   eleNetId: ElenetId | null;
   tags: Tag[];
   children: ElectricalNetwork[];
+  commissioningPackageNo: string | null;
+  mechanicalCompletionPackageNo: string | null;
+  isInProjectMaster: boolean;
+  projectCode: string;
+  powerActive: string | null;
 };
 
 export interface ElenetId {
   instCode: string;
   tagNo: string;
-  cubicleId: string;
+  cubicleId: string | null;
   drawerId: string | null;
-  branchId: number;
+  branchId: number | null;
 }
 
 export type Tag = {
