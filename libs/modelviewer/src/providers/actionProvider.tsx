@@ -7,19 +7,14 @@ import { useSelectionContext } from './selectionProvider';
 interface ActionContextState {
   hideModel(): void;
   showModel(): void;
-  orbit(): void;
-  toggleClipping(): void;
   isClipped: boolean;
   isOrbit: boolean;
   isFocus: boolean;
-  fitToScreen(): void;
   toggleFocus(): void;
+  toggleClipping(): void;
   toggleCameraMode(): void;
-  toggleShowNodesNotInSelection(): void;
-  firstPerson(): void;
-  assignGrayscaleToInvertedNodeCollection(): void;
-  assignDefaultColorToInvertedNodeCollection(): void;
-  assignOutlineToInvertedNodeCollection(): void;
+  fitToScreen(): void;
+  assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
 const ActionContext = createContext({} as ActionContextState);
@@ -31,8 +26,6 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
 
   const [isOrbit, setIsOrbit] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
-  const [isShowNodesNotInSelection, setIsShowNodesNotInSelection] =
-    useState<boolean>(true);
 
   const currentNodes = useMemo(() => {
     return getCurrentNodes();
@@ -88,17 +81,14 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const toggleFocus = () => {
-    toggleShowNodesNotInSelection();
-    setIsFocus(!isFocus);
+    if (currentNodes) {
+      selectionService?.showNodesNotInSelection(currentNodes, isFocus);
+      setIsFocus(!isFocus);
+    }
   };
 
-  const assignGrayscaleToInvertedNodeCollection = () => {
+  const assignAppearanceToInvertedNodeCollection = (appearance: NodeAppearance) => {
     if (currentNodes) {
-      const appearance: NodeAppearance = {
-        color: new Color(128, 128, 128),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      };
       selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
       selectionService?.assignStyletToInvertedNodeCollection(
         selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
@@ -106,44 +96,6 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
       );
     }
   };
-
-  const assignDefaultColorToInvertedNodeCollection = () => {
-    if (currentNodes) {
-      const appearance: NodeAppearance = {
-        color: new Color(0, 0, 0),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      };
-      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
-      selectionService?.assignStyletToInvertedNodeCollection(
-        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
-        appearance
-      );
-    }
-  };
-
-  const assignOutlineToInvertedNodeCollection = () => {
-    if (currentNodes) {
-      const appearance: NodeAppearance = {
-        outlineColor: NodeOutlineColor.Red,
-        color: new Color(10, 10, 10),
-        renderGhosted: false,
-      };
-      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
-      selectionService?.assignStyletToInvertedNodeCollection(
-        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
-        appearance
-      );
-    }
-  };
-
-  const toggleShowNodesNotInSelection = () => {
-    if (currentNodes) {
-      selectionService?.showNodesNotInSelection(currentNodes, isShowNodesNotInSelection);
-      setIsShowNodesNotInSelection(!isShowNodesNotInSelection);
-    }
-  };
-
   const firstPerson = () => {
     selectionService?.cameraFirstPerson();
   };
@@ -153,18 +105,13 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
       value={{
         hideModel,
         showModel,
-        orbit,
-        firstPerson,
         toggleClipping,
         isClipped,
         isOrbit,
         isFocus,
         fitToScreen,
         toggleFocus,
-        toggleShowNodesNotInSelection,
-        assignGrayscaleToInvertedNodeCollection,
-        assignDefaultColorToInvertedNodeCollection,
-        assignOutlineToInvertedNodeCollection,
+        assignAppearanceToInvertedNodeCollection,
         toggleCameraMode,
       }}
     >

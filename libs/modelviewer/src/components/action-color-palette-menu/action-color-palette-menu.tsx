@@ -3,33 +3,42 @@ import { color_palette } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { useState } from 'react';
 import { useActions } from '../../providers/actionProvider';
+import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
+import { Color } from 'three';
 
 export const ColorPaletteMenu = () => {
   Icon.add({ color_palette });
-  const {
-    assignGrayscaleToInvertedNodeCollection,
-    assignDefaultColorToInvertedNodeCollection,
-    assignOutlineToInvertedNodeCollection,
-  } = useActions();
+  const { assignAppearanceToInvertedNodeCollection } = useActions();
 
   const [colorPaletteIsOpen, setColorPaletteIsOpen] = useState<boolean>(false);
   const [colorPaletteAnchorEl, setColorPaletteAnchorEl] =
     useState<HTMLButtonElement | null>(null);
 
-  const colorPaletteOptions = ['Grayscale', 'Default', 'Outline'];
+  const colorPaletteOptions = ['Default', 'Grayscale', 'Ghost'];
 
   const handleColorPaletteMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
-
+    let appearance: NodeAppearance = {};
     if (colorPaletteOptions[index] === 'Grayscale') {
-      assignGrayscaleToInvertedNodeCollection();
+      appearance = {
+        color: new Color(128, 128, 128),
+        outlineColor: NodeOutlineColor.NoOutline,
+        renderGhosted: false,
+      };
     }
     if (colorPaletteOptions[index] === 'Default') {
-      assignDefaultColorToInvertedNodeCollection();
+      appearance = {
+        color: new Color(0, 0, 0),
+        outlineColor: NodeOutlineColor.NoOutline,
+        renderGhosted: false,
+      };
     }
-    if (colorPaletteOptions[index] === 'Outline') {
-      assignOutlineToInvertedNodeCollection();
+    if (colorPaletteOptions[index] === 'Ghost') {
+      appearance = {
+        renderGhosted: true,
+      };
     }
+    assignAppearanceToInvertedNodeCollection(appearance);
   };
 
   const openColorPaletteMenu = () => {
