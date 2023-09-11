@@ -2,7 +2,7 @@ import { Button, Icon } from '@equinor/eds-core-react';
 import { crop, fullscreen, rotate_3d, visibility } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
-import { useSelectionContext } from '../../providers/selectionProvider';
+import { useActions } from '../../providers/actionProvider';
 import { ColorPaletteMenu } from '../action-color-palette-menu/action-color-palette-menu';
 import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-settings-menu';
 
@@ -17,7 +17,7 @@ export const ActionsMenu = () => {
     toggleClipping,
     fitToScreen,
     toggleCameraMode,
-  } = useSelectionContext();
+  } = useActions();
 
   return (
     <>

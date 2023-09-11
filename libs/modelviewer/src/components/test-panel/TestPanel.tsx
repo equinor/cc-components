@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useSelectionContext } from '../../providers/selectionProvider';
 import { Color } from 'three';
+import { useSelectionContext } from '../../providers/selectionProvider';
 
 const mockedTagList = [
   '30L06200A',
@@ -21,8 +21,8 @@ const mockedTagColorList = [
 ];
 
 export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) => {
-  const { selectNodesByTagColor, selectNodesByTags, orbit, firstPerson } =
-    useSelectionContext();
+  const { selectNodesByTagColor, selectNodesByTags } = useSelectionContext();
+
   return (
     <TestPanelWrapper>
       <div

@@ -17,19 +17,10 @@ import { useModelContext } from './modelsProvider';
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
   selectNodesByTagColor(tags: TagColor[]): Promise<void>;
-  orbit(): void;
-  toggleClipping(): void;
+  getCurrentNodes(): HierarchyNodeModel[] | undefined;
+  getSelectionService(): SelectionService | undefined;
   isClipped: boolean;
-  isOrbit: boolean;
-  isFocus: boolean;
-  fitToScreen(): void;
-  toggleFocus(): void;
-  toggleCameraMode(): void;
-  toggleShowNodesNotInSelection(): void;
-  firstPerson(): void;
-  assignGrayscaleToInvertedNodeCollection(): void;
-  assignDefaultColorToInvertedNodeCollection(): void;
-  assignOutlineToInvertedNodeCollection(): void;
+  setClipped: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -42,11 +33,6 @@ export const SelectionContextProvider = ({
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
   const [isClipped, setClipped] = useState<boolean>(true);
-  const [isOrbit, setIsOrbit] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
-  const [isShowNodesNotInSelection, setisShowNodesNotInSelection] =
-    useState<boolean>(true);
-
   const selectionService = useMemo(() => {
     if (modelMeta && echoInstance) {
       return new SelectionService(modelMeta, echoInstance);
@@ -65,6 +51,14 @@ export const SelectionContextProvider = ({
     if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
   };
 
+  const getCurrentNodes = () => {
+    if (currentNodes) return currentNodes;
+  };
+
+  const getSelectionService = () => {
+    if (selectionService) return selectionService;
+  };
+
   const selectNodesByTagColor = async (tags: TagColor[]) => {
     const nodes = await selectionService?.assignColorByTagColor(tags, {
       fitToSelection: true,
@@ -73,114 +67,15 @@ export const SelectionContextProvider = ({
     if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
   };
 
-  const orbit = () => {
-    if (currentNodes && selectionService) {
-      const target = selectionService.getCenterFromNodes(currentNodes);
-      selectionService.cameraObitTarget(target);
-    }
-  };
-
-  const toggleClipping = () => {
-    if (currentNodes) {
-      selectionService?.clipModelByNodes(currentNodes, isClipped);
-      setClipped(!isClipped);
-    }
-  };
-
-  const fitToScreen = () => {
-    if (currentNodes) {
-      selectionService?.fitCameraToNodeSelection(currentNodes);
-    }
-  };
-
-  const toggleCameraMode = () => {
-    if (isOrbit) {
-      firstPerson();
-    } else {
-      orbit();
-    }
-    setIsOrbit(!isOrbit);
-  };
-
-  const toggleFocus = () => {
-    toggleShowNodesNotInSelection();
-    setIsFocus(!isFocus);
-  };
-
-  const assignGrayscaleToInvertedNodeCollection = () => {
-    if (currentNodes) {
-      const appearance: NodeAppearance = {
-        color: new Color(128, 128, 128),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      };
-      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
-      selectionService?.assignStyletToInvertedNodeCollection(
-        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
-        appearance
-      );
-    }
-  };
-
-  const assignDefaultColorToInvertedNodeCollection = () => {
-    if (currentNodes) {
-      const appearance: NodeAppearance = {
-        color: new Color(0, 0, 0),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      };
-      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
-      selectionService?.assignStyletToInvertedNodeCollection(
-        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
-        appearance
-      );
-    }
-  };
-
-  const assignOutlineToInvertedNodeCollection = () => {
-    if (currentNodes) {
-      const appearance: NodeAppearance = {
-        outlineColor: NodeOutlineColor.Red,
-        color: new Color(10, 10, 10),
-        renderGhosted: false,
-      };
-      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
-      selectionService?.assignStyletToInvertedNodeCollection(
-        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
-        appearance
-      );
-    }
-  };
-
-  const toggleShowNodesNotInSelection = () => {
-    if (currentNodes) {
-      selectionService?.showNodesNotInSelection(currentNodes, isShowNodesNotInSelection);
-      setisShowNodesNotInSelection(!isShowNodesNotInSelection);
-    }
-  };
-
-  const firstPerson = () => {
-    selectionService?.cameraFirstPerson();
-  };
-
   return (
     <SelectionContext.Provider
       value={{
         selectNodesByTags,
         selectNodesByTagColor,
-        orbit,
-        firstPerson,
-        toggleClipping,
+        getCurrentNodes,
+        getSelectionService,
         isClipped,
-        isOrbit,
-        isFocus,
-        fitToScreen,
-        toggleFocus,
-        toggleShowNodesNotInSelection,
-        assignGrayscaleToInvertedNodeCollection,
-        assignDefaultColorToInvertedNodeCollection,
-        assignOutlineToInvertedNodeCollection,
-        toggleCameraMode,
+        setClipped,
       }}
     >
       {children}

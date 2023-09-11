@@ -37,12 +37,12 @@ const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => 
       <ModelViewerContextProvider>
         <ModelContextProvider plantCode={plantCode}>
           <SelectionContextProvider tags={tagList}>
-            <ActionContextProvider>
-              <ModelSelection plantName={plantName}>
+            <ModelSelection plantName={plantName}>
+              <ActionContextProvider>
                 <ActionsMenu />
                 <TestPanel setTags={(tags: string[]) => setTagList(tags)} />
-              </ModelSelection>
-            </ActionContextProvider>
+              </ActionContextProvider>
+            </ModelSelection>
           </SelectionContextProvider>
         </ModelContextProvider>
       </ModelViewerContextProvider>

@@ -2,7 +2,7 @@ import { Button, Icon, Menu } from '@equinor/eds-core-react';
 import { color_palette } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { useState } from 'react';
-import { useSelectionContext } from '../../providers/selectionProvider';
+import { useActions } from '../../providers/actionProvider';
 
 export const ColorPaletteMenu = () => {
   Icon.add({ color_palette });
@@ -10,7 +10,7 @@ export const ColorPaletteMenu = () => {
     assignGrayscaleToInvertedNodeCollection,
     assignDefaultColorToInvertedNodeCollection,
     assignOutlineToInvertedNodeCollection,
-  } = useSelectionContext();
+  } = useActions();
 
   const [colorPaletteIsOpen, setColorPaletteIsOpen] = useState<boolean>(false);
   const [colorPaletteAnchorEl, setColorPaletteAnchorEl] =
