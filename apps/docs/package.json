@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "@astrojs/react": "2.0.2",
-    "astro": "2.0.0"
+    "astro": "2.10.12"
   }
 }
