@@ -1,6 +1,7 @@
 import {
   PropsWithChildren,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -9,17 +10,33 @@ import {
 import { useModelViewerContext } from './modelViewerProvider';
 
 import { useModelContext } from './modelsProvider';
-import { SelectionService, TagColor } from '../services/selectionService';
-import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
+import {
+  SelectionService,
+  TagColor,
+  ViewerNodeSelection,
+} from '../services/selectionService';
+import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
+import { Vector3 } from 'three';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
   selectNodesByTagColor(tags: TagColor[]): Promise<void>;
   orbit(): void;
   firstPerson(): void;
+  fitCameraToAAbb(aabb: AabbModel): void;
+  currentNodes: HierarchyNodeModel[];
+  viewNodes: ViewerNodeSelection[];
+  selectionService?: SelectionService;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
+
+interface Test extends Event {
+  detail: {
+    point: Vector3;
+    treeIndex: number;
+  };
+}
 
 export const SelectionContextProvider = ({
   children,
@@ -27,7 +44,7 @@ export const SelectionContextProvider = ({
 }: PropsWithChildren<{ tags: string[] }>) => {
   const { echoInstance } = useModelViewerContext();
   const { modelMeta } = useModelContext();
-  const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
+  const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
 
   const selectionService = useMemo(() => {
     if (modelMeta && echoInstance) {
@@ -39,6 +56,18 @@ export const SelectionContextProvider = ({
     if (tags && selectionService) selectionService.selectNodesByTags(tags);
   }, [tags, selectionService]);
 
+  useEffect(() => {
+    window.addEventListener('selectionStarted', (e) => {
+      const index = (e as Test).detail.treeIndex;
+      selectionService?.getNodeFromTreeId(index).then((data) => {
+        data;
+      });
+    });
+    return () => {
+      // window.removeEventListener('selectionStarted');
+    };
+  }, [selectionService]);
+
   const selectNodesByTags = async (tags: string[]) => {
     await selectionService?.selectNodesByTags(tags);
   };
@@ -47,8 +76,10 @@ export const SelectionContextProvider = ({
     const nodes = await selectionService?.assignColorByTagColor(tags, {
       fitToSelection: true,
     });
-    setCurrentNodes(nodes);
-    if (nodes) selectionService?.clipModelByNodes(nodes, true);
+    if (nodes) {
+      setCurrentNodes(nodes);
+      selectionService?.clipModelByNodes(nodes, true);
+    }
   };
 
   const orbit = () => {
@@ -62,6 +93,20 @@ export const SelectionContextProvider = ({
     selectionService?.cameraFirstPerson();
   };
 
+  const viewNodes = useMemo(() => {
+    return selectionService?.getViewerNodeSelection(currentNodes) || [];
+  }, [currentNodes]);
+
+  const fitCameraToAAbb = useCallback(
+    (aabb: AabbModel) => {
+      if (selectionService) {
+        const box3 = selectionService.getBoundingBoxFormAabbModel(aabb, 0);
+        selectionService.fitCameraToBox3(box3, 10, 0);
+      }
+    },
+    [selectionService]
+  );
+
   return (
     <SelectionContext.Provider
       value={{
@@ -69,6 +114,10 @@ export const SelectionContextProvider = ({
         selectNodesByTagColor,
         orbit,
         firstPerson,
+        fitCameraToAAbb,
+        currentNodes,
+        viewNodes,
+        selectionService,
       }}
     >
       {children}

@@ -10,6 +10,7 @@ import CameraControls, {
   AabbModel,
   AssetMetadataSimpleDto,
   CameraControlsExtended,
+  CancelToken,
   Echo3dViewer,
   EchoSetupObject,
   HierarchyClient,
@@ -18,8 +19,10 @@ import CameraControls, {
   combineHierarchyAabbs,
   convertHierarchyAabbToThreeBox3,
   getNumericRange,
+  getTagNoRefNoAndAabbByNodeId,
 } from '@equinor/echo-3d-viewer';
 import { get3dPositionFromAabbMinMaxValues } from '@equinor/echo-3d-viewer/dist/src/utils/calculationUtils';
+import { notEqual } from 'assert';
 import { Box3, Color, Vector3 } from 'three';
 import * as THREE from 'three';
 
@@ -36,6 +39,7 @@ export interface SelectNodesByTagOptions {
   duration?: number | undefined;
   radiusFactor?: number | undefined;
   invertedAppearance?: NodeAppearance;
+  signal?: AbortSignal;
 }
 
 export class SelectionService {
@@ -66,14 +70,30 @@ export class SelectionService {
     return aabb;
   }
 
-  getNodesByTags = async (tags: string[]) => {
+  getNodesByTags = async (tags: string[], signal?: AbortSignal) => {
     return (
-      await this.hierarchyClient.findNodesByTagList(this.modelMeta.hierarchyId, tags)
+      await this.hierarchyClient.findNodesByTagList(
+        this.modelMeta.hierarchyId,
+        tags,
+        signal
+      )
     ).results;
   };
 
+  getNodeFromTreeId = async (
+    treeIndex: number,
+    cancellationToken: CancelToken = CancelToken.none
+  ) => {
+    const node = await getTagNoRefNoAndAabbByNodeId(
+      treeIndex,
+      this.modelMeta.hierarchyId,
+      cancellationToken
+    );
+    return node;
+  };
+
   async selectNodesByTags(tags: string[], options?: SelectNodesByTagOptions) {
-    const nodes = await this.getNodesByTags(tags);
+    const nodes = await this.getNodesByTags(tags, options?.signal);
     const nodeCollection = this.getNodeCollectionFromHierarchyNodeModel(nodes);
 
     const appearance = this.resetStyleToNodeAppearance(options?.appearance);
@@ -265,4 +285,30 @@ export class SelectionService {
       cameraManager.initializeFirstPersonControlsUsingTarget(camera.position, target);
     }
   }
+
+  getViewerNodeSelection(nodes: HierarchyNodeModel[]): ViewerNodeSelection[] {
+    return nodes
+      .filter((nodeResult) => nodeResult.aabb && nodeResult.tag)
+      .map((nodeResult) => {
+        const { min, max } = nodeResult.aabb!;
+
+        const boundingBox = new THREE.Box3(
+          new THREE.Vector3(min.x, min.z, -max.y),
+          new THREE.Vector3(max.x, max.z, -min.y)
+        );
+        return {
+          position: get3dPositionFromAabbMinMaxValues(nodeResult.aabb!),
+          tagNo: nodeResult.tag!,
+          aabb: nodeResult.aabb!,
+          boundingBox,
+        };
+      });
+  }
+}
+
+export interface ViewerNodeSelection {
+  position: THREE.Vector3;
+  tagNo: string;
+  aabb: AabbModel;
+  boundingBox: THREE.Box3;
 }
