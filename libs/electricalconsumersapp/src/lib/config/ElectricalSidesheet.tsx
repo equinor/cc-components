@@ -1,40 +1,22 @@
 import { createWidget } from '@equinor/workspace-sidesheet';
 import { ElectricalConsumer } from './workspaceConfig';
+import { useContextId, useHttpClient, ElectricalNetwork } from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
   StyledBanner,
   StyledSideSheetContainer,
   StyledTabs,
-  useContextId,
-  useHttpClient,
   StyledPanels,
   TabTitle,
-  CircuitDiagram,
-  ElectricalNetwork,
-} from '@cc-components/shared';
+  StyledTabsList,
+  StyledTabListWrapper,
+} from '@cc-components/sharedcomponents';
 import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { useState } from 'react';
-import { TabListProps, Tabs } from '@equinor/eds-core-react';
-import { tokens } from '@equinor/eds-tokens';
-import styled from 'styled-components';
+import { Tabs } from '@equinor/eds-core-react';
 import { CircuitDiagramTab } from '../sidesheet/CircuitDiagramTab';
-
-export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
-  overflow: hidden;
-  width: 100%;
-  background-color: ${tokens.colors.ui.background__light.hex};
-`;
-export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
-  overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-
-  scroll-behavior: smooth;
-`;
 
 export const ElectricalSidesheet = createWidget<{
   close: VoidFunction;
