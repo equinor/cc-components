@@ -41,6 +41,16 @@ export const StyledCircuitNameAndIcon = styled.div`
   border-radius: 10px;
 `;
 
+export const StyledCircuitNameAndIconWrapper = styled.div<{ maybeRef: HTMLDivElement }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: ${(p) => p.maybeRef?.offsetTop - 10 ?? 0}px;
+`;
+
 export const StyledNetworkNameAndIcon = styled.div`
   display: flex;
   align-items: center;
@@ -129,21 +139,13 @@ export const StyledItem = styled.div`
   max-width: 1000px;
 `;
 
-export const StyledFirstItem = styled.div<{ svg: string }>`
+export const StyledFirstItem = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
   min-width: 200px;
   max-width: 1000px;
   position: relative;
-  ::before {
-    width: 50px;
-    height: 20px;
-    background: null;
-    position: absolute;
-    left: -100px;
-    top: 1.5ch;
-  }
 `;
 
 export const Name = styled.div`
