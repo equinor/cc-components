@@ -7,7 +7,7 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabsWrapper,
-} from '@cc-components/shared/sidesheet';
+} from '@cc-components/sharedcomponents';
 import { getSwcrStatusColor, SwcrPackage } from '@cc-components/swcrshared';
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@cc-components/shared';

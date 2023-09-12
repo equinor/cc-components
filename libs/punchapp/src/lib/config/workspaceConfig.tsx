@@ -1,10 +1,10 @@
 import {
-  CCApiAccessLoading,
   useCCApiAccessCheck,
   useContextId,
   useHttpClient,
   usePBIOptions,
 } from '@cc-components/shared';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
 

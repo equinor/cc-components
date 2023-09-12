@@ -1,5 +1,5 @@
 import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable';
-import { StyledContentWrapper } from '../tabs.styles';
+import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { MaterialBase } from './types';
 type MaterialTabProps<T> = {

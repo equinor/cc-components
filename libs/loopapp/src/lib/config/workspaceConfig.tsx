@@ -1,7 +1,6 @@
 import {
   usePBIOptions,
   useCCApiAccessCheck,
-  CCApiAccessLoading,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
@@ -15,6 +14,7 @@ import { useTableConfig } from './tableConfig';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
