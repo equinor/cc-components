@@ -10,8 +10,7 @@
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "dependencies": {
-    "styled-components": "5.3.6",
-    "@cc-components/shared": "workspace:^"
+    "styled-components": "5.3.6"
   },
   "devDependencies": {
     "@types/styled-components": "5.1.26"
