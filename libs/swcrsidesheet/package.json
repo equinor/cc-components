@@ -12,8 +12,5 @@
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
     "@cc-components/swcrshared": "workspace:^"
-  },
-  "devDependencies": {
-    "@types/styled-components": "5.1.26"
   }
 }
