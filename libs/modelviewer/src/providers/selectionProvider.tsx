@@ -17,8 +17,6 @@ interface SelectionContextState {
   selectNodesByTagColor(tags: TagColor[]): Promise<void>;
   getCurrentNodes(): HierarchyNodeModel[] | undefined;
   getSelectionService(): SelectionService | undefined;
-  isClipped: boolean;
-  setClipped: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -30,7 +28,6 @@ export const SelectionContextProvider = ({
   const { echoInstance } = useModelViewerContext();
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
-  const [isClipped, setClipped] = useState<boolean>(true);
   const selectionService = useMemo(() => {
     if (modelMeta && echoInstance) {
       return new SelectionService(modelMeta, echoInstance);
@@ -46,7 +43,7 @@ export const SelectionContextProvider = ({
       fitToSelection: true,
     });
     setCurrentNodes(nodes);
-    if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
+    if (nodes) selectionService?.clipModelByNodes(nodes, true);
   };
 
   const getCurrentNodes = () => {
@@ -62,7 +59,7 @@ export const SelectionContextProvider = ({
       fitToSelection: true,
     });
     setCurrentNodes(nodes);
-    if (nodes) selectionService?.clipModelByNodes(nodes, isClipped);
+    if (nodes) selectionService?.clipModelByNodes(nodes, true);
   };
 
   return (
@@ -72,8 +69,6 @@ export const SelectionContextProvider = ({
         selectNodesByTagColor,
         getCurrentNodes,
         getSelectionService,
-        isClipped,
-        setClipped,
       }}
     >
       {children}

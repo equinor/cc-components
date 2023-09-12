@@ -21,11 +21,11 @@ const ActionContext = createContext({} as ActionContextState);
 
 export const ActionContextProvider = ({ children }: PropsWithChildren) => {
   const { getModel } = useModelContext();
-  const { getCurrentNodes, getSelectionService, isClipped, setClipped } =
-    useSelectionContext();
+  const { getCurrentNodes, getSelectionService } = useSelectionContext();
 
   const [isOrbit, setIsOrbit] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
+  const [isClipped, setClipped] = useState<boolean>(true);
 
   const currentNodes = useMemo(() => {
     return getCurrentNodes();

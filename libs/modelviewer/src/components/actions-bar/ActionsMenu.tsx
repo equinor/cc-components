@@ -47,7 +47,7 @@ export const ActionsMenu = () => {
             <Icon
               name={'visibility'}
               color={
-                isFocus ? tokens.colors.text.static_icons__secondary.rgba : undefined
+                !isFocus ? tokens.colors.text.static_icons__secondary.rgba : undefined
               }
             />
           </Button>
