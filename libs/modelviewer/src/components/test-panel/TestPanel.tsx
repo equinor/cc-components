@@ -67,6 +67,22 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
           >
             Set B
           </button>
+          <button
+            onClick={() => {
+              setTags(mockedTagList);
+            }}
+            style={{ height: '25px' }}
+          >
+            Set all
+          </button>
+          <button
+            onClick={() => {
+              setTags([]);
+            }}
+            style={{ height: '25px' }}
+          >
+            Clear
+          </button>
         </div>
       </div>
     </TestPanelWrapper>

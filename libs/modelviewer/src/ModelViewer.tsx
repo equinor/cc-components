@@ -7,6 +7,8 @@ import { ModelViewerContextProvider } from './providers/modelViewerProvider';
 import { ModelContextProvider } from './providers/modelsProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { ActionContextProvider } from './providers/actionProvider';
+import { TagOverlay } from './components/tag-overlay/tagOverlay';
+import { TagMap } from './types/overlay';
 
 type FusionModelViewerProps = {
   plantName: string;
@@ -39,6 +41,12 @@ const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => 
           <SelectionContextProvider tags={tagList}>
             <ModelSelection plantName={plantName}>
               <ActionContextProvider>
+                <TagOverlay
+                  tagOverlay={tagList.reduce((acc, item) => {
+                    acc[item] = { tagNo: item, status: 'ok', type: 'tag' };
+                    return acc;
+                  }, {} as TagMap)}
+                />
                 <ActionsMenu />
                 <TestPanel setTags={(tags: string[]) => setTagList(tags)} />
               </ActionContextProvider>
