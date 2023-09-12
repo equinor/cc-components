@@ -2,7 +2,6 @@ import { Button, Icon } from '@equinor/eds-core-react';
 import { crop, fullscreen, rotate_3d, visibility } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
-
 import { useActions } from '../../providers/actionProvider';
 import { ColorPaletteMenu } from '../action-color-palette-menu/action-color-palette-menu';
 import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-settings-menu';
@@ -20,37 +19,35 @@ export const ActionsMenu = () => {
     toggleCameraMode,
   } = useActions();
 
-  const renderIconButton = (
-    iconName: string,
-    title: string,
-    onClick: () => void,
-    isActive: boolean | null
-  ) => (
-    <Button variant="ghost_icon" title={title} onClick={onClick}>
-      <Icon
-        name={iconName}
-        color={
-          isActive ? tokens.colors.text.static_icons__secondary.rgba : undefined
-        }
-      />
-    </Button>
-  );
-
   return (
-    <WrapperActionsBar>
-      <ActionsBar>
+    <StyledWrapperActionsBar>
+      <StyledActionsBar>
         {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
         {renderIconButton('visibility', 'Show selection only', toggleFocus, !isFocus)}
         <ColorPaletteMenu />
         {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
         {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, !isOrbit)}
         <ModelSettingsMenu />
-      </ActionsBar>
-    </WrapperActionsBar>
+      </StyledActionsBar>
+    </StyledWrapperActionsBar>
   );
 };
 
-const ActionsBar = styled.div`
+const renderIconButton = (
+  iconName: string,
+  title: string,
+  onClick: () => void,
+  isActive: boolean | null
+) => (
+  <Button variant="ghost_icon" title={title} onClick={onClick}>
+    <Icon
+      name={iconName}
+      color={isActive ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+    />
+  </Button>
+);
+
+const StyledActionsBar = styled.div`
   display: flex;
   bottom: 50px;
   background-color: #fff;
@@ -62,7 +59,7 @@ const ActionsBar = styled.div`
   }
 `;
 
-const WrapperActionsBar = styled.div`
+const StyledWrapperActionsBar = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;

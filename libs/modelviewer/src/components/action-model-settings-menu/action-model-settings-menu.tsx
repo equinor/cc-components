@@ -31,18 +31,18 @@ export const ModelSettingsMenu = () => {
       <Button
         ref={setAnchorEl}
         variant="ghost_icon"
-        aria-label="select task action"
+        aria-label="Open task actions menu"
         aria-haspopup="true"
-        aria-controls="menu-default"
-        id="anchor-split"
+        aria-controls="task-actions-menu"
+        id="task-actions-button"
         onClick={toggleMenu}
       >
-        <Icon data={more_horizontal} title="arrow_down"></Icon>
+        <Icon data={more_horizontal} title="More options icon"></Icon>
       </Button>
       <Menu
         open={isOpen}
-        id="menu-split"
-        aria-labelledby="anchor-split"
+        id="task-actions-menu"
+        aria-labelledby="task-actions-button"
         onClose={toggleMenu}
         anchorEl={anchorEl}
       >

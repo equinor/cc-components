@@ -3,11 +3,9 @@ import { color_palette } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { useState } from 'react';
 import { useActions } from '../../providers/actionProvider';
-import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
-import { Color } from 'three';
+import { ColorOption, getAppearanceByOption } from '../../utils/colorOptions';
 
 export const ColorPaletteMenu = () => {
-  type ColorOption = 'Default' | 'Grayscale' | 'Ghost';
   Icon.add({ color_palette });
 
   const { assignAppearanceToInvertedNodeCollection } = useActions();
@@ -17,25 +15,6 @@ export const ColorPaletteMenu = () => {
     useState<HTMLButtonElement | null>(null);
 
   const colorPaletteOptions: ColorOption[] = ['Default', 'Grayscale', 'Ghost'];
-
-  const getAppearanceByOption = (option: ColorOption): NodeAppearance => {
-    const appearances: Record<ColorOption, NodeAppearance> = {
-      Default: {
-        color: new Color(0, 0, 0),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      },
-      Grayscale: {
-        color: new Color(128, 128, 128),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      },
-      Ghost: {
-        renderGhosted: true,
-      },
-    };
-    return appearances[option];
-  };
 
   const handleColorPaletteMenuItemClick = (
     event: React.MouseEvent,
