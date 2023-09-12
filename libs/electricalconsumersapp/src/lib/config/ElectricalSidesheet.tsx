@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { TabListProps, Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
+import { CircuitDiagramTab } from '../sidesheet/CircuitDiagramTab';
 
 export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
   overflow: hidden;
@@ -41,7 +42,7 @@ export const ElectricalSidesheet = createWidget<{
   id: string;
 }>((props) => {
   return (
-    <Test
+    <ElectricalInnerSidesheet
       item={props.props.item}
       id={props.props.id}
       closeSidesheet={props.props.close}
@@ -49,7 +50,7 @@ export const ElectricalSidesheet = createWidget<{
   );
 });
 
-export function Test({
+export function ElectricalInnerSidesheet({
   item,
   id,
   closeSidesheet,
@@ -75,7 +76,7 @@ export function Test({
   const { data: elenetwork, isLoading: isLoadingEle } =
     useQuery<ElectricalNetwork | null>(
       /**Change facility to project */
-      /** facility*/ [itemId, facility],
+      /** facility*/ [itemId, facility, project],
       async ({ signal }) => {
         const res = await client.fetch(
           `api/contexts/${context}/electrical/consumers/electrical-network/${encodeURIComponent(
@@ -83,6 +84,11 @@ export function Test({
           )}/${facility}`,
           { signal }
         );
+
+        if (res.status === 204) {
+          return null;
+        }
+
         if (!res.ok) {
           if (res.status === 404) {
             return null;
@@ -96,6 +102,7 @@ export function Test({
         useErrorBoundary: false,
       }
     );
+
   const { data: consumer, isLoading } = useQuery<ElectricalConsumer>(
     /**Change facility to project */
     /** facility*/ [id],
@@ -110,8 +117,8 @@ export function Test({
       return res.json();
     },
     {
-      suspense: true,
-      useErrorBoundary: true,
+      suspense: false,
+      useErrorBoundary: false,
       initialData: item ?? undefined,
     }
   );
@@ -150,11 +157,7 @@ export function Test({
 
         <StyledPanels>
           <Tabs.Panel>
-            {elenetwork ? (
-              <CircuitDiagram network={elenetwork} />
-            ) : (
-              <div>No electrical network found</div>
-            )}
+            <CircuitDiagramTab elenetwork={elenetwork} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

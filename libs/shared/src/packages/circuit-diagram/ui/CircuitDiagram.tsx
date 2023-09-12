@@ -21,13 +21,23 @@ import {
   StyledCircuitNameAndIcon,
   StyledCircuitNameAndIconWrapper,
 } from './stylesCircuitDiagram';
+import styled from 'styled-components';
 
 Icon.add({ heat_trace, cable, junction_box, circuit });
 
 type CircuitRef = Record<string, HTMLDivElement>;
 
-export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
+type CircuitDiagramProps = {
+  network?: ElectricalNetwork;
+  isLoading?: boolean;
+};
+
+export function CircuitDiagram({ network, isLoading }: CircuitDiagramProps) {
   const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
+
+  if (!!isLoading || !network) {
+    return <CircuitDiagramSkeleton />;
+  }
   return (
     <StyledCircuitDiagramWrapper>
       <StyledCircuitDiagram>
@@ -279,3 +289,62 @@ const SpaceHeaterIcon = () => {
     </svg>
   );
 };
+
+//temp
+export const Skeleton = styled.div<{ height?: string; width?: string }>`
+  width: ${({ width }) => `${width ?? '100%'}`};
+  height: ${({ height }) => `${height ?? '100%'}`};
+  cursor: progress;
+  background: linear-gradient(0.25turn, transparent, #fff, transparent),
+    linear-gradient(#eee, #eee);
+  background-repeat: no-repeat;
+  background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
+  background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
+  border-radius: 5px;
+  animation: loading 1.5s infinite;
+  @keyframes loading {
+    to {
+      background-position: 315px 0, 0 0, 0 190px, 50px 195px;
+    }
+  }
+`;
+
+export function CircuitDiagramSkeleton() {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: '10px',
+      }}
+    >
+      <Skeleton height="150px" width="110px" />
+      <Skeleton height="15px" width="110px" />
+      <Skeleton height="100px" width="50px" />
+      <div
+        style={{
+          display: 'flex',
+          height: '100px',
+          justifyContent: 'space-around',
+          flexDirection: 'column',
+        }}
+      >
+        <Skeleton height="15px" width="110px" />
+        <Skeleton height="15px" width="110px" />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '5px',
+        }}
+      >
+        <Skeleton height="50px" width="50px" />
+        <Skeleton height="50px" width="50px" />
+      </div>
+    </div>
+  );
+}
