@@ -53,8 +53,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-error-boundary:
-        specifier: ^4.0.4
-        version: 4.0.4(react@18.2.0)
+        specifier: ^4.0.11
+        version: 4.0.11(react@18.2.0)
       react-is:
         specifier: 18.2.0
         version: 18.2.0
@@ -147,6 +147,15 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@types/node@18.11.9)
 
+  apps/electricalconsumers:
+    dependencies:
+      '@cc-components/electricalconsumersapp':
+        specifier: workspace:^
+        version: link:../../libs/electricalconsumersapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/handover:
     dependencies:
       '@cc-components/handoverapp':
@@ -224,6 +233,15 @@ importers:
       commander:
         specifier: 11.0.0
         version: 11.0.0
+
+  libs/electricalconsumersapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/handoverapp:
     dependencies:
@@ -11339,12 +11357,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-error-boundary@4.0.4(react@18.2.0):
-    resolution: {integrity: sha512-AbqMFx8bCsob8rCHZvJYQ42MQijK0/034RUvan9qrqyJCpazr8d9vKHrysbxcr6odoHLZvQEcYomFPoIqH9fow==}
+  /react-error-boundary@4.0.11(react@18.2.0):
+    resolution: {integrity: sha512-U13ul67aP5DOSPNSCWQ/eO0AQEYzEFkVljULQIjMV0KlffTAhxuDoBKdO0pb/JZ8mDhMKFZ9NZi0BmLGUiNphw==}
     peerDependencies:
       react: '>=16.13.1'
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       react: 18.2.0
     dev: false
 
