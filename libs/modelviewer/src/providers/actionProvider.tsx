@@ -1,30 +1,85 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
-
+import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
+import { Color } from 'three';
 import { useModelContext } from './modelsProvider';
+import { useSelectionContext } from './selectionProvider';
 
 interface ActionContextState {
   hideModel(): void;
   showModel(): void;
+  isClipped: boolean;
+  isOrbit: boolean;
+  isFocus: boolean;
+  toggleFocus(): void;
+  toggleClipping(): void;
+  toggleCameraMode(): void;
+  fitToScreen(): void;
+  assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
-const ActionContext = createContext({} as ActionContextState);
+const ActionContext = createContext<ActionContextState | undefined>(undefined);
 
-export const ActionContextProvider = ({ children }: PropsWithChildren) => {
+export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const { getModel } = useModelContext();
+  const { getCurrentNodes, getSelectionService } = useSelectionContext();
 
-  const hideModel = () => {
+  const [isOrbit, setIsOrbit] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
+  const [isClipped, setClipped] = useState(true);
+
+  const currentNodes = getCurrentNodes();
+  const selectionService = getSelectionService();
+
+  const setModelVisibility = (isVisible: boolean) => {
     const model = getModel();
     if (model) {
       const appearance = model.getDefaultNodeAppearance();
-      model.setDefaultNodeAppearance({ ...appearance, visible: false });
+      model.setDefaultNodeAppearance({ ...appearance, visible: isVisible });
     }
   };
 
-  const showModel = () => {
-    const model = getModel();
-    if (model) {
-      const appearance = model.getDefaultNodeAppearance();
-      model.setDefaultNodeAppearance({ ...appearance, visible: true });
+  const hideModel = () => setModelVisibility(false);
+  const showModel = () => setModelVisibility(true);
+
+  const orbit = () => {
+    if (currentNodes && selectionService) {
+      const target = selectionService.getCenterFromNodes(currentNodes);
+      selectionService.cameraObitTarget(target);
+    }
+  };
+
+  const firstPerson = () => selectionService?.cameraFirstPerson();
+
+  const toggleCameraMode = () => {
+    isOrbit ? firstPerson() : orbit();
+    setIsOrbit(!isOrbit);
+  };
+
+  const toggleFocus = () => {
+    if (currentNodes) {
+      selectionService?.showNodesNotInSelection(currentNodes, isFocus);
+      setIsFocus(!isFocus);
+    }
+  };
+
+  const toggleClipping = () => {
+    if (currentNodes && selectionService) {
+      selectionService.clipModelByNodes(currentNodes, isClipped);
+      setClipped(!isClipped);
+    }
+  };
+
+  const fitToScreen = () => {
+    if (currentNodes) {
+      selectionService?.fitCameraToNodeSelection(currentNodes);
+    }
+  };
+
+  const assignAppearanceToInvertedNodeCollection = (appearance: NodeAppearance) => {
+    if (currentNodes && selectionService) {
+      const collection =
+        selectionService.getNodeCollectionFromHierarchyNodeModel(currentNodes);
+      selectionService.assignStyletToInvertedNodeCollection(collection, appearance);
     }
   };
 
@@ -33,6 +88,14 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
       value={{
         hideModel,
         showModel,
+        toggleClipping,
+        isClipped,
+        isOrbit,
+        isFocus,
+        fitToScreen,
+        toggleFocus,
+        assignAppearanceToInvertedNodeCollection,
+        toggleCameraMode,
       }}
     >
       {children}
@@ -42,6 +105,6 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
 
 export const useActions = () => {
   const context = useContext(ActionContext);
-  if (!context) throw new Error('Context provider not found!');
+  if (!context) throw new Error('useActions must be used within ActionContextProvider');
   return context;
 };

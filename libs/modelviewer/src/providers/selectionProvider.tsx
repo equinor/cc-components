@@ -27,6 +27,8 @@ interface SelectionContextState {
   currentNodes: HierarchyNodeModel[];
   viewNodes: ViewerNodeSelection[];
   selectionService?: SelectionService;
+  getCurrentNodes(): HierarchyNodeModel[] | undefined;
+  getSelectionService(): SelectionService | undefined;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -69,7 +71,19 @@ export const SelectionContextProvider = ({
   }, [selectionService]);
 
   const selectNodesByTags = async (tags: string[]) => {
-    await selectionService?.selectNodesByTags(tags);
+    const nodes = await selectionService?.selectNodesByTags(tags, {
+      fitToSelection: true,
+    });
+    setCurrentNodes(nodes || []);
+    if (nodes) selectionService?.clipModelByNodes(nodes, true);
+  };
+
+  const getCurrentNodes = () => {
+    if (currentNodes) return currentNodes;
+  };
+
+  const getSelectionService = () => {
+    if (selectionService) return selectionService;
   };
 
   const selectNodesByTagColor = async (tags: TagColor[]) => {
@@ -118,6 +132,8 @@ export const SelectionContextProvider = ({
         currentNodes,
         viewNodes,
         selectionService,
+        getCurrentNodes,
+        getSelectionService,
       }}
     >
       {children}
