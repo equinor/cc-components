@@ -1,3 +1,4 @@
+import { CogniteCadModel } from '@cognite/reveal';
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -8,10 +9,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useModelViewerContext } from './modelViewerProvider';
 import { ModelService, ViewerOptions } from '../services/modelsService';
-import { CogniteCadModel } from '@cognite/reveal';
-import { Subscription } from 'rxjs';
+import { useModelViewerContext } from './modelViewerProvider';
 
 type ModelContextType = {
   hasAccess: boolean;

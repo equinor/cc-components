@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useSelectionContext } from '../../providers/selectionProvider';
 import { Color } from 'three';
+import { useSelectionContext } from '../../providers/selectionProvider';
 
 const mockedTagList = [
   '30L06200A',
@@ -21,7 +21,8 @@ const mockedTagColorList = [
 ];
 
 export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) => {
-  const { selectNodesByTagColor, orbit, firstPerson } = useSelectionContext();
+  const { selectNodesByTagColor, selectNodesByTags } = useSelectionContext();
+
   return (
     <TestPanelWrapper>
       <div
@@ -40,7 +41,15 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
             }}
             style={{ height: '25px' }}
           >
-            Set Selection
+            Set Selection with color
+          </button>
+          <button
+            onClick={() => {
+              selectNodesByTags(mockedTagList);
+            }}
+            style={{ height: '25px' }}
+          >
+            Set Selection with tags
           </button>
           <button
             onClick={() => {
@@ -57,22 +66,6 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
             style={{ height: '25px' }}
           >
             Set B
-          </button>
-          <button
-            onClick={() => {
-              orbit();
-            }}
-            style={{ height: '25px' }}
-          >
-            Orbit
-          </button>
-          <button
-            onClick={() => {
-              firstPerson();
-            }}
-            style={{ height: '25px' }}
-          >
-            Firs Person
           </button>
         </div>
       </div>

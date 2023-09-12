@@ -1,154 +1,68 @@
-import { Button, Icon, Menu } from '@equinor/eds-core-react';
-import {
-  color_palette,
-  crop,
-  fullscreen,
-  more_horizontal,
-  visibility,
-} from '@equinor/eds-icons';
+import { Button, Icon } from '@equinor/eds-core-react';
+import { crop, fullscreen, rotate_3d, visibility } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useModelContext } from '../../providers/modelsProvider';
 import { useActions } from '../../providers/actionProvider';
+import { ColorPaletteMenu } from '../action-color-palette-menu/action-color-palette-menu';
+import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-settings-menu';
+
+Icon.add({ crop, visibility, fullscreen, rotate_3d });
 
 export const ActionsMenu = () => {
-  Icon.add({ crop, visibility, color_palette, fullscreen, more_horizontal });
-
-  const { showSelector, setShowModelDialog } = useModelContext();
-
-  const showModelSelector = () => {
-    setShowModelDialog(!showSelector);
-  };
-
-  const options = ['Change Model', 'Model Action 2', 'Model Action 3'];
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const { showModel, hideModel } = useActions();
-
-  useEffect(() => {
-    isVisible ? showModel() : hideModel();
-  }, [isVisible, showModel, hideModel]);
-
-  const handleMenuItemClick = (event: React.MouseEvent, index: number) => {
-    event.stopPropagation();
-    setSelectedIndex(index);
-
-    if (options[index] === 'Change Model') {
-      showModelSelector();
-    }
-  };
-  const openMenu = () => {
-    setIsOpen(true);
-  };
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+  const {
+    isClipped,
+    isOrbit,
+    isFocus,
+    toggleFocus,
+    toggleClipping,
+    fitToScreen,
+    toggleCameraMode,
+  } = useActions();
 
   return (
-    <>
-      <WrapperActionsBar>
-        <ActionsBar>
-          <Button
-            variant="ghost_icon"
-            onClick={() => {
-              console.log();
-            }}
-          >
-            <Icon
-              name={'crop'}
-              color={true ? tokens.colors.text.static_icons__secondary.rgba : undefined}
-            />
-          </Button>
-          <Button
-            variant="ghost_icon"
-            onClick={() => {
-              console.log();
-              setIsVisible((s) => !s);
-            }}
-          >
-            <Icon
-              name={'visibility'}
-              color={true ? tokens.colors.text.static_icons__secondary.rgba : undefined}
-            />
-          </Button>
-
-          <Button
-            variant="ghost_icon"
-            onClick={() => {
-              console.log();
-            }}
-          >
-            <Icon
-              name={'color_palette'}
-              color={false ? undefined : tokens.colors.text.static_icons__secondary.rgba}
-            />
-          </Button>
-          <Button
-            title="View selection"
-            variant="ghost_icon"
-            onClick={() => {
-              console.log();
-            }}
-          >
-            <Icon
-              name={'fullscreen'}
-              color={tokens.colors.text.static_icons__secondary.rgba}
-            />
-          </Button>
-          <Button
-            ref={setAnchorEl}
-            variant="ghost_icon"
-            aria-label="select task action"
-            aria-haspopup="true"
-            aria-controls="menu-default"
-            id="anchor-split"
-            onClick={() => (isOpen ? closeMenu() : openMenu())}
-          >
-            <Icon data={more_horizontal} title="arrow_down"></Icon>
-          </Button>
-          <Menu
-            open={isOpen}
-            id="menu-split"
-            aria-labelledby="anchor-split"
-            onClose={closeMenu}
-            anchorEl={anchorEl}
-          >
-            {options.map((option, index) => (
-              <Menu.Item
-                key={option}
-                disabled={index === 2}
-                onClick={(event: React.MouseEvent) => handleMenuItemClick(event, index)}
-              >
-                {option}
-              </Menu.Item>
-            ))}
-          </Menu>
-        </ActionsBar>
-      </WrapperActionsBar>
-    </>
+    <StyledWrapperActionsBar>
+      <StyledActionsBar>
+        {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
+        {renderIconButton('visibility', 'Show selection only', toggleFocus, !isFocus)}
+        <ColorPaletteMenu />
+        {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
+        {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, !isOrbit)}
+        <ModelSettingsMenu />
+      </StyledActionsBar>
+    </StyledWrapperActionsBar>
   );
 };
 
-export const ActionsBar = styled.div`
+const renderIconButton = (
+  iconName: string,
+  title: string,
+  onClick: () => void,
+  isActive: boolean | null
+) => (
+  <Button variant="ghost_icon" title={title} onClick={onClick}>
+    <Icon
+      name={iconName}
+      color={isActive ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+    />
+  </Button>
+);
+
+const StyledActionsBar = styled.div`
   display: flex;
   bottom: 50px;
   background-color: #fff;
   padding: 0.5rem;
   border-radius: 50px;
+
   > button {
     margin: 0rem 0.25rem;
   }
 `;
 
-export const WrapperActionsBar = styled.div`
+const StyledWrapperActionsBar = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
   bottom: 50px;
   width: 100%;
-  /* z-index: 10; */
 `;

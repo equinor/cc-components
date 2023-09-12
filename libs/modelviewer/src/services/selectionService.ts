@@ -20,8 +20,8 @@ import CameraControls, {
   getNumericRange,
 } from '@equinor/echo-3d-viewer';
 import { get3dPositionFromAabbMinMaxValues } from '@equinor/echo-3d-viewer/dist/src/utils/calculationUtils';
-import { Box3, Color, Vector3 } from 'three';
 import * as THREE from 'three';
+import { Box3, Color, Vector3 } from 'three';
 
 CameraControls.install({ THREE });
 
@@ -145,7 +145,6 @@ export class SelectionService {
       this.getNodeCollectionFromHierarchyNodeModel(nodes)
     );
   }
-
   resetStyleToNodeAppearance(appearance?: NodeAppearance) {
     const newAppearance = appearance || this.model.getDefaultNodeAppearance();
     this.model.styledNodeCollections.forEach((nodeCollection) =>
@@ -153,6 +152,16 @@ export class SelectionService {
     );
 
     return newAppearance;
+  }
+
+  async showNodesNotInSelection(nodes: HierarchyNodeModel[], show: boolean) {
+    const newAppearance = {
+      visible: show,
+    };
+    this.assignStyletToInvertedNodeCollection(
+      this.getNodeCollectionFromHierarchyNodeModel(nodes),
+      newAppearance
+    );
   }
 
   getNodeCollectionsMap(nodes: HierarchyNodeModel[], tagColors: TagColor[]) {

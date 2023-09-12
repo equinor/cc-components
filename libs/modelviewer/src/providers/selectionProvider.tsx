@@ -8,15 +8,15 @@ import {
 } from 'react';
 import { useModelViewerContext } from './modelViewerProvider';
 
-import { useModelContext } from './modelsProvider';
-import { SelectionService, TagColor } from '../services/selectionService';
 import { HierarchyNodeModel } from '@equinor/echo-3d-viewer';
+import { SelectionService, TagColor } from '../services/selectionService';
+import { useModelContext } from './modelsProvider';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
   selectNodesByTagColor(tags: TagColor[]): Promise<void>;
-  orbit(): void;
-  firstPerson(): void;
+  getCurrentNodes(): HierarchyNodeModel[] | undefined;
+  getSelectionService(): SelectionService | undefined;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -28,7 +28,6 @@ export const SelectionContextProvider = ({
   const { echoInstance } = useModelViewerContext();
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[] | undefined>();
-
   const selectionService = useMemo(() => {
     if (modelMeta && echoInstance) {
       return new SelectionService(modelMeta, echoInstance);
@@ -40,7 +39,19 @@ export const SelectionContextProvider = ({
   }, [tags, selectionService]);
 
   const selectNodesByTags = async (tags: string[]) => {
-    await selectionService?.selectNodesByTags(tags);
+    const nodes = await selectionService?.selectNodesByTags(tags, {
+      fitToSelection: true,
+    });
+    setCurrentNodes(nodes);
+    if (nodes) selectionService?.clipModelByNodes(nodes, true);
+  };
+
+  const getCurrentNodes = () => {
+    if (currentNodes) return currentNodes;
+  };
+
+  const getSelectionService = () => {
+    if (selectionService) return selectionService;
   };
 
   const selectNodesByTagColor = async (tags: TagColor[]) => {
@@ -51,24 +62,13 @@ export const SelectionContextProvider = ({
     if (nodes) selectionService?.clipModelByNodes(nodes, true);
   };
 
-  const orbit = () => {
-    if (currentNodes && selectionService) {
-      const target = selectionService.getCenterFromNodes(currentNodes);
-      selectionService.cameraObitTarget(target);
-    }
-  };
-
-  const firstPerson = () => {
-    selectionService?.cameraFirstPerson();
-  };
-
   return (
     <SelectionContext.Provider
       value={{
         selectNodesByTags,
         selectNodesByTagColor,
-        orbit,
-        firstPerson,
+        getCurrentNodes,
+        getSelectionService,
       }}
     >
       {children}
