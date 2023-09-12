@@ -7,46 +7,43 @@ import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
 import { Color } from 'three';
 
 export const ColorPaletteMenu = () => {
+  type ColorOption = 'Default' | 'Grayscale' | 'Ghost';
   Icon.add({ color_palette });
+
   const { assignAppearanceToInvertedNodeCollection } = useActions();
 
   const [colorPaletteIsOpen, setColorPaletteIsOpen] = useState<boolean>(false);
   const [colorPaletteAnchorEl, setColorPaletteAnchorEl] =
     useState<HTMLButtonElement | null>(null);
 
-  const colorPaletteOptions = ['Default', 'Grayscale', 'Ghost'];
+  const colorPaletteOptions: ColorOption[] = ['Default', 'Grayscale', 'Ghost'];
 
-  const handleColorPaletteMenuItemClick = (event: React.MouseEvent, index: number) => {
-    event.stopPropagation();
-    let appearance: NodeAppearance = {};
-    if (colorPaletteOptions[index] === 'Grayscale') {
-      appearance = {
-        color: new Color(128, 128, 128),
-        outlineColor: NodeOutlineColor.NoOutline,
-        renderGhosted: false,
-      };
-    }
-    if (colorPaletteOptions[index] === 'Default') {
-      appearance = {
+  const getAppearanceByOption = (option: ColorOption): NodeAppearance => {
+    const appearances: Record<ColorOption, NodeAppearance> = {
+      Default: {
         color: new Color(0, 0, 0),
         outlineColor: NodeOutlineColor.NoOutline,
         renderGhosted: false,
-      };
-    }
-    if (colorPaletteOptions[index] === 'Ghost') {
-      appearance = {
+      },
+      Grayscale: {
+        color: new Color(128, 128, 128),
+        outlineColor: NodeOutlineColor.NoOutline,
+        renderGhosted: false,
+      },
+      Ghost: {
         renderGhosted: true,
-      };
-    }
+      },
+    };
+    return appearances[option];
+  };
+
+  const handleColorPaletteMenuItemClick = (
+    event: React.MouseEvent,
+    option: ColorOption
+  ) => {
+    event.stopPropagation();
+    const appearance = getAppearanceByOption(option);
     assignAppearanceToInvertedNodeCollection(appearance);
-  };
-
-  const openColorPaletteMenu = () => {
-    setColorPaletteIsOpen(true);
-  };
-
-  const closeColorPaletteMenu = () => {
-    setColorPaletteIsOpen(false);
   };
 
   return (
@@ -54,9 +51,7 @@ export const ColorPaletteMenu = () => {
       <Button
         variant="ghost_icon"
         title="Change color palette"
-        onClick={() => {
-          openColorPaletteMenu();
-        }}
+        onClick={() => setColorPaletteIsOpen(true)}
         ref={setColorPaletteAnchorEl}
       >
         <Icon
@@ -68,14 +63,14 @@ export const ColorPaletteMenu = () => {
         open={colorPaletteIsOpen}
         id="menu-color-palette"
         aria-labelledby="anchor-color-palette"
-        onClose={closeColorPaletteMenu}
+        onClose={() => setColorPaletteIsOpen(false)}
         anchorEl={colorPaletteAnchorEl}
       >
-        {colorPaletteOptions.map((option, index) => (
+        {colorPaletteOptions.map((option) => (
           <Menu.Item
             key={option}
             onClick={(event: React.MouseEvent) =>
-              handleColorPaletteMenuItemClick(event, index)
+              handleColorPaletteMenuItemClick(event, option)
             }
           >
             {option}

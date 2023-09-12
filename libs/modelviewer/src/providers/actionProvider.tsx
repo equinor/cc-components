@@ -1,5 +1,5 @@
 import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
-import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 import { Color } from 'three';
 import { useModelContext } from './modelsProvider';
 import { useSelectionContext } from './selectionProvider';
@@ -17,39 +17,29 @@ interface ActionContextState {
   assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
-const ActionContext = createContext({} as ActionContextState);
+const ActionContext = createContext<ActionContextState | undefined>(undefined);
 
-export const ActionContextProvider = ({ children }: PropsWithChildren) => {
+export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const { getModel } = useModelContext();
   const { getCurrentNodes, getSelectionService } = useSelectionContext();
 
   const [isOrbit, setIsOrbit] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
-  const [isClipped, setClipped] = useState<boolean>(true);
+  const [isClipped, setClipped] = useState(true);
 
-  const currentNodes = useMemo(() => {
-    return getCurrentNodes();
-  }, [getCurrentNodes()]);
+  const currentNodes = getCurrentNodes();
+  const selectionService = getSelectionService();
 
-  const selectionService = useMemo(() => {
-    return getSelectionService();
-  }, [getSelectionService()]);
-
-  const hideModel = () => {
+  const setModelVisibility = (isVisible: boolean) => {
     const model = getModel();
     if (model) {
       const appearance = model.getDefaultNodeAppearance();
-      model.setDefaultNodeAppearance({ ...appearance, visible: false });
+      model.setDefaultNodeAppearance({ ...appearance, visible: isVisible });
     }
   };
 
-  const showModel = () => {
-    const model = getModel();
-    if (model) {
-      const appearance = model.getDefaultNodeAppearance();
-      model.setDefaultNodeAppearance({ ...appearance, visible: true });
-    }
-  };
+  const hideModel = () => setModelVisibility(false);
+  const showModel = () => setModelVisibility(true);
 
   const orbit = () => {
     if (currentNodes && selectionService) {
@@ -58,25 +48,10 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const toggleClipping = () => {
-    if (currentNodes) {
-      selectionService?.clipModelByNodes(currentNodes, isClipped);
-      setClipped(!isClipped);
-    }
-  };
-
-  const fitToScreen = () => {
-    if (currentNodes) {
-      selectionService?.fitCameraToNodeSelection(currentNodes);
-    }
-  };
+  const firstPerson = () => selectionService?.cameraFirstPerson();
 
   const toggleCameraMode = () => {
-    if (isOrbit) {
-      firstPerson();
-    } else {
-      orbit();
-    }
+    isOrbit ? firstPerson() : orbit();
     setIsOrbit(!isOrbit);
   };
 
@@ -87,17 +62,25 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const assignAppearanceToInvertedNodeCollection = (appearance: NodeAppearance) => {
-    if (currentNodes) {
-      selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes);
-      selectionService?.assignStyletToInvertedNodeCollection(
-        selectionService?.getNodeCollectionFromHierarchyNodeModel(currentNodes),
-        appearance
-      );
+  const toggleClipping = () => {
+    if (currentNodes && selectionService) {
+      selectionService.clipModelByNodes(currentNodes, isClipped);
+      setClipped(!isClipped);
     }
   };
-  const firstPerson = () => {
-    selectionService?.cameraFirstPerson();
+
+  const fitToScreen = () => {
+    if (currentNodes) {
+      selectionService?.fitCameraToNodeSelection(currentNodes);
+    }
+  };
+
+  const assignAppearanceToInvertedNodeCollection = (appearance: NodeAppearance) => {
+    if (currentNodes && selectionService) {
+      const collection =
+        selectionService.getNodeCollectionFromHierarchyNodeModel(currentNodes);
+      selectionService.assignStyletToInvertedNodeCollection(collection, appearance);
+    }
   };
 
   return (
@@ -122,6 +105,6 @@ export const ActionContextProvider = ({ children }: PropsWithChildren) => {
 
 export const useActions = () => {
   const context = useContext(ActionContext);
-  if (!context) throw new Error('Context provider not found!');
+  if (!context) throw new Error('useActions must be used within ActionContextProvider');
   return context;
 };

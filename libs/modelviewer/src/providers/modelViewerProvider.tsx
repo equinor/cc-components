@@ -15,7 +15,7 @@ import {
   HierarchyClient,
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
-import Canvas from '../components/actions-bar/canvas/canvas';
+import Canvas from '../components/canvas/canvas';
 
 type ModelViewerContextType = {
   viewer?: Echo3dViewer;
