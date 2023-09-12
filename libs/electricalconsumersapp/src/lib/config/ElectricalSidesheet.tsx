@@ -65,52 +65,57 @@ export function Test({
   const client = useHttpClient();
   const context = useContextId();
 
-  const [itemId, facility] = id.split('_');
+  const [itemId, facility, project] = id.split('_');
 
   if (!facility || !itemId) {
     closeSidesheet();
     return <></>;
   }
 
-  const { data: elenetwork, isLoading: isLoadingEle } = useQuery<ElectricalNetwork>(
-    /**Change facility to project */
-    /** facility*/ [itemId, facility],
-    async ({ signal }) => {
-      const res = await client.fetch(
-        `api/contexts/${context}/electrical/consumers/electrical-network/${encodeURIComponent(
-          itemId
-        )}/${facility}`,
-        { signal }
-      );
-      if (!res.ok) {
-        throw new Error('Failed to fetch elenetwork');
+  const { data: elenetwork, isLoading: isLoadingEle } =
+    useQuery<ElectricalNetwork | null>(
+      /**Change facility to project */
+      /** facility*/ [itemId, facility],
+      async ({ signal }) => {
+        const res = await client.fetch(
+          `api/contexts/${context}/electrical/consumers/electrical-network/${encodeURIComponent(
+            itemId
+          )}/${facility}`,
+          { signal }
+        );
+        if (!res.ok) {
+          if (res.status === 404) {
+            return null;
+          }
+          throw new Error('Failed to fetch elenetwork');
+        }
+        return res.json();
+      },
+      {
+        suspense: false,
+        useErrorBoundary: false,
       }
-      return res.json();
-    },
-    {
-      suspense: false,
-      useErrorBoundary: false,
-    }
-  );
+    );
   const { data: consumer, isLoading } = useQuery<ElectricalConsumer>(
     /**Change facility to project */
     /** facility*/ [id],
     async ({ signal }) => {
       const res = await client.fetch(
-        `api/contexts/${context}/electrical/consumers/${facility}/${itemId}`,
+        `api/contexts/${context}/electrical/consumers/${facility}/${project}/${itemId}`,
         { signal }
       );
       if (!res.ok) {
-        throw new Error('Failed to fetch consumers');
+        throw new Error('Failed to fetch consumer');
       }
       return res.json();
     },
     {
-      suspense: false,
-      useErrorBoundary: false,
+      suspense: true,
+      useErrorBoundary: true,
       initialData: item ?? undefined,
     }
   );
+
   if (isLoading) {
     return <SidesheetSkeleton close={closeSidesheet} />;
   }
@@ -130,18 +135,27 @@ export function Test({
         <BannerItem title="Facility" value={consumer.instCode} />
         <BannerItem title="Status" value={consumer.tagStatus} />
         <BannerItem title="Symbol code" value={consumer.componentType} />
+        <BannerItem title="McPkg" value={consumer.mechanicalCompletionPackageNo ?? ''} />
+        <BannerItem title="CommPkg" value={consumer.commissioningPackageNo ?? ''} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
             <Tabs.Tab>
-              CircuitDiagram <TabTitle isLoading={true} data={undefined} />
+              CircuitDiagram
+              <TabTitle isLoading={isLoadingEle} data={elenetwork == null ? [] : [{}]} />
             </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
         <StyledPanels>
-          <Tabs.Panel>{elenetwork && <CircuitDiagram network={elenetwork} />}</Tabs.Panel>
+          <Tabs.Panel>
+            {elenetwork ? (
+              <CircuitDiagram network={elenetwork} />
+            ) : (
+              <div>No electrical network found</div>
+            )}
+          </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>

@@ -22,6 +22,7 @@ export type ElectricalConsumer = {
   eleSymbolCode: any;
   mechanicalCompletionPackageNo: string | null;
   commissioningPackageNo: string | null;
+  projectCode: string;
 };
 
 export const WorkspaceWrapper = () => {
@@ -38,7 +39,8 @@ export const WorkspaceWrapper = () => {
     <Workspace<ElectricalConsumer>
       key={contextId}
       workspaceOptions={{
-        getIdentifier: (e) => encodeURIComponent(`${e.tagNo}_${e.instCode}`),
+        getIdentifier: (e) =>
+          encodeURIComponent(`${e.tagNo}_${e.instCode}_${e.projectCode}`),
       }}
       filterOptions={filterConfig}
       sidesheetOptions={{
