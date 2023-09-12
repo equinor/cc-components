@@ -236,6 +236,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/handovershared:
     dependencies:
@@ -270,6 +273,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/loopshared:
     dependencies:
@@ -322,6 +328,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
     devDependencies:
       '@types/styled-components':
         specifier: 5.1.26
@@ -349,6 +358,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/punchshared:
     dependencies:
@@ -456,6 +468,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
@@ -469,6 +484,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
