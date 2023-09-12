@@ -1,11 +1,4 @@
-import {
-  MutableRefObject,
-  ReactNode,
-  forwardRef,
-  startTransition,
-  useRef,
-  useState,
-} from 'react';
+import { ReactNode, forwardRef, useState } from 'react';
 import { heat_trace, cable, junction_box, circuit } from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
 import { ElectricalNetwork } from '../types/ElectricalNetwork';
@@ -26,16 +19,14 @@ import {
   StyledSwitchboardChildren,
   StyledSwitchboardWrapper,
   StyledCircuitNameAndIcon,
+  StyledCircuitNameAndIconWrapper,
 } from './stylesCircuitDiagram';
-import { mock } from './mockData';
 
 Icon.add({ heat_trace, cable, junction_box, circuit });
 
 type CircuitRef = Record<string, HTMLDivElement>;
 
 export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
-  // const network = mock;
-
   const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
   return (
     <StyledCircuitDiagramWrapper>
@@ -47,12 +38,12 @@ export function CircuitDiagram({ network }: { network: ElectricalNetwork }) {
               <>
                 {circuit.children.map((circuitChildren) => (
                   <ElectricalComponent
-                    ref={(element: HTMLDivElement) => {
+                    ref={(element: HTMLDivElement | null) => {
                       if (!element) return;
                       setCircuitRef((old) => {
                         const isPresent = old?.[circuit.name] === element;
                         if (isPresent) return old;
-                        return Object.assign({ [circuit.name]: element }, old);
+                        return Object.assign({}, old, { [circuit.name]: element });
                       });
                     }}
                     network={circuitChildren}
@@ -83,25 +74,13 @@ function Switchboard({
       </StyledNetworkNameAndIcon>
       {network.children.map((s) => {
         const maybeRef = circuitRef?.[s.name];
-        console.log(maybeRef);
-        console.log(s.name, circuitRef);
         return (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'absolute',
-              top: maybeRef?.offsetTop - 10 ?? 0,
-              width: '100%',
-              left: 0,
-            }}
-          >
+          <StyledCircuitNameAndIconWrapper maybeRef={maybeRef}>
             <StyledCircuitNameAndIcon key={s.name}>
               {s.name} <Icon name={circuit.name} />
               {s.isSafetyCritical ? <CriticalLine /> : null}
             </StyledCircuitNameAndIcon>
-          </div>
+          </StyledCircuitNameAndIconWrapper>
         );
       })}
     </StyledSwitchboardWrapper>
@@ -114,14 +93,7 @@ const MaybeFirst = forwardRef<
 >(({ circuitName, children }, ref) => (
   <>
     {circuitName ? (
-      <StyledFirstItem
-        ref={ref}
-        svg={`%3Csvg xmlns='
-      http://www.w3.org/2000/svg'%3E%3Cpath
-      d='M12 2a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1zM4.707 5.707a1 1 0 0 0 0 1.414l3.847 3.847a4.002 4.002 0 0 0 2.454 5.908A.998.998 0 0 0 11 17v4a1 1 0 0 0 2 0v-4a.998.998 0 0 0-.008-.124 4.002 4.002 0 1 0-3.024-7.322L6.12 5.707a1 1 0 0 0-1.414 0zM14 13a2 2 0 1 1-4 0 2 2 0 0 1 4 0z'%3E%3C/path%3E%3C/svg%3E`}
-      >
-        {children}
-      </StyledFirstItem>
+      <StyledFirstItem ref={ref}>{children}</StyledFirstItem>
     ) : (
       <StyledItem>{children}</StyledItem>
     )}
@@ -172,6 +144,7 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
         );
       }
 
+      // need to implement the rest
       default:
         return (
           <StyledItem>
