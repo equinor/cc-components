@@ -254,6 +254,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/handovershared:
     dependencies:
@@ -288,6 +291,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/loopshared:
     dependencies:
@@ -340,6 +346,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
     devDependencies:
       '@types/styled-components':
         specifier: 5.1.26
@@ -367,6 +376,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/punchshared:
     dependencies:
@@ -401,6 +413,9 @@ importers:
 
   libs/shared:
     dependencies:
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.11.1(@types/react@18.0.25)(react@18.2.0)
@@ -437,9 +452,6 @@ importers:
 
   libs/sharedcomponents:
     dependencies:
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
       styled-components:
         specifier: 5.3.6
         version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -474,6 +486,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
@@ -487,6 +502,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared

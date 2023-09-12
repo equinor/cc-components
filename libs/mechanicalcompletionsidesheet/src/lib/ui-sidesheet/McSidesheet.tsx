@@ -2,18 +2,20 @@ import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import {
-  BannerItem,
   NcrTab,
   PunchTab,
+  WorkorderBase,
+  WorkorderTab,
+} from '@cc-components/shared/sidesheet';
+import {
   SidesheetHeader,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-  WorkorderBase,
-  WorkorderTab,
-} from '@cc-components/shared/sidesheet';
+  BannerItem,
+} from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import { createWidget } from '@cc-components/shared';

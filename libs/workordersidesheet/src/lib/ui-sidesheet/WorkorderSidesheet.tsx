@@ -1,48 +1,36 @@
 import {
-  BannerItem,
   CutoffTab,
   LinkCell,
   MaterialTab,
   MccrTab,
-  SidesheetHeader,
   StatusCircle,
-  StyledBanner,
-  StyledPanels,
-  StyledSideSheetContainer,
-  StyledTabs,
-  TabTitle,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
-import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import {
+  BannerItem,
+  SidesheetHeader,
+  SidesheetSkeleton,
+  StyledBanner,
+  StyledPanels,
+  StyledSideSheetContainer,
+  StyledTabListWrapper,
+  StyledTabs,
+  StyledTabsList,
+  TabTitle,
+} from '@cc-components/sharedcomponents';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { TabListProps, Tabs } from '@equinor/eds-core-react';
-import { tokens } from '@equinor/eds-tokens';
+import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
-
-export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
-  overflow: hidden;
-  width: 100%;
-  background-color: ${tokens.colors.ui.background__light.hex};
-`;
-export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
-  overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-  scroll-behavior: smooth;
-`;
 
 export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);

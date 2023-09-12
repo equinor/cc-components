@@ -1,12 +1,4 @@
 import { Punch } from '@cc-components/punchshared';
-import {
-  BannerItem,
-  SidesheetHeader,
-  StyledBanner,
-  StyledPanels,
-  StyledSideSheetContainer,
-  StyledTabs,
-} from '@cc-components/shared/sidesheet';
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@cc-components/shared';
 import { useRef, useState } from 'react';
@@ -14,7 +6,15 @@ import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
 import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
-import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import {
+  BannerItem,
+  SidesheetHeader,
+  SidesheetSkeleton,
+  StyledBanner,
+  StyledPanels,
+  StyledSideSheetContainer,
+  StyledTabs,
+} from '@cc-components/sharedcomponents';
 
 export const PunchSidesheet = createWidget<Punch>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
