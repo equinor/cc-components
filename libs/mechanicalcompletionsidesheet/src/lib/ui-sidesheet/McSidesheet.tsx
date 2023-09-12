@@ -16,22 +16,19 @@ import {
 } from '@cc-components/shared/sidesheet';
 import { Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
+
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
-type McSidesheetProps = {
-  id: string;
-  item?: McPackage;
-  closeSidesheet: () => void;
-};
-export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
+
+export const McSideSheet = createWidget<McPackage>(({ props }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const handleChange = (index: number) => {

@@ -1,5 +1,5 @@
 import { Loop } from '@cc-components/loopshared';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
@@ -40,13 +40,7 @@ export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.
   scroll-behavior: smooth;
 `;
 
-type LoopProps = {
-  id: string;
-  item?: Loop;
-  close: () => void;
-};
-
-export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
+export const LoopSidesheet = createWidget<Loop>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const client = useHttpClient();
@@ -74,7 +68,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
   const { data, isLoading, error } = useGetWorkorders(loop?.loopNo);
 
   if (isLoadingSidesheet) {
-    return <SidesheetSkeleton close={props.close} />;
+    return <SidesheetSkeleton close={props.closeSidesheet} />;
   }
 
   if (!loop || sidesheetError) {
@@ -89,7 +83,7 @@ export const LoopSidesheet = createWidget<LoopProps>(({ props }) => {
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={`${loop.loopNo}, ${loop.description}` || ''}
-        onClose={props.close}
+        onClose={props.closeSidesheet}
         applicationTitle="Loop"
       />
       <StyledBanner>
