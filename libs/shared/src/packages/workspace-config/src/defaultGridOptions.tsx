@@ -11,6 +11,7 @@ export const defaultGridOptions: GridOptions = {
   loadingCellRenderer: LoadingCellRenderer,
   defaultColDef: defaultColDef,
   serverSideInitialRowCount: 100,
+  enableBrowserTooltips: true,
   onFirstDataRendered: (e) => {
     e.columnApi.autoSizeColumns(
       e.columnApi.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
