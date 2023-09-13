@@ -17,6 +17,7 @@ import {
 } from '../services/selectionService';
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Vector3 } from 'three';
+import { TagOverlay } from '../types/overlayTags';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<void>;
@@ -42,8 +43,8 @@ interface Test extends Event {
 
 export const SelectionContextProvider = ({
   children,
-  tags,
-}: PropsWithChildren<{ tags: string[] }>) => {
+  tags: tagOverlay,
+}: PropsWithChildren<{ tags: TagOverlay[] }>) => {
   const { echoInstance } = useModelViewerContext();
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
@@ -55,8 +56,11 @@ export const SelectionContextProvider = ({
   }, [modelMeta, echoInstance]);
 
   useEffect(() => {
-    if (tags && selectionService) selectionService.selectNodesByTags(tags);
-  }, [tags, selectionService]);
+    if (tagOverlay.length > 0 && selectionService) {
+      const tags = tagOverlay.map((tag) => tag.tagNo);
+      selectionService.selectNodesByTags(tags).then((nodes) => setCurrentNodes(nodes));
+    }
+  }, [tagOverlay, selectionService]);
 
   useEffect(() => {
     window.addEventListener('selectionStarted', (e) => {

@@ -297,13 +297,14 @@ export class SelectionService {
   getViewerNodeSelection(nodes: HierarchyNodeModel[]): ViewerNodeSelection[] {
     return nodes
       .filter((nodeResult) => nodeResult.aabb && nodeResult.tag)
-      .map((nodeResult) => {
+      .map((nodeResult, index) => {
         const { min, max } = nodeResult.aabb!;
 
         const boundingBox = new THREE.Box3(
           new THREE.Vector3(min.x, min.z, -max.y),
           new THREE.Vector3(max.x, max.z, -min.y)
         );
+
         return {
           position: get3dPositionFromAabbMinMaxValues(nodeResult.aabb!),
           tagNo: nodeResult.tag!,
