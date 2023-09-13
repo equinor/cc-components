@@ -53,8 +53,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-error-boundary:
-        specifier: ^4.0.4
-        version: 4.0.4(react@18.2.0)
+        specifier: ^4.0.11
+        version: 4.0.11(react@18.2.0)
       react-is:
         specifier: 18.2.0
         version: 18.2.0
@@ -147,6 +147,15 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@types/node@18.11.9)
 
+  apps/electricalconsumers:
+    dependencies:
+      '@cc-components/electricalconsumersapp':
+        specifier: workspace:^
+        version: link:../../libs/electricalconsumersapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/handover:
     dependencies:
       '@cc-components/handoverapp':
@@ -225,6 +234,15 @@ importers:
         specifier: 11.0.0
         version: 11.0.0
 
+  libs/electricalconsumersapp:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
+
   libs/handoverapp:
     dependencies:
       '@cc-components/handovershared':
@@ -236,6 +254,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/handovershared:
     dependencies:
@@ -254,10 +275,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/loopapp:
     dependencies:
@@ -270,6 +287,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/loopshared:
     dependencies:
@@ -288,10 +308,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/mechanicalcompletionapp:
     dependencies:
@@ -322,10 +338,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/plugins: {}
 
@@ -349,6 +364,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/punchshared:
     dependencies:
@@ -367,10 +385,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/scopechangerequestapp:
     dependencies:
@@ -383,6 +397,9 @@ importers:
 
   libs/shared:
     dependencies:
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.11.1(@types/react@18.0.25)(react@18.2.0)
@@ -417,18 +434,7 @@ importers:
         specifier: ^2.0.36
         version: 2.0.36(@remirror/pm@2.0.8)(@types/node@18.11.9)
 
-  libs/sharedcomponents:
-    dependencies:
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
-      styled-components:
-        specifier: 5.3.6
-        version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
+  libs/sharedcomponents: {}
 
   libs/swcrapp:
     dependencies:
@@ -456,19 +462,21 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/workorderapp:
     dependencies:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
@@ -493,10 +501,6 @@ importers:
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   reports/JCA-reports/jcainstallation:
     dependencies:
@@ -11321,12 +11325,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-error-boundary@4.0.4(react@18.2.0):
-    resolution: {integrity: sha512-AbqMFx8bCsob8rCHZvJYQ42MQijK0/034RUvan9qrqyJCpazr8d9vKHrysbxcr6odoHLZvQEcYomFPoIqH9fow==}
+  /react-error-boundary@4.0.11(react@18.2.0):
+    resolution: {integrity: sha512-U13ul67aP5DOSPNSCWQ/eO0AQEYzEFkVljULQIjMV0KlffTAhxuDoBKdO0pb/JZ8mDhMKFZ9NZi0BmLGUiNphw==}
     peerDependencies:
       react: '>=16.13.1'
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       react: 18.2.0
     dev: false
 

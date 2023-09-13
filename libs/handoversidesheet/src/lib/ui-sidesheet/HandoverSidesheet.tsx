@@ -6,23 +6,25 @@ import { tokens } from '@equinor/eds-tokens';
 
 import {
   BannerItem,
-  McTab,
-  PunchTab,
-  QueryTab,
   SidesheetHeader,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
-  SwcrTab,
   TabTitle,
+} from '@cc-components/sharedcomponents';
+
+import {
+  useContextId,
   UnsignedActionTab,
   UnsignedTaskTab,
   WorkorderBase,
   WorkorderTab,
-} from '@cc-components/shared/sidesheet';
-
-import { useContextId } from '@cc-components/shared';
+  SwcrTab,
+  McTab,
+  PunchTab,
+  QueryTab,
+} from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
