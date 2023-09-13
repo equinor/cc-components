@@ -64,14 +64,8 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
-<<<<<<< HEAD
     field: 'Title',
     colId: 'Title',
-=======
-    field: 'Description',
-    colId: 'Description',
-    headerTooltip: 'Description',
->>>>>>> 6415280521f1c6fcb190a1d0b395b2984df5d61b
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       return <DescriptionCell description={props.value} />;
