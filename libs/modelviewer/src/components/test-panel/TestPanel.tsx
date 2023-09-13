@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Color } from 'three';
 import { useSelectionContext } from '../../providers/selectionProvider';
+import { TagOverlay } from '../../types/overlayTags';
 
 const mockedTagList = [
   '30L06200A',
@@ -20,7 +21,41 @@ const mockedTagColorList = [
   { tag: '30L06100A', color: new Color('#44fd44') },
 ];
 
-export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) => {
+const mockedTagListNew = [
+  '56L00024A',
+  '56L00027A',
+  '56L00028A',
+  '56L00074A',
+  '56L00598A',
+  '56L00600A',
+  '56L00602A',
+  '56L00604A',
+  '56L00606A',
+  '56L00608A',
+  '56L00610A',
+  '56L00612A',
+  '56L00612A',
+  '56L00616A',
+  '56L00618A',
+  '56L00620A',
+  '56L00622A',
+  '56L00624A',
+  '56L00626A',
+  '56L00628A',
+  '56L00630A',
+  '56L00670A',
+  '56L00672A',
+  '56L00674A',
+  '56L00676A',
+  '56L00678A',
+  '56L00028A',
+];
+
+export const TestPanel = ({
+  setTags,
+}: {
+  setTags: (tags: TagOverlay[] | string[]) => void;
+}) => {
   const { selectNodesByTagColor, selectNodesByTags } = useSelectionContext();
 
   return (
@@ -53,7 +88,7 @@ export const TestPanel = ({ setTags }: { setTags: (tags: string[]) => void }) =>
           </button>
           <button
             onClick={() => {
-              setTags(['30L06200A', '30XV6200', '30L06200B']);
+              setTags(mockedTagListNew);
             }}
             style={{ height: '25px' }}
           >

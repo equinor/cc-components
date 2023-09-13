@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
@@ -7,13 +7,13 @@ import { ModelViewerContextProvider } from './providers/modelViewerProvider';
 import { ModelContextProvider } from './providers/modelsProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { ActionContextProvider } from './providers/actionProvider';
-import { TagOverlay } from './components/tag-overlay/tagOverlay';
-import { TagMap } from './types/overlay';
+import { TagsOverlay } from './components/tag-overlay/tagOverlay';
+import { TagMap, TagOverlay } from './types/overlayTags';
 
 type FusionModelViewerProps = {
   plantName: string;
   plantCode: string;
-  tags?: string[];
+  tagsOverlay?: string[] | TagOverlay[];
 };
 
 export const FusionModelViewer = (props: FusionModelViewerProps) => {
@@ -32,8 +32,28 @@ export const FusionModelViewer = (props: FusionModelViewerProps) => {
   );
 };
 
-const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => {
-  const [tagList, setTagList] = useState<string[]>([]);
+const ModelViewer = ({
+  plantName,
+  plantCode,
+  tagsOverlay,
+}: PropsWithChildren<FusionModelViewerProps>) => {
+  const [tagList, setTagList] = useState<TagOverlay[]>([]);
+
+  const handleTagList = (tagOverlay: string[] | TagOverlay[]) => {
+    if (typeof tagOverlay[0] === 'string') {
+      setTagList(
+        (tagOverlay as string[]).map((tag) => ({
+          tagNo: tag,
+          description: '-',
+          status: 'nan',
+          type: 'tag',
+        }))
+      );
+      return;
+    } else {
+      setTagList(tagOverlay as TagOverlay[]);
+    }
+  };
   return (
     <>
       <ModelViewerContextProvider>
@@ -41,14 +61,11 @@ const ModelViewer = ({ plantName, plantCode, tags }: FusionModelViewerProps) => 
           <SelectionContextProvider tags={tagList}>
             <ModelSelection plantName={plantName}>
               <ActionContextProvider>
-                <TagOverlay
-                  tagOverlay={tagList.reduce((acc, item) => {
-                    acc[item] = { tagNo: item, status: 'ok', type: 'tag' };
-                    return acc;
-                  }, {} as TagMap)}
-                />
+                <TagsOverlay tagsOverlay={tagList} />
                 <ActionsMenu />
-                <TestPanel setTags={(tags: string[]) => setTagList(tags)} />
+                <TestPanel
+                  setTags={(tags: string[] | TagOverlay[]) => handleTagList(tags)}
+                />
               </ActionContextProvider>
             </ModelSelection>
           </SelectionContextProvider>

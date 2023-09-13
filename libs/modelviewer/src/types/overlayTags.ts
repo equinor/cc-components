@@ -9,7 +9,15 @@ export interface DomPosition {
 export interface OverlayTag {
   key: string;
   tagNo: string;
-  position3d: Vector3;
+  description?: string;
+  icon?: string | JSX.Element;
+  status: string;
+  type: string;
+  position: Vector3;
   aabb: AabbModel;
   boundingBox: Box3;
 }
+
+export type TagOverlay = Omit<OverlayTag, 'key' | 'position' | 'aabb' | 'boundingBox'>;
+
+export type TagMap = Record<string, TagOverlay>;
