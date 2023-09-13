@@ -45,6 +45,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'LoopTag',
     field: 'Loop tag',
+    headerTooltip: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       return <LinkCell url={props.data?.loopUrl ?? ''} urlText={props.value ?? ''} />;
@@ -54,6 +55,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     field: 'Description',
     colId: 'Description',
+    headerTooltip: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <DescriptionCell description={props.value} />;
@@ -63,6 +65,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'System',
     field: 'System',
+    headerTooltip: 'System',
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => (
       <StyledMonospace>{props.data?.system}</StyledMonospace>
@@ -71,7 +74,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CommPkgNo',
-    field: 'Comm pkg',
+    field: 'Comm Pkg',
+    headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (props.data?.commissioningPackageUrl && props.data.commissioningPackageNo) {
@@ -90,6 +94,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'MCPkgNo',
     field: 'MC Pkg',
+    headerTooltip: 'Mechanical Completion Package Number',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (
@@ -110,13 +115,15 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Priority1',
-    field: 'Priority',
+    field: 'Priority 1',
+    headerTooltip: 'Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
     enableRowGroup: false,
   },
   {
     colId: 'RfcPlannedForecastDate',
     field: 'Planned/Forecast RFC',
+    headerTooltip: 'Planned/Forecast RFC',
     valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -126,6 +133,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'RfoPlannedForecastDate',
     field: 'Planned/Forecast RFO',
+    headerTooltip: 'Planned/Forecast RFO',
     valueGetter: (pkg) => pkg.data?.rfO_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -135,6 +143,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'CLStatus',
     field: 'Checklist status',
+    headerTooltip: 'Checklist status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {
       return (
@@ -153,12 +162,14 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'Responsible',
     field: 'Responsible',
+    headerTooltip: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: false,
   },
   {
     colId: 'Location',
     field: 'Location',
+    headerTooltip: 'Location',
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <StyledMonospace>{props.data?.location}</StyledMonospace>;
@@ -168,6 +179,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'FormularType',
     field: 'Form type',
+    headerTooltip: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
@@ -179,6 +191,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'SignedDate',
     field: 'Signed',
+    headerTooltip: 'Singed Date',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -188,6 +201,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'VerifiedDate',
     field: 'Verified',
+    headerTooltip: 'Verified Date',
     valueGetter: (pkg) => pkg.data?.verifiedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -196,6 +210,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     field: 'Content MC status',
+    headerTooltip: 'Content MC status',
     valueGetter: (pkg) => pkg.data?.loopContentStatus,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {
       return (
@@ -214,6 +229,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'WoPlannedCompletionDate',
     field: 'Planned MC complete',
+    headerTooltip: 'Planned MC complete',
     valueGetter: (pkg) => pkg.data?.woPlannedCompletionDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -232,6 +248,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'RemainingManHours',
     field: 'Rem mhrs',
+    headerTooltip: 'Remaining Manhours',
+
     valueGetter: (pkg) => pkg.data?.remainingManHours,
     // valueFormatter: (pkg) => pkg.context.maxRemHrs,
     // cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
