@@ -22,7 +22,6 @@ import {
   useHelpers,
   OnChangeJSON,
 } from '@remirror/react';
-
 import type { CreateEditorStateProps } from 'remirror';
 import type { RemirrorProps } from '@remirror/react';
 import { theme } from './theme';

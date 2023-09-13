@@ -1,8 +1,8 @@
-import { configure, WorkspaceWrapper } from '@cc-components/punchapp';
+import { configure, WorkspaceWrapper } from '@cc-components/<%= projectName %>app';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 
-const MyApp = () => {
+const Workspace<%= projectName %> = () => {
   const client = useHttpClient('cc-api');
   return (
     <RootAppWrapper client={client}>
@@ -11,5 +11,5 @@ const MyApp = () => {
   );
 };
 
-export const render = createRender(PunchApp, configure);
+export const render = createRender(Workspace<%= projectName %>, configure);
 export default render;

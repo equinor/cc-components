@@ -1,5 +1,5 @@
 import { HeatTrace } from 'libs/heattraceshared/dist/src';
-import { pipetestAndHeatTraceColorMap } from '@cc-components/shared';
+import { pipetestAndHeatTraceColorMap } from '@cc-components/shared/mapping';
 import { getTextColor } from './getTextColor';
 
 type PackageStatusReturn = {

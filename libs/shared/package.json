@@ -92,12 +92,10 @@
     "@remirror/react": "^2.0.27",
     "@remirror/react-editors": "^1.0.38",
     "@remirror/styles": "^2.0.4",
+    "@remirror/theme": "^2.0.9",
     "date-fns": "^2.29.3",
     "markdown-to-jsx": "^7.2.0",
-    "@storybook/react": "^7.3.2",
-    "remirror": "^2.0.36"
-  },
-  "devDependencies": {
-    "@storybook/types": "7.3.2"
+    "remirror": "^2.0.36",
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }

@@ -1,17 +1,14 @@
 import styled from 'styled-components';
 import { Skeleton } from '../Skeleton';
+
+import { tokens } from '@equinor/eds-tokens';
+import { Button, Icon, Tabs } from '@equinor/eds-core-react';
 import {
-  BannerItem,
-  SidesheetHeader,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
-  TabTitle,
-  WorkorderTab,
-} from '@cc-components/shared';
-import { tokens } from '@equinor/eds-tokens';
-import { Button, Icon, Tabs } from '@equinor/eds-core-react';
+} from '../../sidesheet';
 
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
