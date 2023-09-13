@@ -29,7 +29,7 @@ CameraControls.install({ THREE });
 
 export interface TagColor {
   tag: string;
-  color: Color;
+  color: string | Color;
 }
 
 export interface SelectNodesByTagOptions {
@@ -185,6 +185,9 @@ export class SelectionService {
 
   getNodeCollectionsMap(nodes: HierarchyNodeModel[], tagColors: TagColor[]) {
     return tagColors.reduce((nodeCollectionsMap, tagColor) => {
+      if (typeof tagColor.color === 'string') {
+        tagColor.color = new Color(tagColor.color);
+      }
       const key = tagColor.color.getHexString();
 
       if (nodeCollectionsMap[key]) {

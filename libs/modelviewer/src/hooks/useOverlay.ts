@@ -14,8 +14,7 @@ import {
 import { Cluster } from '../types/cluster';
 import { TagOverlay } from '../types/overlayTags';
 
-export function useOverlay(tagsOverlay: TagOverlay[]) {
-  const tagMap = useMemo(() => createTagMap(tagsOverlay), [tagsOverlay]);
+export function useOverlay(tagsOverlay?: TagOverlay[]) {
   const { echoInstance } = useModelViewerContext();
 
   const { viewNodes } = useSelectionContext();
@@ -48,8 +47,8 @@ export function useOverlay(tagsOverlay: TagOverlay[]) {
   }, [echoInstance]);
 
   const overlayTags = useMemo(
-    () => createOverlayTags(viewNodes, tagMap),
-    [viewNodes, tagMap]
+    () => (tagsOverlay ? createOverlayTags(viewNodes, createTagMap(tagsOverlay)) : []),
+    [viewNodes, tagsOverlay]
   );
 
   return { overlayTags, overlayTool };

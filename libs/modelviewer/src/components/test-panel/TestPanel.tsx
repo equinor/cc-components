@@ -51,12 +51,8 @@ const mockedTagListNew = [
   '56L00028A',
 ];
 
-export const TestPanel = ({
-  setTags,
-}: {
-  setTags: (tags: TagOverlay[] | string[]) => void;
-}) => {
-  const { selectNodesByTagColor, selectNodesByTags } = useSelectionContext();
+export const TestPanel = () => {
+  const { selectNodesByTagColor, setTags } = useSelectionContext();
 
   return (
     <TestPanelWrapper>
@@ -80,7 +76,7 @@ export const TestPanel = ({
           </button>
           <button
             onClick={() => {
-              selectNodesByTags(mockedTagList);
+              setTags(mockedTagList, { color: '#c22ac5' });
             }}
             style={{ height: '25px' }}
           >
@@ -88,7 +84,7 @@ export const TestPanel = ({
           </button>
           <button
             onClick={() => {
-              setTags(mockedTagListNew);
+              setTags(mockedTagListNew, { color: '#ff0000' });
             }}
             style={{ height: '25px' }}
           >

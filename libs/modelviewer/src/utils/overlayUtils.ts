@@ -60,6 +60,7 @@ export const createOverlayTags = (
         description: tagMap[viewNode.tagNo].description,
         status: tagMap[viewNode.tagNo].status,
         icon: tagMap[viewNode.tagNo].icon,
+        color: tagMap[viewNode.tagNo].color,
       });
     }
     return overlayTags;

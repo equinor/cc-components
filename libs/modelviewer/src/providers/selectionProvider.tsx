@@ -16,20 +16,26 @@ import {
   ViewerNodeSelection,
 } from '../services/selectionService';
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
-import { Vector3 } from 'three';
+import { Color, Vector3 } from 'three';
 import { TagOverlay } from '../types/overlayTags';
+import { defaultTagColor } from '../components/tag-overlay/tagOverlay';
 
 interface SelectionContextState {
-  selectNodesByTags(tags: string[]): Promise<void>;
-  selectNodesByTagColor(tags: TagColor[]): Promise<void>;
+  selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
+  selectNodesByTagColor(tags: TagColor[]): Promise<HierarchyNodeModel[] | undefined>;
+  selectNodesByTagsOverlay(
+    tagOverly: TagOverlay[]
+  ): Promise<HierarchyNodeModel[] | undefined>;
   orbit(): void;
   firstPerson(): void;
   fitCameraToAAbb(aabb: AabbModel): void;
   currentNodes: HierarchyNodeModel[];
   viewNodes: ViewerNodeSelection[];
+  tagList: TagOverlay[];
   selectionService?: SelectionService;
   getCurrentNodes(): HierarchyNodeModel[] | undefined;
   getSelectionService(): SelectionService | undefined;
+  setTags: (tagOverlay: string[] | TagOverlay[], options?: { color: string }) => void;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -43,8 +49,54 @@ interface Test extends Event {
 
 export const SelectionContextProvider = ({
   children,
-  tags: tagOverlay,
-}: PropsWithChildren<{ tags: TagOverlay[] }>) => {
+  tagsOverlay,
+  selectionOptions,
+}: PropsWithChildren<{
+  tagsOverlay?: TagOverlay[] | string[];
+  selectionOptions?: {
+    statusResolver?: (status: string) => string;
+    displayStatusColor?: boolean;
+  };
+}>) => {
+  const [tagList, setTagList] = useState<TagOverlay[]>([]);
+
+  const handleTagList = (
+    tagOverlay: string[] | TagOverlay[],
+    options?: { color: string }
+  ) => {
+    if (typeof tagOverlay[0] === 'string') {
+      setTagList(
+        (tagOverlay as string[]).map((tag) => ({
+          tagNo: tag,
+          description: 'Unknown tag',
+          color: options?.color,
+        }))
+      );
+      return;
+    } else if (selectionOptions?.displayStatusColor) {
+      setTagList(
+        (tagOverlay as TagOverlay[]).map((tagOverlay) => {
+          const color =
+            tagOverlay.status && selectionOptions.statusResolver
+              ? selectionOptions.statusResolver(tagOverlay.status)
+              : defaultTagColor;
+          return {
+            ...tagOverlay,
+            color,
+          };
+        })
+      );
+    } else {
+      setTagList(tagOverlay as TagOverlay[]);
+    }
+  };
+
+  useEffect(() => {
+    if (tagsOverlay) {
+      handleTagList(tagsOverlay);
+    }
+  }, [tagsOverlay]);
+
   const { echoInstance } = useModelViewerContext();
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
@@ -56,11 +108,10 @@ export const SelectionContextProvider = ({
   }, [modelMeta, echoInstance]);
 
   useEffect(() => {
-    if (tagOverlay.length > 0 && selectionService) {
-      const tags = tagOverlay.map((tag) => tag.tagNo);
-      selectionService.selectNodesByTags(tags).then((nodes) => setCurrentNodes(nodes));
+    if (tagList.length > 0 && selectionService) {
+      selectNodesByTagsOverlay(tagList).then((nodes) => nodes && setCurrentNodes(nodes));
     }
-  }, [tagOverlay, selectionService]);
+  }, [tagList, selectionService]);
 
   useEffect(() => {
     window.addEventListener('selectionStarted', (e) => {
@@ -80,6 +131,17 @@ export const SelectionContextProvider = ({
     });
     setCurrentNodes(nodes || []);
     if (nodes) selectionService?.clipModelByNodes(nodes, true);
+    return nodes;
+  };
+
+  const selectNodesByTagsOverlay = async (tags: TagOverlay[]) => {
+    if (tags[0].color) {
+      const nodes = await selectNodesByTagColor(
+        tags.map((tag) => ({ tag: tag.tagNo, color: new Color(tag.color) }))
+      );
+      return nodes;
+    }
+    return await selectNodesByTags(tags.map((t) => t.tagNo));
   };
 
   const getCurrentNodes = () => {
@@ -98,6 +160,7 @@ export const SelectionContextProvider = ({
       setCurrentNodes(nodes);
       selectionService?.clipModelByNodes(nodes, true);
     }
+    return nodes;
   };
 
   const orbit = () => {
@@ -112,8 +175,9 @@ export const SelectionContextProvider = ({
   };
 
   const viewNodes = useMemo(() => {
+    console.log(currentNodes);
     return selectionService?.getViewerNodeSelection(currentNodes) || [];
-  }, [currentNodes]);
+  }, [currentNodes, selectionService]);
 
   const fitCameraToAAbb = useCallback(
     (aabb: AabbModel) => {
@@ -130,6 +194,7 @@ export const SelectionContextProvider = ({
       value={{
         selectNodesByTags,
         selectNodesByTagColor,
+        selectNodesByTagsOverlay,
         orbit,
         firstPerson,
         fitCameraToAAbb,
@@ -138,6 +203,8 @@ export const SelectionContextProvider = ({
         selectionService,
         getCurrentNodes,
         getSelectionService,
+        setTags: handleTagList,
+        tagList,
       }}
     >
       {children}
