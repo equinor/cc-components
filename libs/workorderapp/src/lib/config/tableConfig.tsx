@@ -63,8 +63,8 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
-    field: 'Description',
-    colId: 'Description',
+    field: 'Title',
+    colId: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       return <DescriptionCell description={props.value} />;
