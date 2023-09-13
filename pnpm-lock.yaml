@@ -284,10 +284,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/heattraceapp:
     dependencies:
@@ -354,10 +350,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/mechanicalcompletionapp:
     dependencies:
@@ -391,10 +383,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/plugins: {}
 
@@ -439,10 +427,6 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/scopechangerequestapp:
     dependencies:
@@ -492,15 +476,7 @@ importers:
         specifier: ^2.0.36
         version: 2.0.36(@remirror/pm@2.0.8)(@types/node@18.11.9)
 
-  libs/sharedcomponents:
-    dependencies:
-      styled-components:
-        specifier: 5.3.6
-        version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
+  libs/sharedcomponents: {}
 
   libs/swcrapp:
     dependencies:
@@ -534,10 +510,6 @@ importers:
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   libs/workorderapp:
     dependencies:
@@ -571,10 +543,6 @@ importers:
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
-    devDependencies:
-      '@types/styled-components':
-        specifier: 5.1.26
-        version: 5.1.26
 
   reports/JCA-reports/jcainstallation:
     dependencies:

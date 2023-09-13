@@ -8,11 +8,5 @@
   },
   "module": "./dist/src/index.js",
   "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
-  "dependencies": {
-    "styled-components": "5.3.6"
-  },
-  "devDependencies": {
-    "@types/styled-components": "5.1.26"
-  }
+  "types": "./dist/src/index.d.ts"
 }
