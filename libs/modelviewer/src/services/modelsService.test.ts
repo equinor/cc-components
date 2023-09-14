@@ -8,7 +8,6 @@ import {
 } from '@equinor/echo-3d-viewer';
 import { ModelService } from './modelsService';
 
-import { TestScheduler } from 'rxjs/testing';
 import { CameraConfiguration, CogniteCadModel } from '@cognite/reveal';
 import { Vector3 } from 'three';
 
@@ -19,16 +18,14 @@ const getCameraConfiguration = vi
   .fn()
   .mockImplementation(() => ({ position, target } as CameraConfiguration));
 
-const loadModel = vi
-  .fn()
-  .mockImplementation(
-    () =>
-      ({
-        getCameraConfiguration,
-        modelId: 123,
-        setDefaultNodeAppearance: vi.fn(),
-      } as unknown as CogniteCadModel)
-  );
+const loadModel = vi.fn().mockImplementation(
+  () =>
+    ({
+      getCameraConfiguration,
+      modelId: 123,
+      setDefaultNodeAppearance: vi.fn(),
+    } as unknown as CogniteCadModel)
+);
 const removeModel = vi.fn();
 
 const modelsMeta = [

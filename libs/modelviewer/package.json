@@ -21,7 +21,8 @@
     "@equinor/fusion-framework-module": "^4.2.2",
     "@equinor/fusion-framework-react-app": "^4.1.2",
     "react": "18.2.0",
-    "@types/three": "0.149.0"
+    "@types/three": "0.149.0",
+    "jsdom": "^22.1.0"
   },
   "peerDependencies": {
     "react": "18.2.0"

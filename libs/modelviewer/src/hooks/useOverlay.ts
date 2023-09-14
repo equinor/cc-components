@@ -14,8 +14,9 @@ import {
 import { Cluster } from '../types/cluster';
 import { TagOverlay } from '../types/overlayTags';
 
-export function useOverlay(tagsOverlay?: TagOverlay[]) {
+export function useOverlay() {
   const { echoInstance } = useModelViewerContext();
+  const { tagList: tagsOverlay } = useSelectionContext();
 
   const { viewNodes } = useSelectionContext();
 

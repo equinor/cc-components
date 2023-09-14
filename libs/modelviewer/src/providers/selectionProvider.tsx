@@ -18,7 +18,7 @@ import {
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Color, Vector3 } from 'three';
 import { TagOverlay } from '../types/overlayTags';
-import { defaultTagColor } from '../components/tag-overlay/tagOverlay';
+import { defaultTagColor } from '../components/tag-item/TagItem';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
