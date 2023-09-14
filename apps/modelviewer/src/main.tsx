@@ -41,7 +41,7 @@ const Test = () => {
 
 const App = () => {
   return (
-    <FusionModelViewer plantName="Johan Castberg" plantCode="jca">
+    <FusionModelViewer plantName="Johan Castberg" plantCode="jca" tagsOverlay={mockedTagListA}>
       <FusionModelViewer.CustomActions>
         <Test />
       </FusionModelViewer.CustomActions>

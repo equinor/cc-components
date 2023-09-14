@@ -26,7 +26,6 @@ export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ childre
   const [isOrbit, setIsOrbit] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [isClipped, setClipped] = useState(true);
-
   const currentNodes = getCurrentNodes();
   const selectionService = getSelectionService();
 
@@ -51,21 +50,22 @@ export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ childre
   const firstPerson = () => selectionService?.cameraFirstPerson();
 
   const toggleCameraMode = () => {
-    isOrbit ? firstPerson() : orbit();
     setIsOrbit(!isOrbit);
+    isOrbit ? firstPerson() : orbit();
   };
 
   const toggleFocus = () => {
     if (currentNodes) {
-      selectionService?.showNodesNotInSelection(currentNodes, isFocus);
       setIsFocus(!isFocus);
+      selectionService?.showNodesNotInSelection(currentNodes, isFocus);
     }
   };
 
   const toggleClipping = () => {
+    const newClippedValue = !isClipped;
+    setClipped(newClippedValue);
     if (currentNodes && selectionService) {
-      selectionService.clipModelByNodes(currentNodes, isClipped);
-      setClipped(!isClipped);
+      selectionService.clipModelByNodes(currentNodes, newClippedValue);
     }
   };
 

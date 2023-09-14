@@ -28,11 +28,11 @@ export const ActionsMenu = (props: ActionsMenuProps) => {
     <StyledWrapperActionsBar>
       <StyledActionsBar>
         {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
-        {renderIconButton('visibility', 'Show selection only', toggleFocus, !isFocus)}
+        {renderIconButton('visibility', 'Show selection only', toggleFocus, isFocus)}
         <ColorPaletteMenu />
         {props.CustomActions}
         {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
-        {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, !isOrbit)}
+        {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, isOrbit)}
         <ModelSettingsMenu />
       </StyledActionsBar>
     </StyledWrapperActionsBar>
@@ -48,7 +48,7 @@ const renderIconButton = (
   <Button variant="ghost_icon" title={title} onClick={onClick}>
     <Icon
       name={iconName}
-      color={isActive ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+      color={isActive ? undefined : tokens.colors.text.static_icons__secondary.rgba}
     />
   </Button>
 );
