@@ -1,14 +1,20 @@
 import { Button, Icon } from '@equinor/eds-core-react';
 import { crop, fullscreen, rotate_3d, visibility } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
+import { Children, ReactNode, cloneElement, isValidElement } from 'react';
 import styled from 'styled-components';
+import { FusionModelViewer } from '../../ModelViewer';
 import { useActions } from '../../providers/actionProvider';
 import { ColorPaletteMenu } from '../action-color-palette-menu/action-color-palette-menu';
 import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-settings-menu';
 
 Icon.add({ crop, visibility, fullscreen, rotate_3d });
 
-export const ActionsMenu = () => {
+type ActionsMenuProps = {
+  Actions?: ReactNode;
+};
+
+export const ActionsMenu = (props: ActionsMenuProps) => {
   const {
     isClipped,
     isOrbit,
@@ -19,12 +25,15 @@ export const ActionsMenu = () => {
     toggleCameraMode,
   } = useActions();
 
+  console.log(props.Actions);
+
   return (
     <StyledWrapperActionsBar>
       <StyledActionsBar>
         {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
         {renderIconButton('visibility', 'Show selection only', toggleFocus, !isFocus)}
         <ColorPaletteMenu />
+        {props.Actions}
         {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
         {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, !isOrbit)}
         <ModelSettingsMenu />

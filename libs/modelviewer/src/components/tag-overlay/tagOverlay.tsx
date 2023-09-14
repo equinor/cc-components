@@ -103,10 +103,6 @@ export const TagsOverlay = ({
     setSelected(undefined);
   };
 
-  useEffect(() => {
-    console.log(overlayTags);
-  }, [overlayTags]);
-
   return (
     <div>
       {overlayTags.map((tag, index) => {
