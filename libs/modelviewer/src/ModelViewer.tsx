@@ -7,7 +7,7 @@ import { ModelViewerContextProvider } from './providers/modelViewerProvider';
 import { ModelContextProvider } from './providers/modelsProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { ActionContextProvider } from './providers/actionProvider';
-import { TagsOverlay } from './components/tag-overlay/TagOverlay';
+import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { TagOverlay } from './types/overlayTags';
 
 type FusionModelViewerProps = {
