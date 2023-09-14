@@ -11,7 +11,6 @@ import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
-import { TestPanel } from './components/test-panel/TestPanel';
 import { ActionContextProvider } from './providers/actionProvider';
 import { ModelViewerContextProvider } from './providers/modelViewerProvider';
 import { ModelContextProvider } from './providers/modelsProvider';
@@ -78,7 +77,6 @@ const ModelViewer = ({
               <ActionContextProvider>
                 <TagsOverlay {...options} />
                 <ActionsMenu Actions={components.actions} />
-                <TestPanel />
               </ActionContextProvider>
             </ModelSelection>
           </SelectionContextProvider>
