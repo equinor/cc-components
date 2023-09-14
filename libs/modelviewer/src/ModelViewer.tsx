@@ -10,7 +10,7 @@ import {
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
-import { TagsOverlay } from './components/tag-overlay/tagOverlay';
+import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { TestPanel } from './components/test-panel/TestPanel';
 import { ActionContextProvider } from './providers/actionProvider';
 import { ModelViewerContextProvider } from './providers/modelViewerProvider';
@@ -58,7 +58,6 @@ const ModelViewer = ({
   options,
   children,
 }: PropsWithChildren<FusionModelViewerProps>) => {
-
   const components: { actions?: React.ReactElement } = {
     actions: undefined,
   };
