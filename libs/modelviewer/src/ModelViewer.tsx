@@ -21,7 +21,6 @@ type FusionModelViewerProps = {
   plantName: string;
   plantCode: string;
   tagsOverlay?: string[] | TagOverlay[];
-  children?: ReactNode;
   options?: {
     iconResolver?: (type: string) => string;
     statusResolver?: (status: string) => string;
@@ -57,14 +56,14 @@ const ModelViewer = ({
   options,
   children,
 }: PropsWithChildren<FusionModelViewerProps>) => {
-  const components: { actions?: React.ReactElement } = {
-    actions: undefined,
+  const components: { CustomActions?: React.ReactElement } = {
+    CustomActions: undefined,
   };
 
   Children.forEach(children, (child) => {
     if (!isValidElement(child)) return;
-    if (child.type === FusionModelViewer.Actions) {
-      components.actions = cloneElement(child);
+    if (child.type === FusionModelViewer.CustomActions) {
+      components.CustomActions = cloneElement(child);
     }
   });
 
@@ -76,7 +75,7 @@ const ModelViewer = ({
             <ModelSelection plantName={plantName}>
               <ActionContextProvider>
                 <TagsOverlay {...options} />
-                <ActionsMenu Actions={components.actions} />
+                <ActionsMenu CustomActions={components.CustomActions} />
               </ActionContextProvider>
             </ModelSelection>
           </SelectionContextProvider>
@@ -86,6 +85,6 @@ const ModelViewer = ({
   );
 };
 
-FusionModelViewer.Actions = (props: any) => {
+FusionModelViewer.CustomActions = (props: any) => {
   return <div>{props.children}</div>;
 };

@@ -11,7 +11,7 @@ import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-se
 Icon.add({ crop, visibility, fullscreen, rotate_3d });
 
 type ActionsMenuProps = {
-  Actions?: ReactNode;
+  CustomActions?: ReactNode;
 };
 
 export const ActionsMenu = (props: ActionsMenuProps) => {
@@ -25,15 +25,13 @@ export const ActionsMenu = (props: ActionsMenuProps) => {
     toggleCameraMode,
   } = useActions();
 
-  console.log(props.Actions);
-
   return (
     <StyledWrapperActionsBar>
       <StyledActionsBar>
         {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
         {renderIconButton('visibility', 'Show selection only', toggleFocus, !isFocus)}
         <ColorPaletteMenu />
-        {props.Actions}
+        {props.CustomActions}
         {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
         {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, !isOrbit)}
         <ModelSettingsMenu />
