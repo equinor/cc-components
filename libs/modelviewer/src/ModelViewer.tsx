@@ -1,6 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
-import MessageBoundary from './components/message-boundry/MessageBoundary';
+import MessageBoundary, {
+  MessageBoundaryState,
+} from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
 import { TestPanel } from './components/test-panel/TestPanel';
 import { ModelViewerContextProvider } from './providers/modelViewerProvider';
@@ -19,19 +21,23 @@ type FusionModelViewerProps = {
     statusResolver?: (status: string) => string;
     titleResolver?: (overlay: TagOverlay) => string;
     CustomOverlayComponent?: FC<TagOverlay & { index: number }>;
+    fallbackComponent?: FC<MessageBoundaryState>;
   };
 };
 
 export const FusionModelViewer = (props: FusionModelViewerProps) => {
   return (
     <MessageBoundary
-      fallbackComponent={({ title, message }) => (
-        // Todo: add proper fallback component
-        <div>
-          <h1>{title}</h1>
-          <p>{message}</p>
-        </div>
-      )}
+      fallbackComponent={
+        props.options?.fallbackComponent
+          ? props.options.fallbackComponent
+          : ({ title, message }) => (
+              <div>
+                <h1>{title}</h1>
+                <p>{message}</p>
+              </div>
+            )
+      }
     >
       <ModelViewer {...props} />
     </MessageBoundary>
