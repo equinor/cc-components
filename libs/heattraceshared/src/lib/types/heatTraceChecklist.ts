@@ -38,4 +38,6 @@ export type heatTraceChecklist = {
   checklistStep: string;
   checklistStepSequence: string;
   pipetestType: string;
+  circuit: string;
+  switchboard: string;
 };
