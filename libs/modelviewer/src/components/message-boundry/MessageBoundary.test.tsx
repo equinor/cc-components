@@ -1,10 +1,8 @@
+import { useEffect } from 'react';
 import { describe, test, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-
 import MessageBoundary, { MessageBoundaryFallbackProps } from './MessageBoundary';
 import { useError } from '../../hooks/useMessageBoundary';
-import { useEffect } from 'react';
 
 type MessageComponentProps = {
   somethingToThrow: unknown;
@@ -13,6 +11,7 @@ type MessageComponentProps = {
 const MessageComponent = ({ somethingToThrow }: MessageComponentProps) => {
   throw somethingToThrow;
 };
+
 const MessageComponentWithHook = () => {
   const { setError } = useError();
 
@@ -69,35 +68,34 @@ describe('MessageBoundary', async () => {
   });
 });
 
-
 describe('component test for useError', async () => {
   const errorMessage = 'This is an Error 2000';
-  
+
   const MessageComponentWithHookClickEvent = () => {
     const { setError } = useError();
 
     return (
       <button
-      data-testid="button"
-      onClick={() => {
-        setError(errorMessage);
-      }}
+        data-testid="button"
+        onClick={() => {
+          setError(errorMessage);
+        }}
       >
-          Error Button
-        </button>
-      );
-    };
-    
-    const Fallback = ({ message, title }: MessageBoundaryFallbackProps) => {
-      return (
-        <div data-testid="fallback">
-          <h1>{title}</h1>
-          <p>{message}</p>
-        </div>
-      );
-    };
-    
-    test('Should be able have setError inside a dom event', async () => {
+        Error Button
+      </button>
+    );
+  };
+
+  const Fallback = ({ message, title }: MessageBoundaryFallbackProps) => {
+    return (
+      <div data-testid="fallback">
+        <h1>{title}</h1>
+        <p>{message}</p>
+      </div>
+    );
+  };
+
+  test('Should be able have setError inside a dom event', async () => {
     render(
       <MessageBoundary fallbackComponent={Fallback}>
         <MessageComponentWithHookClickEvent />
