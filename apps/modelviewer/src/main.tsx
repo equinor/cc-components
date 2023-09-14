@@ -2,7 +2,7 @@ import { FusionModelViewer, useCustomAction } from '@cc-components/modelviewer';
 import { configure } from '@cc-components/modelviewerapp';
 import { createRender } from '@cc-components/shared';
 import { Button, Icon } from '@equinor/eds-core-react';
-import { badge, alarm } from '@equinor/eds-icons';
+import { alarm, badge } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 
 const mockedTagListA = ['30L06200A', '30XV6200', '30L06200B'];

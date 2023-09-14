@@ -1,9 +1,8 @@
 import { Button, Icon } from '@equinor/eds-core-react';
 import { crop, fullscreen, rotate_3d, visibility } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { Children, ReactNode, cloneElement, isValidElement } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { FusionModelViewer } from '../../ModelViewer';
 import { useActions } from '../../providers/actionProvider';
 import { ColorPaletteMenu } from '../action-color-palette-menu/action-color-palette-menu';
 import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-settings-menu';
