@@ -31,16 +31,19 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     {
       field: 'Id',
       valueGetter: (pkg) => pkg.data?.serialNumber,
+      headerTooltip: 'Id',
       width: 90,
     },
     {
       field: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
+      headerTooltip: 'Title',
       width: 250,
     },
     {
       field: 'Comment',
       valueGetter: (pkg) => pkg.data?.hasComments,
+      headerTooltip: 'Comment',
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
       ) => {
@@ -54,6 +57,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     {
       field: 'Contr.',
       valueGetter: (pkg) => pkg.data?.hasPendingContributions,
+      headerTooltip: 'Contributions',
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
       ) => {
@@ -76,6 +80,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     {
       field: 'Workflow',
       valueGetter: (pkg) => pkg.data?.workflowSteps,
+      headerTooltip: 'Workflow',
       valueFormatter: (pkg) =>
         pkg.data?.workflowSteps?.map((step) => step.name).toString() ?? '',
       cellRenderer: (
@@ -90,11 +95,13 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Current step',
+      headerTooltip: 'Current step',
       valueGetter: (pkg) => pkg.data?.currentWorkflowStep?.name,
       width: 180,
     },
     {
       field: 'Next',
+      headerTooltip: 'Next',
       valueGetter: (pkg) => {
         return pkg.data && findNextToSign(pkg.data);
       },
@@ -102,11 +109,13 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Status',
+      headerTooltip: 'Status',
       valueGetter: (pkg) => pkg.data?.workflowStatus,
       width: 120,
     },
     {
       field: 'State',
+      headerTooltip: 'State',
       valueGetter: (pkg) => pkg.data?.isVoided,
       valueFormatter: (pkg) => (pkg.data?.isVoided ? 'Voided' : pkg.data?.state) ?? '',
       cellRenderer: (
@@ -118,6 +127,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Disciplines',
+      headerTooltip: 'Disciplines',
       valueGetter: (pkg) => pkg.data?.disciplineGuesstimates,
       valueFormatter: (pkg) =>
         pkg.data?.disciplineGuesstimates
@@ -132,6 +142,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Guess Mhrs',
+      headerTooltip: 'Guesstimate Manhours',
       valueGetter: (pkg) => pkg.data?.disciplineGuesstimates,
       valueFormatter: (pkg) =>
         pkg.data?.disciplineGuesstimates
@@ -141,26 +152,31 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Est Mhrs',
+      headerTooltip: 'Estimate Manhours',
       valueGetter: (pkg) => pkg.data?.workOrdersTotalEstimatedManHours,
       width: 150,
     },
     {
       field: 'Exp Mhrs',
+      headerTooltip: 'Expanded Manhours',
       valueGetter: (pkg) => pkg.data?.workOrdersTotalExpendedManHours,
       width: 150,
     },
     {
       field: 'Rem Mhrs',
+      headerTooltip: 'Remaining Manhours',
       valueGetter: (pkg) => pkg.data?.workOrdersTotalRemainingManHours,
       width: 150,
     },
     {
       field: 'Change category',
+      headerTooltip: 'Change Category',
       valueGetter: (pkg) => pkg.data?.changeCategory?.name,
       width: 180,
     },
     {
       field: 'Change origin',
+      headerTooltip: 'Change Origin',
       valueGetter: (pkg) => pkg.data?.originSourceId,
       valueFormatter: (pkg) =>
         `${pkg.data?.originSource} - ${pkg.data?.originSourceId}` ?? '',
@@ -176,11 +192,13 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Scope',
+      headerTooltip: 'Scope',
       valueGetter: (pkg) => pkg.data?.scope?.name,
       width: 140,
     },
     {
       field: 'Last updated',
+      headerTooltip: 'Last Updated',
       valueGetter: (pkg) => pkg.data?.modifiedAtUtc,
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
@@ -191,6 +209,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Created at',
+      headerTooltip: 'Created At',
       valueGetter: (pkg) => pkg.data?.createdAtUtc,
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
@@ -201,6 +220,7 @@ export const tableConfig: GridConfig<ScopeChangeRequest> = {
     },
     {
       field: 'Last signed',
+      headerTooltip: 'Last Signed',
       valueGetter: (pkg) => pkg.data && getLastSigned(pkg.data),
       cellRenderer: (
         props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
