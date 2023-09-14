@@ -73,7 +73,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
   {
     field: 'RFC',
-    valueGetter: (pkg) => 'RFC',
+    valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },
@@ -81,9 +81,9 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   {
     field: 'Pipetests',
     valueGetter: (pkg) => pkg.data?.pipetest,
-    cellRenderer: (props: ICellRendererProps<HeatTrace, CheckList[]>) => {
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       if (!props.value) return null;
-      return props.value;
+      return <StyledMonospace>{props.value}</StyledMonospace>;
       // (
       //   <StyledMonospace>
       //     {generateCommaSeperatedStringArrayColumn(getHTList(props.value))}

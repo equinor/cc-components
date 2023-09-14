@@ -6,10 +6,7 @@ import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
-import { StatusCircle } from '@cc-components/shared/common';
-import { pipetestStatusColormap } from '@cc-components/shared/mapping';
-import { useQuery } from '@tanstack/react-query';
-import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { useContextId, useHttpClient } from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
@@ -59,8 +56,6 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
     throw new Error('Heat Trace undefined');
   }
 
-  // const { data, isLoading } = useGetWorkorders(heattrace.heatTraceCableNo);
-
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
@@ -76,10 +71,13 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
         <BannerItem title="Checklist status" value={heattrace.status} />
         <BannerItem
           title="Comm Pkg"
-          value={heattrace.commissioningPackageNo}
+          value={heattrace.commissioningPackageNo ?? 'Missing'}
         ></BannerItem>
-        <BannerItem title="MC Pkg" value={heattrace.mechanicalCompletionPackageNo} />
-        <BannerItem title="Priority1" value={heattrace.priority1 || '(Blank)'} />
+        <BannerItem
+          title="MC Pkg"
+          value={heattrace.mechanicalCompletionPackageNo ?? 'Missing'}
+        />
+        <BannerItem title="Priority1" value={heattrace.priority1 ?? 'Missing'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
