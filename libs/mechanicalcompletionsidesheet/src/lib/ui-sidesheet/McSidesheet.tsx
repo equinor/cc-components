@@ -2,36 +2,35 @@ import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import {
-  BannerItem,
   NcrTab,
   PunchTab,
+  WorkorderBase,
+  WorkorderTab,
+} from '@cc-components/shared/sidesheet';
+import {
   SidesheetHeader,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-  WorkorderBase,
-  WorkorderTab,
-} from '@cc-components/shared/sidesheet';
+  BannerItem,
+} from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
+
 const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
-type McSidesheetProps = {
-  id: string;
-  item?: McPackage;
-  closeSidesheet: () => void;
-};
-export const McSideSheet = createWidget<McSidesheetProps>(({ props }) => {
+
+export const McSideSheet = createWidget<McPackage>(({ props }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const handleChange = (index: number) => {

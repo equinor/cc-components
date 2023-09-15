@@ -14,7 +14,8 @@ export const tableConfig: GridConfig<McPackage> = {
   // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
-      field: 'McpkgNo',
+      field: 'MC Pkg',
+      headerTooltip: 'Mechanical Completion Package Number',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.mcPkgNumber}</StyledMonospace>;
@@ -31,6 +32,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Description',
+      headerTooltip: 'Description',
       valueGetter: (pkg) => pkg.data?.description,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <DescriptionCell description={props.value} />;
@@ -39,12 +41,14 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Discipline',
+      headerTooltip: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
       enableRowGroup: true,
       width: 144,
     },
     {
       field: 'MC Status',
+      headerTooltip: 'Mechanical Completion Status',
       valueGetter: (pkg) => pkg.data?.mcStatus,
       cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
         return (
@@ -65,18 +69,21 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Responsible',
+      headerTooltip: 'Responsible',
       valueGetter: (pkg) => pkg.data?.responsible,
       enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Phase',
+      headerTooltip: 'Phase',
       valueGetter: (pkg) => pkg.data?.phase,
       enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Area',
+      headerTooltip: 'Area',
       valueGetter: (pkg) => pkg.data?.area,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.area}</StyledMonospace>;
@@ -85,7 +92,8 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 150,
     },
     {
-      field: 'Comm. package',
+      field: 'Comm Pkg',
+      headerTooltip: 'Commissioning Package Number',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.commPkgNumber}</StyledMonospace>;
@@ -103,6 +111,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'System',
+      headerTooltip: 'System',
       valueGetter: (pkg) => pkg.data?.system,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
         return <StyledMonospace>{props.data?.system}</StyledMonospace>;
@@ -112,6 +121,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Planned M-01 Final Punch',
+      headerTooltip: 'Planned M-01 Final Punch',
       valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
@@ -120,6 +130,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Actual M-01 Actual Date',
+      headerTooltip: 'Actual M-01 Actual Date',
       valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
@@ -128,6 +139,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Planned M-03 RFC',
+      headerTooltip: 'Planned M-03 RFC',
       valueGetter: (pkg) => pkg.data?.rfccPlannedDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
@@ -136,6 +148,7 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Actual M-03 RFC',
+      headerTooltip: 'Actual M-03 RFC',
       valueGetter: (pkg) => pkg.data?.rfccActualDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
         return <YearAndWeekCell dateString={props.value} />;
@@ -144,18 +157,21 @@ export const tableConfig: GridConfig<McPackage> = {
     },
     {
       field: 'Comm Pri1',
+      headerTooltip: 'Commissioning Priority 1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
       width: 155,
     },
     {
       field: 'Comm Pri2',
+      headerTooltip: 'Commissioning Priority 2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
       width: 155,
     },
     {
       field: 'Comm Pri3',
+      headerTooltip: 'Commissioning Priority 3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,
       width: 155,

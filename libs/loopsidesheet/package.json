@@ -11,10 +11,6 @@
   "dependencies": {
     "@cc-components/loopshared": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^",
-    "@cc-components/modelviewer": "workspace:^"
-  },
-  "devDependencies": {
-    "@types/styled-components": "5.1.26"
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }

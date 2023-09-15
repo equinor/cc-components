@@ -6,28 +6,30 @@ import { tokens } from '@equinor/eds-tokens';
 
 import {
   BannerItem,
-  McTab,
-  PunchTab,
-  QueryTab,
   SidesheetHeader,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
-  SwcrTab,
   TabTitle,
+} from '@cc-components/sharedcomponents';
+
+import {
+  useContextId,
   UnsignedActionTab,
   UnsignedTaskTab,
   WorkorderBase,
   WorkorderTab,
-} from '@cc-components/shared/sidesheet';
-
-import { useContextId } from '@cc-components/shared';
+  SwcrTab,
+  McTab,
+  PunchTab,
+  QueryTab,
+} from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
@@ -37,9 +39,9 @@ import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
-  close: () => void;
+  closeSidesheet: VoidFunction;
 };
-export const HandoverSidesheet = createWidget<HandoverProps>(({ frame, props }) => (
+export const HandoverSidesheet = createWidget<HandoverPackage>(({ props }) => (
   <EnsureHandover {...props} />
 ));
 
@@ -99,8 +101,9 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={props?.item?.commissioningPackageNo || ''}
+        description={props?.item?.description || ''}
         applicationTitle={'Handover'}
-        onClose={props.close}
+        onClose={props.closeSidesheet}
       />
       <StyledBanner>
         <BannerItem
@@ -246,7 +249,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
 
 export default HandoverSidesheet.render;
 
-function EnsureHandover({ id, close, item }: HandoverProps) {
+function EnsureHandover({ id, closeSidesheet, item }: HandoverProps) {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
   const { isLoading, data, error } = useQuery(
@@ -266,7 +269,6 @@ function EnsureHandover({ id, close, item }: HandoverProps) {
   }
 
   if (error || !data) {
-    console.log(error);
     return (
       <div
         style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
@@ -287,7 +289,7 @@ function EnsureHandover({ id, close, item }: HandoverProps) {
     <HandoverSidesheetComponent
       id={id}
       item={data}
-      close={close}
+      closeSidesheet={closeSidesheet}
     ></HandoverSidesheetComponent>
   );
 }

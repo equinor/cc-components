@@ -1,5 +1,5 @@
+import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable';
-import { StyledContentWrapper } from '../tabs.styles';
 import { columns } from './columns';
 import { CutoffBase } from './types';
 

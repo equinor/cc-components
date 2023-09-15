@@ -1,4 +1,4 @@
-import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
+import { StatusCircle } from '@cc-components/shared/common';
 import {
   BannerItem,
   SidesheetHeader,
@@ -7,19 +7,14 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabsWrapper,
-} from '@cc-components/shared/sidesheet';
+} from '@cc-components/sharedcomponents';
 import { getSwcrStatusColor, SwcrPackage } from '@cc-components/swcrshared';
 import { Tabs } from '@equinor/eds-core-react';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget } from '@cc-components/shared';
 import { useSignatures } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 
-type SwcrProps = {
-  id: string;
-  item?: SwcrPackage;
-  close: () => void;
-};
-export const SwcrSidesheet = createWidget<SwcrProps>(({ props }) => {
+export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
   const { signatures, signaturesFetching } = useSignatures(props.id);
   const attachmentsUrls = props?.item?.url.replace('#', '#tab=attachments&');
   return (
@@ -27,7 +22,7 @@ export const SwcrSidesheet = createWidget<SwcrProps>(({ props }) => {
       <SidesheetHeader
         title={`${props?.item?.swcrNo || ''}, ${props?.item?.title || ''} `}
         applicationTitle={'Software change record'}
-        onClose={props.close}
+        onClose={props.closeSidesheet}
       />
       <StyledBanner>
         <BannerItem

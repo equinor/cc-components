@@ -1,9 +1,5 @@
-import {
-  CCApiAccessLoading,
-  useCCApiAccessCheck,
-  useContextId,
-  usePBIOptions,
-} from '@cc-components/shared';
+import { useCCApiAccessCheck, useContextId, usePBIOptions } from '@cc-components/shared';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import Workspace from '@equinor/workspace-fusion';
