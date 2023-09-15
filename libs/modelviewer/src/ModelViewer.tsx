@@ -78,6 +78,4 @@ const ModelViewer = ({
   );
 };
 
-FusionModelViewer.CustomActions = (props: any) => {
-  return <div>{props.children}</div>;
-};
+FusionModelViewer.CustomActions = ({ children }: PropsWithChildren) => <>{children}</>;
