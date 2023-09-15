@@ -475,16 +475,19 @@ importers:
     dependencies:
       '@cognite/reveal':
         specifier: 4.2.2
-        version: 4.2.2(@cognite/sdk@7.18.0)(three@0.149.0)
+        version: 4.2.2(@cognite/sdk@8.2.0)(three@0.154.0)
+      '@cognite/sdk':
+        specifier: 8.2.0
+        version: 8.2.0
       '@equinor/echo-3d-viewer':
         specifier: ^0.0.1
-        version: 0.0.1(@cognite/reveal@4.2.2)(@cognite/sdk@7.18.0)(lodash@4.17.21)(three@0.149.0)
+        version: 0.0.1(@cognite/reveal@4.2.2)(@cognite/sdk@8.2.0)(lodash@4.17.21)(three@0.154.0)
       rxjs:
         specifier: ^7.5.7
         version: 7.5.7
       three:
-        specifier: 0.149.0
-        version: 0.149.0
+        specifier: 0.154.0
+        version: 0.154.0
     devDependencies:
       '@equinor/fusion-framework-module':
         specifier: ^4.2.2
@@ -493,8 +496,8 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2(@equinor/fusion-framework-module-http@5.0.4)(@equinor/fusion-framework-module@4.2.2)(@equinor/fusion-framework-react-module-context@4.0.1)(@equinor/fusion-framework-react-module@3.0.3)(@remix-run/router@1.6.3)(@types/react@18.0.25)(odata-query@7.0.3)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.5.7)
       '@types/three':
-        specifier: 0.149.0
-        version: 0.149.0
+        specifier: ~0.154.0
+        version: 0.154.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2615,13 +2618,13 @@ packages:
       minimist: 1.2.8
     dev: true
 
-  /@cognite/reveal@4.2.2(@cognite/sdk@7.18.0)(three@0.149.0):
+  /@cognite/reveal@4.2.2(@cognite/sdk@8.2.0)(three@0.154.0):
     resolution: {integrity: sha512-BU/TGWsXYx1PjXZVHn0yBinDvLfpfk6umXm76yPkOKx5tlgBpq1/gSELnfnZUKZ/l2YROGvniGMTaUNyBV9nzw==}
     peerDependencies:
       '@cognite/sdk': ^7.16.0
       three: 0.149.0
     dependencies:
-      '@cognite/sdk': 7.18.0
+      '@cognite/sdk': 8.2.0
       '@tweenjs/tween.js': 18.6.4
       assert: 2.0.0
       async-mutex: 0.4.0
@@ -2634,9 +2637,9 @@ packages:
       path-browserify: 1.0.1
       rxjs: 7.8.0
       skmeans: 0.11.3
-      sparse-octree: 7.1.6(three@0.149.0)
-      three: 0.149.0
-      three-stdlib: 2.21.8(three@0.149.0)
+      sparse-octree: 7.1.6(three@0.154.0)
+      three: 0.154.0
+      three-stdlib: 2.21.8(three@0.154.0)
     dev: false
 
   /@cognite/sdk-core@4.9.0:
@@ -2651,8 +2654,8 @@ packages:
       - encoding
     dev: false
 
-  /@cognite/sdk@7.18.0:
-    resolution: {integrity: sha512-voLcKXelyMjHazCFh50ML4eheAnlDfw0MTa/TJyHMIvDAqHzm2oq47XFsHMx0KXUT36KARc0eJNMASuI0PKLbA==}
+  /@cognite/sdk@8.2.0:
+    resolution: {integrity: sha512-LttDwc7WgO9hJNaGeR0Gp/JM6/VZAogunwAVMR2HLMP3enpmcEQlLrfQdlaiT/F1sQ6y2jdgtqxyfrTBHjLDQw==}
     dependencies:
       '@cognite/sdk-core': 4.9.0
       '@types/geojson': 7946.0.10
@@ -2824,7 +2827,7 @@ packages:
     resolution: {integrity: sha512-AHPmaAx+RYfZz0eYu6Gviiagpmiyw98ySSlQvCUhVGDRtDFe4DBS0x1bSjdF3gqUDYOczB+yYvBTtEylYSdRhg==}
     dev: false
 
-  /@equinor/echo-3d-viewer@0.0.1(@cognite/reveal@4.2.2)(@cognite/sdk@7.18.0)(lodash@4.17.21)(three@0.149.0):
+  /@equinor/echo-3d-viewer@0.0.1(@cognite/reveal@4.2.2)(@cognite/sdk@8.2.0)(lodash@4.17.21)(three@0.154.0):
     resolution: {integrity: sha512-4X2IgphwKztmWgICvDS/su7ypkQxNNLM8Hv5FEybi/c+R20l5FZJarRNZv8ifzZaYReyKmOhffpBAV7xG9Ii1Q==}
     peerDependencies:
       '@cognite/reveal': 4.2.2
@@ -2832,14 +2835,14 @@ packages:
       lodash: ^4.17.21
       three: 0.149.0
     dependencies:
-      '@cognite/reveal': 4.2.2(@cognite/sdk@7.18.0)(three@0.149.0)
-      '@cognite/sdk': 7.18.0
+      '@cognite/reveal': 4.2.2(@cognite/sdk@8.2.0)(three@0.154.0)
+      '@cognite/sdk': 8.2.0
       '@esfx/canceltoken': 1.0.0
       '@tweenjs/tween.js': 20.0.3
-      camera-controls: 2.3.4(three@0.149.0)
+      camera-controls: 2.3.4(three@0.154.0)
       hold-event: 0.2.0
       lodash: 4.17.21
-      three: 0.149.0
+      three: 0.154.0
       throttle-typescript: 1.1.0
     dev: false
 
@@ -9423,7 +9426,6 @@ packages:
 
   /@tweenjs/tween.js@18.6.4:
     resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
-    dev: false
 
   /@tweenjs/tween.js@20.0.3:
     resolution: {integrity: sha512-SYUe1UgY5HM05EB4+0B4arq2IPjvyzKXoklXKxSYrc2IFxGm1cBrqg5XbiB5uwbs0xY5j+rj986NAJMM0KZaUw==}
@@ -9793,6 +9795,10 @@ packages:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
     dev: true
 
+  /@types/stats.js@0.17.0:
+    resolution: {integrity: sha512-9w+a7bR8PeB0dCT/HBULU2fMqf6BAzvKbxFboYhmDtDkKPiyXYbjoe2auwsXlEFI7CFNMF1dCv3dFH5Poy9R1w==}
+    dev: true
+
   /@types/string.prototype.matchall@4.0.1:
     resolution: {integrity: sha512-jVQQq9YbEcLwWejeHs4CMVZkereuGPgflaOH/BGqHOYT45f3LV0Ah2Cmc0Cby/DZ9qhIp2V3lqPTHnLXlK7VLQ==}
     dev: false
@@ -9814,10 +9820,15 @@ packages:
       '@types/estree': 1.0.0
     dev: false
 
-  /@types/three@0.149.0:
-    resolution: {integrity: sha512-fgNBm9LWc65ER/W0cvoXdC0iMy7Ke9e2CONmEr6Jt8sDSY3sw4DgOubZfmdZ747dkPhbQrgRQAWwDEr2S/7IEg==}
+  /@types/three@0.154.0:
+    resolution: {integrity: sha512-IioqpGhch6FdLDh4zazRn3rXHj6Vn2nVOziJdXVbJFi9CaI65LtP9qqUtpzbsHK2Ezlox8NtsLNHSw3AQzucjA==}
     dependencies:
+      '@tweenjs/tween.js': 18.6.4
+      '@types/stats.js': 0.17.0
       '@types/webxr': 0.5.2
+      fflate: 0.6.10
+      lil-gui: 0.17.0
+      meshoptimizer: 0.18.1
     dev: true
 
   /@types/throttle-debounce@2.1.0:
@@ -11846,12 +11857,12 @@ packages:
   /camelize@1.0.1:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
 
-  /camera-controls@2.3.4(three@0.149.0):
+  /camera-controls@2.3.4(three@0.154.0):
     resolution: {integrity: sha512-swhc87YVHf9te0glBI7Oa/QBgsSCL4ZxtoR4V3vE6l7mEebsYRNL8y7Y2m2E6MrT0UTphM1S7mQqs0Sp7QTZ2g==}
     peerDependencies:
       three: '>=0.126.1'
     dependencies:
-      three: 0.149.0
+      three: 0.154.0
     dev: false
 
   /caniuse-api@3.0.0:
@@ -14193,7 +14204,6 @@ packages:
 
   /fflate@0.6.10:
     resolution: {integrity: sha512-IQrh3lEPM93wVCEczc9SaAOvkmcoQn/G8Bo1e8ZPlY3X3bnAxWaBdvTdvM1hP62iZp0BXWDy4vTAy4fF0+Dlpg==}
-    dev: false
 
   /figgy-pudding@3.5.2:
     resolution: {integrity: sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw==}
@@ -16974,6 +16984,10 @@ packages:
       isomorphic.js: 0.2.5
     dev: false
 
+  /lil-gui@0.17.0:
+    resolution: {integrity: sha512-MVBHmgY+uEbmJNApAaPbtvNh1RCAeMnKym82SBjtp5rODTYKWtM+MXHCifLe2H2Ti1HuBGBtK/5SyG4ShQ3pUQ==}
+    dev: true
+
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
@@ -17511,6 +17525,10 @@ packages:
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
+
+  /meshoptimizer@0.18.1:
+    resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
+    dev: true
 
   /methods@1.1.2:
     resolution: {integrity: sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==}
@@ -21488,13 +21506,13 @@ packages:
   /space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
 
-  /sparse-octree@7.1.6(three@0.149.0):
+  /sparse-octree@7.1.6(three@0.154.0):
     resolution: {integrity: sha512-2fnurm+xGOkhQLoPDqv2kbVXN+xLdTArIt3SCyU47GGVJaUf9AQbKl13KNKYKRxivGLEcscNJtqfvxY2zCGT6Q==}
     engines: {node: '>= 0.14.0'}
     peerDependencies:
       three: 0.x.x
     dependencies:
-      three: 0.149.0
+      three: 0.154.0
     dev: false
 
   /spdx-correct@3.2.0:
@@ -22237,7 +22255,7 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
-  /three-stdlib@2.21.8(three@0.149.0):
+  /three-stdlib@2.21.8(three@0.154.0):
     resolution: {integrity: sha512-kqisiKvO4mSy59v5vWqBQSH8famLxp7Z51LxpMJI9GwDxqODaW02rhIwmjYDEzZWNFpjZpoDHVGbdpeHf8h3SA==}
     peerDependencies:
       three: '>=0.122.0'
@@ -22252,12 +22270,12 @@ packages:
       mmd-parser: 1.0.4
       opentype.js: 1.3.4
       potpack: 1.0.2
-      three: 0.149.0
+      three: 0.154.0
       zstddec: 0.0.2
     dev: false
 
-  /three@0.149.0:
-    resolution: {integrity: sha512-tohpUxPDht0qExRLDTM8sjRLc5d9STURNrdnK3w9A+V4pxaTBfKWWT/IqtiLfg23Vfc3Z+ImNfvRw1/0CtxrkQ==}
+  /three@0.154.0:
+    resolution: {integrity: sha512-Uzz8C/5GesJzv8i+Y2prEMYUwodwZySPcNhuJUdsVMH2Yn4Nm8qlbQe6qRN5fOhg55XB0WiLfTPBxVHxpE60ug==}
     dev: false
 
   /throttle-debounce@3.0.1:

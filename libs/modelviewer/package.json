@@ -14,16 +14,21 @@
   "dependencies": {
     "@equinor/echo-3d-viewer": "^0.0.1",
     "@cognite/reveal": "4.2.2",
-    "three": "0.149.0",
+    "@cognite/sdk": "8.2.0",
+    "three": "0.154.0",
     "rxjs": "^7.5.7"
   },
   "devDependencies": {
     "@equinor/fusion-framework-module": "^4.2.2",
     "@equinor/fusion-framework-react-app": "^4.1.2",
     "react": "18.2.0",
-    "@types/three": "0.149.0"
+    "@types/three": "~0.154.0"
   },
   "peerDependencies": {
+    "@equinor/echo-3d-viewer": "^0.0.1",
+    "@cognite/reveal": "4.4.0",
+    "@cognite/sdk": "8.2.0",
+    "three": "0.154.0",
     "react": "18.2.0"
   }
 }
