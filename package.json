@@ -52,7 +52,8 @@
     "vite-tsconfig-paths": "^4.0.2",
     "vitest": "^0.25.8",
     "@testing-library/react-hooks": "^8.0.1",
-    "@testing-library/jest-dom": "^6.1.2"
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0"
   },
   "dependencies": {
     "@equinor/eds-core-react": "^0.28.0",
