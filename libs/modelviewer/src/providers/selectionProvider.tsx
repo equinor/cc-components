@@ -14,8 +14,8 @@ import { Color, Vector3 } from 'three';
 import { defaultTagColor } from '../components/tag-item/TagItem';
 import { SelectionService, TagColor } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
-import { useModelContext } from './modelsProvider';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
+import { useModelContext } from './modelsProvider';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
