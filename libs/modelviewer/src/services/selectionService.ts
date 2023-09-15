@@ -15,15 +15,12 @@ import CameraControls, {
   EchoSetupObject,
   HierarchyClient,
   HierarchyNodeModel,
-  SelectedNodeInformation,
-  combineHierarchyAabbs,
-  convertHierarchyAabbToThreeBox3,
-  getNumericRange,
   getTagNoRefNoAndAabbByNodeId,
 } from '@equinor/echo-3d-viewer';
-import { get3dPositionFromAabbMinMaxValues } from '@equinor/echo-3d-viewer/dist/src/utils/calculationUtils';
+
 import * as THREE from 'three';
 import { Box3, Color, Vector3 } from 'three';
+import { NodeService } from './nodeService';
 
 CameraControls.install({ THREE });
 
@@ -41,11 +38,12 @@ export interface SelectNodesByTagOptions {
   signal?: AbortSignal;
 }
 
-export class SelectionService {
+export class SelectionService extends NodeService {
   private hierarchyClient: HierarchyClient;
   private viewer: Echo3dViewer;
 
   constructor(private modelMeta: AssetMetadataSimpleDto, echoInstance: EchoSetupObject) {
+    super();
     this.hierarchyClient = echoInstance.hierarchyApiClient;
     this.viewer = echoInstance.viewer;
   }
@@ -59,17 +57,7 @@ export class SelectionService {
     return currentModel;
   }
 
-  getCombinedAAbbsFromNodes(nodes: HierarchyNodeModel[]): AabbModel | null {
-    const aabbs = nodes.reduce((allAabbs: AabbModel[], highlightedNode) => {
-      if (highlightedNode.aabb) allAabbs.push(highlightedNode.aabb);
-      return allAabbs;
-    }, []);
-    const aabb = combineHierarchyAabbs(aabbs);
-
-    return aabb;
-  }
-
-  getNodesByTags = async (tags: string[], signal?: AbortSignal) => {
+  findNodesByTags = async (tags: string[], signal?: AbortSignal) => {
     return (
       await this.hierarchyClient.findNodesByTagList(
         this.modelMeta.hierarchyId,
@@ -83,16 +71,15 @@ export class SelectionService {
     treeIndex: number,
     cancellationToken: CancelToken = CancelToken.none
   ) => {
-    const node = await getTagNoRefNoAndAabbByNodeId(
+    return await getTagNoRefNoAndAabbByNodeId(
       treeIndex,
       this.modelMeta.hierarchyId,
       cancellationToken
     );
-    return node;
   };
 
   async selectNodesByTags(tags: string[], options?: SelectNodesByTagOptions) {
-    const nodes = await this.getNodesByTags(tags, options?.signal);
+    const nodes = await this.findNodesByTags(tags, options?.signal);
     const nodeCollection = this.getNodeCollectionFromHierarchyNodeModel(nodes);
 
     const appearance = this.resetStyleToNodeAppearance(options?.appearance);
@@ -113,27 +100,8 @@ export class SelectionService {
     return nodes;
   }
 
-  getNodeTagInfoFromHierarchyNodeModel(
-    nodes: HierarchyNodeModel[]
-  ): SelectedNodeInformation[] {
-    return nodes.map((node) => {
-      return {
-        id: node.id,
-        endId: node.endId,
-        e3dTagNo: node.tag,
-        discipline: node.discipline,
-        system: node.system,
-        parentId: node.parentId,
-        referenceNo: node.pdmsData ? node.pdmsData.RefNo : undefined,
-        nodeAabb: node.aabb,
-        tag: node.tag,
-        point: node.aabb ? get3dPositionFromAabbMinMaxValues(node.aabb) : undefined,
-      };
-    });
-  }
-
   async assignColorByTagColor(tagColors: TagColor[], options?: SelectNodesByTagOptions) {
-    const nodes = await this.getNodesByTags(tagColors.map((tagColor) => tagColor.tag));
+    const nodes = await this.findNodesByTags(tagColors.map((tagColor) => tagColor.tag));
     this.assignColorToNodesByTagColor(nodes, tagColors);
 
     if (options?.fitToSelection) {
@@ -205,36 +173,12 @@ export class SelectionService {
     }, {} as Record<string, { color: Color; nodes: HierarchyNodeModel[] }>);
   }
 
-  getNodeCollectionFromHierarchyNodeModel(
-    nodes: HierarchyNodeModel[]
-  ): TreeIndexNodeCollection {
-    const indices = new IndexSet();
-    const numericRanges = nodes.filter((x) => x.endId).map((x) => getNumericRange(x));
-    numericRanges.forEach((range) => indices.addRange(range));
-    return new TreeIndexNodeCollection(indices);
-  }
-
   assignStyletToInvertedNodeCollection(
     nodeCollection: TreeIndexNodeCollection,
     appearance: NodeAppearance = { renderGhosted: true }
   ) {
     const unassignedNodes = new InvertedNodeCollection(this.model, nodeCollection);
     this.model.assignStyledNodeCollection(unassignedNodes, appearance);
-  }
-
-  getBoxFromNodes(nodes: HierarchyNodeModel[]): Box3 | undefined {
-    const aabb = this.getCombinedAAbbsFromNodes(nodes);
-
-    if (aabb) {
-      return convertHierarchyAabbToThreeBox3(aabb);
-    }
-  }
-
-  getCenterFromNodes(nodes?: HierarchyNodeModel[]) {
-    if (!nodes) return new Vector3(0, 0, 0);
-
-    const aabb = this.getCombinedAAbbsFromNodes(nodes);
-    return aabb ? get3dPositionFromAabbMinMaxValues(aabb) : new Vector3(0, 0, 0);
   }
 
   fitCameraToNodeSelection(
@@ -252,14 +196,6 @@ export class SelectionService {
     radiusFactor?: number | undefined
   ) {
     this.viewer?.fitCameraToBoundingBox(box, duration, radiusFactor);
-  }
-
-  getBoundingBoxFormAabbModel(aabb: AabbModel, padding = 1) {
-    const { min, max } = aabb;
-    return new Box3(
-      new Vector3(min.x - padding, min.z - padding, -max.y - padding),
-      new Vector3(max.x + padding, max.z + padding, -min.y + padding)
-    );
   }
 
   clipModelByNodes(nodes: HierarchyNodeModel[], isClipped: boolean, padding?: number) {
@@ -296,31 +232,4 @@ export class SelectionService {
       cameraManager.initializeFirstPersonControlsUsingTarget(camera.position, target);
     }
   }
-
-  getViewerNodeSelection(nodes: HierarchyNodeModel[]): ViewerNodeSelection[] {
-    return nodes
-      .filter((nodeResult) => nodeResult.aabb && nodeResult.tag)
-      .map((nodeResult, index) => {
-        const { min, max } = nodeResult.aabb!;
-
-        const boundingBox = new THREE.Box3(
-          new THREE.Vector3(min.x, min.z, -max.y),
-          new THREE.Vector3(max.x, max.z, -min.y)
-        );
-
-        return {
-          position: get3dPositionFromAabbMinMaxValues(nodeResult.aabb!),
-          tagNo: nodeResult.tag!,
-          aabb: nodeResult.aabb!,
-          boundingBox,
-        };
-      });
-  }
-}
-
-export interface ViewerNodeSelection {
-  position: THREE.Vector3;
-  tagNo: string;
-  aabb: AabbModel;
-  boundingBox: THREE.Box3;
 }

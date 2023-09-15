@@ -10,9 +10,7 @@
   "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@cc-components/mechanicalcompletionshared": "workspace:^",
-    "@cc-components/shared": "workspace:^"
-  },
-  "devDependencies": {
-    "@types/styled-components": "5.1.26"
+    "@cc-components/shared": "workspace:^",
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }

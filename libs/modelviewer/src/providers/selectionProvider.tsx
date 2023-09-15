@@ -12,13 +12,10 @@ import { useModelViewerContext } from './modelViewerProvider';
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Color, Vector3 } from 'three';
 import { defaultTagColor } from '../components/tag-item/TagItem';
-import {
-  SelectionService,
-  TagColor,
-  ViewerNodeSelection,
-} from '../services/selectionService';
+import { SelectionService, TagColor } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
 import { useModelContext } from './modelsProvider';
+import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
@@ -175,7 +172,6 @@ export const SelectionContextProvider = ({
   };
 
   const viewNodes = useMemo(() => {
-    console.log(currentNodes);
     return selectionService?.getViewerNodeSelection(currentNodes) || [];
   }, [currentNodes, selectionService]);
 

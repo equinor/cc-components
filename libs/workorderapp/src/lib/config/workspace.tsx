@@ -1,5 +1,4 @@
 import {
-  CCApiAccessLoading,
   useCCApiAccessCheck,
   useContextId,
   useHttpClient,
@@ -16,6 +15,7 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useGardenConfig } from './gardenConfig';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();

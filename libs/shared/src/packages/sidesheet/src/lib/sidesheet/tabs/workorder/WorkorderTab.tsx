@@ -1,5 +1,5 @@
 import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable/TabTable';
-import { StyledContentWrapper } from '../tabs.styles';
+import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { WorkorderBase } from './types';
 
