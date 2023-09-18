@@ -69,6 +69,6 @@ const StyledWrapperActionsBar = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  bottom: 50px;
+  bottom: 100px;
   width: 100%;
 `;

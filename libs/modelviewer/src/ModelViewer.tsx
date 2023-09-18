@@ -52,13 +52,14 @@ const ModelViewer = ({
   const components: { CustomActions?: React.ReactElement } = {
     CustomActions: undefined,
   };
-
-  Children.forEach(children, (child) => {
-    if (!isValidElement(child)) return;
-    if (child.type === FusionModelViewer.CustomActions) {
-      components.CustomActions = cloneElement(child);
-    }
-  });
+  if (Children.count(children) != 0) {
+    Children.forEach(children, (child) => {
+      if (!isValidElement(child)) return;
+      if (child.type === FusionModelViewer.CustomActions) {
+        components.CustomActions = cloneElement(child);
+      }
+    });
+  }
 
   return (
     <>
