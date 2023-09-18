@@ -42,6 +42,26 @@ export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
     })();
   }, [viewerInstance]);
 
+  /* Add event listeners for re-authenticating every timewindow gains focus.
+   * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
+   */
+  useEffect(() => {
+    const onFocusGained = () => {
+      const authenticateEchoClient = async () => {
+        await viewerInstance.client?.authenticate();
+      };
+
+      authenticateEchoClient();
+    };
+    if (viewerInstance.client) {
+      window.addEventListener('focus', onFocusGained);
+    }
+
+    return () => {
+      window.removeEventListener('focus', onFocusGained);
+    };
+  }, [viewerInstance.client]);
+
   const { viewer, modelApiClient, hierarchyApiClient, echoInstance } = viewerInstance;
 
   return (
