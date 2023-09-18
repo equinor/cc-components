@@ -1,4 +1,4 @@
-export type heatTraceChecklist = {
+export type HeatTraceChecklist = {
   heatTraceCableNo: string;
   heatTraceCableId: string;
   heatTraceCableIdUrlId: string;

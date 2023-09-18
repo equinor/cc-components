@@ -1,10 +1,10 @@
 import { TabTable } from '@cc-components/shared';
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
-import { CheckList } from '@cc-components/heattraceshared';
 import { checklistColumns } from './checklistColumns';
+import { HeatTraceChecklist } from 'libs/heattraceshared/dist/src';
 
 type ChecklistTabProps = {
-  checklists: CheckList[] | undefined;
+  checklists: HeatTraceChecklist[] | undefined;
   isFetching: boolean;
   error: Error | null;
 };
@@ -15,13 +15,12 @@ export const ChecklistTab = ({
 }: ChecklistTabProps): JSX.Element => {
   return (
     <StyledContentWrapper>
-      {checklists ? <h4>Pipetest checklist:</h4> : ''}
       <TabTable
         columns={checklistColumns}
         error={error}
         isFetching={isFetching}
         packages={checklists}
-        resourceName="Checklist"
+        resourceName="Checklists"
       />
     </StyledContentWrapper>
   );

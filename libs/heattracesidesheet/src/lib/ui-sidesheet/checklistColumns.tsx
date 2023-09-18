@@ -5,38 +5,38 @@ import {
   statusColorMap,
 } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { CheckList } from '@cc-components/heattraceshared';
+import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 
-export const checklistColumns: ColDef<CheckList>[] = [
+export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
   {
     field: 'Tag',
-    valueGetter: (pkg) => pkg.data?.tagNo,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
+    valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
+    cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
     field: 'Revision',
     valueGetter: (pkg) => pkg.data?.revision,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
+    cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
     field: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
+    cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
     field: 'Responsible',
-    valueGetter: (pkg) => pkg.data?.responsible,
+    valueGetter: (pkg) => pkg.data?.mcResponsible,
   },
   {
     field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
+    cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       if (!props.data?.status) return null;
       return (
         <StatusCircle

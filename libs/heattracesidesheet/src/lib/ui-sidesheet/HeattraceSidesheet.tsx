@@ -19,6 +19,7 @@ import {
 
 import { Workorder } from '../types';
 import { ChecklistTab } from './ChecklistTab';
+import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
 // import data from '../utils-sidesheet/workorderResponse.json' assert { type: 'json' };
 
 // const workorders: Workorder[] = data as any;
@@ -47,6 +48,9 @@ type HeatTraceProps = {
 
 export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
+
+  const { dataChecklists, errorChecklists, isLoadingChecklists } =
+    useGetHeatTraceChecklists(props.item?.heatTraceCableId ?? '');
 
   const client = useHttpClient();
   const contextId = useContextId();
@@ -87,7 +91,8 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
               Work orders <TabTitle isLoading={false} data={workorders} />
             </Tabs.Tab>
             <Tabs.Tab>
-              Checklists <TabTitle isLoading={false} data={[]} />
+              Checklists
+              <TabTitle isLoading={isLoadingChecklists} data={dataChecklists} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
@@ -104,10 +109,9 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <ChecklistTab
-              error={null}
-              isFetching={false}
-              checklists={[]}
-              // checklists={heattrace.checkLists}
+              error={errorChecklists}
+              isFetching={isLoadingChecklists}
+              checklists={dataChecklists}
             />
           </Tabs.Panel>
           <Tabs.Panel>3D is coming</Tabs.Panel>
