@@ -1,7 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Children, FC, PropsWithChildren, cloneElement, isValidElement } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
-import MessageBoundary from './components/message-boundry/MessageBoundary';
+import MessageBoundary, {
+  MessageBoundaryState,
+} from './components/message-boundry/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { ActionContextProvider } from './providers/actionProvider';
@@ -19,6 +21,7 @@ type FusionModelViewerProps = {
     statusResolver?: (status: string) => string;
     titleResolver?: (overlay: TagOverlay) => string;
     CustomOverlayComponent?: FC<TagOverlay & { index: number }>;
+    fallbackComponent?: FC<MessageBoundaryState>;
   };
 };
 
@@ -26,19 +29,22 @@ export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProp
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <MessageBoundary
-        fallbackComponent={({ title, message }) => (
-          // Todo: add proper fallback component
-          <div>
-            <h1>{title}</h1>
-            <p>{message}</p>
-          </div>
-        )}
-      >
-        <ModelViewer {...props} />
-      </MessageBoundary>
-    </QueryClientProvider>
+   <QueryClientProvider client={queryClient}>
+    <MessageBoundary
+      fallbackComponent={
+        props.options?.fallbackComponent
+          ? props.options.fallbackComponent
+          : ({ title, message }) => (
+              <div>
+                <h1>{title}</h1>
+                <p>{message}</p>
+              </div>
+            )
+      }
+    >
+      <ModelViewer {...props} />
+    </MessageBoundary>
+   </QueryClientProvider>
   );
 };
 
