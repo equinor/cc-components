@@ -9,13 +9,13 @@ import {
 } from 'react';
 import { useModelViewerContext } from './modelViewerProvider';
 
-import { useModelContext } from './modelsProvider';
-import { SelectionService, TagColor } from '../services/selectionService';
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Color, Vector3 } from 'three';
-import { TagOverlay } from '../types/overlayTags';
 import { defaultTagColor } from '../components/tag-item/TagItem';
+import { SelectionService, TagColor } from '../services/selectionService';
+import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
+import { useModelContext } from './modelsProvider';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;

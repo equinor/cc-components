@@ -1,6 +1,7 @@
 import { Button, Icon } from '@equinor/eds-core-react';
 import { crop, fullscreen, rotate_3d, visibility } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { useActions } from '../../providers/actionProvider';
 import { ColorPaletteMenu } from '../action-color-palette-menu/action-color-palette-menu';
@@ -8,7 +9,11 @@ import { ModelSettingsMenu } from '../action-model-settings-menu/action-model-se
 
 Icon.add({ crop, visibility, fullscreen, rotate_3d });
 
-export const ActionsMenu = () => {
+type ActionsMenuProps = {
+  CustomActions?: ReactNode;
+};
+
+export const ActionsMenu = (props: ActionsMenuProps) => {
   const {
     isClipped,
     isOrbit,
@@ -23,10 +28,11 @@ export const ActionsMenu = () => {
     <StyledWrapperActionsBar>
       <StyledActionsBar>
         {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
-        {renderIconButton('visibility', 'Show selection only', toggleFocus, !isFocus)}
+        {renderIconButton('visibility', 'Show selection only', toggleFocus, isFocus)}
         <ColorPaletteMenu />
+        {props.CustomActions}
         {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
-        {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, !isOrbit)}
+        {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, isOrbit)}
         <ModelSettingsMenu />
       </StyledActionsBar>
     </StyledWrapperActionsBar>
@@ -42,7 +48,7 @@ const renderIconButton = (
   <Button variant="ghost_icon" title={title} onClick={onClick}>
     <Icon
       name={iconName}
-      color={isActive ? tokens.colors.text.static_icons__secondary.rgba : undefined}
+      color={isActive ? undefined : tokens.colors.text.static_icons__secondary.rgba}
     />
   </Button>
 );
@@ -63,6 +69,6 @@ const StyledWrapperActionsBar = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  bottom: 50px;
+  bottom: 100px;
   width: 100%;
 `;

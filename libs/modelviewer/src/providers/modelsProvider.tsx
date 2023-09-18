@@ -70,8 +70,8 @@ export const ModelContextProvider = ({
   useEffect(() => {
     if (hasAccess) {
       const localModelId = modelService?.getLocalModel(plantCode);
-      if (localModelId !== undefined) {
-        const selectedModel = models!.find(
+      if (localModelId !== undefined && models !== undefined) {
+        const selectedModel = models.find(
           (model) => model.platformSectionId === localModelId
         );
         if (selectedModel?.id) {
