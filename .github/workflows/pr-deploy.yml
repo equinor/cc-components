@@ -1,7 +1,5 @@
 name: 'Deploy PR build'
 on:
-  pull_request:
-    types: [opened]
   issue_comment:
     types: [created]
 

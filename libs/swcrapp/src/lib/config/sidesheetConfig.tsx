@@ -5,7 +5,7 @@ export const sidesheetConfig: SidesheetConfig<SwcrPackage> = {
   type: 'default',
   DetailsSidesheet: (props) => (
     <SwcrSidesheet.Component
-      close={props.controller.close}
+      closeSidesheet={props.controller.close}
       id={props.id}
       item={props.item}
     />

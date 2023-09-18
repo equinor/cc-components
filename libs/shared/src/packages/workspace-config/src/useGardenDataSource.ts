@@ -8,7 +8,11 @@ type ApiGardenMeta = {
   subGroupCount: number;
   allGroupingOptions:
     | string[]
-    | { groupingKey: string; dimension: string[] | null; type: string[] | null }[];
+    | {
+        groupingKey: string;
+        timeInterval: string[] | null;
+        dateVariant: string[] | null;
+      }[];
   validGroupingOptions: string[];
 };
 
@@ -36,6 +40,8 @@ export function useGardenDataSource(
           columnEnd,
           rowStart,
           rowEnd,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           groupingKeys,
           filter: filters,
         },
@@ -52,6 +58,8 @@ export function useGardenDataSource(
       const requestArgs = createRequestBody(
         {
           groupingKeys: keys.groupingKeys,
+          dateVariant: keys.dateVariant,
+          timeInterval: keys.timeInterval,
           filter: filters,
         },
         signal
@@ -68,13 +76,13 @@ export function useGardenDataSource(
       //TODO: remove when api is migrated
       const groupingOptions: {
         groupingKey: string;
-        dimension: string[] | null;
-        type: string[] | null;
+        timeInterval: string[] | null;
+        dateVariant: string[] | null;
       }[] =
         typeof possibleItem === 'string'
           ? meta.allGroupingOptions.map((s) => ({
-              dimension: null,
-              type: null,
+              timeInterval: null,
+              dateVariant: null,
               groupingKey: s as string,
             }))
           : (meta.allGroupingOptions as any);
@@ -96,6 +104,8 @@ export function useGardenDataSource(
           rowStart: 0,
           rowEnd: 0,
           groupingKeys,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           filter: filters,
         },
         signal
@@ -116,6 +126,8 @@ export function useGardenDataSource(
           columnName,
           subGroupName: subgroupName,
           groupingKeys,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           filter: filter,
         },
         signal

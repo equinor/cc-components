@@ -22,17 +22,18 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   align-items: center;
   box-sizing: border-box;
   position: relative;
-  background: ${(props) => props.backgroundColor};
-  color: ${(props) => props.textColor};
   cursor: pointer;
   height: 100%;
   border-radius: 5px;
   font-weight: 500;
   font-size: 13px;
-  padding-left: 20px;
-  padding-right: 2px;
-  outline: ${(props) => (props.isSelected ? '2px dashed green' : '')};
-  outline-offset: ${(props) => (props.isSelected ? '2px' : '')};
+  padding: 0 2px 0 20px;
+  
+  background: ${(props) => props.backgroundColor};
+  color: ${(props) => props.textColor};
+  
+  outline: ${(props) => (props.isSelected ? '2px dashed green' : 'none')};
+  outline-offset: ${(props) => (props.isSelected ? '2px' : '0')};
 `;
 type SizesProps = {
   size: 'small' | 'medium' | 'large';
@@ -59,6 +60,7 @@ export const StyledItemText = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 280px;
 `;
 
 type StatusCirclesProps = {

@@ -1,55 +1,38 @@
 import {
-  BannerItem,
   CutoffTab,
   LinkCell,
   MaterialTab,
   MccrTab,
-  SidesheetHeader,
   StatusCircle,
-  StyledBanner,
-  StyledPanels,
-  StyledSideSheetContainer,
-  StyledTabs,
-  TabTitle,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
-import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import {
+  BannerItem,
+  SidesheetHeader,
+  SidesheetSkeleton,
+  StyledBanner,
+  StyledPanels,
+  StyledSideSheetContainer,
+  StyledTabListWrapper,
+  StyledTabs,
+  StyledTabsList,
+  TabTitle,
+} from '@cc-components/sharedcomponents';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { TabListProps, Tabs } from '@equinor/eds-core-react';
-import { tokens } from '@equinor/eds-tokens';
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { Tabs } from '@equinor/eds-core-react';
+import { createWidget } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
 
-export const StyledTabListWrapper: (props: any) => JSX.Element = styled.div`
-  overflow: hidden;
-  width: 100%;
-  background-color: ${tokens.colors.ui.background__light.hex};
-`;
-export const StyledTabsList: (props: TabListProps) => JSX.Element = styled(Tabs.List)`
-  overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-
-  scroll-behavior: smooth;
-`;
-type WorkorderProps = {
-  id: string;
-  item?: WorkOrder;
-  closeSidesheet: () => void;
-};
-export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }) => {
+export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
@@ -118,14 +101,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="Material status"
           value={
-            props.item?.materialStatus ? (
+            wo?.materialStatus ? (
               <StatusCircle
                 statusColor={
-                  props.item?.materialStatus
-                    ? getMatStatusColorByStatus(props.item.materialStatus)
+                  wo?.materialStatus
+                    ? getMatStatusColorByStatus(wo.materialStatus)
                     : 'transparent'
                 }
-                content={props.item?.materialStatus || 'N/A'}
+                content={wo?.materialStatus || 'N/A'}
               />
             ) : (
               'N/A'
@@ -135,14 +118,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="MC status"
           value={
-            props.item?.mccrStatus ? (
+            wo?.mccrStatus ? (
               <StatusCircle
                 statusColor={
-                  props.item?.mccrStatus
-                    ? getMccrStatusColorByStatus(props.item.mccrStatus)
+                  wo?.mccrStatus
+                    ? getMccrStatusColorByStatus(wo.mccrStatus)
                     : 'transparent'
                 }
-                content={props.item?.mccrStatus || 'N/A'}
+                content={wo?.mccrStatus || 'N/A'}
               />
             ) : (
               'N/A'

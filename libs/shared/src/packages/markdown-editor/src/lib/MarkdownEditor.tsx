@@ -22,7 +22,6 @@ import {
   useHelpers,
   OnChangeJSON,
 } from '@remirror/react';
-
 import type { CreateEditorStateProps } from 'remirror';
 import type { RemirrorProps } from '@remirror/react';
 import { theme } from './theme';
@@ -69,7 +68,7 @@ export const MarkdownEditor: FC<PropsWithChildren<MarkdownEditorProps>> = ({
   initialContent,
   ...rest
 }) => {
-  const extensions = useCallback(
+  const extensions: any = useCallback(
     () => [
       new PlaceholderExtension({ placeholder }),
       new BoldExtension(),

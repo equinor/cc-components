@@ -1,4 +1,19 @@
 # CC Applications
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/fprd-deploy.yml?label=Prod%20deployment)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/pr-deploy.yml?label=PR%20deployment)
+
+## Technology stack
+
+[React](https://react.dev/)
+
+[Turbo](https://turbo.build/)
+
+[Typescript](https://www.typescriptlang.org/)
+
+[Vite](https://vitejs.dev/)
+
+[PNPM](https://pnpm.io/)
+
 
 ## Strategy
 
@@ -59,3 +74,5 @@ HMR is disabled due to an error in dependency resolution resulting in massive bu
 | [query-workspace](https://github.com/equinor/cc-components/blob/main/reports/query/README.md)                               | Query workspace         | Temporarily disabled |                                     |
 | [schedule-viewer](https://github.com/equinor/cc-components/blob/main/reports/schedule-viewer/README.md)                     | Schedule viewer         | Temporarily disabled |                                     |
 | [tags](https://github.com/equinor/cc-components/blob/main/reports/tags/README.md)                                           | tags                    | Yes                  |                                     |
+| [electrical-consumers]()                                                                                                    | Electrical Consumers    | No                   | Under construction                  |
+| [heat-trace]()                                                                                                              | Heat Trace              | No                   | Under construction                  |

@@ -1,8 +1,10 @@
 import { AabbModel, Echo3dViewer, combineHierarchyAabbs } from '@equinor/echo-3d-viewer';
 import { Cluster } from '../types/cluster';
-import { HtmlOverlayToolHandler, ViewerNodeSelection } from '../services';
+
 import { HtmlOverlayTool } from '@cognite/reveal';
 import { OverlayTag, TagMap, TagOverlay } from '../types/overlayTags';
+import { HtmlOverlayToolHandler } from '../services';
+import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 
 export const createClusterAabb = (clusters: Cluster[]) => {
   const aabbs = clusters.reduce((allAabbs: AabbModel[], cluster) => {
