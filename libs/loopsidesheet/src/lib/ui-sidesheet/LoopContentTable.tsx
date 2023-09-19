@@ -104,7 +104,7 @@ type ContentTableProps = {
 };
 
 export const ContentTable = ({ loop }: ContentTableProps) => {
-  const { data, error, isLoading } = useGetLoopContent(loop.loopNo);
+  const { data, error, isLoading } = useGetLoopContent(loop.loopId);
 
   return (
     <div>
