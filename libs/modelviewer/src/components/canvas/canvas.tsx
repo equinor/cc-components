@@ -20,7 +20,7 @@ export default Canvas;
 const StyledCanvas = styled.canvas``;
 
 const ViewerWrapper = styled.div`
-  height: calc(100vh - 90px);
+  height: inherit;
   overflow: hidden;
   > .reveal-viewer-spinner {
     display: none;
