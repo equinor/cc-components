@@ -136,7 +136,7 @@ export class ModelService {
     const localModelsJson = localStorage.getItem(LOCAL_MODEL_ID_KEY);
     if (localModelsJson) {
       const localModels = JSON.parse(localModelsJson);
-      return localModels[plantCode] || undefined;
+      return localModels[plantCode.toLowerCase()] || undefined;
     }
     return undefined;
   }
@@ -148,7 +148,7 @@ export class ModelService {
     const existingModelsJson = localStorage.getItem(LOCAL_MODEL_ID_KEY);
     const existingModels = existingModelsJson ? JSON.parse(existingModelsJson) : {};
 
-    existingModels[plantCode] = platformSectionId;
+    existingModels[plantCode.toLowerCase()] = platformSectionId;
 
     localStorage.setItem(LOCAL_MODEL_ID_KEY, JSON.stringify(existingModels));
   }
