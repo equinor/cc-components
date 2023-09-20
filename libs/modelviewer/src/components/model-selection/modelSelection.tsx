@@ -19,22 +19,14 @@ const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
   }
 
   return (
-    <div>
-      <div
-        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-      >
-        <h5>
-          {modelMeta?.platformNameLabel} - {modelMeta?.platformSectionLabel}
-        </h5>
-      </div>
+    <>
       {children}
-
       {models && models.length > 0 ? (
         <ModelSelectionDialog models={models} />
       ) : (
         <AccessDialog hasAccess={hasAccess} plantName={plantName} />
       )}
-    </div>
+    </>
   );
 };
 
