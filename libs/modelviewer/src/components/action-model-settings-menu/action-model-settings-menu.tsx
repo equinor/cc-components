@@ -6,7 +6,7 @@ import { useModelContext } from '../../providers/modelsProvider';
 export const ModelSettingsMenu = () => {
   Icon.add({ more_horizontal });
   const { showSelector, setShowModelDialog } = useModelContext();
-  const optionsSettings = ['Change Model', 'Model Action 2', 'Model Action 3'];
+  const optionsSettings = ['Change Model'];
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
