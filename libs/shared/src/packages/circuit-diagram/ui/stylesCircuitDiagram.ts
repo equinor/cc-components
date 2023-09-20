@@ -51,7 +51,7 @@ export const StyledCircuitNameAndIconWrapper = styled.div<{ maybeRef: HTMLDivEle
   top: ${(p) => p.maybeRef?.offsetTop - 10 ?? 0}px;
 `;
 
-export const StyledNetworkNameAndIcon = styled.div`
+export const StyledNetworkName = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@ export const StyledJunctionBox = styled.div`
 
 export const StyledCable = styled.div`
   border-bottom: 2px solid black;
-  height: 5ch;
+  height: 3ch;
   white-space: nowrap;
   padding: 0px 10px;
 `;
@@ -119,8 +119,8 @@ export const StyledPopover = styled.div<{ cornerButton?: boolean }>`
   background-color: #121212;
   padding: 5px 5px;
   border-radius: 4px;
-  margin-top: ${(p) => (p.cornerButton ? '40px' : '10px')};
-  right: ${(p) => (p.cornerButton ? '0px' : null)};
+  margin-top: ${(p) => (p.cornerButton ? '60px' : '10px')};
+  right: ${(p) => (p.cornerButton ? '40px' : null)};
 `;
 
 export const StyledSwitchboardChildren = styled.div`

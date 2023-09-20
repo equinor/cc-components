@@ -1,5 +1,5 @@
 import { ReactNode, forwardRef, useState } from 'react';
-import { heat_trace, cable, junction_box, circuit } from '@equinor/eds-icons';
+import { warning_outlined } from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
 import { ElectricalNetwork } from '../types/ElectricalNetwork';
 import {
@@ -13,7 +13,7 @@ import {
   StyledCriticalLine,
   StyledHTCable,
   StyledJunctionBox,
-  StyledNetworkNameAndIcon,
+  StyledNetworkName,
   StyledPopover,
   StyledSpaceHeater,
   StyledSwitchboardChildren,
@@ -23,7 +23,7 @@ import {
 } from './stylesCircuitDiagram';
 import { Skeleton } from '@cc-components/sharedcomponents';
 
-Icon.add({ heat_trace, cable, junction_box, circuit });
+Icon.add({ warning_outlined });
 
 type CircuitRef = Record<string, HTMLDivElement>;
 
@@ -79,16 +79,13 @@ function Switchboard({
 }) {
   return (
     <StyledSwitchboardWrapper>
-      <StyledNetworkNameAndIcon>
-        {network.name} <SwitchBoardIcon />
-      </StyledNetworkNameAndIcon>
-      {network.children.map((s) => {
-        const maybeRef = circuitRef?.[s.name];
+      <StyledNetworkName>{network.name}</StyledNetworkName>
+      {network.children.map((circuit) => {
+        const maybeRef = circuitRef?.[circuit.name];
         return (
           <StyledCircuitNameAndIconWrapper maybeRef={maybeRef}>
-            <StyledCircuitNameAndIcon key={s.name}>
-              {s.name} <Icon name={circuit.name} />
-              {s.isSafetyCritical ? <CriticalLine /> : null}
+            <StyledCircuitNameAndIcon key={circuit.name} style={{ minWidth: '76px' }}>
+              {circuit.name}
             </StyledCircuitNameAndIcon>
           </StyledCircuitNameAndIconWrapper>
         );
@@ -172,23 +169,16 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
 );
 
 export const HTCable = ({ network }: { network: ElectricalNetwork }) => {
-  return (
-    <StyledHTCable>
-      {network.name}
-      <Icon name={heat_trace.name} />
-      {network.isSafetyCritical ? <CriticalLine /> : null}
-    </StyledHTCable>
-  );
+  return <StyledHTCable>{network.name}</StyledHTCable>;
 };
 
 export const SpaceHeater = ({ network }: { network: ElectricalNetwork }) => {
   return (
     <StyledSpaceHeater>
-      <StyledNetworkNameAndIcon>
+      <StyledNetworkName>
         {network.name}
         <SpaceHeaterIcon />
-        {network.isSafetyCritical ? <CriticalLine /> : null}
-      </StyledNetworkNameAndIcon>
+      </StyledNetworkName>
     </StyledSpaceHeater>
   );
 };
@@ -196,24 +186,19 @@ export const SpaceHeater = ({ network }: { network: ElectricalNetwork }) => {
 function Cable({ network }: { network: ElectricalNetwork }) {
   return (
     <StyledCable>
-      <StyledNetworkNameAndIcon>
-        {network.name}
-        <Icon name={cable.name} />
-        {network.isSafetyCritical ? <CriticalLine /> : null}
-      </StyledNetworkNameAndIcon>
+      <StyledNetworkName>{network.name}</StyledNetworkName>
     </StyledCable>
   );
 }
 
 function JunctionBox({ network }: { network: ElectricalNetwork }) {
   return (
-    <StyledJunctionBox>
-      <StyledNetworkNameAndIcon>
-        {network.name}
-        <Icon name={junction_box.name} />
-        {network.isSafetyCritical ? <CriticalLine /> : null}
-      </StyledNetworkNameAndIcon>
-    </StyledJunctionBox>
+    <>
+      {network.missingCable ? <MissingCable /> : null}
+      <StyledJunctionBox>
+        <StyledNetworkName>{network.name}</StyledNetworkName>
+      </StyledJunctionBox>
+    </>
   );
 }
 
@@ -224,42 +209,28 @@ const CriticalLine = (): JSX.Element => {
   const onClose = () => setIsOpen(false);
 
   return (
-    <>
-      <StyledCriticalLine onMouseOver={onOpen} onMouseLeave={onClose}>
-        CL
-        {isOpen && (
-          <div>
-            <StyledPopover>Heating Critical Line</StyledPopover>
-          </div>
-        )}
-      </StyledCriticalLine>
-    </>
+    <StyledCriticalLine onMouseOver={onOpen} onMouseLeave={onClose}>
+      CL
+      {isOpen && (
+        <div>
+          <StyledPopover>Heating Critical Line</StyledPopover>
+        </div>
+      )}
+    </StyledCriticalLine>
   );
 };
 
-const SwitchBoardIcon = () => {
+const MissingCable = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+
   return (
-    <svg
-      width="2rem"
-      height="1.8rem"
-      viewBox="0 0 56 57"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ rotate: '0deg;' }}
-    >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M2 2.002v52.5h52.5v-52.5H2zm3.5 49v-45.5H51v45.5H5.5z"
-        fill="#000"
-      ></path>
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M45.25 10.502h-34c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75h34c.97 0 1.75-.78 1.75-1.75s-.78-1.75-1.75-1.75zM45.25 18.502h-34c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75h34c.97 0 1.75-.78 1.75-1.75s-.78-1.75-1.75-1.75zM45.25 26.502h-34c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75h34c.97 0 1.75-.78 1.75-1.75s-.78-1.75-1.75-1.75z"
-        fill="#000"
-      ></path>
-    </svg>
+    <>
+      <Icon name={warning_outlined.name} onMouseOver={onOpen} onMouseLeave={onClose} />
+      {isOpen && <StyledPopover cornerButton>Missing a cable</StyledPopover>}
+    </>
   );
 };
 
