@@ -19,8 +19,8 @@
     "rxjs": "^7.5.7"
   },
   "devDependencies": {
-    "@equinor/fusion-framework-module": "^4.2.2",
-    "@equinor/fusion-framework-react-app": "^4.1.2",
+    "@equinor/fusion-framework-module": "^4.2.5",
+    "@equinor/fusion-framework-react-app": "^4.1.8",
     "react": "18.2.0",
     "@types/three": "~0.154.0"
   },
