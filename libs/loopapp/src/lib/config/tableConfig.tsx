@@ -36,7 +36,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     const requestOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/problem+json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(filterstate),
     };
