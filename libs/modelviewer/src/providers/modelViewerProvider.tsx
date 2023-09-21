@@ -16,6 +16,7 @@ import {
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
 import Canvas from '../components/canvas/canvas';
+import { IHttpClient } from '@equinor/fusion-framework-module-http';
 
 type ModelViewerContextType = {
   viewer?: Echo3dViewer;
@@ -23,6 +24,7 @@ type ModelViewerContextType = {
   hierarchyApiClient?: HierarchyClient;
   echoInstance?: EchoSetupObject;
   viewerRef?: React.RefObject<HTMLCanvasElement>;
+  echoClient?: IHttpClient;
 };
 
 const modelViewerContext = createContext<ModelViewerContextType>({});
@@ -72,6 +74,7 @@ export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
         hierarchyApiClient,
         echoInstance,
         viewerRef,
+        echoClient: viewerInstance.echoClient,
       }}
     >
       <Canvas />

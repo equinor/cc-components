@@ -1,14 +1,14 @@
-import { Dialog } from '@equinor/eds-core-react';
-import React from 'react';
+import { Button, Dialog } from '@equinor/eds-core-react';
+import React, { useState } from 'react';
 
 interface AccessDialogProps {
   plantName: string;
-  hasAccess: boolean;
 }
 
-const AccessDialog: React.FC<AccessDialogProps> = ({ plantName, hasAccess }) => {
+const AccessDialog: React.FC<AccessDialogProps> = ({ plantName }) => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
-    <Dialog open={!hasAccess}>
+    <Dialog open={isOpen}>
       <Dialog.Header>
         <Dialog.Title>No access</Dialog.Title>
       </Dialog.Header>
@@ -19,6 +19,15 @@ const AccessDialog: React.FC<AccessDialogProps> = ({ plantName, hasAccess }) => 
           <br /> Access IT requires Equinor Network connection.
         </p>
       </Dialog.CustomContent>
+      <Dialog.Actions>
+        <Button
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        >
+          Ok
+        </Button>
+      </Dialog.Actions>
     </Dialog>
   );
 };

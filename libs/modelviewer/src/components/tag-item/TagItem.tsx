@@ -83,14 +83,31 @@ export const TagItem = ({
 }: TagProps) => {
   if (isSelected) {
     return (
-      <ContextWrapper onClick={() => onSelected()} aria-label="tag context">
-        <TagInfoWrapper>
+      <ContextWrapper
+        onClick={(e) => {
+          onSelected();
+        }}
+        aria-label="tag context"
+      >
+        <TagInfoWrapper
+          title={`${tag.tagNo} - ${tag.description || 'no description provided'}`}
+        >
           <TagIcon
             icon={
-              <Icon
-                name={iconResolver && tag.type ? iconResolver(tag.type) : 'tag'}
-                color={'#ffffff'}
-              />
+              typeof tag.icon !== 'string' ? (
+                tag.icon
+              ) : (
+                <Icon
+                  name={
+                    tag.icon
+                      ? tag.icon
+                      : iconResolver && tag.type
+                      ? iconResolver(tag.type)
+                      : 'tag'
+                  }
+                  color={'#ffffff'}
+                />
+              )
             }
             legendColor={
               statusResolver && tag.status
@@ -110,7 +127,15 @@ export const TagItem = ({
           </TagText>
 
           <StyledTagInfoIcon>
-            <Button variant="ghost_icon">
+            <Button
+              variant="ghost_icon"
+              onClick={(e) => {
+                console.log(tag);
+                tag.action && tag.action(tag);
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
               <Icon name="info_circle" title="tag information"></Icon>
             </Button>
           </StyledTagInfoIcon>
@@ -121,18 +146,31 @@ export const TagItem = ({
 
   return (
     <div
+      title={tag.tagNo}
       aria-label="tag context"
-      onClick={() => {
+      onClick={(e) => {
         onSelected(tag.tagNo);
+        e.stopPropagation();
+        e.preventDefault();
       }}
     >
       <TagIconShadowWrapper>
         <TagIcon
           icon={
-            <Icon
-              name={iconResolver && tag.type ? iconResolver(tag.type) : 'tag'}
-              color={'#ffffff'}
-            />
+            typeof tag.icon !== 'string' ? (
+              tag.icon
+            ) : (
+              <Icon
+                name={
+                  tag.icon
+                    ? tag.icon
+                    : iconResolver && tag.type
+                    ? iconResolver(tag.type)
+                    : 'tag'
+                }
+                color={'#ffffff'}
+              />
+            )
           }
           legendColor={
             statusResolver && tag.status

@@ -9,6 +9,7 @@ import {
 } from '@equinor/echo-3d-viewer';
 import { IModelViewerConfig } from './configurator';
 import { tokens } from '@equinor/eds-tokens';
+import { IHttpClient } from '@equinor/fusion-framework-module-http';
 
 export interface IModuleViewerProvider {
   setup(args: SetupArgs): Promise<void>;
@@ -17,6 +18,7 @@ export interface IModuleViewerProvider {
   get modelApiClient(): ModelsClient | undefined;
   get hierarchyApiClient(): HierarchyClient | undefined;
   get viewer(): Echo3dViewer | undefined;
+  get echoClient(): IHttpClient;
 }
 
 type SetupArgs = {
@@ -32,9 +34,12 @@ export class ModuleViewerProvider implements IModuleViewerProvider {
   config: IModelViewerConfig;
 
   private _echoInstance?: EchoSetupObject;
+  private _echoClient: IHttpClient;
 
   constructor(config: IModelViewerConfig) {
     this.config = config;
+
+    this._echoClient = config.echoClient;
   }
 
   async setup(args: SetupArgs) {
@@ -63,6 +68,9 @@ export class ModuleViewerProvider implements IModuleViewerProvider {
   }
   get viewer() {
     return this.echoInstance?.viewer;
+  }
+  get echoClient() {
+    return this._echoClient;
   }
 
   disposeViewer() {

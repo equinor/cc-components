@@ -3,6 +3,7 @@ import {
   BaseConfigBuilder,
   ConfigBuilderCallbackArgs,
 } from '@equinor/fusion-framework-module';
+import { type IHttpClient } from '@equinor/fusion-framework-module-http';
 
 export type ClientOptions = {
   baseUrl: string;
@@ -22,6 +23,7 @@ export interface ModelViewerConfigOptions {
 export interface IModelViewerConfig {
   hierarchyClientConfig: ClientConfig;
   modelClientConfig: ClientConfig;
+  echoClient: any;
   renderConfig: RendererConfiguration;
 }
 
@@ -34,6 +36,15 @@ export class ModelViewerConfigurator extends BaseConfigBuilder<IModelViewerConfi
       throw new Error('Fusion MsalModule required to activate this module');
     }
     return await requireInstance('auth');
+  }
+  protected async _getHttpModule({
+    hasModule,
+    requireInstance,
+  }: ConfigBuilderCallbackArgs) {
+    if (!hasModule('http')) {
+      throw new Error('Fusion http module is required to activate this module');
+    }
+    return await requireInstance('http');
   }
 
   protected async _getActionTokenGenerator(
@@ -68,6 +79,17 @@ export class ModelViewerConfigurator extends BaseConfigBuilder<IModelViewerConfi
         baseUrl,
         getAccessToken: await this._getActionTokenGenerator(scope, args),
       };
+    });
+  };
+
+  setEchoClientConfig = (config: ClientOptions) => {
+    this._set('echoClient', async (args) => {
+      const http = await this._getHttpModule(args);
+      const client = http.createClient({
+        baseUri: config.baseUrl,
+        defaultScopes: [config.scope],
+      });
+      return client;
     });
   };
 }

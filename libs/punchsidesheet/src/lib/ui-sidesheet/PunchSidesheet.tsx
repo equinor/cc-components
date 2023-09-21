@@ -15,6 +15,7 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
 } from '@cc-components/sharedcomponents';
+import { PunchModelViewerTab } from './PunchModelViewer';
 
 export const PunchSidesheet = createWidget<Punch>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -113,12 +114,26 @@ export const PunchSidesheet = createWidget<Punch>(({ props }) => {
         <StyledTabListWrapper>
           <StyledTabsList ref={ref}>
             <Tabs.Tab>Details </Tabs.Tab>
+            <Tabs.Tab>3D </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab punch={punch} />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            {activeTab === 1 ? (
+              <PunchModelViewerTab
+                punch={punch}
+                action={() => {
+                  console.log('here');
+                  setActiveTab(0);
+                }}
+              />
+            ) : (
+              'Change tab to right tab index: ' + activeTab
+            )}
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
