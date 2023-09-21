@@ -139,7 +139,7 @@ export function ElectricalInnerSidesheet({
 
         <StyledPanels>
           <Tabs.Panel>
-            <CircuitDiagramTab elenetwork={elenetwork} />
+            <CircuitDiagramTab elenetwork={elenetwork} itemId={itemId} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useState } from 'react';
+import { Fragment, ReactNode, forwardRef, useState } from 'react';
 import { warning_outlined } from '@equinor/eds-icons';
 import { Icon } from '@equinor/eds-core-react';
 import { ElectricalNetwork } from '../types/ElectricalNetwork';
@@ -13,7 +13,7 @@ import {
   StyledCriticalLine,
   StyledHTCable,
   StyledJunctionBox,
-  StyledNetworkName,
+  StyledNetworkNameAndIcon,
   StyledPopover,
   StyledSpaceHeater,
   StyledSwitchboardChildren,
@@ -30,9 +30,10 @@ type CircuitRef = Record<string, HTMLDivElement>;
 type CircuitDiagramProps = {
   network?: ElectricalNetwork;
   isLoading?: boolean;
+  itemId: string;
 };
 
-export function CircuitDiagram({ network, isLoading }: CircuitDiagramProps) {
+export function CircuitDiagram({ network, isLoading, itemId }: CircuitDiagramProps) {
   const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
 
   if (!!isLoading || !network) {
@@ -45,11 +46,11 @@ export function CircuitDiagram({ network, isLoading }: CircuitDiagramProps) {
         <StyledSwitchboardChildren>
           {network.children.map((circuit) => {
             return (
-              <>
-                {circuit.children.map((circuitChildren) => (
+              <Fragment key={circuit.name}>
+                {circuit.children.map((circuitChildren, i) => (
                   <ElectricalComponent
                     ref={(element: HTMLDivElement | null) => {
-                      if (!element) return;
+                      if (!element || i !== 0) return;
                       setCircuitRef((old) => {
                         const isPresent = old?.[circuit.name] === element;
                         if (isPresent) return old;
@@ -59,9 +60,10 @@ export function CircuitDiagram({ network, isLoading }: CircuitDiagramProps) {
                     network={circuitChildren}
                     key={circuitChildren.name}
                     circuitName={circuit.name}
+                    itemId={itemId}
                   />
                 ))}
-              </>
+              </Fragment>
             );
           })}
         </StyledSwitchboardChildren>
@@ -79,11 +81,11 @@ function Switchboard({
 }) {
   return (
     <StyledSwitchboardWrapper>
-      <StyledNetworkName>{network.name}</StyledNetworkName>
+      {network.name}
       {network.children.map((circuit) => {
         const maybeRef = circuitRef?.[circuit.name];
         return (
-          <StyledCircuitNameAndIconWrapper maybeRef={maybeRef}>
+          <StyledCircuitNameAndIconWrapper key={circuit.name} maybeRef={maybeRef}>
             <StyledCircuitNameAndIcon key={circuit.name} style={{ minWidth: '76px' }}>
               {circuit.name}
             </StyledCircuitNameAndIcon>
@@ -110,27 +112,34 @@ const MaybeFirst = forwardRef<
 type ElectricalComponentProps = {
   network: ElectricalNetwork;
   circuitName: string | null;
+  itemId: string;
 };
 
 const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>(
-  ({ circuitName, network }, ref) => {
+  ({ circuitName, network, itemId }, ref) => {
+    const backgroundColor = itemId === network.name ? 'lightblue' : 'white';
     switch (network.eleSymbolCode) {
       case 'HT_KAB': {
-        return <HTCable network={network} />;
+        return <HTCable network={network} backgroundColor={backgroundColor} />;
       }
 
       case 'VARME': {
-        return <SpaceHeater network={network} />;
+        return <SpaceHeater network={network} backgroundColor={backgroundColor} />;
       }
 
       case 'KABEL': {
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
-            <Cable network={network} />
+            <Cable network={network} backgroundColor={backgroundColor} />
 
             <ChildWrapper>
               {network.children.map((s) => (
-                <ElectricalComponent network={s} key={s.name} circuitName={null} />
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
               ))}
             </ChildWrapper>
           </MaybeFirst>
@@ -140,11 +149,16 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
       case 'K_BOX': {
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
-            <JunctionBox network={network} />
+            <JunctionBox network={network} backgroundColor={backgroundColor} />
 
             <ChildWrapper>
               {network.children.map((s) => (
-                <ElectricalComponent network={s} key={s.name} circuitName={null} />
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
               ))}
             </ChildWrapper>
           </MaybeFirst>
@@ -154,49 +168,76 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
       // need to implement the rest
       default:
         return (
-          <StyledItem>
-            <Name>{network.name}</Name>
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <StyledItem backgroundColor={backgroundColor}>
+              <Name>{network.name}</Name>
 
-            <ChildWrapper>
-              {network.children.map((s) => (
-                <ElectricalComponent network={s} key={s.name} circuitName={null} />
-              ))}
-            </ChildWrapper>
-          </StyledItem>
+              <ChildWrapper>
+                {network.children.map((s) => (
+                  <ElectricalComponent
+                    network={s}
+                    key={s.name}
+                    circuitName={null}
+                    itemId={itemId}
+                  />
+                ))}
+              </ChildWrapper>
+            </StyledItem>
+          </MaybeFirst>
         );
     }
   }
 );
 
-export const HTCable = ({ network }: { network: ElectricalNetwork }) => {
-  return <StyledHTCable>{network.name}</StyledHTCable>;
+export const HTCable = ({
+  network,
+  backgroundColor,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+}) => {
+  return <StyledHTCable backgroundColor={backgroundColor}>{network.name}</StyledHTCable>;
 };
 
-export const SpaceHeater = ({ network }: { network: ElectricalNetwork }) => {
+export const SpaceHeater = ({
+  network,
+  backgroundColor,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+}) => {
   return (
-    <StyledSpaceHeater>
-      <StyledNetworkName>
+    <StyledSpaceHeater backgroundColor={backgroundColor}>
+      <StyledNetworkNameAndIcon>
         {network.name}
         <SpaceHeaterIcon />
-      </StyledNetworkName>
+      </StyledNetworkNameAndIcon>
     </StyledSpaceHeater>
   );
 };
 
-function Cable({ network }: { network: ElectricalNetwork }) {
-  return (
-    <StyledCable>
-      <StyledNetworkName>{network.name}</StyledNetworkName>
-    </StyledCable>
-  );
+function Cable({
+  network,
+  backgroundColor,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+}) {
+  return <StyledCable backgroundColor={backgroundColor}>{network.name}</StyledCable>;
 }
 
-function JunctionBox({ network }: { network: ElectricalNetwork }) {
+function JunctionBox({
+  network,
+  backgroundColor,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+}) {
   return (
     <>
       {network.missingCable ? <MissingCable /> : null}
-      <StyledJunctionBox>
-        <StyledNetworkName>{network.name}</StyledNetworkName>
+      <StyledJunctionBox backgroundColor={backgroundColor}>
+        {network.name}
       </StyledJunctionBox>
     </>
   );

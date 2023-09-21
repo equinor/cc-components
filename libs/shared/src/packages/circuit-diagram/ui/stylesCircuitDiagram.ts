@@ -12,6 +12,7 @@ export const StyledSwitchboardWrapper = styled.div`
   margin-bottom: -15px;
   border-radius: 10px;
   position: relative;
+  align-items: center;
 `;
 
 export const StyledCircuitDiagramWrapper = styled.div`
@@ -48,17 +49,17 @@ export const StyledCircuitNameAndIconWrapper = styled.div<{ maybeRef: HTMLDivEle
   position: absolute;
   width: 100%;
   left: 0;
-  top: ${(p) => p.maybeRef?.offsetTop - 10 ?? 0}px;
+  top: ${(p) => p.maybeRef?.offsetTop - 24 ?? 0}px;
 `;
 
-export const StyledNetworkName = styled.div`
+export const StyledNetworkNameAndIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1ch;
 `;
 
-export const StyledHTCable = styled.div`
+export const StyledHTCable = styled.div<{ backgroundColor: string }>`
   display: flex;
   gap: 1ch;
   padding: 0px 10px;
@@ -66,6 +67,8 @@ export const StyledHTCable = styled.div`
   width: fit-content;
   white-space: nowrap;
   align-items: center;
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: 0px 15px 0px 0px;
   ::after {
     width: 12px;
     height: 12px;
@@ -81,20 +84,22 @@ export const StyledHTCable = styled.div`
   }
 `;
 
-export const StyledJunctionBox = styled.div`
+export const StyledJunctionBox = styled.div<{ backgroundColor: string }>`
   box-sizing: border-box;
   min-height: 50px;
   white-space: nowrap;
   padding: 10px 5px 0px 5px;
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
   border-radius: 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
-export const StyledCable = styled.div`
+export const StyledCable = styled.div<{ backgroundColor: string }>`
   border-bottom: 2px solid black;
   height: 3ch;
   white-space: nowrap;
   padding: 0px 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const StyledCriticalLine = styled.div`
@@ -131,12 +136,11 @@ export const StyledSwitchboardChildren = styled.div`
   }
 `;
 
-export const StyledItem = styled.div`
+export const StyledItem = styled.div<{ backgroundColor?: string }>`
   height: 100%;
   display: flex;
   flex-direction: row;
-  min-width: 200px;
-  max-width: 1000px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const StyledFirstItem = styled.div`
@@ -152,16 +156,17 @@ export const Name = styled.div`
   border: 1px solid black;
   height: 100%;
   min-width: 75px;
-  border-radius: 5px;
+  white-space: nowrap;
 `;
 
-export const StyledSpaceHeater = styled.div`
+export const StyledSpaceHeater = styled.div<{ backgroundColor: string }>`
   box-sizing: border-box;
   min-height: 50px;
   white-space: nowrap;
   padding: 10px 5px 0px 5px;
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
   border-radius: 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const ChildWrapper = styled.div`
