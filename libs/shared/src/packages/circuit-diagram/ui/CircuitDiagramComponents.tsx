@@ -15,6 +15,7 @@ import {
   StyledItem,
   StyledCriticalLine,
   StyledPopover,
+  Name,
 } from './stylesCircuitDiagram';
 import { Skeleton } from '@cc-components/sharedcomponents';
 
@@ -100,6 +101,30 @@ export function JunctionBox({
   );
 }
 
+export function Light({
+  network,
+  backgroundColor,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+}) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+  return (
+    <StyledItem backgroundColor={backgroundColor}>
+      <Name>
+        <StyledNetworkNameAndIcon>
+          {network.name}{' '}
+          <Icon name={light.name} size={16} onMouseOver={onOpen} onMouseLeave={onClose} />
+          {isOpen && <StyledPopover>LYS</StyledPopover>}
+        </StyledNetworkNameAndIcon>
+      </Name>
+    </StyledItem>
+  );
+}
+
 export const MaybeFirst = forwardRef<
   HTMLDivElement,
   { circuitName: string | null; children: ReactNode }
@@ -146,29 +171,43 @@ export const MissingCable = (): JSX.Element => {
 };
 
 export const SpaceHeaterIcon = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+
   return (
-    <svg
-      width="2rem"
-      height="1.8rem"
-      viewBox="0 0 56 56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ rotate: '0deg' }}
-    >
-      <g clip-path="url(#varme_svg__clip0_1814_4864)" stroke="#132634" stroke-width="3.3">
-        <path stroke-linecap="round" d="M1.65 28.684h52.7"></path>
-        <path fill="#ffffff" d="M8.65 17.65h38.7v20.7H8.65z"></path>
-        <path
-          stroke-linecap="round"
-          d="M18.15 17.984v20.033M27.55 17.984v20.033M37.451 17.984v20.033"
-        ></path>
-      </g>
-      <defs>
-        <clipPath id="varme_svg__clip0_1814_4864">
-          <path fill="#fff" d="M0 0h56v56H0z"></path>
-        </clipPath>
-      </defs>
-    </svg>
+    <>
+      <svg
+        width="24px"
+        height="21.6px"
+        viewBox="0 0 56 56"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ rotate: '0deg' }}
+        onMouseOver={onOpen}
+        onMouseLeave={onClose}
+      >
+        <g
+          clip-path="url(#varme_svg__clip0_1814_4864)"
+          stroke="#132634"
+          stroke-width="3.3"
+        >
+          <path stroke-linecap="round" d="M1.65 28.684h52.7"></path>
+          <path fill="#ffffff" d="M8.65 17.65h38.7v20.7H8.65z"></path>
+          <path
+            stroke-linecap="round"
+            d="M18.15 17.984v20.033M27.55 17.984v20.033M37.451 17.984v20.033"
+          ></path>
+        </g>
+        <defs>
+          <clipPath id="varme_svg__clip0_1814_4864">
+            <path fill="#fff" d="M0 0h56v56H0z"></path>
+          </clipPath>
+        </defs>
+      </svg>
+      {isOpen && <StyledPopover cornerButton>VARME</StyledPopover>}
+    </>
   );
 };
 

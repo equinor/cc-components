@@ -17,6 +17,7 @@ import {
   Cable,
   JunctionBox,
   CircuitRef,
+  Light,
 } from './CircuitDiagramComponents';
 
 type CircuitDiagramProps = {
@@ -105,6 +106,25 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
             <JunctionBox network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'LYS': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Light network={network} backgroundColor={backgroundColor} />
 
             <ChildWrapper>
               {network.children.map((s) => (

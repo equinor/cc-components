@@ -59,6 +59,20 @@ export const StyledNetworkNameAndIcon = styled.div`
   gap: 1ch;
 `;
 
+export const Name = styled.div`
+  border: 1px solid black;
+  padding: 10px 5px;
+  min-width: 75px;
+  white-space: nowrap;
+`;
+
+export const StyledItem = styled.div<{ backgroundColor?: string }>`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: ${(props) => props.backgroundColor};
+`;
+
 export const StyledHTCable = styled.div<{ backgroundColor: string }>`
   display: flex;
   gap: 1ch;
@@ -86,9 +100,8 @@ export const StyledHTCable = styled.div<{ backgroundColor: string }>`
 
 export const StyledJunctionBox = styled.div<{ backgroundColor: string }>`
   box-sizing: border-box;
-  min-height: 50px;
   white-space: nowrap;
-  padding: 10px 5px 0px 5px;
+  padding: 10px 5px;
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
   border-radius: 10px;
   background-color: ${(props) => props.backgroundColor};
@@ -136,13 +149,6 @@ export const StyledSwitchboardChildren = styled.div`
   }
 `;
 
-export const StyledItem = styled.div<{ backgroundColor?: string }>`
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color: ${(props) => props.backgroundColor};
-`;
-
 export const StyledFirstItem = styled.div`
   height: 100%;
   display: flex;
@@ -152,20 +158,11 @@ export const StyledFirstItem = styled.div`
   position: relative;
 `;
 
-export const Name = styled.div`
-  border: 1px solid black;
-  height: 100%;
-  min-width: 75px;
-  white-space: nowrap;
-`;
-
 export const StyledSpaceHeater = styled.div<{ backgroundColor: string }>`
   box-sizing: border-box;
-  min-height: 50px;
   white-space: nowrap;
-  padding: 10px 5px 0px 5px;
+  padding: 10px 5px;
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
-  border-radius: 10px;
   background-color: ${(props) => props.backgroundColor};
 `;
 
