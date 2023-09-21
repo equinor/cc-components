@@ -21,6 +21,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 
 export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState> => {
   const client = useHttpClient('cc-api');
+
   const { getRows, colDefs } = useGridDataSource(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/loop/grid`, req);
     const meta = (await res.json()) as DataResponse<Loop>;
@@ -31,12 +32,43 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     };
   }, columnDefinitions);
 
+  async function fetchLoopExport(filterstate: FilterState): Promise<any> {
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/problem+json',
+      },
+      body: JSON.stringify(filterstate),
+    };
+
+    const res = await client.fetch(
+      `/api/contexts/${contextId}/loop/export`,
+      requestOptions
+    );
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch file');
+    }
+
+    const blob = await res.blob();
+
+    const url = window.URL.createObjectURL(
+      new Blob([blob], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      })
+    );
+
+    window.open(url, '_self');
+    window.URL.revokeObjectURL(url);
+  }
+
   return {
     columnDefinitions: colDefs as [ColDef<Loop>, ...ColDef<Loop>[]],
     gridOptions: {
       ...defaultGridOptions,
     },
     getRows: getRows,
+    excelExport: fetchLoopExport,
     modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
