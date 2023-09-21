@@ -396,6 +396,9 @@ importers:
       '@equinor/fusion-framework-module':
         specifier: ^4.2.5
         version: 4.2.5(@types/semver@7.5.2)
+      '@equinor/fusion-framework-module-http':
+        specifier: ^5.1.1
+        version: 5.1.1(@types/semver@7.5.2)
       '@equinor/fusion-framework-react-app':
         specifier: ^4.1.8
         version: 4.1.8(@equinor/fusion-framework-module-http@5.1.1)(@equinor/fusion-framework-react-module-context@6.0.14)(@remix-run/router@1.9.0)(@types/react@18.0.25)(odata-query@7.0.4)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.5.7)
