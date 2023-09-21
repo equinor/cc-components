@@ -51,7 +51,7 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
     }
   );
 
-  const { data, isLoading, error } = useGetWorkorders(loop?.loopNo);
+  const { data, isLoading, error } = useGetWorkorders(loop?.loopId);
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.closeSidesheet} />;
