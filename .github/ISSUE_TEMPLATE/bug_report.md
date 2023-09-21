@@ -24,5 +24,4 @@ assignees: ''
 - [ ] items which covers
 - [ ] the expected outcome 
 
-> **Note**
-> Please apply appropriate label, e,g, bug, feature, enhancement
+
