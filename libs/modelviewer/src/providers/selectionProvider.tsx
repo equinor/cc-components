@@ -53,6 +53,8 @@ export const SelectionContextProvider = ({
   selectionOptions?: {
     statusResolver?: (status: string) => string;
     displayStatusColor?: boolean;
+    defaultCroppingDistance?: number;
+    defaultCameraDistance?: number;
   };
 }>) => {
   const [tagList, setTagList] = useState<TagOverlay[]>([]);
@@ -127,7 +129,13 @@ export const SelectionContextProvider = ({
       fitToSelection: true,
     });
     setCurrentNodes(nodes || []);
-    if (nodes) selectionService?.clipModelByNodes(nodes, true);
+    console.log(selectionOptions);
+    if (nodes)
+      selectionService?.clipModelByNodes(
+        nodes,
+        true,
+        selectionOptions?.defaultCroppingDistance
+      );
     return nodes;
   };
 
@@ -178,7 +186,10 @@ export const SelectionContextProvider = ({
   const fitCameraToAAbb = useCallback(
     (aabb: AabbModel) => {
       if (selectionService) {
-        const box3 = selectionService.getBoundingBoxFormAabbModel(aabb, 0);
+        const box3 = selectionService.getBoundingBoxFormAabbModel(
+          aabb,
+          selectionOptions?.defaultCameraDistance || 0
+        );
         selectionService.fitCameraToBox3(box3, 10, 0);
       }
     },

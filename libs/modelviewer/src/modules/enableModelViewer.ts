@@ -6,6 +6,7 @@ export const enableModelViewer = (
   configurator: IModulesConfigurator<any, any>,
   configure: (builder: ModelViewerConfigurator) => void
 ) => {
+  configurator;
   configurator.addConfig({
     module,
     configure,

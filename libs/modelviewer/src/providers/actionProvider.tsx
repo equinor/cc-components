@@ -1,5 +1,5 @@
 import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
-import { PropsWithChildren, createContext, useContext, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 import { Color } from 'three';
 import { useModelContext } from './modelsProvider';
 import { useSelectionContext } from './selectionProvider';
@@ -19,11 +19,13 @@ interface ActionContextState {
 
 const ActionContext = createContext<ActionContextState | undefined>(undefined);
 
-export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+export const ActionContextProvider: React.FC<
+  PropsWithChildren<{ defaultCameraDistance?: number; defaultCroppingDistance?: number }>
+> = ({ children, defaultCameraDistance, defaultCroppingDistance }) => {
   const { getModel } = useModelContext();
   const { getCurrentNodes, getSelectionService } = useSelectionContext();
 
-  const [isOrbit, setIsOrbit] = useState(false);
+  const [isOrbit, setIsOrbit] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
   const [isClipped, setClipped] = useState(true);
   const currentNodes = getCurrentNodes();
@@ -36,6 +38,10 @@ export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ childre
       model.setDefaultNodeAppearance({ ...appearance, visible: isVisible });
     }
   };
+
+  useEffect(() => {
+    isOrbit ? orbit() : firstPerson();
+  }, [isOrbit, currentNodes]);
 
   const hideModel = () => setModelVisibility(false);
   const showModel = () => setModelVisibility(true);
@@ -51,7 +57,6 @@ export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ childre
 
   const toggleCameraMode = () => {
     setIsOrbit(!isOrbit);
-    isOrbit ? firstPerson() : orbit();
   };
 
   const toggleFocus = () => {
@@ -71,7 +76,7 @@ export const ActionContextProvider: React.FC<PropsWithChildren<{}>> = ({ childre
 
   const fitToScreen = () => {
     if (currentNodes) {
-      selectionService?.fitCameraToNodeSelection(currentNodes);
+      selectionService?.fitCameraToNodeSelection(currentNodes, defaultCameraDistance);
     }
   };
 

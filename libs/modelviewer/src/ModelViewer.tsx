@@ -11,10 +11,12 @@ import { ModelViewerContextProvider } from './providers/modelViewerProvider';
 import { ModelContextProvider } from './providers/modelsProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { TagOverlay } from './types/overlayTags';
+import { PlantDataContextProvider } from './providers/plantDataProvider';
+import { Message } from './components/message/Message';
 
 type FusionModelViewerProps = {
-  plantName: string;
-  plantCode: string;
+  instCode?: string;
+  plantCode?: string;
   tagsOverlay?: string[] | TagOverlay[];
   options?: {
     iconResolver?: (type: string) => string;
@@ -22,6 +24,9 @@ type FusionModelViewerProps = {
     titleResolver?: (overlay: TagOverlay) => string;
     CustomOverlayComponent?: FC<TagOverlay & { index: number }>;
     fallbackComponent?: FC<MessageBoundaryState>;
+    defaultCroppingDistance?: number;
+    displayStatusColor?: boolean;
+    defaultCameraDistance?: number;
   };
 };
 
@@ -29,27 +34,20 @@ export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProp
   const queryClient = new QueryClient();
 
   return (
-   <QueryClientProvider client={queryClient}>
-    <MessageBoundary
-      fallbackComponent={
-        props.options?.fallbackComponent
-          ? props.options.fallbackComponent
-          : ({ title, message }) => (
-              <div>
-                <h1>{title}</h1>
-                <p>{message}</p>
-              </div>
-            )
-      }
-    >
-      <ModelViewer {...props} />
-    </MessageBoundary>
-   </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <MessageBoundary
+        fallbackComponent={
+          props.options?.fallbackComponent ? props.options.fallbackComponent : Message
+        }
+      >
+        <ModelViewer {...props} />
+      </MessageBoundary>
+    </QueryClientProvider>
   );
 };
 
 const ModelViewer = ({
-  plantName,
+  instCode,
   plantCode,
   tagsOverlay,
   options,
@@ -69,18 +67,23 @@ const ModelViewer = ({
 
   return (
     <>
-      <ModelViewerContextProvider>
-        <ModelContextProvider plantCode={plantCode}>
-          <SelectionContextProvider tagsOverlay={tagsOverlay} {...options}>
-            <ModelSelection plantName={plantName}>
-              <ActionContextProvider>
-                <TagsOverlay {...options} />
-                <ActionsMenu CustomActions={components.CustomActions} />
-              </ActionContextProvider>
-            </ModelSelection>
-          </SelectionContextProvider>
-        </ModelContextProvider>
-      </ModelViewerContextProvider>
+      <PlantDataContextProvider {...{ plantCode, instCode }}>
+        <ModelViewerContextProvider>
+          <ModelContextProvider>
+            <SelectionContextProvider
+              tagsOverlay={tagsOverlay}
+              selectionOptions={options}
+            >
+              <ModelSelection>
+                <ActionContextProvider>
+                  <TagsOverlay {...options} />
+                  <ActionsMenu CustomActions={components.CustomActions} />
+                </ActionContextProvider>
+              </ModelSelection>
+            </SelectionContextProvider>
+          </ModelContextProvider>
+        </ModelViewerContextProvider>
+      </PlantDataContextProvider>
     </>
   );
 };

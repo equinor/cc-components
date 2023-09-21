@@ -10,7 +10,7 @@
       "rootDir": ".",
       "declaration": true
     },
-    "exclude": ["dist"],
+    "exclude": ["dist", "vitest.config.ts"],
     "extends": "../../tsconfig.base.json",
   }
   

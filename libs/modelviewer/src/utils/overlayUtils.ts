@@ -63,6 +63,7 @@ export const createOverlayTags = (
         status: tagMap[viewNode.tagNo].status,
         icon: tagMap[viewNode.tagNo].icon,
         color: tagMap[viewNode.tagNo].color,
+        action: tagMap[viewNode.tagNo].action,
       });
     }
     return overlayTags;

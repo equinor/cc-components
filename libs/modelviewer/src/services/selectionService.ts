@@ -42,7 +42,11 @@ export class SelectionService extends NodeService {
   private hierarchyClient: HierarchyClient;
   private viewer: Echo3dViewer;
 
-  constructor(private modelMeta: AssetMetadataSimpleDto, echoInstance: EchoSetupObject) {
+  constructor(
+    private modelMeta: AssetMetadataSimpleDto,
+    echoInstance: EchoSetupObject,
+    config?: { defaultCroppingDistance?: number }
+  ) {
     super();
     this.hierarchyClient = echoInstance.hierarchyApiClient;
     this.viewer = echoInstance.viewer;

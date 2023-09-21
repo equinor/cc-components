@@ -3,29 +3,25 @@ import React, { PropsWithChildren } from 'react';
 import { useModelContext } from '../../providers/modelsProvider';
 import AccessDialog from '../access-dialog/accessDialog';
 import ModelSelectionDialog from '../model-selection-dialog/modelSelectionDialog';
+import { usePlantData } from '../../providers/plantDataProvider';
+import { Loading } from '../loading/loading';
 
-interface ModelSelectionProps {
-  plantName: string;
-}
-
-const ModelSelection: React.FC<PropsWithChildren<ModelSelectionProps>> = ({
-  children,
-  plantName,
-}) => {
+const ModelSelection: React.FC<PropsWithChildren> = ({ children }) => {
   const { hasAccess, models, isLoading, modelMeta } = useModelContext();
+  const plantData = usePlantData();
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <Loading />;
+  }
+
+  if (!hasAccess) {
+    return <AccessDialog plantName={plantData.projectDescription} />;
   }
 
   return (
     <>
-      {children}
-      {models && models.length > 0 ? (
-        <ModelSelectionDialog models={models} />
-      ) : (
-        <AccessDialog hasAccess={hasAccess} plantName={plantName} />
-      )}
+      {modelMeta && children}
+      {models && models.length > 0 && <ModelSelectionDialog models={models} />}
     </>
   );
 };

@@ -12,6 +12,8 @@ import {
 import { ModelService, ViewerOptions } from '../services/modelsService';
 import { useModelViewerContext } from './modelViewerProvider';
 
+import { usePlantData } from './plantDataProvider';
+
 type ModelContextType = {
   hasAccess: boolean;
   showSelector: boolean;
@@ -29,12 +31,7 @@ type ModelContextType = {
 
 const ModelContext = createContext({} as ModelContextType);
 
-export const ModelContextProvider = ({
-  children,
-  plantCode,
-}: PropsWithChildren<{
-  plantCode: string;
-}>) => {
+export const ModelContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [showSelector, setShowModelDialog] = useState(false);
   const [modelMeta, setModelMeta] = useState<AssetMetadataSimpleDto>();
 
@@ -46,13 +43,15 @@ export const ModelContextProvider = ({
     }
   }, [echoInstance]);
 
+  const plantData = usePlantData();
+
   const { data: models, isLoading } = useQuery<AssetMetadataSimpleDto[]>(
-    ['models', plantCode],
+    ['models', plantData],
     async () => {
       if (!modelService) {
         throw new Error('No model service provided');
       }
-      const data = await modelService.getModelsForPlant(plantCode);
+      const data = await modelService.getModelsForPlant(plantData.plantCode);
       return data;
     },
     {
@@ -61,7 +60,6 @@ export const ModelContextProvider = ({
     }
   );
 
-  //Access
   const hasAccess = useMemo(() => {
     return models?.length !== 0;
   }, [models]);
@@ -69,7 +67,7 @@ export const ModelContextProvider = ({
   //init setup from local store
   useEffect(() => {
     if (hasAccess) {
-      const localModelId = modelService?.getLocalModel(plantCode);
+      const localModelId = modelService?.getLocalModel(plantData.plantCode);
       if (localModelId !== undefined && models !== undefined) {
         const selectedModel = models.find(
           (model) => model.platformSectionId === localModelId
@@ -84,7 +82,7 @@ export const ModelContextProvider = ({
       }
       setShowModelDialog(true);
     }
-  }, [models, plantCode]);
+  }, [models, plantData]);
 
   const loadModelById = async (modelId: number, options?: ViewerOptions) => {
     if (!modelService) throw new Error('No Model Service');
