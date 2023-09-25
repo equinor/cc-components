@@ -43,7 +43,7 @@ export const ModelContextProvider = ({ children }: PropsWithChildren<{}>) => {
     }
   }, [echoInstance]);
 
-  const plantData = usePlantData();
+  const { plantData } = usePlantData();
 
   const { data: models, isLoading } = useQuery<AssetMetadataSimpleDto[]>(
     ['models', plantData],

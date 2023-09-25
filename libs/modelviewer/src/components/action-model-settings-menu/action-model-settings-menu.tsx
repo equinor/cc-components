@@ -1,12 +1,21 @@
 import { Button, Icon, Menu } from '@equinor/eds-core-react';
 import { more_horizontal } from '@equinor/eds-icons';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useModelContext } from '../../providers/modelsProvider';
+import { usePlantData } from '../../providers/plantDataProvider';
 
 export const ModelSettingsMenu = () => {
   Icon.add({ more_horizontal });
   const { showSelector, setShowModelDialog } = useModelContext();
-  const optionsSettings = ['Change Model'];
+  const { togglePlantSelector } = usePlantData();
+
+  const { plantsData } = usePlantData();
+
+  const optionsSettings = useMemo(() => {
+    return plantsData.length === 0
+      ? ['Change 3d Model']
+      : ['Change 3d Model', 'Change Plant'];
+  }, [plantsData]);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -21,8 +30,11 @@ export const ModelSettingsMenu = () => {
 
   const handleMenuItemClick = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
-    if (optionsSettings[index] === 'Change Model') {
+    if (optionsSettings[index] === 'Change 3d Model') {
       showModelSelector();
+    }
+    if (optionsSettings[index] === 'Change Plant') {
+      togglePlantSelector();
     }
   };
 

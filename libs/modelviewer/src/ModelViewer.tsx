@@ -15,8 +15,7 @@ import { PlantDataContextProvider } from './providers/plantDataProvider';
 import { Message } from './components/message/Message';
 
 type FusionModelViewerProps = {
-  instCode?: string;
-  plantCode?: string;
+  facility: string;
   tagsOverlay?: string[] | TagOverlay[];
   options?: {
     iconResolver?: (type: string) => string;
@@ -47,8 +46,7 @@ export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProp
 };
 
 const ModelViewer = ({
-  instCode,
-  plantCode,
+  facility,
   tagsOverlay,
   options,
   children,
@@ -67,7 +65,7 @@ const ModelViewer = ({
 
   return (
     <>
-      <PlantDataContextProvider {...{ plantCode, instCode }}>
+      <PlantDataContextProvider {...{ facility }}>
         <ModelViewerContextProvider>
           <ModelContextProvider>
             <SelectionContextProvider

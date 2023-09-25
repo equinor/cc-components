@@ -69,6 +69,7 @@ export const SelectionContextProvider = ({
           tagNo: tag,
           description: 'Unknown tag',
           color: options?.color,
+          icon: 'tag',
         }))
       );
       return;

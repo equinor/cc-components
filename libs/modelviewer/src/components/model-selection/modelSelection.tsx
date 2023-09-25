@@ -8,7 +8,7 @@ import { Loading } from '../loading/loading';
 
 const ModelSelection: React.FC<PropsWithChildren> = ({ children }) => {
   const { hasAccess, models, isLoading, modelMeta } = useModelContext();
-  const plantData = usePlantData();
+  const { plantData } = usePlantData();
 
   if (isLoading) {
     return <Loading />;

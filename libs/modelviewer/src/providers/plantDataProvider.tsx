@@ -13,25 +13,32 @@ import { EchoService, PlantData } from '../services/echoService';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../components/loading/loading';
 import { useWarning } from '../hooks/useMessageBoundary';
+import PlantSelectionDialog from '../components/plant-selection-dialog/modelSelectionDialog';
 
 type PlantDataContextType = {
   plantData?: PlantData;
+  plantsData: PlantData[];
+  togglePlantSelector(): void;
 };
 
 const PlantDataContext = createContext<PlantDataContextType>({
   plantData: undefined,
+  plantsData: [],
+  togglePlantSelector: () => {
+    // dummy function
+  },
 });
 
 export const PlantDataContextProvider = ({
   children,
-  plantCode,
-  instCode,
-}: PropsWithChildren<{ plantCode?: string; instCode?: string }>) => {
+  facility,
+}: PropsWithChildren<{ facility: string }>) => {
   const { echoClient } = useAppModules<[ModuleViewer]>().moduleViewer;
   const [isLoading, setIsLoading] = useState(true);
-
+  const [showSelector, setShowModelDialog] = useState(false);
   const [currentPlantData, setCurrentPlantData] = useState<PlantData>();
   const [plantsData, setPlantsData] = useState<PlantData[]>([]);
+  const [hasLocalPlant, setHasLocalPlant] = useState(true);
   const { setWarning } = useWarning();
 
   const echoService = useMemo(() => {
@@ -39,6 +46,10 @@ export const PlantDataContextProvider = ({
       return new EchoService(echoClient);
     }
   }, [echoClient]);
+
+  const togglePlantSelector = () => {
+    setShowModelDialog(true);
+  };
 
   const { data: plantData } = useQuery<PlantData[]>(
     ['all-plants'],
@@ -57,43 +68,70 @@ export const PlantDataContextProvider = ({
 
   useEffect(() => {
     if (!plantData) return;
-    const plant = plantData?.find(
-      (plant) => plant.plantCode.toLowerCase() === plantCode?.toLowerCase()
+    const localPlantCode = echoService?.getLocalPlant(facility);
+
+    if (localPlantCode) {
+      const plantByLocalInstCode = plantData?.find(
+        (plant) => plant.plantCode.toLowerCase() === localPlantCode?.toLowerCase()
+      );
+
+      if (plantByLocalInstCode) {
+        setCurrentPlantData(plantByLocalInstCode);
+        setIsLoading(false);
+      }
+      console.log(plantByLocalInstCode);
+
+      return;
+    }
+
+    setHasLocalPlant(false);
+
+    const plantByPlantCode = plantData?.find(
+      (plant) => plant.plantCode.toLowerCase() === facility?.toLowerCase()
     );
-    if (plant) {
-      setCurrentPlantData(plant);
+
+    if (plantByPlantCode) {
+      setCurrentPlantData(plantByPlantCode);
+      setIsLoading(false);
+      return;
+    }
+
+    const plantsByInstCode = plantData?.filter(
+      (plant) => plant.installationCode.toLowerCase() === facility?.toLowerCase()
+    );
+
+    if (plantsByInstCode && plantsByInstCode.length > 1) {
+      setPlantsData(plantsByInstCode);
+      setShowModelDialog(true);
+    } else if (plantsByInstCode && plantsByInstCode.length === 1) {
+      setCurrentPlantData(plantsByInstCode[0]);
     }
     setIsLoading(false);
-  }, [plantData, plantCode]);
+  }, [facility, plantData]);
 
   useEffect(() => {
-    if (!plantData) return;
-    const plants = plantData?.filter(
-      (plant) => plant.installationCode.toLowerCase() === instCode?.toLowerCase()
-    );
-
-    if (plants && plants.length > 1) {
-      setPlantsData(plants);
-    } else if (plants && plants.length === 1) {
-      setCurrentPlantData(plants[0]);
-    }
-    setIsLoading(false);
-  }, [plantData, instCode]);
-
-  useEffect(() => {
-    if (!isLoading && !currentPlantData) setWarning('No Plant Data Available');
-  }, [isLoading, currentPlantData]);
-
-  if (!plantCode && !instCode) {
-    throw new Error('No plantCode or instCode provided!');
-  }
+    if (!isLoading && !currentPlantData && !plantData)
+      setWarning('No Plant Data Available');
+  }, [isLoading, currentPlantData, plantData]);
 
   if (isLoading) {
     return <Loading />;
   }
 
-  if (plantsData.length > 1) {
-    return <div>{JSON.stringify(plantsData)}</div>;
+  if (plantsData.length > 1 && !currentPlantData && !hasLocalPlant) {
+    return (
+      <PlantSelectionDialog
+        onSelectedPlant={(selectedPlan, remember) => {
+          if (selectedPlan) {
+            setCurrentPlantData(selectedPlan);
+            remember && echoService?.setLocalPlant(selectedPlan);
+          }
+        }}
+        plants={plantsData}
+        selectedPlant={currentPlantData}
+        showSelector={showSelector}
+      />
+    );
   }
 
   if (!currentPlantData) {
@@ -101,14 +139,20 @@ export const PlantDataContextProvider = ({
   }
 
   return (
-    <PlantDataContext.Provider value={{ plantData: currentPlantData }}>
+    <PlantDataContext.Provider
+      value={{ plantData: currentPlantData, plantsData, togglePlantSelector }}
+    >
       {children}
     </PlantDataContext.Provider>
   );
 };
 
-export const usePlantData = (): PlantData => {
+export const usePlantData = () => {
   const context = useContext(PlantDataContext);
   if (!context.plantData) throw new Error('Plant data found!');
-  return context.plantData;
+  return {
+    plantData: context.plantData,
+    plantsData: context.plantsData,
+    togglePlantSelector: context.togglePlantSelector,
+  };
 };
