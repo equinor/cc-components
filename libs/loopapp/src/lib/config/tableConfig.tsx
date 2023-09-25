@@ -32,7 +32,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     };
   }, columnDefinitions);
 
-  async function fetchLoopExport(filterstate: FilterState): Promise<any> {
+  async function fetchLoopExport(filterstate: FilterState): Promise<void> {
     const requestOptions = {
       method: 'POST',
       headers: {
