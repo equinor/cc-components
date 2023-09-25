@@ -41,8 +41,7 @@ export const PunchModelViewerTab = ({ punch, action }: PunchModelViewerProps) =>
   return (
     <StyledWrapper>
       <FusionModelViewer
-        // plantCode={'jsv' || punch.facility}
-        instCode={punch.facility}
+        facility={punch.facility}
         options={{
           statusResolver: (status: string) => {
             return hasProperty(colorMap, status)

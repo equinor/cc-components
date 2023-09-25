@@ -26,5 +26,9 @@ export const configure = async (config: IAppConfigurator) => {
       baseUrl: 'https://app-echomodeldist-dev.azurewebsites.net',
       scope: 'd484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation',
     });
+    builder.setEchoClientConfig({
+      baseUrl: 'https://dt-echopedia-api-dev.azurewebsites.net',
+      scope: 'aef35d97-53d4-4fd0-adaf-c5a514b38436/user_impersonation',
+    });
   });
 };

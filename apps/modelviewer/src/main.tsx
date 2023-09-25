@@ -4,6 +4,7 @@ import { createRender } from '@cc-components/shared';
 import { Button, Icon } from '@equinor/eds-core-react';
 import { alarm, badge } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
+import styled from 'styled-components';
 
 const mockedTagListA = ['30L06200A', '30XV6200', '30L06200B'];
 
@@ -39,13 +40,20 @@ const Test = () => {
   );
 };
 
+const StyledWrapper = styled.div`
+  height: calc(100vh - 48px);
+  overflow: hidden;
+`;
+
 const App = () => {
   return (
-    <FusionModelViewer plantCode="jca" tagsOverlay={mockedTagListA}>
-      <FusionModelViewer.CustomActions>
-        <Test />
-      </FusionModelViewer.CustomActions>
-    </FusionModelViewer>
+    <StyledWrapper>
+      <FusionModelViewer facility="jca" tagsOverlay={mockedTagListA}>
+        <FusionModelViewer.CustomActions>
+          <Test />
+        </FusionModelViewer.CustomActions>
+      </FusionModelViewer>
+    </StyledWrapper>
   );
 };
 
