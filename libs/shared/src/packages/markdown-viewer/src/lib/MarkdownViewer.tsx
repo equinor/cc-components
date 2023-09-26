@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { LI, OL } from './ComponentOverrides';
 
 // Doing it like this because of jest failing...
-const StyledMarkdown = styled((props) => <Markdown {...props} />)`
+const StyledMarkdown = styled((props: any) => <Markdown {...props} />)`
   font-size: 16px !important;
   word-break: break-word;
   p {
