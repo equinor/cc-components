@@ -42,4 +42,5 @@ export type WorkOrder = {
   workOrderId: string;
   workOrderUrlId: string;
   workorderUrl: string | null;
+  workBreakdownStructure: string | null;
 };
