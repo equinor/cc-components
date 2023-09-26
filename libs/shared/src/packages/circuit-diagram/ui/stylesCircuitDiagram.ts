@@ -94,7 +94,7 @@ export const StyledHTCable = styled.div<{ backgroundColor: string }>`
     content: ' ';
     position: relative;
     left: 2ch;
-    top: 1.5ch;
+    top: 1.6ch;
   }
 `;
 
