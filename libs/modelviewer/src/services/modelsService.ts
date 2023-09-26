@@ -102,7 +102,7 @@ export class ModelService {
 
     if (this.model) {
       this.#initializeCamera(this.model);
-      this.model.setDefaultNodeAppearance({ color: new Color(2, 2, 2) });
+      this.model.setDefaultNodeAppearance({ color: new Color('#e3e3e3') });
     }
 
     return this.model;

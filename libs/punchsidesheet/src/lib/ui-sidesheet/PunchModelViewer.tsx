@@ -48,8 +48,8 @@ export const PunchModelViewerTab = ({ punch, action }: PunchModelViewerProps) =>
               ? colorMap[status as PackageStatus]
               : '#009922';
           },
-          defaultCroppingDistance: 5,
-          defaultCameraDistance: 3,
+          defaultCroppingDistance: 3,
+          defaultRadiusFactor: 1,
         }}
         tagsOverlay={tagsOverlay}
       ></FusionModelViewer>

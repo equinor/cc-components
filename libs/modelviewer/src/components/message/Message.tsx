@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MessageBoundaryState } from '../message-boundry/MessageBoundary';
+import { MessageBoundaryState } from '../message-boundary/MessageBoundary';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { getIconByType } from '../../utils/message';
 

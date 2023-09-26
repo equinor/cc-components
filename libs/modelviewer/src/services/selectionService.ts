@@ -42,11 +42,7 @@ export class SelectionService extends NodeService {
   private hierarchyClient: HierarchyClient;
   private viewer: Echo3dViewer;
 
-  constructor(
-    private modelMeta: AssetMetadataSimpleDto,
-    echoInstance: EchoSetupObject,
-    config?: { defaultCroppingDistance?: number }
-  ) {
+  constructor(private modelMeta: AssetMetadataSimpleDto, echoInstance: EchoSetupObject) {
     super();
     this.hierarchyClient = echoInstance.hierarchyApiClient;
     this.viewer = echoInstance.viewer;
@@ -119,7 +115,11 @@ export class SelectionService extends NodeService {
     return nodes;
   }
 
-  assignColorToNodesByTagColor(nodes: HierarchyNodeModel[], tagColors: TagColor[]) {
+  assignColorToNodesByTagColor(
+    nodes: HierarchyNodeModel[],
+    tagColors: TagColor[],
+    appearance: NodeAppearance = {}
+  ) {
     const nodeCollectionsMap = this.getNodeCollectionsMap(nodes, tagColors);
 
     Object.values(nodeCollectionsMap).forEach((collection) => {
@@ -133,7 +133,8 @@ export class SelectionService extends NodeService {
     });
 
     this.assignStyletToInvertedNodeCollection(
-      this.getNodeCollectionFromHierarchyNodeModel(nodes)
+      this.getNodeCollectionFromHierarchyNodeModel(nodes),
+      appearance
     );
   }
   resetStyleToNodeAppearance(appearance?: NodeAppearance) {
@@ -179,7 +180,7 @@ export class SelectionService extends NodeService {
 
   assignStyletToInvertedNodeCollection(
     nodeCollection: TreeIndexNodeCollection,
-    appearance: NodeAppearance = { renderGhosted: true }
+    appearance: NodeAppearance
   ) {
     const unassignedNodes = new InvertedNodeCollection(this.model, nodeCollection);
     this.model.assignStyledNodeCollection(unassignedNodes, appearance);

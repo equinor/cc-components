@@ -1,9 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Children, FC, PropsWithChildren, cloneElement, isValidElement } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
-import MessageBoundary, {
-  MessageBoundaryState,
-} from './components/message-boundry/MessageBoundary';
+import MessageBoundary from './components/message-boundary/MessageBoundary';
 import ModelSelection from './components/model-selection/modelSelection';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { ActionContextProvider } from './providers/actionProvider';
@@ -13,20 +11,12 @@ import { SelectionContextProvider } from './providers/selectionProvider';
 import { TagOverlay } from './types/overlayTags';
 import { PlantDataContextProvider } from './providers/plantDataProvider';
 import { Message } from './components/message/Message';
+import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
 
 type FusionModelViewerProps = {
   facility: string;
   tagsOverlay?: string[] | TagOverlay[];
-  options?: {
-    iconResolver?: (type: string) => string;
-    statusResolver?: (status: string) => string;
-    titleResolver?: (overlay: TagOverlay) => string;
-    CustomOverlayComponent?: FC<TagOverlay & { index: number }>;
-    fallbackComponent?: FC<MessageBoundaryState>;
-    defaultCroppingDistance?: number;
-    displayStatusColor?: boolean;
-    defaultCameraDistance?: number;
-  };
+  options?: ModelViewerConfig;
 };
 
 export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProps>) => {
@@ -34,13 +24,15 @@ export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProp
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MessageBoundary
-        fallbackComponent={
-          props.options?.fallbackComponent ? props.options.fallbackComponent : Message
-        }
-      >
-        <ModelViewer {...props} />
-      </MessageBoundary>
+      <ConfigContextProvider config={props.options}>
+        <MessageBoundary
+          fallbackComponent={
+            props.options?.fallbackComponent ? props.options.fallbackComponent : Message
+          }
+        >
+          <ModelViewer {...props} />
+        </MessageBoundary>
+      </ConfigContextProvider>
     </QueryClientProvider>
   );
 };
@@ -48,7 +40,6 @@ export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProp
 const ModelViewer = ({
   facility,
   tagsOverlay,
-  options,
   children,
 }: PropsWithChildren<FusionModelViewerProps>) => {
   const components: { CustomActions?: React.ReactElement } = {
@@ -68,13 +59,10 @@ const ModelViewer = ({
       <PlantDataContextProvider {...{ facility }}>
         <ModelViewerContextProvider>
           <ModelContextProvider>
-            <SelectionContextProvider
-              tagsOverlay={tagsOverlay}
-              selectionOptions={options}
-            >
+            <SelectionContextProvider tagsOverlay={tagsOverlay}>
               <ModelSelection>
                 <ActionContextProvider>
-                  <TagsOverlay {...options} />
+                  <TagsOverlay />
                   <ActionsMenu CustomActions={components.CustomActions} />
                 </ActionContextProvider>
               </ModelSelection>

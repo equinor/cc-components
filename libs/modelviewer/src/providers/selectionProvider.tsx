@@ -16,6 +16,7 @@ import { SelectionService, TagColor } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 import { useModelContext } from './modelsProvider';
+import { useConfig } from './configProvider';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
@@ -47,17 +48,11 @@ interface Test extends Event {
 export const SelectionContextProvider = ({
   children,
   tagsOverlay,
-  selectionOptions,
 }: PropsWithChildren<{
   tagsOverlay?: TagOverlay[] | string[];
-  selectionOptions?: {
-    statusResolver?: (status: string) => string;
-    displayStatusColor?: boolean;
-    defaultCroppingDistance?: number;
-    defaultCameraDistance?: number;
-  };
 }>) => {
   const [tagList, setTagList] = useState<TagOverlay[]>([]);
+  const config = useConfig();
 
   const handleTagList = (
     tagOverlay: string[] | TagOverlay[],
@@ -73,12 +68,12 @@ export const SelectionContextProvider = ({
         }))
       );
       return;
-    } else if (selectionOptions?.displayStatusColor) {
+    } else if (config?.displayStatusColor) {
       setTagList(
         (tagOverlay as TagOverlay[]).map((tagOverlay) => {
           const color =
-            tagOverlay.status && selectionOptions.statusResolver
-              ? selectionOptions.statusResolver(tagOverlay.status)
+            tagOverlay.status && config.statusResolver
+              ? config.statusResolver(tagOverlay.status)
               : defaultTagColor;
           return {
             ...tagOverlay,
@@ -128,15 +123,11 @@ export const SelectionContextProvider = ({
   const selectNodesByTags = async (tags: string[]) => {
     const nodes = await selectionService?.selectNodesByTags(tags, {
       fitToSelection: true,
+      radiusFactor: config.defaultRadiusFactor,
     });
     setCurrentNodes(nodes || []);
-    console.log(selectionOptions);
     if (nodes)
-      selectionService?.clipModelByNodes(
-        nodes,
-        true,
-        selectionOptions?.defaultCroppingDistance
-      );
+      selectionService?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
     return nodes;
   };
 
@@ -161,10 +152,11 @@ export const SelectionContextProvider = ({
   const selectNodesByTagColor = async (tags: TagColor[]) => {
     const nodes = await selectionService?.assignColorByTagColor(tags, {
       fitToSelection: true,
+      radiusFactor: config.defaultCroppingDistance,
     });
     if (nodes) {
       setCurrentNodes(nodes);
-      selectionService?.clipModelByNodes(nodes, true);
+      selectionService?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
     }
     return nodes;
   };
@@ -185,13 +177,14 @@ export const SelectionContextProvider = ({
   }, [currentNodes, selectionService]);
 
   const fitCameraToAAbb = useCallback(
-    (aabb: AabbModel) => {
+    (aabb: AabbModel, duration?: number) => {
       if (selectionService) {
-        const box3 = selectionService.getBoundingBoxFormAabbModel(
-          aabb,
-          selectionOptions?.defaultCameraDistance || 0
+        const box3 = selectionService.getBoundingBoxFormAabbModel(aabb);
+        selectionService.fitCameraToBox3(
+          box3,
+          duration || config.defaultCameraMoveDuration,
+          config.defaultRadiusFactor
         );
-        selectionService.fitCameraToBox3(box3, 10, 0);
       }
     },
     [selectionService]
