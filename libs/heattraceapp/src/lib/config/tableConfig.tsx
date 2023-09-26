@@ -73,7 +73,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
   {
     field: 'RFC',
-    valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
+    valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },

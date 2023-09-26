@@ -36,8 +36,8 @@ export type HeatTrace = {
   pipetest: string | null;
   pipetestType: string;
   system: string | null;
-  rfC_Planned_Forecast_Date: string;
-  rfO_Planned_Forecast_Date: string;
+  rfCPlannedForecastDate: string;
+  rfOPlannedForecastDate: string;
   m03PlannedForecastDate: string | null;
   signedDate: string;
   identifier: string | null;
