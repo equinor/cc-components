@@ -3,10 +3,10 @@ import { ElectricalNetwork } from '../types/ElectricalNetwork';
 import {
   ChildWrapper,
   StyledItem,
-  Name,
   StyledCircuitDiagram,
   StyledCircuitDiagramWrapper,
   StyledSwitchboardChildren,
+  StyledDefaultComponent,
 } from './stylesCircuitDiagram';
 import {
   CircuitDiagramSkeleton,
@@ -18,6 +18,13 @@ import {
   JunctionBox,
   CircuitRef,
   Light,
+  ElectricalOutlet,
+  ControlPanel,
+  Motor,
+  Switch,
+  Thermostat,
+  Battery,
+  Instrument,
 } from './CircuitDiagramComponents';
 
 type CircuitDiagramProps = {
@@ -140,12 +147,191 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
         );
       }
 
+      case 'STIKK': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <ElectricalOutlet network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'KURSI': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <ControlPanel
+              network={network}
+              backgroundColor={backgroundColor}
+              popoverText="Kurs I"
+            />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'KONT_P': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <ControlPanel
+              network={network}
+              backgroundColor={backgroundColor}
+              popoverText="Kontrollpanel"
+            />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'MOTOR': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Motor network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'SWITCH': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Switch network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'TERM_P': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Thermostat network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'BATT': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Battery network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'INSTR': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Instrument network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'TRA_1F': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Instrument network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
       // need to implement the rest
       default:
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
             <StyledItem backgroundColor={backgroundColor}>
-              <Name>{network.name}</Name>
+              <StyledDefaultComponent>{network.name}</StyledDefaultComponent>
 
               <ChildWrapper>
                 {network.children.map((s) => (

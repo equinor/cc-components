@@ -38,7 +38,7 @@ export const StyledCircuitNameAndIcon = styled.div`
   padding: 6px;
   gap: 1ch;
   background: rgb(255, 255, 255);
-  border: 1px solid rgb(220, 220, 220);
+  border: 1px solid ${tokens.colors.ui.background__medium.hex};
   border-radius: 10px;
 `;
 
@@ -59,8 +59,8 @@ export const StyledNetworkNameAndIcon = styled.div`
   gap: 1ch;
 `;
 
-export const Name = styled.div`
-  border: 1px solid black;
+export const StyledDefaultComponent = styled.div`
+  border: 1px solid ${tokens.colors.ui.background__medium.hex};
   padding: 10px 5px;
   min-width: 75px;
   white-space: nowrap;
