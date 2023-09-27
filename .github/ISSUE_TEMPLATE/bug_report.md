@@ -4,17 +4,13 @@ about: Create a report to help us improve
 title: "🐛: <title>"
 labels: bug
 assignees: ''
-
 ---
 
 ## Description
-<!-- Short description --> 
+<!-- Short description -->
 
 ## Reproduce
+<!-- Steps to reproduce - Add relevant screenshots -->
 
-## Screenshots
-<!-- Add relevant screenshots -->
-
-## Expected behaviour
-<!-- Avoid disambiguity -->
-
+## Expected behavior
+<!-- Avoid ambiguity -->

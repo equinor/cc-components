@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: "🎁: <title>"
 labels: feature
 assignees: ''
-
 ---
 
 ## Expected outcome
@@ -17,6 +16,6 @@ assignees: ''
 ## Acceptance Criteria
 <!-- How to test -->
 
-- [ ] list
+- [ ] when selecting 
 - [ ] items which covers
 - [ ] the expected outcome 

@@ -4,11 +4,10 @@ about: Create a report to help us improve
 title: "✨: <title>"
 labels: feature
 assignees: ''
-
 ---
 
 ## Expected outcome
-<!-- Short description --> 
+<!-- Short description -->
 
 ## Business Value / Developer Experience
 <!-- Should give motivation for prioritization.
@@ -19,5 +18,4 @@ assignees: ''
 
 - [ ] list
 - [ ] items which covers
-- [ ] the expected outcome 
-
+- [ ] the expected outcome
