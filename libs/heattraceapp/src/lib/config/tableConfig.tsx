@@ -8,6 +8,7 @@ import {
 import {
   DateCell,
   DescriptionCell,
+  LinkCell,
   StyledMonospace,
   useHttpClient,
 } from '@cc-components/shared';
@@ -47,7 +48,9 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      return (
+        <LinkCell url={props.data?.heatTraceCableUrl ?? ''} urlText={props.value ?? ''} />
+      );
     },
   },
   {

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
@@ -75,13 +75,31 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
         <BannerItem title="Checklist status" value={heattrace.status} />
         <BannerItem
           title="Comm Pkg"
-          value={heattrace.commissioningPackageNo ?? 'Missing'}
+          value={
+            heattrace.commissioningPackageNo ? (
+              <LinkCell
+                url={heattrace.commissioningPackageUrl ?? ''}
+                urlText={heattrace.commissioningPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
+          }
         ></BannerItem>
         <BannerItem
           title="MC Pkg"
-          value={heattrace.mechanicalCompletionPackageNo ?? 'Missing'}
+          value={
+            heattrace.mechanicalCompletionPackageNo ? (
+              <LinkCell
+                url={heattrace.mechanicalCompletionUrl ?? ''}
+                urlText={heattrace.mechanicalCompletionPackageNo}
+              />
+            ) : (
+              'N/A'
+            )
+          }
         />
-        <BannerItem title="Priority1" value={heattrace.priority1 ?? 'Missing'} />
+        <BannerItem title="Priority1" value={heattrace.priority1 ?? 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>

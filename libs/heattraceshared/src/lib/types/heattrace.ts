@@ -42,6 +42,9 @@ export type HeatTrace = {
   signedDate: string;
   identifier: string | null;
   identifierId: string | null;
+  heatTraceCableUrl: string | null;
+  commissioningPackageUrl: string | null;
+  mechanicalCompletionUrl: string | null;
 };
 
 export interface Pipetest {

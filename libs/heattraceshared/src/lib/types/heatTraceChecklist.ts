@@ -40,4 +40,7 @@ export type HeatTraceChecklist = {
   pipetestType: string;
   circuit: string;
   switchboard: string;
+  checklistUrl: string | null;
+  commissioningPackageUrl: string | null;
+  mechanicalCompletionUrl: string | null;
 };
