@@ -1,7 +1,7 @@
 ---
-name: Feature report
+name: ✨: Feature report
 about: Create a report to help us improve
-title: ":gift: <title>"
+title: "✨: <title>"
 labels: feature
 assignees: ''
 

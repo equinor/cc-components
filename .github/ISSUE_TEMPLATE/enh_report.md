@@ -1,7 +1,7 @@
 ---
-name: Enhancement report
+name: 🎁 Enhancement report
 about: Create a report to help us improve
-title: ":card_index: <title>"
+title: "🎁: <title>"
 labels: feature
 assignees: ''
 
