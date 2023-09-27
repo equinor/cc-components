@@ -1,27 +1,22 @@
-import { numberFormat } from '@cc-components/shared/utils-formatting';
-import { SwcrPackage } from '@cc-components/swcrshared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { getStatusBarData } from '../utils-status-bar';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const statusBarConfig: StatusBarConfig<SwcrPackage> = (data) => {
-  const kpis = getStatusBarData(data);
+export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
+  const client = useHttpClient('cc-api');
 
-  return [
-    {
-      title: 'Total SWCRs',
-      value: numberFormat(kpis.allSwcrs),
-    },
-    {
-      title: 'Open',
-      value: numberFormat(kpis.openSwcrs),
-    },
-    {
-      title: 'Closed',
-      value: numberFormat(kpis.closedSwcrs),
-    },
-    {
-      title: '% Closed',
-      value: `${kpis.percentageClosedSwcrs}%`,
-    },
-  ];
+  return async (filters, signal) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/SWCR/kpis`, {
+      method: 'POST',
+      body: JSON.stringify({
+        filter: filters,
+      }),
+      signal,
+      headers: {
+        ['content-type']: 'application/json',
+      },
+    });
+    return (await res.json()).map((s: any) => ({ ...s, title: s.name }));
+  };
 };
+
+export const statusBarConfig = {};

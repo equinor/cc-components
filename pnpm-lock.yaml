@@ -448,8 +448,8 @@ importers:
         specifier: workspace:^
         version: link:../swcrsidesheet
       '@equinor/workspace-fusion':
-        specifier: 0.20.4-alpha.6.0
-        version: 0.20.4-alpha.6.0(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+        specifier: 5.1.0
+        version: 5.1.0(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
 
   libs/swcrshared:
     dependencies:

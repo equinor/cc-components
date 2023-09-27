@@ -1,15 +1,55 @@
 import {
   DescriptionCell,
-  LinkCell,
-  StyledMonospace,
+  StyledMonospace
 } from '@cc-components/shared/table-helpers';
-import { SwcrPackage } from '@cc-components/swcrshared';
-import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { getNextSignatureRoleKeys, getNextToSignKeys, getTypeKeys } from '../utils-keys';
+import {
+  DataResponse,
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
+import { SwcrPackage } from 'libs/swcrshared/dist/src';
 
-export const tableConfig: GridConfig<SwcrPackage> = {
-  // gridOptions: defaultGridOptions,
-  columnDefinitions: [
+export const useTableConfig = (contextId: string): GridConfig<SwcrPackage, FilterState> => {
+  const client = useHttpClient('cc-api');
+
+  const { getRows, colDefs } = useGridDataSource(async (req) => {
+    const res = await client.fetch(`/api/contexts/${contextId}/SWCR/grid`, req);
+
+    const meta = (await res.json()) as DataResponse<SwcrPackage>;
+    return {
+      rowCount: meta.rowCount,
+      items: meta.items,
+      columnDefinitions: meta.columnDefinitions,
+    };
+  }, columnDefinitions);
+
+  return {
+    getRows,
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
+        );
+      },
+    },
+    columnDefinitions: colDefs as [ColDef<SwcrPackage>, ...ColDef<SwcrPackage>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
+  };
+};
+
+const columnDefinitions: [
     {
       field: 'SWCRs',
       headerName: 'Software Change Requests',
