@@ -8,20 +8,15 @@ assignees: ''
 ---
 
 ## Expected outcome
-
-> Short description 
+<!-- Short description -->
 
 ## Business Value / Developer Experience
+<!-- Should give motivation for prioritization.
+ Outcome measurement of delivered value. -->
 
-> Should give motivation for prioritization.
-> Outcome measurement of delivered value.
-
-## User Acceptance Tests (UAT)
-
-> How to test
+## Acceptance Criteria
+<!-- How to test -->
 
 - [ ] list
 - [ ] items which covers
 - [ ] the expected outcome 
-
-

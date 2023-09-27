@@ -7,21 +7,14 @@ assignees: ''
 
 ---
 
-## Expected outcome
+## Description
+<!-- Short description --> 
 
-> Short description 
+## Reproduce
 
-## Business Value / Developer Experience
+## Screenshots
+<!-- Add relevant screenshots -->
 
-> Should give motivation for prioritization.
-> Outcome measurement of delivered value.
-
-## User Acceptance Tests (UAT)
-
-> How to test
-
-- [ ] list
-- [ ] items which covers
-- [ ] the expected outcome 
-
+## Expected behaviour
+<!-- Avoid disambiguity -->
 
