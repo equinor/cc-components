@@ -15,6 +15,7 @@ import {
   StyledItem,
   StyledPopover,
   StyledDefaultComponent,
+  StyledPopoverContainer,
 } from './stylesCircuitDiagram';
 import { Skeleton } from '@cc-components/sharedcomponents';
 import {
@@ -134,7 +135,11 @@ export function Light({
             onMouseOver={onOpen}
             onMouseLeave={onClose}
           />
-          {isOpen && <StyledPopover>Light</StyledPopover>}
+          {isOpen && (
+            <StyledPopoverContainer>
+              <StyledPopover>Light</StyledPopover>
+            </StyledPopoverContainer>
+          )}
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -238,7 +243,11 @@ export function Thermostat({
             onMouseOver={onOpen}
             onMouseLeave={onClose}
           />
-          {isOpen && <StyledPopover>Thermostat</StyledPopover>}
+          {isOpen && (
+            <StyledPopoverContainer>
+              <StyledPopover>Thermostat</StyledPopover>
+            </StyledPopoverContainer>
+          )}
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -268,7 +277,11 @@ export function Battery({
             onMouseOver={onOpen}
             onMouseLeave={onClose}
           />
-          {isOpen && <StyledPopover>Battery</StyledPopover>}
+          {isOpen && (
+            <StyledPopoverContainer>
+              <StyledPopover>Battery</StyledPopover>
+            </StyledPopoverContainer>
+          )}
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>

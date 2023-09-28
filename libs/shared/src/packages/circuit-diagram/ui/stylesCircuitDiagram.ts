@@ -130,15 +130,18 @@ export const StyledCriticalLine = styled.div`
   cursor: default;
 `;
 
-export const StyledPopover = styled.div<{ cornerButton?: boolean }>`
+export const StyledPopoverContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+export const StyledPopover = styled.div`
   position: absolute;
   z-index: 100;
   color: #fff;
   background-color: #121212;
   padding: 5px 5px;
   border-radius: 4px;
-  margin-top: ${(p) => (p.cornerButton ? '60px' : '10px')};
-  right: ${(p) => (p.cornerButton ? '40px' : null)};
 `;
 
 export const StyledSwitchboardChildren = styled.div`

@@ -1,7 +1,11 @@
 import { Icon } from '@equinor/eds-core-react';
 import { warning_outlined } from '@equinor/eds-icons';
 import { useState } from 'react';
-import { StyledCriticalLine, StyledPopover } from './stylesCircuitDiagram';
+import {
+  StyledCriticalLine,
+  StyledPopover,
+  StyledPopoverContainer,
+} from './stylesCircuitDiagram';
 
 export const CriticalLine = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -30,7 +34,11 @@ export const MissingCable = (): JSX.Element => {
   return (
     <>
       <Icon name={warning_outlined.name} onMouseOver={onOpen} onMouseLeave={onClose} />
-      {isOpen && <StyledPopover cornerButton>Missing a cable</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Missing a cable</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -71,7 +79,11 @@ export const SpaceHeaterIcon = () => {
           </clipPath>
         </defs>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Heater</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Heater</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -110,7 +122,11 @@ export const ElectricalOutletIcon = () => {
           </clipPath>
         </defs>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Electrical outlet</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Electrical outlet</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -143,7 +159,11 @@ export const PanelIcon = ({ popoverText }: { popoverText: string }) => {
           </clipPath>
         </defs>
       </svg>
-      {isOpen && <StyledPopover cornerButton>{popoverText}</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>{popoverText}</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -181,7 +201,11 @@ export const MotorIcon = () => {
           fill="#000"
         ></path>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Motor</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Motor</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -217,7 +241,11 @@ export const SwitchIcon = () => {
           </clipPath>
         </defs>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Switch</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Switch</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -250,7 +278,11 @@ export const InstrumentIcon = () => {
           </clipPath>
         </defs>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Instrument</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Instrument</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -285,7 +317,11 @@ export const TransformerIcon = () => {
           </clipPath>
         </defs>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Tranformer</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Transformer</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
@@ -321,7 +357,11 @@ export const UnknownIcon = () => {
           fill="#243746"
         ></path>
       </svg>
-      {isOpen && <StyledPopover cornerButton>Unknown</StyledPopover>}
+      {isOpen && (
+        <StyledPopoverContainer>
+          <StyledPopover>Unknown</StyledPopover>
+        </StyledPopoverContainer>
+      )}
     </>
   );
 };
