@@ -43,7 +43,7 @@ const columns: ColDef<LoopContent>[] = [
   },
   {
     field: 'MC status',
-    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
+    valueGetter: (pkg) => pkg.data?.clStatus,
     cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
       if (props.value) {
         return (
