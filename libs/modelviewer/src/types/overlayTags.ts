@@ -12,6 +12,7 @@ export interface OverlayTag {
   aabb: AabbModel;
   boundingBox: Box3;
   color?: string;
+  dataType?: string;
   action?: (tagOverlay?: TagOverlay) => void;
 }
 

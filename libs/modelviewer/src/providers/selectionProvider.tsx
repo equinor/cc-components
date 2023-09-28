@@ -30,10 +30,13 @@ interface SelectionContextState {
   currentNodes: HierarchyNodeModel[];
   viewNodes: ViewerNodeSelection[];
   tagList: TagOverlay[];
+  notFoundTagList: TagOverlay[];
   selectionService?: SelectionService;
   getCurrentNodes(): HierarchyNodeModel[] | undefined;
   getSelectionService(): SelectionService | undefined;
   setTags: (tagOverlay: string[] | TagOverlay[], options?: { color: string }) => void;
+  toggleTags(tags: string[]): void;
+  filterTags: string[];
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -171,8 +174,9 @@ export const SelectionContextProvider = ({
   const firstPerson = () => {
     selectionService?.cameraFirstPerson();
   };
+  const [filterTags, setFilterTags] = useState<string[]>([]);
 
-  const viewNodes = useMemo(() => {
+  const viewNodes = useMemo((): ViewerNodeSelection[] => {
     return selectionService?.getViewerNodeSelection(currentNodes) || [];
   }, [currentNodes, selectionService]);
 
@@ -190,6 +194,39 @@ export const SelectionContextProvider = ({
     [selectionService]
   );
 
+  const toggleTags = (tags: string[]) => {
+    const tagList: string[] = tags.reduce((acc, tag) => {
+      if (acc.includes(tag)) {
+        acc = acc.filter((tagNo) => tagNo !== tag);
+      } else {
+        acc = [...acc, tag];
+      }
+      return acc;
+    }, filterTags);
+    setFilterTags(tagList);
+  };
+
+  const notFoundTagList = useMemo(() => {
+    if (viewNodes.length === tagList.length || viewNodes.length === 0) return [];
+
+    const tagSet = tagList.reduce((acc, item) => {
+      acc[item.tagNo] = item;
+      return acc;
+    }, {} as Record<string, TagOverlay>);
+
+    viewNodes.forEach((node) => {
+      if (tagSet[node.tagNo]) {
+        delete tagSet[node.tagNo];
+      }
+    });
+
+    return Object.values(tagSet);
+  }, [viewNodes, tagList]);
+
+  useEffect(() => {
+    setFilterTags(tagList.map((tagItem) => tagItem.tagNo));
+  }, [tagList]);
+
   return (
     <SelectionContext.Provider
       value={{
@@ -201,11 +238,14 @@ export const SelectionContextProvider = ({
         fitCameraToAAbb,
         currentNodes,
         viewNodes,
+        filterTags,
         selectionService,
         getCurrentNodes,
         getSelectionService,
         setTags: handleTagList,
         tagList,
+        notFoundTagList,
+        toggleTags,
       }}
     >
       {children}

@@ -553,6 +553,9 @@ importers:
 
   libs/workorderapp:
     dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -574,6 +577,9 @@ importers:
 
   libs/workordersidesheet:
     dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared

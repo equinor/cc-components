@@ -14,7 +14,7 @@ interface ActionContextState {
   toggleFocus(): void;
   toggleClipping(): void;
   toggleCameraMode(): void;
-  fitToScreen(): void;
+  fitToScreen(duration?: number, radiusFactor?: number): void;
   assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
@@ -24,7 +24,8 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   const { getModel } = useModelContext();
   const { getCurrentNodes, getSelectionService } = useSelectionContext();
 
-  const { defaultRadiusFactor, defaultCroppingDistance } = useConfig();
+  const { defaultCroppingDistance, defaultCameraMoveDuration, defaultRadiusFactor } =
+    useConfig();
 
   const [isOrbit, setIsOrbit] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
@@ -79,10 +80,11 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
     }
   };
 
-  const fitToScreen = (radiusFactor?: number) => {
+  const fitToScreen = (duration?: number, radiusFactor?: number) => {
     if (currentNodes) {
       selectionService?.fitCameraToNodeSelection(
         currentNodes,
+        duration || defaultCameraMoveDuration,
         radiusFactor || defaultRadiusFactor
       );
     }

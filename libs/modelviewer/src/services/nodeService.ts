@@ -3,6 +3,7 @@ import {
   HierarchyNodeModel,
   SelectedNodeInformation,
   combineHierarchyAabbs,
+  convertHierarchyAabbToThreeBox3,
   getNumericRange,
 } from '@equinor/echo-3d-viewer';
 import { get3dPositionFromAabbMinMaxValues } from '@equinor/echo-3d-viewer/dist/src/utils/calculationUtils';
@@ -80,7 +81,7 @@ export class NodeService {
     const aabb = this.getCombinedAAbbsFromNodes(nodes);
 
     if (aabb) {
-      return this.getBoundingBoxFormAabbModel(aabb);
+      return convertHierarchyAabbToThreeBox3(aabb);
     }
   }
 

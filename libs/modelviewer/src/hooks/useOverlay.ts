@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useMemo } from 'react';
+import { useCallback, useEffect, useRef, useMemo, useState } from 'react';
 import { useModelViewerContext, useSelectionContext } from '../providers';
 
 import { HtmlOverlayToolHandler } from '../services';
@@ -12,7 +12,6 @@ import {
   createTagMap,
 } from '../utils/overlayUtils';
 import { Cluster } from '../types/cluster';
-import { TagOverlay } from '../types/overlayTags';
 
 export function useOverlay() {
   const { echoInstance } = useModelViewerContext();

@@ -12,6 +12,8 @@ import { TagOverlay } from './types/overlayTags';
 import { PlantDataContextProvider } from './providers/plantDataProvider';
 import { Message } from './components/message/Message';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
+import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
+import { Legend } from './components/legend/Legend';
 
 type FusionModelViewerProps = {
   facility: string;
@@ -62,6 +64,8 @@ const ModelViewer = ({
             <SelectionContextProvider tagsOverlay={tagsOverlay}>
               <ModelSelection>
                 <ActionContextProvider>
+                  <TagsNotFound />
+                  <Legend />
                   <TagsOverlay />
                   <ActionsMenu CustomActions={components.CustomActions} />
                 </ActionContextProvider>
