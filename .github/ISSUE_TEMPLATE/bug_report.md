@@ -1,27 +1,17 @@
 ---
-name: Bug report
+name: 🐛 Bug report
 about: Create a report to help us improve
-title: ":bug: <title>"
+title: "🐛: <title>"
 labels: bug
 assignees: ''
-
 ---
 
-## Expected outcome
+## Description
+<!-- Short description -->
 
-> Short description 
+## Reproduce
+<!-- Steps to reproduce - Add relevant screenshots -->
 
-## Business Value / Developer Experience
-
-> Should give motivation for prioritization.
-> Outcome measurement of delivered value.
-
-## User Acceptance Tests (UAT)
-
-> How to test
-
-- [ ] list
-- [ ] items which covers
-- [ ] the expected outcome 
-
-
+## Expected behavior
+<!-- Avoid ambiguity -->
+  
