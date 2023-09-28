@@ -1,27 +1,21 @@
 ---
-name: Enhancement report
+name: 🎁 Enhancement report
 about: Create a report to help us improve
-title: ":card_index: <title>"
+title: "🎁: <title>"
 labels: feature
 assignees: ''
-
 ---
 
 ## Expected outcome
-
-> Short description 
+<!-- Short description -->
 
 ## Business Value / Developer Experience
+<!-- Should give motivation for prioritization.
+ Outcome measurement of delivered value. -->
 
-> Should give motivation for prioritization.
-> Outcome measurement of delivered value.
+## Acceptance Criteria
+<!-- How to test -->
 
-## User Acceptance Tests (UAT)
-
-> How to test
-
-- [ ] list
+- [ ] when selecting 
 - [ ] items which covers
 - [ ] the expected outcome 
-
-
