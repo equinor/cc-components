@@ -19,7 +19,7 @@ export const StyledCircuitDiagramWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 20px;
+  margin-top: 20px;
 `;
 
 export const StyledCircuitDiagram = styled.div`
@@ -27,7 +27,7 @@ export const StyledCircuitDiagram = styled.div`
   width: 100%;
   overflow: auto;
   font-size: 12px;
-  padding: 20px;
+  padding: 10px;
   position: relative;
 `;
 
@@ -94,7 +94,7 @@ export const StyledHTCable = styled.div<{ backgroundColor: string }>`
     content: ' ';
     position: relative;
     left: 2ch;
-    top: 1.6ch;
+    top: 1.1ch;
   }
 `;
 
