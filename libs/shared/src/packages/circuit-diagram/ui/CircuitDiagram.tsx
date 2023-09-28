@@ -25,6 +25,7 @@ import {
   Thermostat,
   Battery,
   Instrument,
+  Transformer,
 } from './CircuitDiagramComponents';
 
 type CircuitDiagramProps = {
@@ -310,7 +311,7 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
       case 'TRA_1F': {
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
-            <Instrument network={network} backgroundColor={backgroundColor} />
+            <Transformer network={network} backgroundColor={backgroundColor} />
 
             <ChildWrapper>
               {network.children.map((s) => (

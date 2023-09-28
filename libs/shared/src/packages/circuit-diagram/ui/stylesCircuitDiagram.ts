@@ -64,6 +64,7 @@ export const StyledDefaultComponent = styled.div`
   padding: 10px 5px;
   min-width: 75px;
   white-space: nowrap;
+  height: fit-content;
 `;
 
 export const StyledItem = styled.div<{ backgroundColor?: string }>`
