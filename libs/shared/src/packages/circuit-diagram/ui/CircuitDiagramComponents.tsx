@@ -26,6 +26,7 @@ import {
   SwitchIcon,
   InstrumentIcon,
   TransformerIcon,
+  UnknownIcon,
 } from './Icons';
 
 Icon.add({ warning_outlined, light, thermostat, battery });
@@ -304,6 +305,24 @@ export function Transformer({
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name} <TransformerIcon />
+        </StyledNetworkNameAndIcon>
+      </StyledDefaultComponent>
+    </StyledItem>
+  );
+}
+
+export function Unknown({
+  network,
+  backgroundColor,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+}) {
+  return (
+    <StyledItem backgroundColor={backgroundColor}>
+      <StyledDefaultComponent>
+        <StyledNetworkNameAndIcon>
+          {network.name} <UnknownIcon />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>

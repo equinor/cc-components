@@ -289,3 +289,39 @@ export const TransformerIcon = () => {
     </>
   );
 };
+
+export const UnknownIcon = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+
+  return (
+    <>
+      <svg
+        width="24px"
+        height="21.6px"
+        viewBox="0 0 30 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ rotate: '0deg' }}
+        onMouseOver={onOpen}
+        onMouseLeave={onClose}
+      >
+        <circle
+          cx="15"
+          cy="15"
+          r="14"
+          stroke="#243746"
+          stroke-width="2"
+          fill="transparent"
+        ></circle>
+        <path
+          d="M15.687 17.46c.2-.08.28-.22.28-.42v-1.52l.6-.2c1.32-.46 2.42-1.64 2.42-3.58 0-2.3-1.72-3.98-4.34-3.98-1.96 0-3.92 1.1-4.62 3.06-.08.22.02.38.24.46l1.38.58c.2.1.36.04.48-.2.48-.9 1.36-1.46 2.5-1.46 1.3 0 1.98.64 1.98 1.72 0 .86-.64 1.58-2.1 1.96l-.76.2c-.22.06-.32.2-.32.42v3.24c0 .26.16.4.42.3l1.84-.58zm-.14 4.54c.24 0 .36-.14.36-.36v-1.8c0-.24-.12-.38-.36-.38h-1.8c-.24 0-.36.14-.36.38v1.8c0 .22.12.36.36.36h1.8z"
+          fill="#243746"
+        ></path>
+      </svg>
+      {isOpen && <StyledPopover cornerButton>Unknown</StyledPopover>}
+    </>
+  );
+};

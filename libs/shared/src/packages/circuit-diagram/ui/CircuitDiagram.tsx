@@ -26,6 +26,7 @@ import {
   Battery,
   Instrument,
   Transformer,
+  Unknown,
 } from './CircuitDiagramComponents';
 
 type CircuitDiagramProps = {
@@ -312,6 +313,25 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
             <Transformer network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'UNKNOWN': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Unknown network={network} backgroundColor={backgroundColor} />
 
             <ChildWrapper>
               {network.children.map((s) => (
