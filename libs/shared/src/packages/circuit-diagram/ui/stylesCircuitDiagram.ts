@@ -12,13 +12,14 @@ export const StyledSwitchboardWrapper = styled.div`
   margin-bottom: -15px;
   border-radius: 10px;
   position: relative;
+  align-items: center;
 `;
 
 export const StyledCircuitDiagramWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 20px;
+  margin-top: 20px;
 `;
 
 export const StyledCircuitDiagram = styled.div`
@@ -26,7 +27,7 @@ export const StyledCircuitDiagram = styled.div`
   width: 100%;
   overflow: auto;
   font-size: 12px;
-  padding: 20px;
+  padding: 10px;
   position: relative;
 `;
 
@@ -37,7 +38,7 @@ export const StyledCircuitNameAndIcon = styled.div`
   padding: 6px;
   gap: 1ch;
   background: rgb(255, 255, 255);
-  border: 1px solid rgb(220, 220, 220);
+  border: 1px solid ${tokens.colors.ui.background__medium.hex};
   border-radius: 10px;
 `;
 
@@ -48,7 +49,7 @@ export const StyledCircuitNameAndIconWrapper = styled.div<{ maybeRef: HTMLDivEle
   position: absolute;
   width: 100%;
   left: 0;
-  top: ${(p) => p.maybeRef?.offsetTop - 10 ?? 0}px;
+  top: ${(p) => p.maybeRef?.offsetTop - 24 ?? 0}px;
 `;
 
 export const StyledNetworkNameAndIcon = styled.div`
@@ -58,7 +59,21 @@ export const StyledNetworkNameAndIcon = styled.div`
   gap: 1ch;
 `;
 
-export const StyledHTCable = styled.div`
+export const StyledDefaultComponent = styled.div`
+  border: 1px solid ${tokens.colors.ui.background__medium.hex};
+  padding: 10px 5px;
+  min-width: 75px;
+  white-space: nowrap;
+`;
+
+export const StyledItem = styled.div<{ backgroundColor?: string }>`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: ${(props) => props.backgroundColor};
+`;
+
+export const StyledHTCable = styled.div<{ backgroundColor: string }>`
   display: flex;
   gap: 1ch;
   padding: 0px 10px;
@@ -66,6 +81,8 @@ export const StyledHTCable = styled.div`
   width: fit-content;
   white-space: nowrap;
   align-items: center;
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: 0px 15px 0px 0px;
   ::after {
     width: 12px;
     height: 12px;
@@ -77,24 +94,25 @@ export const StyledHTCable = styled.div`
     content: ' ';
     position: relative;
     left: 2ch;
-    top: 1.5ch;
+    top: 1.1ch;
   }
 `;
 
-export const StyledJunctionBox = styled.div`
+export const StyledJunctionBox = styled.div<{ backgroundColor: string }>`
   box-sizing: border-box;
-  min-height: 50px;
   white-space: nowrap;
-  padding: 10px 5px 0px 5px;
+  padding: 10px 5px;
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
   border-radius: 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
-export const StyledCable = styled.div`
+export const StyledCable = styled.div<{ backgroundColor: string }>`
   border-bottom: 2px solid black;
-  height: 5ch;
+  height: 3ch;
   white-space: nowrap;
   padding: 0px 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const StyledCriticalLine = styled.div`
@@ -112,15 +130,18 @@ export const StyledCriticalLine = styled.div`
   cursor: default;
 `;
 
-export const StyledPopover = styled.div<{ cornerButton?: boolean }>`
+export const StyledPopoverContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+export const StyledPopover = styled.div`
   position: absolute;
   z-index: 100;
   color: #fff;
   background-color: #121212;
   padding: 5px 5px;
   border-radius: 4px;
-  margin-top: ${(p) => (p.cornerButton ? '40px' : '10px')};
-  right: ${(p) => (p.cornerButton ? '0px' : null)};
 `;
 
 export const StyledSwitchboardChildren = styled.div`
@@ -129,14 +150,6 @@ export const StyledSwitchboardChildren = styled.div`
   &:nth-child(2) {
     padding-top: 60px;
   }
-`;
-
-export const StyledItem = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  min-width: 200px;
-  max-width: 1000px;
 `;
 
 export const StyledFirstItem = styled.div`
@@ -148,20 +161,12 @@ export const StyledFirstItem = styled.div`
   position: relative;
 `;
 
-export const Name = styled.div`
-  border: 1px solid black;
-  height: 100%;
-  min-width: 75px;
-  border-radius: 5px;
-`;
-
-export const StyledSpaceHeater = styled.div`
+export const StyledSpaceHeater = styled.div<{ backgroundColor: string }>`
   box-sizing: border-box;
-  min-height: 50px;
   white-space: nowrap;
-  padding: 10px 5px 0px 5px;
+  padding: 10px 5px;
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
-  border-radius: 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const ChildWrapper = styled.div`
