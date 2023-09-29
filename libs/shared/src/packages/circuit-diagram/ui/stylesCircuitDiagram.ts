@@ -9,7 +9,6 @@ export const StyledSwitchboardWrapper = styled.div`
   border: 1px solid ${tokens.colors.ui.background__medium.hex};
   gap: 5ch;
   padding: 10px 5px 0px 5px;
-  margin-bottom: -15px;
   border-radius: 10px;
   position: relative;
   align-items: center;

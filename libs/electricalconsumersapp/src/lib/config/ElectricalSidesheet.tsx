@@ -1,4 +1,4 @@
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
 import { ElectricalConsumer } from './workspaceConfig';
 import { useContextId, useHttpClient, ElectricalNetwork } from '@cc-components/shared';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@cc-components/sharedcomponents';
 import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import { CircuitDiagramTab } from '../sidesheet/CircuitDiagramTab';
 
@@ -41,10 +41,17 @@ export function ElectricalInnerSidesheet({
   id: string;
   closeSidesheet: VoidFunction;
 }) {
+  const { width, setWidth } = useResizeContext();
   const [activeTab, setActiveTab] = useState(0);
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
+  const reszied = useRef({ hasResized: false, id: id });
+  if (reszied.current.id !== id) {
+    reszied.current = { hasResized: false, id: id };
+    setWidth(700);
+  }
+
   const client = useHttpClient();
   const context = useContextId();
 
@@ -139,7 +146,19 @@ export function ElectricalInnerSidesheet({
 
         <StyledPanels>
           <Tabs.Panel>
-            <CircuitDiagramTab elenetwork={elenetwork} itemId={consumer.tagNo} />
+            <CircuitDiagramTab
+              elenetwork={elenetwork}
+              itemId={consumer.tagNo}
+              onCircuitDiagramReady={(element) => {
+                if (reszied.current.hasResized) return;
+                const newWidth = element.scrollWidth;
+                console.log(newWidth, element.clientWidth);
+                if (width !== 700) return;
+                console.log(width);
+                setWidth(newWidth + 50);
+                reszied.current = { hasResized: true, id: id };
+              }}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
