@@ -2,9 +2,9 @@ import { CircuitDiagram, ElectricalNetwork } from '@cc-components/shared';
 
 type CircuitDiagramTabProps = {
   elenetwork?: ElectricalNetwork | null;
-  itemId: string;
+  itemNo: string;
 };
-export const CircuitDiagramTab = ({ elenetwork, itemId }: CircuitDiagramTabProps) => {
+export const CircuitDiagramTab = ({ elenetwork, itemNo }: CircuitDiagramTabProps) => {
   if (elenetwork === null) {
     return <div>No elenetwork found</div>;
   }
@@ -12,7 +12,7 @@ export const CircuitDiagramTab = ({ elenetwork, itemId }: CircuitDiagramTabProps
     <CircuitDiagram
       network={elenetwork}
       isLoading={elenetwork === undefined}
-      itemNo={itemId}
+      itemNo={itemNo}
     />
   );
 };

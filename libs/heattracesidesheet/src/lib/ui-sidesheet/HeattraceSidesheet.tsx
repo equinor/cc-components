@@ -6,7 +6,12 @@ import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
-import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import {
+  ElectricalNetwork,
+  LinkCell,
+  useContextId,
+  useHttpClient,
+} from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
@@ -20,9 +25,9 @@ import {
 import { Workorder } from '../types';
 import { ChecklistTab } from './ChecklistTab';
 import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
-// import data from '../utils-sidesheet/workorderResponse.json' assert { type: 'json' };
+import { useQuery } from '@tanstack/react-query';
+import { CircuitDiagramTab } from './CircuitDiagramTab';
 
-// const workorders: Workorder[] = data as any;
 const workorders: Workorder[] = [];
 
 export const StyledTabListWrapper = styled.div`
@@ -36,7 +41,6 @@ export const StyledTabsList = styled(Tabs.List)`
     width: 0;
     height: 0;
   }
-
   scroll-behavior: smooth;
 `;
 
@@ -48,6 +52,15 @@ type HeatTraceProps = {
 
 export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const heattrace = props.item;
+
+  if (!heattrace) {
+    throw new Error('Heat Trace undefined');
+  }
+
+  const htNo = heattrace.heatTraceCableNo;
+  const facility = heattrace.facility;
+  const project = heattrace.project;
 
   const { dataChecklists, errorChecklists, isLoadingChecklists } =
     useGetHeatTraceChecklists(props.item?.heatTraceCableId ?? '');
@@ -55,10 +68,35 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  const heattrace = props.item;
-  if (!heattrace) {
-    throw new Error('Heat Trace undefined');
-  }
+  const { data: elenetwork, isLoading: isLoadingEle } =
+    useQuery<ElectricalNetwork | null>(
+      /**Change facility to project */
+      /** facility*/ [htNo, facility, project],
+      async ({ signal }) => {
+        const res = await client.fetch(
+          `api/contexts/${contextId}/electrical/consumers/electrical-network/${encodeURIComponent(
+            htNo
+          )}/${facility}`,
+          { signal }
+        );
+
+        if (res.status === 204) {
+          return null;
+        }
+
+        if (!res.ok) {
+          if (res.status === 404) {
+            return null;
+          }
+          throw new Error('Failed to fetch elenetwork');
+        }
+        return res.json();
+      },
+      {
+        suspense: false,
+        useErrorBoundary: false,
+      }
+    );
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -116,7 +154,9 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
           </StyledTabsList>
         </StyledTabListWrapper>
         <StyledPanels>
-          <Tabs.Panel>Circuit diagram is coming</Tabs.Panel>
+          <Tabs.Panel>
+            <CircuitDiagramTab elenetwork={elenetwork} itemNo={htNo} />
+          </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab
               error={null}

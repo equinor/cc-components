@@ -48,9 +48,9 @@ export function ElectricalInnerSidesheet({
   const client = useHttpClient();
   const context = useContextId();
 
-  const [itemId, facility, project] = id.split('_');
+  const [itemNo, facility, project] = id.split('_');
 
-  if (!facility || !itemId) {
+  if (!facility || !itemNo) {
     closeSidesheet();
     return <></>;
   }
@@ -58,11 +58,11 @@ export function ElectricalInnerSidesheet({
   const { data: elenetwork, isLoading: isLoadingEle } =
     useQuery<ElectricalNetwork | null>(
       /**Change facility to project */
-      /** facility*/ [itemId, facility, project],
+      /** facility*/ [itemNo, facility, project],
       async ({ signal }) => {
         const res = await client.fetch(
           `api/contexts/${context}/electrical/consumers/electrical-network/${encodeURIComponent(
-            itemId
+            itemNo
           )}/${facility}`,
           { signal }
         );
@@ -90,7 +90,7 @@ export function ElectricalInnerSidesheet({
     /** facility*/ [id],
     async ({ signal }) => {
       const res = await client.fetch(
-        `api/contexts/${context}/electrical/consumers/${facility}/${project}/${itemId}`,
+        `api/contexts/${context}/electrical/consumers/${facility}/${project}/${itemNo}`,
         { signal }
       );
       if (!res.ok) {

@@ -32,7 +32,7 @@ import {
 type CircuitDiagramProps = {
   network?: ElectricalNetwork;
   isLoading?: boolean;
-  itemId: string;
+  itemNo: string;
 };
 
 type ElectricalComponentProps = {
@@ -41,7 +41,7 @@ type ElectricalComponentProps = {
   itemId: string;
 };
 
-export function CircuitDiagram({ network, isLoading, itemId }: CircuitDiagramProps) {
+export function CircuitDiagram({ network, isLoading, itemNo }: CircuitDiagramProps) {
   const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
 
   if (!!isLoading || !network) {
@@ -68,7 +68,7 @@ export function CircuitDiagram({ network, isLoading, itemId }: CircuitDiagramPro
                     network={circuitChildren}
                     key={circuitChildren.name}
                     circuitName={circuit.name}
-                    itemId={itemId}
+                    itemId={itemNo}
                   />
                 ))}
               </Fragment>
