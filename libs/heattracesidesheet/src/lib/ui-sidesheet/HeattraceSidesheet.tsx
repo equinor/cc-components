@@ -1,6 +1,6 @@
 import { HeatTrace } from '@cc-components/heattraceshared';
-import { createWidget } from '@equinor/workspace-sidesheet';
-import { useState } from 'react';
+import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
+import { useRef, useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
@@ -52,6 +52,7 @@ type HeatTraceProps = {
 
 export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const { width, setWidth } = useResizeContext();
   const heattrace = props.item;
 
   if (!heattrace) {
@@ -67,6 +68,12 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
 
   const client = useHttpClient();
   const contextId = useContextId();
+
+  const reszied = useRef({ hasResized: false, id: props.id });
+  if (reszied.current.id !== props.id) {
+    reszied.current = { hasResized: false, id: props.id };
+    setWidth(700);
+  }
 
   const { data: elenetwork, isLoading: isLoadingEle } =
     useQuery<ElectricalNetwork | null>(
@@ -155,7 +162,17 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
         </StyledTabListWrapper>
         <StyledPanels>
           <Tabs.Panel>
-            <CircuitDiagramTab elenetwork={elenetwork} itemNo={htNo} />
+            <CircuitDiagramTab
+              elenetwork={elenetwork}
+              itemNo={htNo}
+              onCircuitDiagramReady={(element) => {
+                if (reszied.current.hasResized) return;
+                const newWidth = element.scrollWidth;
+                if (width !== 700) return;
+                setWidth(newWidth + 50);
+                reszied.current = { hasResized: true, id: props.id };
+              }}
+            />
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab
