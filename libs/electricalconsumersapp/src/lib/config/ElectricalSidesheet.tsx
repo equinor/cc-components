@@ -152,9 +152,7 @@ export function ElectricalInnerSidesheet({
               onCircuitDiagramReady={(element) => {
                 if (reszied.current.hasResized) return;
                 const newWidth = element.scrollWidth;
-                console.log(newWidth, element.clientWidth);
                 if (width !== 700) return;
-                console.log(width);
                 setWidth(newWidth + 50);
                 reszied.current = { hasResized: true, id: id };
               }}
