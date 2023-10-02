@@ -28,12 +28,11 @@ import {
   Transformer,
   Unknown,
 } from './CircuitDiagramComponents';
-import { on } from 'events';
 
 type CircuitDiagramProps = {
   network?: ElectricalNetwork;
   isLoading?: boolean;
-  itemId: string;
+  itemNo: string;
   onCircuitDiagramReady?: (element: HTMLDivElement) => void;
 };
 
@@ -46,7 +45,7 @@ type ElectricalComponentProps = {
 export function CircuitDiagram({
   network,
   isLoading,
-  itemId,
+  itemNo,
   onCircuitDiagramReady,
 }: CircuitDiagramProps) {
   const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
@@ -80,7 +79,7 @@ export function CircuitDiagram({
                     network={circuitChildren}
                     key={circuitChildren.name}
                     circuitName={circuit.name}
-                    itemId={itemId}
+                    itemId={itemNo}
                   />
                 ))}
               </Fragment>
