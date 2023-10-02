@@ -24,7 +24,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   const envConfig: HeattraceEnvConfig = c.env.config?.environment as HeattraceEnvConfig;
 
   if (!envConfig) {
-    throw new Error('Failed to load environemnt config for workorder');
+    throw new Error('Failed to load environemnt config for heat trace');
   }
   config.configureHttpClient('cc-api', {
     baseUri: envConfig?.uri,
