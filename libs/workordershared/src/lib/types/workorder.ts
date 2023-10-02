@@ -24,7 +24,7 @@ export type WorkOrder = {
   plannedStartupDate: string | null;
   projectDescription: string | null;
   projectIdentifier: string | null;
-  projectProgress: string | null;
+  projectProgress: number | null;
   remainingHours: string | null;
   responsible: string | null;
   responsibleCode: string | null;
@@ -42,4 +42,5 @@ export type WorkOrder = {
   workOrderId: string;
   workOrderUrlId: string;
   workorderUrl: string | null;
+  workBreakdownStructure: string | null;
 };

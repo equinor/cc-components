@@ -8,3 +8,4 @@ export {
   proCoSysWorkOrderProgressColorMap,
   orderedProCoSysStatuses,
 } from './procosys';
+export { pipetestAndHeatTraceColorMap } from './pipetestAndHeatTraceColor';

@@ -1,59 +1,52 @@
-import { createWidget } from '@equinor/workspace-sidesheet';
-import { useState } from 'react';
-import { Tabs } from '@equinor/eds-core-react';
-import styled from 'styled-components';
-import { tokens } from '@equinor/eds-tokens';
+import {
+  CutoffTab,
+  LinkCell,
+  MaterialTab,
+  MccrTab,
+  StatusCircle,
+  useContextId,
+  useHttpClient,
+} from '@cc-components/shared';
+import {
+  BannerItem,
+  SidesheetHeader,
+  SidesheetSkeleton,
+  StyledBanner,
+  StyledPanels,
+  StyledSideSheetContainer,
+  StyledTabListWrapper,
+  StyledTabs,
+  StyledTabsList,
+  TabTitle,
+} from '@cc-components/sharedcomponents';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
+import { Tabs } from '@equinor/eds-core-react';
+import { createWidget } from '@cc-components/shared';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
-import {
-  BannerItem,
-  MaterialTab,
-  MccrTab,
-  SidesheetHeader,
-  StyledBanner,
-  StyledPanels,
-  StyledSideSheetContainer,
-  StyledTabs,
-  TabTitle,
-  StyledItemLink,
-  useHttpClient,
-  useContextId,
-  StatusCircle,
-  LinkCell,
-} from '@cc-components/shared';
-import { useQuery } from '@tanstack/react-query';
-import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
+import { useCutoff } from '../utils-sidesheet/useCutoff';
 
-export const StyledTabListWrapper = styled.div`
-  overflow: hidden;
-  width: 100%;
-  background-color: ${tokens.colors.ui.background__light.hex};
-`;
-export const StyledTabsList = styled(Tabs.List)`
-  overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-
-  scroll-behavior: smooth;
-`;
-type WorkorderProps = {
-  id: string;
-  item?: WorkOrder;
-  closeSidesheet: () => void;
-};
-export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }) => {
+export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
+  const {
+    material,
+    isFetching: isFetchingMaterial,
+    error: materialError,
+  } = useMaterial(props.id);
+
+  const { data: cutoffList, error: cutoffError, isLoading } = useCutoff(props.id);
+
   const client = useHttpClient();
   const contextId = useContextId();
+
   const {
     data: wo,
     error,
@@ -70,8 +63,9 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
       return res.json();
     },
     {
-      suspense: true,
-      initialData: props.item,
+      suspense: false,
+      useErrorBoundary: false,
+      initialData: props.item ?? undefined,
     }
   );
 
@@ -82,12 +76,6 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
   if (!wo || error) {
     return <div>Failed to get Workorder with id: {props.id}</div>;
   }
-
-  const {
-    material,
-    isFetching: isFetchingMaterial,
-    error: materialError,
-  } = useMaterial(props.id);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -113,14 +101,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="Material status"
           value={
-            props.item?.materialStatus ? (
+            wo?.materialStatus ? (
               <StatusCircle
                 statusColor={
-                  props.item?.materialStatus
-                    ? getMatStatusColorByStatus(props.item.materialStatus)
+                  wo?.materialStatus
+                    ? getMatStatusColorByStatus(wo.materialStatus)
                     : 'transparent'
                 }
-                content={props.item?.materialStatus || 'N/A'}
+                content={wo?.materialStatus || 'N/A'}
               />
             ) : (
               'N/A'
@@ -130,14 +118,14 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
         <BannerItem
           title="MC status"
           value={
-            props.item?.mccrStatus ? (
+            wo?.mccrStatus ? (
               <StatusCircle
                 statusColor={
-                  props.item?.mccrStatus
-                    ? getMccrStatusColorByStatus(props.item.mccrStatus)
+                  wo?.mccrStatus
+                    ? getMccrStatusColorByStatus(wo.mccrStatus)
                     : 'transparent'
                 }
-                content={props.item?.mccrStatus || 'N/A'}
+                content={wo?.mccrStatus || 'N/A'}
               />
             ) : (
               'N/A'
@@ -154,6 +142,9 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
             </Tabs.Tab>
             <Tabs.Tab>
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
             </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
@@ -174,6 +165,13 @@ export const WorkorderSidesheet = createWidget<WorkorderProps>(({ frame, props }
               material={material}
               isFetching={isFetchingMaterial}
               error={materialError as Error | null}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <CutoffTab
+              cutoff={cutoffList}
+              isFetching={isLoading}
+              error={cutoffError as Error | null}
             />
           </Tabs.Panel>
         </StyledPanels>

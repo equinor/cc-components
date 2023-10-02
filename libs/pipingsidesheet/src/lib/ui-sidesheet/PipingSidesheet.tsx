@@ -5,6 +5,11 @@ import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { useGetWorkorders } from '../utils-sidesheet';
+import { WorkorderBase, WorkorderTab } from '@cc-components/shared/sidesheet';
+import { StatusCircle } from '@cc-components/shared/common';
+import { pipetestStatusColormap } from '@cc-components/shared/mapping';
+import { useQuery } from '@tanstack/react-query';
+import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
@@ -13,19 +18,11 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
-  WorkorderTab,
-} from '@cc-components/shared/sidesheet';
-import { StatusCircle } from '@cc-components/shared/common';
-import { pipetestStatusColormap } from '@cc-components/shared/mapping';
-import { useQuery } from '@tanstack/react-query';
-import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
-
-import { Workorder } from '../types';
-import data from '../utils-sidesheet/workorderResponse.json' assert { type: 'json' };
+} from '@cc-components/sharedcomponents';
 import { InsultaionTab } from './InsultaionTab';
 import { ChecklistTab } from './ChecklistTab';
 
-const workorders: Workorder[] = data as any;
+const workorders: WorkorderBase[] = [];
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;

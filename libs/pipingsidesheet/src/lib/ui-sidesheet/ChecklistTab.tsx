@@ -1,4 +1,5 @@
-import { StyledContentWrapper, TabTable } from '@cc-components/shared';
+import { TabTable } from '@cc-components/shared';
+import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { CheckList } from '@cc-components/pipingshared';
 import { checklistColumns } from './checklistColumns';
 

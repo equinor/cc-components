@@ -4,7 +4,6 @@ import {
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { ExtendedGardenFields } from '../types';
 import {
   getColorBasedOnGroupBy,
   getMatStatus,
@@ -23,10 +22,11 @@ type PackageStatusReturn = {
   progressBar: string;
   status: ProcosysStatuses | FollowUpStatuses;
 };
+
 export const getWorkOrderStatuses = (
   data: WorkOrder,
-  gardenKey: keyof WorkOrder | ExtendedGardenFields,
-  groupByKeys: (keyof WorkOrder | ExtendedGardenFields)[]
+  gardenKey: string,
+  groupByKeys: string[]
 ): PackageStatusReturn => {
   const mccrColor = getMccrStatusColorByStatus(data.mccrStatus);
   const matColor = getMatStatusColorByStatus(data.materialStatus);
@@ -35,13 +35,11 @@ export const getWorkOrderStatuses = (
   const colorMap = getColorBasedOnGroupBy(groupByKeys[0] || gardenKey);
   const status = statusMap(data);
   //TODO: default color?
+
   const backgroundColor = hasProperty(colorMap, status) ? colorMap[status] : 'black';
   const textColor = getTextColorByStatus(status);
   const size = getItemSize(Number(data?.estimatedHours ?? 0));
-  const progressBar = `linear-gradient(90deg, #706b6b ${parseInt(
-    data?.projectProgress ?? '0',
-    10
-  )}%, transparent ${parseInt(data?.projectProgress ?? '0', 10)}%)`;
+  const progressBar = `linear-gradient(90deg, #706b6b ${data?.projectProgress}%, transparent ${data?.projectProgress}%)`;
   return {
     mccrColor,
     matColor,

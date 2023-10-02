@@ -31,6 +31,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
     rowStart,
     parentRef,
     width: itemWidth = 300,
+    groupingKeys,
     displayName,
   } = props;
 
@@ -44,7 +45,10 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): JSX.Element => {
     status,
     textColor,
     //TODO: group by keys
-  } = useMemo(() => getWorkOrderStatuses(data, 'disciplineCode', []), [data]);
+  } = useMemo(
+    () => getWorkOrderStatuses(data, groupingKeys.at(0)!, groupingKeys.slice(1)),
+    [data]
+  );
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);

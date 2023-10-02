@@ -1,9 +1,9 @@
 export type QueryBase = {
-  queryNumber: string;
+  queryNo: string;
   queryId: string;
+  queryUrl: string;
   title: string | null;
-  status: string | null;
+  queryStatus: string | null;
   nextToSign: string | null;
-  type: string | null;
-  url: string;
+  queryType: string | null;
 };

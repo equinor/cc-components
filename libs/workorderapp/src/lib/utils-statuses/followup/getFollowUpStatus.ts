@@ -40,8 +40,7 @@ const materialAvailable = (workOrder: WorkOrder): number =>
 export const getFollowUpStatus = (workOrder: WorkOrder): FollowUpStatuses => {
   const status = getWoStatus(workOrder);
   const statusIndex = orderedProCoSysStatuses.indexOf(status);
-
-  if (workOrder?.projectProgress === '100') {
+  if (workOrder?.projectProgress === 100) {
     return FollowUpStatuses.WOFinished;
   } else if (materialOk(workOrder) && [4, 5, 6, 7, 8, 9, 10].indexOf(statusIndex) > -1) {
     return FollowUpStatuses.MaterialAndWoOk;

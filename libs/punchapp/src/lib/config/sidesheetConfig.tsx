@@ -7,7 +7,7 @@ export const sidesheetConfig: SidesheetConfig<Punch> = {
     <PunchSidesheet.Component
       id={props.id}
       item={props.item}
-      close={props.controller.close}
+      closeSidesheet={props.close}
     />
   ),
 };

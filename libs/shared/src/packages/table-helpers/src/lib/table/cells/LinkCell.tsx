@@ -1,8 +1,8 @@
 import { StyledLink } from './cell.styles';
 
 type LinkCellProps = {
-  url: string;
-  urlText: string;
+  url?: string;
+  urlText?: string;
   tooltipText?: string;
 };
 /**

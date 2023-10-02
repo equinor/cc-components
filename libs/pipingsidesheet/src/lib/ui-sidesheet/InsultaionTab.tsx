@@ -1,5 +1,6 @@
 import { InsulationBox } from '@cc-components/pipingshared';
-import { StyledContentWrapper, TabTable } from '@cc-components/shared';
+import { TabTable } from '@cc-components/shared';
+import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { insulationsColumns } from './insulationsColumns';
 
 type InsulationTabProps = {

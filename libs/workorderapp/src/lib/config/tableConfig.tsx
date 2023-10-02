@@ -3,21 +3,28 @@ import {
   LinkCell,
   ProgressCell,
   StatusCell,
-  YearAndWeekCell,
   StyledMonospace,
+  YearAndWeekCell,
 } from '@cc-components/shared';
-import { tokens } from '@equinor/eds-tokens';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { FilterState } from '@equinor/workspace-fusion/filter';
-import { ColDef, GridConfig } from '@equinor/workspace-fusion/grid';
+import {
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { useGridDataSource } from '@cc-components/shared/workspace-config';
+import { tokens } from '@equinor/eds-tokens';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { defaultGridOptions } from '@cc-components/shared/workspace-config';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  ICellRendererProps,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
@@ -37,15 +44,9 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     getRows: getRows,
     gridOptions: {
       ...defaultGridOptions,
-      onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
-        );
-      },
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 
@@ -53,6 +54,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'WorkOrderNumber',
     field: 'Workorder',
+    headerTooltip: 'Workorder Number',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
       if (!props.data?.workorderUrl) {
@@ -62,8 +64,9 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
-    field: 'Description',
-    colId: 'Description',
+    field: 'Title',
+    colId: 'Title',
+    headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -73,16 +76,19 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'DisciplineCode',
     field: 'Discipline',
+    headerTooltip: 'Discipline',
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
     colId: 'MilestoneCode',
     field: 'Milestone',
+    headerTooltip: 'Milestone',
     valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
     colId: 'JobStatus',
     field: 'Job status',
+    headerTooltip: 'Job Status',
     valueGetter: (pkg) => pkg.data?.jobStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
       return <StyledMonospace>{props.data?.jobStatus}</StyledMonospace>;
@@ -91,6 +97,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'MaterialStatus',
     field: 'Material',
+    headerTooltip: 'Material Status',
     valueGetter: (pkg) => pkg.data?.materialStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (props.value) {
@@ -109,6 +116,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'HoldBy',
     field: 'Hold',
+    headerTooltip: 'Hold By',
     valueGetter: (pkg) => pkg.data?.holdBy,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (props.value) {
@@ -128,6 +136,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'PlannedStartupDate',
     field: 'Planned start',
+    headerTooltip: 'Planned Startup Date',
     valueGetter: (pkg) => pkg.data?.plannedStartupDate,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       return <YearAndWeekCell dateString={props.value} />;
@@ -136,6 +145,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'PlannedFinishDate',
     field: 'Planned finish',
+    headerTooltip: 'Planned Finish Date',
     valueGetter: (pkg) => pkg.data?.plannedFinishDate,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       return <YearAndWeekCell dateString={props.value} />;
@@ -186,6 +196,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'ProjectProgress',
     field: 'Progress',
+    headerTooltip: 'Project Progress',
     valueGetter: (pkg) => pkg.data?.projectProgress,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value || Number(props.value) === 0) {
@@ -196,7 +207,9 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
+    colId: 'MCStatus',
     field: 'MC',
+    headerTooltip: 'Mechanical Completion Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value) return null;
@@ -210,5 +223,11 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
         />
       );
     },
+  },
+  {
+    colId: 'WorkBreakdownStructure',
+    field: 'WBS',
+    headerTooltip: 'Work breakdown structure code',
+    valueGetter: (pkg) => pkg.data?.workBreakdownStructure,
   },
 ];

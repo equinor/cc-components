@@ -1,5 +1,5 @@
 import { Pipetest } from '@cc-components/pipingshared';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useHttpClient } from '@cc-components/shared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
@@ -8,7 +8,7 @@ import { GardenItem } from '../ui-garden';
 export const useGardenConfig = (
   contextId: string
 ): GardenConfig<Pipetest, FilterState> => {
-  const client = useHttpClient('cc-api');
+  const client = useHttpClient();
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({
       getBlockAsync: (req) =>
@@ -26,10 +26,7 @@ export const useGardenConfig = (
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.name,
-    initialGrouping: {
-      horizontalGroupingAccessor: 'Responsible',
-      verticalGroupingKeys: [],
-    },
+    initialGrouping: ['Responsible'],
     customViews: {
       customItemView: GardenItem,
     },

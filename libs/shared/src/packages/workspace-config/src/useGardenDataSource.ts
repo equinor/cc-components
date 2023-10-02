@@ -6,7 +6,13 @@ type ApiGardenMeta = {
   columnCount: number;
   rowCount: number;
   subGroupCount: number;
-  allGroupingOptions: string[];
+  allGroupingOptions:
+    | string[]
+    | {
+        groupingKey: string;
+        timeInterval: string[] | null;
+        dateVariant: string[] | null;
+      }[];
   validGroupingOptions: string[];
 };
 
@@ -34,6 +40,8 @@ export function useGardenDataSource(
           columnEnd,
           rowStart,
           rowEnd,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           groupingKeys,
           filter: filters,
         },
@@ -49,7 +57,9 @@ export function useGardenDataSource(
     getGardenMeta: async (keys, filters, signal) => {
       const requestArgs = createRequestBody(
         {
-          groupingKeys: keys,
+          groupingKeys: keys.groupingKeys,
+          dateVariant: keys.dateVariant,
+          timeInterval: keys.timeInterval,
           filter: filters,
         },
         signal
@@ -60,13 +70,29 @@ export function useGardenDataSource(
         throw new Error('Api error');
       }
       const meta: ApiGardenMeta = await res.json();
+
+      const possibleItem = meta.allGroupingOptions.at(0);
+
+      //TODO: remove when api is migrated
+      const groupingOptions: {
+        groupingKey: string;
+        timeInterval: string[] | null;
+        dateVariant: string[] | null;
+      }[] =
+        typeof possibleItem === 'string'
+          ? meta.allGroupingOptions.map((s) => ({
+              timeInterval: null,
+              dateVariant: null,
+              groupingKey: s as string,
+            }))
+          : (meta.allGroupingOptions as any);
+
       return {
-        allGroupingOptions: meta.allGroupingOptions,
+        allGroupingOptions: groupingOptions,
         columnCount: meta.columnCount,
         validGroupingOptions: meta.validGroupingOptions,
         columnStart: meta.startIndex,
         rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
-        groupingOptions: meta.allGroupingOptions,
       };
     },
     getHeader: async (args, filters, signal) => {
@@ -78,6 +104,8 @@ export function useGardenDataSource(
           rowStart: 0,
           rowEnd: 0,
           groupingKeys,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           filter: filters,
         },
         signal
@@ -98,6 +126,8 @@ export function useGardenDataSource(
           columnName,
           subGroupName: subgroupName,
           groupingKeys,
+          dateVariant: args.dateVariant,
+          timeInterval: args.timeInterval,
           filter: filter,
         },
         signal

@@ -10,9 +10,7 @@ import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generate
 import { getHTList } from '../utils-table/tableHelpers';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-import data from '../responsePiping.json' assert { type: 'json' };
-
-const pipetests: Pipetest[] = data as any;
+const pipetests: Pipetest[] = [];
 
 export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterState> => {
   // const client = useHttpClient('cc-api');

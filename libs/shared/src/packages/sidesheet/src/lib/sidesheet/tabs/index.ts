@@ -8,6 +8,5 @@ export * from './unsignedAction';
 export * from './unsignedTask';
 export * from './details';
 export * from './material';
+export * from './cutoff';
 export * from './mccr';
-export { TabsWrapper } from './TabList';
-export * from './tabs.styles';

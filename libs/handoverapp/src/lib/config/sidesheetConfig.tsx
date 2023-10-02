@@ -8,7 +8,7 @@ export const sidesheetConfig: SidesheetConfig<HandoverPackage> = {
     <HandoverSidesheet.Component
       id={props.id}
       item={props.item}
-      close={props.controller.close}
+      closeSidesheet={props.close}
     />
   ),
 };

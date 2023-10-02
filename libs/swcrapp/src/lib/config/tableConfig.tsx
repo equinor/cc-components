@@ -12,7 +12,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
   columnDefinitions: [
     {
       field: 'SWCRs',
-      headerName: 'SWCRs',
+      headerName: 'Software Change Requests',
       valueGetter: (pkg) => pkg.data?.swcrNo,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
         return <StyledMonospace>{props.data?.swcrNo}</StyledMonospace>;
@@ -29,6 +29,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     },
     {
       field: 'Title',
+      headerTooltip: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string | undefined>) => {
         return <DescriptionCell description={props?.value} />;
@@ -37,11 +38,13 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     },
     {
       field: 'Contract',
+      headerTooltip: 'Contract',
       valueGetter: (pkg) => pkg.data?.contract,
       width: 200,
     },
     {
       field: 'System',
+      headerTooltip: 'System',
       valueGetter: (pkg) => pkg.data?.system,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
         return <StyledMonospace>{props.data?.system}</StyledMonospace>;
@@ -51,12 +54,14 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     },
     {
       field: 'Status',
+      headerTooltip: 'Status',
       valueGetter: (pkg) => pkg.data?.status,
       enableRowGroup: true,
       width: 200,
     },
     {
       field: 'Next sign by',
+      headerTooltip: 'Next Sign by ',
       valueGetter: (pkg) => pkg.data?.nextToSign,
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
         if (!props.data) {
@@ -80,6 +85,7 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     },
     {
       field: 'Next sign role',
+      headerTooltip: 'Next Sign Role',
       valueGetter: (pkg) => pkg.data?.nextSignRanking,
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
         if (!props.data) {
@@ -103,11 +109,13 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     },
     {
       field: 'Supplier',
+      headerTooltip: 'Supplier',
       valueGetter: (pkg) => pkg.data?.supplier,
       width: 150,
     },
     {
       field: 'Types',
+      headerTooltip: 'Types',
       valueGetter: (pkg) => pkg.data?.types,
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
         if (!props.data) {
@@ -122,17 +130,20 @@ export const tableConfig: GridConfig<SwcrPackage> = {
     },
     {
       field: 'Priority',
+      headerTooltip: 'Priority',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
       width: 150,
     },
     {
       field: 'Control System',
+      headerTooltip: 'Control System',
       valueGetter: (pkg) => pkg.data?.controlSystem,
       width: 200,
     },
     {
       field: 'Node',
+      headerTooltip: 'Node',
       valueGetter: (pkg) => pkg.data?.node,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
         return <StyledMonospace>{props.data?.node}</StyledMonospace>;

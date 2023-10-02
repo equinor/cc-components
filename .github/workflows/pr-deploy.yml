@@ -1,0 +1,64 @@
+name: 'Deploy PR build'
+on:
+  issue_comment:
+    types: [created]
+
+permissions: write-all
+jobs:
+  deploy-affected-ci:
+    # only run if pull request is approved and QA is required
+    if: contains(github.event.comment.body, 'deploy test')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Login to Azure'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: 'Obtain token for upload'
+        shell: bash
+        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
+
+      - uses: xt0rted/pull-request-comment-branch@v2
+        id: comment-branch
+
+      - uses: actions/checkout@v4
+        if: success()
+        with:
+          ref: ${{ steps.comment-branch.outputs.head_ref }}
+          fetch-depth: 0
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: npm i -g typescript && pnpm install
+
+      - name: Build monorepo
+        run: pnpm ci:build
+
+      - name: 'Deploy affected apps to Fusion CI'
+        shell: bash
+        env:
+          #Runs out of memory when bundling more apps otherwise even though concurrency is 1
+          NODE_OPTIONS: '--max_old_space_size=4096'
+        run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.issue.number }}
+
+      - name: Comment pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Deployed! 🚀'
+            })

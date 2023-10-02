@@ -4,29 +4,14 @@ import {
   StyledTabContent,
   StyledTable,
 } from '@cc-components/shared/sidesheet';
+import { LinkCell } from '@cc-components/shared/table-helpers';
 import { formatDateString } from '@cc-components/shared/utils-dates';
 
-import { useMemo } from 'react';
-type HandoverDetails = {
-  nextToSign: string;
-};
 type DetailsTabProps = {
   commpkg: HandoverPackage;
-  nextToSign: HandoverDetails[] | undefined;
-  dataIsFetching: boolean;
 };
 
-export const DetailsTab = ({
-  commpkg,
-  nextToSign,
-  dataIsFetching,
-}: DetailsTabProps): JSX.Element => {
-  const NextToSign = useMemo(() => {
-    if (dataIsFetching) return <>Loading...</>;
-
-    return nextToSign?.length ? <div>{nextToSign[0].nextToSign}</div> : '';
-  }, [nextToSign, dataIsFetching]);
-
+export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
   return (
     <StyledTabContent>
       <h3>Details</h3>
@@ -44,11 +29,11 @@ export const DetailsTab = ({
           </tr>
           <tr>
             <td>Comm Pkg Discipline</td>
-            <td>{stringCell(commpkg?.mcDisciplines?.join(',') || '')}</td>
+            <td>{stringCell(commpkg.mcDisciplines)}</td>
           </tr>
           <tr>
             <td>Comm Pkg Area</td>
-            <td>{stringCell(commpkg.area)}</td>
+            <td>{stringCell(commpkg.location)}</td>
           </tr>
           <tr>
             <td>Comm Pkg Phase</td>
@@ -60,7 +45,7 @@ export const DetailsTab = ({
           </tr>
           <tr>
             <td>Comm Pkg Tags</td>
-            <td>{stringCell(commpkg.volume.toString())}</td>
+            <td>{stringCell(commpkg.volume ? commpkg.volume.toString() : '0')}</td>
           </tr>
           <tr>
             <td>Remark</td>
@@ -68,24 +53,29 @@ export const DetailsTab = ({
           </tr>
           <tr>
             <td>Commissioning Priority 1</td>
-            <td>{stringCell(`${commpkg.priority1} - ${commpkg.priority1}`)}</td>
+            <td>{stringCell(commpkg.priority1 ? commpkg.priority1.toString() : '-')}</td>
           </tr>
           <tr>
             <td>Commissioning Priority 2</td>
-            <td>{stringCell(`${commpkg.priority2} - ${commpkg.priority2}`)}</td>
+            <td>{stringCell(commpkg.priority2 ? commpkg.priority2.toString() : '-')}</td>
           </tr>
           <tr>
             <td>Commissioning Priority 3</td>
-            <td>{stringCell(`${commpkg.priority3} - ${commpkg.priority3}`)}</td>
+            <td>{stringCell(commpkg.priority3 ? commpkg.priority3.toString() : '-')}</td>
           </tr>
           <tr>
             <td>Comm Pkg Progress</td>
             <td>{stringCell(`${commpkg.progress || 0}%`)}</td>
           </tr>
-
           <tr>
-            <td>Next to sign</td>
-            <td>{NextToSign}</td>
+            <td>ProCoSys URL</td>
+            <td>
+              <LinkCell
+                url={commpkg.commissioningPackageUrl ?? ''}
+                urlText={commpkg.commissioningPackageUrl ?? ''}
+              />
+              ;
+            </td>
           </tr>
         </tbody>
       </StyledTable>
@@ -102,28 +92,28 @@ export const DetailsTab = ({
         <tbody>
           <tr>
             <td>RFCC (C01)</td>
-            <td>{stringCell(formatDateString(commpkg.plannedStartDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.forecastStartDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfcPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfcForecastDate))}</td>
           </tr>
           <tr>
             <td>TAC (C06)</td>
-            <td>{stringCell(formatDateString(commpkg.plannedTacDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.forecastTacDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.tacPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.tacForecastDate))}</td>
           </tr>
           <tr>
             <td>RFOC (C07)</td>
-            <td>{stringCell(formatDateString(commpkg.plannedFinishDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.forecastFinishDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfoPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfoForecastDate))}</td>
           </tr>
           <tr>
             <td>DCC (D01)</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionPlannedStartDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionForecastStartDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.dccPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.dccForecastDate))}</td>
           </tr>
           <tr>
             <td>RFRC (D03)</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionPlannedFinishDate))}</td>
-            <td>{stringCell(formatDateString(commpkg.demolitionForecastFinishDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfrcPlannedDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfrcForecastDate))}</td>
           </tr>
         </tbody>
       </StyledTable>
