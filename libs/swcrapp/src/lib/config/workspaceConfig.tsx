@@ -43,7 +43,7 @@ export const WorkspaceWrapper = () => {
     <Workspace
       key={contextId}
       workspaceOptions={{
-        getIdentifier: (item) => item.swcrId,
+        getIdentifier: (item) => item.softwareChangeRecordId,
         defaultTab: 'garden',
       }}
       filterOptions={filterConfig}

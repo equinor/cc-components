@@ -12,6 +12,7 @@
     "@cc-components/shared": "workspace:^",
     "@cc-components/swcrshared": "workspace:^",
     "@cc-components/swcrsidesheet": "workspace:^",
-    "@equinor/workspace-fusion": "5.1.0"
+    "@equinor/workspace-fusion": "5.1.0",
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }

@@ -5,7 +5,7 @@ import { memo, useMemo } from 'react';
 import { ExtendedGardenFields } from '../types';
 import { StyledItemWrapper, StyledRoot } from './garden.styles';
 
-export const SwcrItem = (props: CustomItemView<SwcrPackage, ExtendedGardenFields>) => {
+export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   const {
     columnExpanded,
     data,
@@ -13,7 +13,7 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage, ExtendedGardenFields
     onClick,
     depth,
     width: itemWidth = 300,
-    controller: { getDisplayName },
+    displayName,
   } = props;
 
   const statusColor = getSwcrStatusColor(data.status);
@@ -32,16 +32,15 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage, ExtendedGardenFields
         onClick={onClick}
         isSelected={isSelected}
       >
-        {getDisplayName(data)}
+        {displayName}
       </StyledItemWrapper>
       {columnExpanded && (
         <>
           {data.title}{' '}
-          {parseInt(data.estimatedManhours) > 0 ? `(${data.estimatedManhours}h)` : ''}
+          {(data.estimatedManHours) > 0 ? `(${data.estimatedManHours}h)` : ''}
         </>
       )}
     </StyledRoot>
   );
 };
-
-export const GardenItem = memo(SwcrItem);
+export default memo(SwcrItem);

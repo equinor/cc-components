@@ -40,4 +40,5 @@ export type SwcrPackage = {
   rfCPlannedDate: string;
   rfCForecastDate: string;
   system: string;
+  automationControlSystem: string;
 };

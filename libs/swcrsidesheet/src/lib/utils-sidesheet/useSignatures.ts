@@ -12,7 +12,7 @@ export const useSignatures = (swcrId: string): UseSignatures => {
   const [signatures, setSignatures] = useState<SwcrSignature[]>([]);
   const [signaturesFetching, setSignaturesFetching] = useState<boolean>(false);
   const contextId = useContextId();
-  const dataProxy = useHttpClient('data-proxy');
+  const dataProxy = useHttpClient('cc-api');
   const getSignatures = useCallback(async (swcrId: string) => {
     setSignaturesFetching(true);
     try {
@@ -21,15 +21,7 @@ export const useSignatures = (swcrId: string): UseSignatures => {
       );
 
       const parsedSignatures = JSON.parse(await result.text()) as SwcrSignature[];
-
-      setSignatures(
-        parsedSignatures.sort((a, b) =>
-          a.ranking.localeCompare(b.ranking, undefined, {
-            numeric: true,
-            sensitivity: 'base',
-          })
-        ) || []
-      );
+      setSignatures(parsedSignatures);
     } catch {
       setSignatures([]);
     } finally {

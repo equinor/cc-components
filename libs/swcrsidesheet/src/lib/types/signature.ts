@@ -1,11 +1,10 @@
 export type SwcrSignature = {
-  swcrNo: string;
+  softwareChangeRecordNo: string;
   ranking: string;
   signatureRole: string;
   functionalRole: string;
-  person: string;
-  signDate: string;
-  signStatus: string;
-  swcrId: string;
-  rowKey: string;
+  sequence: string;
+  signedDate: string;
+  status: string;
+  softwareChangeRecordId: string;
 };

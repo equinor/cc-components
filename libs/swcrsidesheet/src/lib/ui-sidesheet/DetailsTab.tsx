@@ -13,7 +13,7 @@ import {
 } from './sidesheet.styles';
 import { Chip } from '@equinor/eds-core-react';
 import { Fragment } from 'react';
-import { StyledTabContent } from '@cc-components/shared/sidesheet';
+import { StyledTabContent, StyledTable } from '@cc-components/shared/sidesheet';
 import { StyledItemLink } from '@cc-components/shared/common';
 type DetailsTabProps = {
   item: SwcrPackage | undefined;
@@ -37,9 +37,9 @@ export const DetailsTab = ({
           <Chip>
             <StyledChipText>{item?.priority || '-'}</StyledChipText>
           </Chip>
-          <Chip>
+          {/* <Chip>
             <StyledChipText>{item?.referenceTypes || '-'}</StyledChipText>
-          </Chip>
+          </Chip> */}
           <Chip>
             <StyledChipText>{item?.supplier || '-'}</StyledChipText>
           </Chip>
@@ -47,14 +47,14 @@ export const DetailsTab = ({
             <StyledChipText>{item?.system || '-'}</StyledChipText>
           </Chip>
         </StyledTags>
-        {parseInt(item?.cntAttachments || '0') > 0 && (
+        {/* {parseInt(item?.cntAttachments || '0') > 0 && (
           <StyledAttachments>
             Attachments:
             <StyledItemLink target="_BLANK" href={attachmentsUrls} rel="noreferrer">
               {item?.cntAttachments}
             </StyledItemLink>
           </StyledAttachments>
-        )}
+        )} */}
       </StyledTagsAndAttachmentBlock>
       <StyledTextBlock>
         <h5>Description</h5>
@@ -66,30 +66,32 @@ export const DetailsTab = ({
       </StyledTextBlock>
       <StyledTextBlock>
         <h5>Modifications</h5>
-        {item?.modification ? (
-          <PreBlock>{item.modification}</PreBlock>
+        {item?.modificationDescription ? (
+          <PreBlock>{item.modificationDescription}</PreBlock>
         ) : (
           <StyledTextBlockEmpty>No modifications</StyledTextBlockEmpty>
         )}
       </StyledTextBlock>
+
       <StyledSignatures>
         <h5>Next signatures</h5>
         <h5>Seq</h5>
         <h5>By</h5>
-
-        {!signaturesFetching &&
+        {signaturesFetching ? (
+          <p>loading</p>
+        ) : (
           signatures &&
           signatures
-            .filter((signature) => !signature.signDate)
+           .filter((signature) => !signature.signedDate).sort
+           
             .map((signature, key) => (
               <Fragment key={'signature' + key}>
                 <SignatureBlock>{signature.signatureRole}</SignatureBlock>
-                <SignatureBlock>{signature.ranking}</SignatureBlock>
-                <SignatureBlock>
-                  {signature.functionalRole || signature.person}
-                </SignatureBlock>
+                <SignatureBlock>{signature.sequence}</SignatureBlock>
+                <SignatureBlock>{signature.functionalRole}</SignatureBlock>
               </Fragment>
-            ))}
+            ))
+        )}
       </StyledSignatures>
     </StyledTabContent>
   );

@@ -1,13 +1,12 @@
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import SwcrItem from '../ui-garden/Item';
+import  SwcrItem  from '../ui-garden/Item';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
-export const useGardenConfig = (
-  contextId: string
-): GardenConfig<SwcrPackage, FilterState> => {
+
+export const useGardenConfig = (contextId: string): GardenConfig<SwcrPackage, FilterState> => {
   const client = useHttpClient('cc-api');
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({
@@ -24,7 +23,7 @@ export const useGardenConfig = (
     getGardenMeta,
     getHeader,
     getSubgroupItems,
-    getDisplayName: (item) => item.swcrNo,
+    getDisplayName: (item) => item.softwareChangeRecordNo,
     initialGrouping: ['System'],
     visuals: {
       rowHeight: 25,

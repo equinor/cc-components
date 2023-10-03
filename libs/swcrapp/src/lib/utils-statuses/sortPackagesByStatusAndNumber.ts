@@ -6,4 +6,4 @@ export const sortPackagesByStatusAndNumber = (
   columnB: SwcrPackage
 ): number =>
   getSwcrStatusPriority(columnA.status) - getSwcrStatusPriority(columnB.status) ||
-  parseInt(columnA.swcrNo) - parseInt(columnB.swcrNo);
+  parseInt(columnA.softwareChangeRecordNo) - parseInt(columnB.softwareChangeRecordNo);

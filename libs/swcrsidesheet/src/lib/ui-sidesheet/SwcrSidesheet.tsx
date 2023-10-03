@@ -16,11 +16,11 @@ import { DetailsTab } from './DetailsTab';
 
 export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
   const { signatures, signaturesFetching } = useSignatures(props.id);
-  const attachmentsUrls = props?.item?.url.replace('#', '#tab=attachments&');
+  const attachmentsUrls = props?.item?.swcrUrl.replace('#', '#tab=attachments&');
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${props?.item?.swcrNo || ''}, ${props?.item?.title || ''} `}
+        title={`${props?.item?.softwareChangeRecordNo || ''}, ${props?.item?.title || ''} `}
         applicationTitle={'Software change record'}
         onClose={props.closeSidesheet}
       />
@@ -28,7 +28,7 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
         <BannerItem
           title="SWCR"
           value={
-            props?.item?.swcrNo ?? 'N/A'
+            props?.item?.softwareChangeRecordNo ?? 'N/A'
             // <StyledItemLink
             //   target="_blank"
             //   href={proCoSysUrls.getSwcrUrl(props?.item?.swcrId || '')}
