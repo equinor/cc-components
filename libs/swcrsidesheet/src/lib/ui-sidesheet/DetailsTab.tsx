@@ -82,7 +82,7 @@ export const DetailsTab = ({
         ) : (
           signatures &&
           signatures
-           .filter((signature) => !signature.signedDate).sort
+           .filter((signature) => !signature.signedDate)
            
             .map((signature, key) => (
               <Fragment key={'signature' + key}>
