@@ -32,7 +32,8 @@ import {
 type CircuitDiagramProps = {
   network?: ElectricalNetwork;
   isLoading?: boolean;
-  itemId: string;
+  itemNo: string;
+  onCircuitDiagramReady?: (element: HTMLDivElement) => void;
 };
 
 type ElectricalComponentProps = {
@@ -41,7 +42,12 @@ type ElectricalComponentProps = {
   itemId: string;
 };
 
-export function CircuitDiagram({ network, isLoading, itemId }: CircuitDiagramProps) {
+export function CircuitDiagram({
+  network,
+  isLoading,
+  itemNo,
+  onCircuitDiagramReady,
+}: CircuitDiagramProps) {
   const [circuitRef, setCircuitRef] = useState<CircuitRef>({});
 
   if (!!isLoading || !network) {
@@ -49,7 +55,12 @@ export function CircuitDiagram({ network, isLoading, itemId }: CircuitDiagramPro
   }
   return (
     <StyledCircuitDiagramWrapper>
-      <StyledCircuitDiagram>
+      <StyledCircuitDiagram
+        ref={(element) => {
+          if (element === null || !onCircuitDiagramReady) return;
+          onCircuitDiagramReady(element);
+        }}
+      >
         <Switchboard network={network} circuitRef={circuitRef} />
         <StyledSwitchboardChildren>
           {network.children.map((circuit) => {
@@ -68,7 +79,7 @@ export function CircuitDiagram({ network, isLoading, itemId }: CircuitDiagramPro
                     network={circuitChildren}
                     key={circuitChildren.name}
                     circuitName={circuit.name}
-                    itemId={itemId}
+                    itemId={itemNo}
                   />
                 ))}
               </Fragment>

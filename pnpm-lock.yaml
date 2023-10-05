@@ -165,6 +165,15 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  apps/heattrace:
+    dependencies:
+      '@cc-components/heattraceapp':
+        specifier: workspace:^
+        version: link:../../libs/heattraceapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/loop:
     dependencies:
       '@cc-components/loopapp':
@@ -269,6 +278,39 @@ importers:
       '@cc-components/handovershared':
         specifier: workspace:^
         version: link:../handovershared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
+
+  libs/heattraceapp:
+    dependencies:
+      '@cc-components/heattraceshared':
+        specifier: workspace:^
+        version: link:../heattraceshared
+      '@cc-components/heattracesidesheet':
+        specifier: workspace:^
+        version: link:../heattracesidesheet
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
+
+  libs/heattraceshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/heattracesidesheet:
+    dependencies:
+      '@cc-components/heattraceshared':
+        specifier: workspace:^
+        version: link:../heattraceshared
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
