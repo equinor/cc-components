@@ -58,7 +58,7 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   const firstPerson = () => selectionService?.cameraFirstPerson();
 
   const toggleCameraMode = () => {
-    setIsOrbit(!isOrbit);
+    setIsOrbit((isOrbit) => !isOrbit);
   };
 
   const toggleFocus = () => {
