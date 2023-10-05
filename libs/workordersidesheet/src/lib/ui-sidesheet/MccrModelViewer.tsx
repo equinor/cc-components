@@ -51,7 +51,6 @@ export const MccrModelViewerTab = <T extends MccrBase>({
       description: mccr.description,
       status: mccr.mccrStatus,
       icon: mccrIcon(mccr.mccrStatus || ''),
-      dataType: 'Mccr',
     })) as TagOverlay[];
   }, [mccr]);
 
@@ -59,7 +58,7 @@ export const MccrModelViewerTab = <T extends MccrBase>({
     return (
       <NoResourceData>
         <Progress.Circular />
-        <InfoText>{`Fetching ${'mccr'}`}</InfoText>
+        <InfoText>Fetching Mccr Tags</InfoText>
       </NoResourceData>
     );
   }
@@ -72,7 +71,7 @@ export const MccrModelViewerTab = <T extends MccrBase>({
           size={40}
           color={tokens.colors.interactive.primary__resting.hsla}
         />
-        <InfoText>{`Failed to load ${'mccr'}`}</InfoText>
+        <InfoText>Failed to load Mccr tags</InfoText>
       </NoResourceData>
     );
   }
