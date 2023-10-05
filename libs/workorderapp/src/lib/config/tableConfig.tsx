@@ -224,4 +224,10 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
       );
     },
   },
+  {
+    colId: 'WorkBreakdownStructure',
+    field: 'WBS',
+    headerTooltip: 'Work breakdown structure code',
+    valueGetter: (pkg) => pkg.data?.workBreakdownStructure,
+  },
 ];

@@ -31,6 +31,7 @@ export type HandoverPunch = {
   clearedBy: string | null;
   sorting: string | null;
   tagUrl: string;
+  isOpen: boolean;
 } & HandoverChild;
 
 export type HandoverQuery = {
@@ -78,7 +79,7 @@ export type HandoverWorkOrder = {
   projectProgress: number | null;
   remainingHours: number | null;
   description: string | null;
-  workOrderUrl : string;
+  workOrderUrl: string;
   workOrderUrlId: string;
   workOrderNumber: string;
 } & HandoverChild;

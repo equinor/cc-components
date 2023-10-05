@@ -1,4 +1,4 @@
-import { createWidget } from '@equinor/workspace-sidesheet';
+import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
 import { ElectricalConsumer } from './workspaceConfig';
 import { useContextId, useHttpClient, ElectricalNetwork } from '@cc-components/shared';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@cc-components/sharedcomponents';
 import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import { CircuitDiagramTab } from '../sidesheet/CircuitDiagramTab';
 
@@ -41,16 +41,23 @@ export function ElectricalInnerSidesheet({
   id: string;
   closeSidesheet: VoidFunction;
 }) {
+  const { width, setWidth } = useResizeContext();
   const [activeTab, setActiveTab] = useState(0);
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
+  const reszied = useRef({ hasResized: false, id: id });
+  if (reszied.current.id !== id) {
+    reszied.current = { hasResized: false, id: id };
+    setWidth(700);
+  }
+
   const client = useHttpClient();
   const context = useContextId();
 
-  const [itemId, facility, project] = id.split('_');
+  const [itemNo, facility, project] = id.split('_');
 
-  if (!facility || !itemId) {
+  if (!facility || !itemNo) {
     closeSidesheet();
     return <></>;
   }
@@ -58,11 +65,11 @@ export function ElectricalInnerSidesheet({
   const { data: elenetwork, isLoading: isLoadingEle } =
     useQuery<ElectricalNetwork | null>(
       /**Change facility to project */
-      /** facility*/ [itemId, facility, project],
+      /** facility*/ [itemNo, facility, project],
       async ({ signal }) => {
         const res = await client.fetch(
           `api/contexts/${context}/electrical/consumers/electrical-network/${encodeURIComponent(
-            itemId
+            itemNo
           )}/${facility}`,
           { signal }
         );
@@ -90,7 +97,7 @@ export function ElectricalInnerSidesheet({
     /** facility*/ [id],
     async ({ signal }) => {
       const res = await client.fetch(
-        `api/contexts/${context}/electrical/consumers/${facility}/${project}/${itemId}`,
+        `api/contexts/${context}/electrical/consumers/${facility}/${project}/${itemNo}`,
         { signal }
       );
       if (!res.ok) {
@@ -139,7 +146,17 @@ export function ElectricalInnerSidesheet({
 
         <StyledPanels>
           <Tabs.Panel>
-            <CircuitDiagramTab elenetwork={elenetwork} />
+            <CircuitDiagramTab
+              elenetwork={elenetwork}
+              itemNo={consumer.tagNo}
+              onCircuitDiagramReady={(element) => {
+                if (reszied.current.hasResized) return;
+                const newWidth = element.scrollWidth;
+                if (width !== 700) return;
+                setWidth(newWidth + 50);
+                reszied.current = { hasResized: true, id: id };
+              }}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
