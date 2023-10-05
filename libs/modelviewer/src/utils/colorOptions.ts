@@ -11,7 +11,7 @@ export const getAppearanceByOption = (option: ColorOption): NodeAppearance => {
       renderGhosted: false,
     },
     Grayscale: {
-      color: new Color(128, 128, 128),
+      color: new Color('#e3e3e3'),
       outlineColor: NodeOutlineColor.NoOutline,
       renderGhosted: false,
     },

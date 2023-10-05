@@ -3,6 +3,7 @@ import { PropsWithChildren, createContext, useContext, useEffect, useState } fro
 import { Color } from 'three';
 import { useModelContext } from './modelsProvider';
 import { useSelectionContext } from './selectionProvider';
+import { useConfig } from './configProvider';
 
 interface ActionContextState {
   hideModel(): void;
@@ -13,17 +14,18 @@ interface ActionContextState {
   toggleFocus(): void;
   toggleClipping(): void;
   toggleCameraMode(): void;
-  fitToScreen(): void;
+  fitToScreen(duration?: number, radiusFactor?: number): void;
   assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
 const ActionContext = createContext<ActionContextState | undefined>(undefined);
 
-export const ActionContextProvider: React.FC<
-  PropsWithChildren<{ defaultCameraDistance?: number; defaultCroppingDistance?: number }>
-> = ({ children, defaultCameraDistance, defaultCroppingDistance }) => {
+export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { getModel } = useModelContext();
   const { getCurrentNodes, getSelectionService } = useSelectionContext();
+
+  const { defaultCroppingDistance, defaultCameraMoveDuration, defaultRadiusFactor } =
+    useConfig();
 
   const [isOrbit, setIsOrbit] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
@@ -56,7 +58,7 @@ export const ActionContextProvider: React.FC<
   const firstPerson = () => selectionService?.cameraFirstPerson();
 
   const toggleCameraMode = () => {
-    setIsOrbit(!isOrbit);
+    setIsOrbit((isOrbit) => !isOrbit);
   };
 
   const toggleFocus = () => {
@@ -66,17 +68,25 @@ export const ActionContextProvider: React.FC<
     }
   };
 
-  const toggleClipping = () => {
+  const toggleClipping = (croppingDistance?: number) => {
     const newClippedValue = !isClipped;
     setClipped(newClippedValue);
     if (currentNodes && selectionService) {
-      selectionService.clipModelByNodes(currentNodes, newClippedValue);
+      selectionService.clipModelByNodes(
+        currentNodes,
+        newClippedValue,
+        croppingDistance || defaultCroppingDistance
+      );
     }
   };
 
-  const fitToScreen = () => {
+  const fitToScreen = (duration?: number, radiusFactor?: number) => {
     if (currentNodes) {
-      selectionService?.fitCameraToNodeSelection(currentNodes, defaultCameraDistance);
+      selectionService?.fitCameraToNodeSelection(
+        currentNodes,
+        duration || defaultCameraMoveDuration,
+        radiusFactor || defaultRadiusFactor
+      );
     }
   };
 

@@ -16,6 +16,7 @@ import { SelectionService, TagColor } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 import { useModelContext } from './modelsProvider';
+import { useConfig } from './configProvider';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
@@ -29,10 +30,13 @@ interface SelectionContextState {
   currentNodes: HierarchyNodeModel[];
   viewNodes: ViewerNodeSelection[];
   tagList: TagOverlay[];
+  notFoundTagList: TagOverlay[];
   selectionService?: SelectionService;
   getCurrentNodes(): HierarchyNodeModel[] | undefined;
   getSelectionService(): SelectionService | undefined;
   setTags: (tagOverlay: string[] | TagOverlay[], options?: { color: string }) => void;
+  toggleTags(tags: string[]): void;
+  filterTags: string[];
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -47,17 +51,11 @@ interface Test extends Event {
 export const SelectionContextProvider = ({
   children,
   tagsOverlay,
-  selectionOptions,
 }: PropsWithChildren<{
   tagsOverlay?: TagOverlay[] | string[];
-  selectionOptions?: {
-    statusResolver?: (status: string) => string;
-    displayStatusColor?: boolean;
-    defaultCroppingDistance?: number;
-    defaultCameraDistance?: number;
-  };
 }>) => {
   const [tagList, setTagList] = useState<TagOverlay[]>([]);
+  const config = useConfig();
 
   const handleTagList = (
     tagOverlay: string[] | TagOverlay[],
@@ -73,12 +71,12 @@ export const SelectionContextProvider = ({
         }))
       );
       return;
-    } else if (selectionOptions?.displayStatusColor) {
+    } else if (config?.displayStatusColor) {
       setTagList(
         (tagOverlay as TagOverlay[]).map((tagOverlay) => {
           const color =
-            tagOverlay.status && selectionOptions.statusResolver
-              ? selectionOptions.statusResolver(tagOverlay.status)
+            tagOverlay.status && config.statusResolver
+              ? config.statusResolver(tagOverlay.status)
               : defaultTagColor;
           return {
             ...tagOverlay,
@@ -128,15 +126,11 @@ export const SelectionContextProvider = ({
   const selectNodesByTags = async (tags: string[]) => {
     const nodes = await selectionService?.selectNodesByTags(tags, {
       fitToSelection: true,
+      radiusFactor: config.defaultRadiusFactor,
     });
     setCurrentNodes(nodes || []);
-    console.log(selectionOptions);
     if (nodes)
-      selectionService?.clipModelByNodes(
-        nodes,
-        true,
-        selectionOptions?.defaultCroppingDistance
-      );
+      selectionService?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
     return nodes;
   };
 
@@ -161,10 +155,11 @@ export const SelectionContextProvider = ({
   const selectNodesByTagColor = async (tags: TagColor[]) => {
     const nodes = await selectionService?.assignColorByTagColor(tags, {
       fitToSelection: true,
+      radiusFactor: config.defaultCroppingDistance,
     });
     if (nodes) {
       setCurrentNodes(nodes);
-      selectionService?.clipModelByNodes(nodes, true);
+      selectionService?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
     }
     return nodes;
   };
@@ -179,23 +174,58 @@ export const SelectionContextProvider = ({
   const firstPerson = () => {
     selectionService?.cameraFirstPerson();
   };
+  const [filterTags, setFilterTags] = useState<string[]>([]);
 
-  const viewNodes = useMemo(() => {
+  const viewNodes = useMemo((): ViewerNodeSelection[] => {
     return selectionService?.getViewerNodeSelection(currentNodes) || [];
   }, [currentNodes, selectionService]);
 
   const fitCameraToAAbb = useCallback(
-    (aabb: AabbModel) => {
+    (aabb: AabbModel, duration?: number) => {
       if (selectionService) {
-        const box3 = selectionService.getBoundingBoxFormAabbModel(
-          aabb,
-          selectionOptions?.defaultCameraDistance || 0
+        const box3 = selectionService.getBoundingBoxFormAabbModel(aabb);
+        selectionService.fitCameraToBox3(
+          box3,
+          duration || config.defaultCameraMoveDuration,
+          config.defaultRadiusFactor
         );
-        selectionService.fitCameraToBox3(box3, 10, 0);
       }
     },
     [selectionService]
   );
+
+  const toggleTags = (tags: string[]) => {
+    const tagList: string[] = tags.reduce((acc, tag) => {
+      if (acc.includes(tag)) {
+        acc = acc.filter((tagNo) => tagNo !== tag);
+      } else {
+        acc = [...acc, tag];
+      }
+      return acc;
+    }, filterTags);
+    setFilterTags(tagList);
+  };
+
+  const notFoundTagList = useMemo(() => {
+    if (viewNodes.length === tagList.length || viewNodes.length === 0) return [];
+
+    const tagSet = tagList.reduce((acc, item) => {
+      acc[item.tagNo] = item;
+      return acc;
+    }, {} as Record<string, TagOverlay>);
+
+    viewNodes.forEach((node) => {
+      if (tagSet[node.tagNo]) {
+        delete tagSet[node.tagNo];
+      }
+    });
+
+    return Object.values(tagSet);
+  }, [viewNodes, tagList]);
+
+  useEffect(() => {
+    setFilterTags(tagList.map((tagItem) => tagItem.tagNo));
+  }, [tagList]);
 
   return (
     <SelectionContext.Provider
@@ -208,11 +238,14 @@ export const SelectionContextProvider = ({
         fitCameraToAAbb,
         currentNodes,
         viewNodes,
+        filterTags,
         selectionService,
         getCurrentNodes,
         getSelectionService,
         setTags: handleTagList,
         tagList,
+        notFoundTagList,
+        toggleTags,
       }}
     >
       {children}

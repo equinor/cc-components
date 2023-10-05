@@ -31,7 +31,7 @@ export const ActionsMenu = (props: ActionsMenuProps) => {
         {renderIconButton('visibility', 'Show selection only', toggleFocus, isFocus)}
         <ColorPaletteMenu />
         {props.CustomActions}
-        {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
+        {renderIconButton('fullscreen', 'Fit to screen', () => fitToScreen(), null)}
         {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, isOrbit)}
         <ModelSettingsMenu />
       </StyledActionsBar>

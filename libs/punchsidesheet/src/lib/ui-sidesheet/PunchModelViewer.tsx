@@ -13,14 +13,14 @@ type PunchModelViewerProps = {
 const StyledWrapper = styled.div`
   height: calc(100vh - 276px);
   overflow: hidden;
+  position: relative;
 `;
+const punchIcon = (status: string) => {
+  return <h3>{status}</h3>;
+};
 
 export const PunchModelViewerTab = ({ punch, action }: PunchModelViewerProps) => {
   if (!punch?.facility) return null;
-
-  const punchIcon = () => {
-    return <h3>{punch.category}</h3>;
-  };
 
   const tagsOverlay = useMemo(() => {
     if (punch) {
@@ -28,11 +28,9 @@ export const PunchModelViewerTab = ({ punch, action }: PunchModelViewerProps) =>
         {
           tagNo: punch.tagNo,
           description: punch.description,
-          color: hasProperty(colorMap, punch.category)
-            ? colorMap[punch.category as PackageStatus]
-            : '#ffffff',
+          status: punch.category,
           action,
-          icon: punchIcon(),
+          icon: punchIcon(punch.category),
         },
       ] as TagOverlay[];
     }
@@ -48,8 +46,8 @@ export const PunchModelViewerTab = ({ punch, action }: PunchModelViewerProps) =>
               ? colorMap[status as PackageStatus]
               : '#009922';
           },
-          defaultCroppingDistance: 5,
-          defaultCameraDistance: 3,
+          defaultCroppingDistance: 3,
+          defaultRadiusFactor: 1,
         }}
         tagsOverlay={tagsOverlay}
       ></FusionModelViewer>
