@@ -94,7 +94,7 @@ export function useGardenDataSource(
         validGroupingOptions: meta.validGroupingOptions,
         columnStart: meta.startIndex,
         rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
-        columnWidth: meta.columnWidth,
+        columnWidth: meta?.columnWidth,
       };
     },
     getHeader: async (args, filters, signal) => {
