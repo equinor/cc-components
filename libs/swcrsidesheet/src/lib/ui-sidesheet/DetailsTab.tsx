@@ -11,7 +11,7 @@ import {
   StyledTextBlock,
   StyledTextBlockEmpty,
 } from './sidesheet.styles';
-import { Chip } from '@equinor/eds-core-react';
+import { Chip, CircularProgress  } from '@equinor/eds-core-react';
 import { Fragment } from 'react';
 import { StyledTabContent, StyledTable } from '@cc-components/shared/sidesheet';
 import { StyledItemLink } from '@cc-components/shared/common';
@@ -74,23 +74,29 @@ export const DetailsTab = ({
       </StyledTextBlock>
 
       <StyledSignatures>
-        <h5>Next signatures</h5>
-        <h5>Seq</h5>
-        <h5>By</h5>
+        <h5>Signatures</h5>
         {signaturesFetching ? (
-          <p>loading</p>
+          <CircularProgress/>
         ) : (
-          signatures &&
-          signatures
-           .filter((signature) => !signature.signedDate)
-           
-            .map((signature, key) => (
-              <Fragment key={'signature' + key}>
-                <SignatureBlock>{signature.signatureRole}</SignatureBlock>
-                <SignatureBlock>{signature.sequence}</SignatureBlock>
-                <SignatureBlock>{signature.functionalRole}</SignatureBlock>
-              </Fragment>
-            ))
+          signatures && signatures.length > 0 ? (
+            <>
+              <h5>Next signatures</h5>
+              <h5>Seq</h5>
+              <h5>By</h5>
+              {signatures
+                .filter((signature) => !signature.signedDate)
+                .map((signature, key) => (
+                  <Fragment key={'signature' + key}>
+                    <SignatureBlock>{signature.signatureRole}</SignatureBlock>
+                    <SignatureBlock>{signature.sequence}</SignatureBlock>
+                    <SignatureBlock>{signature.functionalRole}</SignatureBlock>
+                  </Fragment>
+                ))
+              }
+            </>
+          ) : (
+            <p>There are no signatures</p>
+          )
         )}
       </StyledSignatures>
     </StyledTabContent>

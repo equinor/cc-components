@@ -1,6 +1,7 @@
 import {
   DescriptionCell,
-  StyledMonospace
+  StyledMonospace,
+  LinkCell,
 } from '@cc-components/shared/table-helpers';
 import {
   DataResponse,
@@ -56,7 +57,12 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
       headerName: 'Software Change Requests',
       valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
-        return <StyledMonospace>{props.data?.softwareChangeRecordNo}</StyledMonospace>;
+        if (!props.data?.swcrUrl || !props.data?.softwareChangeRecordNo) {
+          return null;
+        }
+        return <LinkCell url={props.data.swcrUrl} urlText={props.data.softwareChangeRecordNo} />;
+      },
+      onCellClicked: () => {},
       },
       // valueFormatter: (pkg) =>
       //   pkg.data?.swcrId ? proCoSysUrls.getSwcrUrl(pkg.data.swcrId) : '',
@@ -66,8 +72,6 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
       //   }
       //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
       // },
-      width: 150,
-    },
     {
 
       colId: 'Title',
@@ -144,18 +148,26 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
       field: 'Next Sign Role',
       headerTooltip: 'Next Sign Role',
       valueGetter: (pkg) => {
-        // Check if nextToSign and nextToSignRanking are empty or not
-        if (pkg.data?.nextToSign && pkg.data?.nextToSignRanking) {
-          return `${pkg.data.nextToSignRanking}: ${pkg.data.nextToSign}`;
-        } 
-        // If they are empty, return LatestSignedRanking and LatestSignedRole
-        else {
-          return `${pkg.data?.latestSignedRanking}: ${pkg.data?.latestSignedRole}`;
-        }
+        const ranking = pkg.data?.nextToSignRanking ?? '(blank)';
+        const role = pkg.data?.nextToSign ?? '(blank)';
+        return `${ranking}: ${role}`;
       },
       enableRowGroup: true,
       width: 300,
     },
+    {
+      colId: 'LatestSignBy',
+      field: 'Lastest Signed Role',
+      headerTooltip: 'Lastest Signed Role',
+      valueGetter: (pkg) => {
+        const ranking = pkg.data?.latestSignedRanking ?? '(blank)';
+        const role = pkg.data?.latestSignedRole ?? '(blank)';
+        return `${ranking}: ${role}`;
+      },
+      enableRowGroup: true,
+      width: 300,
+    },
+    
     // {
     //   field: 'Next sign role',
     //   headerTooltip: 'Next Sign Role',
