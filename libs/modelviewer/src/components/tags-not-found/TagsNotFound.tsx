@@ -56,34 +56,33 @@ export const TagsNotFound = () => {
   const { notFoundTagList } = useSelectionContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (notFoundTagList.length !== 0) {
-    return (
-      <Style.Overlay>
-        <div>
-          <Style.Header onClick={() => setIsExpanded((isExpanded) => !isExpanded)}>
-            <Icon
-              data={warning_outlined}
-              color={tokens.colors.interactive.warning__resting.hex}
-            />
-            Tags Not found in 3D ({notFoundTagList.length})
-            <Icon
-              data={isExpanded ? arrow_drop_up : arrow_drop_down}
-              color={tokens.colors.text.static_icons__primary_white.hex}
-            />
-          </Style.Header>
-        </div>
-        {isExpanded && (
-          <Style.MissingWrapper>
-            {notFoundTagList.map((tagItem) => (
-              <Style.MissingItem variant={'overline'} key={tagItem.tagNo}>
-                <span>{tagItem.tagNo}</span>
-                <span>{tagItem.status}</span>
-              </Style.MissingItem>
-            ))}
-          </Style.MissingWrapper>
-        )}
-      </Style.Overlay>
-    );
-  }
-  return null;
+  if (notFoundTagList.length === 0) return null;
+
+  return (
+    <Style.Overlay>
+      <div>
+        <Style.Header onClick={() => setIsExpanded((isExpanded) => !isExpanded)}>
+          <Icon
+            data={warning_outlined}
+            color={tokens.colors.interactive.warning__resting.hex}
+          />
+          Tags Not found in 3D ({notFoundTagList.length})
+          <Icon
+            data={isExpanded ? arrow_drop_up : arrow_drop_down}
+            color={tokens.colors.text.static_icons__primary_white.hex}
+          />
+        </Style.Header>
+      </div>
+      {isExpanded && (
+        <Style.MissingWrapper>
+          {notFoundTagList.map((tagItem) => (
+            <Style.MissingItem variant={'overline'} key={tagItem.tagNo}>
+              <span>{tagItem.tagNo}</span>
+              <span>{tagItem.status}</span>
+            </Style.MissingItem>
+          ))}
+        </Style.MissingWrapper>
+      )}
+    </Style.Overlay>
+  );
 };
