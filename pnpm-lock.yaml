@@ -23,8 +23,8 @@ importers:
         specifier: ^4.0.11
         version: 4.0.11(@equinor/fusion-framework-module@2.0.1)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1)
       '@equinor/workspace-fusion':
-        specifier: 5.1.0
-        version: 5.1.0(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+        specifier: 5.2.0
+        version: 5.2.0(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
       '@equinor/workspace-sidesheet':
         specifier: ^0.1.6
         version: 0.1.6(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -2320,8 +2320,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@5.1.0(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
-    resolution: {integrity: sha512-6BCPDUs0uiN+9LtkKcnBXlx0LwxRUT7E6gBtxKLoQaJM5bZOJY1Tk55RyXwmwvo19Tv9Og/CjFLgt1yka7DIng==}
+  /@equinor/workspace-fusion@5.2.0(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
+    resolution: {integrity: sha512-I6pCIxRe5KZxVBa6BR411BEK7uc1aukDdyjqiyHIstPROZpG0raYl6+HXs8S6RX6JGDAhYyuVaKnRjQcj+5IJw==}
     peerDependencies:
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
@@ -2332,7 +2332,7 @@ packages:
       '@equinor/eds-tokens': 0.9.0
       '@equinor/workspace-ag-grid': 1.2.2(@ag-grid-enterprise/core@28.1.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-filter': 2.0.8(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-garden': 5.0.0(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-garden': 5.1.0(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-powerbi': 1.0.6(@babel/core@7.22.10)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-react': 1.0.4(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
@@ -2378,6 +2378,31 @@ packages:
 
   /@equinor/workspace-garden@5.0.0(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
     resolution: {integrity: sha512-R6GBxsR8f5m8XOwJUwe3ganxl+VDJuRwXdYW+vLcNlq5sw3F3J9apOVSoY5CwS0/mxcnFu1mZ45bz378Y+pepA==}
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+      styled-components: ^5.3.6
+    dependencies:
+      '@equinor/eds-core-react': 0.28.0(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/eds-icons': 0.18.0
+      '@equinor/eds-tokens': 0.9.0
+      '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-query-devtools': 4.29.1(@tanstack/react-query@4.35.3)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 3.1.4(react@18.2.0)
+      react-is: 18.2.0
+      react-virtual: 2.10.4(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - react-native
+      - supports-color
+    dev: false
+
+  /@equinor/workspace-garden@5.1.0(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-FlnRQ0xtnr1F4jeErpqc9wXXF0fAGbMk9CmmTw1hIQX7REWFVQDEFL5WlP1wYWbG4UilsRROH8IbrxlKQtlqBg==}
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
