@@ -67,16 +67,6 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>Comm Pkg Progress</td>
             <td>{stringCell(`${commpkg.progress || 0}%`)}</td>
           </tr>
-          <tr>
-            <td>ProCoSys URL</td>
-            <td>
-              <LinkCell
-                url={commpkg.commissioningPackageUrl ?? ''}
-                urlText={commpkg.commissioningPackageUrl ?? ''}
-              />
-              ;
-            </td>
-          </tr>
         </tbody>
       </StyledTable>
 
