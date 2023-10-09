@@ -5,6 +5,7 @@ import {
 } from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { useState } from 'react';
+import { useExternalContextId } from '../../hooks';
 
 type IServerSideRowGetParams = Parameters<GridConfig<unknown, unknown>['getRows']>[0];
 
@@ -32,7 +33,7 @@ export function useGridDataSource<TData>(
   columnDefinitions: ColDef<TData>[]
 ) {
   const [colDefs, setColDefs] = useState<ColDef<TData>[]>(columnDefinitions);
-
+  const externalContextId = useExternalContextId();
   return {
     colDefs,
     getRows: async (params: IServerSideRowGetParams, filters: FilterState) => {
@@ -49,7 +50,10 @@ export function useGridDataSource<TData>(
               orderBy: sortTarget?.colId,
               descending: sortTarget?.sort === 'desc',
             }),
-            headers: { ['content-type']: 'application/json' },
+            headers: {
+              ['content-type']: 'application/json',
+              ['x-fusion-context']: externalContextId,
+            } as any,
             method: 'POST',
           },
           params

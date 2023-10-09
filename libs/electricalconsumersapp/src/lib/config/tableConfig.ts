@@ -21,10 +21,7 @@ export const useTableConfig = (
   const client = useHttpClient();
 
   const { getRows, colDefs } = useGridDataSource(async (req) => {
-    const res = await client.fetch(
-      `/api/contexts/${contextId}/electrical/consumers/grid`,
-      req
-    );
+    const res = await client.fetch(`/api/electrical/consumers/grid`, req);
     const meta = (await res.json()) as {
       items: ElectricalConsumer[];
       rowCount: number;

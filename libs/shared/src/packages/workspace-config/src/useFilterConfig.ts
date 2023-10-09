@@ -1,5 +1,6 @@
 import { FilterConfig } from '@equinor/workspace-fusion/filter';
 import { filterMonospaceWhitelist } from '../../utils-formatting';
+import { useExternalContextId } from '../../hooks';
 
 /**
  * Simplify workspace filter config
@@ -15,6 +16,7 @@ import { filterMonospaceWhitelist } from '../../utils-formatting';
 export const useFilterConfig = (
   req: (init: RequestInit) => Promise<Response>
 ): FilterConfig => {
+  const externalContextId = useExternalContextId();
   return {
     styles: { monospaceGroups: filterMonospaceWhitelist },
     dataSource: {
@@ -25,7 +27,8 @@ export const useFilterConfig = (
           method: 'POST',
           headers: {
             ['content-type']: 'application/json',
-          },
+            ['x-fusion-context']: externalContextId,
+          } as any,
         });
 
         return res.json();

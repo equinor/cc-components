@@ -32,7 +32,7 @@ export const WorkspaceWrapper = () => {
   const gridConfig = useTableConfig(contextId);
 
   const filterConfig = useFilterConfig((req) =>
-    client.fetch(`/api/contexts/${contextId}/electrical/consumers/filter-model`, req)
+    client.fetch(`/api/electrical/consumers/filter-model`, req)
   );
 
   return (

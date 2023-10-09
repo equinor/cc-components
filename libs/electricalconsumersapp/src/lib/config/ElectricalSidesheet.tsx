@@ -1,6 +1,11 @@
 import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
 import { ElectricalConsumer } from './workspaceConfig';
-import { useContextId, useHttpClient, ElectricalNetwork } from '@cc-components/shared';
+import {
+  useContextId,
+  useHttpClient,
+  ElectricalNetwork,
+  useExternalContextId,
+} from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
@@ -54,6 +59,7 @@ export function ElectricalInnerSidesheet({
 
   const client = useHttpClient();
   const context = useContextId();
+  const externalContextId = useExternalContextId();
 
   const [itemNo, facility, project] = id.split('_');
 
@@ -68,10 +74,10 @@ export function ElectricalInnerSidesheet({
       /** facility*/ [itemNo, facility, project],
       async ({ signal }) => {
         const res = await client.fetch(
-          `api/contexts/${context}/electrical/consumers/electrical-network/${encodeURIComponent(
+          `api/electrical/consumers/electrical-network/${encodeURIComponent(
             itemNo
           )}/${facility}`,
-          { signal }
+          { signal, headers: { ['x-fusion-context']: externalContextId } }
         );
 
         if (res.status === 204) {
@@ -97,8 +103,8 @@ export function ElectricalInnerSidesheet({
     /** facility*/ [id],
     async ({ signal }) => {
       const res = await client.fetch(
-        `api/contexts/${context}/electrical/consumers/${facility}/${project}/${itemNo}`,
-        { signal }
+        `api/electrical/consumers/${facility}/${project}/${itemNo}`,
+        { signal, headers: { ['x-fusion-context']: externalContextId } }
       );
       if (!res.ok) {
         throw new Error('Failed to fetch consumer');
