@@ -45,6 +45,14 @@ export type HeatTrace = {
   heatTraceCableUrl: string | null;
   commissioningPackageUrl: string | null;
   mechanicalCompletionUrl: string | null;
+  switchboard: string | null;
+  circuit: string | null;
+  checklistStep: string | null;
+  checklistStepSequence: number | null;
+  formStatus: 'OK' | 'OS' | 'PA' | 'PB' | 'IN' | null;
+  isExposed: number | null;
+  dueDateTimePeriod: string | null;
+  isOverdue: string | null;
 };
 
 export interface Pipetest {
