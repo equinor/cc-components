@@ -1,4 +1,4 @@
-import { colorMap, pipetestStatusColormap } from '@cc-components/shared/mapping';
+import { colorMap } from '@cc-components/shared/mapping';
 import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
