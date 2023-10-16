@@ -63,6 +63,10 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const facility = heattrace.facility;
   const project = heattrace.project;
 
+  const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(
+    props.item?.heatTraceCableId ?? ''
+  );
+
   const { dataChecklists, errorChecklists, isLoadingChecklists } =
     useGetHeatTraceChecklists(props.item?.heatTraceCableId ?? '');
 
@@ -117,7 +121,7 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
         applicationTitle="Heat Trace"
       />
       <StyledBanner>
-        <BannerItem title="Checklist status" value={heattrace.status} />
+        <BannerItem title="Checklist status" value={heattrace.formStatus || 'N/A'} />
         <BannerItem
           title="Comm Pkg"
           value={
@@ -151,7 +155,8 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
           <StyledTabsList>
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
-              Work orders <TabTitle isLoading={false} data={workorders} />
+              Work orders{' '}
+              <TabTitle isLoading={isLoadingWorkorders} data={dataWorkorders} />
             </Tabs.Tab>
             <Tabs.Tab>
               Checklists
@@ -176,10 +181,9 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab
-              error={null}
-              isFetching={false}
-              workorders={[]}
-              // workorders={workorders}
+              error={errorWorkorders}
+              isFetching={isLoadingWorkorders}
+              workorders={dataWorkorders}
             />
           </Tabs.Panel>
           <Tabs.Panel>
