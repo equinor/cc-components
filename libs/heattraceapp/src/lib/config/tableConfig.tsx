@@ -72,8 +72,8 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     },
   },
   // Need to implement the visual checklistStatus
-  { field: 'Checklist status', valueGetter: (pkg) => pkg.data?.status },
-  { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
+  { field: 'Checklist status', valueGetter: (pkg) => pkg.data?.formStatus },
+  { field: 'Current step', valueGetter: (pkg) => pkg.data?.checklistStep },
   {
     field: 'RFC',
     valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,

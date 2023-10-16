@@ -26,7 +26,6 @@ export type HeatTraceChecklist = {
   mechanicalCompletionPackageUrlId: string;
   mechanicalCompletionStatus: string;
   priority1: string;
-  priority1Description: string;
   priority2: string;
   priority3: string;
   rfC_Planned_Forecast_Date: string;

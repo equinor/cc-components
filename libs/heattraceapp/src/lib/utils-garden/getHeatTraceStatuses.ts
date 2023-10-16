@@ -8,8 +8,8 @@ type PackageStatusReturn = {
 };
 
 export const getHeatTraceStatuses = (data: HeatTrace): PackageStatusReturn => {
-  // const backgroundColor = pipetestAndHeatTraceColorMap[data.currentStep];
-  // const textColor = getTextColor(data.currentStep);
+  const backgroundColor = pipetestAndHeatTraceColorMap[data.checklistStep || ''];
+  const textColor = getTextColor(data.checklistStep || '');
 
-  return { backgroundColor: 'green', textColor: 'white' };
+  return { backgroundColor: backgroundColor, textColor: textColor };
 };
