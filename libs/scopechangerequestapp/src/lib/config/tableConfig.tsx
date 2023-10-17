@@ -5,9 +5,7 @@ import {
   ICellRendererProps,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
-import { Scope, ScopeChangeRequest } from '../types/scopeChangeRequest';
-import { Comments } from '../utils-table/Comments';
-import { PendingContributions } from '../utils-table/PendingContributions';
+import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { WorkflowCompact } from '../workflow/WorkflowCompact';
 import { StateCell } from '../utils-table/StateCell';
 import { getLastSigned } from '../utils-table/getLastSigned';

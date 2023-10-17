@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -434,9 +430,36 @@ importers:
 
   libs/scopechangerequestapp:
     dependencies:
+      '@cc-components/scopechangerequestshared':
+        specifier: workspace:^
+        version: link:../scopechangerequestshared
+      '@cc-components/scopechangerequestsidesheet':
+        specifier: workspace:^
+        version: link:../scopechangerequestsidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+
+  libs/scopechangerequestshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/scopechangerequestsidesheet:
+    dependencies:
+      '@cc-components/punchshared':
+        specifier: workspace:^
+        version: link:../punchshared
+      '@cc-components/scopechangerequestshared':
+        specifier: workspace:^
+        version: link:../scopechangerequestshared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/shared:
     dependencies:
@@ -13416,3 +13439,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
