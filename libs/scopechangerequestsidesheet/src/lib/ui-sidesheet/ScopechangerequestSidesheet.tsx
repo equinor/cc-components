@@ -59,7 +59,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
     return (
       <StyledSideSheetContainer>
         <SidesheetHeader
-          title={scopechange.serialNumber + '--' + scopechange.title || ''}
+          title={scopechange.serialNumber + ' - ' + scopechange.title || ''}
           applicationTitle={'Scope Change Request'}
           onClose={props.closeSidesheet}
         />
@@ -111,13 +111,21 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
         <StyledTabs activeTab={activeTab} onChange={handleChange}>
           <StyledTabListWrapper>
             <StyledTabsList ref={ref}>
-              <Tabs.Tab>Details </Tabs.Tab>
+              <Tabs.Tab>Request </Tabs.Tab>
+              <Tabs.Tab>Work orders</Tabs.Tab>
+              <Tabs.Tab>Logs</Tabs.Tab>
             </StyledTabsList>
           </StyledTabListWrapper>
 
           <StyledPanels>
             <Tabs.Panel>
-              <RequestTab />
+              <RequestTab scopechange={scopechange} />
+            </Tabs.Panel>
+            <Tabs.Panel>
+              <h1> Work orders panel </h1>
+            </Tabs.Panel>
+            <Tabs.Panel>
+              <h1> Logs panel </h1>
             </Tabs.Panel>
           </StyledPanels>
         </StyledTabs>
