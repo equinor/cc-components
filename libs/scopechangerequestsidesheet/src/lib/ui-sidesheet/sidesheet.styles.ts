@@ -18,9 +18,18 @@ export const StyledTabsList: any = styled(Tabs.List)`
   scroll-behavior: smooth;
 `;
 
+export const StyledTabContent: any = styled(Tabs.List)`
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  scroll-behavior: smooth;
+`;
+
 export const StyledTextBlock: any = styled.div`
   max-width: 960px;
-
+  align-items: end;
   pre {
     white-space: pre-wrap;
     line-height: 1.5em;
