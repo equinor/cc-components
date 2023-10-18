@@ -121,6 +121,18 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'FormType',
+    field: 'Form Type',
+    headerTooltip: 'Form Type',
+    valueGetter: (pkg) => pkg.data?.formularType,
+  },
+  {
+    colId: 'Discipline',
+    field: 'Discipline',
+    headerTooltip: 'Discipline',
+    valueGetter: (pkg) => pkg.data?.discipline,
+  },
+  {
     colId: 'PLSorting',
     field: 'PL Sorting',
     headerTooltip: 'PL Sorting',
