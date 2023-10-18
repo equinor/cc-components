@@ -27,6 +27,7 @@ import {
   Instrument,
   Transformer,
   Unknown,
+  Board,
 } from './CircuitDiagramComponents';
 
 type CircuitDiagramProps = {
@@ -208,7 +209,7 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
             <ControlPanel
               network={network}
               backgroundColor={backgroundColor}
-              popoverText="Kontrollpanel"
+              popoverText="Control panel"
             />
 
             <ChildWrapper>
@@ -324,6 +325,29 @@ const ElectricalComponent = forwardRef<HTMLDivElement, ElectricalComponentProps>
         return (
           <MaybeFirst circuitName={circuitName} ref={ref}>
             <Transformer network={network} backgroundColor={backgroundColor} />
+
+            <ChildWrapper>
+              {network.children.map((s) => (
+                <ElectricalComponent
+                  network={s}
+                  key={s.name}
+                  circuitName={null}
+                  itemId={itemId}
+                />
+              ))}
+            </ChildWrapper>
+          </MaybeFirst>
+        );
+      }
+
+      case 'TAVLE': {
+        return (
+          <MaybeFirst circuitName={circuitName} ref={ref}>
+            <Board
+              network={network}
+              backgroundColor={backgroundColor}
+              popoverText="Board"
+            />
 
             <ChildWrapper>
               {network.children.map((s) => (
