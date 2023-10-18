@@ -12,14 +12,14 @@ import { sidesheetConfig } from './pipingSidesheet';
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
   // const client = useHttpClient('cc-api');
-  // const { isLoading } = useCCApiAccessCheck(contextId, client, 'piping');
+  // const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');
 
   // const filterOptions = useFilterConfig((req) =>
-  //   client.fetch(`/api/contexts/${contextId}/piping/filter-model`, req)
+  //   client.fetch(`/api/contexts/${contextId}/pipetest/filter-model`, req)
   // );
 
   const tableConfig = useTableConfig(contextId);
-  // const statusBarConfig = useStatusBarConfig(contextId);
+  const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
   // if (isLoading) {
@@ -35,7 +35,7 @@ export const WorkspaceWrapper = () => {
       // filterOptions={filterOptions}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
-      // statusBarOptions={statusBarConfig}
+      statusBarOptions={statusBarConfig}
       sidesheetOptions={sidesheetConfig}
       modules={[gridModule, gardenModule]}
     />

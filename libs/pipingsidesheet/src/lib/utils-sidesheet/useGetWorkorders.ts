@@ -7,10 +7,10 @@ export const useGetWorkorders = (pipetestName: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
   const { data, isLoading, error } = useQuery<Workorder[], Error>(
-    ['piping', pipetestName, 'workorders'],
+    ['pipetest', pipetestName, 'workorders'],
     async ({ signal }) => {
       const respons = await client.fetch(
-        `/api/contexts/${contextId}/piping/${pipetestName}/workorders`,
+        `/api/contexts/${contextId}/pipetest/${pipetestName}/workorders`,
         { signal }
       );
       if (!respons.ok) {

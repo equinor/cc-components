@@ -51,9 +51,9 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
   const client = useHttpClient();
   const contextId = useContextId();
   // const { data: pipetest } = useQuery<Pipetest>(
-  //   ['piping', props.id],
+  //   ['pipetest', props.id],
   //   async () => {
-  //     const res = await client.fetch(`/api/contexts/${contextId}/piping/${props.id}`);
+  //     const res = await client.fetch(`/api/contexts/${contextId}/pipetest/${props.id}`);
   //     if (!res.ok) {
   //       throw res;
   //     }
@@ -81,7 +81,7 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
       <SidesheetHeader
         title={`${pipetest.name}, ${pipetest.description}` || ''}
         onClose={props.close}
-        applicationTitle="Piping"
+        applicationTitle="Pipetest"
       />
       <StyledBanner>
         <BannerItem title="Current step" value={pipetest.step} />
@@ -99,7 +99,7 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
           }
         ></BannerItem>
         <BannerItem
-          title="Piping RFC"
+          title="RFC"
           value={
             pipetest.rfccPlanned ? <DateCell dateString={pipetest.rfccPlanned} /> : 'N/A'
           }

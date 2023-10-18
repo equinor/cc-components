@@ -15,7 +15,7 @@ const pipetests: Pipetest[] = [];
 export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterState> => {
   // const client = useHttpClient('cc-api');
   // const { getRows } = useGridDataSource(async (req) => {
-  //   const res = await client.fetch(`/api/contexts/${contextId}/piping/grid`, req);
+  //   const res = await client.fetch(`/api/contexts/${contextId}/pipetest/grid`, req);
   //   const meta = (await res.json()) as { items: any[]; rowCount: number };
   //   return {
   //     rowCount: meta.rowCount,
@@ -71,7 +71,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
       { field: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
       { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
       {
-        field: 'Piping RFC',
+        field: 'RFC',
         valueGetter: (pkg) => pkg.data?.rfccPlanned,
         cellRenderer: (
           props: ICellRendererProps<Pipetest, string | null | undefined>

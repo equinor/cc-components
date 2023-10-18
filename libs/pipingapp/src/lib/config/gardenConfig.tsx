@@ -12,12 +12,12 @@ export const useGardenConfig = (
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({
       getBlockAsync: (req) =>
-        client.fetch(`/api/contexts/${contextId}/piping/garden`, req),
+        client.fetch(`/api/contexts/${contextId}/pipetest/garden`, req),
       getGardenMeta: (req) =>
-        client.fetch(`/api/contexts/${contextId}/piping/garden-meta`, req),
-      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/piping/garden`, req),
+        client.fetch(`/api/contexts/${contextId}/pipetest/garden-meta`, req),
+      getHeader: (req) => client.fetch(`/api/contexts/${contextId}/pipetest/garden`, req),
       getSubgroupItems: (req) =>
-        client.fetch(`/api/contexts/${contextId}/piping/subgroup-items`, req),
+        client.fetch(`/api/contexts/${contextId}/pipetest/subgroup-items`, req),
     });
 
   return {
