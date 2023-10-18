@@ -1,6 +1,6 @@
 import { Icon } from '@equinor/eds-core-react';
 import { warning_outlined, light, thermostat, battery } from '@equinor/eds-icons';
-import { useState, forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import { ElectricalNetwork } from '../types';
 import {
   StyledSwitchboardWrapper,
@@ -13,9 +13,7 @@ import {
   StyledJunctionBox,
   StyledFirstItem,
   StyledItem,
-  StyledPopover,
   StyledDefaultComponent,
-  StyledPopoverContainer,
 } from './stylesCircuitDiagram';
 import { Skeleton } from '@cc-components/sharedcomponents';
 import {
@@ -28,7 +26,10 @@ import {
   InstrumentIcon,
   TransformerIcon,
   UnknownIcon,
+  TagMccrStatus,
 } from './Icons';
+import { colorMap } from '../../mapping';
+import { PackageStatus } from '../../types';
 
 Icon.add({ warning_outlined, light, thermostat, battery });
 
@@ -43,13 +44,23 @@ export function Switchboard({
 }) {
   return (
     <StyledSwitchboardWrapper>
-      {network.name}
+      <StyledNetworkNameAndIcon>
+        {network.name}
+        <TagMccrStatus
+          mccrStatus={network.mccrStatus || 'No status'}
+          mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+        />
+      </StyledNetworkNameAndIcon>
       {network.children.map((circuit) => {
         const maybeRef = circuitRef?.[circuit.name];
         return (
           <StyledCircuitNameAndIconWrapper key={circuit.name} maybeRef={maybeRef}>
             <StyledCircuitNameAndIcon key={circuit.name} style={{ minWidth: '76px' }}>
               {circuit.name}
+              <TagMccrStatus
+                mccrStatus={circuit.mccrStatus || 'No status'}
+                mccrColor={colorMap[(circuit.mccrStatus || 'No status') as PackageStatus]}
+              />
             </StyledCircuitNameAndIcon>
           </StyledCircuitNameAndIconWrapper>
         );
@@ -65,7 +76,15 @@ export function HTCable({
   network: ElectricalNetwork;
   backgroundColor: string;
 }) {
-  return <StyledHTCable backgroundColor={backgroundColor}>{network.name}</StyledHTCable>;
+  return (
+    <StyledHTCable backgroundColor={backgroundColor}>
+      {network.name}
+      <TagMccrStatus
+        mccrStatus={network.mccrStatus || 'No status'}
+        mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+      />
+    </StyledHTCable>
+  );
 }
 
 export function SpaceHeater({
@@ -77,10 +96,12 @@ export function SpaceHeater({
 }) {
   return (
     <StyledSpaceHeater backgroundColor={backgroundColor}>
-      <StyledNetworkNameAndIcon>
-        {network.name}
-        <SpaceHeaterIcon />
-      </StyledNetworkNameAndIcon>
+      {network.name}
+      <SpaceHeaterIcon />
+      <TagMccrStatus
+        mccrStatus={network.mccrStatus || 'No status'}
+        mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+      />
     </StyledSpaceHeater>
   );
 }
@@ -92,7 +113,15 @@ export function Cable({
   network: ElectricalNetwork;
   backgroundColor: string;
 }) {
-  return <StyledCable backgroundColor={backgroundColor}>{network.name}</StyledCable>;
+  return (
+    <StyledCable backgroundColor={backgroundColor}>
+      {network.name}
+      <TagMccrStatus
+        mccrStatus={network.mccrStatus || 'No status'}
+        mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+      />
+    </StyledCable>
+  );
 }
 
 export function JunctionBox({
@@ -107,6 +136,10 @@ export function JunctionBox({
       {network.missingCable ? <MissingCable /> : null}
       <StyledJunctionBox backgroundColor={backgroundColor}>
         {network.name}
+        <TagMccrStatus
+          mccrStatus={network.mccrStatus || 'No status'}
+          mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+        />
       </StyledJunctionBox>
     </>
   );
@@ -119,27 +152,16 @@ export function Light({
   network: ElectricalNetwork;
   backgroundColor: string;
 }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const onOpen = () => setIsOpen(true);
-  const onClose = () => setIsOpen(false);
   return (
     <StyledItem backgroundColor={backgroundColor}>
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name}
-          <Icon
-            name={light.name}
-            height={21}
-            width={21}
-            onMouseOver={onOpen}
-            onMouseLeave={onClose}
+          <Icon name={light.name} height={21} width={21} title="Light"></Icon>
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
           />
-          {isOpen && (
-            <StyledPopoverContainer>
-              <StyledPopover>Light</StyledPopover>
-            </StyledPopoverContainer>
-          )}
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -158,6 +180,10 @@ export function ElectricalOutlet({
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name} <ElectricalOutletIcon />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -178,6 +204,10 @@ export function ControlPanel({
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name} <PanelIcon popoverText={popoverText} />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -195,7 +225,11 @@ export function Motor({
     <StyledItem backgroundColor={backgroundColor}>
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
-          {network.name} <MotorIcon />
+          {network.name} <MotorIcon />{' '}
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -213,7 +247,11 @@ export function Switch({
     <StyledItem backgroundColor={backgroundColor}>
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
-          {network.name} <SwitchIcon />
+          {network.name} <SwitchIcon />{' '}
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -227,27 +265,16 @@ export function Thermostat({
   network: ElectricalNetwork;
   backgroundColor: string;
 }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const onOpen = () => setIsOpen(true);
-  const onClose = () => setIsOpen(false);
   return (
     <StyledItem backgroundColor={backgroundColor}>
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name}
-          <Icon
-            name={thermostat.name}
-            height={21}
-            width={21}
-            onMouseOver={onOpen}
-            onMouseLeave={onClose}
+          <Icon name={thermostat.name} height={21} width={21} title="Thermostat" />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
           />
-          {isOpen && (
-            <StyledPopoverContainer>
-              <StyledPopover>Thermostat</StyledPopover>
-            </StyledPopoverContainer>
-          )}
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -261,27 +288,16 @@ export function Battery({
   network: ElectricalNetwork;
   backgroundColor: string;
 }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const onOpen = () => setIsOpen(true);
-  const onClose = () => setIsOpen(false);
   return (
     <StyledItem backgroundColor={backgroundColor}>
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name}
-          <Icon
-            name={battery.name}
-            height={21}
-            width={21}
-            onMouseOver={onOpen}
-            onMouseLeave={onClose}
+          <Icon name={battery.name} height={21} width={21} title="Battery" />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
           />
-          {isOpen && (
-            <StyledPopoverContainer>
-              <StyledPopover>Battery</StyledPopover>
-            </StyledPopoverContainer>
-          )}
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -300,6 +316,10 @@ export function Instrument({
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name} <InstrumentIcon />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -318,6 +338,34 @@ export function Transformer({
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name} <TransformerIcon />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
+        </StyledNetworkNameAndIcon>
+      </StyledDefaultComponent>
+    </StyledItem>
+  );
+}
+
+export function Board({
+  network,
+  backgroundColor,
+  popoverText,
+}: {
+  network: ElectricalNetwork;
+  backgroundColor: string;
+  popoverText: string;
+}) {
+  return (
+    <StyledItem backgroundColor={backgroundColor}>
+      <StyledDefaultComponent>
+        <StyledNetworkNameAndIcon>
+          {network.name} <PanelIcon popoverText={popoverText} />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>
@@ -336,6 +384,10 @@ export function Unknown({
       <StyledDefaultComponent>
         <StyledNetworkNameAndIcon>
           {network.name} <UnknownIcon />
+          <TagMccrStatus
+            mccrStatus={network.mccrStatus || 'No status'}
+            mccrColor={colorMap[(network.mccrStatus || 'No status') as PackageStatus]}
+          />
         </StyledNetworkNameAndIcon>
       </StyledDefaultComponent>
     </StyledItem>

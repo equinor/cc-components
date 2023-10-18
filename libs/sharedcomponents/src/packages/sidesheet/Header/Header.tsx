@@ -1,8 +1,8 @@
 import { Button, Icon } from '@equinor/eds-core-react';
+import { close, external_link } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
-import { close } from '@equinor/eds-icons';
-Icon.add({ close });
+Icon.add({ close, external_link });
 
 const StyledContainer = styled.div`
   display: grid;
@@ -52,8 +52,14 @@ const StyledButton = styled.div`
   position: absolute;
   right: 0;
 `;
+
+const StyledUrlWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 type HeaderProps = {
   title: string;
+  url?: string;
   description?: string;
   applicationTitle: string;
   color?: string;
@@ -65,6 +71,7 @@ type HeaderProps = {
  */
 export const SidesheetHeader = ({
   title,
+  url,
   description,
   applicationTitle,
   color,
@@ -74,7 +81,15 @@ export const SidesheetHeader = ({
     <StyledContainer>
       <StyledColor defaultValue={color} />
       <StyledWrapTitles>
-        <StyledTitle> {title}</StyledTitle>
+        <StyledUrlWrapper>
+          <StyledTitle> {title}</StyledTitle>
+          {url ? (
+            <Button style={{ width: '150px' }} variant="ghost" href={url}>
+              Open in ProCoSys
+              <Icon name="external_link" size={16}></Icon>
+            </Button>
+          ) : null}
+        </StyledUrlWrapper>
         <StyledDescription> {description}</StyledDescription>
         <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
       </StyledWrapTitles>

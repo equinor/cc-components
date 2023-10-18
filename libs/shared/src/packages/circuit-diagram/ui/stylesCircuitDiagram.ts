@@ -98,6 +98,8 @@ export const StyledHTCable = styled.div<{ backgroundColor: string }>`
 `;
 
 export const StyledJunctionBox = styled.div<{ backgroundColor: string }>`
+  display: flex;
+  gap: 1ch;
   box-sizing: border-box;
   white-space: nowrap;
   padding: 10px 5px;
@@ -107,6 +109,9 @@ export const StyledJunctionBox = styled.div<{ backgroundColor: string }>`
 `;
 
 export const StyledCable = styled.div<{ backgroundColor: string }>`
+  display: flex;
+  gap: 1ch;
+  align-items: center;
   border-bottom: 2px solid black;
   height: 3ch;
   white-space: nowrap;
@@ -129,20 +134,6 @@ export const StyledCriticalLine = styled.div`
   cursor: default;
 `;
 
-export const StyledPopoverContainer = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-export const StyledPopover = styled.div`
-  position: absolute;
-  z-index: 100;
-  color: #fff;
-  background-color: #121212;
-  padding: 5px 5px;
-  border-radius: 4px;
-`;
-
 export const StyledSwitchboardChildren = styled.div`
   display: grid;
   gap: 2em;
@@ -161,6 +152,9 @@ export const StyledFirstItem = styled.div`
 `;
 
 export const StyledSpaceHeater = styled.div<{ backgroundColor: string }>`
+  display: flex;
+  gap: 1ch;
+  align-items: center;
   box-sizing: border-box;
   white-space: nowrap;
   padding: 10px 5px;
@@ -178,4 +172,14 @@ export const ChildWrapper = styled.div`
 //Filler div to place scrollbar at the bottom of screen
 export const CircuitDiagramFillerDiv = styled.div`
   height: 100vh;
+`;
+
+export const StyledMccrStatus = styled.div<{ mccrStatusColor: string }>`
+  width: 12px;
+  height: 12px;
+  background-color: ${(props) => props.mccrStatusColor};
+  border-radius: 50%;
+  margin: 0px 1px;
+  outline-offset: -1px;
+  content: ' ';
 `;
