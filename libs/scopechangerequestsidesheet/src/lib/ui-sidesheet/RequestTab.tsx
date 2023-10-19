@@ -17,7 +17,7 @@ export const RequestTab = ({
   return (
     <StyledRequestTabWrapper>
       <StyledRequestColumn>
-        <h3>Request</h3>+
+        <h3>Request</h3>
         {scopechange?.description ? <pre>{scopechange?.description}</pre> : 'N/A'}
         <h3>Change origin</h3>
         {scopechange?.originSourceId ?? 'No change origin'}
