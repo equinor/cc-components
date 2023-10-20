@@ -53,11 +53,11 @@ HMR is disabled due to an error in dependency resolution resulting in massive bu
 
 | Key                                                                                                                         | Display name            | Production           | Halt reason                         |
 | --------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- | ----------------------------------- |
-| [handover](https://github.com/equinor/cc-components/blob/main/apps/handover/README.md)                                      | handover                | Temporarily disabled | Paused due to serverside migration. |
+| [handover](https://github.com/equinor/cc-components/blob/main/apps/handover/README.md)                                      | handover                | Yes                  |                                     |
 | [loop](https://github.com/equinor/cc-components/blob/main/apps/loop/README.md)                                              | loop                    | Yes                  |                                     |
 | [mechanical-completion](https://github.com/equinor/cc-components/blob/main/apps/mechanicalcompletion/README.md)             | Mechanical completion   | Yes                  |                                     |
 | [punch](https://github.com/equinor/cc-components/blob/main/apps/punch/README.md)                                            | punch                   | Yes                  |                                     |
-| [scopechangerequest](https://github.com/equinor/cc-components/blob/main/apps/scopechangerequest/README.md)                  | scopechangerequest      | Temporarily disabled |                                     |
+| [scopechangerequest](https://github.com/equinor/cc-components/blob/main/apps/scopechangerequest/README.md)                  | scopechangerequest      | Temporarily disabled |  Under construction                 |
 | [swcr](https://github.com/equinor/cc-components/blob/main/apps/swcr/README.md)                                              | SWCR                    | Yes                  |                                     |
 | [workorder](https://github.com/equinor/cc-components/blob/main/apps/workorder/README.md)                                    | workorder               | Yes                  |                                     |
 | [activities](https://github.com/equinor/cc-components/blob/main/reports/activities/README.md)                               | activities              | Yes                  |                                     |
