@@ -1,38 +1,38 @@
 import Workspace from '@equinor/workspace-fusion';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
-import { useContextId } from '@cc-components/shared';
+import { useContextId, useHttpClient, useCCApiAccessCheck } from '@cc-components/shared';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './pipingSidesheet';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
-  // const client = useHttpClient('cc-api');
-  // const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');
+  const client = useHttpClient();
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');
 
-  // const filterOptions = useFilterConfig((req) =>
-  //   client.fetch(`/api/contexts/${contextId}/pipetest/filter-model`, req)
-  // );
+  const filterOptions = useFilterConfig((req) =>
+    client.fetch(`/api/contexts/${contextId}/pipetest/filter-model`, req)
+  );
 
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
-  // if (isLoading) {
-  //   return <CCApiAccessLoading />;
-  // }
-
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
+  1;
   return (
     <Workspace
       workspaceOptions={{
-        getIdentifier: () => '',
+        getIdentifier: (pt) => pt.name,
         defaultTab: 'grid',
       }}
-      // filterOptions={filterOptions}
+      filterOptions={filterOptions}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}

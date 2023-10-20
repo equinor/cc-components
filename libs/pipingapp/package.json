@@ -10,6 +10,7 @@
   "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@cc-components/shared": "workspace:^",
+    "@cc-components/sharedcomponents": "workspace:^",
     "@cc-components/pipingshared": "workspace:^",
     "@cc-components/pipingsidesheet": "workspace:^"
   }
