@@ -6,12 +6,14 @@ import { SwcrSignature } from '../types';
 type UseSignatures = {
   signatures: SwcrSignature[];
   signaturesFetching: boolean;
+  error: Error | null;
 };
 
 export const useSignatures = (swcrId: string): UseSignatures => {
   const [signatures, setSignatures] = useState<SwcrSignature[]>([]);
   const [signaturesFetching, setSignaturesFetching] = useState<boolean>(false);
   const contextId = useContextId();
+  const [error, setError] = useState<Error | null>(null);
   const dataProxy = useHttpClient('cc-api');
   const getSignatures = useCallback(async (swcrId: string) => {
     setSignaturesFetching(true);
@@ -19,7 +21,9 @@ export const useSignatures = (swcrId: string): UseSignatures => {
       const result = await dataProxy.fetch(
         `api/contexts/${contextId}/swcr/${swcrId}/signatures`
       );
-
+      if (!result.ok) {
+        throw new Error('Failed to fetch signatures');
+      }
       const parsedSignatures = JSON.parse(await result.text()) as SwcrSignature[];
       setSignatures(parsedSignatures);
     } catch {
@@ -36,5 +40,6 @@ export const useSignatures = (swcrId: string): UseSignatures => {
   return {
     signatures,
     signaturesFetching,
+    error,
   };
 };

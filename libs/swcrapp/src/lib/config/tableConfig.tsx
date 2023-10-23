@@ -17,7 +17,7 @@ import {
   ICellRendererProps,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
-import { SwcrPackage } from 'libs/swcrshared/dist/src';
+import { SwcrPackage } from '@cc-components/swcrshared';
 
 export const useTableConfig = (contextId: string): GridConfig<SwcrPackage, FilterState> => {
   const client = useHttpClient('cc-api');
@@ -118,33 +118,38 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     //   width: 400,
     // },
 
-    // {
-    //   field: 'Next sign by',
-    //   headerTooltip: 'Next Sign by ',
-    //   valueGetter: (pkg) => pkg.data?.nextToSign,
-    //   cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
-    //     if (!props.data) {
-    //       return null;
-    //     } else {
-    //       const keys = getNextToSignKeys(props.data, '');
-    //       return (
-    //         <div
-    //           style={{
-    //             overflow: 'hidden',
-    //             textOverflow: 'ellipsis',
-    //             whiteSpace: 'nowrap',
-    //           }}
-    //         >
-    //           {keys}
-    //         </div>
-    //       );
-    //     }
-    //   },
-    //   width: 400,
-    // },
     {
-      //TODO SJEKK med Atle
-      colId: 'NextSignBy',
+      field: 'Next sign by', //denne heter functionalrole i FAM.
+      headerTooltip: 'Next Sign by ',
+      valueGetter: (pkg) => 'Waiting on data',
+      // cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
+      //   if (!props.data) {
+      //     return null;
+      //   } else {
+      //     const keys = getNextToSignKeys(props.data, '');
+      //     return (
+      //       <div
+      //         style={{
+      //           overflow: 'hidden',
+      //           textOverflow: 'ellipsis',
+      //           whiteSpace: 'nowrap',
+      //         }}
+      //       >
+      //         {keys}
+      //       </div>
+      //     );
+      //   }
+      // },
+      width: 400,
+    },
+    {
+      field: 'LatestSignBy', //denne hete LatestSignedRoleFunctionalRole i FAM
+      headerTooltip: 'Latest Sign By',
+      valueGetter: (pkg) => 'Waiting on data',
+    },
+
+    {
+      colId: 'NextSignRole',
       field: 'Next Sign Role',
       headerTooltip: 'Next Sign Role',
       valueGetter: (pkg) => {
@@ -156,8 +161,8 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
       width: 300,
     },
     {
-      colId: 'LatestSignBy',
-      field: 'Lastest Signed Role',
+      colId: 'LatestSignByRole',
+      field: 'Lastest Signed By Role',
       headerTooltip: 'Lastest Signed Role',
       valueGetter: (pkg) => {
         const ranking = pkg.data?.latestSignedRanking ?? '(blank)';
@@ -199,21 +204,21 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
       valueGetter: (pkg) => pkg.data?.supplier,
       width: 150,
     },
-    // {
-    //   field: 'Types',
-    //   headerTooltip: 'Types',
-    //   valueGetter: (pkg) => pkg.data?.types,
-    //   cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
-    //     if (!props.data) {
-    //       return null;
-    //     } else {
-    //       const keys = getTypeKeys(props.data, '');
-    //       return <div>{keys}</div>;
-    //     }
-    //   },
-    //   enableRowGroup: true,
-    //   width: 150,
-    // },
+    {
+      field: 'Types',
+      headerTooltip: 'Types',
+      valueGetter: (pkg) => 'Waiting on data',
+      // cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
+      //   if (!props.data) {
+      //     return null;
+      //   } else {
+      //     const keys = getTypeKeys(props.data, '');
+      //     return <div>{keys}</div>;
+      //   }
+      // },
+      enableRowGroup: true,
+      width: 150,
+    },
     {
       colId: 'Priority',
       field: 'Priority',
