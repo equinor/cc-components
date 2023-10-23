@@ -11,5 +11,6 @@ export const pipetestAndHeatTraceColorMap: Record<string, string> = {
   'B-test': '#FFC67A',
   'C-test': '#DCAB6A',
   Marking: tokens.colors.interactive.table__cell__fill_activated.hex,
+  'Ht Temporary': tokens.colors.interactive.table__cell__fill_activated.hex, //Possibly only temp. Now checklistStepSequence = 11 is checklistStep = "Ht Teporary"
   Complete: tokens.colors.interactive.success__resting.hex,
 };
