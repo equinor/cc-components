@@ -28,8 +28,6 @@ import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
 import { useQuery } from '@tanstack/react-query';
 import { CircuitDiagramTab } from './CircuitDiagramTab';
 
-const workorders: Workorder[] = [];
-
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
