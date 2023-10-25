@@ -2,6 +2,14 @@ import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { Icon } from '@equinor/eds-core-react';
 import { check, arrow_forward } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
+import {
+  StyledRequestColumn,
+  StyledRequestTabWrapper,
+  VerticalLine,
+  WorklowIconAndLine,
+} from './requestTab.styles';
+import { StyledWorkflowText } from './requestTab.styles';
+
 type WorkflowChartProps = {
   scopechange?: ScopeChangeRequest | undefined;
   error?: Error | null;
@@ -11,37 +19,50 @@ export const WorkflowChart = ({
   scopechange,
   error,
 }: WorkflowChartProps): JSX.Element => {
+  const workflowLen = scopechange?.workflowSteps?.length || 0;
+
   return (
-    <div>
-      {scopechange?.workflowSteps?.map((x) => {
+    <>
+      {scopechange?.workflowSteps?.map((x, i) => {
         return x.isCurrent || x.isCompleted ? (
-          <div>
-            <b>
-              {x.isCompleted ? (
-                <>
-                  <Icon
-                    name={check.name}
-                    size={16}
-                    color={tokens.colors.interactive.primary__resting.hsla}
-                  />
-                  {x.name}
-                </>
-              ) : (
-                <>
-                  <Icon
-                    name={arrow_forward.name}
-                    size={16}
-                    color={tokens.colors.interactive.primary__resting.hsla}
-                  />
-                  {x.name}
-                </>
-              )}
-            </b>
-          </div>
+          <>
+            <>
+              <b>
+                {x.isCompleted ? (
+                  <StyledWorkflowText>
+                    <Icon
+                      name={check.name}
+                      size={16}
+                      color={tokens.colors.interactive.primary__resting.hsla}
+                    />
+                    {x.name}{' '}
+                  </StyledWorkflowText>
+                ) : (
+                  <StyledWorkflowText>
+                    <Icon
+                      name={arrow_forward.name}
+                      size={16}
+                      color={tokens.colors.interactive.primary__resting.hsla}
+                    />
+                    {x.name}
+                  </StyledWorkflowText>
+                )}
+              </b>
+            </>
+
+            <WorklowIconAndLine>
+              {i !== workflowLen - 1 && <VerticalLine active={x.isCurrent} />}
+            </WorklowIconAndLine>
+          </>
         ) : (
-          <div> {x.name} </div>
+          <>
+            {x.name}
+            <WorklowIconAndLine>
+              {i !== workflowLen - 1 && <VerticalLine active={x.isCurrent} />}
+            </WorklowIconAndLine>
+          </>
         );
       })}
-    </div>
+    </>
   );
 };

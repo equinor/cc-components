@@ -33,6 +33,5 @@ export const StyledTextBlock: any = styled.div`
   pre {
     white-space: pre-wrap;
     line-height: 1.5em;
-    font-family: Equinor;
   }
 `;

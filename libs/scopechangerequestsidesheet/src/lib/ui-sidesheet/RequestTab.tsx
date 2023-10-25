@@ -3,12 +3,18 @@ import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { Checkbox } from '@equinor/eds-core-react';
 import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { WorkflowChart } from './WorkflowChart';
-import { StyledRequestColumn, StyledRequestTabWrapper } from './requestTab.styles';
+import {
+  StyledRequestColumn,
+  StyledRequestTabWrapper,
+  VerticalLine,
+  WorklowIconAndLine,
+} from './requestTab.styles';
 type RequestTabProps = {
   scopechange?: ScopeChangeRequest | undefined;
   isFetching?: boolean;
   error?: Error | null;
 };
+
 export const RequestTab = ({
   scopechange,
   error,
@@ -18,7 +24,7 @@ export const RequestTab = ({
     <StyledRequestTabWrapper>
       <StyledRequestColumn>
         <h3>Request</h3>
-        {scopechange?.description ? <pre>{scopechange?.description}</pre> : 'N/A'}
+        {scopechange?.description ? <>{scopechange?.description}</> : 'N/A'}
         <h3>Change origin</h3>
         {scopechange?.originSourceId ?? 'No change origin'}
         <h3>Disciplines and guesstimates</h3>
@@ -33,7 +39,7 @@ export const RequestTab = ({
           readOnly={true}
           label="Materials identified in storage"
         />
-        <br></br>
+
         <Checkbox
           checked={scopechange?.materialsToBeBoughtByContractor}
           readOnly={true}
