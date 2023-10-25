@@ -1,6 +1,6 @@
 import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable/TabTable';
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
-import { detailsColumns } from './detailsColumns';
+import { columns } from './detailsColumns';
 import { SwcrBase } from './types';
 
 type SwcrTabProps<T> = {
@@ -20,7 +20,7 @@ export const SwcrTab = <T extends SwcrBase>({
         error={error}
         isFetching={isFetching}
         resourceName="SWCR"
-        columns={detailsColumns}
+        columns={columns}
       />
     </StyledContentWrapper>
   );

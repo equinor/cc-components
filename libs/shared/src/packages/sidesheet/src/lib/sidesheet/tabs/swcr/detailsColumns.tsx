@@ -4,7 +4,7 @@ import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/c
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { SwcrBase } from './types';
 
-export const detailsColumns: ColDef<SwcrBase>[] = [
+export const columns: ColDef<SwcrBase>[] = [
   {
     field: '#',
     valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,

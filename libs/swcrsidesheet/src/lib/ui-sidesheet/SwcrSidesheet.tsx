@@ -1,8 +1,6 @@
 import { createWidget } from '@cc-components/shared';
 import { StatusCircle } from '@cc-components/shared/common';
-import {
-  LinkCell
-} from '@cc-components/shared/table-helpers';
+import { LinkCell } from '@cc-components/shared/table-helpers';
 import {
   BannerItem,
   SidesheetHeader,
@@ -12,17 +10,17 @@ import {
   StyledTabListWrapper,
   StyledTabs,
   StyledTabsList,
-  TabTitle
+  TabTitle,
 } from '@cc-components/sharedcomponents';
 import { SwcrPackage, getSwcrStatusColor } from '@cc-components/swcrshared';
 import { Tabs } from '@equinor/eds-core-react';
 import { useState } from 'react';
 import { useSignatures } from '../utils-sidesheet';
-import { SwcrSignaturesTab } from '@cc-components/shared/sidesheet';
 import { DetailsTab } from './DetailsTab';
+import { SignaturesTab } from './SignaturesTab';
 
 export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
-  const { signatures, signaturesFetching , error} = useSignatures(props.id);
+  const { signatures, signaturesFetching, error } = useSignatures(props.id);
   const [activeTab, setActiveTab] = useState(0);
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -31,7 +29,9 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${props?.item?.softwareChangeRecordNo || ''}, ${props?.item?.title || ''} `}
+        title={`${props?.item?.softwareChangeRecordNo || ''}, ${
+          props?.item?.title || ''
+        } `}
         applicationTitle={'Software change record'}
         onClose={props.closeSidesheet}
       />
@@ -39,57 +39,39 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
         <BannerItem
           title="SWCR"
           value={
-              props?.item?.softwareChangeRecordNo && props?.item?.swcrUrl
-              ? <LinkCell 
-                  url={props.item.swcrUrl} 
-                  urlText={props.item.softwareChangeRecordNo} 
-                />
-              : props?.item?.softwareChangeRecordNo ?? 'N/A'
-            }
-        />
-          <BannerItem
-            title="Status"
-            value={
-              <StatusCircle
-                content={props?.item?.status || ''}
-                statusColor={getSwcrStatusColor(props?.item?.status)}
+            props?.item?.softwareChangeRecordNo && props?.item?.swcrUrl ? (
+              <LinkCell
+                url={props.item.swcrUrl}
+                urlText={props.item.softwareChangeRecordNo}
               />
-            }
+            ) : (
+              props?.item?.softwareChangeRecordNo ?? 'N/A'
+            )
+          }
+        />
+        <BannerItem
+          title="Status"
+          value={
+            <StatusCircle
+              content={props?.item?.status || ''}
+              statusColor={getSwcrStatusColor(props?.item?.status)}
             />
-          <BannerItem
-            title="Contract"
-            value={
-              props?.item?.contract ?? 'N/A'
-            }
-          />
-          <BannerItem
-            title="Priority"
-            value={
-              props?.item?.priority ?? 'N/A'
-            }
-          />
-          <BannerItem
-            title="Supplier"
-            value={
-              props?.item?.supplier ?? 'N/A'
-            }
-          />
-          <BannerItem
-            title="System"
-            value={
-              props?.item?.system ?? 'N/A'
-            }
-          />
+          }
+        />
+        <BannerItem title="Contract" value={props?.item?.contract ?? 'N/A'} />
+        <BannerItem title="Priority" value={props?.item?.priority ?? 'N/A'} />
+        <BannerItem title="Supplier" value={props?.item?.supplier ?? 'N/A'} />
+        <BannerItem title="System" value={props?.item?.system ?? 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
-      <StyledTabListWrapper>
-        <StyledTabsList>
+        <StyledTabListWrapper>
+          <StyledTabsList>
             <Tabs.Tab>Details</Tabs.Tab>
             <Tabs.Tab>
-              Signatures <TabTitle isLoading={signaturesFetching} data={signatures}/>
+              Signatures <TabTitle isLoading={signaturesFetching} data={signatures} />
             </Tabs.Tab>
-        </StyledTabsList>
-      </StyledTabListWrapper>
+          </StyledTabsList>
+        </StyledTabListWrapper>
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab
@@ -100,7 +82,11 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
             />
           </Tabs.Panel>
           <Tabs.Panel>
-            <SwcrSignaturesTab error={error} isFetching={signaturesFetching} signatures={signatures} />
+            <SignaturesTab
+              error={error}
+              isFetching={signaturesFetching}
+              signatures={signatures}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

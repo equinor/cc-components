@@ -1,5 +1,5 @@
 import { useContextId } from '@cc-components/shared/hooks';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useHttpClient } from '@cc-components/shared';
 import { useCallback, useEffect, useState } from 'react';
 import { SwcrSignature } from '../types';
 
@@ -14,7 +14,7 @@ export const useSignatures = (swcrId: string): UseSignatures => {
   const [signaturesFetching, setSignaturesFetching] = useState<boolean>(false);
   const contextId = useContextId();
   const [error, setError] = useState<Error | null>(null);
-  const dataProxy = useHttpClient('cc-api');
+  const dataProxy = useHttpClient();
   const getSignatures = useCallback(async (swcrId: string) => {
     setSignaturesFetching(true);
     try {
