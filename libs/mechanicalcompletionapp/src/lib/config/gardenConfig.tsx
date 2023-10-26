@@ -1,32 +1,52 @@
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import { McPackage } from 'libs/mechanicalcompletionshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
-import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
-import { GardenHeader, GardenItem, GardenGroupBy } from '../ui-garden';
-import { fieldSettings } from '../utils-garden/fieldSettings';
-import { getHighlightedColumn } from '../utils-garden/getHighlightedColumn';
-import { getItemWidth } from '../utils-garden/getItemWidth';
+import { GardenItem } from '../ui-garden';
+import { useGardenDataSource } from '@cc-components/shared/workspace-config';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 
-export const gardenConfig: GardenConfig<
-  McPackage,
-  ExtendedGardenFields,
-  CustomGroupByKeys,
-  Record<'averageTagVolume', number>
-> = {
-  getDisplayName: (item) => item.mcPkgNumber,
-  customGroupByKeys: {
-    plannedForecast: 'Planned',
-    weeklyDaily: 'Weekly',
-  },
-  initialGrouping: { horizontalGroupingAccessor: 'rfcmc', verticalGroupingKeys: [] },
-  fieldSettings: fieldSettings,
-  customViews: {
-    customItemView: GardenItem,
-    customHeaderView: GardenHeader,
-    customGroupByView: GardenGroupBy,
-  },
-  visuals: {
-    calculateItemWidth: getItemWidth,
-    highlightHorizontalColumn: getHighlightedColumn,
-    rowHeight: 30,
-  },
+export const useGardenConfig = (
+  contextId: string
+): GardenConfig<McPackage, FilterState> => {
+  const client = useHttpClient('cc-app');
+
+  const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
+    useGardenDataSource({
+      getBlockAsync: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/mechanical-completion/garden`,
+          requestArgs
+        ),
+      getGardenMeta: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/mechanical-completion/garden-meta`,
+          requestArgs
+        ),
+      getHeader: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/mechanical-completion/garden`,
+          requestArgs
+        ),
+      getSubgroupItems: (requestArgs) =>
+        client.fetch(
+          `/api/contexts/${contextId}/mechanical-completion/subgroup-items`,
+          requestArgs
+        ),
+    });
+
+  return {
+    getDisplayName: (item) => item.mechanicalCompletionPackageNo,
+    initialGrouping: ['RFC_PlannedDate'],
+    getBlockAsync,
+    getGardenMeta,
+    getHeader,
+    getSubgroupItems,
+    customViews: {
+      customItemView: GardenItem,
+      // customHeaderView: GardenHeader,
+    },
+    visuals: {
+      rowHeight: 31,
+    },
+  };
 };

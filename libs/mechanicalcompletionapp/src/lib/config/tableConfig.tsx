@@ -1,180 +1,221 @@
-import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
-import { statusColorMap } from '@cc-components/shared/mapping';
+import { McPackage, McStatus } from 'libs/mechanicalcompletionshared';
 import {
   DescriptionCell,
   LinkCell,
   StatusCell,
   StyledMonospace,
   YearAndWeekCell,
-} from '@cc-components/shared/table-helpers';
+  statusColorMap,
+} from '@cc-components/shared';
+import { ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { FilterState } from '@equinor/workspace-fusion/filter';
+import {
+  ColDef,
+  ColumnsToolPanelModule,
+  GridConfig,
+  MenuModule,
+} from '@equinor/workspace-fusion/grid';
 
-import { GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { useHttpClient } from '@cc-components/shared';
+import {
+  GridColumnOption,
+  defaultGridOptions,
+  useGridDataSource,
+} from '@cc-components/shared/workspace-config';
 
-export const tableConfig: GridConfig<McPackage> = {
-  // gridOptions: defaultGridOptions,
-  columnDefinitions: [
-    {
-      field: 'MC Pkg',
-      headerTooltip: 'Mechanical Completion Package Number',
-      valueGetter: (pkg) => pkg.data?.mcPkgNumber,
-      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
-        return <StyledMonospace>{props.data?.mcPkgNumber}</StyledMonospace>;
-      },
-      // valueFormatter: (pkg) =>
-      //   pkg.data?.mcPkgId ? proCoSysUrls.getMcUrl(pkg.data.mcPkgId) : '',
-      // cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-      //   if (!props.valueFormatted) {
-      //     return null;
-      //   }
-      //   return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      // },
-      width: 140,
-    },
-    {
-      field: 'Description',
-      headerTooltip: 'Description',
-      valueGetter: (pkg) => pkg.data?.description,
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        return <DescriptionCell description={props.value} />;
-      },
-      width: 300,
-    },
-    {
-      field: 'Discipline',
-      headerTooltip: 'Discipline',
-      valueGetter: (pkg) => pkg.data?.discipline,
-      enableRowGroup: true,
-      width: 144,
-    },
-    {
-      field: 'MC Status',
-      headerTooltip: 'Mechanical Completion Status',
-      valueGetter: (pkg) => pkg.data?.mcStatus,
-      cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
-        return (
-          <StatusCell
-            content={props.value}
-            cellAttributeFn={() => ({
-              style: {
-                backgroundColor: props.value
-                  ? statusColorMap[props.value]
-                  : 'transparent',
-              },
-            })}
-          />
+export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterState> => {
+  const client = useHttpClient();
+
+  const { getRows, colDefs } = useGridDataSource(async (req) => {
+    const res = await client.fetch(
+      `/api/contexts/${contextId}/mechanical-completion/grid`,
+      req
+    );
+    const meta = (await res.json()) as {
+      items: any[];
+      rowCount: number;
+      columnDefinitions: GridColumnOption[];
+    };
+    return {
+      rowCount: meta.rowCount,
+      items: meta.items,
+      columnDefinitions: meta.columnDefinitions,
+    };
+  }, columnDefinitions);
+
+  return {
+    getRows: getRows,
+    modules: [MenuModule, ColumnsToolPanelModule],
+    columnDefinitions: colDefs as any,
+    gridOptions: {
+      ...defaultGridOptions,
+      onFirstDataRendered: (e) => {
+        e.columnApi.autoSizeColumns(
+          e.columnApi
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
         );
       },
-      enableRowGroup: true,
-      width: 150,
     },
-    {
-      field: 'Responsible',
-      headerTooltip: 'Responsible',
-      valueGetter: (pkg) => pkg.data?.responsible,
-      enableRowGroup: true,
-      width: 150,
-    },
-    {
-      field: 'Phase',
-      headerTooltip: 'Phase',
-      valueGetter: (pkg) => pkg.data?.phase,
-      enableRowGroup: true,
-      width: 150,
-    },
-    {
-      field: 'Area',
-      headerTooltip: 'Area',
-      valueGetter: (pkg) => pkg.data?.area,
-      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
-        return <StyledMonospace>{props.data?.area}</StyledMonospace>;
-      },
-      enableRowGroup: true,
-      width: 150,
-    },
-    {
-      field: 'Comm Pkg',
-      headerTooltip: 'Commissioning Package Number',
-      valueGetter: (pkg) => pkg.data?.commPkgNumber,
-      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
-        return <StyledMonospace>{props.data?.commPkgNumber}</StyledMonospace>;
-      },
-      // valueFormatter: (pkg) =>
-      //   pkg.data?.commPkgId ? proCoSysUrls.getCommPkgUrl(pkg.data.commPkgId) : '',
-      // cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-      //   if (!props.valueFormatted) {
-      //     return null;
-      //   } else {
-      //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-      //   }
-      // },
-      width: 185,
-    },
-    {
-      field: 'System',
-      headerTooltip: 'System',
-      valueGetter: (pkg) => pkg.data?.system,
-      cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
-        return <StyledMonospace>{props.data?.system}</StyledMonospace>;
-      },
-      enableRowGroup: true,
-      width: 125,
-    },
-    {
-      field: 'Planned M-01 Final Punch',
-      headerTooltip: 'Planned M-01 Final Punch',
-      valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        return <YearAndWeekCell dateString={props.value} />;
-      },
-      width: 250,
-    },
-    {
-      field: 'Actual M-01 Actual Date',
-      headerTooltip: 'Actual M-01 Actual Date',
-      valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        return <YearAndWeekCell dateString={props.value} />;
-      },
-      width: 250,
-    },
-    {
-      field: 'Planned M-03 RFC',
-      headerTooltip: 'Planned M-03 RFC',
-      valueGetter: (pkg) => pkg.data?.rfccPlannedDate,
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        return <YearAndWeekCell dateString={props.value} />;
-      },
-      width: 210,
-    },
-    {
-      field: 'Actual M-03 RFC',
-      headerTooltip: 'Actual M-03 RFC',
-      valueGetter: (pkg) => pkg.data?.rfccActualDate,
-      cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-        return <YearAndWeekCell dateString={props.value} />;
-      },
-      width: 200,
-    },
-    {
-      field: 'Comm Pri1',
-      headerTooltip: 'Commissioning Priority 1',
-      valueGetter: (pkg) => pkg.data?.priority,
-      enableRowGroup: true,
-      width: 155,
-    },
-    {
-      field: 'Comm Pri2',
-      headerTooltip: 'Commissioning Priority 2',
-      valueGetter: (pkg) => pkg.data?.priority2,
-      enableRowGroup: true,
-      width: 155,
-    },
-    {
-      field: 'Comm Pri3',
-      headerTooltip: 'Commissioning Priority 3',
-      valueGetter: (pkg) => pkg.data?.priority3,
-      enableRowGroup: true,
-      width: 155,
-    },
-  ],
+  };
 };
+
+const columnDefinitions: ColDef<McPackage>[] = [
+  {
+    field: 'MC Pkg',
+    colId: 'MCPkgNo',
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
+    valueFormatter: (pkg) => pkg.data?.mechanicalCompletionPackageUrl ?? '',
+    cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      if (!props.valueFormatted) {
+        return props.value;
+      }
+      return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    },
+    minWidth: 140,
+  },
+  {
+    field: 'Description',
+    colId: 'Description',
+    headerTooltip: 'Description',
+    valueGetter: (pkg) => pkg.data?.description,
+    cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      return <DescriptionCell description={props.value} />;
+    },
+    minWidth: 300,
+  },
+  {
+    field: 'Discipline',
+    colId: 'Discipline',
+    headerTooltip: 'Discipline',
+    valueGetter: (pkg) => pkg.data?.discipline,
+    enableRowGroup: true,
+    minWidth: 144,
+  },
+  {
+    field: 'MC Status',
+    colId: 'McStatus',
+    headerTooltip: 'Mechanical Completion Status',
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
+    cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
+      return (
+        <StatusCell
+          content={props.value}
+          cellAttributeFn={() => ({
+            style: {
+              backgroundColor: props.value ? statusColorMap[props.value] : 'transparent',
+            },
+          })}
+        />
+      );
+    },
+    enableRowGroup: true,
+    minWidth: 150,
+  },
+  {
+    field: 'Responsible',
+    colId: 'Responsible',
+    headerTooltip: 'Responsible',
+    valueGetter: (pkg) => pkg.data?.responsible,
+    enableRowGroup: true,
+    minWidth: 150,
+  },
+  {
+    field: 'Phase',
+    colId: 'Phase',
+    headerTooltip: 'mechanicalCompletionPhase',
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPhase,
+    enableRowGroup: true,
+    minWidth: 150,
+  },
+  {
+    field: 'Location',
+    colId: 'Location',
+    headerTooltip: 'Location',
+    valueGetter: (pkg) => pkg.data?.location,
+    cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
+      return <StyledMonospace>{props.data?.location}</StyledMonospace>;
+    },
+    enableRowGroup: true,
+    minWidth: 150,
+  },
+  {
+    field: 'Comm Pkg',
+    colId: 'CommPkg',
+    headerTooltip: 'Commissioning Package Number',
+    valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+    valueFormatter: (pkg) => pkg.data?.commissioningPackageUrl ?? '',
+    cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      if (!props.valueFormatted) {
+        return props.value;
+      }
+      return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+    },
+    minWidth: 185,
+  },
+  {
+    field: 'System',
+    colId: 'System',
+    headerTooltip: 'System',
+    valueGetter: (pkg) => pkg.data?.system,
+    cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
+      return <StyledMonospace>{props.data?.system}</StyledMonospace>;
+    },
+    enableRowGroup: true,
+    minWidth: 125,
+  },
+  {
+    field: 'Actual M-01 Actual Date',
+    colId: 'PlannedM1FinalPunch',
+    headerTooltip: 'finalPunchPlannedDate',
+    valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
+    cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      return <YearAndWeekCell dateString={props.value} />;
+    },
+    minWidth: 250,
+  },
+  {
+    field: 'Actual M-02 RFC',
+    colId: 'ActualM2ActualDate',
+    headerTooltip: 'finalPunchActualDate',
+    valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
+    cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      return <YearAndWeekCell dateString={props.value} />;
+    },
+    minWidth: 210,
+  },
+  {
+    field: 'Actual M-03 RFC',
+    colId: 'CommPri3',
+    headerTooltip: 'rfC_ActualDate',
+    valueGetter: (pkg) => pkg.data?.rfC_ActualDate,
+    cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
+      return <YearAndWeekCell dateString={props.value} />;
+    },
+    minWidth: 200,
+  },
+  {
+    field: 'Comm Pri1',
+    colId: 'CommPri1',
+    headerTooltip: 'Commissioning Priority 1',
+    valueGetter: (pkg) => pkg.data?.priority1,
+    enableRowGroup: true,
+    minWidth: 155,
+  },
+  {
+    field: 'Comm Pri2',
+    colId: 'CommPri2',
+    headerTooltip: 'Commissioning Priority 2',
+    valueGetter: (pkg) => pkg.data?.priority2,
+    enableRowGroup: true,
+    minWidth: 155,
+  },
+  {
+    field: 'Comm Pri3',
+    colId: 'CommPri3',
+    headerTooltip: 'Commissioning Priority 3',
+    valueGetter: (pkg) => pkg.data?.priority3,
+    enableRowGroup: true,
+    minWidth: 155,
+  },
+];

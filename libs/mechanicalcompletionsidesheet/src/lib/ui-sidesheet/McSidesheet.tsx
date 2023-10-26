@@ -15,28 +15,36 @@ import {
   StyledTabs,
   TabTitle,
   BannerItem,
+  SidesheetSkeleton,
+  StyledTabListWrapper,
 } from '@cc-components/sharedcomponents';
-import { Tabs } from '@equinor/eds-core-react';
+import { Icon, Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { createWidget } from '@cc-components/shared';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useMcResource } from '../utils-sidesheet';
+import { createWidget, useContextId } from '@cc-components/shared';
+import { useRef, useState } from 'react';
+// import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
+import { error_outlined } from '@equinor/eds-icons';
 
-const StyledTabListWrapper = styled.div`
-  overflow: hidden;
-  width: 100%;
-  background-color: ${tokens.colors.ui.background__light.hex};
-`;
+type McProps = {
+  id: string;
+  item?: McPackage;
+  closeSidesheet: VoidFunction;
+};
+export const McSideSheet = createWidget<McPackage>(({ props }) => (
+  <EnsureMcPkg {...props} />
+));
 
-export const McSideSheet = createWidget<McPackage>(({ props }) => {
+Icon.add({ error_outlined });
+
+const McSideSheetComponent = (props: Required<McProps>) => {
   const [activeTab, setActiveTab] = useState<number>(0);
-
+  const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
     setActiveTab(index);
+    ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };
-
+  /*
   const {
     data: workOrders,
     isFetching: isFetchingWorkOrders,
@@ -53,11 +61,11 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
     isFetching: isFetchingNcr,
     error: ncrError,
   } = useMcResource(props.id, 'ncr');
-
+*/
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props?.item?.description || ''}
+        title={props.item.description || ''}
         applicationTitle={'Mechanical completion'}
         onClose={props.closeSidesheet}
       />
@@ -65,7 +73,7 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
         <BannerItem
           title="MC pkg"
           value={
-            props.item?.mcPkgNumber ?? 'N/A'
+            props.item?.mechanicalCompletionPackageNo ?? 'N/A'
             // <StyledItemLink href={proCoSysUrls.getMcUrl(props.id)} target="_blank">
             //   {props.item?.mcPkgNumber ?? 'N/A'}
             // </StyledItemLink>
@@ -74,7 +82,7 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
         <BannerItem
           title="Comm pkg"
           value={
-            props.item?.commPkgNumber ?? 'N/A'
+            props.item?.commissioningPackageNo ?? 'N/A'
             // <StyledItemLink
             //   href={proCoSysUrls.getCommPkgUrl(props.item?.commPkgId ?? '')}
             //   target="_blank"
@@ -87,10 +95,10 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
           title="MC status"
           value={
             <StatusCircle
-              content={props.item?.mcStatus ?? 'N/A'}
+              content={props.item?.mechanicalCompletionStatus ?? 'N/A'}
               statusColor={
-                props.item?.mcStatus
-                  ? statusColorMap[props.item?.mcStatus]
+                props.item?.mechanicalCompletionStatus
+                  ? statusColorMap[props.item?.mechanicalCompletionStatus]
                   : 'transparent'
               }
             />
@@ -100,10 +108,10 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
           title="Comm status"
           value={
             <StatusCircle
-              content={props.item?.commPkgStatus ?? 'N/A'}
+              content={props.item?.commpkgStatus ?? 'N/A'}
               statusColor={
-                props.item?.commPkgStatus
-                  ? statusColorMap[props.item?.commPkgStatus]
+                props.item?.commpkgStatus
+                  ? statusColorMap[props.item?.commpkgStatus]
                   : 'transparent'
               }
             />
@@ -114,6 +122,7 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
         <StyledTabListWrapper>
           <Tabs.List>
             <Tabs.Tab>Details</Tabs.Tab>
+            {/*             
             <Tabs.Tab>
               Workorders <TabTitle data={workOrders} isLoading={isFetchingWorkOrders} />
             </Tabs.Tab>
@@ -122,7 +131,7 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
             </Tabs.Tab>
             <Tabs.Tab>
               NCR <TabTitle data={ncr} isLoading={isFetchingNcr} />
-            </Tabs.Tab>
+            </Tabs.Tab> */}
           </Tabs.List>
         </StyledTabListWrapper>
 
@@ -130,7 +139,7 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
           <Tabs.Panel>
             <DetailsTab mcPackage={props?.item} />
           </Tabs.Panel>
-          <Tabs.Panel>
+          {/* <Tabs.Panel>
             <WorkorderTab
               error={workOrderError}
               isFetching={isFetchingWorkOrders}
@@ -161,11 +170,76 @@ export const McSideSheet = createWidget<McPackage>(({ props }) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <NcrTab error={ncrError} isFetching={isFetchingNcr} ncrs={ncr} />
-          </Tabs.Panel>
+          </Tabs.Panel> */}
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
+};
 
 export default McSideSheet.render;
+
+import { useQuery } from '@tanstack/react-query';
+import styled from 'styled-components';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+
+function EnsureMcPkg({ id, closeSidesheet, item }: McProps) {
+  const client = useHttpClient('cc-app');
+  const contextId = useContextId();
+  const { isLoading, data, error } = useQuery(
+    ['handover', id],
+    async () => {
+      const res = await client.fetch(
+        `/api/contexts/${contextId}/mechanical-completion/${id}`
+      );
+      if (!res.ok) {
+        throw new Error(`Failed to get mcpkg with id ${id}`);
+      }
+      return res.json() as Promise<McPackage>;
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  if (isLoading) {
+    return <SidesheetSkeleton close={close} />;
+  }
+
+  if (error || !data) {
+    return (
+      <div
+        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
+      >
+        <ErrorWrapper>
+          <Icon
+            name="error_outlined"
+            size={48}
+            color={tokens.colors.interactive.primary__resting.hsla}
+          />
+          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
+        </ErrorWrapper>
+      </div>
+    );
+  }
+
+  return (
+    <McSideSheetComponent
+      id={id}
+      item={data}
+      closeSidesheet={closeSidesheet}
+    ></McSideSheetComponent>
+  );
+}
+
+const ErrorWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ErrorMessage = styled.h3`
+  margin: 0;
+`;

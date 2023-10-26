@@ -3,7 +3,7 @@ import { createRender, RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const McApp = () => {
-  const client = useHttpClient('data-proxy');
+  const client = useHttpClient('cc-app');
   return (
     <RootAppWrapper client={client}>
       <WorkspaceWrapper />
@@ -11,5 +11,5 @@ const McApp = () => {
   );
 };
 
-export const render = createRender(McApp, configure, 'Mechanical completion');
+export const render = createRender(McApp, configure, 'mechanical-completion');
 export default render;

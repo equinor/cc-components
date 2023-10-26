@@ -12,7 +12,7 @@ export const NoContext = () => {
 
   useLayoutEffect(() => {
     if (window.location.href.includes('localhost')) {
-      setCurrentContext('ce31b83a-b6cd-4267-89f3-db308edf721e');
+      setCurrentContext('94dd5f4d-17f1-4312-bf75-ad75f4d9572c');
     }
   }, [window.location.href]);
 

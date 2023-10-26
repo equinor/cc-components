@@ -12,12 +12,12 @@ export const useMcResource = <T extends keyof McResourceTypeMap>(
   packageId: string,
   packageType: T
 ) => {
-  const dataProxy = useHttpClient('data-proxy');
+  const dataProxy = useHttpClient('cc-app');
   const contextId = useContextId();
   const fetch = useCallback(
     async (id: string, signal?: AbortSignal) => {
       const result = await dataProxy.fetch(
-        `api/contexts/${contextId}/mc-pkgs/${id}/${packageType}`,
+        `api/contexts/${contextId}/mechanical-completion/${id}/`,
         { signal }
       );
 

@@ -1,13 +1,13 @@
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { PopoverWrapper } from '@cc-components/shared/common';
-import { statusColorMap } from '@cc-components/shared/mapping';
+import { itemContentColors, statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useState } from 'react';
-import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
+import { McPackage } from '../../../../mechanicalcompletionshared';
+import { commStatusColors } from '../utils-statuses/commStatusColors';
+import { getCommissioningStatus } from '../utils-statuses/getStatuses';
 import { getItemContentsColor } from '../utils-garden/getItemContentsColor';
 import { getTagSize } from '../utils-garden/getTagSize';
-import { getCommissioningStatus } from '../utils-statuses';
-import { commStatusColors } from '../utils-statuses/commStatusColors';
+import { PopoverContent } from './Popover/PopoverContent';
 import {
   StyledItemText,
   StyledItemWrapper,
@@ -15,57 +15,43 @@ import {
   StyledSizes,
   StyledStatusCircles,
 } from './garden.styles';
-import { PopoverContent } from './Popover/PopoverContent';
 
-const McGardenItem = (
-  props: CustomItemView<
-    McPackage,
-    ExtendedGardenFields,
-    CustomGroupByKeys,
-    Record<'averageTagVolume', number>
-  >
-) => {
+const McGardenItem = (props: CustomItemView<McPackage>) => {
   const {
-    columnExpanded,
-    columnStart,
-    controller,
     data,
-    isSelected,
     onClick,
-    parentRef,
-    rowStart,
+    columnExpanded,
     depth,
-    width: itemWidth = 300,
+    width: itemWidth = 100,
+    isSelected,
+    rowStart,
+    columnStart,
+    parentRef,
   } = props;
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
     null
   );
-  const { useContext, getDisplayName } = controller;
 
-  const context = useContext();
-  const size = useMemo(
-    () => getTagSize(data, context?.['averageTagVolume'] || 0),
-    [context, data]
-  );
-  const status = useMemo(() => getCommissioningStatus(data), [data]);
-  const backgroundColor = useMemo(() => commStatusColors[status], [status]);
-  const contentsColor = useMemo(() => getItemContentsColor(status), [status]);
-  const mcDotColor = useMemo(() => statusColorMap[data.mcStatus], [data.mcStatus]);
-  const commDotColor = useMemo(
-    () => statusColorMap[data.commPkgStatus],
-    [data.commPkgStatus]
-  );
+  const size = getTagSize(data, 10); //fikse average
+  const status = getCommissioningStatus(data);
+  const backgroundColor = commStatusColors[status];
+  const contentsColor = getItemContentsColor(status);
+  const mcDotColor = statusColorMap[data.mechanicalCompletionStatus];
+  const commDotColor = statusColorMap[data.commpkgStatus];
   const width = useMemo(() => (depth ? 100 - depth * 3 : 97), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
+
   const options = {
-    status,
+    size,
     backgroundColor,
     contentsColor,
-    size,
     mcDotColor,
     commDotColor,
+    status,
   };
+
   return (
     <>
       <StyledRoot>
@@ -85,7 +71,7 @@ const McGardenItem = (
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
         >
           <StyledSizes color={contentsColor} size={size} />
-          <StyledItemText> {getDisplayName(data)}</StyledItemText>
+          <StyledItemText> {data.mechanicalCompletionPackageNo}</StyledItemText>
 
           <StyledStatusCircles mcColor={mcDotColor} commColor={commDotColor} />
         </StyledItemWrapper>
@@ -99,7 +85,7 @@ const McGardenItem = (
           parentRef={parentRef}
           rowStart={rowStart}
           columnStart={columnStart}
-          popoverTitle={`Mc.pkg: ${data.mcPkgNumber}`}
+          popoverTitle={`Mc.pkg: ${data.mechanicalCompletionPackageNo}`}
         >
           <PopoverContent data={data} options={options} />
         </PopoverWrapper>

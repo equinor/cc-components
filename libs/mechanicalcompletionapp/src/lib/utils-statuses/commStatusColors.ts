@@ -1,6 +1,6 @@
-import { CommissioningStatus } from '../types';
+// import { CommissioningStatus } from '../types';
 
-export const commStatusColors: Record<CommissioningStatus, string> = {
+export const commStatusColors: Record<string, string> = {
   'RFOC Accepted': '#0035bc',
   'RFOC Sent': '#09ccf2',
   'RFOC Rejected': '#eb0000',
