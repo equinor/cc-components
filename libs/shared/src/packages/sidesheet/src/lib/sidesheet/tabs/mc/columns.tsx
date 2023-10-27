@@ -1,7 +1,7 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { colorMap } from '../../../../../../mapping';
-import { StatusCell } from '../../../../../../table-helpers';
+import { DateCell, StatusCell } from '../../../../../../table-helpers';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { PackageStatus } from '../../../../../../types';
@@ -50,7 +50,7 @@ export const columns: ColDef<McBase>[] = [
     field: 'Punch Accepted Date',
     valueGetter: (pkg) => pkg.data?.punchAcceptedActualtDate,
     cellRenderer: (props: ICellRendererProps<McBase>) => (
-      <DescriptionCell description={props.value || '..'} />
+      <DateCell dateString={props.value} />
     ),
     minWidth: 175,
     flex: 2,
