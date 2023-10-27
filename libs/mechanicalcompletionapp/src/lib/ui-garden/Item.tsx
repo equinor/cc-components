@@ -40,7 +40,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
   const contentsColor = getItemContentsColor(status);
   const mcDotColor = statusColorMap[data.mechanicalCompletionStatus];
   const commDotColor = statusColorMap[data.commpkgStatus];
-  const width = useMemo(() => (depth ? 100 - depth * 3 : 97), [depth]);
+  const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const options = {
@@ -75,7 +75,11 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
 
           <StyledStatusCircles mcColor={mcDotColor} commColor={commDotColor} />
         </StyledItemWrapper>
-        {columnExpanded && data.description}
+        {columnExpanded && (
+          <StyledItemText title={data.description ?? ''}>
+            {data.description}
+          </StyledItemText>
+        )}
       </StyledRoot>
       {isOpen && (
         <PopoverWrapper

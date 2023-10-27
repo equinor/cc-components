@@ -65,7 +65,9 @@ const McSideSheetComponent = (props: Required<McProps>) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props.item.description || ''}
+        title={props.item.mechanicalCompletionPackageNo || ''}
+        description={props?.item?.description || ''}
+        url={props.item.mechanicalCompletionPackageUrl || ''}
         applicationTitle={'Mechanical completion'}
         onClose={props.closeSidesheet}
       />
@@ -187,7 +189,7 @@ function EnsureMcPkg({ id, closeSidesheet, item }: McProps) {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
   const { isLoading, data, error } = useQuery(
-    ['handover', id],
+    ['mcpkg', id],
     async () => {
       const res = await client.fetch(
         `/api/contexts/${contextId}/mechanical-completion/${id}`
