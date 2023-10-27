@@ -15,6 +15,7 @@ export type HandoverMcpkg = {
   rfO_Status: string | null;
   rfC_Status: string | null;
   mechanicalCompletionPackageUrl: string;
+  punchAcceptedActualtDate: string | null;
 } & HandoverChild;
 
 export type HandoverNCR = {

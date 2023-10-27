@@ -47,6 +47,15 @@ export const columns: ColDef<McBase>[] = [
     flex: 1,
   },
   {
+    field: 'Punch Accepted Date',
+    valueGetter: (pkg) => pkg.data?.punchAcceptedActualtDate,
+    cellRenderer: (props: ICellRendererProps<McBase>) => (
+      <DescriptionCell description={props.value || '..'} />
+    ),
+    minWidth: 175,
+    flex: 2,
+  },
+  {
     field: 'RFCC',
     valueGetter: (pkg) => pkg.data?.rfC_Status,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
