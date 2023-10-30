@@ -63,6 +63,7 @@ export type HandoverPackage = {
   subSystem: string | null;
   volume: number;
   hasUnsignedActions: string | null;
-  dynamicCommissioningStatus : BaseStatus;
+  dynamicCommissioningStatus: BaseStatus;
   mcDisciplines: string | null;
+  remainingPunchOutCount: number | null;
 };

@@ -67,6 +67,10 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>Comm Pkg Progress</td>
             <td>{stringCell(`${commpkg.progress || 0}%`)}</td>
           </tr>
+          <tr>
+            <td> Mc Packages Missing PunchOut</td>
+            <td>{stringCell(`${commpkg.remainingPunchOutCount || 0}`)}</td>
+          </tr>
         </tbody>
       </StyledTable>
 
