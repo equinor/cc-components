@@ -6,4 +6,5 @@ export type McBase = {
   rfO_Status: string | null;
   rfC_Status: string | null;
   mechanicalCompletionPackageUrl: string;
+  punchAcceptedActualtDate: string | null;
 };
