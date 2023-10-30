@@ -34,7 +34,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     null
   );
 
-  const size = getTagSize(data, 10); //fikse average
+  const size = getTagSize(data, 10);
   const status = getCommissioningStatus(data);
   const backgroundColor = commStatusColors[status];
   const contentsColor = getItemContentsColor(status);
