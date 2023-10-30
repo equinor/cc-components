@@ -1,7 +1,7 @@
 import { PopoverWrapper } from '@cc-components/shared/common';
 import { itemContentColors, statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo, useRef, useState } from 'react';
 import { McPackage } from '../../../../mechanicalcompletionshared';
 import { commStatusColors } from '../utils-statuses/commStatusColors';
 import { getCommissioningStatus } from '../utils-statuses/getStatuses';
@@ -30,9 +30,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
   } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
-    null
-  );
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const size = getTagSize(data, 10);
   const status = getCommissioningStatus(data);
@@ -52,18 +50,33 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     status,
   };
 
+  const handleMouseEnter = () => {
+    // Clear any existing timeouts
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    // Set the new timeout
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (!isOpen) setIsOpen(true);
+    }, 500);
+  };
+
+  const handleMouseLeave = () => {
+    // Clear the timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null; // Reset the timeout ref to null
+    }
+    // Close the popover immediately
+    setIsOpen(false);
+  };
+
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
-          onMouseEnter={() => {
-            hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
-            setHoverTimeout(setTimeout(() => setIsOpen(true), 700));
-          }}
-          onMouseLeave={() => {
-            hoverTimeout && clearTimeout(hoverTimeout);
-            setIsOpen(false);
-          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           onClick={onClick}
           backgroundColor={backgroundColor}
           textColor={contentsColor}
