@@ -6,7 +6,6 @@
   "private": true,
   "packageManager": "pnpm@8.0.0",
   "scripts": {
-    "a": "nx build plugins",
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g vite pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm ci:build",
     "serve": "turbo run dev --filter",
