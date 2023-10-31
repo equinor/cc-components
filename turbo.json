@@ -8,6 +8,9 @@
     "dev": {
       "dependsOn": ["^build"]
     },
+    "dev:local": {
+      "dependsOn": ["^build"]
+    },
     "shipit": {
       "dependsOn": ["build"]
     },
