@@ -11,9 +11,6 @@
     "dev:local": {
       "dependsOn": ["^build"]
     },
-    "shipit": {
-      "dependsOn": ["build"]
-    },
     "pr:deploy": {
       "dependsOn": []
     },

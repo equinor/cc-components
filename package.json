@@ -8,7 +8,8 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "first-time-setup": "npm i -g vite pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm ci:build",
-    "serve": "turbo run dev:local --filter",
+    "serve": "turbo run dev --filter",
+    "serve:local": "turbo run dev:local --filter",
     "ci:build": "turbo run build --output-logs errors-only --concurrency 1",
     "build": "turbo run build --output-logs errors-only --parallel",
     "build:app": "turbo run build --parallel --output-logs errors-only --filter",
@@ -17,9 +18,7 @@
     "build:apps": "turbo run build --filter ./apps/** --parallel --output-logs errors-only",
     "build:libs": "turbo run build --filter ./libs/* --parallel --output-logs errors-only",
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
-    "new:report": "nx generate @cc-components/plugins:fusion-report-generator",
-    "shipit:app": "turbo run shipit --filter",
-    "shipit:reports": "turbo run shipit --filter ./reports/**"
+    "new:report": "nx generate @cc-components/plugins:fusion-report-generator"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^9.3.5",
