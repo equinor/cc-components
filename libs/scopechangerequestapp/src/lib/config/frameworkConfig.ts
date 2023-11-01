@@ -20,10 +20,11 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
       });
     });
   });
-  const envConfig: PunchEnvConfig = c.env.config?.environment as PunchEnvConfig;
+  const envConfig: ScopeChangeRequestConfig = c.env.config
+    ?.environment as ScopeChangeRequestConfig;
 
   if (!envConfig) {
-    throw new Error('Failed to load environemnt config for workorder');
+    throw new Error('Failed to load environemnt config for Scope Change Request');
   }
   config.configureHttpClient('scopechange', {
     baseUri: envConfig?.uri,
@@ -33,7 +34,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   enableAgGrid(config);
 };
 
-type PunchEnvConfig = {
+type ScopeChangeRequestConfig = {
   uri: string;
   defaultScopes: string[];
 };

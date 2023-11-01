@@ -1,4 +1,3 @@
-// TODO: Make all variables nullable?
 export type ScopeChangeRequest = {
   createdAtUtc: string;
   createdBy: CreatedBy;

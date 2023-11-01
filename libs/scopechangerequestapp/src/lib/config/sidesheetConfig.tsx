@@ -6,7 +6,7 @@ export const sidesheetConfig: SidesheetConfig<ScopeChangeRequest> = {
   DetailsSidesheet: (props) => (
     <ScopechangerequestSidesheet.Component
       id={props.id}
-      //item={props.item}
+      item={props.item}
       closeSidesheet={props.close}
     />
   ),

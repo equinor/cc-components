@@ -8,7 +8,7 @@ export const useGetWorkorders = (scopeChangeRequestId: string) => {
     ['scope-change-request', scopeChangeRequestId, 'workorders'],
     async ({ signal }) => {
       const response = await client.fetch(
-        `/api/contexts/${contextId}/scope-change-requests/${scopeChangeRequestId}/work-orders`,
+        `/api/scope-change-requests/${scopeChangeRequestId}/work-orders`,
         { signal, headers: { ['x-fusion-context-id']: contextId } }
       );
       if (response.status === 204) {

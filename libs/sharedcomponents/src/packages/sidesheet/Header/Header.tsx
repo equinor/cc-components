@@ -9,11 +9,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* padding-left: 24px;
-  padding-bottom: 24px;
-  padding-top: 24px; */
   position: relative;
-  /* gap: 1em; */
   align-items: center;
 `;
 const StyledTitle = styled.div`

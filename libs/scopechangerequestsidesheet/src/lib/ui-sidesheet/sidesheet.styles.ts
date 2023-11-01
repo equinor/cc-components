@@ -8,7 +8,7 @@ export const StyledTabListWrapper: any = styled.div`
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
 
-export const StyledTabsList: any = styled(Tabs.List)`
+export const StyledTabsList = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -18,7 +18,7 @@ export const StyledTabsList: any = styled(Tabs.List)`
   scroll-behavior: smooth;
 `;
 
-export const StyledTabContent: any = styled(Tabs.List)`
+export const StyledTabContent = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -27,7 +27,7 @@ export const StyledTabContent: any = styled(Tabs.List)`
   scroll-behavior: smooth;
 `;
 
-export const StyledTextBlock: any = styled.div`
+export const StyledTextBlock = styled.div`
   max-width: 960px;
   align-items: end;
   pre {
