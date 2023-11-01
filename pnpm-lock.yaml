@@ -671,6 +671,15 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  reports/ads-schedule-viewer:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   reports/atexinspection:
     dependencies:
       '@cc-components/powerbi':
