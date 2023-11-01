@@ -24,8 +24,7 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   const { getModel } = useModelContext();
   const { getCurrentNodes, getSelectionService } = useSelectionContext();
 
-  const { defaultCroppingDistance, defaultCameraMoveDuration, defaultRadiusFactor } =
-    useConfig();
+  const { defaultRadiusFactor, defaultCroppingDistance } = useConfig();
 
   const [isOrbit, setIsOrbit] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
@@ -80,11 +79,10 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
     }
   };
 
-  const fitToScreen = (duration?: number, radiusFactor?: number) => {
+  const fitToScreen = (radiusFactor?: number) => {
     if (currentNodes) {
       selectionService?.fitCameraToNodeSelection(
         currentNodes,
-        duration || defaultCameraMoveDuration,
         radiusFactor || defaultRadiusFactor
       );
     }

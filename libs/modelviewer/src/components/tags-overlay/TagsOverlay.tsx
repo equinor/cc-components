@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useOverlay } from '../../hooks/useOverlay';
 import { useModelViewerContext, useSelectionContext } from '../../providers';
 
@@ -31,49 +31,52 @@ export const TagsOverlay = (): JSX.Element => {
 
   return (
     <div>
-      {overlayTags
-        .filter((ot) => filterTags.includes(ot.tagNo))
-        .map((tag, index) => {
-          const isSelected = selected === tag.tagNo;
-          return (
-            <div
-              key={`${tag.tagNo}_${index}`}
-              title={titleResolver ? titleResolver(tag) : tag.tagNo}
-              onClick={() => {
-                echoInstance?.viewer.cameraManager.fitCameraToBoundingBox(
-                  tag.boundingBox,
-                  defaultRadiusFactor
-                );
-              }}
+      {overlayTags.map((tag, index) => {
+        const isSelected = selected === tag.tagNo;
+        return (
+          <div
+            key={`${tag.tagNo}_${index}`}
+            title={titleResolver ? titleResolver(tag) : tag.tagNo}
+            onClick={() => {
+              echoInstance?.viewer.cameraManager.fitCameraToBoundingBox(
+                tag.boundingBox,
+                defaultRadiusFactor
+              );
+            }}
+          >
+            <RevealHtmlOverlayWrapper
+              overlayTool={overlayTool.current}
+              position3d={tag.position}
+              tagNo={tag.tagNo}
+              aabb={tag.aabb}
             >
-              <RevealHtmlOverlayWrapper
-                overlayTool={overlayTool.current}
-                position3d={tag.position}
-                tagNo={tag.tagNo}
-                aabb={tag.aabb}
-              >
-                {CustomOverlayComponent ? (
-                  <div
-                    onClick={() => {
-                      setSelected(tag.tagNo);
-                    }}
-                  >
-                    <CustomOverlayComponent
-                      {...tag}
-                      index={index}
-                      clearSelection={() => onSelected()}
-                      isSelected={isSelected}
-                    />
-                  </div>
-                ) : (
-                  <TagItem
-                    {...{ tag, iconResolver, statusResolver, isSelected, onSelected }}
+              {CustomOverlayComponent ? (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelected(tag.tagNo);
+                  }}
+                >
+                  <CustomOverlayComponent
+                    {...tag}
+                    index={index}
+                    clearSelection={() => setSelected(tag.tagNo)}
+                    isSelected={isSelected}
                   />
-                )}
-              </RevealHtmlOverlayWrapper>
-            </div>
-          );
-        })}
+                </div>
+              ) : (
+                <TagItem
+                  tag={tag}
+                  iconResolver={iconResolver}
+                  statusResolver={statusResolver}
+                  isSelected={isSelected}
+                  onSelected={() => setSelected(tag.tagNo)}
+                />
+              )}
+            </RevealHtmlOverlayWrapper>
+          </div>
+        );
+      })}
     </div>
   );
 };
