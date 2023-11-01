@@ -1,17 +1,15 @@
 import { Button, Icon } from '@equinor/eds-core-react';
-import { close, external_link } from '@equinor/eds-icons';
+import { close, directions, external_link } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
+import { useResizeContext } from '@equinor/workspace-sidesheet';
 import styled from 'styled-components';
 Icon.add({ close, external_link });
 
 const StyledContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr 35px;
-  padding-left: 24px;
-  padding-bottom: 24px;
-  padding-top: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   position: relative;
-  gap: 1em;
   align-items: center;
 `;
 const StyledTitle = styled.div`
@@ -49,6 +47,9 @@ const StyledColor = styled.div<{ color?: string }>`
   background-color: ${(prop) => prop.color || '#8c1159'};
 `;
 const StyledButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
   position: absolute;
   right: 0;
 `;
@@ -79,20 +80,22 @@ export const SidesheetHeader = ({
 }: HeaderProps) => {
   return (
     <StyledContainer>
-      <StyledColor defaultValue={color} />
-      <StyledWrapTitles>
-        <StyledUrlWrapper>
-          <StyledTitle> {title}</StyledTitle>
-          {url ? (
-            <Button style={{ width: '150px' }} variant="ghost" href={url}>
-              Open in ProCoSys
-              <Icon name="external_link" size={16}></Icon>
-            </Button>
-          ) : null}
-        </StyledUrlWrapper>
-        <StyledDescription> {description}</StyledDescription>
-        <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
-      </StyledWrapTitles>
+      <div style={{ position: 'relative' }}>
+        <StyledColor defaultValue={color} />
+        <StyledWrapTitles>
+          <StyledUrlWrapper>
+            <StyledTitle>{title}</StyledTitle>
+            {url ? (
+              <Button style={{ width: '150px' }} variant="ghost" href={url}>
+                Open in ProCoSys
+                <Icon name="external_link" size={16}></Icon>
+              </Button>
+            ) : null}
+          </StyledUrlWrapper>
+          <StyledDescription>{description}</StyledDescription>
+          <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
+        </StyledWrapTitles>
+      </div>
       <StyledButton>
         <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
           <Icon
