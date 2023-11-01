@@ -3,9 +3,8 @@ import { more_horizontal } from '@equinor/eds-icons';
 import { useMemo, useState } from 'react';
 import { useModelContext } from '../../providers/modelsProvider';
 import { usePlantData } from '../../providers/plantDataProvider';
-
+Icon.add({ more_horizontal });
 export const ModelSettingsMenu = () => {
-  Icon.add({ more_horizontal });
   const { showSelector, setShowModelDialog } = useModelContext();
   const { togglePlantSelector } = usePlantData();
 

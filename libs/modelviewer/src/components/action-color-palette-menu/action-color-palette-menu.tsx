@@ -4,10 +4,8 @@ import { tokens } from '@equinor/eds-tokens';
 import { useState } from 'react';
 import { useActions } from '../../providers/actionProvider';
 import { ColorOption, getAppearanceByOption } from '../../utils/colorOptions';
-
+Icon.add({ color_palette });
 export const ColorPaletteMenu = () => {
-  Icon.add({ color_palette });
-
   const { assignAppearanceToInvertedNodeCollection } = useActions();
 
   const [colorPaletteIsOpen, setColorPaletteIsOpen] = useState<boolean>(false);
