@@ -17,5 +17,5 @@
     "dist",
     "vite.config.ts"
   ],
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "../shared/src/packages/sidesheet/src/lib/sidesheet/tabs/mccrModelViewer/MccrModelViewer.tsx"]
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }
