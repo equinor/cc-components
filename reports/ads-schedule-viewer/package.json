@@ -8,12 +8,8 @@
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b -f",
-    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
-    "build:spa": "fusion-framework-cli app build",
-    "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k ads-schedule-viewer dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k ads-schedule-viewer",
-    "shipit": "pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
+    "pr:deploy": "npx ts-node --esm ../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "npx ts-node --esm ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
     "@cc-components/powerbi": "workspace:^",

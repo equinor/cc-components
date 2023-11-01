@@ -1,6 +1,6 @@
 {
   "name": "schedule-viewer",
-  "displayName": "Schedule viewer (PoC)",
+  "displayName": "Schedule viewer",
   "shortName": "schedule-viewer",
   "version": "0.0.2",
   "main": "/src/main.tsx",
