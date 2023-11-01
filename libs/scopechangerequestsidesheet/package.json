@@ -13,6 +13,5 @@
     "@cc-components/scopechangerequestshared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^"
 
-
   }
 }

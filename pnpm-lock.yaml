@@ -451,9 +451,6 @@ importers:
 
   libs/scopechangerequestsidesheet:
     dependencies:
-      '@cc-components/punchshared':
-        specifier: workspace:^
-        version: link:../punchshared
       '@cc-components/scopechangerequestshared':
         specifier: workspace:^
         version: link:../scopechangerequestshared
