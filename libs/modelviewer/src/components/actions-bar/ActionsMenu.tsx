@@ -27,28 +27,57 @@ export const ActionsMenu = (props: ActionsMenuProps) => {
   return (
     <StyledWrapperActionsBar>
       <StyledActionsBar>
-        {renderIconButton('crop', 'Crop Selection', toggleClipping, isClipped)}
-        {renderIconButton('visibility', 'Show selection only', toggleFocus, isFocus)}
+        <IconButton
+          iconName="crop"
+          title="Crop Selection"
+          onClick={toggleClipping}
+          isActive={isClipped}
+        />
+        <IconButton
+          iconName="visibility"
+          title="Show selection only"
+          onClick={toggleFocus}
+          isActive={isFocus}
+        />
         <ColorPaletteMenu />
         {props.CustomActions}
-        {renderIconButton('fullscreen', 'Fit to screen', fitToScreen, null)}
-        {renderIconButton('rotate_3d', 'Free Camera / Orbit', toggleCameraMode, isOrbit)}
+        <IconButton
+          iconName="fullscreen"
+          title="Fit to screen"
+          onClick={() => fitToScreen()}
+          isActive={null}
+        />
+        <IconButton
+          iconName="rotate_3d"
+          title="Free Camera / Orbit"
+          onClick={toggleCameraMode}
+          isActive={isOrbit}
+        />
         <ModelSettingsMenu />
       </StyledActionsBar>
     </StyledWrapperActionsBar>
   );
 };
 
-const renderIconButton = (
-  iconName: string,
-  title: string,
-  onClick: () => void,
-  isActive: boolean | null
-) => (
+interface IconButtonProps {
+  iconName: string;
+  title: string;
+  onClick: () => void;
+  isActive: boolean | null;
+}
+
+export const IconButton: React.FC<IconButtonProps> = ({
+  iconName,
+  title,
+  onClick,
+  isActive,
+}) => (
   <Button variant="ghost_icon" title={title} onClick={onClick}>
     <Icon
       name={iconName}
-      color={isActive ? undefined : tokens.colors.text.static_icons__secondary.rgba}
+      color={
+        isActive !== false ? undefined : tokens.colors.text.static_icons__secondary.rgba
+      }
     />
   </Button>
 );

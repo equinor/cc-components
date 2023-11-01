@@ -4,6 +4,7 @@ import { GardenDataSource } from '@equinor/workspace-fusion/garden';
 type ApiGardenMeta = {
   startIndex: number | null;
   columnCount: number;
+  columnWidth?: number;
   rowCount: number;
   subGroupCount: number;
   allGroupingOptions:
@@ -93,6 +94,7 @@ export function useGardenDataSource(
         validGroupingOptions: meta.validGroupingOptions,
         columnStart: meta.startIndex,
         rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
+        columnWidth: meta?.columnWidth,
       };
     },
     getHeader: async (args, filters, signal) => {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useOverlay } from '../../hooks/useOverlay';
-import { useModelViewerContext } from '../../providers';
+import { useModelViewerContext, useSelectionContext } from '../../providers';
 
 import { RevealHtmlOverlayWrapper } from '../reveal-hml-overlay-wrapper/revealHtmlOverlayWrapper';
 import { TagItem } from '../tag-item/TagItem';
@@ -11,6 +11,7 @@ export const TagsOverlay = (): JSX.Element => {
 
   const [selected, setSelected] = useState<string>();
 
+  const { filterTags } = useSelectionContext();
   const { overlayTags, overlayTool } = useOverlay();
   const {
     defaultRadiusFactor,
@@ -23,6 +24,10 @@ export const TagsOverlay = (): JSX.Element => {
   const onSelected = (tag?: string) => {
     setSelected(tag);
   };
+
+  // useEffect(() => {
+  //   console.log(filterTags);
+  // }, [filterTags]);
 
   return (
     <div>
@@ -47,20 +52,25 @@ export const TagsOverlay = (): JSX.Element => {
             >
               {CustomOverlayComponent ? (
                 <div
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setSelected(tag.tagNo);
                   }}
                 >
                   <CustomOverlayComponent
                     {...tag}
                     index={index}
-                    clearSelection={() => onSelected()}
+                    clearSelection={() => setSelected(tag.tagNo)}
                     isSelected={isSelected}
                   />
                 </div>
               ) : (
                 <TagItem
-                  {...{ tag, iconResolver, statusResolver, isSelected, onSelected }}
+                  tag={tag}
+                  iconResolver={iconResolver}
+                  statusResolver={statusResolver}
+                  isSelected={isSelected}
+                  onSelected={() => setSelected(tag.tagNo)}
                 />
               )}
             </RevealHtmlOverlayWrapper>

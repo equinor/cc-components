@@ -80,8 +80,10 @@ export const RevealHtmlOverlayWrapper: React.FC<
       <OverlayClustersStyle />
       <div
         ref={ref}
-        className="Hello"
-        style={{ position: 'absolute', transform: `translate(0px, ${offsetY}px)` }}
+        style={{
+          position: 'absolute',
+          transform: `translate(0px, ${offsetY}px)`,
+        }}
       >
         {children}
       </div>

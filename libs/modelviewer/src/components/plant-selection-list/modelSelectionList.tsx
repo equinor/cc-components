@@ -20,7 +20,7 @@ const PlantSelectionList: FC<PlantSelectionListProps> = ({
   );
   return (
     <UnstyledList>
-      {plants!.map((plant) => (
+      {plants.map((plant) => (
         <li key={plant.plantCode}>
           <Radio
             label={plant.projectDescription}

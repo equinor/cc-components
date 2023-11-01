@@ -14,7 +14,7 @@ interface ActionContextState {
   toggleFocus(): void;
   toggleClipping(): void;
   toggleCameraMode(): void;
-  fitToScreen(): void;
+  fitToScreen(duration?: number, radiusFactor?: number): void;
   assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
@@ -57,7 +57,7 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   const firstPerson = () => selectionService?.cameraFirstPerson();
 
   const toggleCameraMode = () => {
-    setIsOrbit(!isOrbit);
+    setIsOrbit((isOrbit) => !isOrbit);
   };
 
   const toggleFocus = () => {

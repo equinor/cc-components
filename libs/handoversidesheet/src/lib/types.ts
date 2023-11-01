@@ -15,6 +15,7 @@ export type HandoverMcpkg = {
   rfO_Status: string | null;
   rfC_Status: string | null;
   mechanicalCompletionPackageUrl: string;
+  punchAcceptedActualtDate: string | null;
 } & HandoverChild;
 
 export type HandoverNCR = {
@@ -31,6 +32,7 @@ export type HandoverPunch = {
   clearedBy: string | null;
   sorting: string | null;
   tagUrl: string;
+  isOpen: boolean;
 } & HandoverChild;
 
 export type HandoverQuery = {
@@ -78,7 +80,7 @@ export type HandoverWorkOrder = {
   projectProgress: number | null;
   remainingHours: number | null;
   description: string | null;
-  workOrderUrl : string;
+  workOrderUrl: string;
   workOrderUrlId: string;
   workOrderNumber: string;
 } & HandoverChild;

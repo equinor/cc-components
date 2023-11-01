@@ -1,7 +1,7 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
-import { Icon } from '@equinor/eds-core-react';
+import { Icon, Switch } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 import {
@@ -15,23 +15,23 @@ import {
 } from '@cc-components/sharedcomponents';
 
 import {
-  useContextId,
+  McTab,
+  PunchTab,
+  QueryTab,
+  SwcrTab,
   UnsignedActionTab,
   UnsignedTaskTab,
   WorkorderBase,
   WorkorderTab,
-  SwcrTab,
-  McTab,
-  PunchTab,
-  QueryTab,
+  createWidget,
+  useContextId,
 } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { createWidget } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useMemo, useRef, useState } from 'react';
 import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
@@ -49,6 +49,7 @@ Icon.add({ error_outlined });
 
 const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   const [activeTab, setActiveTab] = useState(0);
+  const [ShowOnlyOutstandingPunch, setShowOnlyOutstandingPunch] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -97,10 +98,18 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     error: queryError,
   } = useHandoverResource(props.id, 'query');
 
+  const filteredPunches = useMemo(() => {
+    if (ShowOnlyOutstandingPunch) {
+      return punchPackages?.filter((punch) => punch.isOpen === true);
+    }
+    return punchPackages;
+  }, [punchPackages, ShowOnlyOutstandingPunch]);
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={props?.item?.commissioningPackageNo || ''}
+        url={props?.item?.commissioningPackageUrl || ''}
         description={props?.item?.description || ''}
         applicationTitle={'Handover'}
         onClose={props.closeSidesheet}
@@ -165,7 +174,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               />
             </Tabs.Tab>
             <Tabs.Tab>
-              Punch <TabTitle data={punchPackages} isLoading={isDataFetchingPunch} />{' '}
+              Punch <TabTitle data={filteredPunches} isLoading={isDataFetchingPunch} />{' '}
             </Tabs.Tab>
             <Tabs.Tab>
               SWCR <TabTitle data={swcrPackages} isLoading={isDataFetchingSwcr} />
@@ -220,8 +229,16 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             />
           </Tabs.Panel>
           <Tabs.Panel>
+            <Switch
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setShowOnlyOutstandingPunch(e.target.checked);
+              }}
+              checked={ShowOnlyOutstandingPunch}
+              label={`Show only outstanding`}
+              style={{ paddingLeft: '1rem', paddingTop: '0.5rem' }}
+            />
             <PunchTab
-              punches={punchPackages}
+              punches={filteredPunches}
               isFetching={isDataFetchingPunch}
               error={punchError}
             />

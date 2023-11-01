@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DisputedTableIcon } from './DisputedTableIcon';
 import { DefaultWorkflowDot } from './DefaultWorkflowDot';
-import { WorkflowStep } from '../types/scopeChangeRequest';
+import { WorkflowStep } from '@cc-components/scopechangerequestshared';
 
 interface WorkflowProps {
   steps: WorkflowStep[];

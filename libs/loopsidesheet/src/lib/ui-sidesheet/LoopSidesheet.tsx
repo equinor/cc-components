@@ -3,7 +3,7 @@ import { createWidget } from '@cc-components/shared';
 
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
-import {  Tabs } from '@equinor/eds-core-react';
+import { Tabs } from '@equinor/eds-core-react';
 
 import { useGetWorkorders } from '../utils-sidesheet';
 import { Checklists } from './Checklists';
@@ -51,7 +51,7 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
     }
   );
 
-  const { data, isLoading, error } = useGetWorkorders(loop?.loopNo);
+  const { data, isLoading, error } = useGetWorkorders(loop?.loopId);
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.closeSidesheet} />;
@@ -121,7 +121,6 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
             <Tabs.Tab>
               Work orders <TabTitle isLoading={isLoading} data={data} />
             </Tabs.Tab>
-            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <StyledPanels>
@@ -132,8 +131,6 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
-          </Tabs.Panel>
-          <Tabs.Panel>
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>

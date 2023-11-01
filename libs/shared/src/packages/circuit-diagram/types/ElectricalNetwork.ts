@@ -54,6 +54,8 @@ export type ElectricalNetwork = {
   isInProjectMaster: boolean;
   projectCode: string;
   powerActive: string | null;
+  missingCable: boolean;
+  mccrStatus: string | null;
 };
 
 export interface ElenetId {

@@ -105,11 +105,7 @@ export class SelectionService extends NodeService {
     this.assignColorToNodesByTagColor(nodes, tagColors);
 
     if (options?.fitToSelection) {
-      await this.fitCameraToNodeSelection(
-        nodes,
-        options?.duration || 0,
-        options?.radiusFactor
-      );
+      this.fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
     }
 
     return nodes;
