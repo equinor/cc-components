@@ -36,8 +36,8 @@ export const StyledRequestTabWrapper = styled.div`
 export const StyledRequestColumn = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 50%; /* Set a maximum width for the div */
-  overflow-wrap: break-word; /* Allow the text to break within the div */
+  max-width: 50%;
+  overflow-wrap: break-word;
 `;
 export const StyledWorkflowText = styled.div`
   display: flex;

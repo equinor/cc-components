@@ -153,7 +153,7 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
           <StyledTabsList>
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
-              Work orders{' '}
+              Work orders
               <TabTitle isLoading={isLoadingWorkorders} data={dataWorkorders} />
             </Tabs.Tab>
             <Tabs.Tab>

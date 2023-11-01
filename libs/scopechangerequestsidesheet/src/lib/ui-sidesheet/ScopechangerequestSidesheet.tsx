@@ -2,10 +2,12 @@ import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@cc-components/shared';
 import { useRef, useState } from 'react';
-import { RequestTab } from './RequestTab';
+import { RequestTab } from './tabs/RequestTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
 import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { WorkorderTab } from '@cc-components/shared/sidesheet';
+
 import {
   BannerItem,
   SidesheetHeader,
@@ -15,6 +17,10 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
 } from '@cc-components/sharedcomponents';
+import { useGetWorkorders } from '../utils-sidesheet/useGetWorkorders';
+import { useGetHistory } from '../utils-sidesheet/useGetHistory';
+
+import { Logtab } from './tabs/LogTab';
 
 export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
   ({ props }) => {
@@ -24,10 +30,12 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
       setActiveTab(index);
       ref.current && ref.current.scrollTo({ left: index ** index });
     };
-
     const client = useHttpClient();
     const contextId = useContextId();
-
+    const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(
+      props.id ?? ''
+    );
+    const { dataHistory, errorHistory, isLoadingHistory } = useGetHistory(props.id ?? '');
     const {
       data: scopechange,
       error,
@@ -122,10 +130,14 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
               <RequestTab scopechange={scopechange} />
             </Tabs.Panel>
             <Tabs.Panel>
-              <h1> Work orders panel </h1>
+              <WorkorderTab
+                isFetching={isLoadingWorkorders}
+                error={errorWorkorders}
+                workorders={dataWorkorders}
+              />
             </Tabs.Panel>
             <Tabs.Panel>
-              <h1> Logs panel </h1>
+              <Logtab logEntry={dataHistory} />
             </Tabs.Panel>
           </StyledPanels>
         </StyledTabs>

@@ -7,8 +7,8 @@ import {
   StyledRequestTabWrapper,
   VerticalLine,
   WorklowIconAndLine,
-} from './requestTab.styles';
-import { StyledWorkflowText } from './requestTab.styles';
+} from './tabs/requestTab.styles';
+import { StyledWorkflowText } from './tabs/requestTab.styles';
 
 type WorkflowChartProps = {
   scopechange?: ScopeChangeRequest | undefined;
@@ -20,7 +20,6 @@ export const WorkflowChart = ({
   error,
 }: WorkflowChartProps): JSX.Element => {
   const workflowLen = scopechange?.workflowSteps?.length || 0;
-
   return (
     <>
       {scopechange?.workflowSteps?.map((x, i) => {
@@ -35,7 +34,7 @@ export const WorkflowChart = ({
                       size={16}
                       color={tokens.colors.interactive.primary__resting.hsla}
                     />
-                    {x.name}{' '}
+                    {x.name}
                   </StyledWorkflowText>
                 ) : (
                   <StyledWorkflowText>
