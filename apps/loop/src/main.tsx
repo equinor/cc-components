@@ -6,8 +6,8 @@ const LoopApp = () => {
   const client = useHttpClient('cc-api');
   return (
     <RootAppWrapper client={client}>
-       <WorkspaceWrapper />
-     </RootAppWrapper>
+      <WorkspaceWrapper />
+    </RootAppWrapper>
   );
 };
 
