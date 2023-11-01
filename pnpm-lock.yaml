@@ -491,12 +491,33 @@ importers:
 
   libs/scopechangerequestapp:
     dependencies:
+      '@cc-components/scopechangerequestshared':
+        specifier: workspace:^
+        version: link:../scopechangerequestshared
+      '@cc-components/scopechangerequestsidesheet':
+        specifier: workspace:^
+        version: link:../scopechangerequestsidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
-      '@equinor/workspace-fusion':
-        specifier: 0.20.4-alpha.6.0
-        version: 0.20.4-alpha.6.0(@babel/core@7.23.2)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+
+  libs/scopechangerequestshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/scopechangerequestsidesheet:
+    dependencies:
+      '@cc-components/scopechangerequestshared':
+        specifier: workspace:^
+        version: link:../scopechangerequestshared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/shared:
     dependencies:

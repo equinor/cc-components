@@ -36,6 +36,7 @@ export type ScopeChangeRequest = {
   mcPackages: McPackage[];
   tags: Tag[];
   areas: Area[];
+  logEntry: LogEntry[];
   punchListItems: PunchListItem[];
   documents: Document[];
   disciplineGuesstimates: DisciplineGuesstimate[];
@@ -209,3 +210,16 @@ export interface WorkOrder {
   expendedManHours: number;
   remainingManHours: number;
 }
+
+export type LogEntry = {
+  createdAtUtc: string;
+  createdByAzureOid: string;
+  modifiedAtUtc: string;
+  modifiedByAzureOid: string;
+  id: string;
+  title: string;
+  objectGuid: string;
+  eventType: string;
+  objectType: string;
+  details: string;
+};
