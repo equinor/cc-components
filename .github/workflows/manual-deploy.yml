@@ -7,19 +7,19 @@ on:
         type: string
         description: Which app to deploy to test
 jobs:
-  deploy-affected-prod:
+  deploy-manual-ci:
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_PROD_CLIENT_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           allow-no-subscriptions: true
 
       - name: 'Obtain token for upload'
         shell: bash
-        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_PROD_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
+        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,9 +32,9 @@ jobs:
       - name: Build monorepo
         run: pnpm ci:build
 
-      - name: 'Deploy affected apps to Fusion PROD'
+      - name: 'Deploy affected apps to Fusion CI env'
         shell: bash
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run fprd:deploy --filter=${{inputs.appKey}} --concurrency 1 -- --token ${{ env.FUSION_TOKEN }}
+        run: npx turbo run pr:deploy --filter=${{inputs.appKey}} --concurrency 1 -- --token ${{ env.FUSION_TOKEN }}
