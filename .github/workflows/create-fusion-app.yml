@@ -1,4 +1,4 @@
-name: CI
+name: Create Fusion App
 
 on:
   workflow_dispatch:
