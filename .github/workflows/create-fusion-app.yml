@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      appKey:
+        type: string
+        description: Fusion app key (This cant be changed!)
+      displayName:
+        type: string
+        description: Display name for fusion app
+      description:
+        type: string
+        description: App description
+      #   boolean:
+      #     type: boolean
+      #     description: True or False
+      category:
+        type: choice
+        description: Fusion app category
+        options:
+          - Construction and Commissioning
+          - Corporate Project Review
+          - Portfolio Management
+          - Project control
+          - Organisation
+          - Project management
+          - Experience
+          - Marketing, Midstream and Processing
+          - Offshore Wind (OW)
+          - Fusion utilities
+          - Fusion administration
+          - Safety, Security and Sustainability
+          - Collaboration
+          - Project Development Centre (PDC)
+          - Quality and risk
+          - Engineering
+          - MMP Liquids
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: greet
+        run: |
+          echo "App key is ${{ inputs.appKey }}"
+          echo "DisplayName is ${{ inputs.displayName }}"
+          echo "Description is ${{ inputs.description }}"
+          echo "Category is ${{ inputs.category }}"
