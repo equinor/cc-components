@@ -33,6 +33,8 @@ on:
           - Quality and risk
           - Engineering
           - MMP Liquids
+
+permissions: write-all
 jobs:
   create-fusion-apps:
     runs-on: ubuntu-latest
