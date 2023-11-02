@@ -6,6 +6,7 @@ on:
       appKey:
         type: string
         description: Which app to deploy to test
+permissions: write-all
 jobs:
   deploy-manual-ci:
     runs-on: ubuntu-latest
