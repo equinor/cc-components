@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "allowJs": false,
+      "esModuleInterop": false,
+      "allowSyntheticDefaultImports": true,
+      "noImplicitOverride": false,
+      "strict": true,
+      "outDir": "./dist",
+      "rootDir": ".",
+      "declaration": true
+    },
+    "exclude": ["dist", "vitest.config.ts"],
+    "extends": "../../tsconfig.base.json",
+  }
+  
