@@ -60,4 +60,4 @@ jobs:
 
       - name: 'Create application in Fusion'
         shell: bash
-        run: npx ts-node --esm ./github-action/src/createFusionApp.ts -T ${{ env.FUSION_TOKEN }} -A ${{inputs.appKey}} -C ${{inputs.category}} -D ${{inputs.displayName}}
+        run: npx ts-node --esm ./github-action/src/createFusionApp.ts create -T ${{ env.FUSION_TOKEN }} -A ${{inputs.appKey}} -C ${{inputs.category}} -D ${{inputs.displayName}}
