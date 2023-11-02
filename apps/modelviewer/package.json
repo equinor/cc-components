@@ -1,0 +1,20 @@
+{
+  "name": "modelviewer",
+  "version": "0.0.1",
+  "main": "/src/main.tsx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "fusion-framework-cli app dev",
+    "build": "tsc -b -f"
+  },
+  "dependencies": {
+    "@cc-components/modelviewerapp": "workspace:^",
+    "@cc-components/shared": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^"
+  },
+  "files": [
+    "dist/app-bundle.js",
+    "app-manifest.json"
+  ]
+}

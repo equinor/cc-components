@@ -7,7 +7,7 @@ const MyApp = () => {
       <Report
         appKey={"<%= projectName %>"}
         column={'ProjectMaster GUID'}
-        reportId={''}
+        reportId={"<%= reportId %>"}
         table={'Dim_ProjectMaster'}
       />
     </RootAppWrapper>
