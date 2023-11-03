@@ -43,7 +43,14 @@ program
   .option('-A, --appkey <appkey>')
   .option('-D, --displayname <displayname>')
   .option('-C, --category <category>')
+  .option('-O, --owners <owners>')
+  .option('-E, env <env>')
   .action(async (args) => {
+    const fusionEnv: string = args.env;
+    if (!['CI', 'FPRD'].includes(fusionEnv)) {
+      logInfo(`Unknown env ${fusionEnv}`, 'Red');
+      throw new Error(`Unknown env ${fusionEnv}`);
+    }
     if (!args.token) {
       throw new Error('Missing az token');
     }
@@ -57,8 +64,20 @@ program
       throw new Error(`Invalid category ${args.category}`);
     }
 
+    const admins = args.owners.split(',');
+    if (admins.length <= 0) {
+      throw new Error('Application needs atleast one admin');
+    }
+
     setSecret(args.token);
-    createFusionApp(args.token, args.appkey, args.displayname, args.category);
+    createFusionApp(
+      args.token,
+      args.appkey,
+      args.displayname,
+      args.category,
+      admins,
+      fusionEnv as 'CI' | 'FPRD'
+    );
   });
 
 await program.parseAsync();
@@ -67,7 +86,9 @@ export async function createFusionApp(
   token: string,
   appKey: string,
   displayName: string,
-  categoryName: string
+  categoryName: string,
+  admins: string[],
+  env: 'CI' | 'FPRD'
 ) {
   //TODO: fetch dynamically
   const category = categories.find((s) => s.name === categoryName);
@@ -82,7 +103,7 @@ export async function createFusionApp(
     shortName: appKey,
     description: '.',
     owners: [],
-    admins: [],
+    admins: admins,
     accentColor: category.name,
     categoryId: category.id,
     icon: '',
@@ -98,8 +119,7 @@ export async function createFusionApp(
     hide: true,
   };
 
-  await createApplicationAsync('CI', payload, token);
-  //   await createApplicationAsync('FPRD', payload, token);
+  await createApplicationAsync(env, payload, token);
 }
 
 async function createApplicationAsync(
