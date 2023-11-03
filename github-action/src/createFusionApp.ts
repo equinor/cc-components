@@ -43,7 +43,7 @@ program
   .option('-A, --appkey <appkey>')
   .option('-D, --displayname <displayname>')
   .option('-C, --category <category>')
-  .option('-O, --owners <owners>')
+  .option('-O, --admins <admins>')
   .option('-E, env <env>')
   .action(async (args) => {
     const fusionEnv: string = args.env;
@@ -64,7 +64,7 @@ program
       throw new Error(`Invalid category ${args.category}`);
     }
 
-    const admins = args.owners.split(',');
+    const admins = args.admins.split(',');
     if (admins.length <= 0) {
       throw new Error('Application needs atleast one admin');
     }
