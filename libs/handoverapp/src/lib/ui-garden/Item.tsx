@@ -50,7 +50,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     data.commissioningPackageStatus === 'RFC Accepted';
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
-  const fittedWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
+  const fittedWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const options: ItemOptions = {
     size,
