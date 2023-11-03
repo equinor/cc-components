@@ -92,8 +92,6 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
           textColor={textColor}
           onClick={onClick}
           style={{
-            width: `${columnExpanded ? 100 : width}%`,
-            maxWidth: fittedWidth,
             minWidth: fittedWidth,
           }}
           isSelected={isSelected}
