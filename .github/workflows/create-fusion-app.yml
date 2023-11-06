@@ -60,6 +60,7 @@ jobs:
         run: npx ts-node --esm ./github-action/src/createFusionApp.ts create -T ${{ env.FUSION_TOKEN }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{secrets.FUSION_APP_ADMINS}}' -E 'CI'
 
   create-fusion-app-fprd:
+    needs: ['create-fusion-app-ci']
     runs-on: ubuntu-latest
     steps:
       - name: 'Login to Azure'
