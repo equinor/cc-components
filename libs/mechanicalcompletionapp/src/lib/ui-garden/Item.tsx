@@ -1,12 +1,11 @@
 import { PopoverWrapper } from '@cc-components/shared/common';
-import { itemContentColors, statusColorMap } from '@cc-components/shared/mapping';
+import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import { McPackage } from '../../../../mechanicalcompletionshared';
-import { commStatusColors } from '../utils-statuses/commStatusColors';
-import { getCommissioningStatus } from '../utils-statuses/getStatuses';
 import { getItemContentsColor } from '../utils-garden/getItemContentsColor';
 import { getTagSize } from '../utils-garden/getTagSize';
+import { commStatusColors } from '../utils-statuses/commStatusColors';
 import { PopoverContent } from './Popover/PopoverContent';
 import {
   StyledItemText,
@@ -33,7 +32,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const size = getTagSize(data, 10);
-  const status = getCommissioningStatus(data);
+  const status = data.commissioningStatus;
   const backgroundColor = commStatusColors[status];
   const contentsColor = getItemContentsColor(status);
   const mcDotColor = statusColorMap[data.mechanicalCompletionStatus];

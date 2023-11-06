@@ -64,5 +64,6 @@ export type McPackage = {
   projectSchema: string;
   c01_Planned_Forecast_Date: string;
   commissioningPackageUrl: string;
+  commissioningStatus: string;
   mechanicalCompletionPackageUrl: string;
 };
