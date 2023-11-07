@@ -1,6 +1,0 @@
-Beep boop
-I am the PR-bot
-
-Available commands are:
-Deploy test
-Create fusion app

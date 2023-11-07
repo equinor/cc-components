@@ -14,19 +14,18 @@ jobs:
         with:
           fetch-depth: 0 # Required to fetch range
 
-      - name: read file
-        run: echo "MESSAGE=$(cat pr-bot.txt)" >> $GITHUB_ENV
-
-      - name: test
-        run: echo ${{env.MESSAGE}}
-
-      - name: Comment pr
-        uses: actions/github-script@v6
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Beep boop im the PR bot🤖 \r\n Available commands are: \r\n Deploy Test \r\n Create fusion app'
-            })
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: npm i -g typescript && pnpm install
+
+      - name: Comment info pr
+        shell: bash
+        run: npx ts-node --esm ./github-action/src/pull-request-bot/pull-request-bot.ts info -T ${{ secrets.GITHUB_TOKEN }}
