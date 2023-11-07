@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0 # Required to fetch range
 
       - name: read file
-        run: echo "MESSAGE=$(cat ./github/workflows/pr-bot.txt)" >> $GITHUB_ENV
+        run: echo "MESSAGE=$(cat pr-bot.txt)" >> $GITHUB_ENV
 
       - name: test
         run: echo ${{env.MESSAGE}}
