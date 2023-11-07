@@ -1,10 +1,10 @@
-import { context, getOctokit } from '@actions/github';
+import { context } from '@actions/github';
+import { OctoClient } from '../types/OctoClient';
 
 /**
  * Creates a comment on an issue/PR
  */
-export function commentIssue(token: string, body: string) {
-  const client = getOctokit(token);
+export function commentIssue(client: OctoClient, body: string) {
   client.rest.issues.createComment({
     owner: context.repo.owner,
     repo: context.repo.repo,
