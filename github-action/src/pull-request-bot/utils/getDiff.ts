@@ -1,7 +1,28 @@
 import { context } from '@actions/github';
 import { OctoClient } from '../types/OctoClient';
 
-export async function getDiff(client: OctoClient) {
+export type File = {
+  sha: string;
+  filename: string;
+  status:
+    | 'added'
+    | 'removed'
+    | 'modified'
+    | 'renamed'
+    | 'copied'
+    | 'changed'
+    | 'unchanged';
+  additions: number;
+  deletions: number;
+  changes: number;
+  blob_url: string;
+  raw_url: string;
+  contents_url: string;
+  patch?: string;
+  previous_filename?: string;
+};
+
+export async function getDiff(client: OctoClient): Promise<File[]> {
   const result = await client.rest.repos.compareCommits({
     repo: context.repo.repo,
     owner: context.repo.owner,
