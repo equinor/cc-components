@@ -12,6 +12,9 @@ jobs:
       - uses: xt0rted/pull-request-comment-branch@v2
         id: comment-branch
 
+      - name: Build monorepo
+        run: echo "MESSAGE=$(cat ./github/workflows/pr-bot.txt)" >> $GITHUB_ENV
+
       - name: Comment pr
         uses: actions/github-script@v6
         with:
@@ -20,10 +23,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '
-              Beep boop 🤖
-              I am the PR-bot, available commands are
-              `deploy test`
-              `create fusion app`
-              '
+              body: ${{env.MESSAGE}}
             })
