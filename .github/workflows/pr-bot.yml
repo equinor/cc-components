@@ -9,10 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: xt0rted/pull-request-comment-branch@v2
-        id: comment-branch
-
-      - name: Build monorepo
+      - name: read file
         run: echo "MESSAGE=$(cat ./github/workflows/pr-bot.txt)" >> $GITHUB_ENV
 
       - name: Comment pr
@@ -23,5 +20,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{env.MESSAGE}}'
+              body: 'Beep boop i'm the PR bot🤖 \r\n Available commands are: \r\n Deploy Test \r\n Create fusion app'
             })
