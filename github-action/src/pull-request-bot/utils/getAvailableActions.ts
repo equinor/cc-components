@@ -25,7 +25,7 @@ async function getDeployTestActionAsync(client: OctoClient): Promise<Action | un
   );
   if (isAppLibTouched) {
     return {
-      command: 'Deploy test',
+      command: 'Deploy test🚀',
       description: 'Will deploy changed apps to Fusion CI',
     };
   } else {
