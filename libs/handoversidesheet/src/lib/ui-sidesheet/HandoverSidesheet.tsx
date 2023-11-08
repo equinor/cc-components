@@ -278,11 +278,11 @@ function EnsureHandover({ id, closeSidesheet, item }: HandoverProps) {
       }
       return res.json() as Promise<HandoverPackage>;
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, initialData: item ?? undefined }
   );
 
   if (isLoading) {
-    return <SidesheetSkeleton close={close} />;
+    return <SidesheetSkeleton close={() => closeSidesheet()} />;
   }
 
   if (error || !data) {
