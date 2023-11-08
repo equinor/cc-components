@@ -23,8 +23,8 @@ importers:
         specifier: ^6.0.14
         version: 6.0.14(@equinor/fusion-framework-module@4.2.5)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)(rxjs@7.8.1)
       '@equinor/workspace-fusion':
-        specifier: 6.0.0-rc.2
-        version: 6.0.0-rc.2(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.23.2)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+        specifier: 6.0.0-rc.3
+        version: 6.0.0-rc.3(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.23.2)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
       '@equinor/workspace-sidesheet':
         specifier: ^0.1.6
         version: 0.1.6(@babel/core@7.23.2)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -3968,8 +3968,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@6.0.0-rc.2(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.23.2)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
-    resolution: {integrity: sha512-hRisHoy4ByK26eu6nN9rsFhqqIdtWYyHx+O1XwYVpa6JCF+pigq82Rk05j44wIsP2WiI/sN9iqCWWxLSL23QbQ==}
+  /@equinor/workspace-fusion@6.0.0-rc.3(@ag-grid-enterprise/core@28.1.1)(@babel/core@7.23.2)(@types/sortablejs@1.15.1)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
+    resolution: {integrity: sha512-WN/cf6ZVrgUsH52rkbnYvPeKletY6WPPRQ6lRZlwN7bgvw8UIcu7LXeF9JA2eoPuH1rOBIj0CVYe2gtYcf0Yuw==}
     peerDependencies:
       react-dom: '>= 16.8.0'
       react-is: '>= 16.8.0'
