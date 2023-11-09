@@ -3,9 +3,10 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { PunchBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/punch/type';
 import { useCallback } from 'react';
 import { McNcr, McWorkOrder } from '../types';
+import { WorkorderBase } from 'libs/shared/dist/src';
 type McResourceTypeMap = {
   ncr: McNcr;
-  'work-orders': McWorkOrder;
+  'work-orders': WorkorderBase;
   punch: PunchBase;
 };
 export const useMcResource = <T extends keyof McResourceTypeMap>(
@@ -17,10 +18,12 @@ export const useMcResource = <T extends keyof McResourceTypeMap>(
   const fetch = useCallback(
     async (id: string, signal?: AbortSignal) => {
       const result = await dataProxy.fetch(
-        `api/contexts/${contextId}/mechanical-completion/${id}/`,
+        `api/contexts/${contextId}/mechanical-completion/${id}/${packageType}`,
         { signal }
       );
-
+      if (!result.ok) {
+        throw new Error('Error fetching API');
+      }
       return JSON.parse(await result.text()) as McResourceTypeMap[T][];
     },
     [dataProxy, contextId, packageType]

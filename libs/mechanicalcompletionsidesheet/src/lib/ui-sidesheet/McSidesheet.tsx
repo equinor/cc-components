@@ -22,7 +22,7 @@ import { Icon, Tabs } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import { createWidget, useContextId } from '@cc-components/shared';
 import { useRef, useState } from 'react';
-// import { useMcResource } from '../utils-sidesheet';
+import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { error_outlined } from '@equinor/eds-icons';
 
@@ -44,7 +44,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     setActiveTab(index);
     ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };
-  /*
+
   const {
     data: workOrders,
     isFetching: isFetchingWorkOrders,
@@ -56,6 +56,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     isFetching: isFetchingPunchItems,
     error: punchError,
   } = useMcResource(props.id, 'punch');
+  /*
   const {
     data: ncr,
     isFetching: isFetchingNcr,
@@ -124,14 +125,14 @@ const McSideSheetComponent = (props: Required<McProps>) => {
         <StyledTabListWrapper>
           <Tabs.List>
             <Tabs.Tab>Details</Tabs.Tab>
-            {/*             
+
             <Tabs.Tab>
               Workorders <TabTitle data={workOrders} isLoading={isFetchingWorkOrders} />
             </Tabs.Tab>
             <Tabs.Tab>
               Punch <TabTitle data={punchItems} isLoading={isFetchingPunchItems} />
             </Tabs.Tab>
-            <Tabs.Tab>
+            {/*   <Tabs.Tab>
               NCR <TabTitle data={ncr} isLoading={isFetchingNcr} />
             </Tabs.Tab> */}
           </Tabs.List>
@@ -141,26 +142,11 @@ const McSideSheetComponent = (props: Required<McProps>) => {
           <Tabs.Panel>
             <DetailsTab mcPackage={props?.item} />
           </Tabs.Panel>
-          {/* <Tabs.Panel>
+          <Tabs.Panel>
             <WorkorderTab
               error={workOrderError}
               isFetching={isFetchingWorkOrders}
-              workorders={(workOrders ?? []).map(
-                (workorder): WorkorderBase => ({
-                  ...workorder,
-                  workOrderUrl: workorder.url,
-                  workOrderNumber: workorder.workOrderNumber,
-                  actualCompletionDate: '',
-                  discipline: '',
-                  estimatedHours: null,
-                  jobStatus: '',
-                  remainingHours: null,
-                  title: workorder.description,
-                  workOrderUrlId: workorder.workOrderId,
-                  projectProgress: workorder.projectProgress,
-                  plannedFinishDate: workorder.plannedCompletionDate,
-                })
-              )}
+              workorders={workOrders}
             />
           </Tabs.Panel>
           <Tabs.Panel>
@@ -170,7 +156,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               punches={punchItems}
             />
           </Tabs.Panel>
-          <Tabs.Panel>
+          {/*   <Tabs.Panel>
             <NcrTab error={ncrError} isFetching={isFetchingNcr} ncrs={ncr} />
           </Tabs.Panel> */}
         </StyledPanels>
