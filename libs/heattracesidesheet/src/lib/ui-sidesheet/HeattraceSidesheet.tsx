@@ -138,6 +138,19 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
         applicationTitle="Heat Trace"
       />
       <StyledBanner>
+        <BannerItem
+          title="Heat trace"
+          value={
+            heatTrace.heatTraceCableNo ? (
+              <LinkCell
+                url={heatTrace.heatTraceCableUrl ?? ''}
+                urlText={heatTrace.heatTraceCableNo}
+              />
+            ) : (
+              'N/A'
+            )
+          }
+        ></BannerItem>
         <BannerItem title="Checklist status" value={heatTrace.formStatus || 'N/A'} />
         <BannerItem
           title="Comm Pkg"

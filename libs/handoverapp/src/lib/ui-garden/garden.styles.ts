@@ -28,10 +28,10 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   font-weight: 500;
   font-size: 13px;
   padding: 0 2px 0 20px;
-  
+
   background: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor};
-  
+
   outline: ${(props) => (props.isSelected ? '2px dashed green' : 'none')};
   outline-offset: ${(props) => (props.isSelected ? '2px' : '0')};
 `;

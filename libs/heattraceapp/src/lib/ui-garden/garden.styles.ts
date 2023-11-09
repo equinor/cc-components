@@ -45,30 +45,26 @@ type StatusCirclesProps = {
 };
 export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   display: flex;
-  grid-column: 2/3;
+  grid-column: 3/4;
   justify-content: end;
   align-items: center;
 
   ::before {
-    width: ${(props) => (props.mcColor ? '12px' : '13px')};
-    height: ${(props) => (props.mcColor ? '12px' : '13px')};
-    border: ${(props) => (props.mcColor ? '1px solid white' : `none`)};
-    background-color: ${(props) => props.mcColor ?? 'white'};
+    width: 12px;
+    height: 12px;
+    border: 1px solid white;
+    background-color: ${(props) => props.mcColor};
     border-radius: 50%;
     margin: 0px 1px;
-    outline: ${(props) => (props.mcColor ? 'none' : `1px dashed gray`)};
-    outline-offset: -1px;
     content: ' ';
   }
   ::after {
-    width: ${(props) => (props.commColor ? '12px' : '13px')};
-    height: ${(props) => (props.commColor ? '12px' : '13px')};
-    border: ${(props) => (props.commColor ? '1px solid white' : `none`)};
-    background-color: ${(props) => props.commColor ?? 'white'};
+    width: 12px;
+    height: 12px;
+    border: 1px solid white;
+    background-color: ${(props) => props.commColor};
     border-radius: 50%;
     margin: 0px 1px;
-    outline: ${(props) => (props.commColor ? 'none' : `1px dashed gray`)};
-    outline-offset: -2px;
     content: ' ';
   }
 `;
