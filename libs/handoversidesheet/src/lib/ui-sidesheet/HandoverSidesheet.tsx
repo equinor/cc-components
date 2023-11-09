@@ -198,15 +198,15 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
-                  workOrderNumber: workorder.workOrderNumber,
+                  workOrderNumber: workorder.workOrderNo,
                   actualCompletionDate: workorder.actualCompletionDate,
-                  plannedFinishDate: workorder.plannedFinishDate,
+                  plannedFinishDate: workorder.plannedCompletionDate,
                   discipline: workorder.discipline,
-                  estimatedHours: workorder.estimatedHours,
+                  estimatedHours: workorder.estimatedManHours,
                   jobStatus: workorder.jobStatus,
-                  remainingHours: workorder.remainingHours,
-                  title: workorder.description,
-                  workOrderUrl: workorder.commpkgId,
+                  remainingHours: workorder.remainingManHours,
+                  title: workorder.title,
+                  workOrderUrl: workorder.workOrderUrl,
                   projectProgress: workorder.projectProgress,
                 })
               )}
