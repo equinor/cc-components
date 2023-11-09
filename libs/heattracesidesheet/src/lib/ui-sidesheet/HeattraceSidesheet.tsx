@@ -15,14 +15,13 @@ import {
 import {
   BannerItem,
   SidesheetHeader,
+  SidesheetSkeleton,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
   StyledTabs,
   TabTitle,
 } from '@cc-components/sharedcomponents';
-
-import { Workorder } from '../types';
 import { ChecklistTab } from './ChecklistTab';
 import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
 import { useQuery } from '@tanstack/react-query';
@@ -51,15 +50,35 @@ type HeatTraceProps = {
 export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   const [activeTab, setActiveTab] = useState(0);
   const { width, setWidth } = useResizeContext();
-  const heattrace = props.item;
+  const {
+    data: heatTrace,
+    error,
+    isLoading: isLoadingSidesheet,
+  } = useQuery(
+    ['heat-trace', props.id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/heat-trace/${props.id}`);
+      if (!res.ok) throw res;
+      return res.json() as Promise<HeatTrace>;
+    },
+    {
+      suspense: false,
+      initialData: props.item ?? undefined,
+      useErrorBoundary: false,
+    }
+  );
 
-  if (!heattrace) {
-    throw new Error('Heat Trace undefined');
+  if (isLoadingSidesheet) {
+    return <SidesheetSkeleton close={props.close} />;
   }
 
-  const htNo = heattrace.heatTraceCableNo;
-  const facility = heattrace.facility;
-  const project = heattrace.project;
+  if (!heatTrace || error) {
+    return <div>Failed to get Heat Trace with id: {props.id}</div>;
+  }
+
+  const htNo = heatTrace.heatTraceCableNo;
+  const facility = heatTrace.facility;
+  const project = heatTrace.project;
 
   const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(
     props.item?.heatTraceCableId ?? ''
@@ -114,19 +133,32 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${heattrace.heatTraceCableNo} - ${heattrace.heatTraceCableDescription}`}
+        title={`${heatTrace.heatTraceCableNo} - ${heatTrace.heatTraceCableDescription}`}
         onClose={props.close}
         applicationTitle="Heat Trace"
       />
       <StyledBanner>
-        <BannerItem title="Checklist status" value={heattrace.formStatus || 'N/A'} />
+        <BannerItem
+          title="Heat trace"
+          value={
+            heatTrace.heatTraceCableNo ? (
+              <LinkCell
+                url={heatTrace.heatTraceCableUrl ?? ''}
+                urlText={heatTrace.heatTraceCableNo}
+              />
+            ) : (
+              'N/A'
+            )
+          }
+        ></BannerItem>
+        <BannerItem title="Checklist status" value={heatTrace.formStatus || 'N/A'} />
         <BannerItem
           title="Comm Pkg"
           value={
-            heattrace.commissioningPackageNo ? (
+            heatTrace.commissioningPackageNo ? (
               <LinkCell
-                url={heattrace.commissioningPackageUrl ?? ''}
-                urlText={heattrace.commissioningPackageNo}
+                url={heatTrace.commissioningPackageUrl ?? ''}
+                urlText={heatTrace.commissioningPackageNo}
               />
             ) : (
               'N/A'
@@ -136,17 +168,17 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => {
         <BannerItem
           title="MC Pkg"
           value={
-            heattrace.mechanicalCompletionPackageNo ? (
+            heatTrace.mechanicalCompletionPackageNo ? (
               <LinkCell
-                url={heattrace.mechanicalCompletionUrl ?? ''}
-                urlText={heattrace.mechanicalCompletionPackageNo}
+                url={heatTrace.mechanicalCompletionUrl ?? ''}
+                urlText={heatTrace.mechanicalCompletionPackageNo}
               />
             ) : (
               'N/A'
             )
           }
         />
-        <BannerItem title="Priority1" value={heattrace.priority1 ?? 'N/A'} />
+        <BannerItem title="Priority1" value={heatTrace.priority1 ?? 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
