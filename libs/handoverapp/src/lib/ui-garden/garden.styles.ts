@@ -6,7 +6,7 @@ export const StyledRoot = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: 5px;
+  margin-left: 2px;
   position: relative;
 `;
 

@@ -25,7 +25,7 @@ export const useGardenConfig = (
   return {
     getDisplayName: (item) => item.commissioningPackageNo,
     initialGrouping: ['RFOC'],
-    initialDateVariant: 'Planned',
+    initialDateVariant: 'Forecast',
     initialTimeInterval: 'Weekly',
     getBlockAsync,
     getGardenMeta,
