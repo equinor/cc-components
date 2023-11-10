@@ -106,9 +106,14 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   // next sign by will be included with "Next sign role"
   {
+    colId: 'NextSignBy',
     field: 'Next sign by', //denne heter functionalrole i FAM.
-    headerTooltip: 'Next Sign by ',
-    valueGetter: (pkg) => 'Waiting on data',
+    headerTooltip: 'Next Sign by',
+    valueGetter: (pkg) => {
+      const ranking = pkg.data?.nextToSignRanking ?? '';
+      const role = pkg.data?.nextToSignFunctionalRole ?? '';
+      return (ranking || role) ? `${ranking}: ${role}` : '';
+    },
     // cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
     //   if (!props.data) {
     //     return null;
@@ -130,31 +135,36 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 400,
   },
   {
-    field: 'LatestSignBy', //denne hete LatestSignedRoleFunctionalRole i FAM
-    headerTooltip: 'Latest Sign By',
-    valueGetter: (pkg) => 'Waiting on data',
-  },
-
-  {
     colId: 'NextSignRole',
     field: 'Next Sign Role',
     headerTooltip: 'Next Sign Role',
     valueGetter: (pkg) => {
-      const ranking = pkg.data?.nextToSignRanking;
-      const role = pkg.data?.nextToSign ?? '(blank)';
-      return !ranking ? role : `${ranking}: ${role}`;
+      const ranking = pkg.data?.nextToSignRanking ?? '';
+      const role = pkg.data?.nextToSignRole ?? '';
+      return (ranking || role) ? `${ranking}: ${role}` : '';
     },
     enableRowGroup: true,
-    width: 300,
+    minWidth: 200,
   },
+  {
+    colId: 'LatestSignBy',
+    field: 'Latest Sign By', 
+    headerTooltip: 'Latest Sign By',
+    valueGetter: (pkg) => {
+      const ranking = pkg.data?.latestSignedRanking ?? '';
+      const role = pkg.data?.latestSignedRoleFunctionalRole ?? '';
+      return (ranking || role) ? `${ranking}: ${role}` : '';
+    },
+  },
+
   {
     colId: 'LatestSignByRole',
     field: 'Latest Signed By Role',
     headerTooltip: 'Latest Signed Role',
     valueGetter: (pkg) => {
-      const ranking = pkg.data?.latestSignedRanking ?? '(blank)';
-      const role = pkg.data?.latestSignedRole ?? '(blank)';
-      return `${ranking}: ${role}`;
+      const ranking = pkg.data?.latestSignedRanking ?? '';
+      const role = pkg.data?.latestSignedRole ?? '';
+      return (ranking || role) ? `${ranking}: ${role}` : '';
     },
     enableRowGroup: true,
     width: 300,
@@ -167,12 +177,12 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 150,
   },
   {
+    colId: 'Types',
     field: 'Types',
     headerTooltip: 'Types',
-    valueGetter: (pkg) => 'Waiting on data',
+    valueGetter: (pkg) => pkg.data?.swcrTypes,
     // cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
     //   if (!props.data) {
-    //     return null;
     //   } else {
     //     const keys = getTypeKeys(props.data, '');
     //     return <div>{keys}</div>;

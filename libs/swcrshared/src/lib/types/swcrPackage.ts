@@ -24,10 +24,12 @@ export type SwcrPackage = {
   action: string;
   status: SwcrStatus;
   famUpsertedTime: string;
-  nextToSign: string;
+  nextToSignRole: string;
+  nextToSignFunctionalRole: string;
   nextToSignRanking: number;
   latestSignedRanking: number;
   latestSignedRole: string;
+  latestSignedRoleFunctionalRole: string;
   closedDate: string;
   isOpen: boolean;
   commissioningPackageNo: string;
@@ -41,4 +43,5 @@ export type SwcrPackage = {
   rfCForecastDate: string;
   system: string;
   automationControlSystem: string;
+  swcrTypes: string;
 };
