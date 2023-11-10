@@ -25,6 +25,8 @@ export type HandoverNCR = {
 } & HandoverChild;
 
 export type HandoverPunch = {
+  punchItemNo: string | null;
+  punchUrl: string | null;
   tagNo: string;
   tagUrlId: string;
   category: string | null;

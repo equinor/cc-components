@@ -1,4 +1,6 @@
 export type PunchBase = {
+  punchItemNo: string | null;
+  punchUrl: string | null;
   tagNo: string;
   tagUrlId: string;
   category: string | null;
