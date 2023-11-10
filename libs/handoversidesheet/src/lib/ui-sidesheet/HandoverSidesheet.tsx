@@ -16,6 +16,7 @@ import {
 
 import {
   McTab,
+  NcrTab,
   PunchTab,
   QueryTab,
   SwcrTab,
@@ -97,6 +98,12 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     dataIsFetching: isDataFetchingQuery,
     error: queryError,
   } = useHandoverResource(props.id, 'query');
+
+  const {
+    data: ncrPackages,
+    dataIsFetching: isDataFetchingNcr,
+    error: ncrError,
+  } = useHandoverResource(props.id, 'ncr');
 
   const filteredPunches = useMemo(() => {
     if (ShowOnlyOutstandingPunch) {
@@ -183,6 +190,10 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             <Tabs.Tab>
               Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
             </Tabs.Tab>
+
+            <Tabs.Tab>
+              NCR <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />{' '}
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -254,6 +265,13 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           <Tabs.Panel>
             <QueryTab
               queries={queryPackages}
+              isFetching={isDataFetchingQuery}
+              error={queryError}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <NcrTab
+              ncrs={ncrPackages}
               isFetching={isDataFetchingQuery}
               error={queryError}
             />

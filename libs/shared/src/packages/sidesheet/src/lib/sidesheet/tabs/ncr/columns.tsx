@@ -1,7 +1,11 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { NcrBase } from './types';
-import { LinkCell, DescriptionCell } from '../../../../../../table-helpers';
+import {
+  LinkCell,
+  DescriptionCell,
+  StyledMonospace,
+} from '../../../../../../table-helpers';
 
 export const columns: ColDef<NcrBase>[] = [
   {
@@ -9,7 +13,8 @@ export const columns: ColDef<NcrBase>[] = [
     valueGetter: (pkg) => pkg.data?.documentNumber,
     cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
       if (props.data) {
-        return <LinkCell url={props.data.url} urlText={props.value} />;
+        //return <LinkCell url={props.data.url} urlText={props.value} />; Deadlinks
+        return <StyledMonospace>{props.data.documentNumber}</StyledMonospace>;
       } else return null;
     },
     minWidth: 200,
