@@ -33,7 +33,7 @@ export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => (
 ));
 
 const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
-  const circuitDiagramTab = useCircuitDiagram(props.item);
+  const circuitDiagramTab = useCircuitDiagramTab(props.item);
   const workorderTab = useWorkorderTab(props.id);
   const checklistTab = useChecklistTab(props.id);
   const threeDTab = use3DTab(props.id);
@@ -103,12 +103,12 @@ function EnsureHeatTrace({ id, item, close }: HeatTraceProps) {
     data: heatTrace,
     error,
     isLoading: isLoadingSidesheet,
-  } = useQuery(
+  } = useQuery<HeatTrace>(
     ['heat-trace', id],
     async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/heat-trace/${id}`);
       if (!res.ok) throw res;
-      return res.json() as Promise<HeatTrace>;
+      return res.json();
     },
     {
       suspense: false,
@@ -128,7 +128,7 @@ function EnsureHeatTrace({ id, item, close }: HeatTraceProps) {
   return <HeattraceSidesheetComponent id={id} item={heatTrace} close={close} />;
 }
 
-const useCircuitDiagram = (ht: HeatTrace) => {
+const useCircuitDiagramTab = (ht: HeatTrace) => {
   const client = useHttpClient();
   const contextId = useContextId();
   const { width, setWidth } = useResizeContext();
