@@ -198,7 +198,7 @@ const useWorkorderTab = (htId: string) => {
   );
   const tab = useMemo(() => {
     return {
-      tabTitle: `Work orders (${dataWorkorders?.length})`,
+      tabTitle: `Work orders (${dataWorkorders ? dataWorkorders?.length : '...'})`,
       tabContent: (
         <WorkorderTab
           error={errorWorkorders}
@@ -216,7 +216,7 @@ const useChecklistTab = (htId: string) => {
     useGetHeatTraceChecklists(htId ?? '');
   const tab = useMemo(() => {
     return {
-      tabTitle: `Checklists (${dataChecklists?.length})`,
+      tabTitle: `Checklists (${dataChecklists ? dataChecklists?.length : '...'})`,
       tabContent: (
         <ChecklistTab
           error={errorChecklists}
