@@ -518,6 +518,9 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+      react-hook-form:
+        specifier: ^7.47.0
+        version: 7.47.0(react@18.2.0)
 
   libs/shared:
     dependencies:
@@ -2832,7 +2835,7 @@ packages:
       react-dom: '>=16.8'
       styled-components: '>=4.2'
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.23.2
       '@equinor/eds-icons': 0.16.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/eds-utils': 0.7.0(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -15041,6 +15044,15 @@ packages:
 
   /react-fast-compare@3.2.1:
     resolution: {integrity: sha512-xTYf9zFim2pEif/Fw16dBiXpe0hoy5PxcD8+OwBnTtNLfIm3g6WxhKNurY+6OmdH1u6Ta/W/Vl6vjbYP1MFnDg==}
+    dev: false
+
+  /react-hook-form@7.47.0(react@18.2.0):
+    resolution: {integrity: sha512-F/TroLjTICipmHeFlMrLtNLceO2xr1jU3CyiNla5zdwsGUGu2UOxxR4UyJgLlhMwLW/Wzp4cpJ7CPfgJIeKdSg==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:
