@@ -53,14 +53,15 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
 const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'WorkOrderNumber',
-
     headerTooltip: 'Workorder Number',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
       if (!props.data?.workorderUrl) {
         return <StyledMonospace>{props.value}</StyledMonospace>;
       }
-      return <LinkCell url={props.data?.workorderUrl} urlText={props.value} />;
+      return (
+        <LinkCell url={props.data?.workorderUrl} urlText={props.value ?? undefined} />
+      );
     },
   },
   {
@@ -86,7 +87,6 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'JobStatus',
-    field: 'Job status',
     headerTooltip: 'Job Status',
     valueGetter: (pkg) => pkg.data?.jobStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
@@ -134,24 +134,21 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'PlannedStartupDate',
-    field: 'Planned start',
     headerTooltip: 'Planned Startup Date',
     valueGetter: (pkg) => pkg.data?.plannedStartupDate,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-      return <YearAndWeekCell dateString={props.value} />;
+      return <YearAndWeekCell dateString={props.value ?? null} />;
     },
   },
   {
     colId: 'PlannedFinishDate',
-    field: 'Planned finish',
     headerTooltip: 'Planned Finish Date',
     valueGetter: (pkg) => pkg.data?.plannedFinishDate,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-      return <YearAndWeekCell dateString={props.value} />;
+      return <YearAndWeekCell dateString={props.value ?? null} />;
     },
   },
   // {
-  //   field: 'Est mhr',
   //   valueFormatter: (pkg) => pkg.context.maxEstHrs,
   //   valueGetter: (pkg) => pkg.data?.estimatedHours,
   //   cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -165,7 +162,6 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   //   },
   // },
   // {
-  //   field: 'Exp mhr',
   //   valueFormatter: (pkg) => pkg.context.maxExpHrs,
   //   valueGetter: (pkg) => pkg.data?.expendedHours,
   //   cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -179,7 +175,6 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   //   },
   // },
   // {
-  //   field: 'Rem mhr',
   //   valueFormatter: (pkg) => pkg.context.maxRemHrs,
   //   valueGetter: (pkg) => pkg.data?.remainingHours,
   //   cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {

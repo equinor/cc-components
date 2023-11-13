@@ -100,9 +100,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (props.node.group) return null;
       return (
         <StatusCell
-          content={props.value}
+          content={props.value ?? null}
           cellAttributeFn={() => ({
-            style: { backgroundColor: statusColorMap[props.value] },
+            style: { backgroundColor: statusColorMap[props.value ?? 'OS'] },
           })}
         />
       );
@@ -118,9 +118,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (props.node.group) return null;
       return (
         <StatusCell
-          content={props.value}
+          content={props.value ?? null}
           cellAttributeFn={() => ({
-            style: { backgroundColor: statusColorMap[props.value] },
+            style: { backgroundColor: statusColorMap[props.value ?? 'OS'] },
           })}
         />
       );

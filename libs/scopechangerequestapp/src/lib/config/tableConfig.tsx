@@ -162,7 +162,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 140,
   },
   {
-    field: 'Guess Mhrs',
     headerTooltip: 'Guesstimate Manhours',
     valueGetter: (pkg) => pkg.data?.disciplineGuesstimates,
     valueFormatter: (pkg) =>
@@ -190,7 +189,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
   //   width: 150,
   // },
   {
-    field: 'Change origin',
     headerTooltip: 'Change Origin',
     valueGetter: (pkg) => pkg.data?.originSourceId,
     valueFormatter: (pkg) =>
@@ -211,7 +209,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 140,
   },
   {
-    field: 'Last updated',
     headerTooltip: 'Last Updated',
     valueGetter: (pkg) => pkg.data?.modifiedAtUtc,
     cellRenderer: (
@@ -222,7 +219,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 160,
   },
   {
-    field: 'Created at',
     headerTooltip: 'Created At',
     valueGetter: (pkg) => pkg.data?.createdAtUtc,
     cellRenderer: (
@@ -233,7 +229,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 140,
   },
   {
-    field: 'Last signed',
     headerTooltip: 'Last Signed',
     valueGetter: (pkg) => pkg.data && getLastSigned(pkg.data),
     cellRenderer: (

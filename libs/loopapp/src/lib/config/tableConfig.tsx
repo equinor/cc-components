@@ -76,7 +76,6 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
 const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'LoopTag',
-    field: 'Loop tag',
     headerTooltip: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -95,7 +94,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'System',
-
     headerTooltip: 'System',
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => (
@@ -105,7 +103,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CommPkgNo',
-    field: 'Comm Pkg',
     headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -124,7 +121,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'MCPkgNo',
-    field: 'MC Pkg',
     headerTooltip: 'Mechanical Completion Package Number',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -146,14 +142,12 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Priority1',
-    field: 'Priority 1',
     headerTooltip: 'Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
     enableRowGroup: false,
   },
   {
     colId: 'RfcPlannedForecastDate',
-    field: 'Planned/Forecast RFC',
     headerTooltip: 'Planned/Forecast RFC',
     valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -163,7 +157,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'RfoPlannedForecastDate',
-    field: 'Planned/Forecast RFO',
     headerTooltip: 'Planned/Forecast RFO',
     valueGetter: (pkg) => pkg.data?.rfO_Planned_Forecast_Date,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -173,13 +166,12 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CLStatus',
-    field: 'Checklist status',
     headerTooltip: 'Checklist status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {
       return (
         <StatusCell
-          content={props.value}
+          content={props.value ?? null}
           cellAttributeFn={() => ({
             style: {
               backgroundColor: props.value ? statusColorMap[props.value] : 'transparent',
@@ -192,14 +184,12 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Responsible',
-
     headerTooltip: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: false,
   },
   {
     colId: 'Location',
-
     headerTooltip: 'Location',
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -209,7 +199,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'FormularType',
-    field: 'Form type',
     headerTooltip: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -221,7 +210,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'SignedDate',
-
     headerTooltip: 'Singed Date',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -231,7 +219,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'VerifiedDate',
-
     headerTooltip: 'Verified Date',
     valueGetter: (pkg) => pkg.data?.verifiedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -240,13 +227,12 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
-    field: 'Content MC status',
     headerTooltip: 'Content MC status',
     valueGetter: (pkg) => pkg.data?.loopContentStatus,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {
       return (
         <StatusCell
-          content={props.value}
+          content={props.value ?? null}
           cellAttributeFn={() => ({
             style: {
               backgroundColor: props.value ? statusColorMap[props.value] : 'transparent',
@@ -259,7 +245,6 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'WoPlannedCompletionDate',
-    field: 'Planned MC complete',
     headerTooltip: 'Planned MC complete',
     valueGetter: (pkg) => pkg.data?.woPlannedCompletionDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -278,9 +263,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   // },
   {
     colId: 'RemainingManHours',
-    field: 'Rem mhrs',
     headerTooltip: 'Remaining Manhours',
-
     valueGetter: (pkg) => pkg.data?.remainingManHours,
     // valueFormatter: (pkg) => pkg.context.maxRemHrs,
     // cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
