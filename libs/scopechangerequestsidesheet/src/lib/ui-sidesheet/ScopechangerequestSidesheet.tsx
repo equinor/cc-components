@@ -19,7 +19,6 @@ import {
 } from '@cc-components/sharedcomponents';
 import { useGetWorkorders } from '../utils-sidesheet/useGetWorkorders';
 import { useGetHistory } from '../utils-sidesheet/useGetHistory';
-
 import { Logtab } from './tabs/LogTab';
 
 export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
