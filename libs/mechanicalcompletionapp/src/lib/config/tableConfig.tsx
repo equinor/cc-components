@@ -14,6 +14,7 @@ export const tableConfig: GridConfig<McPackage> = {
   // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
+      headerName: 'MC Pkg',
       headerTooltip: 'Mechanical Completion Package Number',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -30,6 +31,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 140,
     },
     {
+      headerName: 'Description',
       headerTooltip: 'Description',
       valueGetter: (pkg) => pkg.data?.description,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -38,12 +40,14 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 300,
     },
     {
+      headerName: 'Discipline',
       headerTooltip: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
       enableRowGroup: true,
       width: 144,
     },
     {
+      headerName: 'MC Status',
       headerTooltip: 'Mechanical Completion Status',
       valueGetter: (pkg) => pkg.data?.mcStatus,
       cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
@@ -64,18 +68,21 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 150,
     },
     {
+      headerName: 'Responsible',
       headerTooltip: 'Responsible',
       valueGetter: (pkg) => pkg.data?.responsible,
       enableRowGroup: true,
       width: 150,
     },
     {
+      headerName: 'Phase',
       headerTooltip: 'Phase',
       valueGetter: (pkg) => pkg.data?.phase,
       enableRowGroup: true,
       width: 150,
     },
     {
+      headerName: 'Area',
       headerTooltip: 'Area',
       valueGetter: (pkg) => pkg.data?.area,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -85,6 +92,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 150,
     },
     {
+      headerName: 'Comm Pkg',
       headerTooltip: 'Commissioning Package Number',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -102,6 +110,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 185,
     },
     {
+      headerName: 'System',
       headerTooltip: 'System',
       valueGetter: (pkg) => pkg.data?.system,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -111,6 +120,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 125,
     },
     {
+      headerName: 'Planned M-01 Final Punch',
       headerTooltip: 'Planned M-01 Final Punch',
       valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -119,6 +129,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 250,
     },
     {
+      headerName: 'Actual M-01 Actual Date',
       headerTooltip: 'Actual M-01 Actual Date',
       valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -127,6 +138,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 250,
     },
     {
+      headerName: 'Planned M-03 RFC',
       headerTooltip: 'Planned M-03 RFC',
       valueGetter: (pkg) => pkg.data?.rfccPlannedDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -135,6 +147,7 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 210,
     },
     {
+      headerName: 'Actual M-03 RFC',
       headerTooltip: 'Actual M-03 RFC',
       valueGetter: (pkg) => pkg.data?.rfccActualDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -143,18 +156,21 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 200,
     },
     {
+      headerName: 'Comm Pri1',
       headerTooltip: 'Commissioning Priority 1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
       width: 155,
     },
     {
+      headerName: 'Comm Pri2',
       headerTooltip: 'Commissioning Priority 2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
       width: 155,
     },
     {
+      headerName: 'Comm Pri3',
       headerTooltip: 'Commissioning Priority 3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,

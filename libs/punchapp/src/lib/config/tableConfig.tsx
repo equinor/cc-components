@@ -57,7 +57,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
 const columnDefinitions: ColDef<Punch>[] = [
   {
     colId: 'Punch',
-
+    headerName: 'Punch',
     headerTooltip: 'Punch',
     valueGetter: (pkg) => pkg.data?.punchItemNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -69,6 +69,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
+    headerName: 'Description',
     colId: 'description',
     headerTooltip: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
@@ -79,7 +80,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Category',
-
+    headerName: 'Category',
     headerTooltip: 'Category',
     valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -100,7 +101,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Status',
-
+    headerName: 'Status',
     headerTooltip: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -121,28 +122,31 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'FormType',
+    headerName: 'Form Type',
     headerTooltip: 'Form Type',
     valueGetter: (pkg) => pkg.data?.formularType,
   },
   {
     colId: 'Discipline',
-
+    headerName: 'Discipline',
     headerTooltip: 'Discipline',
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
     colId: 'PLSorting',
+    headerName: 'PL Sorting',
     headerTooltip: 'PL Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
   },
   {
     colId: 'PLType',
+    headerName: 'PL Type',
     headerTooltip: 'PL Type',
     valueGetter: (pkg) => pkg.data?.type,
   },
   {
     colId: 'Estimate',
-
+    headerName: 'Estimate',
     headerTooltip: 'Estimate',
     valueGetter: (pkg) => pkg.data?.estimate,
     cellRenderer: (props: ICellRendererProps<Punch, string>) => {
@@ -151,21 +155,25 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'RaisedByOrg',
+    headerName: 'Raised by org',
     headerTooltip: 'Raised by Org',
     valueGetter: (pkg) => pkg.data?.raisedBy,
   },
   {
     colId: 'ClearingByOrg',
+    headerName: 'Clearing by org',
     headerTooltip: 'Cleared by Org',
     valueGetter: (pkg) => pkg.data?.clearedBy,
   },
   {
     colId: 'Priority',
+    headerName: 'priority',
     headerTooltip: 'Priority',
     valueGetter: (o) => o.data?.priority,
   },
   {
     colId: 'Cleared',
+    headerName: 'Cleared',
     headerTooltip: 'Cleared',
     valueGetter: (pkg) => pkg.data?.clearedAtDate,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -174,6 +182,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Verified',
+    headerName: 'Verified',
     headerTooltip: 'Verified',
     valueGetter: (pkg) => pkg.data?.verifiedAtDate,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -182,6 +191,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'HandoverPlan',
+    headerName: 'Handover plan',
     headerTooltip: 'Handover Plan',
     valueGetter: (pkg) => pkg.data?.handoverPlan,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -190,6 +200,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'FormType',
+    headerName: 'Form type',
     headerTooltip: 'Form Type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -200,6 +211,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Tag',
+    headerName: 'Tag',
     headerTooltip: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -210,6 +222,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'CommPkg',
+    headerName: 'Comm Pkg',
     headerTooltip: 'Commissioning Package',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -228,6 +241,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'WorkOrder',
+    headerName: 'Workorder',
     headerTooltip: 'Workorder',
     valueGetter: (pkg) => pkg.data?.workOrderNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -238,11 +252,13 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'MaterialRequired',
+    headerName: 'Material required',
     headerTooltip: 'Material Required',
     valueGetter: (pkg) => (pkg.data?.materialRequired ? 'Yes' : 'No'),
   },
   {
     colId: 'MaterialEstimate',
+    headerName: 'Material estimate',
     headerTooltip: 'Material Estimate',
     valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {

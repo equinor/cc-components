@@ -56,45 +56,59 @@ export const useTableConfig = (
 
 const columnDefinitions: ColDef<ElectricalConsumer>[] = [
   {
+    headerName: 'tagNo',
     colId: 'TagNo',
   },
   {
+    headerName: 'commissioningPackageNo',
     colId: 'CommissioningPackageNo',
   },
   {
+    headerName: 'mechanicalCompletionPackageNo',
     colId: 'MechanicalCompletionPackageNo',
   },
   {
+    headerName: 'instCode',
     colId: 'InstCode',
   },
   {
+    headerName: 'consumerType',
     colId: 'ConsumerType',
   },
   {
+    headerName: 'description',
     colId: 'Description',
   },
   {
+    headerName: 'tagCategory',
     colId: 'TagCategory',
   },
   {
+    headerName: 'tagCategoryDescription',
     colId: 'TagCategoryDescription',
   },
   {
+    headerName: 'tagStatus',
     colId: 'TagStatus',
   },
   {
+    headerName: 'componentType',
     colId: 'ComponentType',
   },
   {
+    headerName: 'eleSymbolCode',
     colId: 'EleSymbolCode',
   },
   {
+    headerName: 'cubicleId',
     colId: 'CubicleId',
   },
   {
+    headerName: 'drawerId',
     colId: 'DrawerId',
   },
   {
+    headerName: 'branchId',
     colId: 'BranchId',
   },
 ];

@@ -45,7 +45,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
 const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   {
     colId: 'HeatTraceCableNo',
-
+    headerName: 'Tag',
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return (
@@ -55,32 +55,38 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   },
   {
     colId: 'HeatTraceCableDescription',
-
+    headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.heatTraceCableDescription,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
     width: 300,
   },
-  { colId: 'Priority1', valueGetter: (pkg) => pkg.data?.priority1 },
+  {
+    colId: 'Priority1',
+    headerName: 'Priority1',
+    valueGetter: (pkg) => pkg.data?.priority1,
+  },
   {
     colId: 'Location',
-
+    headerName: 'Location',
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   // Need to implement the visual checklistStatus
-  { valueGetter: (pkg) => pkg.data?.formStatus },
-  { valueGetter: (pkg) => pkg.data?.checklistStep },
+  { headerName: 'Checklist status', valueGetter: (pkg) => pkg.data?.formStatus },
+  { headerName: 'Current step', valueGetter: (pkg) => pkg.data?.checklistStep },
   {
+    headerName: 'RFC',
     valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },
   },
   {
+    headerName: 'Pipetests',
     valueGetter: (pkg) => pkg.data?.pipetest,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       if (!props.value) return null;
