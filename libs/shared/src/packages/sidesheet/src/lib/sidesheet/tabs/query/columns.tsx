@@ -6,6 +6,7 @@ import { QueryBase } from './types';
 
 export const columns: ColDef<QueryBase>[] = [
   {
+    headerName: 'Document No.',
     valueGetter: (pkg) => pkg.data?.queryNo,
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
       return <LinkCell url={props.data?.queryUrl} urlText={props.data?.queryNo} />;
@@ -13,6 +14,7 @@ export const columns: ColDef<QueryBase>[] = [
     minWidth: 200,
   },
   {
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -20,13 +22,16 @@ export const columns: ColDef<QueryBase>[] = [
     minWidth: 200,
   },
   {
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.queryStatus,
   },
   {
+    headerName: 'Type',
     valueGetter: (pkg) => pkg.data?.queryType,
     width: 100,
   },
   {
+    headerName: 'Next to sign',
     valueGetter: (pkg) => pkg.data?.nextToSign,
   },
 ];

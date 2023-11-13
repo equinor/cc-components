@@ -9,6 +9,7 @@ import { McBase } from './types';
 
 export const columns: ColDef<McBase>[] = [
   {
+    headerName: 'MC.Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<McBase, string | null>) => {
       return (
@@ -21,6 +22,7 @@ export const columns: ColDef<McBase>[] = [
     minWidth: 150,
   },
   {
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
@@ -29,6 +31,7 @@ export const columns: ColDef<McBase>[] = [
     flex: 2,
   },
   {
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
@@ -44,6 +47,7 @@ export const columns: ColDef<McBase>[] = [
     flex: 1,
   },
   {
+    headerName: 'Punch Accepted Date',
     valueGetter: (pkg) => pkg.data?.punchAcceptedActualtDate,
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DateCell dateString={props.value} />
@@ -52,6 +56,7 @@ export const columns: ColDef<McBase>[] = [
     flex: 2,
   },
   {
+    headerName: 'RFCC',
     valueGetter: (pkg) => pkg.data?.rfC_Status,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
@@ -67,6 +72,7 @@ export const columns: ColDef<McBase>[] = [
     flex: 1,
   },
   {
+    headerName: 'RFOC',
     valueGetter: (pkg) => pkg.data?.rfO_Status,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell

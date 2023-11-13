@@ -5,6 +5,7 @@ import { UnsignedActionBase } from './types';
 
 export const columns: ColDef<UnsignedActionBase>[] = [
   {
+    headerName: '#',
     valueGetter: (pkg) => pkg.data?.actionNo,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase>) => {
       if (props.data) {
@@ -15,6 +16,7 @@ export const columns: ColDef<UnsignedActionBase>[] = [
     minWidth: 150,
   },
   {
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase, string | null>) => {
       return <DescriptionCell description={props.value} displayFullText />;

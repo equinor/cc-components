@@ -11,7 +11,7 @@ import {
 
 export const columns: ColDef<MccrBase>[] = [
   {
-    headerName: 'TagNo',
+    headerName: 'TagNo.',
     minWidth: 90,
     valueGetter: (pkg) => pkg.data?.tagNumber,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
@@ -23,6 +23,7 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
+    headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -31,6 +32,7 @@ export const columns: ColDef<MccrBase>[] = [
     resizable: true,
   },
   {
+    headerName: 'Type',
     valueGetter: (pkg) => pkg.data?.mccrType,
     // valueFormatter: (pkg) =>
     //   pkg.data?.mccrId ? proCoSysUrls.getFormTypeUrl(pkg.data.mccrId) : '',
@@ -43,6 +45,7 @@ export const columns: ColDef<MccrBase>[] = [
     // },
   },
   {
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps) => {
       if (!props.value) return null;
@@ -58,9 +61,11 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
+    headerName: 'Res',
     valueGetter: (pkg) => pkg.data?.mccrResponsible,
   },
   {
+    headerName: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mcpkgNumber,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       if (!props.data?.mechanicalCompletionPackageUrl) {
@@ -76,6 +81,7 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
+    headerName: 'Comm Pkg.',
     valueGetter: (pkg) => pkg.data?.commpkgNumber,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       if (!props.data?.commissioningPackageUrl) {

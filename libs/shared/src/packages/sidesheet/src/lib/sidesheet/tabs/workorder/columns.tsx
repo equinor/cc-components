@@ -14,6 +14,7 @@ export const columns = (
 ): ColDef<WorkorderBase>[] => {
   return [
     {
+      headerName: 'WO',
       valueGetter: (pkg) => pkg.data?.workOrderNumber,
       cellRenderer: (props: ICellRendererProps<WorkorderBase, string | null>) => {
         return (
@@ -26,6 +27,7 @@ export const columns = (
       minWidth: 200,
     },
     {
+      headerName: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
@@ -33,14 +35,17 @@ export const columns = (
       minWidth: 200,
     },
     {
+      headerName: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
       width: 130,
     },
     {
+      headerName: 'Status',
       valueGetter: (pkg) => pkg.data?.jobStatus,
       width: 120,
     },
     {
+      headerName: 'Plan. finish',
       valueGetter: (pkg) => pkg.data?.plannedFinishDate,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
@@ -48,6 +53,7 @@ export const columns = (
       width: 100,
     },
     {
+      headerName: 'Act. finish',
       valueGetter: (pkg) => pkg.data?.actualCompletionDate,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
@@ -55,6 +61,7 @@ export const columns = (
       width: 100,
     },
     {
+      headerName: 'Progress',
       valueGetter: (pkg) => pkg.data?.projectProgress,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return (
@@ -66,6 +73,7 @@ export const columns = (
       width: 140,
     },
     {
+      headerName: 'Estimated',
       valueGetter: (pkg) => pkg.data?.estimatedHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (maxEstimatedHours === null) {
@@ -84,6 +92,7 @@ export const columns = (
       width: 140,
     },
     {
+      headerName: 'Remaining',
       valueGetter: (pkg) => pkg.data?.remainingHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (maxRemainingHours === null) {

@@ -6,6 +6,7 @@ import { UnsignedTaskBase } from './types';
 
 export const columns: ColDef<UnsignedTaskBase>[] = [
   {
+    headerName: '#',
     valueGetter: (pkg) => pkg.data?.taskId,
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
       return <LinkCell url={props.data?.unsignedTaskUrl} urlText={props.data?.taskId} />;
@@ -13,6 +14,7 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     minWidth: 150,
   },
   {
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => (
       <DescriptionCell description={props.value} />
