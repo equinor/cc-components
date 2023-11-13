@@ -11,7 +11,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
   // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
-      field: 'SWCRs',
       headerName: 'Software Change Requests',
       valueGetter: (pkg) => pkg.data?.swcrNo,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
@@ -28,7 +27,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 150,
     },
     {
-      field: 'Title',
       headerTooltip: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string | undefined>) => {
@@ -37,13 +35,11 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 500,
     },
     {
-      field: 'Contract',
       headerTooltip: 'Contract',
       valueGetter: (pkg) => pkg.data?.contract,
       width: 200,
     },
     {
-      field: 'System',
       headerTooltip: 'System',
       valueGetter: (pkg) => pkg.data?.system,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
@@ -53,7 +49,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 150,
     },
     {
-      field: 'Status',
       headerTooltip: 'Status',
       valueGetter: (pkg) => pkg.data?.status,
       enableRowGroup: true,
@@ -108,13 +103,11 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 300,
     },
     {
-      field: 'Supplier',
       headerTooltip: 'Supplier',
       valueGetter: (pkg) => pkg.data?.supplier,
       width: 150,
     },
     {
-      field: 'Types',
       headerTooltip: 'Types',
       valueGetter: (pkg) => pkg.data?.types,
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
@@ -129,7 +122,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 150,
     },
     {
-      field: 'Priority',
       headerTooltip: 'Priority',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
@@ -142,7 +134,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 200,
     },
     {
-      field: 'Node',
       headerTooltip: 'Node',
       valueGetter: (pkg) => pkg.data?.node,
       cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {

@@ -7,7 +7,7 @@ const LoadingCellRenderer = memo(() => {
   return <Skeleton height={'20px'} width={'100px'} />;
 });
 
-export const defaultGridOptions: GridOptions = {
+export const defaultGridOptions = <T,>(): GridOptions<T> => ({
   loadingCellRenderer: LoadingCellRenderer,
   defaultColDef: defaultColDef,
   serverSideInitialRowCount: 100,
@@ -18,4 +18,4 @@ export const defaultGridOptions: GridOptions = {
     );
   },
   rowStyle: { fontSize: '14px' },
-};
+});

@@ -85,7 +85,6 @@ const columnDefinitions: ColDef<Loop>[] = [
     onCellClicked: () => {},
   },
   {
-    field: 'Description',
     colId: 'Description',
     headerTooltip: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
@@ -96,7 +95,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'System',
-    field: 'System',
+
     headerTooltip: 'System',
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => (
@@ -193,14 +192,14 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Responsible',
-    field: 'Responsible',
+
     headerTooltip: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: false,
   },
   {
     colId: 'Location',
-    field: 'Location',
+
     headerTooltip: 'Location',
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
@@ -222,7 +221,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'SignedDate',
-    field: 'Signed',
+
     headerTooltip: 'Singed Date',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
@@ -232,7 +231,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'VerifiedDate',
-    field: 'Verified',
+
     headerTooltip: 'Verified Date',
     valueGetter: (pkg) => pkg.data?.verifiedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {

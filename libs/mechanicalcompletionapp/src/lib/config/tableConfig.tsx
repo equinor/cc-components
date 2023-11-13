@@ -31,7 +31,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 140,
     },
     {
-      field: 'Description',
       headerTooltip: 'Description',
       valueGetter: (pkg) => pkg.data?.description,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -40,7 +39,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 300,
     },
     {
-      field: 'Discipline',
       headerTooltip: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
       enableRowGroup: true,
@@ -68,21 +66,18 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 150,
     },
     {
-      field: 'Responsible',
       headerTooltip: 'Responsible',
       valueGetter: (pkg) => pkg.data?.responsible,
       enableRowGroup: true,
       width: 150,
     },
     {
-      field: 'Phase',
       headerTooltip: 'Phase',
       valueGetter: (pkg) => pkg.data?.phase,
       enableRowGroup: true,
       width: 150,
     },
     {
-      field: 'Area',
       headerTooltip: 'Area',
       valueGetter: (pkg) => pkg.data?.area,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -110,7 +105,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 185,
     },
     {
-      field: 'System',
       headerTooltip: 'System',
       valueGetter: (pkg) => pkg.data?.system,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {

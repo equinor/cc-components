@@ -71,19 +71,17 @@ export const useTableConfig = (
 };
 const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
   {
-    field: 'Id',
     valueGetter: (pkg) => pkg.data?.serialNumber,
     headerTooltip: 'Id',
     width: 90,
   },
   {
-    field: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     headerTooltip: 'Title',
     width: 250,
   },
   // {
-  //   field: 'Comment',
+  //
   //   valueGetter: (pkg) => pkg.data?.hasComments,
   //   headerTooltip: 'Comment',
   //   cellRenderer: (
@@ -99,13 +97,12 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
 
   // Hidden for now only one phase
   // {
-  //   field: 'Phase',
+  //
   //   valueGetter: (pkg) => pkg.data?.phase,
   //   enableRowGroup: true,
   //   width: 60,
   // },
   {
-    field: 'Workflow',
     valueGetter: (pkg) => pkg.data?.workflowStatus,
     headerTooltip: 'Workflow',
     valueFormatter: (pkg) =>
@@ -127,7 +124,7 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
   //   width: 180,
   // },
   // {
-  //   field: 'Next',
+  //
   //   headerTooltip: 'Next',
   //   valueGetter: (pkg) => {
   //     return pkg.data && findNextToSign(pkg.data);
@@ -135,13 +132,11 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
   //   width: 220,
   // },
   {
-    field: 'Status',
     headerTooltip: 'Status',
     valueGetter: (pkg) => pkg.data?.workflowStatus,
     width: 120,
   },
   {
-    field: 'State',
     headerTooltip: 'State',
     valueGetter: (pkg) => pkg.data?.isVoided,
     valueFormatter: (pkg) => (pkg.data?.isVoided ? 'Voided' : pkg.data?.state) ?? '',
@@ -153,7 +148,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 110,
   },
   {
-    field: 'Disciplines',
     headerTooltip: 'Disciplines',
     valueGetter: (pkg) => pkg.data?.disciplineGuesstimates,
     valueFormatter: (pkg) =>
@@ -212,7 +206,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 180,
   },
   {
-    field: 'Scope',
     headerTooltip: 'Scope',
     valueGetter: (pkg) => pkg.data?.scope?.name,
     width: 140,

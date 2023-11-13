@@ -53,7 +53,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
 const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'WorkOrderNumber',
-    field: 'Workorder',
+
     headerTooltip: 'Workorder Number',
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
@@ -64,7 +64,6 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
-    field: 'Title',
     colId: 'Title',
     headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
@@ -75,13 +74,13 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'DisciplineCode',
-    field: 'Discipline',
+
     headerTooltip: 'Discipline',
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
     colId: 'MilestoneCode',
-    field: 'Milestone',
+
     headerTooltip: 'Milestone',
     valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
@@ -96,7 +95,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'MaterialStatus',
-    field: 'Material',
+
     headerTooltip: 'Material Status',
     valueGetter: (pkg) => pkg.data?.materialStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -115,7 +114,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'HoldBy',
-    field: 'Hold',
+
     headerTooltip: 'Hold By',
     valueGetter: (pkg) => pkg.data?.holdBy,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -195,7 +194,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   // },
   {
     colId: 'ProjectProgress',
-    field: 'Progress',
+
     headerTooltip: 'Project Progress',
     valueGetter: (pkg) => pkg.data?.projectProgress,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -208,7 +207,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'MCStatus',
-    field: 'MC',
+
     headerTooltip: 'Mechanical Completion Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -226,7 +225,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'WorkBreakdownStructure',
-    field: 'WBS',
+
     headerTooltip: 'Work breakdown structure code',
     valueGetter: (pkg) => pkg.data?.workBreakdownStructure,
   },
