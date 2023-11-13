@@ -85,9 +85,10 @@
     "./workspace-config": "./dist/src/packages/workspace-config/index.js"
   },
   "dependencies": {
+    "@cc-components/sharedcomponents": "workspace:^",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@equinor/workspace-ag-grid": "1.0.4",
+    "@equinor/workspace-ag-grid": "2.0.0",
     "@remirror/pm": "^2.0.8",
     "@remirror/react": "^2.0.27",
     "@remirror/react-editors": "^1.0.38",
@@ -95,7 +96,6 @@
     "@remirror/theme": "^2.0.9",
     "date-fns": "^2.29.3",
     "markdown-to-jsx": "^7.2.0",
-    "remirror": "^2.0.36",
-    "@cc-components/sharedcomponents": "workspace:^"
+    "remirror": "^2.0.36"
   }
 }
