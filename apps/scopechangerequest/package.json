@@ -1,11 +1,13 @@
 {
   "name": "scopechangerequest",
+  "displayName": "Scope Change Control",
   "version": "0.0.2",
   "main": "/src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
+    "dev:local": "fusion-framework-cli app dev -c app.config.local.js",
     "build": "tsc -b -f",
     "pr:deploy": "npx ts-node --esm ../../github-action/src/releasePr.ts release",
     "fprd:deploy": "npx ts-node --esm ../../github-action/src/releaseMain.ts release"

@@ -8,8 +8,8 @@
     "dev": {
       "dependsOn": ["^build"]
     },
-    "shipit": {
-      "dependsOn": ["build"]
+    "dev:local": {
+      "dependsOn": ["^build"]
     },
     "pr:deploy": {
       "dependsOn": []

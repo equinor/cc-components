@@ -10,6 +10,8 @@
   "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "0.20.4-alpha.6.0"
+    "@cc-components/scopechangerequestshared" : "workspace:^",
+    "@cc-components/scopechangerequestsidesheet": "workspace:^"
+
   }
 }
