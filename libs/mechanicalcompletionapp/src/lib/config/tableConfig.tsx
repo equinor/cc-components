@@ -14,7 +14,6 @@ export const tableConfig: GridConfig<McPackage> = {
   // gridOptions: defaultGridOptions,
   columnDefinitions: [
     {
-      field: 'MC Pkg',
       headerTooltip: 'Mechanical Completion Package Number',
       valueGetter: (pkg) => pkg.data?.mcPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -45,7 +44,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 144,
     },
     {
-      field: 'MC Status',
       headerTooltip: 'Mechanical Completion Status',
       valueGetter: (pkg) => pkg.data?.mcStatus,
       cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
@@ -87,7 +85,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 150,
     },
     {
-      field: 'Comm Pkg',
       headerTooltip: 'Commissioning Package Number',
       valueGetter: (pkg) => pkg.data?.commPkgNumber,
       cellRenderer: (props: ICellRendererProps<McPackage, string>) => {
@@ -114,7 +111,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 125,
     },
     {
-      field: 'Planned M-01 Final Punch',
       headerTooltip: 'Planned M-01 Final Punch',
       valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -123,7 +119,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 250,
     },
     {
-      field: 'Actual M-01 Actual Date',
       headerTooltip: 'Actual M-01 Actual Date',
       valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -132,7 +127,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 250,
     },
     {
-      field: 'Planned M-03 RFC',
       headerTooltip: 'Planned M-03 RFC',
       valueGetter: (pkg) => pkg.data?.rfccPlannedDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -141,7 +135,6 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 210,
     },
     {
-      field: 'Actual M-03 RFC',
       headerTooltip: 'Actual M-03 RFC',
       valueGetter: (pkg) => pkg.data?.rfccActualDate,
       cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -150,21 +143,18 @@ export const tableConfig: GridConfig<McPackage> = {
       width: 200,
     },
     {
-      field: 'Comm Pri1',
       headerTooltip: 'Commissioning Priority 1',
       valueGetter: (pkg) => pkg.data?.priority,
       enableRowGroup: true,
       width: 155,
     },
     {
-      field: 'Comm Pri2',
       headerTooltip: 'Commissioning Priority 2',
       valueGetter: (pkg) => pkg.data?.priority2,
       enableRowGroup: true,
       width: 155,
     },
     {
-      field: 'Comm Pri3',
       headerTooltip: 'Commissioning Priority 3',
       valueGetter: (pkg) => pkg.data?.priority3,
       enableRowGroup: true,

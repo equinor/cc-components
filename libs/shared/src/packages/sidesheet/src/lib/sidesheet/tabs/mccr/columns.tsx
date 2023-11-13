@@ -11,7 +11,6 @@ import {
 
 export const columns: ColDef<MccrBase>[] = [
   {
-    field: 'TagNo.',
     headerName: 'TagNo',
     minWidth: 90,
     valueGetter: (pkg) => pkg.data?.tagNumber,
@@ -24,7 +23,6 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
-    field: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -33,7 +31,6 @@ export const columns: ColDef<MccrBase>[] = [
     resizable: true,
   },
   {
-    field: 'Type',
     valueGetter: (pkg) => pkg.data?.mccrType,
     // valueFormatter: (pkg) =>
     //   pkg.data?.mccrId ? proCoSysUrls.getFormTypeUrl(pkg.data.mccrId) : '',
@@ -46,7 +43,6 @@ export const columns: ColDef<MccrBase>[] = [
     // },
   },
   {
-    field: 'Status',
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps) => {
       if (!props.value) return null;
@@ -62,11 +58,9 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
-    field: 'Res',
     valueGetter: (pkg) => pkg.data?.mccrResponsible,
   },
   {
-    field: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mcpkgNumber,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       if (!props.data?.mechanicalCompletionPackageUrl) {
@@ -82,7 +76,6 @@ export const columns: ColDef<MccrBase>[] = [
     },
   },
   {
-    field: 'Comm Pkg.',
     valueGetter: (pkg) => pkg.data?.commpkgNumber,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       if (!props.data?.commissioningPackageUrl) {

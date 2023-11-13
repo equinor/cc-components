@@ -118,7 +118,7 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 130,
   },
   // {
-  //   field: 'Current step',
+  //
   //   headerTooltip: 'Current step',
   //   valueGetter: (pkg) => pkg.data?.documents,
   //   width: 180,
@@ -171,19 +171,19 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 150,
   },
   // {
-  //   field: 'Est Mhrs',
+  //
   //   headerTooltip: 'Estimate Manhours',
   //   valueGetter: (pkg) => pkg.data?.workOrdersTotalEstimatedManHours,
   //   width: 150,
   // },
   // {
-  //   field: 'Exp Mhrs',
+  //
   //   headerTooltip: 'Expanded Manhours',
   //   valueGetter: (pkg) => pkg.data?.workOrdersTotalExpendedManHours,
   //   width: 150,
   // },
   // {
-  //   field: 'Rem Mhrs',
+  //
   //   headerTooltip: 'Remaining Manhours',
   //   valueGetter: (pkg) => pkg.data?.workOrdersTotalRemainingManHours,
   //   width: 150,

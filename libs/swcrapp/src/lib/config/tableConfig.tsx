@@ -55,7 +55,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 200,
     },
     {
-      field: 'Next sign by',
       headerTooltip: 'Next Sign by ',
       valueGetter: (pkg) => pkg.data?.nextToSign,
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
@@ -79,7 +78,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 400,
     },
     {
-      field: 'Next sign role',
       headerTooltip: 'Next Sign Role',
       valueGetter: (pkg) => pkg.data?.nextSignRanking,
       cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
@@ -128,7 +126,6 @@ export const tableConfig: GridConfig<SwcrPackage> = {
       width: 150,
     },
     {
-      field: 'Control System',
       headerTooltip: 'Control System',
       valueGetter: (pkg) => pkg.data?.controlSystem,
       width: 200,

@@ -6,7 +6,6 @@ import { SwcrBase } from './types';
 
 export const columns: ColDef<SwcrBase>[] = [
   {
-    field: '#',
     valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
     cellRenderer: (props: ICellRendererProps<SwcrBase, string | null>) => {
       return (
@@ -19,7 +18,6 @@ export const columns: ColDef<SwcrBase>[] = [
     minWidth: 100,
   },
   {
-    field: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
@@ -28,13 +26,11 @@ export const columns: ColDef<SwcrBase>[] = [
     minWidth: 200,
   },
   {
-    field: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     flex: 1,
     minWidth: 100,
   },
   {
-    field: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
     flex: 1,
     minWidth: 100,

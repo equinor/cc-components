@@ -150,21 +150,18 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 150,
   },
   {
-    field: 'priority1',
     colId: 'Priority1',
     headerTooltip: 'Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
     minWidth: 150,
   },
   {
-    field: 'priority2',
     colId: 'Priority2',
     headerTooltip: 'Priority 2',
     valueGetter: (pkg) => pkg.data?.priority2,
     minWidth: 150,
   },
   {
-    field: 'priority3',
     colId: 'Priority3',
     headerTooltip: 'Priority 3',
     valueGetter: (pkg) => pkg.data?.priority3,
