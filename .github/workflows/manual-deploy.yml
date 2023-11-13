@@ -9,7 +9,7 @@ on:
 permissions: write-all
 jobs:
   deploy-manual-ci:
-    runs-on: ubuntu-latest¨
+    runs-on: ubuntu-latest
     environment: ci
     steps:
       - name: 'Login to Azure'
