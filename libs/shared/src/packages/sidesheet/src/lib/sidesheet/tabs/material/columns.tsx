@@ -7,7 +7,7 @@ export const columns: ColDef<MaterialBase>[] = [
   {
     valueGetter: (pkg) => pkg.data?.available,
     cellRenderer: (props: ICellRendererProps<MaterialBase, boolean | null>) => {
-      return <AvailableItemCell available={props.value} />;
+      return <AvailableItemCell available={props.value ?? null} />;
     },
     minWidth: 120,
   },

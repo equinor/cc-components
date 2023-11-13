@@ -39,7 +39,7 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return (
         <StatusCell
-          content={props.value}
+          content={props.value ?? null}
           cellAttributeFn={() => ({
             style: {
               backgroundColor: props.value
