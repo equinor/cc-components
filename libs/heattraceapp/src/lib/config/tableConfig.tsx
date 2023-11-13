@@ -62,7 +62,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     },
     width: 300,
   },
-  { colId: 'Priority1', field: 'Priority1', valueGetter: (pkg) => pkg.data?.priority1 },
+  { colId: 'Priority1', valueGetter: (pkg) => pkg.data?.priority1 },
   {
     colId: 'Location',
 
@@ -72,8 +72,8 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     },
   },
   // Need to implement the visual checklistStatus
-  { field: 'Checklist status', valueGetter: (pkg) => pkg.data?.formStatus },
-  { field: 'Current step', valueGetter: (pkg) => pkg.data?.checklistStep },
+  { valueGetter: (pkg) => pkg.data?.formStatus },
+  { valueGetter: (pkg) => pkg.data?.checklistStep },
   {
     valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string | null | undefined>) => {
