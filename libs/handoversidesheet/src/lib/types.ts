@@ -12,9 +12,10 @@ export type HandoverMcpkg = {
   mcPkgId: string;
   description: string | null;
   mechanicalCompletionStatus: string | null;
-  rfO_Status: string | null;
-  rfC_Status: string | null;
+  rfoStatus: string | null;
+  rfcStatus: string | null;
   mechanicalCompletionPackageUrl: string;
+  punchAcceptedActualtDate: string | null;
 } & HandoverChild;
 
 export type HandoverNCR = {
@@ -24,6 +25,8 @@ export type HandoverNCR = {
 } & HandoverChild;
 
 export type HandoverPunch = {
+  punchItemNo: string;
+  punchUrl: string;
   tagNo: string;
   tagUrlId: string;
   category: string | null;
@@ -70,16 +73,24 @@ export type HandoverUnsignedTask = {
 } & HandoverChild;
 
 export type HandoverWorkOrder = {
-  actualCompletionDate: string | null;
-  discipline: string | null;
-  estimatedHours: number | null;
-  expendedHours?: number | null;
-  jobStatus: string | null;
-  plannedFinishDate: string | null;
-  projectProgress: number | null;
-  remainingHours: number | null;
-  description: string | null;
-  workOrderUrl: string;
+  workOrderNo: string;
+  workOrderId: string;
   workOrderUrlId: string;
-  workOrderNumber: string;
+  projectProgress: number | null;
+  title: string | null;
+  description: null | null;
+  jobStatus: string | null;
+  materialStatus: string | null;
+  commissioningPackageNo: string | null;
+  commissioningPackageId: string | null;
+  facility: string | null;
+  commissioningPackageUrlId: string | null;
+  discipline: string | null;
+  plannedCompletionDate: string | null;
+  actualCompletionDate: string | null;
+  workOrderUrl: string;
+  estimatedManHours: number | null;
+  remainingManHours: number | null;
+  workBreakdownStructure: string | null;
+  responsible: string | null;
 } & HandoverChild;

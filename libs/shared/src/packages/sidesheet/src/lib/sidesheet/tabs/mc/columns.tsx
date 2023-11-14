@@ -1,7 +1,7 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { colorMap } from '../../../../../../mapping';
-import { StatusCell } from '../../../../../../table-helpers';
+import { DateCell, StatusCell } from '../../../../../../table-helpers';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { PackageStatus } from '../../../../../../types';
@@ -47,8 +47,17 @@ export const columns: ColDef<McBase>[] = [
     flex: 1,
   },
   {
+    field: 'Punch Accepted Date',
+    valueGetter: (pkg) => pkg.data?.punchAcceptedActualtDate,
+    cellRenderer: (props: ICellRendererProps<McBase>) => (
+      <DateCell dateString={props.value} />
+    ),
+    minWidth: 175,
+    flex: 2,
+  },
+  {
     field: 'RFCC',
-    valueGetter: (pkg) => pkg.data?.rfC_Status,
+    valueGetter: (pkg) => pkg.data?.rfcStatus,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
         content={`${props.value}`}
@@ -64,7 +73,7 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     field: 'RFOC',
-    valueGetter: (pkg) => pkg.data?.rfO_Status,
+    valueGetter: (pkg) => pkg.data?.rfoStatus,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
         content={`${props.value}`}

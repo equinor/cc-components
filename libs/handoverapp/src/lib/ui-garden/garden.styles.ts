@@ -6,7 +6,7 @@ export const StyledRoot = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: 5px;
+  margin-left: 2px;
   position: relative;
 `;
 
@@ -28,10 +28,10 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   font-weight: 500;
   font-size: 13px;
   padding: 0 2px 0 20px;
-  
+
   background: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor};
-  
+
   outline: ${(props) => (props.isSelected ? '2px dashed green' : 'none')};
   outline-offset: ${(props) => (props.isSelected ? '2px' : '0')};
 `;

@@ -68,14 +68,8 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>{stringCell(`${commpkg.progress || 0}%`)}</td>
           </tr>
           <tr>
-            <td>ProCoSys URL</td>
-            <td>
-              <LinkCell
-                url={commpkg.commissioningPackageUrl ?? ''}
-                urlText={commpkg.commissioningPackageUrl ?? ''}
-              />
-              ;
-            </td>
+            <td> Mc Packages Missing PunchOut</td>
+            <td>{stringCell(`${commpkg.remainingPunchOutCount || 0}`)}</td>
           </tr>
         </tbody>
       </StyledTable>

@@ -1,28 +1,29 @@
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
+import { WorkorderBase, useContextId, useHttpClient } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
-import { Workorder } from '../types';
 
-export const useGetWorkorders = (heatTraceCabelNo: string) => {
-  const client = useHttpClient('cc-api');
+export const useGetWorkorders = (heatTraceCabelId: string) => {
+  const client = useHttpClient();
   const contextId = useContextId();
-  const { data, isLoading, error } = useQuery<Workorder[], Error>(
-    ['heat-trace', heatTraceCabelNo, 'workorders'],
+  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
+    ['heat-trace', heatTraceCabelId, 'workorders'],
     async ({ signal }) => {
-      const respons = await client.fetch(
-        `/api/contexts/${contextId}/heat-trace/${heatTraceCabelNo}/workorders`,
+      const response = await client.fetch(
+        `/api/contexts/${contextId}/heat-trace/${heatTraceCabelId}/work-orders`,
         { signal }
       );
-      if (!respons.ok) {
+      if (response.status === 204) {
+        return null;
+      }
+      if (!response.ok) {
         throw new Error();
       }
-      return respons.json();
+      return response.json();
     }
   );
 
   return {
-    data: data,
-    isLoading: isLoading,
-    error: error,
+    dataWorkorders: data,
+    isLoadingWorkorders: isLoading,
+    errorWorkorders: error,
   };
 };

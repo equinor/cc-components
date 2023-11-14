@@ -3,7 +3,7 @@ import { createWidget } from '@cc-components/shared';
 
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
-import {  Tabs } from '@equinor/eds-core-react';
+import { Tabs } from '@equinor/eds-core-react';
 
 import { useGetWorkorders } from '../utils-sidesheet';
 import { Checklists } from './Checklists';
