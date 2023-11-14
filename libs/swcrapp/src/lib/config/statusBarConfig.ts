@@ -1,5 +1,5 @@
-import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 import { useHttpClient } from '@cc-components/shared';
+import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
 
 export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
   const client = useHttpClient();

@@ -1,14 +1,15 @@
+import { useHttpClient } from '@cc-components/shared';
 import {
   DescriptionCell,
-  StyledMonospace,
   LinkCell,
+  StyledMonospace,
 } from '@cc-components/shared/table-helpers';
 import {
   DataResponse,
   defaultGridOptions,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
-import { useHttpClient } from '@cc-components/shared';
+import { SwcrPackage } from '@cc-components/swcrshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
@@ -17,7 +18,6 @@ import {
   ICellRendererProps,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
-import { SwcrPackage } from '@cc-components/swcrshared';
 
 export const useTableConfig = (
   contextId: string
@@ -114,24 +114,6 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
       const role = pkg.data?.nextToSignFunctionalRole ?? '';
       return (ranking || role) ? `${ranking}: ${role}` : '';
     },
-    // cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
-    //   if (!props.data) {
-    //     return null;
-    //   } else {
-    //     const keys = getNextToSignKeys(props.data, '');
-    //     return (
-    //       <div
-    //         style={{
-    //           overflow: 'hidden',
-    //           textOverflow: 'ellipsis',
-    //           whiteSpace: 'nowrap',
-    //         }}
-    //       >
-    //         {keys}
-    //       </div>
-    //     );
-    //   }
-    // },
     width: 400,
   },
   {
@@ -181,13 +163,6 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     field: 'Types',
     headerTooltip: 'Types',
     valueGetter: (pkg) => pkg.data?.swcrTypes,
-    // cellRenderer: (props: ICellRendererProps<SwcrPackage>) => {
-    //   if (!props.data) {
-    //   } else {
-    //     const keys = getTypeKeys(props.data, '');
-    //     return <div>{keys}</div>;
-    //   }
-    // },
     enableRowGroup: true,
     width: 150,
   },

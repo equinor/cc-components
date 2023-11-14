@@ -4,19 +4,19 @@ import {
   useHttpClient,
   usePBIOptions,
 } from '@cc-components/shared';
-import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import Workspace from '@equinor/workspace-fusion';
 
 import { sidesheetConfig } from './sidesheetConfig';
 
-import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 
-import { useTableConfig } from './tableConfig';
-import { useStatusBarConfig } from './statusBarConfig';
 import { useGardenConfig } from './gardenConfig';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useTableConfig } from './tableConfig';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();

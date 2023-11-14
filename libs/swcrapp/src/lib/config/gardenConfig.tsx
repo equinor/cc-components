@@ -1,9 +1,9 @@
+import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 import { SwcrPackage } from '@cc-components/swcrshared';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import SwcrItem from '../ui-garden/Item';
-import { FilterState } from '@equinor/workspace-fusion/filter';
-import { useGardenDataSource } from '@cc-components/shared/workspace-config';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 export const useGardenConfig = (
   contextId: string

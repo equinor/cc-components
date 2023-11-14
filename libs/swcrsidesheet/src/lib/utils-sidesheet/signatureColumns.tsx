@@ -13,7 +13,7 @@ export const signatureColumns: ColDef<SwcrSignature>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
       return <StyledMonospace>{props.data?.signatureRole}</StyledMonospace>;
     },
-    minWidth: 200,  
+    minWidth: 350,  
   },
   {
     field: 'Seq',
@@ -22,11 +22,19 @@ export const signatureColumns: ColDef<SwcrSignature>[] = [
   },
   {
     field: 'By',
-    valueGetter: (pkg) => pkg.data?.functionalRole,
+    valueGetter: (pkg) => pkg.data?.signedBy,
     cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
-      return <StyledMonospace>{props.data?.functionalRole}</StyledMonospace>;
+      return <StyledMonospace>{props.data?.signedBy}</StyledMonospace>;
     },
-    minWidth: 200,
+    minWidth: 450,
+  },
+  {
+    field: 'Date',
+    valueGetter: (pkg) => pkg.data?.signedDate,
+    cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
+      return <StyledMonospace>{props.data?.signedDate}</StyledMonospace>;
+    },
+    minWidth: 100,
   },
 ];
 

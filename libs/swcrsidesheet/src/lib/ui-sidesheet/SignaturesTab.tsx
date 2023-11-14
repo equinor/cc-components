@@ -1,6 +1,6 @@
+import { TabTable } from '@cc-components/shared';
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { SwcrSignature } from '../types';
-import { TabTable } from '@cc-components/shared';
 import { signatureColumns } from '../utils-sidesheet/signatureColumns';
 
 type SignatureTabProps = {

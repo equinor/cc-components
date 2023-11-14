@@ -7,4 +7,5 @@ export type SwcrSignature = {
   signedDate: string;
   status: string;
   softwareChangeRecordId: string;
+  signedBy: string;
 };
