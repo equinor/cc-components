@@ -10,6 +10,7 @@ permissions: write-all
 jobs:
   deploy-manual-ci:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: 'Login to Azure'
         uses: azure/login@v1
@@ -31,7 +32,7 @@ jobs:
         run: npm i -g pnpm typescript && pnpm i
 
       - name: Build monorepo
-        run: pnpm ci:build
+        run: npx turbo run build --filter=${{inputs.appKey}}
 
       - name: 'Deploy affected apps to Fusion CI env'
         shell: bash

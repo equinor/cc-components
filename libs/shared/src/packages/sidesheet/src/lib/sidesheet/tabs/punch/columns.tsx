@@ -9,6 +9,14 @@ import { PunchBase } from './type';
 
 export const columns: ColDef<PunchBase>[] = [
   {
+    field: 'Punch No',
+    valueGetter: (pkg) => pkg.data?.punchItemNo,
+    cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
+      return <LinkCell url={props.data?.punchUrl ?? ''} urlText={props.value ?? ''} />;
+    },
+    minWidth: 150,
+  },
+  {
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {

@@ -1,5 +1,6 @@
 import {
   BaseStatus,
+  LinkCell,
   StatusCircle,
   StyledMonospace,
   statusColorMap,
@@ -12,21 +13,18 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     field: 'Tag',
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
-    },
-  },
-  {
-    field: 'Revision',
-    valueGetter: (pkg) => pkg.data?.revision,
-    cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      return (
+        <LinkCell url={props.data?.heatTraceCableUrl ?? ''} urlText={props.value ?? ''} />
+      );
     },
   },
   {
     field: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      return (
+        <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
+      );
     },
   },
   {
