@@ -1,6 +1,6 @@
 import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable/TabTable';
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
-import { columns } from './columns';
+import { columns } from './detailsColumns';
 import { SwcrBase } from './types';
 
 type SwcrTabProps<T> = {
