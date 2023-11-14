@@ -57,7 +57,7 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     headerName: 'RFCC',
-    valueGetter: (pkg) => pkg.data?.rfC_Status,
+    valueGetter: (pkg) => pkg.data?.rfcStatus,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
         content={`${props.value}`}
@@ -73,7 +73,7 @@ export const columns: ColDef<McBase>[] = [
   },
   {
     headerName: 'RFOC',
-    valueGetter: (pkg) => pkg.data?.rfO_Status,
+    valueGetter: (pkg) => pkg.data?.rfoStatus,
     cellRenderer: (props: ICellRendererProps<McBase, PackageStatus | undefined>) => (
       <StatusCell
         content={`${props.value}`}
