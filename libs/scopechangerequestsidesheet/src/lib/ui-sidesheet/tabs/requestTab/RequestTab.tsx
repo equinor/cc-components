@@ -2,7 +2,7 @@ import { StyledTabContent, TabTable } from '@cc-components/shared';
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { Checkbox } from '@equinor/eds-core-react';
 import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
-import { WorkflowChart } from '../WorkflowChart';
+import { WorkflowChart } from './workflow/WorkflowChart';
 
 import {
   StyledRequestColumn,
