@@ -78,10 +78,5 @@
     "react-is": "18.2.0",
     "rxjs": "^7.8.1",
     "styled-components": "5.3.6"
-  },
-  "pnpm": {
-    "overrides": {
-      "react-dom": "18.2.0"
-    }
   }
 }
