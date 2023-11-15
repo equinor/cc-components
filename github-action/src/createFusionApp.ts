@@ -82,9 +82,16 @@ program
 await program.parseAsync();
 
 async function getCategoriesAsync(
-  env: 'CI' | 'FPRD'
+  env: 'CI' | 'FPRD',
+  token: string
 ): Promise<{ name: string; id: string }[]> {
-  const res = await fetch(`${env === 'CI' ? ciUrl : prodUrl}/api/apps/categories`);
+  const res = await fetch(`${env === 'CI' ? ciUrl : prodUrl}/api/apps/categories`, {
+    method: 'GET',
+    headers: {
+      ['content-type']: 'application/json',
+      ['Authorization']: `Bearer ${token}`,
+    },
+  });
   return res.json();
 }
 
@@ -97,7 +104,7 @@ export async function createFusionApp(
   env: 'CI' | 'FPRD'
 ) {
   //TODO: fetch dynamically
-  const categories = await getCategoriesAsync(env);
+  const categories = await getCategoriesAsync(env, token);
 
   const category = categories.find((s) => s.name === categoryName);
 
