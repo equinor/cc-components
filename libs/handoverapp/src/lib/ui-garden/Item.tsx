@@ -96,14 +96,14 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
           }}
           isSelected={isSelected}
         >
+          <StyledSizes size={size} color={textColor} />
+          {data.hasUnsignedActions && <FlagIcon color={textColor} />}
+          <StyledItemText>{data.commissioningPackageNo}</StyledItemText>
           {showWarningIcon && (
             <StyledWarningIconWrapper>
               <WarningIcon />
             </StyledWarningIconWrapper>
           )}
-          <StyledSizes size={size} color={textColor} />
-          {data.hasUnsignedActions && <FlagIcon color={textColor} />}
-          <StyledItemText>{data.commissioningPackageNo}</StyledItemText>
           <StyledStatusCircles mcColor={mcPackageColor} commColor={commStatusColor} />
         </StyledItemWrapper>
 

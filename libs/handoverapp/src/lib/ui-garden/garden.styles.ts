@@ -18,7 +18,7 @@ export type ItemProps = {
 
 export const StyledItemWrapper = styled.div<ItemProps>`
   display: grid;
-  grid-template-columns: 15px 3fr auto;
+  grid-template-columns: 15px 0.75fr auto auto;
   align-items: center;
   box-sizing: border-box;
   position: relative;
@@ -69,7 +69,7 @@ type StatusCirclesProps = {
 };
 export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   display: flex;
-  grid-column: 3/4;
+  grid-column: 4;
   justify-content: end;
   align-items: center;
 
@@ -94,8 +94,8 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
 `;
 export const StyledWarningIconWrapper = styled.div`
   position: absolute;
-  top: -6px;
-  left: -10px;
+  top: 3px;
+  grid-column: 3;
   z-index: 1;
 `;
 //#endregion

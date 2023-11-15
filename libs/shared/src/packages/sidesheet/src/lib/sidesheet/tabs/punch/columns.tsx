@@ -9,7 +9,7 @@ import { PunchBase } from './type';
 
 export const columns: ColDef<PunchBase>[] = [
   {
-    field: 'Punch No',
+    headerName: 'Punch No',
     valueGetter: (pkg) => pkg.data?.punchItemNo,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <LinkCell url={props.data?.punchUrl ?? ''} urlText={props.value ?? ''} />;
@@ -17,7 +17,7 @@ export const columns: ColDef<PunchBase>[] = [
     minWidth: 150,
   },
   {
-    field: 'Tag',
+    headerName: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
@@ -25,7 +25,7 @@ export const columns: ColDef<PunchBase>[] = [
     minWidth: 150,
   },
   {
-    field: 'Description',
+    headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -34,17 +34,17 @@ export const columns: ColDef<PunchBase>[] = [
     flex: 2,
   },
   {
-    field: 'To be cleared by',
+    headerName: 'To be cleared by',
     valueGetter: (pkg) => pkg.data?.clearedBy,
     width: 160,
   },
   {
-    field: 'Status',
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return (
         <StatusCell
-          content={props.value}
+          content={props.value ?? null}
           cellAttributeFn={() => ({
             style: {
               backgroundColor: props.value
@@ -61,7 +61,7 @@ export const columns: ColDef<PunchBase>[] = [
     flex: 1,
   },
   {
-    field: 'Sorting',
+    headerName: 'Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
     minWidth: 100,
     flex: 1,
