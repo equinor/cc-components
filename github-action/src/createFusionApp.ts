@@ -6,7 +6,6 @@ import { OutgoingHttpHeaders } from 'http';
 import { HttpClient } from '@actions/http-client';
 
 import { logInfo } from './utils/logInfo.js';
-import { categories } from './appCategories.js';
 
 type FusionApp = {
   key: string;
@@ -14,7 +13,7 @@ type FusionApp = {
   shortName: string;
   description: string;
   owners: string[];
-  admins: string[];
+  admins: { azureUniqueId: string }[];
   accentColor: string;
   categoryId: string;
   icon: string;
@@ -43,7 +42,14 @@ program
   .option('-A, --appkey <appkey>')
   .option('-D, --displayname <displayname>')
   .option('-C, --category <category>')
+  .option('-O, --admins <admins>')
+  .option('-E, env <env>')
   .action(async (args) => {
+    const fusionEnv: string = args.env;
+    if (!['CI', 'FPRD'].includes(fusionEnv)) {
+      logInfo(`Unknown env ${fusionEnv}`, 'Red');
+      throw new Error(`Unknown env ${fusionEnv}`);
+    }
     if (!args.token) {
       throw new Error('Missing az token');
     }
@@ -57,19 +63,49 @@ program
       throw new Error(`Invalid category ${args.category}`);
     }
 
+    const admins = args.admins.split(',');
+    if (admins.length <= 0) {
+      throw new Error('Application needs atleast one admin');
+    }
+
     setSecret(args.token);
-    createFusionApp(args.token, args.appkey, args.displayname, args.category);
+    createFusionApp(
+      args.token,
+      args.appkey,
+      args.displayname,
+      args.category,
+      admins,
+      fusionEnv as 'CI' | 'FPRD'
+    );
   });
 
 await program.parseAsync();
+
+async function getCategoriesAsync(
+  env: 'CI' | 'FPRD',
+  token: string
+): Promise<{ name: string; id: string }[]> {
+  const res = await fetch(`${env === 'CI' ? ciUrl : prodUrl}/api/apps/categories`, {
+    method: 'GET',
+    headers: {
+      ['content-type']: 'application/json',
+      ['Authorization']: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
 
 export async function createFusionApp(
   token: string,
   appKey: string,
   displayName: string,
-  categoryName: string
+  categoryName: string,
+  admins: string[],
+  env: 'CI' | 'FPRD'
 ) {
   //TODO: fetch dynamically
+  const categories = await getCategoriesAsync(env, token);
+
   const category = categories.find((s) => s.name === categoryName);
 
   if (!category) {
@@ -82,7 +118,7 @@ export async function createFusionApp(
     shortName: appKey,
     description: '.',
     owners: [],
-    admins: [],
+    admins: admins.map((s) => ({ azureUniqueId: s })),
     accentColor: category.name,
     categoryId: category.id,
     icon: '',
@@ -98,8 +134,7 @@ export async function createFusionApp(
     hide: true,
   };
 
-  await createApplicationAsync('CI', payload, token);
-  //   await createApplicationAsync('FPRD', payload, token);
+  await createApplicationAsync(env, payload, token);
 }
 
 async function createApplicationAsync(
