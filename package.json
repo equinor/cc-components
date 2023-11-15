@@ -65,7 +65,6 @@
     "@equinor/fusion-framework-react-app": "^4.1.8",
     "@equinor/fusion-framework-react-module-context": "^6.0.14",
     "@equinor/fusion-observable": "8.1.2",
-    "@equinor/fusion-react-styles": "^0.6.0",
     "@equinor/workspace-fusion": "5.4.3-alpha.1",
     "@equinor/workspace-sidesheet": "^0.1.6",
     "@microsoft/applicationinsights-web": "^3.0.3",
