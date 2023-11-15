@@ -7,12 +7,12 @@ import { useGetChecklists } from '../utils-sidesheet';
 
 const columns: ColDef<ChecklistForLoop>[] = [
   {
-    field: 'Group',
+    headerName: 'Group',
     valueGetter: (pkg) => pkg.data?.formularGroup,
     width: 100,
   },
   {
-    field: 'Comm Pkg',
+    headerName: 'Comm Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
       return props.value ? (
@@ -39,7 +39,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
     width: 100,
   },
   {
-    field: 'Checklist status',
+    headerName: 'Checklist Status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
       if (props.value) {
@@ -61,7 +61,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
     width: 100,
   },
   {
-    field: 'Form type',
+    headerName: 'Form Type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
       return props.value ? (
@@ -73,7 +73,7 @@ const columns: ColDef<ChecklistForLoop>[] = [
     width: 100,
   },
   {
-    field: 'Responsible',
+    headerName: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
     width: 100,
   },

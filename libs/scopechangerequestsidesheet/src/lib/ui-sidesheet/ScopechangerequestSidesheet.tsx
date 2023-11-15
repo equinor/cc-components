@@ -2,7 +2,7 @@ import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { Tabs } from '@equinor/eds-core-react';
 import { createWidget } from '@cc-components/shared';
 import { useRef, useState } from 'react';
-import { RequestTab } from './tabs/RequestTab';
+import { RequestTab } from './tabs/requestTab/RequestTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 import { useQuery } from '@tanstack/react-query';
 import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
@@ -19,7 +19,6 @@ import {
 } from '@cc-components/sharedcomponents';
 import { useGetWorkorders } from '../utils-sidesheet/useGetWorkorders';
 import { useGetHistory } from '../utils-sidesheet/useGetHistory';
-
 import { Logtab } from './tabs/LogTab';
 
 export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
@@ -67,7 +66,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
     return (
       <StyledSideSheetContainer>
         <SidesheetHeader
-          title={scopechange.serialNumber + ' - ' + scopechange.title || ''}
+          title={scopechange.serialNumber + ' - ' + scopechange.title || 'N/A'}
           applicationTitle={'Scope Change Request'}
           onClose={props.closeSidesheet}
         />
@@ -75,43 +74,43 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
           <BannerItem
             title="Phase"
             value={
-              !scopechange.phase ? (
-                ''
+              !!scopechange.phase ? (
+                <LinkCell url={scopechange.phase} urlText={'scopechange.phase'} />
               ) : (
-                <LinkCell url={scopechange.phase} urlText={scopechange.phase} />
+                'N/A'
               )
             }
           />
           <BannerItem
             title="Change Category"
             value={
-              !scopechange.changeCategory ? (
-                ''
-              ) : (
+              !!scopechange.changeCategory ? (
                 <LinkCell
                   url={scopechange.changeCategory.name}
                   urlText={scopechange.changeCategory.name}
                 />
+              ) : (
+                'N/A'
               )
             }
           />
           <BannerItem
             title="Scope"
             value={
-              !scopechange.scope ? (
-                ''
-              ) : (
+              !!scopechange.scope ? (
                 <LinkCell url={scopechange.scope.name} urlText={scopechange.scope.name} />
+              ) : (
+                'N/A'
               )
             }
           />
           <BannerItem
             title="State"
             value={
-              !scopechange.state ? (
-                ''
-              ) : (
+              !!scopechange.state ? (
                 <LinkCell url={scopechange.state} urlText={scopechange.state} />
+              ) : (
+                'N/A'
               )
             }
           />
@@ -121,7 +120,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
             <StyledTabsList ref={ref}>
               <Tabs.Tab>Request </Tabs.Tab>
               <Tabs.Tab>Work orders</Tabs.Tab>
-              <Tabs.Tab>Logs</Tabs.Tab>
+              <Tabs.Tab>Log</Tabs.Tab>
             </StyledTabsList>
           </StyledTabListWrapper>
 

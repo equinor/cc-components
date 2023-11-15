@@ -9,6 +9,7 @@ jobs:
     # only run if pull request is approved and QA is required
     if: contains(github.event.comment.body, 'deploy test')
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: 'Login to Azure'
         uses: azure/login@v1

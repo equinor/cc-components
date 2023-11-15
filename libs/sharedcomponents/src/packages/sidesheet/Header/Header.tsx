@@ -84,7 +84,13 @@ export const SidesheetHeader = ({
         <StyledUrlWrapper>
           <StyledTitle> {title}</StyledTitle>
           {url ? (
-            <Button style={{ width: '150px' }} variant="ghost" href={url}>
+            <Button
+              style={{ width: '150px' }}
+              variant="ghost"
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Open in ProCoSys
               <Icon name="external_link" size={16}></Icon>
             </Button>

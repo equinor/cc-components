@@ -6,7 +6,7 @@ export const StyledRoot = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: 5px;
+  margin-left: 2px;
   position: relative;
 `;
 
@@ -18,7 +18,7 @@ export type ItemProps = {
 
 export const StyledItemWrapper = styled.div<ItemProps>`
   display: grid;
-  grid-template-columns: 15px 3fr auto;
+  grid-template-columns: 15px 0.75fr auto auto;
   align-items: center;
   box-sizing: border-box;
   position: relative;
@@ -28,10 +28,10 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   font-weight: 500;
   font-size: 13px;
   padding: 0 2px 0 20px;
-  
+
   background: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor};
-  
+
   outline: ${(props) => (props.isSelected ? '2px dashed green' : 'none')};
   outline-offset: ${(props) => (props.isSelected ? '2px' : '0')};
 `;
@@ -69,7 +69,7 @@ type StatusCirclesProps = {
 };
 export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   display: flex;
-  grid-column: 3/4;
+  grid-column: 4;
   justify-content: end;
   align-items: center;
 
@@ -94,8 +94,8 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
 `;
 export const StyledWarningIconWrapper = styled.div`
   position: absolute;
-  top: -6px;
-  left: -10px;
+  top: 3px;
+  grid-column: 3;
   z-index: 1;
 `;
 //#endregion

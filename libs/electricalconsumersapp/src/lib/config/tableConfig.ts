@@ -56,59 +56,59 @@ export const useTableConfig = (
 
 const columnDefinitions: ColDef<ElectricalConsumer>[] = [
   {
-    field: 'tagNo',
+    headerName: 'tagNo',
     colId: 'TagNo',
   },
   {
-    field: 'commissioningPackageNo',
+    headerName: 'commissioningPackageNo',
     colId: 'CommissioningPackageNo',
   },
   {
-    field: 'mechanicalCompletionPackageNo',
+    headerName: 'mechanicalCompletionPackageNo',
     colId: 'MechanicalCompletionPackageNo',
   },
   {
-    field: 'instCode',
+    headerName: 'instCode',
     colId: 'InstCode',
   },
   {
-    field: 'consumerType',
+    headerName: 'consumerType',
     colId: 'ConsumerType',
   },
   {
-    field: 'description',
+    headerName: 'description',
     colId: 'Description',
   },
   {
-    field: 'tagCategory',
+    headerName: 'tagCategory',
     colId: 'TagCategory',
   },
   {
-    field: 'tagCategoryDescription',
+    headerName: 'tagCategoryDescription',
     colId: 'TagCategoryDescription',
   },
   {
-    field: 'tagStatus',
+    headerName: 'tagStatus',
     colId: 'TagStatus',
   },
   {
-    field: 'componentType',
+    headerName: 'componentType',
     colId: 'ComponentType',
   },
   {
-    field: 'eleSymbolCode',
+    headerName: 'eleSymbolCode',
     colId: 'EleSymbolCode',
   },
   {
-    field: 'cubicleId',
+    headerName: 'cubicleId',
     colId: 'CubicleId',
   },
   {
-    field: 'drawerId',
+    headerName: 'drawerId',
     colId: 'DrawerId',
   },
   {
-    field: 'branchId',
+    headerName: 'branchId',
     colId: 'BranchId',
   },
 ];
