@@ -12,8 +12,8 @@ export type HandoverMcpkg = {
   mcPkgId: string;
   description: string | null;
   mechanicalCompletionStatus: string | null;
-  rfO_Status: string | null;
-  rfC_Status: string | null;
+  rfoStatus: string | null;
+  rfcStatus: string | null;
   mechanicalCompletionPackageUrl: string;
   punchAcceptedActualtDate: string | null;
 } & HandoverChild;
