@@ -13,7 +13,11 @@ export function useWorkspaceBookmarks() {
   const bookmarkHandler = useBookmark<Partial<Bookmark>>();
 
   useEffect(() => {
-    const unsub = bookmarkHandler.addBookmarkCreator(async () => bookmarkRef.current);
+    console.log('Registering handler');
+    const unsub = bookmarkHandler.addBookmarkCreator(async () => {
+      console.log('bookmark requested');
+      return bookmarkRef.current;
+    });
 
     return () => {
       typeof unsub === 'function' && unsub();
