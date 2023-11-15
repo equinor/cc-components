@@ -145,6 +145,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
                   ? statusColorMap[props.item.mechanicalCompletionStatus]
                   : 'transparent'
               }
+              infoMessage="Commissioning Package has non-counting scope"
             />
           }
         />
