@@ -9,7 +9,7 @@ import {
 
 export const columns: ColDef<NcrBase>[] = [
   {
-    field: 'Document No.',
+    headerName: 'Document No.',
     valueGetter: (pkg) => pkg.data?.documentNumber,
     cellRenderer: (props: ICellRendererProps<NcrBase, string>) => {
       if (props.data) {
@@ -21,7 +21,7 @@ export const columns: ColDef<NcrBase>[] = [
     flex: 1,
   },
   {
-    field: 'Title',
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<NcrBase, string | null>) => {
       return <DescriptionCell description={props.value} displayFullText />;
