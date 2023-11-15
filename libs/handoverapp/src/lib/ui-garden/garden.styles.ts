@@ -18,7 +18,7 @@ export type ItemProps = {
 
 export const StyledItemWrapper = styled.div<ItemProps>`
   display: grid;
-  grid-template-columns: 15px auto auto auto;
+  grid-template-columns: 15px 0.75fr auto auto;
   align-items: center;
   box-sizing: border-box;
   position: relative;
