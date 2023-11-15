@@ -6,7 +6,6 @@ import { OutgoingHttpHeaders } from 'http';
 import { HttpClient } from '@actions/http-client';
 
 import { logInfo } from './utils/logInfo.js';
-import { categories } from './appCategories.js';
 
 type FusionApp = {
   key: string;
@@ -82,6 +81,13 @@ program
 
 await program.parseAsync();
 
+async function getCategoriesAsync(
+  env: 'CI' | 'FPRD'
+): Promise<{ name: string; id: string }[]> {
+  const res = await fetch(`${env === 'CI' ? ciUrl : prodUrl}/api/apps/categories`);
+  return res.json();
+}
+
 export async function createFusionApp(
   token: string,
   appKey: string,
@@ -91,6 +97,8 @@ export async function createFusionApp(
   env: 'CI' | 'FPRD'
 ) {
   //TODO: fetch dynamically
+  const categories = await getCategoriesAsync(env);
+
   const category = categories.find((s) => s.name === categoryName);
 
   if (!category) {
