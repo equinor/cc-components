@@ -74,7 +74,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
           <BannerItem
             title="Phase"
             value={
-              scopechange.phase ? (
+              !!scopechange.phase ? (
                 <LinkCell url={scopechange.phase} urlText={'scopechange.phase'} />
               ) : (
                 'N/A'
@@ -84,7 +84,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
           <BannerItem
             title="Change Category"
             value={
-              scopechange.changeCategory ? (
+              !!scopechange.changeCategory ? (
                 <LinkCell
                   url={scopechange.changeCategory.name}
                   urlText={scopechange.changeCategory.name}
@@ -97,7 +97,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
           <BannerItem
             title="Scope"
             value={
-              scopechange.scope ? (
+              !!scopechange.scope ? (
                 <LinkCell url={scopechange.scope.name} urlText={scopechange.scope.name} />
               ) : (
                 'N/A'
@@ -107,7 +107,7 @@ export const ScopechangerequestSidesheet = createWidget<ScopeChangeRequest>(
           <BannerItem
             title="State"
             value={
-              scopechange.state ? (
+              !!scopechange.state ? (
                 <LinkCell url={scopechange.state} urlText={scopechange.state} />
               ) : (
                 'N/A'
