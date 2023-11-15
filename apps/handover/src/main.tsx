@@ -12,4 +12,5 @@ const HandoverApp = () => {
 };
 
 export const render = createRender(HandoverApp, configure, 'Handover');
+
 export default render;
