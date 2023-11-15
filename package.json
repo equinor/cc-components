@@ -21,7 +21,7 @@
     "new:report": "nx generate @cc-components/plugins:fusion-report-generator"
   },
   "devDependencies": {
-    "@equinor/fusion-framework-cli": "^9.3.5",
+    "@equinor/fusion-framework-cli": "^9.4.1",
     "@nrwl/devkit": "16.9.1",
     "@nrwl/js": "^17.0.2",
     "@swc-node/register": "1.6.7",
