@@ -1,11 +1,11 @@
-name: Manual deploy fusion app
+name: Manual deploy fusion app PROD
 
 on:
   workflow_dispatch:
     inputs:
       appKey:
         type: string
-        description: Which app to deploy to test
+        description: Which app to deploy to production
 permissions: write-all
 jobs:
   deploy-manual-fprd:
