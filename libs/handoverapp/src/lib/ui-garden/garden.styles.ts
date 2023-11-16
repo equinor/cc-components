@@ -60,7 +60,6 @@ export const StyledItemText = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 280px;
 `;
 
 type StatusCirclesProps = {
