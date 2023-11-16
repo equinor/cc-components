@@ -14,7 +14,7 @@ export const columns = (
 ): ColDef<WorkorderBase>[] => {
   return [
     {
-      field: 'WO',
+      headerName: 'WO',
       valueGetter: (pkg) => pkg.data?.workOrderNumber,
       cellRenderer: (props: ICellRendererProps<WorkorderBase, string | null>) => {
         return (
@@ -27,7 +27,7 @@ export const columns = (
       minWidth: 200,
     },
     {
-      field: 'Title',
+      headerName: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
@@ -35,17 +35,17 @@ export const columns = (
       minWidth: 200,
     },
     {
-      field: 'Discipline',
+      headerName: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
       width: 130,
     },
     {
-      field: 'Status',
+      headerName: 'Status',
       valueGetter: (pkg) => pkg.data?.jobStatus,
       width: 120,
     },
     {
-      field: 'Plan. finish',
+      headerName: 'Plan. finish',
       valueGetter: (pkg) => pkg.data?.plannedFinishDate,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
@@ -53,7 +53,7 @@ export const columns = (
       width: 100,
     },
     {
-      field: 'Act. finish',
+      headerName: 'Act. finish',
       valueGetter: (pkg) => pkg.data?.actualCompletionDate,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
@@ -61,7 +61,7 @@ export const columns = (
       width: 100,
     },
     {
-      field: 'Progress',
+      headerName: 'Progress',
       valueGetter: (pkg) => pkg.data?.projectProgress,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return (
@@ -73,7 +73,7 @@ export const columns = (
       width: 140,
     },
     {
-      field: 'Estimated',
+      headerName: 'Estimated',
       valueGetter: (pkg) => pkg.data?.estimatedHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (maxEstimatedHours === null) {
@@ -92,7 +92,7 @@ export const columns = (
       width: 140,
     },
     {
-      field: 'Remaining',
+      headerName: 'Remaining',
       valueGetter: (pkg) => pkg.data?.remainingHours,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         if (maxRemainingHours === null) {

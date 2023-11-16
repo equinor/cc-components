@@ -5,41 +5,40 @@ import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/c
 
 export const columns: ColDef<MaterialBase>[] = [
   {
-    field: 'Available',
+    headerName: 'Available',
     valueGetter: (pkg) => pkg.data?.available,
     cellRenderer: (props: ICellRendererProps<MaterialBase, boolean | null>) => {
-      return <AvailableItemCell available={props.value} />;
+      return <AvailableItemCell available={props.value ?? null} />;
     },
     minWidth: 120,
   },
   {
-    field: '#',
     headerName: '#',
     minWidth: 90,
     valueGetter: (pkg) => pkg.data?.itemNumber,
     valueFormatter: (pkg) => pkg.data?.itemNumber ?? '',
   },
   {
-    field: 'Description',
+    headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<MaterialBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
   },
   {
-    field: 'QTY',
+    headerName: 'QTY',
     valueGetter: (pkg) => pkg.data?.quantity,
   },
   {
-    field: 'Info',
+    headerName: 'Info',
     valueGetter: (pkg) => pkg.data?.information,
   },
   {
-    field: 'Status',
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
   },
   {
-    field: 'Stock Location',
+    headerName: 'Stock Location',
     valueGetter: (pkg) => pkg.data?.stockLocation,
   },
 ];

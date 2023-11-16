@@ -7,8 +7,8 @@ import {
   StyledRequestTabWrapper,
   VerticalLine,
   WorklowIconAndLine,
-} from './tabs/requestTab.styles';
-import { StyledWorkflowText } from './tabs/requestTab.styles';
+} from '../requestTab.styles';
+import { StyledWorkflowText } from '../requestTab.styles';
 
 type WorkflowChartProps = {
   scopechange?: ScopeChangeRequest | undefined;

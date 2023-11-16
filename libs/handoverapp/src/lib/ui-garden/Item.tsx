@@ -18,9 +18,7 @@ import { ItemOptions } from './types';
 
 const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
-    null
-  );
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
@@ -28,14 +26,14 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     data,
     onClick,
     columnExpanded,
+    width: itemWidth = 300,
     depth,
-    width: itemWidth = 100,
     isSelected,
     rowStart,
     columnStart,
     parentRef,
   } = props;
-  //TODO Context.MAXSIZE
+
   const size = getItemSize(data.volume, 100 || 0);
 
   const backgroundColor = useMemo(
@@ -52,7 +50,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     data.commissioningPackageStatus === 'RFC Accepted';
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
-  const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
+  const fittedWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const options: ItemOptions = {
     size,
@@ -63,37 +61,49 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     commStatusColor,
     showWarningIcon,
   };
+  const handleMouseEnter = () => {
+    // Clear any existing timeouts
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    // Set the new timeout
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (!isOpen) setIsOpen(true);
+    }, 500);
+  };
 
+  const handleMouseLeave = () => {
+    // Clear the timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null; // Reset the timeout ref to null
+    }
+    // Close the popover immediately
+    setIsOpen(false);
+  };
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
           ref={anchorRef}
-          onMouseOver={() => {
-            hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
-            setHoverTimeout(setTimeout(() => setIsOpen(true), 700));
-          }}
-          onMouseOut={() => {
-            hoverTimeout && clearTimeout(hoverTimeout);
-            setIsOpen(false);
-          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           backgroundColor={backgroundColor}
           textColor={textColor}
           onClick={onClick}
           style={{
-            width: `${columnExpanded ? 100 : width}%`,
-            maxWidth: columnExpanded ? '200px' : maxWidth,
+            minWidth: fittedWidth,
           }}
           isSelected={isSelected}
         >
+          <StyledSizes size={size} color={textColor} />
+          {data.hasUnsignedActions && <FlagIcon color={textColor} />}
+          <StyledItemText>{data.commissioningPackageNo}</StyledItemText>
           {showWarningIcon && (
             <StyledWarningIconWrapper>
               <WarningIcon />
             </StyledWarningIconWrapper>
           )}
-          <StyledSizes size={size} color={textColor} />
-          {data.hasUnsignedActions && <FlagIcon color={textColor} />}
-          <StyledItemText>{data.commissioningPackageNo}</StyledItemText>
           <StyledStatusCircles mcColor={mcPackageColor} commColor={commStatusColor} />
         </StyledItemWrapper>
 
