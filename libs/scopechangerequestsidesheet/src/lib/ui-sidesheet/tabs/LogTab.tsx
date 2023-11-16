@@ -7,8 +7,8 @@ import {
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { Checkbox } from '@equinor/eds-core-react';
 import { LogEntry, ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
-import { WorkflowChart } from '../WorkflowChart';
-import { VerticalLine } from './requestTab.styles';
+import { WorkflowChart } from './requestTab/workflow/WorkflowChart';
+import { VerticalLine } from './requestTab/requestTab.styles';
 
 type LogTabProps = {
   logEntry?: LogEntry[] | undefined;

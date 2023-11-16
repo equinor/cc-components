@@ -9,6 +9,7 @@ import {
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
+import { useHttpClient as useFrameworkClient } from '@equinor/fusion-framework-react-app/http';
 import {
   BannerItem,
   SidesheetHeader,
@@ -129,6 +130,7 @@ function EnsureHeatTrace({ id, item, close }: HeatTraceProps) {
 }
 
 const useCircuitDiagramTab = (ht: HeatTrace) => {
+  const eleClient = useFrameworkClient('electrical-api');
   const client = useHttpClient();
   const contextId = useContextId();
   const { width, setWidth } = useResizeContext();
@@ -146,7 +148,7 @@ const useCircuitDiagramTab = (ht: HeatTrace) => {
     /**Change facility to project */
     /** facility*/ [ht.heatTraceCableNo, ht.facility, ht.project],
     async ({ signal }) => {
-      const res = await client.fetch(
+      const res = await eleClient.fetch(
         `api/contexts/${contextId}/electrical/consumers/electrical-network/${encodeURIComponent(
           ht.heatTraceCableNo
         )}/${ht.facility}`,

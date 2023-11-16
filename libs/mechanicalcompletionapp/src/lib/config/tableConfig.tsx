@@ -1,4 +1,3 @@
-import { McPackage, McStatus } from 'libs/mechanicalcompletionshared';
 import {
   DescriptionCell,
   LinkCell,
@@ -15,6 +14,7 @@ import {
   GridConfig,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
+import { McPackage, McStatus } from 'libs/mechanicalcompletionshared';
 
 import { useHttpClient } from '@cc-components/shared';
 import {
@@ -62,7 +62,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
 
 const columnDefinitions: ColDef<McPackage>[] = [
   {
-    field: 'MC Pkg',
+    headerName: 'MC Pkg',
     colId: 'MCPkgNo',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     valueFormatter: (pkg) => pkg.data?.mechanicalCompletionPackageUrl ?? '',
@@ -75,7 +75,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 140,
   },
   {
-    field: 'Description',
+    headerName: 'Description',
     colId: 'Description',
     headerTooltip: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
@@ -85,7 +85,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 300,
   },
   {
-    field: 'Discipline',
+    headerName: 'Discipline',
     colId: 'Discipline',
     headerTooltip: 'Discipline',
     valueGetter: (pkg) => pkg.data?.discipline,
@@ -93,14 +93,14 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 144,
   },
   {
-    field: 'MC Status',
+    headerName: 'MC Status',
     colId: 'McStatus',
     headerTooltip: 'Mechanical Completion Status',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
       return (
         <StatusCell
-          content={props.value}
+          content={props.value as string}
           cellAttributeFn={() => ({
             style: {
               backgroundColor: props.value ? statusColorMap[props.value] : 'transparent',
@@ -113,7 +113,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 150,
   },
   {
-    field: 'Responsible',
+    headerName: 'Responsible',
     colId: 'Responsible',
     headerTooltip: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
@@ -121,7 +121,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 150,
   },
   {
-    field: 'Phase',
+    headerName: 'Phase',
     colId: 'Phase',
     headerTooltip: 'mechanicalCompletionPhase',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPhase,
@@ -129,7 +129,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 150,
   },
   {
-    field: 'Location',
+    headerName: 'Location',
     colId: 'Location',
     headerTooltip: 'Location',
     valueGetter: (pkg) => pkg.data?.location,
@@ -140,7 +140,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 150,
   },
   {
-    field: 'Comm Pkg',
+    headerName: 'Comm Pkg',
     colId: 'CommPkg',
     headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
@@ -154,7 +154,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 185,
   },
   {
-    field: 'System',
+    headerName: 'System',
     colId: 'System',
     headerTooltip: 'System',
     valueGetter: (pkg) => pkg.data?.system,
@@ -165,37 +165,37 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 125,
   },
   {
-    field: 'Actual M-01 Actual Date',
+    headerName: 'Actual M-01 Actual Date',
     colId: 'PlannedM1FinalPunch',
     headerTooltip: 'finalPunchPlannedDate',
     valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-      return <YearAndWeekCell dateString={props.value} />;
+      return <YearAndWeekCell dateString={props.value!} />;
     },
     minWidth: 250,
   },
   {
-    field: 'Actual M-02 RFC',
+    headerName: 'Actual M-02 RFC',
     colId: 'ActualM2ActualDate',
     headerTooltip: 'finalPunchActualDate',
     valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-      return <YearAndWeekCell dateString={props.value} />;
+      return <YearAndWeekCell dateString={props.value!} />;
     },
     minWidth: 210,
   },
   {
-    field: 'Actual M-03 RFC',
+    headerName: 'Actual M-03 RFC',
     colId: 'CommPri3',
     headerTooltip: 'rfC_ActualDate',
     valueGetter: (pkg) => pkg.data?.rfC_ActualDate,
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
-      return <YearAndWeekCell dateString={props.value} />;
+      return <YearAndWeekCell dateString={props.value!} />;
     },
     minWidth: 200,
   },
   {
-    field: 'Comm Pri1',
+    headerName: 'Comm Pri1',
     colId: 'CommPri1',
     headerTooltip: 'Commissioning Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
@@ -203,7 +203,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 155,
   },
   {
-    field: 'Comm Pri2',
+    headerName: 'Comm Pri2',
     colId: 'CommPri2',
     headerTooltip: 'Commissioning Priority 2',
     valueGetter: (pkg) => pkg.data?.priority2,
@@ -211,7 +211,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
     minWidth: 155,
   },
   {
-    field: 'Comm Pri3',
+    headerName: 'Comm Pri3',
     colId: 'CommPri3',
     headerTooltip: 'Commissioning Priority 3',
     valueGetter: (pkg) => pkg.data?.priority3,
