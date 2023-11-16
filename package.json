@@ -79,6 +79,18 @@
   "pnpm": {
     "overrides": {
       "react-dom": "18.2.0"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react-dom": "18",
+        "react": "18"
+      },
+      "ignoreMissing": [
+        "react",
+        "react-dom",
+        "@babel/*",
+        "@types/*"
+      ]
     }
   }
 }
