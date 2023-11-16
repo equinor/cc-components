@@ -31,10 +31,16 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     defaultScopes: envConfig?.defaultScopes,
   });
 
+  config.configureHttpClient('electrical-api', {
+    baseUri: envConfig?.electricalUri,
+    defaultScopes: envConfig?.defaultScopes,
+  });
+
   enableAgGrid(config);
 };
 
 type HeattraceEnvConfig = {
   uri: string;
   defaultScopes: string[];
+  electricalUri: string;
 };
