@@ -809,6 +809,15 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  reports/workorder-area-overview:
+    dependencies:
+      '@cc-components/powerbi':
+        specifier: workspace:^
+        version: link:../../libs/powerbiapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
 packages:
 
   /@actions/core@1.10.0:
