@@ -15,7 +15,7 @@ program
   .command('issue')
   .option('-T, --token <token>', 'change the working directory')
   .option('-C --ci <ci>', 'Fusion CI token')
-  .option('-F -fprd <fprd>', 'Fusion prod token')
+  .option('-F --fprd <fprd>', 'Fusion prod token')
   .action(async (args) => {
     if (!args.token) {
       throw new Error('Missing github token');
