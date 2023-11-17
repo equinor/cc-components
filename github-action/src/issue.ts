@@ -69,12 +69,7 @@ export async function release(token: string, ciToken: string, fprdToken: string)
 
   const table = markdownTable([
     ['Key', 'Name', 'Test', 'Prod'],
-    ...appStatus.map((s) => [
-      s.key,
-      s.name,
-      s.publishedTest,
-      s.publishedProd ? '✅' : '❌',
-    ]),
+    ...appStatus.map((s) => [s.key, s.name, s.publishedTest, s.publishedProd]),
   ]);
 
   const res = await client.rest.issues.update({
