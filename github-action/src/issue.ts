@@ -37,8 +37,8 @@ await program.parseAsync();
 type FusionAppStatus = {
   key: string;
   name: string;
-  publishedTest: boolean;
-  publishedProd: boolean;
+  publishedTest: string;
+  publishedProd: string;
 };
 
 export async function release(token: string, ciToken: string, fprdToken: string) {
@@ -58,8 +58,12 @@ export async function release(token: string, ciToken: string, fprdToken: string)
       return {
         key: x,
         name: maybeCiApp?.name ?? maybeProdApp?.name ?? x,
-        publishedProd: !!maybeProdApp?.isPublished,
-        publishedTest: !!maybeCiApp?.isPublished,
+        publishedProd: !!maybeProdApp?.isPublished
+          ? `${new Date(maybeProdApp.publishedDate).toLocaleDateString('en-gb')} ✅`
+          : '❌',
+        publishedTest: !!maybeCiApp?.isPublished
+          ? `${new Date(maybeCiApp.publishedDate).toLocaleDateString('en-gb')} ✅`
+          : '❌',
       };
     });
 
@@ -68,7 +72,7 @@ export async function release(token: string, ciToken: string, fprdToken: string)
     ...appStatus.map((s) => [
       s.key,
       s.name,
-      s.publishedTest ? '✅' : '❌',
+      s.publishedTest,
       s.publishedProd ? '✅' : '❌',
     ]),
   ]);
@@ -105,6 +109,7 @@ export async function getFusionApps(
       name: s.name,
       key: s.key,
       isPublished: !!s.publishedDate,
+      publishedDate: s.publishedDate,
     })
   );
   return data;
@@ -120,4 +125,5 @@ type IssueFusionApp = {
   name: string;
   key: string;
   isPublished: boolean;
+  publishedDate: string | null;
 };
