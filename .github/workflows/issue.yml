@@ -5,13 +5,15 @@ on:
     branches: ['main']
   pull_request:
     types: [opened, synchronize]
-permissions: write-all
+permissions:
+  issues: write
+  id-token: write
 jobs:
   update-issue:
     name: Update issue
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    environment: ci
+    environment: fprd
 
     steps:
       - name: Checkout
@@ -33,6 +35,17 @@ jobs:
         shell: bash
         run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
 
+      - name: 'Login to Azure'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_PROD_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: 'Obtain fusion token'
+        shell: bash
+        run: echo "FUSION_PROD_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_PROD_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
+
       - name: 'Update issue'
         shell: bash
-        run: npx ts-node --esm ./github-action/src/issue.ts issue -T ${{ github.token }} -C ${{env.FUSION_TOKEN}}
+        run: npx ts-node --esm ./github-action/src/issue.ts issue -T ${{ github.token }} -C ${{env.FUSION_TOKEN}} -F ${{env.FUSION_PROD_TOKEN}}

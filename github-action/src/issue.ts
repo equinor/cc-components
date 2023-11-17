@@ -15,6 +15,7 @@ program
   .command('issue')
   .option('-T, --token <token>', 'change the working directory')
   .option('-C --ci <ci>', 'Fusion CI token')
+  .option('-F -fprd <fprd>', 'Fusion prod token')
   .action(async (args) => {
     if (!args.token) {
       throw new Error('Missing github token');
@@ -22,20 +23,54 @@ program
     if (!args.ci) {
       throw new Error('Missing ci token');
     }
+    if (!args.fprd) {
+      throw new Error('Missing fprd token');
+    }
     setSecret(args.token);
-    release(args.token, args.ci);
+    setSecret(args.ci);
+    setSecret(args.fprd);
+    release(args.token, args.ci, args.fprd);
   });
 
 await program.parseAsync();
 
-export async function release(token: string, ciToken: string) {
+type FusionAppStatus = {
+  key: string;
+  name: string;
+  publishedTest: boolean;
+  publishedProd: boolean;
+};
+
+export async function release(token: string, ciToken: string, fprdToken: string) {
   const client = getOctokit(token);
 
-  const apps = await getFusionApps(ciUrl, ciToken);
+  const ciApps = await getFusionApps(ciUrl, ciToken);
+  const fprdApps = await getFusionApps(prodUrl, fprdToken);
+
+  const appStatus = ciApps
+    .map((s) => s.key)
+    .concat(fprdApps.map((s) => s.key))
+    .filter((v, i, a) => a.indexOf(v) === i)
+    .map((x): FusionAppStatus => {
+      const maybeCiApp = ciApps.find((s) => s.key === x);
+
+      const maybeProdApp = fprdApps.find((s) => s.key === x);
+      return {
+        key: x,
+        name: maybeCiApp?.name ?? maybeProdApp?.name ?? x,
+        publishedProd: !!maybeProdApp?.isPublished,
+        publishedTest: !!maybeCiApp?.isPublished,
+      };
+    });
 
   const table = markdownTable([
-    ['Key', 'Name', 'IsPublished'],
-    ...apps.map((s) => [s.key, s.name, s.isPublished ? '✅' : '❌']),
+    ['Key', 'Name', 'Test', 'Prod'],
+    ...appStatus.map((s) => [
+      s.key,
+      s.name,
+      s.publishedTest ? '✅' : '❌',
+      s.publishedProd ? '✅' : '❌',
+    ]),
   ]);
 
   const res = await client.rest.issues.update({
