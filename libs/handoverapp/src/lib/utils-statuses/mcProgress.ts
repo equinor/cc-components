@@ -8,46 +8,28 @@ type McProgress = {
 };
 
 const mcProgressMap: McProgress[] = [
-  // OS
+  {
+    color: () => colorMap['RFO Accepted'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
+  },
+  {
+    color: () => colorMap['RFO Sent'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
+  },
+  {
+    color: () => colorMap['RFC Accepted'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
+  },
+  {
+    color: () => colorMap['RFC Sent'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
+  },
   {
     color: () => '#d9eaf2',
     accessor: (item) => item.mechanicalCompletionPkgsCount,
   },
-  // RFC Sent or Rejected
-  {
-    color: (item) =>
-      item.isRfcRejected
-        ? colorMap[item.commissioningPackageStatus]
-        : colorMap['RFC Sent'],
-    accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
-  },
-  // TAC or RFC
-  {
-    color: (item) => {
-      if (status.includes('TAC')) {
-        return colorMap[item.commissioningPackageStatus];
-      }
-      return item.isRfcRejected ? colorMap[item.commissioningPackageStatus] : '#7cb342';
-    },
-    accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
-  },
-  // RFO Sent or Rejected
-  {
-    color: (item) =>
-      item.isRfoRejected
-        ? colorMap[item.commissioningPackageStatus]
-        : colorMap['RFO Sent'],
-    accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
-  },
-  // Final color for RFO
-  {
-    color: (item) =>
-      item.isRfoRejected ? colorMap[item.commissioningPackageStatus] : '#0035bc',
-    accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
-  },
 ];
 
-// Calculates the progress percentage for a given package
 const calculateProgressPercentage = (
   item: HandoverPackage,
   accessor: (item: HandoverPackage) => number
@@ -58,26 +40,16 @@ const calculateProgressPercentage = (
     : (count / item.mechanicalCompletionPkgsCount) * 100;
 };
 
-// Function to create a progress gradient based on the package status
 export const createProgressGradient = (
   item: HandoverPackage,
   status: PackageStatus = item.dynamicCommissioningStatus
 ): string => {
-  const baseColor = colorMap[status];
-  let gradientWidth = 0;
+  let gradientSegments: string[] = [];
 
   mcProgressMap.forEach((mcProgress) => {
     const width = calculateProgressPercentage(item, mcProgress.accessor);
-    if (width > 0) {
-      gradientWidth = Math.floor(width);
-    }
+    gradientSegments.push(`${mcProgress.color(item)} 0% ${width}%`);
   });
 
-  var color = item.commissioningPackageStatus == 'RFC Sent' ? '#A1CA74' : '#d9eaf2';
-
-  return gradientWidth === 100 || gradientWidth === 0
-    ? baseColor
-    : `linear-gradient(90deg, ${
-        colorMap[item.commissioningPackageStatus]
-      } ${gradientWidth}%, ${color} ${gradientWidth}%)`;
+  return `linear-gradient(90deg, ${gradientSegments.join(', ')})`;
 };
