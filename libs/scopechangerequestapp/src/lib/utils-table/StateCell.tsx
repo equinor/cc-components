@@ -1,6 +1,6 @@
 import { tokens } from '@equinor/eds-tokens';
 import { StateCircle } from './cells.styles';
-import { ScopeChangeRequest } from '../types/scopeChangeRequest';
+import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { memo } from 'react';
 function getStateIcon(state: 'Draft' | 'Open' | 'Voided' | 'Closed') {
   switch (state) {

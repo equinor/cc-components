@@ -4,7 +4,6 @@ import { DateCell, DescriptionCell, ProgressCell } from '../../../../../../table
 
 export const columns: ColDef<CutoffBase>[] = [
   {
-    field: 'Cutoff',
     headerName: 'Cutoff',
     valueGetter: (pkg) => pkg.data?.cutoffWeek,
     valueFormatter: (pkg) =>
@@ -14,52 +13,52 @@ export const columns: ColDef<CutoffBase>[] = [
     minWidth: 150,
   },
   {
-    field: 'Title',
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
   },
   {
-    field: 'Milestone',
+    headerName: 'Milestone',
     valueGetter: (pkg) => pkg.data?.milestone,
   },
   {
-    field: 'SubMilestone',
+    headerName: 'SubMilestone',
     valueGetter: (pkg) => pkg.data?.subMilestone,
   },
   {
-    field: 'Comm.Pkg',
+    headerName: 'Comm.Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
   },
   {
-    field: 'Area',
+    headerName: 'Area',
     valueGetter: (pkg) => pkg.data?.location,
   },
   {
-    field: 'HoldBy',
+    headerName: 'HoldBy',
     valueGetter: (pkg) => pkg.data?.holdBy,
   },
   {
-    field: 'StartupDate',
+    headerName: 'StartupDate',
     valueGetter: (pkg) => pkg.data?.plannedStartupDate,
     cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => (
       <DateCell dateString={props.data?.plannedStartupDate} />
     ),
   },
   {
-    field: 'FinishDate',
+    headerName: 'FinishDate',
     valueGetter: (pkg) => pkg.data?.plannedCompletionDate,
     cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => (
       <DateCell dateString={props.data?.plannedCompletionDate} />
     ),
   },
   {
-    field: 'Responsible',
+    headerName: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
   },
   {
-    field: 'Project progress',
+    headerName: 'Project progress',
 
     cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => (
       <ProgressCell percentWidth={Math.round(props.data?.projectProgress ?? 0)} />
@@ -67,29 +66,29 @@ export const columns: ColDef<CutoffBase>[] = [
   },
 
   {
-    field: 'Expended mhrs',
+    headerName: 'Expended mhrs',
     valueGetter: (pkg) =>
       pkg.data?.expendedManHours ? Math.round(pkg.data?.expendedManHours) : '',
   },
   {
-    field: 'Estimated mmhrs',
+    headerName: 'Estimated mmhrs',
     valueGetter: (pkg) =>
       pkg.data?.estimatedManHours ? Math.round(pkg.data?.estimatedManHours) : '',
   },
   {
-    field: 'Earned mhrs',
+    headerName: 'Earned mhrs',
     valueGetter: (pkg) =>
       pkg.data?.earnedManHours ? Math.round(pkg.data?.earnedManHours) : '',
   },
   {
-    field: 'Expended LW',
+    headerName: 'Expended LW',
     valueGetter: (pkg) =>
       pkg.data?.expendedManHoursLastWeek
         ? Math.round(pkg.data?.expendedManHoursLastWeek)
         : '',
   },
   {
-    field: 'Earned LW',
+    headerName: 'Earned LW',
     valueGetter: (pkg) =>
       pkg.data?.earnedManHoursLastWeek
         ? Math.round(pkg.data?.earnedManHoursLastWeek)

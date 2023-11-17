@@ -1,4 +1,9 @@
-import { useCCApiAccessCheck, useContextId, usePBIOptions } from '@cc-components/shared';
+import {
+  useCCApiAccessCheck,
+  useContextId,
+  usePBIOptions,
+  useWorkspaceBookmarks,
+} from '@cc-components/shared';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
@@ -21,6 +26,8 @@ export const WorkspaceWrapper = () => {
     table: 'Dim_ProjectMaster',
   });
 
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
+
   const filterConfig = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/handover/filter-model`, req)
   );
@@ -35,11 +42,13 @@ export const WorkspaceWrapper = () => {
 
   return (
     <Workspace
-      key={contextId}
+      key={contextId + bookmarkKey}
       workspaceOptions={{
         getIdentifier: (item) => item.commissioningPackageUrlId,
         defaultTab: 'garden',
       }}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       powerBiOptions={pbi}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}

@@ -15,13 +15,15 @@ interface NormalizedSchema extends FusionReportGeneratorGeneratorSchema {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+  displayName: string;
+  reportId: string;
 }
 
 function normalizeOptions(
   tree: Tree,
   options: FusionReportGeneratorGeneratorSchema
 ): NormalizedSchema {
-  const name = names(options.name).fileName;
+  const name = names(options.appKey.trimEnd()).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
@@ -38,13 +40,16 @@ function normalizeOptions(
     projectRoot,
     projectDirectory,
     parsedTags,
+    reportId: options.reportId.trimEnd(),
+    displayName: options.displayName.trimEnd(),
   };
 }
 
 function addFiles(tree: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
-    ...names(options.name),
+    ...names(options.appKey),
+
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };

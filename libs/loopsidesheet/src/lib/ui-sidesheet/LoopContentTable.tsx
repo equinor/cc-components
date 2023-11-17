@@ -14,7 +14,7 @@ import { useGetLoopContent } from '../utils-sidesheet/useGetLoopContent';
 
 const columns: ColDef<LoopContent>[] = [
   {
-    field: 'Tag',
+    headerName: 'Tag',
     valueGetter: (pkg) => pkg.data?.contentTagNo,
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.contentTagId) {
@@ -31,7 +31,7 @@ const columns: ColDef<LoopContent>[] = [
     width: 120,
   },
   {
-    field: 'Description',
+    headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
       if (props.value) {
@@ -42,7 +42,7 @@ const columns: ColDef<LoopContent>[] = [
     width: 250,
   },
   {
-    field: 'MC status',
+    headerName: 'MC Status',
     valueGetter: (pkg) => pkg.data?.clStatus,
     cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
       if (props.value) {
@@ -64,7 +64,7 @@ const columns: ColDef<LoopContent>[] = [
     width: 140,
   },
   {
-    field: 'Cmpkg',
+    headerName: 'Comm Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.commissioningPackageUrlId) {
@@ -81,7 +81,7 @@ const columns: ColDef<LoopContent>[] = [
     width: 120,
   },
   {
-    headerName: 'MCpkg',
+    headerName: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     // valueFormatter: (pkg) => {
     //   if (pkg.data?.mechanicalCompletionPackageUrlId) {

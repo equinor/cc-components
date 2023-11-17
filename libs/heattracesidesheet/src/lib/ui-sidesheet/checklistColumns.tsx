@@ -1,5 +1,6 @@
 import {
   BaseStatus,
+  LinkCell,
   StatusCircle,
   StyledMonospace,
   statusColorMap,
@@ -9,32 +10,29 @@ import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 
 export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
   {
-    field: 'Tag',
+    headerName: 'Tag No',
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      return (
+        <LinkCell url={props.data?.heatTraceCableUrl ?? ''} urlText={props.value ?? ''} />
+      );
     },
   },
   {
-    field: 'Revision',
-    valueGetter: (pkg) => pkg.data?.revision,
-    cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
-    },
-  },
-  {
-    field: 'Formular type',
+    headerName: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+      return (
+        <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
+      );
     },
   },
   {
-    field: 'Responsible',
+    headerName: 'Responsible',
     valueGetter: (pkg) => pkg.data?.mcResponsible,
   },
   {
-    field: 'Status',
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       if (!props.data?.status) return null;
