@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: 'Update issue'
         shell: bash
-        run: npx ts-node --esm ./github-action/src/statusIssue.ts issue -T ${{ github.token }}
+        run: npx ts-node --esm ./github-action/src/issue.ts issue -T ${{ github.token }}

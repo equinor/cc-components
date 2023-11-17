@@ -1,8 +1,10 @@
 #!/usr/bin/env node
+
 import { Command } from 'commander';
 import { setSecret } from '@actions/core';
 import { getOctokit, context } from '@actions/github';
 import { markdownTable } from 'markdown-table';
+import { logInfo } from './utils/logInfo.js';
 
 const program = new Command();
 
@@ -13,7 +15,7 @@ program
   .option('-T, --token <token>', 'change the working directory')
   .action(async (args) => {
     if (!args.token) {
-      throw new Error('Missing az token');
+      throw new Error('Missing github token');
     }
     setSecret(args.token);
     release(args.token);
@@ -26,11 +28,16 @@ export async function release(token: string) {
 
   const table = markdownTable([['Test', 'value']]);
 
-  client.rest.issues.update({
+  const res = await client.rest.issues.update({
     issue_number: 693,
     owner: context.repo.owner,
     repo: context.repo.repo,
     title: 'Fusion app status',
     body: table,
   });
+
+  if (res.status !== 200) {
+    logInfo(res.status, 'Red');
+    throw new Error('Failed to update issue');
+  }
 }
