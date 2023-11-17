@@ -5,15 +5,19 @@ import {
   defaultGridOptions,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
-import { DateCell, DescriptionCell, StyledMonospace } from '@cc-components/shared';
+import {
+  DateCell,
+  DescriptionCell,
+  StyledMonospace,
+  useHttpClient,
+} from '@cc-components/shared';
 import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generateCommaSeperatedStringArrayColumn';
 import { getHTList } from '../utils-table/tableHelpers';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 
 const pipetests: Pipetest[] = [];
 
 export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterState> => {
-  // const client = useHttpClient('cc-api');
+  // const client = useHttpClient();
   // const { getRows } = useGridDataSource(async (req) => {
   //   const res = await client.fetch(`/api/contexts/${contextId}/pipetest/grid`, req);
   //   const meta = (await res.json()) as { items: any[]; rowCount: number };
@@ -45,14 +49,14 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
     getRows: getRows,
     columnDefinitions: [
       {
-        field: 'Pipetest',
+        headerName: 'Pipetest',
         valueGetter: (pkg) => pkg.data?.name,
         cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
           return <StyledMonospace>{props.value}</StyledMonospace>;
         },
       },
       {
-        field: 'Description',
+        headerName: 'Description',
         colId: 'description',
         valueGetter: (pkg) => pkg.data?.description,
         cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
@@ -60,18 +64,18 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
         },
         width: 300,
       },
-      { field: 'Priority', valueGetter: (pkg) => pkg.data?.commPkPriority1 },
+      { headerName: 'Priority', valueGetter: (pkg) => pkg.data?.commPkPriority1 },
       {
-        field: 'Location',
+        headerName: 'Location',
         valueGetter: (pkg) => pkg.data?.location,
         cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
           return <StyledMonospace>{props.value}</StyledMonospace>;
         },
       },
-      { field: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
-      { field: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
+      { headerName: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
+      { headerName: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
       {
-        field: 'RFC',
+        headerName: 'RFC',
         valueGetter: (pkg) => pkg.data?.rfccPlanned,
         cellRenderer: (
           props: ICellRendererProps<Pipetest, string | null | undefined>
@@ -80,7 +84,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
         },
       },
       {
-        field: 'HT cables',
+        headerName: 'HT cables',
         valueGetter: (pkg) => pkg.data?.checkLists,
         cellRenderer: (props: ICellRendererProps<Pipetest, CheckList[]>) => {
           if (!props.value) return null;
