@@ -1,0 +1,18 @@
+name: Update issue
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  update-issue:
+    name: Update issue
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Update issue'
+        shell: bash
+        run: npx ts-node --esm ./github-action/src/statusIssue.ts issue -T ${{ github.token }}
