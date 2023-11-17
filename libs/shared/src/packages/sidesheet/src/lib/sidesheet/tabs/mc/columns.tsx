@@ -62,7 +62,10 @@ export const columns: ColDef<McBase>[] = [
         content={`${props.value}`}
         cellAttributeFn={() => ({
           style: {
-            backgroundColor: props.value ? colorMap[props.value] : 'transparent',
+            backgroundColor:
+              props.value && props.value != 'OS'
+                ? colorMap[('RFC ' + props.value) as PackageStatus]
+                : colorMap['OS'],
           },
         })}
       />
@@ -77,7 +80,12 @@ export const columns: ColDef<McBase>[] = [
       <StatusCell
         content={`${props.value}`}
         cellAttributeFn={() => ({
-          style: { backgroundColor: props.value ? colorMap[props.value] : 'transparent' },
+          style: {
+            backgroundColor:
+              props.value && props.value != 'OS'
+                ? colorMap[('RFO ' + props.value) as PackageStatus]
+                : colorMap['OS'],
+          },
         })}
       />
     ),

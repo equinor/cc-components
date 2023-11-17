@@ -37,7 +37,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   const size = getItemSize(data.volume, 100 || 0);
 
   const backgroundColor = useMemo(
-    () => createProgressGradient(data, data.commissioningPackageStatus),
+    () => createProgressGradient(data),
     [data, data.commissioningPackageStatus]
   );
   const textColor = getTextColor(data.commissioningPackageStatus);
