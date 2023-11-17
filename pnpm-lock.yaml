@@ -32,8 +32,8 @@ importers:
         specifier: 8.1.2
         version: 8.1.2(@types/react@18.2.22)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 6.0.0-rc.4
-        version: 6.0.0-rc.4(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+        specifier: 6.0.0
+        version: 6.0.0(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
       '@equinor/workspace-sidesheet':
         specifier: ^0.1.6
         version: 0.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -543,8 +543,8 @@ importers:
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.22)(react@18.2.0)
       '@equinor/workspace-ag-grid':
-        specifier: 2.0.2
-        version: 2.0.2(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+        specifier: 2.0.3
+        version: 2.0.3(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@remirror/pm':
         specifier: ^2.0.8
         version: 2.0.8
@@ -3316,7 +3316,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.23.2
       '@equinor/eds-icons': 0.16.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/eds-utils': 0.7.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -4360,14 +4360,14 @@ packages:
       styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     dev: false
 
-  /@equinor/workspace-ag-grid@2.0.2(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-RcVXeTjwWHrLmpzC4xOPx2+zBohxXpaNnDcbuNZKNUBgsWvEPJX91stgOA/lroxM1Dko0mB296zEEkvvxrJY4Q==}
+  /@equinor/workspace-ag-grid@2.0.3(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-nu5L+qmpRWvTFxwbn/KJcipPbTRwgJvjeLFKhArLZhOYclG+tXDGoAgLpRk1cEbJxBJ+uo1zK3Uiw5zWgRw3XQ==}
     peerDependencies:
       '@ag-grid-enterprise/core': 30.2.1
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'
       react-is: '>= 16.8.0'
-      styled-components: 5.3.6
+      styled-components: '>= 5.0.0'
     peerDependenciesMeta:
       react:
         optional: true
@@ -4471,8 +4471,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-filter@2.0.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-nCeHGMy0iwQPAh8qUO+7pNNs0vba47MIq8z3FPs8JDo0xWWa52gfRT0GkkyCgSwO8xPJQxJnZcyX+mY+GapShA==}
+  /@equinor/workspace-filter@3.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-Ui+0GwM3Gqds5CU+PGZpykOKi4qUUek5GxrgrmIgqUuUm8FfVqszQkUWka5zhgJdFahPXZL2FoZlMTGKksF9uA==}
     peerDependencies:
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'
@@ -4483,33 +4483,6 @@ packages:
         optional: true
       react-dom:
         optional: true
-    dependencies:
-      '@equinor/eds-core-react': 0.28.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/eds-icons': 0.18.0
-      '@equinor/eds-tokens': 0.9.2
-      '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-error-boundary: 3.1.4(react@18.2.0)
-      react-is: 18.2.0
-      react-sortablejs: 6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.0)
-      react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.0
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@types/sortablejs'
-      - react-native
-      - supports-color
-    dev: false
-
-  /@equinor/workspace-filter@3.0.0-rc.2(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-vdQSzJkLgNUlsoIhXheE1Pxl4IGmwWk4gWrdMChK0f+HuMguM2I9V1aUucUDLXCj0IP+B4lk+vc2/YpYU/5g7w==}
-    peerDependencies:
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-      react-is: '>= 16.8.0'
-      styled-components: ^5.3.5
     dependencies:
       '@equinor/eds-core-react': 0.28.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/eds-icons': 0.18.0
@@ -4605,8 +4578,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@6.0.0-rc.4(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
-    resolution: {integrity: sha512-YFHxFgW7dxFyFhQrbWefy0p1csnrWZTqQJVRoxEsQhf3vKT1QcYUDl1nEcOsjUglg5BebwQ8c8pJEGLef3eB5Q==}
+  /@equinor/workspace-fusion@6.0.0(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
+    resolution: {integrity: sha512-rKQr548ZgIa90q+kwK2Ly9Uf+GCDDcPKi0pCFrSmKHlPqnptx7H3yqR2KBdMK+C4HqV1vPdfS1O5EMIuqLUHUw==}
     peerDependencies:
       react-dom: '>= 16.8.0 || 18'
       react-is: '>= 16.8.0'
@@ -4618,9 +4591,9 @@ packages:
       '@equinor/eds-core-react': 0.27.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
-      '@equinor/workspace-ag-grid': 2.0.2(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-filter': 3.0.0-rc.2(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-garden': 6.0.0-rc.2(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-ag-grid': 2.0.3(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-filter': 3.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-garden': 6.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-powerbi': 1.0.7(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-react': 1.0.4(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
@@ -4700,8 +4673,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-garden@5.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-HZcgXnQZdoL0zKyFtL3kCFHML32tP8BdqtRHSCUChjPrqSP18EvaHefu8ahtu46wvw0O7LiFHKO8GqpSy5XhgQ==}
+  /@equinor/workspace-garden@6.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-iZzQ4gqRHbrRa7E9IBEuqLB7Wjuue48oN9JujXF7xpMcIupdkFIh4WAZR0BgRlLdCsQEBMEQZYTjvsSVFYUmSA==}
     peerDependencies:
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'
@@ -4712,31 +4685,6 @@ packages:
         optional: true
       react-dom:
         optional: true
-    dependencies:
-      '@equinor/eds-core-react': 0.28.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/eds-icons': 0.18.0
-      '@equinor/eds-tokens': 0.9.0
-      '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
-      '@tanstack/react-query-devtools': 4.29.1(@tanstack/react-query@4.35.3)(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-error-boundary: 3.1.4(react@18.2.0)
-      react-is: 18.2.0
-      react-virtual: 2.10.4(react@18.2.0)
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - react-native
-      - supports-color
-    dev: false
-
-  /@equinor/workspace-garden@6.0.0-rc.2(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-K0pJx6jHvwgmHsDn50R+CJQvY4cVVHcl/jlda+rarlu4jTNdTgbzkViFKXAaWEGREFFLaMIGPkEmJnpffXqEkA==}
-    peerDependencies:
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-      react-is: '>= 16.8.0'
-      styled-components: ^5.3.6
     dependencies:
       '@equinor/eds-core-react': 0.28.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/eds-icons': 0.18.0
