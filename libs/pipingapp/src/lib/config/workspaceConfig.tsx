@@ -25,11 +25,11 @@ export const WorkspaceWrapper = () => {
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
-  1;
+  console.log('RErender');
   return (
     <Workspace
       workspaceOptions={{
-        getIdentifier: (pt) => pt.name,
+        getIdentifier: (pt) => pt.id,
         defaultTab: 'grid',
       }}
       filterOptions={filterOptions}

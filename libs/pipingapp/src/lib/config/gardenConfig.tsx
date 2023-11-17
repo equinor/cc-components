@@ -25,8 +25,8 @@ export const useGardenConfig = (
     getGardenMeta,
     getHeader,
     getSubgroupItems,
-    getDisplayName: (item) => item.name,
-    initialGrouping: ['Responsible'],
+    getDisplayName: (item) => item.id,
+    initialGrouping: ['Priority1'],
     customViews: {
       customItemView: GardenItem,
     },

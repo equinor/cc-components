@@ -79,7 +79,7 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${pipetest.name}, ${pipetest.description}` || ''}
+        title={`${pipetest.id}, ${pipetest.description}` || ''}
         onClose={props.close}
         applicationTitle="Pipetest"
       />

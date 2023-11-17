@@ -9,32 +9,32 @@ import { CheckList } from '@cc-components/pipingshared';
 
 export const checklistColumns: ColDef<CheckList>[] = [
   {
-    field: 'Tag',
+    headerName: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<CheckList>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
-    field: 'Revision',
+    headerName: 'Revision',
     valueGetter: (pkg) => pkg.data?.revision,
     cellRenderer: (props: ICellRendererProps<CheckList>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
-    field: 'Formular type',
+    headerName: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<CheckList>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
-    field: 'Responsible',
+    headerName: 'Responsible',
     valueGetter: (pkg) => pkg.data?.responsible,
   },
   {
-    field: 'Status',
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<CheckList>) => {
       if (!props.data?.status) return null;

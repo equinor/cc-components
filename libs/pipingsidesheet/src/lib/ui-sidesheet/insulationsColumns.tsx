@@ -10,32 +10,32 @@ import {
 
 export const insulationsColumns: ColDef<InsulationBox>[] = [
   {
-    field: 'Pipe insulations',
+    headerName: 'Pipe insulations',
     valueGetter: (pkg) => pkg.data?.objectNo,
     cellRenderer: (props: ICellRendererProps<InsulationBox>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
-    field: 'Description',
+    headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.objectName,
     cellRenderer: (props: ICellRendererProps<InsulationBox>) => {
       return <DescriptionCell description={props.value} />;
     },
   },
   {
-    field: 'Status',
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.objectStatus,
     cellRenderer: (props: ICellRendererProps<InsulationBox>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
-    field: 'Status name',
+    headerName: 'Status name',
     valueGetter: (pkg) => pkg.data?.objectStatusName,
   },
   {
-    field: 'Checklist',
+    headerName: 'Checklist',
     valueGetter: (pkg) => pkg.data?.procosysStatus,
     cellRenderer: (props: ICellRendererProps<InsulationBox>) => {
       if (!props.data?.procosysStatus) return null;
