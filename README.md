@@ -2,6 +2,9 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/fprd-deploy.yml?label=Prod%20deployment)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/pr-deploy.yml?label=PR%20deployment)
 
+[Fusion app status🚀](https://github.com/equinor/cc-components/issues/693)
+
+
 ## Technology stack
 
 [React](https://react.dev/)
