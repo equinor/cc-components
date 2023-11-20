@@ -32,8 +32,8 @@ importers:
         specifier: 8.1.2
         version: 8.1.2(@types/react@18.2.22)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 6.0.2
-        version: 6.0.2(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+        specifier: 6.0.3
+        version: 6.0.3(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
       '@equinor/workspace-sidesheet':
         specifier: ^0.1.6
         version: 0.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -227,6 +227,15 @@ importers:
       '@cc-components/modelviewerapp':
         specifier: workspace:^
         version: link:../../libs/modelviewerapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
+  apps/piping:
+    dependencies:
+      '@cc-components/pipingapp':
+        specifier: workspace:^
+        version: link:../../libs/pipingapp
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../../libs/shared
@@ -456,6 +465,39 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
+
+  libs/pipingapp:
+    dependencies:
+      '@cc-components/pipingshared':
+        specifier: workspace:^
+        version: link:../pipingshared
+      '@cc-components/pipingsidesheet':
+        specifier: workspace:^
+        version: link:../pipingsidesheet
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
+
+  libs/pipingshared:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+
+  libs/pipingsidesheet:
+    dependencies:
+      '@cc-components/pipingshared':
+        specifier: workspace:^
+        version: link:../pipingshared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/plugins: {}
 
@@ -1419,7 +1461,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.23.2
       '@babel/helper-validator-option': 7.22.15
-      browserslist: 4.21.10
+      browserslist: 4.22.1
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -4633,8 +4675,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@6.0.2(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
-    resolution: {integrity: sha512-ZTa5fpm7KbptY+in7V0aMQP+S2ir3RdQpSCiErnjKuJrAT+2REg7Tzr17GNmspQtVIsPcQH2P2YcvJP1kKk7/g==}
+  /@equinor/workspace-fusion@6.0.3(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
+    resolution: {integrity: sha512-a208f2GrKJd0wwKn0oy24I4tydUcT4/NPf27JDylvhuccnJtMsL6KVhoL+FdwIjY001E6mBhLRfJ5tDSberrUg==}
     peerDependencies:
       react-dom: '>= 16.8.0 || 18'
       react-is: '>= 16.8.0'
@@ -4649,7 +4691,7 @@ packages:
       '@equinor/workspace-ag-grid': 2.0.4(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-filter': 3.0.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-garden': 6.0.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-powerbi': 1.0.8(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-powerbi': 1.0.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-react': 1.0.4(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
       '@types/react-dom': 18.2.7
@@ -4834,8 +4876,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-powerbi@1.0.8(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-FsR4DdBKLwDYBrpsVK2+SNbBKWbzpj96RwIjdd1uyt2dP1I1q7kEzMoCKCIMzadrOKm1pwtHmAHc/UEr2ucCfw==}
+  /@equinor/workspace-powerbi@1.0.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-46zzpn5wbIJ0/wFL96ruUpIhnJZc6NNTiOwzp3WkVWfbOfJvVrCwMyU+jlpkSc7hp7J6TsCJXFgImpYG/DcVEw==}
     peerDependencies:
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'
@@ -7083,10 +7125,6 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
-  /@popperjs/core@2.11.7:
-    resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
-    dev: false
-
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
@@ -9058,7 +9096,7 @@ packages:
       '@emotion/styled': 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.22)(react@18.2.0)
       '@lingui/core': 3.17.2
       '@mui/material': 5.12.0(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@popperjs/core': 2.11.7
+      '@popperjs/core': 2.11.8
       '@remirror/core': 2.0.12(@remirror/pm@2.0.8)(@types/node@20.7.0)
       '@remirror/extension-blockquote': 2.0.13(@remirror/pm@2.0.8)(@types/node@20.7.0)
       '@remirror/extension-bold': 2.0.12(@remirror/pm@2.0.8)(@types/node@20.7.0)
@@ -11191,16 +11229,6 @@ packages:
     dependencies:
       fill-range: 7.0.1
 
-  /browserslist@4.21.10:
-    resolution: {integrity: sha512-bipEBdZfVH5/pwrvqc+Ub0kUPVfGUhlKxbvfD+z1BDnPEO/X98ruXGA1WP5ASpAFKan7Qr6j736IacbZQuAlKQ==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001522
-      electron-to-chromium: 1.4.498
-      node-releases: 2.0.13
-      update-browserslist-db: 1.0.11(browserslist@4.21.10)
-
   /browserslist@4.22.1:
     resolution: {integrity: sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -11285,9 +11313,6 @@ packages:
     dependencies:
       three: 0.154.0
     dev: false
-
-  /caniuse-lite@1.0.30001522:
-    resolution: {integrity: sha512-TKiyTVZxJGhsTszLuzb+6vUZSjVOAhClszBr2Ta2k9IwtNBT/4dzmL6aywt0HCgEZlmwJzXJd8yNiob6HgwTRg==}
 
   /caniuse-lite@1.0.30001559:
     resolution: {integrity: sha512-cPiMKZgqgkg5LY3/ntGeLFUpi6tzddBNS58A4tnTgQw1zON7u2sZMU7SzOeVH4tj20++9ggL+V6FDOFMTaFFYA==}
@@ -12044,9 +12069,6 @@ packages:
     dependencies:
       jake: 10.8.5
     dev: true
-
-  /electron-to-chromium@1.4.498:
-    resolution: {integrity: sha512-4LODxAzKGVy7CJyhhN5mebwe7U2L29P+0G+HUriHnabm0d7LSff8Yn7t+Wq+2/9ze2Fu1dhX7mww090xfv7qXQ==}
 
   /electron-to-chromium@1.4.572:
     resolution: {integrity: sha512-RlFobl4D3ieetbnR+2EpxdzFl9h0RAJkPK3pfiwMug2nhBin2ZCsGIAJWdpNniLz43sgXam/CgipOmvTA+rUiA==}
@@ -13243,7 +13265,7 @@ packages:
   /history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.23.2
     dev: false
 
   /hoist-non-react-statics@3.3.2:
@@ -17771,16 +17793,6 @@ packages:
   /unraw@2.0.1:
     resolution: {integrity: sha512-tdOvLfRzHolwYcHS6HIX860MkK9LQ4+oLuNwFYL7bpgTEO64PZrcQxkisgwJYCfF8sKiWLwwu1c83DvMkbefIQ==}
     dev: false
-
-  /update-browserslist-db@1.0.11(browserslist@4.21.10):
-    resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.10
-      escalade: 3.1.1
-      picocolors: 1.0.0
 
   /update-browserslist-db@1.0.13(browserslist@4.22.1):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
