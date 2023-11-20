@@ -7,13 +7,10 @@
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc -b",
-    "windows-zip": "powershell Compress-Archive -Path dist/app-bundle.js, app-manifest.json -DestinationPath dist/bundle.zip",
-    "build:spa": "fusion-framework-cli app build",
-    "postbuild:spa": "zip dist/bundle.zip -Dj dist/app-bundle.js app-manifest.json",
-    "deploy:spa": "fdev portal upload -e ci -k piping dist/bundle.zip",
-    "postdeploy:spa": "fdev portal publish -e ci -k piping",
-    "shipit": "pnpm build && pnpm build:spa && pnpm windows-zip && pnpm deploy:spa"
+    "dev:local": "fusion-framework-cli app dev -c app.config.local.js",
+    "build": "tsc -b -f",
+    "pr:deploy": "npx ts-node --esm ../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "npx ts-node --esm ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
     "@cc-components/pipingapp": "workspace:^",

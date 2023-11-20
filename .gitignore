@@ -12,7 +12,6 @@ dist/
 bin/
 # dependencies
 node_modules
-**/responsePiping.json
 
 # IDEs and editors
 /.idea
