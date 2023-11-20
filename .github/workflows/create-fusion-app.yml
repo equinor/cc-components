@@ -35,6 +35,7 @@ permissions: write-all
 jobs:
   create-fusion-app-ci:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - name: 'Login to Azure'
         uses: azure/login@v1
@@ -57,10 +58,11 @@ jobs:
 
       - name: 'Create application in Fusion CI'
         shell: bash
-        run: npx ts-node --esm ./github-action/src/createFusionApp.ts create -T ${{ env.FUSION_TOKEN }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{secrets.FUSION_APP_ADMINS}}' -E 'CI'
+        run: npx ts-node --esm ./github-action/src/createFusionApp.ts create -T ${{ env.FUSION_TOKEN }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{vars.FUSION_APP_ADMINS_CI}}' -E 'CI'
 
   create-fusion-app-fprd:
     runs-on: ubuntu-latest
+    environment: fprd
     steps:
       - name: 'Login to Azure'
         uses: azure/login@v1
@@ -83,4 +85,4 @@ jobs:
 
       - name: 'Create application in Fusion FPRD'
         shell: bash
-        run: npx ts-node --esm ./github-action/src/createFusionApp.ts create -T ${{ env.FUSION_PROD_TOKEN }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{secrets.FUSION_APP_ADMINS}}' -E 'FPRD'
+        run: npx ts-node --esm ./github-action/src/createFusionApp.ts create -T ${{ env.FUSION_PROD_TOKEN }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{vars.FUSION_APP_ADMINS_FPRD}}'  -E 'FPRD'

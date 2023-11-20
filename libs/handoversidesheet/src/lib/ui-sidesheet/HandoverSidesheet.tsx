@@ -16,6 +16,7 @@ import {
 
 import {
   McTab,
+  NcrTab,
   PunchTab,
   QueryTab,
   SwcrTab,
@@ -98,6 +99,12 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     error: queryError,
   } = useHandoverResource(props.id, 'query');
 
+  const {
+    data: ncrPackages,
+    dataIsFetching: isDataFetchingNcr,
+    error: ncrError,
+  } = useHandoverResource(props.id, 'ncr');
+
   const filteredPunches = useMemo(() => {
     if (ShowOnlyOutstandingPunch) {
       return punchPackages?.filter((punch) => punch.isOpen === true);
@@ -119,10 +126,10 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           title="Compkg status"
           value={
             <StatusCircle
-              content={props?.item?.dynamicCommissioningStatus || 'N/A'}
+              content={props?.item?.status || 'N/A'}
               statusColor={
                 props?.item?.commissioningPackageStatus
-                  ? statusColorMap[props.item.dynamicCommissioningStatus]
+                  ? statusColorMap[props.item.status]
                   : 'transparent'
               }
             />
@@ -183,6 +190,10 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             <Tabs.Tab>
               Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
             </Tabs.Tab>
+
+            <Tabs.Tab>
+              NCR <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />{' '}
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -198,15 +209,15 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
                   ...workorder,
-                  workOrderNumber: workorder.workOrderNumber,
+                  workOrderNumber: workorder.workOrderNo,
                   actualCompletionDate: workorder.actualCompletionDate,
-                  plannedFinishDate: workorder.plannedFinishDate,
+                  plannedFinishDate: workorder.plannedCompletionDate,
                   discipline: workorder.discipline,
-                  estimatedHours: workorder.estimatedHours,
+                  estimatedHours: workorder.estimatedManHours,
                   jobStatus: workorder.jobStatus,
-                  remainingHours: workorder.remainingHours,
-                  title: workorder.description,
-                  workOrderUrl: workorder.commpkgId,
+                  remainingHours: workorder.remainingManHours,
+                  title: workorder.title,
+                  workOrderUrl: workorder.workOrderUrl,
                   projectProgress: workorder.projectProgress,
                 })
               )}
@@ -258,6 +269,13 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               error={queryError}
             />
           </Tabs.Panel>
+          <Tabs.Panel>
+            <NcrTab
+              ncrs={ncrPackages}
+              isFetching={isDataFetchingQuery}
+              error={queryError}
+            />
+          </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
@@ -278,11 +296,11 @@ function EnsureHandover({ id, closeSidesheet, item }: HandoverProps) {
       }
       return res.json() as Promise<HandoverPackage>;
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, initialData: item ?? undefined }
   );
 
   if (isLoading) {
-    return <SidesheetSkeleton close={close} />;
+    return <SidesheetSkeleton close={() => closeSidesheet()} />;
   }
 
   if (error || !data) {

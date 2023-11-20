@@ -55,7 +55,6 @@ export const useTableConfig = (
 const columnDefinitions: ColDef<SwcrPackage>[] = [
   {
     colId: 'SwcrNo',
-    field: 'SWCRs',
     headerName: 'Software Change Requests',
     valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
@@ -69,8 +68,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'Title',
-    field: 'Title',
+    headerName: 'Title',
     headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string | undefined>) => {
@@ -80,14 +78,14 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'Contract',
-    field: 'Contract',
+    headerName: 'Contract',
     headerTooltip: 'Contract',
     valueGetter: (pkg) => pkg.data?.contract,
     width: 200,
   },
   {
     colId: 'System',
-    field: 'System',
+    headerName: 'System',
     headerTooltip: 'System',
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
@@ -98,7 +96,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'Status',
-    field: 'Status',
+    headerName: 'Status',
     headerTooltip: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     enableRowGroup: true,
@@ -107,7 +105,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   // next sign by will be included with "Next sign role"
   {
     colId: 'NextSignBy',
-    field: 'Next sign by', //denne heter functionalrole i FAM.
+    headerName: 'Next sign by', //denne heter functionalrole i FAM.
     headerTooltip: 'Next Sign by',
     valueGetter: (pkg) => {
       const ranking = pkg.data?.nextToSignRanking ?? '';
@@ -118,7 +116,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'NextSignRole',
-    field: 'Next Sign Role',
+    headerName: 'Next Sign Role',
     headerTooltip: 'Next Sign Role',
     valueGetter: (pkg) => {
       const ranking = pkg.data?.nextToSignRanking ?? '';
@@ -130,7 +128,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'LatestSignBy',
-    field: 'Latest Sign By', 
+    headerName: 'Latest Sign By', 
     headerTooltip: 'Latest Sign By',
     valueGetter: (pkg) => {
       const ranking = pkg.data?.latestSignedRanking ?? '';
@@ -141,7 +139,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
 
   {
     colId: 'LatestSignByRole',
-    field: 'Latest Signed By Role',
+    headerName: 'Latest Signed By Role',
     headerTooltip: 'Latest Signed Role',
     valueGetter: (pkg) => {
       const ranking = pkg.data?.latestSignedRanking ?? '';
@@ -153,14 +151,14 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'Supplier',
-    field: 'Supplier',
+    headerName: 'Supplier',
     headerTooltip: 'Supplier',
     valueGetter: (pkg) => pkg.data?.supplier,
     width: 150,
   },
   {
     colId: 'Types',
-    field: 'Types',
+    headerName: 'Types',
     headerTooltip: 'Types',
     valueGetter: (pkg) => pkg.data?.swcrTypes,
     enableRowGroup: true,
@@ -168,7 +166,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'Priority',
-    field: 'Priority',
+    headerName: 'Priority',
     headerTooltip: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
     enableRowGroup: true,
@@ -176,14 +174,14 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'AutomationControlSystem',
-    field: 'Control System',
+    headerName: 'Control System',
     headerTooltip: 'Control System',
     valueGetter: (pkg) => pkg.data?.automationControlSystem,
     width: 200,
   },
   {
     colId: 'Node',
-    field: 'Node',
+    headerName: 'Node',
     headerTooltip: 'Node',
     valueGetter: (pkg) => pkg.data?.nodeIdentifier,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {

@@ -1,3 +1,4 @@
+import { LicenseManager } from '@ag-grid-enterprise/core';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import {
   ComponentRenderArgs,
@@ -26,6 +27,11 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   if (!envConfig.uri) {
     throw new Error('Failed to load environemnt config for workorder');
   }
+
+  if (envConfig.license) {
+    LicenseManager.setLicenseKey(envConfig.license);
+  }
+
   config.configureHttpClient('cc-app', {
     baseUri: envConfig?.uri,
     defaultScopes: envConfig?.defaultScopes,
@@ -38,4 +44,5 @@ type HandoverEnvConfig = {
   uri: string;
   defaultScopes: string[];
   pr?: string;
+  license?: string;
 };

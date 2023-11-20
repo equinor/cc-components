@@ -8,7 +8,7 @@ import { SwcrPackage } from '@cc-components/swcrshared';
 
 export const signatureColumns: ColDef<SwcrSignature>[] = [
   {
-    field: 'Signature Role',
+    headerName: 'Signature Role',
     valueGetter: (pkg) => pkg.data?.signatureRole,
     cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
       return <StyledMonospace>{props.data?.signatureRole}</StyledMonospace>;
@@ -16,12 +16,12 @@ export const signatureColumns: ColDef<SwcrSignature>[] = [
     minWidth: 350,  
   },
   {
-    field: 'Seq',
+    headerName: 'Seq',
     valueGetter: (pkg) => pkg.data?.sequence,
     minWidth: 100, 
   },
   {
-    field: 'By',
+    headerName: 'By',
     valueGetter: (pkg) => pkg.data?.signedBy,
     cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
       return <StyledMonospace>{props.data?.signedBy}</StyledMonospace>;
@@ -29,7 +29,7 @@ export const signatureColumns: ColDef<SwcrSignature>[] = [
     minWidth: 450,
   },
   {
-    field: 'Date',
+    headerName: 'Date',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
       return <StyledMonospace>{props.data?.signedDate}</StyledMonospace>;

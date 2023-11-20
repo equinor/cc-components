@@ -9,68 +9,47 @@ type McProgress = {
 
 const mcProgressMap: McProgress[] = [
   {
-    color: () => '#d9eaf2',
-    accessor: (item) => item.mechanicalCompletionPkgsCount,
-  }, // OS
-  {
-    color: (item) =>
-      item.isRfcRejected
-        ? colorMap[item.commissioningPackageStatus]
-        : colorMap['RFC Sent'],
-    accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
+    color: () => colorMap['RFO Accepted'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
   },
   {
-    color: (item) => {
-      if (status.indexOf('TAC') > -1) return colorMap[item.commissioningPackageStatus];
-      return item.isRfcRejected ? colorMap[item.commissioningPackageStatus] : '#7cb342';
-    },
-    accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
-  },
-  {
-    color: (item) =>
-      item.isRfoRejected
-        ? colorMap[item.commissioningPackageStatus]
-        : colorMap['RFO Sent'],
+    color: () => colorMap['RFO Sent'],
     accessor: (item) => item.mechanicalCompletionPkgsRfocShippedCount,
   },
   {
-    color: (item) =>
-      item.isRfoRejected ? colorMap[item.commissioningPackageStatus] : '#0035bc',
-    accessor: (item) => item.mechanicalCompletionPkgsRfocSignedCount,
+    color: () => colorMap['RFC Accepted'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfccSignedCount,
+  },
+  {
+    color: () => colorMap['RFC Sent'],
+    accessor: (item) => item.mechanicalCompletionPkgsRfccShippedCount,
+  },
+  {
+    color: () => '#d9eaf2',
+    accessor: (item) => item.mechanicalCompletionPkgsCount,
   },
 ];
-const mcProgressPercentage = (
+
+const calculateProgressPercentage = (
   item: HandoverPackage,
   accessor: (item: HandoverPackage) => number
 ): number => {
   const count = accessor(item);
-  return count < 1
-    ? 0
-    : item.mechanicalCompletionPkgsCount === 0
+  return count < 1 || item.mechanicalCompletionPkgsCount === 0
     ? 0
     : (count / item.mechanicalCompletionPkgsCount) * 100;
 };
 
 export const createProgressGradient = (
-  data: HandoverPackage,
-  status: PackageStatus = data.dynamicCommissioningStatus
+  item: HandoverPackage,
+  status: PackageStatus = item.dynamicCommissioningStatus
 ): string => {
-  const color = colorMap[status];
-  let progressWidth = 0;
-  let progressColor = '';
+  let gradientSegments: string[] = [];
 
-  const renderMcProgress = (item: HandoverPackage, mcProgress: McProgress) => {
-    const width = mcProgressPercentage(item, mcProgress.accessor);
-    if (width === 0) return;
-    progressWidth = Math.floor(width);
-    progressColor = colorMap[status];
-  };
+  mcProgressMap.forEach((mcProgress) => {
+    const width = calculateProgressPercentage(item, mcProgress.accessor);
+    gradientSegments.push(`${mcProgress.color(item)} 0% ${width}%`);
+  });
 
-  mcProgressMap.forEach((mcProgress) => renderMcProgress(data, mcProgress));
-
-  return progressWidth === 100 || progressWidth === 0
-    ? color
-    : `linear-gradient(90deg,${
-        colorMap[data.commissioningPackageStatus]
-      } ${progressWidth}%,#d9eaf2 ${progressWidth}%)`;
+  return `linear-gradient(90deg, ${gradientSegments.join(', ')})`;
 };
