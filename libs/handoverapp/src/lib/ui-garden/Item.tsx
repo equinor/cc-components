@@ -43,7 +43,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
   const textColor = getTextColor(data.commissioningPackageStatus);
 
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
-  const commStatusColor = getDotsColor(data.dynamicCommissioningStatus);
+  const commStatusColor = getDotsColor(data.status);
 
   const showWarningIcon =
     data.mechanicalCompletionStatus === 'OS' &&

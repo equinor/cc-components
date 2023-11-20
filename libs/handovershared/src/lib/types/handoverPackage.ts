@@ -66,4 +66,5 @@ export type HandoverPackage = {
   dynamicCommissioningStatus: BaseStatus;
   mcDisciplines: string | null;
   remainingPunchOutCount: number | null;
+  status: BaseStatus; //Comm. pkg status in procosys
 };
