@@ -56,13 +56,13 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     isFetching: isFetchingPunchItems,
     error: punchError,
   } = useMcResource(props.id, 'punch');
-  /*
+
   const {
     data: ncr,
     isFetching: isFetchingNcr,
     error: ncrError,
   } = useMcResource(props.id, 'ncr');
-*/
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
@@ -132,9 +132,9 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             <Tabs.Tab>
               Punch <TabTitle data={punchItems} isLoading={isFetchingPunchItems} />
             </Tabs.Tab>
-            {/*   <Tabs.Tab>
+            <Tabs.Tab>
               NCR <TabTitle data={ncr} isLoading={isFetchingNcr} />
-            </Tabs.Tab> */}
+            </Tabs.Tab>
           </Tabs.List>
         </StyledTabListWrapper>
 
@@ -156,9 +156,9 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               punches={punchItems}
             />
           </Tabs.Panel>
-          {/*   <Tabs.Panel>
+          <Tabs.Panel>
             <NcrTab error={ncrError} isFetching={isFetchingNcr} ncrs={ncr} />
-          </Tabs.Panel> */}
+          </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
