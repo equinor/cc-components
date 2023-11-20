@@ -1,5 +1,5 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { StatusCircle } from '@cc-components/shared/common';
+import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   NcrTab,
@@ -76,22 +76,20 @@ const McSideSheetComponent = (props: Required<McProps>) => {
         <BannerItem
           title="MC pkg"
           value={
-            props.item?.mechanicalCompletionPackageNo ?? 'N/A'
-            // <StyledItemLink href={proCoSysUrls.getMcUrl(props.id)} target="_blank">
-            //   {props.item?.mcPkgNumber ?? 'N/A'}
-            // </StyledItemLink>
+            <StyledItemLink
+              href={props.item?.mechanicalCompletionPackageUrl}
+              target="_blank"
+            >
+              {props.item?.mechanicalCompletionPackageNo ?? 'N/A'}
+            </StyledItemLink>
           }
         />
         <BannerItem
           title="Comm pkg"
           value={
-            props.item?.commissioningPackageNo ?? 'N/A'
-            // <StyledItemLink
-            //   href={proCoSysUrls.getCommPkgUrl(props.item?.commPkgId ?? '')}
-            //   target="_blank"
-            // >
-            //   {props.item?.commPkgNumber}
-            // </StyledItemLink>
+            <StyledItemLink href={props.item?.commissioningPackageUrl} target="_blank">
+              {props.item?.commissioningPackageNo ?? 'N/A'}
+            </StyledItemLink>
           }
         />
         <BannerItem
