@@ -13,9 +13,7 @@ export function useWorkspaceBookmarks() {
   const bookmarkHandler = useBookmark<Partial<Bookmark>>();
 
   useEffect(() => {
-    console.log('Registering handler');
     const unsub = bookmarkHandler.addBookmarkCreator(async () => {
-      console.log('bookmark requested');
       return bookmarkRef.current;
     });
 
