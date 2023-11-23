@@ -10,11 +10,14 @@ import {
 } from '@cc-components/sharedcomponents';
 import { getSwcrStatusColor, SwcrPackage } from '@cc-components/swcrshared';
 import { Tabs } from '@equinor/eds-core-react';
-import { createWidget } from '@cc-components/shared';
 import { useSignatures } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 
-export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
+export const SwcrSidesheet = (props: {
+  id: string;
+  item?: SwcrPackage | undefined;
+  close: VoidFunction;
+}) => {
   const { signatures, signaturesFetching } = useSignatures(props.id);
   const attachmentsUrls = props?.item?.url.replace('#', '#tab=attachments&');
   return (
@@ -22,7 +25,7 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
       <SidesheetHeader
         title={`${props?.item?.swcrNo || ''}, ${props?.item?.title || ''} `}
         applicationTitle={'Software change record'}
-        onClose={props.closeSidesheet}
+        onClose={props.close}
       />
       <StyledBanner>
         <BannerItem
@@ -65,6 +68,4 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
-
-export default SwcrSidesheet.render;
+};

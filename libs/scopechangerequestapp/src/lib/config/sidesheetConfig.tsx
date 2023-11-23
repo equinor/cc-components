@@ -6,14 +6,6 @@ import {
 import { ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 export const sidesheetConfig: SidesheetConfig<ScopeChangeRequest> = {
   type: 'default',
-  CreateSidesheet: (props) => (
-    <CreateScopeChangeSidesheet closeSidesheet={props.close} id="" />
-  ),
-  DetailsSidesheet: (props) => (
-    <ScopechangerequestSidesheet.Component
-      id={props.id}
-      item={props.item}
-      closeSidesheet={props.close}
-    />
-  ),
+  CreateSidesheet: CreateScopeChangeSidesheet,
+  DetailsSidesheet: ScopechangerequestSidesheet,
 };

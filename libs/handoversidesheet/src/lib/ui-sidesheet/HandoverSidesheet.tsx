@@ -39,9 +39,9 @@ import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
-  closeSidesheet: VoidFunction;
+  close: VoidFunction;
 };
-export const HandoverSidesheet = ({ id, closeSidesheet, item }: HandoverProps) => {
+export const HandoverSidesheet = ({ id, close: closeSidesheet, item }: HandoverProps) => {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
   const { isLoading, data, error } = useQuery(
@@ -77,9 +77,7 @@ export const HandoverSidesheet = ({ id, closeSidesheet, item }: HandoverProps) =
     );
   }
 
-  return (
-    <HandoverSidesheetComponent id={id} item={data} closeSidesheet={closeSidesheet} />
-  );
+  return <HandoverSidesheetComponent id={id} item={data} close={closeSidesheet} />;
 };
 
 Icon.add({ error_outlined });
@@ -155,7 +153,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
         url={props?.item?.commissioningPackageUrl || ''}
         description={props?.item?.description || ''}
         applicationTitle={'Handover'}
-        onClose={props.closeSidesheet}
+        onClose={props.close}
       />
       <StyledBanner>
         <BannerItem

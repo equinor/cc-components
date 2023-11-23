@@ -3,11 +3,5 @@ import { SidesheetConfig } from '@equinor/workspace-fusion/sidesheet';
 import { SwcrSidesheet } from '@cc-components/swcrsidesheet';
 export const sidesheetConfig: SidesheetConfig<SwcrPackage> = {
   type: 'default',
-  DetailsSidesheet: (props) => (
-    <SwcrSidesheet.Component
-      closeSidesheet={props.controller.close}
-      id={props.id}
-      item={props.item}
-    />
-  ),
+  DetailsSidesheet: SwcrSidesheet,
 };

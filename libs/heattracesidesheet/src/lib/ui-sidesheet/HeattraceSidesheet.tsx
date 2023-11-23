@@ -1,5 +1,5 @@
 import { HeatTrace } from '@cc-components/heattraceshared';
-import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
+import { useResizeContext } from '@equinor/workspace-fusion';
 import { useMemo, useRef } from 'react';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
@@ -28,10 +28,6 @@ type HeatTraceProps = {
   item?: HeatTrace;
   close: () => void;
 };
-
-export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => (
-  <EnsureHeatTrace {...props} />
-));
 
 const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
   const circuitDiagramTab = useCircuitDiagramTab(props.item);
@@ -94,9 +90,7 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
   );
 };
 
-export default HeattraceSidesheet.render;
-
-function EnsureHeatTrace({ id, item, close }: HeatTraceProps) {
+export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
   const client = useHttpClient();
   const contextId = useContextId();
 
