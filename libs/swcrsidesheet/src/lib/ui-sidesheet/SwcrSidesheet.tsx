@@ -13,11 +13,43 @@ import { Tabs } from '@equinor/eds-core-react';
 import { useSignatures } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 
-export const SwcrSidesheet = (props: {
+import { createWidget as createResizableSidesheet } from '@equinor/workspace-sidesheet';
+
+import { PropsWithChildren } from 'react';
+import { useCloseSidesheetOnContextChange } from '@cc-components/shared';
+
+type BaseProps<T> = {
   id: string;
-  item?: SwcrPackage | undefined;
-  close: VoidFunction;
-}) => {
+  item?: T;
+  closeSidesheet: VoidFunction;
+};
+
+export function createWidget<T>(
+  Comp: (props: { props: BaseProps<T> }) => JSX.Element,
+  resizeOptions?: {
+    defaultWidth?: number | undefined;
+  }
+) {
+  return createResizableSidesheet(
+    (props: { props: BaseProps<T> }) => (
+      <SidesheetWrapper closeSidesheet={props.props.closeSidesheet}>
+        <Comp props={props.props} />
+      </SidesheetWrapper>
+    ),
+    resizeOptions
+  );
+}
+
+export function SidesheetWrapper<T>({
+  closeSidesheet,
+  children,
+}: PropsWithChildren<{ closeSidesheet: VoidFunction }>) {
+  useCloseSidesheetOnContextChange(closeSidesheet);
+
+  return <>{children}</>;
+}
+
+export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
   const { signatures, signaturesFetching } = useSignatures(props.id);
   const attachmentsUrls = props?.item?.url.replace('#', '#tab=attachments&');
   return (
@@ -25,7 +57,7 @@ export const SwcrSidesheet = (props: {
       <SidesheetHeader
         title={`${props?.item?.swcrNo || ''}, ${props?.item?.title || ''} `}
         applicationTitle={'Software change record'}
-        onClose={props.close}
+        onClose={props.closeSidesheet}
       />
       <StyledBanner>
         <BannerItem
@@ -68,4 +100,6 @@ export const SwcrSidesheet = (props: {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-};
+});
+
+export default SwcrSidesheet.render;
