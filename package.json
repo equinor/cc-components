@@ -61,7 +61,7 @@
     "@equinor/fusion-framework-react-app": "^4.1.8",
     "@equinor/fusion-framework-react-module-context": "^6.0.14",
     "@equinor/fusion-observable": "8.1.2",
-    "@equinor/workspace-fusion": "6.1.0-rc.1",
+    "@equinor/workspace-fusion": "6.1.0",
     "@microsoft/applicationinsights-web": "^3.0.3",
     "@swc/helpers": "0.5.2",
     "@tanstack/react-query": "^4.35.3",
