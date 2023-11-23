@@ -58,7 +58,10 @@ async function ensureAppExists(baseUrl: string, token: string, appKey: string) {
     ['Content-Type']: 'application/zip',
   };
 
-  const res = await client.get(`${baseUrl}/api/apps/${appKey}?api-version=1.0`, headers);
+  const res = await client.get(
+    `${baseUrl}/api/admin/apps/${appKey}/versions?api-version=1.0`,
+    headers
+  );
 
   if (res.message.statusCode === 404) {
     logInfo(`Unknown app: ${appKey}`, 'Red');
