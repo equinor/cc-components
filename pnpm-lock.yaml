@@ -32,11 +32,8 @@ importers:
         specifier: 8.1.2
         version: 8.1.2(@types/react@18.2.22)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: ^6.0.15
-        version: 6.0.15(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
-      '@equinor/workspace-sidesheet':
-        specifier: ^0.1.6
-        version: 0.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+        specifier: 6.1.0
+        version: 6.1.0(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
       '@microsoft/applicationinsights-web':
         specifier: ^3.0.3
         version: 3.0.3(tslib@2.6.2)
@@ -434,6 +431,9 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+      '@equinor/workspace-sidesheet':
+        specifier: ^0.1.6
+        version: 0.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
 
   libs/modelviewer:
     dependencies:
@@ -649,6 +649,9 @@ importers:
       '@cc-components/swcrshared':
         specifier: workspace:^
         version: link:../swcrshared
+      '@equinor/workspace-sidesheet':
+        specifier: ^0.1.6
+        version: 0.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
 
   libs/workorderapp:
     dependencies:
@@ -4692,8 +4695,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-fusion@6.0.15(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
-    resolution: {integrity: sha512-tZrPh47WnuJfRNiDZ+JyKeq3UE5HNbzdL/SVWT3YYzLZTS2nVWG3MVtyik9Q38/MA0HbzWwdVN5txv/oTacLRg==}
+  /@equinor/workspace-fusion@6.1.0(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9):
+    resolution: {integrity: sha512-8VBUkMoepYOaymSjedYi6LnR89tlMILkr4sRQjo5Ev980XAWhASwJMqnZZaYsDdS8iqd/F/exd4SMV95ZHE6Fw==}
     peerDependencies:
       react-dom: '>= 16.8.0 || 18'
       react-is: '>= 16.8.0'
@@ -4711,7 +4714,7 @@ packages:
       '@equinor/workspace-powerbi': 1.0.11(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-react': 1.0.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
-      '@types/react-dom': 18.2.7
+      re-resizable: 6.9.11(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 3.1.4(react@18.2.0)
@@ -5025,7 +5028,7 @@ packages:
       '@equinor/eds-core-react': 0.28.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/eds-icons': 0.18.0
       '@equinor/eds-tokens': 0.9.2
-      re-resizable: 6.9.9(react-dom@18.2.0)(react@18.2.0)
+      re-resizable: 6.9.11(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
@@ -16175,8 +16178,8 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /re-resizable@6.9.9(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-l+MBlKZffv/SicxDySKEEh42hR6m5bAHfNu3Tvxks2c4Ah+ldnWjfnVRwxo/nxF27SsUsxDS0raAzFuJNKABXA==}
+  /re-resizable@6.9.11(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-a3hiLWck/NkmyLvGWUuvkAmN1VhwAz4yOhS6FdMTaxCUVN9joIWkT11wsO68coG/iEYuwn+p/7qAmfQzRhiPLQ==}
     peerDependencies:
       react: ^16.13.1 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || 18

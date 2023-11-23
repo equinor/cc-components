@@ -24,7 +24,6 @@ import {
   UnsignedTaskTab,
   WorkorderBase,
   WorkorderTab,
-  createWidget,
   useContextId,
 } from '@cc-components/shared';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
@@ -40,11 +39,46 @@ import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
-  closeSidesheet: VoidFunction;
+  close: VoidFunction;
 };
-export const HandoverSidesheet = createWidget<HandoverPackage>(({ props }) => (
-  <EnsureHandover {...props} />
-));
+export const HandoverSidesheet = ({ id, close: closeSidesheet, item }: HandoverProps) => {
+  const client = useHttpClient('cc-app');
+  const contextId = useContextId();
+  const { isLoading, data, error } = useQuery(
+    ['handover', id],
+    async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
+      if (!res.ok) {
+        throw new Error(`Failed to get handover with id ${id}`);
+      }
+      return res.json() as Promise<HandoverPackage>;
+    },
+    { refetchOnWindowFocus: false, initialData: item ?? undefined }
+  );
+
+  if (isLoading) {
+    return <SidesheetSkeleton close={() => closeSidesheet()} />;
+  }
+
+  if (error || !data) {
+    return (
+      <div
+        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
+      >
+        <ErrorWrapper>
+          <Icon
+            name="error_outlined"
+            size={48}
+            color={tokens.colors.interactive.primary__resting.hsla}
+          />
+          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
+        </ErrorWrapper>
+      </div>
+    );
+  }
+
+  return <HandoverSidesheetComponent id={id} item={data} close={closeSidesheet} />;
+};
 
 Icon.add({ error_outlined });
 
@@ -119,7 +153,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
         url={props?.item?.commissioningPackageUrl || ''}
         description={props?.item?.description || ''}
         applicationTitle={'Handover'}
-        onClose={props.closeSidesheet}
+        onClose={props.close}
       />
       <StyledBanner>
         <BannerItem
@@ -281,53 +315,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     </StyledSideSheetContainer>
   );
 };
-
-export default HandoverSidesheet.render;
-
-function EnsureHandover({ id, closeSidesheet, item }: HandoverProps) {
-  const client = useHttpClient('cc-app');
-  const contextId = useContextId();
-  const { isLoading, data, error } = useQuery(
-    ['handover', id],
-    async () => {
-      const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
-      if (!res.ok) {
-        throw new Error(`Failed to get handover with id ${id}`);
-      }
-      return res.json() as Promise<HandoverPackage>;
-    },
-    { refetchOnWindowFocus: false, initialData: item ?? undefined }
-  );
-
-  if (isLoading) {
-    return <SidesheetSkeleton close={() => closeSidesheet()} />;
-  }
-
-  if (error || !data) {
-    return (
-      <div
-        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
-      >
-        <ErrorWrapper>
-          <Icon
-            name="error_outlined"
-            size={48}
-            color={tokens.colors.interactive.primary__resting.hsla}
-          />
-          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
-        </ErrorWrapper>
-      </div>
-    );
-  }
-
-  return (
-    <HandoverSidesheetComponent
-      id={id}
-      item={data}
-      closeSidesheet={closeSidesheet}
-    ></HandoverSidesheetComponent>
-  );
-}
 
 import styled from 'styled-components';
 const ErrorWrapper = styled.div`
