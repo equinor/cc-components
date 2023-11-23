@@ -54,7 +54,7 @@ jobs:
         run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.issue.number }}
 
       - name: Comment pr
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.issues.createComment({
