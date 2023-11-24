@@ -6,7 +6,13 @@ on:
       appKey:
         type: string
         description: Which app to deploy to production
-permissions: write-all
+permissions:
+  actions: read
+  checks: write
+  contents: read
+  deployments: write
+  id-token: write
+  statuses: write
 jobs:
   deploy-manual-fprd:
     runs-on: ubuntu-latest
