@@ -43,6 +43,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: ci
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to fetch range
+
       - name: Get fusion token
         id: 'get-fusion-token-ci'
         uses: ./.github/actions/get-fusion-token
@@ -50,11 +55,6 @@ jobs:
           client-id: ${{secrets.AZURE_CLIENT_ID}}
           tenant-id: ${{secrets.AZURE_TENANT_ID}}
           resource-id: ${{secrets.AZURE_RESOURCE_ID}}
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Required to fetch range
 
       - name: PNPM setup
         uses: ./.github/actions/pnpm-setup
