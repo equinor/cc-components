@@ -4,7 +4,13 @@ on:
     branches:
       - main
 
-permissions: write-all
+permissions:
+  actions: read
+  checks: write
+  contents: read
+  deployments: write
+  id-token: write
+  statuses: write
 jobs:
   deploy-affected-prod:
     runs-on: ubuntu-latest

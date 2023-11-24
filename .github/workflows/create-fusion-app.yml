@@ -31,7 +31,13 @@ on:
           - Engineering
           - MMP Liquids
 
-permissions: write-all
+permissions:
+  actions: read
+  checks: write
+  contents: read
+  deployments: write
+  id-token: write
+  statuses: write
 jobs:
   create-fusion-app-ci:
     runs-on: ubuntu-latest

@@ -3,7 +3,14 @@ on:
   issue_comment:
     types: [created]
 
-permissions: write-all
+permissions:
+  actions: read
+  issues: read
+  checks: write
+  contents: read
+  deployments: write
+  id-token: write
+  statuses: write
 jobs:
   deploy-affected-ci:
     # only run if pull request is approved and QA is required
