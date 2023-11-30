@@ -1,30 +1,62 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import { useContextId } from '@cc-components/shared';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
+import { NcrTab, PunchTab, WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
-  NcrTab,
-  PunchTab,
-  WorkorderBase,
-  WorkorderTab,
-} from '@cc-components/shared/sidesheet';
-import {
+  BannerItem,
   SidesheetHeader,
+  SidesheetSkeleton,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
+  StyledTabListWrapper,
   StyledTabs,
   TabTitle,
-  BannerItem,
-  SidesheetSkeleton,
-  StyledTabListWrapper,
 } from '@cc-components/sharedcomponents';
 import { Icon, Tabs } from '@equinor/eds-core-react';
+import { error_outlined } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { createWidget, useContextId } from '@cc-components/shared';
 import { useRef, useState } from 'react';
 import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
-import { error_outlined } from '@equinor/eds-icons';
+
+import { createWidget as createResizableSidesheet } from '@equinor/workspace-sidesheet';
+import styled from 'styled-components';
+
+import { useCloseSidesheetOnContextChange } from '@cc-components/shared';
+import { PropsWithChildren } from 'react';
+
+type BaseProps<T> = {
+  id: string;
+  item?: T;
+  closeSidesheet: VoidFunction;
+};
+
+export function createWidget<T>(
+  Comp: (props: { props: BaseProps<T> }) => JSX.Element,
+  resizeOptions?: {
+    defaultWidth?: number | undefined;
+  }
+) {
+  return createResizableSidesheet(
+    (props: { props: BaseProps<T> }) => (
+      <SidesheetWrapper closeSidesheet={props.props.closeSidesheet}>
+        <Comp props={props.props} />
+      </SidesheetWrapper>
+    ),
+    resizeOptions
+  );
+}
+
+export function SidesheetWrapper<T>({
+  closeSidesheet,
+  children,
+}: PropsWithChildren<{ closeSidesheet: VoidFunction }>) {
+  useCloseSidesheetOnContextChange(closeSidesheet);
+
+  return <>{children}</>;
+}
 
 type McProps = {
   id: string;
@@ -165,9 +197,8 @@ const McSideSheetComponent = (props: Required<McProps>) => {
 
 export default McSideSheet.render;
 
-import { useQuery } from '@tanstack/react-query';
-import styled from 'styled-components';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useQuery } from '@tanstack/react-query';
 
 function EnsureMcPkg({ id, closeSidesheet, item }: McProps) {
   const client = useHttpClient('cc-app');

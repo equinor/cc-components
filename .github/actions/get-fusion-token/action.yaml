@@ -1,0 +1,32 @@
+name: Get Fusion token
+description: 'Runs a composite step action'
+inputs:
+  client-id:
+    description: 'SP client id'
+    required: true
+  tenant-id:
+    description: 'Equinor tenant id'
+    required: true
+  resource-id:
+    description: 'Resource id'
+    required: true
+
+outputs:
+  token:
+    description: 'Fusion token'
+    value: ${{ steps.token.outputs.token }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Login to Azure'
+      uses: azure/login@v1
+      with:
+        client-id: ${{inputs.client-id}}
+        tenant-id: ${{ inputs.tenant-id }}
+        allow-no-subscriptions: true
+
+    - name: 'Obtain token for upload'
+      id: token
+      shell: bash
+      run: echo "token=$(az account get-access-token --resource '${{ inputs.resource-id }}' | jq '.accessToken')" >> $GITHUB_OUTPUT

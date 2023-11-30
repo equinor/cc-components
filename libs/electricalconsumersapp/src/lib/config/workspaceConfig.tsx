@@ -45,7 +45,7 @@ export const WorkspaceWrapper = () => {
       filterOptions={filterConfig}
       sidesheetOptions={{
         type: 'default',
-        DetailsSidesheet: ElectricalSidesheet.Component,
+        DetailsSidesheet: ElectricalSidesheet,
       }}
       gridOptions={gridConfig}
       modules={[gridModule, gardenModule, powerBiModule]}
