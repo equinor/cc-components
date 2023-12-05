@@ -1,14 +1,14 @@
-import { McPackage } from 'libs/mechanicalcompletionshared';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { GardenItem } from '../ui-garden';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useHttpClient } from '@cc-components/shared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 
 export const useGardenConfig = (
   contextId: string
 ): GardenConfig<McPackage, FilterState> => {
-  const client = useHttpClient('cc-app');
+  const client = useHttpClient();
 
   const { getBlockAsync, getGardenMeta, getHeader, getSubgroupItems } =
     useGardenDataSource({
