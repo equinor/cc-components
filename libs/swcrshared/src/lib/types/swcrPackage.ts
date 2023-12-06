@@ -43,5 +43,6 @@ export type SwcrPackage = {
   rfCForecastDate: string;
   system: string;
   automationControlSystem: string;
-  swcrTypes: string;
+  swcrTypes: string
+  commissioningPackageArea: string;
 };
