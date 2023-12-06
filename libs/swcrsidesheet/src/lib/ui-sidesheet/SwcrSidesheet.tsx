@@ -1,4 +1,3 @@
-import { createWidget } from '@cc-components/shared';
 import { StatusCircle } from '@cc-components/shared/common';
 import { LinkCell } from '@cc-components/shared/table-helpers';
 import {
@@ -19,69 +18,34 @@ import { useSignatures } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { SignaturesTab } from './SignaturesTab';
 
-import { createWidget as createResizableSidesheet } from '@equinor/workspace-sidesheet';
-
-import { PropsWithChildren } from 'react';
-import { useCloseSidesheetOnContextChange } from '@cc-components/shared';
-
-type BaseProps<T> = {
+type SwcrProps = {
   id: string;
-  item?: T;
-  closeSidesheet: VoidFunction;
+  item?: SwcrPackage;
+  close: VoidFunction;
 };
 
-export function createWidget<T>(
-  Comp: (props: { props: BaseProps<T> }) => JSX.Element,
-  resizeOptions?: {
-    defaultWidth?: number | undefined;
-  }
-) {
-  return createResizableSidesheet(
-    (props: { props: BaseProps<T> }) => (
-      <SidesheetWrapper closeSidesheet={props.props.closeSidesheet}>
-        <Comp props={props.props} />
-      </SidesheetWrapper>
-    ),
-    resizeOptions
-  );
-}
-
-export function SidesheetWrapper<T>({
-  closeSidesheet,
-  children,
-}: PropsWithChildren<{ closeSidesheet: VoidFunction }>) {
-  useCloseSidesheetOnContextChange(closeSidesheet);
-
-  return <>{children}</>;
-}
-
-export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
-  const { signatures, signaturesFetching, error } = useSignatures(props.id);
+export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) => {
+  const { signatures, signaturesFetching, error } = useSignatures(id);
   const [activeTab, setActiveTab] = useState(0);
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
-  const attachmentsUrls = props?.item?.swcrUrl.replace('#', '#tab=attachments&');
+  const attachmentsUrls = item?.swcrUrl.replace('#', '#tab=attachments&');
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${props?.item?.softwareChangeRecordNo || ''}, ${
-          props?.item?.title || ''
-        } `}
+        title={`${item?.softwareChangeRecordNo || ''}, ${item?.title || ''} `}
         applicationTitle={'Software change record'}
-        onClose={props.closeSidesheet}
+        onClose={closeSidesheet}
       />
       <StyledBanner>
         <BannerItem
           title="SWCR"
           value={
-            props?.item?.softwareChangeRecordNo && props?.item?.swcrUrl ? (
-              <LinkCell
-                url={props.item.swcrUrl}
-                urlText={props.item.softwareChangeRecordNo}
-              />
+            item?.softwareChangeRecordNo && item?.swcrUrl ? (
+              <LinkCell url={item.swcrUrl} urlText={item.softwareChangeRecordNo} />
             ) : (
-              props?.item?.softwareChangeRecordNo ?? 'N/A'
+              item?.softwareChangeRecordNo ?? 'N/A'
             )
           }
         />
@@ -89,15 +53,15 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
           title="Status"
           value={
             <StatusCircle
-              content={props?.item?.status || ''}
-              statusColor={getSwcrStatusColor(props?.item?.status)}
+              content={item?.status || ''}
+              statusColor={getSwcrStatusColor(item?.status)}
             />
           }
         />
-        <BannerItem title="Contract" value={props?.item?.contract ?? 'N/A'} />
-        <BannerItem title="Priority" value={props?.item?.priority ?? 'N/A'} />
-        <BannerItem title="Supplier" value={props?.item?.supplier ?? 'N/A'} />
-        <BannerItem title="System" value={props?.item?.system ?? 'N/A'} />
+        <BannerItem title="Contract" value={item?.contract ?? 'N/A'} />
+        <BannerItem title="Priority" value={item?.priority ?? 'N/A'} />
+        <BannerItem title="Supplier" value={item?.supplier ?? 'N/A'} />
+        <BannerItem title="System" value={item?.system ?? 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -112,7 +76,7 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
           <Tabs.Panel>
             <DetailsTab
               attachmentsUrls={attachmentsUrls}
-              item={props?.item}
+              item={item}
               signatures={signatures}
               signaturesFetching={signaturesFetching}
             />
@@ -128,6 +92,4 @@ export const SwcrSidesheet = createWidget<SwcrPackage>(({ props }) => {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
-
-export default SwcrSidesheet.render;
+};
