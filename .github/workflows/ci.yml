@@ -11,10 +11,6 @@ jobs:
     name: Build
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
-    # env:
-    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
     steps:
       - name: Check out code
@@ -22,18 +18,8 @@ jobs:
         with:
           fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 8.0.0
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: PNPM setup
+        uses: ./.github/actions/pnpm-setup
 
       - uses: dtinth/setup-github-actions-caching-for-turbo@v1
 

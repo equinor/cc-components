@@ -4,11 +4,5 @@ import { WorkorderSidesheet } from '@cc-components/workordersidesheet';
 
 export const sidesheetConfig: SidesheetConfig<WorkOrder> = {
   type: 'default',
-  DetailsSidesheet: (props) => (
-    <WorkorderSidesheet.Component
-      id={props.id}
-      item={props.item}
-      closeSidesheet={props.close}
-    />
-  ),
+  DetailsSidesheet: WorkorderSidesheet,
 };

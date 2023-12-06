@@ -1,5 +1,5 @@
 import { HeatTrace } from '@cc-components/heattraceshared';
-import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
+import { useResizeContext } from '@equinor/workspace-fusion';
 import { useMemo, useRef } from 'react';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
@@ -9,6 +9,7 @@ import {
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
+import { useHttpClient as useFrameworkClient } from '@equinor/fusion-framework-react-app/http';
 import {
   BannerItem,
   SidesheetHeader,
@@ -27,10 +28,6 @@ type HeatTraceProps = {
   item?: HeatTrace;
   close: () => void;
 };
-
-export const HeattraceSidesheet = createWidget<HeatTraceProps>(({ props }) => (
-  <EnsureHeatTrace {...props} />
-));
 
 const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
   const circuitDiagramTab = useCircuitDiagramTab(props.item);
@@ -93,9 +90,7 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
   );
 };
 
-export default HeattraceSidesheet.render;
-
-function EnsureHeatTrace({ id, item, close }: HeatTraceProps) {
+export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
   const client = useHttpClient();
   const contextId = useContextId();
 
@@ -129,6 +124,7 @@ function EnsureHeatTrace({ id, item, close }: HeatTraceProps) {
 }
 
 const useCircuitDiagramTab = (ht: HeatTrace) => {
+  const eleClient = useFrameworkClient('electrical-api');
   const client = useHttpClient();
   const contextId = useContextId();
   const { width, setWidth } = useResizeContext();
@@ -146,7 +142,7 @@ const useCircuitDiagramTab = (ht: HeatTrace) => {
     /**Change facility to project */
     /** facility*/ [ht.heatTraceCableNo, ht.facility, ht.project],
     async ({ signal }) => {
-      const res = await client.fetch(
+      const res = await eleClient.fetch(
         `api/contexts/${contextId}/electrical/consumers/electrical-network/${encodeURIComponent(
           ht.heatTraceCableNo
         )}/${ht.facility}`,

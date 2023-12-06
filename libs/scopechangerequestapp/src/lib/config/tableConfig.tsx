@@ -71,19 +71,19 @@ export const useTableConfig = (
 };
 const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
   {
-    field: 'Id',
+    headerName: 'Id',
     valueGetter: (pkg) => pkg.data?.serialNumber,
     headerTooltip: 'Id',
     width: 90,
   },
   {
-    field: 'Title',
+    headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     headerTooltip: 'Title',
     width: 250,
   },
   // {
-  //   field: 'Comment',
+  //   headerName: 'Comment',
   //   valueGetter: (pkg) => pkg.data?.hasComments,
   //   headerTooltip: 'Comment',
   //   cellRenderer: (
@@ -99,13 +99,13 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
 
   // Hidden for now only one phase
   // {
-  //   field: 'Phase',
+  //   headerName: 'Phase',
   //   valueGetter: (pkg) => pkg.data?.phase,
   //   enableRowGroup: true,
   //   width: 60,
   // },
   {
-    field: 'Workflow',
+    headerName: 'Workflow',
     valueGetter: (pkg) => pkg.data?.workflowStatus,
     headerTooltip: 'Workflow',
     valueFormatter: (pkg) =>
@@ -121,13 +121,13 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 130,
   },
   // {
-  //   field: 'Current step',
+  //   headerName: 'Current step',
   //   headerTooltip: 'Current step',
   //   valueGetter: (pkg) => pkg.data?.documents,
   //   width: 180,
   // },
   // {
-  //   field: 'Next',
+  //   headerName: 'Next',
   //   headerTooltip: 'Next',
   //   valueGetter: (pkg) => {
   //     return pkg.data && findNextToSign(pkg.data);
@@ -135,13 +135,13 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
   //   width: 220,
   // },
   {
-    field: 'Status',
+    headerName: 'Status',
     headerTooltip: 'Status',
     valueGetter: (pkg) => pkg.data?.workflowStatus,
     width: 120,
   },
   {
-    field: 'State',
+    headerName: 'State',
     headerTooltip: 'State',
     valueGetter: (pkg) => pkg.data?.isVoided,
     valueFormatter: (pkg) => (pkg.data?.isVoided ? 'Voided' : pkg.data?.state) ?? '',
@@ -153,7 +153,7 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 110,
   },
   {
-    field: 'Disciplines',
+    headerName: 'Disciplines',
     headerTooltip: 'Disciplines',
     valueGetter: (pkg) => pkg.data?.disciplineGuesstimates,
     valueFormatter: (pkg) =>
@@ -168,7 +168,7 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 140,
   },
   {
-    field: 'Guess Mhrs',
+    headerName: 'Guess Mhrs',
     headerTooltip: 'Guesstimate Manhours',
     valueGetter: (pkg) => pkg.data?.disciplineGuesstimates,
     valueFormatter: (pkg) =>
@@ -178,25 +178,25 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 150,
   },
   // {
-  //   field: 'Est Mhrs',
+  //   headerName: 'Est Mhrs',
   //   headerTooltip: 'Estimate Manhours',
   //   valueGetter: (pkg) => pkg.data?.workOrdersTotalEstimatedManHours,
   //   width: 150,
   // },
   // {
-  //   field: 'Exp Mhrs',
+  //   headerName: 'Exp Mhrs',
   //   headerTooltip: 'Expanded Manhours',
   //   valueGetter: (pkg) => pkg.data?.workOrdersTotalExpendedManHours,
   //   width: 150,
   // },
   // {
-  //   field: 'Rem Mhrs',
+  //   headerName: 'Rem Mhrs',
   //   headerTooltip: 'Remaining Manhours',
   //   valueGetter: (pkg) => pkg.data?.workOrdersTotalRemainingManHours,
   //   width: 150,
   // },
   {
-    field: 'Change origin',
+    headerName: 'Change origin',
     headerTooltip: 'Change Origin',
     valueGetter: (pkg) => pkg.data?.originSourceId,
     valueFormatter: (pkg) =>
@@ -212,13 +212,13 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 180,
   },
   {
-    field: 'Scope',
+    headerName: 'Scope',
     headerTooltip: 'Scope',
     valueGetter: (pkg) => pkg.data?.scope?.name,
     width: 140,
   },
   {
-    field: 'Last updated',
+    headerName: 'Last updated',
     headerTooltip: 'Last Updated',
     valueGetter: (pkg) => pkg.data?.modifiedAtUtc,
     cellRenderer: (
@@ -229,7 +229,7 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 160,
   },
   {
-    field: 'Created at',
+    headerName: 'Created at',
     headerTooltip: 'Created At',
     valueGetter: (pkg) => pkg.data?.createdAtUtc,
     cellRenderer: (
@@ -240,7 +240,7 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     width: 140,
   },
   {
-    field: 'Last signed',
+    headerName: 'Last signed',
     headerTooltip: 'Last Signed',
     valueGetter: (pkg) => pkg.data && getLastSigned(pkg.data),
     cellRenderer: (

@@ -10,7 +10,7 @@ import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 
 export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
   {
-    field: 'Tag',
+    headerName: 'Tag No',
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return (
@@ -19,7 +19,7 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     },
   },
   {
-    field: 'Formular type',
+    headerName: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return (
@@ -28,11 +28,11 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     },
   },
   {
-    field: 'Responsible',
+    headerName: 'Responsible',
     valueGetter: (pkg) => pkg.data?.mcResponsible,
   },
   {
-    field: 'Status',
+    headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       if (!props.data?.status) return null;

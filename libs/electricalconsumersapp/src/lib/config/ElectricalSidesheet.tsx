@@ -1,4 +1,3 @@
-import { createWidget, useResizeContext } from '@equinor/workspace-sidesheet';
 import { ElectricalConsumer } from './workspaceConfig';
 import { useContextId, useHttpClient, ElectricalNetwork } from '@cc-components/shared';
 import {
@@ -16,30 +15,17 @@ import { useQuery } from '@tanstack/react-query';
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { useRef, useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
+import { useResizeContext } from '@equinor/workspace-fusion';
 import { CircuitDiagramTab } from '../sidesheet/CircuitDiagramTab';
 
-export const ElectricalSidesheet = createWidget<{
-  close: VoidFunction;
-  item?: ElectricalConsumer;
-  id: string;
-}>((props) => {
-  return (
-    <ElectricalInnerSidesheet
-      item={props.props.item}
-      id={props.props.id}
-      closeSidesheet={props.props.close}
-    />
-  );
-});
-
-export function ElectricalInnerSidesheet({
+export function ElectricalSidesheet({
   item,
   id,
-  closeSidesheet,
+  close,
 }: {
-  item: ElectricalConsumer | undefined;
+  item?: ElectricalConsumer | undefined;
   id: string;
-  closeSidesheet: VoidFunction;
+  close: VoidFunction;
 }) {
   const { width, setWidth } = useResizeContext();
   const [activeTab, setActiveTab] = useState(0);
@@ -58,7 +44,7 @@ export function ElectricalInnerSidesheet({
   const [itemNo, facility, project] = id.split('_');
 
   if (!facility || !itemNo) {
-    closeSidesheet();
+    close();
     return <></>;
   }
 
@@ -113,7 +99,7 @@ export function ElectricalInnerSidesheet({
   );
 
   if (isLoading) {
-    return <SidesheetSkeleton close={closeSidesheet} />;
+    return <SidesheetSkeleton close={close} />;
   }
 
   if (!consumer) {
@@ -125,7 +111,7 @@ export function ElectricalInnerSidesheet({
       <SidesheetHeader
         title={consumer.tagNo}
         applicationTitle={'Electrical consumers'}
-        onClose={closeSidesheet}
+        onClose={close}
       />
       <StyledBanner>
         <BannerItem title="Facility" value={consumer.instCode} />

@@ -25,14 +25,18 @@ import {
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
 import { Tabs } from '@equinor/eds-core-react';
-import { createWidget } from '@cc-components/shared';
+
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
 
-export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
+export const WorkorderSidesheet = (props: {
+  id: string;
+  item?: WorkOrder | undefined;
+  close: VoidFunction;
+}) => {
   const [activeTab, setActiveTab] = useState(0);
   const { mccr, isFetching: isFetchingMccr, error: mccrError } = useMccr(props.id);
 
@@ -70,7 +74,7 @@ export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
   );
 
   if (isLoadingSidesheet) {
-    return <SidesheetSkeleton close={props.closeSidesheet} />;
+    return <SidesheetSkeleton close={props.close} />;
   }
 
   if (!wo || error) {
@@ -85,7 +89,7 @@ export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
       <SidesheetHeader
         title={wo.description ?? ''}
         applicationTitle={'Workorder'}
-        onClose={props.closeSidesheet}
+        onClose={props.close}
       />
       <StyledBanner>
         <BannerItem
@@ -178,6 +182,4 @@ export const WorkorderSidesheet = createWidget<WorkOrder>(({ props }) => {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
-
-export default WorkorderSidesheet.render;
+};

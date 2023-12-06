@@ -1,3 +1,0 @@
-# schedule-viewer
-
-Add readme
