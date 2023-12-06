@@ -4,6 +4,6 @@ export const customDescription = (swcr: SwcrPackage | GardenItem<SwcrPackage>) =
   //TODO: TS check
   const item = swcr as SwcrPackage;
   return `${item.title} ${
-    parseInt(item.estimatedManhours) > 0 ? `(${item.estimatedManhours}h)` : ''
+    (item.estimatedManHours) > 0 ? `(${item.estimatedManHours}h)` : ''
   }`;
 };

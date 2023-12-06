@@ -1,8 +1,8 @@
 export type SwcrBase = {
   softwareChangeRecordNo: string;
-  softwareChangeRecordId: string;
   softwareChangeRecordUrl: string;
-  status: string;
+  softwareChangeRecordId: string;
   description: string;
   priority: string;
+  status: string;
 };

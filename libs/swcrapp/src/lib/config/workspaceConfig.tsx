@@ -1,67 +1,58 @@
+import {
+  useCCApiAccessCheck,
+  useContextId,
+  useHttpClient,
+  usePBIOptions,
+} from '@cc-components/shared';
+import { useFilterConfig } from '@cc-components/shared/workspace-config';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import Workspace from '@equinor/workspace-fusion';
-import { gardenConfig } from './gardenConfig';
-import { filterConfig } from './filterConfig';
-import { statusBarConfig } from './statusBarConfig';
-import { tableConfig } from './tableConfig';
 
 import { sidesheetConfig } from './sidesheetConfig';
-import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
-import {
-  FusionDataProxyUnauthorized,
-  useContextId,
-  useErrorBoundaryTrigger,
-  useHttpClient,
-} from '@cc-components/shared';
-import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
+
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
-import { SwcrPackage } from '@cc-components/swcrshared';
-import { sortPackagesByStatusAndNumber } from '../utils-statuses';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
+
+import { useGardenConfig } from './gardenConfig';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useTableConfig } from './tableConfig';
 
 export const WorkspaceWrapper = () => {
-  const dataProxy = useHttpClient();
   const contextId = useContextId();
-  const getResponseAsync = async () => {
-    const swcrs = await dataProxy.fetch(`/api/contexts/${contextId}/swcr`);
-    return swcrs;
-  };
+  const ccApi = useHttpClient();
 
   const pbi = usePBIOptions('swcr-analytics', {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 
-  const trigger = useErrorBoundaryTrigger();
+  const filterConfig = useFilterConfig((req) =>
+    ccApi.fetch(`/api/contexts/${contextId}/swcr/filter-model`, req)
+  );
+  const tableConfig = useTableConfig(contextId);
+  const statusbarConfig = useStatusBarConfig(contextId);
+  const gardenConfig = useGardenConfig(contextId);
+  const { isLoading } = useCCApiAccessCheck(contextId, ccApi, 'swcr');
 
-  const responseParser = async (response: Response) => {
-    if (response.status === 403) {
-      trigger(new FusionDataProxyUnauthorized(await response.json()));
-      throw new Error('');
-    }
-    const parsedResponse = JSON.parse(await response.text()) as SwcrPackage[];
-    return parsedResponse.sort(sortPackagesByStatusAndNumber);
-  };
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
 
   return (
     <Workspace
       key={contextId}
       workspaceOptions={{
-        appKey: 'SWCR',
-        getIdentifier: (item) => item.swcrId,
+        getIdentifier: (item) => item.softwareChangeRecordId,
         defaultTab: 'garden',
       }}
       filterOptions={filterConfig}
-      gardenOptions={gardenConfig}
       gridOptions={tableConfig}
-      statusBarOptions={statusBarConfig}
+      gardenOptions={gardenConfig}
+      statusBarOptions={statusbarConfig}
       sidesheetOptions={sidesheetConfig}
       powerBiOptions={pbi}
-      dataOptions={{
-        getResponseAsync,
-        responseParser,
-        queryKey: ['swcr', contextId],
-      }}
-      modules={[powerBiModule, gardenModule, gridModule]}
+      modules={[gardenModule, gridModule, powerBiModule]}
     />
   );
 };
