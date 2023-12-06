@@ -67,4 +67,6 @@ export type HandoverPackage = {
   mcDisciplines: string | null;
   remainingPunchOutCount: number | null;
   status: BaseStatus; //Comm. pkg status in procosys
+  worstChecklistStatus: string;
+  hasNonCountingScope: boolean | null;
 };

@@ -179,6 +179,11 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
                   ? statusColorMap[props.item.mechanicalCompletionStatus]
                   : 'transparent'
               }
+              infoMessage={
+                props.item.hasNonCountingScope
+                  ? `Commissioning Package has non-counting scope. Worst checklist status is "${props.item.worstChecklistStatus}"`
+                  : undefined
+              }
             />
           }
         />
