@@ -1,24 +1,23 @@
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import type { CommissioningStatus } from '../types';
+import { McPackage } from 'libs/mechanicalcompletionshared/dist/src';
 
-export const getCommissioningStatus = (mcPackage: McPackage): CommissioningStatus => {
-  if (mcPackage.rfocIsAccepted) {
+export const getCommissioningStatus = (mcPackage: McPackage): string => {
+  if (mcPackage.rfO_IsAccepted) {
     return 'RFOC Accepted';
-  } else if (mcPackage.rfocIsRejected) {
+  } else if (mcPackage.rfC_IsRejected) {
     return 'RFOC Rejected';
-  } else if (mcPackage.rfocIsShipped) {
+  } else if (mcPackage.rfC_IsShipped) {
     return 'RFOC Sent';
-  } else if (mcPackage.tacIsAccepted) {
+  } else if (mcPackage.taC_IsAccepted) {
     return 'TAC Accepted';
-  } else if (mcPackage.tacIsShipped) {
+  } else if (mcPackage.taC_IsShipped) {
     return 'TAC Sent';
-  } else if (mcPackage.rfccIsAccepted) {
+  } else if (mcPackage.rfC_IsAccepted) {
     return 'RFCC Accepted';
-  } else if (mcPackage.rfccIsRejected) {
+  } else if (mcPackage.rfC_IsRejected) {
     return 'RFCC Rejected';
-  } else if (mcPackage.rfccIsShipped) {
+  } else if (mcPackage.rfC_IsShipped) {
     return 'RFCC Sent';
-  } else if (mcPackage.punchAcceptActualDate) {
+  } else if (mcPackage.punchAcceptedActualtDate) {
     return 'Punch status accepted';
   } else if (mcPackage.finalPunchActualDate) {
     return 'Contractor final punch';
