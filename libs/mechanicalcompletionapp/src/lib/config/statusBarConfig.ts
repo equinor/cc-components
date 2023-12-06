@@ -1,34 +1,23 @@
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { numberFormat } from '@cc-components/shared/utils-formatting';
+import { useHttpClient } from '@cc-components/shared';
 import { StatusBarConfig } from '@equinor/workspace-fusion/status-bar';
-import { getStatusBarData } from '../utils-status-bar';
-export const statusBarConfig: StatusBarConfig<McPackage> = (data) => {
-  const kpis = getStatusBarData(data);
 
-  return [
-    {
-      title: 'Total MCpkgs',
-      value: numberFormat(kpis.mcPkgsCount),
-    },
-    {
-      title: 'Final punch',
-      value: numberFormat(kpis.finalPunchCount),
-    },
-    {
-      title: 'Punch status Accepted',
-      value: numberFormat(kpis.punchAcceptedCount),
-    },
-    {
-      title: 'MC to Com',
-      value: numberFormat(kpis.mcToComCount),
-    },
-    {
-      title: 'RFCC',
-      value: numberFormat(kpis.rfccCount),
-    },
-    {
-      title: 'RFCC %',
-      value: `${numberFormat(kpis.rfccPercentage)}%`,
-    },
-  ];
+export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
+  const client = useHttpClient();
+
+  return async (filters, signal) => {
+    const res = await client.fetch(
+      `/api/contexts/${contextId}/mechanical-completion/kpis`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          filter: filters,
+        }),
+        signal,
+        headers: {
+          ['content-type']: 'application/json',
+        },
+      }
+    );
+    return (await res.json()).map((s: any) => ({ ...s, title: s.name }));
+  };
 };

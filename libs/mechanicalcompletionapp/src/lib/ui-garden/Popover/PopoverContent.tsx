@@ -8,14 +8,14 @@ import {
   StyledPopoverProjectTitle,
   StyledPopoverProjectDescription,
 } from '@cc-components/shared/common';
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
+import { McPackage } from '../../../../../mechanicalcompletionshared';
 type ItemOptions = {
-  status: CommissioningStatus;
+  size: TagSize;
   backgroundColor: string;
   contentsColor: string;
-  size: TagSize;
   mcDotColor: string;
   commDotColor: string;
+  status: string;
 };
 type PopoverContentProps = {
   data: McPackage;
@@ -23,14 +23,12 @@ type PopoverContentProps = {
 };
 export const PopoverContent = ({
   data,
-  options: { backgroundColor, contentsColor, size, status, commDotColor, mcDotColor },
+  options: { size, backgroundColor, contentsColor, mcDotColor, commDotColor, status },
 }: PopoverContentProps): JSX.Element => {
   return (
     <StyledPopoverContainer>
       <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
-      <p>
-        {data.projectIdentifier}, {data.projectDescription}
-      </p>
+      <p>{data.projectDescription}</p>
       <StyledPopoverProjectDescription>
         {data.description}
       </StyledPopoverProjectDescription>
@@ -49,12 +47,14 @@ export const PopoverContent = ({
       <Statuses>
         <h5>MC status</h5>
         <StyledPopoverStatus color={mcDotColor}>
-          {['OS', 'OK', 'PA'].includes(data.mcStatus) ? data.mcStatus : 'PB'}
+          {['OS', 'OK', 'PA'].includes(data.mechanicalCompletionStatus)
+            ? data.mechanicalCompletionStatus
+            : 'PB'}
         </StyledPopoverStatus>
 
         <h5>Comm status</h5>
         <StyledPopoverStatus color={commDotColor}>
-          {['OS', 'OK', 'PA'].includes(data.commPkgStatus) ? data.commPkgStatus : 'PB'}
+          {['OS', 'OK', 'PA'].includes(data.commpkgStatus) ? data.commpkgStatus : 'PB'}
         </StyledPopoverStatus>
       </Statuses>
     </StyledPopoverContainer>

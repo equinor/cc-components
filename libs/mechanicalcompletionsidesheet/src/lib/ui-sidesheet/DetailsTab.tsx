@@ -20,7 +20,7 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
             <td>Project</td>
             <td>
               {stringCell(
-                `${mcPackage.projectDescription} (${mcPackage.projectIdentifier})`
+                `${mcPackage.projectDescription} (${mcPackage.mechanicalCompletionPackageNo})`
               )}
             </td>
           </tr>
@@ -36,15 +36,15 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>MC Package Area</td>
-            <td>{stringCell(mcPackage.area)}</td>
+            <td>{stringCell(mcPackage.location)}</td>
           </tr>
           <tr>
             <td>MC Package Phase</td>
-            <td>{stringCell(mcPackage.phase)}</td>
+            <td>{stringCell(mcPackage.mechanicalCompletionPhase)}</td>
           </tr>
           <tr>
             <td>Commissioning Package</td>
-            <td>{stringCell(mcPackage.commPkgNumber)}</td>
+            <td>{stringCell(mcPackage.commissioningPackageNo)}</td>
           </tr>
           <tr>
             <td>System</td>
@@ -52,7 +52,7 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>Subsystem</td>
-            <td>{stringCell(mcPackage.subsystem)}</td>
+            <td>{stringCell(mcPackage.subSystem)}</td>
           </tr>
           <tr>
             <td>Remark</td>
@@ -64,19 +64,19 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>M-02 Punch Status Accepted Actual Date</td>
-            <td>{stringCell(formatDateString(mcPackage.punchAcceptActualDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.punchAcceptedActualtDate))}</td>
           </tr>
           <tr>
             <td>M-03 RFC MC to Commissioning Actual Date</td>
-            <td>{stringCell(formatDateString(mcPackage.rfccShippedDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.rfC_ForecastDate))}</td>
           </tr>
           <tr>
             <td>M-04 RFCC Actual Date</td>
-            <td>{stringCell(formatDateString(mcPackage.rfccActualDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.rfC_ActualDate))}</td>
           </tr>
           <tr>
             <td>Commissioning Priority 1</td>
-            <td>{stringCell(mcPackage.priority)}</td>
+            <td>{stringCell(mcPackage.priority1)}</td>
           </tr>
           <tr>
             <td>Commissioning Priority 2</td>
@@ -106,18 +106,18 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
           </tr>
           <tr>
             <td>RFCC</td>
-            <td>{stringCell(formatDateString(mcPackage.rfccPlannedDate))}</td>
-            <td>{stringCell(formatDateString(mcPackage.rfccForecastDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.rfC_PlannedDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.rfC_ForecastDate))}</td>
           </tr>
           <tr>
             <td>TAC</td>
-            <td>{stringCell(formatDateString(mcPackage.tacPlannedDate))}</td>
-            <td>{stringCell(formatDateString(mcPackage.tacForecastDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.taC_PlannedDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.taC_ForecastDate))}</td>
           </tr>
           <tr>
             <td>RFOC</td>
-            <td>{stringCell(formatDateString(mcPackage.rfocPlannedDate))}</td>
-            <td>{stringCell(formatDateString(mcPackage.rfocForecastDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.rfO_PlannedDate))}</td>
+            <td>{stringCell(formatDateString(mcPackage.rfO_ForecastDate))}</td>
           </tr>
         </tbody>
       </StyledTable>

@@ -1,68 +1,52 @@
-import Workspace from '@equinor/workspace-fusion';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { filterConfig } from './filterConfig';
-import { statusBarConfig } from './statusBarConfig';
-import { tableConfig } from './tableConfig';
-import { gardenConfig } from './gardenConfig';
-import { contextConfig } from './contextConfig';
-import { sidesheetConfig } from './sidesheetConfig';
+import { useCCApiAccessCheck, useContextId } from '@cc-components/shared';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
-import {
-  FusionDataProxyUnauthorized,
-  useContextId,
-  useErrorBoundaryTrigger,
-} from '@cc-components/shared';
-import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
+import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import Workspace from '@equinor/workspace-fusion';
 import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
-import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { sortPackagesByStatus } from '../utils-statuses/sortPackagesByStatus';
+import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
+import { useFilterConfig } from '@cc-components/shared/workspace-config';
+import { useGardenConfig } from './gardenConfig';
+import { sidesheetConfig } from './sidesheetConfig';
+import { useStatusBarConfig } from './statusBarConfig';
+import { useTableConfig } from './tableConfig';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
-  const dataProxy = useHttpClient('data-proxy');
-  const getResponseAsync = async (signal: AbortSignal | undefined) =>
-    dataProxy.fetch(`/api/contexts/${contextId}/mc-pkgs`, {
-      signal,
-    });
-
-  const trigger = useErrorBoundaryTrigger();
+  const client = useHttpClient('cc-app');
+  const { isLoading } = useCCApiAccessCheck(contextId, client, 'mechanical-completion');
 
   const pbi = usePBIOptions('mc-analytics', {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
 
-  const responseParser = async (response: Response) => {
-    if (response.status === 403) {
-      trigger(new FusionDataProxyUnauthorized(await response.json()));
-      throw new Error('');
-    }
+  const filterConfig = useFilterConfig((req) =>
+    client.fetch(`/api/contexts/${contextId}/mechanical-completion/filter-model`, req)
+  );
+  const tableConfig = useTableConfig(contextId);
+  const statusBarConfig = useStatusBarConfig(contextId);
 
-    const parsedResponse = JSON.parse(await response.text()) as McPackage[];
-    return parsedResponse.sort(sortPackagesByStatus);
-  };
+  const gardenConfig = useGardenConfig(contextId);
+
+  if (isLoading) {
+    return <CCApiAccessLoading />;
+  }
 
   return (
     <Workspace
       key={contextId}
       workspaceOptions={{
-        appKey: 'MC',
-        getIdentifier: (item) => item.mcPkgId,
+        getIdentifier: (item) => item.mechanicalCompletionPackageUrlId,
         defaultTab: 'garden',
       }}
+      powerBiOptions={pbi}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
       gridOptions={tableConfig}
       statusBarOptions={statusBarConfig}
-      powerBiOptions={pbi}
-      dataOptions={{
-        getResponseAsync,
-        responseParser,
-        queryKey: ['mechanical_completion', contextId],
-      }}
       sidesheetOptions={sidesheetConfig}
-      contextOptions={contextConfig}
       modules={[gridModule, gardenModule, powerBiModule]}
     />
   );

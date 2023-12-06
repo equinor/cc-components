@@ -410,9 +410,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
-      '@equinor/workspace-fusion':
-        specifier: 0.20.4-alpha.6.0
-        version: 0.20.4-alpha.6.0(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@4.4.9)
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../sharedcomponents
 
   libs/mechanicalcompletionshared:
     dependencies:
@@ -4504,7 +4504,7 @@ packages:
       '@equinor/eds-core-react': 0.28.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/eds-icons': 0.18.0
       '@equinor/eds-tokens': 0.9.2
-      re-resizable: 6.9.11(react-dom@18.2.0)(react@18.2.0)
+      re-resizable: 6.9.9(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
@@ -6713,6 +6713,10 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
+  /@popperjs/core@2.11.7:
+    resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
+    dev: false
+
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
@@ -8684,7 +8688,7 @@ packages:
       '@emotion/styled': 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.22)(react@18.2.0)
       '@lingui/core': 3.17.2
       '@mui/material': 5.12.0(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@popperjs/core': 2.11.8
+      '@popperjs/core': 2.11.7
       '@remirror/core': 2.0.12(@remirror/pm@2.0.8)(@types/node@20.7.0)
       '@remirror/extension-blockquote': 2.0.13(@remirror/pm@2.0.8)(@types/node@20.7.0)
       '@remirror/extension-bold': 2.0.12(@remirror/pm@2.0.8)(@types/node@20.7.0)
@@ -12988,7 +12992,7 @@ packages:
   /history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.22.15
     dev: false
 
   /hoist-non-react-statics@3.3.2:
@@ -15656,6 +15660,21 @@ packages:
 
   /re-resizable@6.9.11(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-a3hiLWck/NkmyLvGWUuvkAmN1VhwAz4yOhS6FdMTaxCUVN9joIWkT11wsO68coG/iEYuwn+p/7qAmfQzRhiPLQ==}
+    peerDependencies:
+      react: ^16.13.1 || ^17.0.0 || ^18.0.0 || 18
+      react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || 18
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /re-resizable@6.9.9(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-l+MBlKZffv/SicxDySKEEh42hR6m5bAHfNu3Tvxks2c4Ah+ldnWjfnVRwxo/nxF27SsUsxDS0raAzFuJNKABXA==}
     peerDependencies:
       react: ^16.13.1 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0 || 18
