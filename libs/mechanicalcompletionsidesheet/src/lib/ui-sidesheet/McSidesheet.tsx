@@ -23,37 +23,6 @@ import { DetailsTab } from './DetailsTab';
 
 import styled from 'styled-components';
 
-// type BaseProps<T> = {
-//   id: string;
-//   item?: T;
-//   closeSidesheet: VoidFunction;
-// };
-
-// export function createWidget<T>(
-//   Comp: (props: { props: BaseProps<T> }) => JSX.Element,
-//   resizeOptions?: {
-//     defaultWidth?: number | undefined;
-//   }
-// ) {
-//   return createResizableSidesheet(
-//     (props: { props: BaseProps<T> }) => (
-//       <SidesheetWrapper closeSidesheet={props.props.closeSidesheet}>
-//         <Comp props={props.props} />
-//       </SidesheetWrapper>
-//     ),
-//     resizeOptions
-//   );
-// }
-
-// export function SidesheetWrapper<T>({
-//   closeSidesheet,
-//   children,
-// }: PropsWithChildren<{ closeSidesheet: VoidFunction }>) {
-//   useCloseSidesheetOnContextChange(closeSidesheet);
-
-//   return <>{children}</>;
-// }
-
 type McProps = {
   id: string;
   item?: McPackage;
