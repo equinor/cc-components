@@ -21,51 +21,16 @@ import { useRef, useState } from 'react';
 import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 
-import { createWidget as createResizableSidesheet } from '@equinor/workspace-sidesheet';
 import styled from 'styled-components';
-
-import { useCloseSidesheetOnContextChange } from '@cc-components/shared';
-import { PropsWithChildren } from 'react';
-
-type BaseProps<T> = {
-  id: string;
-  item?: T;
-  closeSidesheet: VoidFunction;
-};
-
-export function createWidget<T>(
-  Comp: (props: { props: BaseProps<T> }) => JSX.Element,
-  resizeOptions?: {
-    defaultWidth?: number | undefined;
-  }
-) {
-  return createResizableSidesheet(
-    (props: { props: BaseProps<T> }) => (
-      <SidesheetWrapper closeSidesheet={props.props.closeSidesheet}>
-        <Comp props={props.props} />
-      </SidesheetWrapper>
-    ),
-    resizeOptions
-  );
-}
-
-export function SidesheetWrapper<T>({
-  closeSidesheet,
-  children,
-}: PropsWithChildren<{ closeSidesheet: VoidFunction }>) {
-  useCloseSidesheetOnContextChange(closeSidesheet);
-
-  return <>{children}</>;
-}
 
 type McProps = {
   id: string;
   item?: McPackage;
-  closeSidesheet: VoidFunction;
+  close: VoidFunction;
 };
-export const McSideSheet = createWidget<McPackage>(({ props }) => (
-  <EnsureMcPkg {...props} />
-));
+export const McSideSheet = ({ id, close: closeSidesheet, item }: McProps) => {
+  return <EnsureMcPkg id={id} item={item} close={close} />;
+};
 
 Icon.add({ error_outlined });
 
@@ -102,7 +67,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
         description={props?.item?.description || ''}
         url={props.item.mechanicalCompletionPackageUrl || ''}
         applicationTitle={'Mechanical completion'}
-        onClose={props.closeSidesheet}
+        onClose={props.close}
       />
       <StyledBanner>
         <BannerItem
@@ -195,12 +160,10 @@ const McSideSheetComponent = (props: Required<McProps>) => {
   );
 };
 
-export default McSideSheet.render;
-
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
 
-function EnsureMcPkg({ id, closeSidesheet, item }: McProps) {
+const EnsureMcPkg = ({ id, close, item }: McProps) => {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
   const { isLoading, data, error } = useQuery(
@@ -238,14 +201,8 @@ function EnsureMcPkg({ id, closeSidesheet, item }: McProps) {
     );
   }
 
-  return (
-    <McSideSheetComponent
-      id={id}
-      item={data}
-      closeSidesheet={closeSidesheet}
-    ></McSideSheetComponent>
-  );
-}
+  return <McSideSheetComponent id={id} item={data} close={close}></McSideSheetComponent>;
+};
 
 const ErrorWrapper = styled.div`
   text-align: center;
