@@ -3,24 +3,27 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { PunchBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/punch/type';
 import { useCallback } from 'react';
 import { McNcr, McWorkOrder } from '../types';
+import { WorkorderBase } from 'libs/shared/dist/src';
 type McResourceTypeMap = {
   ncr: McNcr;
-  'work-orders': McWorkOrder;
+  'work-orders': WorkorderBase;
   punch: PunchBase;
 };
 export const useMcResource = <T extends keyof McResourceTypeMap>(
   packageId: string,
   packageType: T
 ) => {
-  const dataProxy = useHttpClient('data-proxy');
+  const dataProxy = useHttpClient('cc-app');
   const contextId = useContextId();
   const fetch = useCallback(
     async (id: string, signal?: AbortSignal) => {
       const result = await dataProxy.fetch(
-        `api/contexts/${contextId}/mc-pkgs/${id}/${packageType}`,
+        `api/contexts/${contextId}/mechanical-completion/${id}/${packageType}`,
         { signal }
       );
-
+      if (!result.ok) {
+        throw new Error('Error fetching API');
+      }
       return JSON.parse(await result.text()) as McResourceTypeMap[T][];
     },
     [dataProxy, contextId, packageType]

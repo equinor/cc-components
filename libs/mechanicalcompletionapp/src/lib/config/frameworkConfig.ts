@@ -23,10 +23,10 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
 
   const envConfig: MechEnvConfig = c.env.config?.environment as MechEnvConfig;
 
-  if (!envConfig) {
-    throw new Error('Failed to load environemnt config for workorder');
+  if (!envConfig.uri) {
+    throw new Error('Failed to load environemnt config for MC');
   }
-  config.configureHttpClient('data-proxy', {
+  config.configureHttpClient('cc-app', {
     baseUri: envConfig?.uri,
     defaultScopes: envConfig?.defaultScopes,
   });
@@ -37,4 +37,5 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
 type MechEnvConfig = {
   uri: string;
   defaultScopes: string[];
+  pr?: string;
 };

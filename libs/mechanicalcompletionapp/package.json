@@ -12,6 +12,6 @@
     "@cc-components/mechanicalcompletionshared": "workspace:^",
     "@cc-components/mechanicalcompletionsidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@equinor/workspace-fusion": "0.20.4-alpha.6.0"
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }

@@ -1,5 +1,6 @@
+import { Icon, Tooltip } from '@equinor/eds-core-react';
+import { info_circle } from '@equinor/eds-icons'; // import "save" icon
 import styled from 'styled-components';
-
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -20,13 +21,19 @@ const StyledStatusCircle = styled.div<StatusCircleProps>`
 type StatusProps = {
   content: string;
   statusColor: string;
+  infoMessage?: string;
 };
 
 /** Standard component for displaying a colored circle based on prop and content to the right of it. */
-export const StatusCircle = ({ content, statusColor }: StatusProps) => {
+export const StatusCircle = ({ content, statusColor, infoMessage }: StatusProps) => {
   return (
     <Wrapper>
       <StyledStatusCircle statusColor={statusColor} />
+      {infoMessage ? (
+        <Tooltip title={infoMessage}>
+          <Icon data={info_circle} size={18} color="rgb(0, 112, 121)" rotation={180} />
+        </Tooltip>
+      ) : null}
       <span>{content}</span>
     </Wrapper>
   );

@@ -1,14 +1,11 @@
 import { Pipetest } from '@cc-components/pipingshared';
-import { createWidget } from '@equinor/workspace-sidesheet';
 import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
-import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderBase, WorkorderTab } from '@cc-components/shared/sidesheet';
 import { StatusCircle } from '@cc-components/shared/common';
 import { pipetestStatusColormap } from '@cc-components/shared/mapping';
-import { useQuery } from '@tanstack/react-query';
 import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
 import {
   BannerItem,
@@ -42,10 +39,10 @@ export const StyledTabsList = styled(Tabs.List)`
 type PipingProps = {
   id: string;
   item?: Pipetest;
-  close: () => void;
+  close: VoidFunction;
 };
 
-export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
+export const PipingSidesheet = (props: PipingProps) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const client = useHttpClient();
@@ -154,6 +151,4 @@ export const PipingSidesheet = createWidget<PipingProps>(({ props }) => {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
-
-export default PipingSidesheet.render;
+};

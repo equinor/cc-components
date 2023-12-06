@@ -3,7 +3,14 @@ on:
   issue_comment:
     types: [created]
 
-permissions: write-all
+permissions:
+  actions: read
+  issues: read
+  checks: write
+  contents: read
+  deployments: write
+  id-token: write
+  statuses: write
 jobs:
   deploy-affected-ci:
     # only run if pull request is approved and QA is required
@@ -11,17 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ci
     steps:
-      - name: 'Login to Azure'
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          allow-no-subscriptions: true
-
-      - name: 'Obtain token for upload'
-        shell: bash
-        run: echo "FUSION_TOKEN=$(az account get-access-token --resource '${{ secrets.AZURE_RESOURCE_ID }}' | jq '.accessToken')" >> $GITHUB_ENV
-
       - uses: xt0rted/pull-request-comment-branch@v2
         id: comment-branch
 
@@ -31,17 +27,16 @@ jobs:
           ref: ${{ steps.comment-branch.outputs.head_ref }}
           fetch-depth: 0
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+      - name: Get fusion token
+        id: 'get-fusion-token'
+        uses: ./.github/actions/get-fusion-token
         with:
-          version: 8
+          client-id: ${{secrets.AZURE_CLIENT_ID}}
+          tenant-id: ${{secrets.AZURE_TENANT_ID}}
+          resource-id: ${{secrets.AZURE_RESOURCE_ID}}
 
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: npm i -g typescript && pnpm install
+      - name: PNPM setup
+        uses: ./.github/actions/pnpm-setup
 
       - name: Build monorepo
         run: pnpm ci:build
@@ -51,10 +46,10 @@ jobs:
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ env.FUSION_TOKEN }} --pr ${{ github.event.issue.number }}
+        run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --pr ${{ github.event.issue.number }}
 
       - name: Comment pr
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.issues.createComment({

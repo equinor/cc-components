@@ -1,5 +1,4 @@
 import { Loop } from '@cc-components/loopshared';
-import { createWidget } from '@cc-components/shared';
 import { useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { Tabs } from '@equinor/eds-core-react';
@@ -24,7 +23,11 @@ import {
   TabTitle,
 } from '@cc-components/sharedcomponents';
 
-export const LoopSidesheet = createWidget<Loop>(({ props }) => {
+export const LoopSidesheet = (props: {
+  item?: Loop | undefined;
+  id: string;
+  close: VoidFunction;
+}) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const client = useHttpClient();
@@ -52,7 +55,7 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
   const { data, isLoading, error } = useGetWorkorders(loop?.loopId);
 
   if (isLoadingSidesheet) {
-    return <SidesheetSkeleton close={props.closeSidesheet} />;
+    return <SidesheetSkeleton close={props.close} />;
   }
 
   if (!loop || sidesheetError) {
@@ -67,7 +70,7 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
     <StyledSideSheetContainer>
       <SidesheetHeader
         title={`${loop.loopNo}, ${loop.description}` || ''}
-        onClose={props.closeSidesheet}
+        onClose={props.close}
         applicationTitle="Loop"
       />
       <StyledBanner>
@@ -134,6 +137,4 @@ export const LoopSidesheet = createWidget<Loop>(({ props }) => {
       </StyledTabs>
     </StyledSideSheetContainer>
   );
-});
-
-export default LoopSidesheet.render;
+};

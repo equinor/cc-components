@@ -1,3 +1,0 @@
-# projectsafetybarriers
-
-Add readme
