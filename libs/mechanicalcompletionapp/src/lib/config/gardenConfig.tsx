@@ -45,7 +45,6 @@ export const useGardenConfig = (
     getSubgroupItems,
     customViews: {
       customItemView: GardenItem,
-      // customHeaderView: GardenHeader,
     },
     visuals: {
       rowHeight: 31,
