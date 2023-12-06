@@ -160,8 +160,6 @@ const McSideSheetComponent = (props: Required<McProps>) => {
   );
 };
 
-// export default McSideSheet.render;
-
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
 
