@@ -3,9 +3,20 @@ name: Manual deploy fusion app PROD
 on:
   workflow_dispatch:
     inputs:
-      appKey:
-        type: string
+      category:
+        type: choice
         description: Which app to deploy to production
+        options:
+          - handover
+          - mechanical-completion
+          - swcr
+          - electrical-consumers
+          - heat-trace
+          - loop
+          - pipetest
+          - punch
+          - scopechangerequest
+          - workorder
 permissions:
   actions: read
   checks: write

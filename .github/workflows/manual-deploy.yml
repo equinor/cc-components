@@ -3,9 +3,20 @@ name: Manual deploy fusion app TEST🚀
 on:
   workflow_dispatch:
     inputs:
-      appKey:
-        type: string
+      category:
+        type: choice
         description: Which app to deploy to test
+        options:
+          - handover
+          - mechanical-completion
+          - swcr
+          - electrical-consumers
+          - heat-trace
+          - loop
+          - pipetest
+          - punch
+          - scopechangerequest
+          - workorder
 permissions:
   actions: read
   checks: write
@@ -35,11 +46,11 @@ jobs:
         uses: ./.github/actions/pnpm-setup
 
       - name: Build monorepo
-        run: npx turbo run build --filter='${{inputs.appKey}}'
+        run: npx turbo run build --filter='${{inputs.category}}'
 
       - name: 'Deploy affected apps to Fusion CI env'
         shell: bash
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run pr:deploy --filter='${{inputs.appKey}}' --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }}
+        run: npx turbo run pr:deploy --filter='${{inputs.category}}' --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }}
