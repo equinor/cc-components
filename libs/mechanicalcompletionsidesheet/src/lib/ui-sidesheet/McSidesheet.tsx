@@ -29,7 +29,7 @@ type McProps = {
   close: VoidFunction;
 };
 export const McSideSheet = ({ id, close: closeSidesheet, item }: McProps) => {
-  return <EnsureMcPkg id={id} item={item} close={close} />;
+  return <EnsureMcPkg id={id} item={item} close={closeSidesheet} />;
 };
 
 Icon.add({ error_outlined });
