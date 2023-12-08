@@ -36,7 +36,7 @@ export const useGardenConfig = (
 
   return {
     getDisplayName: (item) => item.mechanicalCompletionPackageNo,
-    initialGrouping: ['RFCC'],
+    initialGrouping: ['M03'],
     initialDateVariant: 'Planned',
     initialTimeInterval: 'Weekly',
     getBlockAsync,
