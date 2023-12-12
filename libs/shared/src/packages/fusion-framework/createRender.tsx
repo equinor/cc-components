@@ -35,12 +35,23 @@ export function createRender(
             enableAjaxPerfTracking: true,
           },
         });
+
         appInsights.loadAppInsights();
         appInsights.trackPageView();
         appInsights.addTelemetryInitializer((envelope) => {
           (envelope.tags as any)['ai.cloud.role'] = appName;
           (envelope.tags as any)['ai.cloud.roleInstance'] = appName;
         });
+
+        appInsights.trackEvent({
+          name: `[App loaded]: ${appName}`,
+          properties: {
+            appKey: appName,
+            url: window.location.toString(),
+            userId: tryGetAccountId(args),
+          },
+        });
+
         Object.assign(window, { ai: appInsights });
         return () => {
           console.log('Removing application insights');
