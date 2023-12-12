@@ -31,14 +31,27 @@ export function createRender(
           config: {
             connectionString: connectionString,
             enableResponseHeaderTracking: true,
+            accountId: tryGetAccountId(args),
+            enableAjaxPerfTracking: true,
           },
         });
+
         appInsights.loadAppInsights();
         appInsights.trackPageView();
         appInsights.addTelemetryInitializer((envelope) => {
           (envelope.tags as any)['ai.cloud.role'] = appName;
           (envelope.tags as any)['ai.cloud.roleInstance'] = appName;
         });
+
+        appInsights.trackEvent({
+          name: `[App loaded]: ${appName}`,
+          properties: {
+            appKey: appName,
+            url: window.location.toString(),
+            userId: tryGetAccountId(args),
+          },
+        });
+
         Object.assign(window, { ai: appInsights });
         return () => {
           console.log('Removing application insights');
@@ -75,6 +88,14 @@ export function createRender(
       cleanup();
     };
   };
+}
+
+function tryGetAccountId(args: ComponentRenderArgs) {
+  try {
+    return args.fusion.modules.auth.defaultAccount?.localAccountId;
+  } catch (e) {
+    return '';
+  }
 }
 
 const queryClient = new QueryClient();
