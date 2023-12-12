@@ -31,6 +31,8 @@ export function createRender(
           config: {
             connectionString: connectionString,
             enableResponseHeaderTracking: true,
+            accountId: tryGetAccountId(args),
+            enableAjaxPerfTracking: true,
           },
         });
         appInsights.loadAppInsights();
@@ -75,6 +77,14 @@ export function createRender(
       cleanup();
     };
   };
+}
+
+function tryGetAccountId(args: ComponentRenderArgs) {
+  try {
+    return args.fusion.modules.auth.defaultAccount?.localAccountId;
+  } catch (e) {
+    return '';
+  }
 }
 
 const queryClient = new QueryClient();
