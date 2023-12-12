@@ -1,4 +1,8 @@
-import { useCCApiAccessCheck, useContextId } from '@cc-components/shared';
+import {
+  useCCApiAccessCheck,
+  useContextId,
+  useWorkspaceBookmarks,
+} from '@cc-components/shared';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
@@ -22,6 +26,8 @@ export const WorkspaceWrapper = () => {
     table: 'Dim_ProjectMaster',
   });
 
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
+
   const filterConfig = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/mechanical-completion/filter-model`, req)
   );
@@ -36,11 +42,13 @@ export const WorkspaceWrapper = () => {
 
   return (
     <Workspace
-      key={contextId}
+      key={contextId + bookmarkKey}
       workspaceOptions={{
         getIdentifier: (item) => item.mechanicalCompletionPackageUrlId,
         defaultTab: 'garden',
       }}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       powerBiOptions={pbi}
       filterOptions={filterConfig}
       gardenOptions={gardenConfig}
