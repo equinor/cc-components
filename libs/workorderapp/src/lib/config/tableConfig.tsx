@@ -232,4 +232,10 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     headerTooltip: 'Work breakdown structure code',
     valueGetter: (pkg) => pkg.data?.workBreakdownStructure,
   },
+  {
+    colId: 'Systems',
+    headerName: 'Systems',
+    headerTooltip: 'Systems',
+    valueGetter: (pkg) => pkg.data?.systems,
+  },
 ];
