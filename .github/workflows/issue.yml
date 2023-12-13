@@ -40,4 +40,4 @@ jobs:
 
       - name: 'Update issue'
         shell: bash
-        run: npx ts-node --esm ./github-action/src/issue.ts issue -T ${{ github.token }} -C ${{steps.get-fusion-token-ci.outputs.token}} -F ${{steps.get-fusion-token-fprd.outputs.token}}
+        run: npx tsx ./github-action/src/issue.ts issue -T ${{ github.token }} -C ${{steps.get-fusion-token-ci.outputs.token}} -F ${{steps.get-fusion-token-fprd.outputs.token}}

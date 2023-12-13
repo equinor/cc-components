@@ -2,7 +2,7 @@ import { McPackage } from '@cc-components/mechanicalcompletionshared';
 import { useContextId } from '@cc-components/shared';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
-import { NcrTab, PunchTab, WorkorderTab } from '@cc-components/shared/sidesheet';
+import { MccrTab, NcrTab, PunchTab, WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BannerItem,
   SidesheetHeader,
@@ -59,6 +59,12 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     isFetching: isFetchingNcr,
     error: ncrError,
   } = useMcResource(props.id, 'ncr');
+
+  const {
+    data: mccrs,
+    isFetching: isFetchingMccr,
+    error: mccrError,
+  } = useMcResource(props.id, 'mccr');
 
   return (
     <StyledSideSheetContainer>
@@ -130,6 +136,9 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             <Tabs.Tab>
               NCR <TabTitle data={ncr} isLoading={isFetchingNcr} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              MCCR <TabTitle data={mccrs} isLoading={isFetchingMccr} />
+            </Tabs.Tab>
           </Tabs.List>
         </StyledTabListWrapper>
 
@@ -154,6 +163,42 @@ const McSideSheetComponent = (props: Required<McProps>) => {
           <Tabs.Panel>
             <NcrTab error={ncrError} isFetching={isFetchingNcr} ncrs={ncr} />
           </Tabs.Panel>
+          <Tabs.Panel>
+            <MccrTab
+              error={mccrError}
+              isFetching={isFetchingMccr}
+              mccr={(mccrs ?? []).map(
+                (mccr): MccrBase => ({
+                  ...mccr,
+                  commissioningPackageId: mccr.commissioningPackageId,
+                  commissioningPackageUrl: mccr.commissioningPackageUrl,
+                  commissioningPackageUrlId: mccr.commissioningPackageUrlId,
+                  commpkgId: mccr.commissioningPackageId,
+                  commpkgNumber: mccr.commissioningPackageNo,
+                  description: mccr.description,
+                  facility: mccr.facility,
+                  mcPkgId: mccr.mechanicalCompletionPackageId,
+                  mccrId: mccr.checklistID,
+                  mccrResponsible: mccr.responsible,
+                  mccrStatus: mccr.status,
+                  mccrType: mccr.formularType,
+                  mccrUrl: mccr.checklistUrl,
+                  mccrUrlId: mccr.checklistUrlId,
+                  mcpkgNumber: mccr.mechanicalCompletionPackageNo,
+                  mechanicalCompletionPackageUrl: mccr.mechanicalCompletionPackageUrl,
+                  mechanicalCompletionPackageUrlId: mccr.mechanicalCompletionUrlId,
+                  project: mccr.project,
+                  tagId: mccr.tagId,
+                  tagNumber: mccr.tagNo,
+                  tagUrl: mccr.tagUrl,
+                  tagUrlId: mccr.tagUrlId,
+                  workOrderId: null,
+                  workOrderUrl: null,
+                  workOrderUrlId: null,
+                })
+              )}
+            />
+          </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
@@ -162,6 +207,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
 
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
+import { MccrBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/mccr/types';
 
 const EnsureMcPkg = ({ id, close, item }: McProps) => {
   const client = useHttpClient('cc-app');

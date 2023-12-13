@@ -11,6 +11,7 @@ export type MccrBase = {
   mccrResponsible: string | null;
   mccrStatus: string | null;
   mccrType: string | null;
+  mccrUrl: string | null;
   mccrUrlId: string | null;
   mcpkgNumber: string | null;
   mechanicalCompletionPackageUrl: string | null;

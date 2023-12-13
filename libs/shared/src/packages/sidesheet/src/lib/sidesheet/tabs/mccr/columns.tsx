@@ -34,15 +34,13 @@ export const columns: ColDef<MccrBase>[] = [
   {
     headerName: 'Type',
     valueGetter: (pkg) => pkg.data?.mccrType,
-    // valueFormatter: (pkg) =>
-    //   pkg.data?.mccrId ? proCoSysUrls.getFormTypeUrl(pkg.data.mccrId) : '',
-    // cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
-    //   if (!props.valueFormatted) {
-    //     return null;
-    //   } else {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    // },
+    cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
+      if (!props.data?.mccrUrl) {
+        return <StyledMonospace>{props.value}</StyledMonospace>;
+      } else {
+        return <LinkCell url={props.data?.mccrUrl} urlText={props.value ?? ''} />;
+      }
+    },
   },
   {
     headerName: 'Status',

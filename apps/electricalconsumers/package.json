@@ -9,8 +9,8 @@
     "dev": "fusion-framework-cli app dev",
     "dev:local": "fusion-framework-cli app dev -c app.config.local.js",
     "build": "tsc -b -f",
-    "pr:deploy": "ts-node --esm ../../github-action/src/releasePr.ts release",
-    "fprd:deploy": "ts-node --esm ../../github-action/src/releaseMain.ts release"
+    "pr:deploy": "tsx ../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
     "@cc-components/electricalconsumersapp": "workspace:^",
