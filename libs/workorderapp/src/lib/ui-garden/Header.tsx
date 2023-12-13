@@ -20,10 +20,7 @@ const WorkOrderHeader = (props: CustomHeaderView) => {
 
   return (
     <HeaderContent>
-      <div>
-        {header.name}
-        <div>{''}</div>
-      </div>
+      <div style={{ whiteSpace: 'pre-line' }}>{header.name}</div>
       <Count>({header.count})</Count>
     </HeaderContent>
   );
