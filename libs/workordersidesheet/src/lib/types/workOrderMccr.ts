@@ -12,6 +12,7 @@ export type WorkOrderMccr = {
   commissioningPackageId: string | null;
   tagNumber: string | null;
   mccrType: string | null;
+  mccrUrl: string | null;
   mccrResponsible: string | null;
   mccrStatus: string;
   mcpkgNumber: string | null;

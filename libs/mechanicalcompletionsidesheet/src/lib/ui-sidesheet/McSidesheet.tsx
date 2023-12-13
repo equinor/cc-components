@@ -182,6 +182,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
                   mccrResponsible: mccr.responsible,
                   mccrStatus: mccr.status,
                   mccrType: mccr.formularType,
+                  mccrUrl: mccr.checklistUrl,
                   mccrUrlId: mccr.checklistUrlId,
                   mcpkgNumber: mccr.mechanicalCompletionPackageNo,
                   mechanicalCompletionPackageUrl: mccr.mechanicalCompletionPackageUrl,
