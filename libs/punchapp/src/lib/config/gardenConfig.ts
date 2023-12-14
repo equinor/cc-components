@@ -29,7 +29,7 @@ export const useGardenConfig = (contextId: string): GardenConfig<Punch, FilterSt
       rowHeight: 25,
     },
     customViews: {
-      customItemView: PunchGardenItem,
+      customItemView: PunchGardenItem as any,
     },
   };
 };

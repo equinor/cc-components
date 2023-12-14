@@ -1,9 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { CCApiUnauthorizedError } from '../error-boundary';
 
-import { useFrameworkHttpClient } from '@equinor/fusion-framework-react/http';
-
-type IHttpClient = ReturnType<typeof useFrameworkHttpClient>;
+import { IHttpClient } from '@equinor/fusion-framework-react/http';
 
 export function useCCApiAccessCheck(
   contextId: string,

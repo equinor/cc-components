@@ -30,7 +30,7 @@ export const useGardenConfig = (
       rowHeight: 25,
     },
     customViews: {
-      customItemView: SwcrItem,
+      customItemView: SwcrItem as any,
     },
   };
 };

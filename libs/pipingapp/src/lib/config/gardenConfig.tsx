@@ -28,7 +28,7 @@ export const useGardenConfig = (
     getDisplayName: (item) => item.id,
     initialGrouping: ['Priority1'],
     customViews: {
-      customItemView: GardenItem,
+      customItemView: GardenItem as any,
     },
   };
 };

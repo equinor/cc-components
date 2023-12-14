@@ -1,8 +1,7 @@
 import { useServiceDiscovery } from '../../../hooks/src/lib/useServiceDiscovery';
 import { EmbedInfo, EmbedToken, ReportInfo } from './types';
 import { useExternalContextId } from '../../../hooks';
-import { useFrameworkHttpClient } from '@equinor/fusion-framework-react/http';
-type IHttpClient = ReturnType<typeof useFrameworkHttpClient>;
+import { type IHttpClient } from '@equinor/fusion-framework-module-http';
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
   return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;

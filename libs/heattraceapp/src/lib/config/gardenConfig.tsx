@@ -29,7 +29,7 @@ export const useGardenConfig = (
     getDisplayName: (item) => item.heatTraceCableNo,
     initialGrouping: ['RFC'],
     customViews: {
-      customItemView: GardenItem,
+      customItemView: GardenItem as any,
     },
   };
 };
