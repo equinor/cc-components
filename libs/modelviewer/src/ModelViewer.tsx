@@ -12,6 +12,7 @@ import { TagOverlay } from './types/overlayTags';
 import { PlantDataContextProvider } from './providers/plantDataProvider';
 import { Message } from './components/message/Message';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
+import { Legend } from './components/legend/Legend';
 
 type FusionModelViewerProps = {
   facility: string;
@@ -63,6 +64,7 @@ const ModelViewer = ({
               <ModelSelection>
                 <ActionContextProvider>
                   <TagsOverlay />
+                  <Legend />
                   <ActionsMenu CustomActions={components.CustomActions} />
                 </ActionContextProvider>
               </ModelSelection>

@@ -31,6 +31,7 @@ import { useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
+import { MccrModelViewerTab } from './MccrModelViewerTab';
 
 export const WorkorderSidesheet = (props: {
   id: string;
@@ -150,6 +151,9 @@ export const WorkorderSidesheet = (props: {
             <Tabs.Tab>
               Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              3D <TabTitle data={mccr} isLoading={isLoading} />
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -176,6 +180,13 @@ export const WorkorderSidesheet = (props: {
               cutoff={cutoffList}
               isFetching={isLoading}
               error={cutoffError as Error | null}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <MccrModelViewerTab
+              mccr={mccr}
+              isFetching={isFetchingMccr}
+              error={mccrError as Error | null}
             />
           </Tabs.Panel>
         </StyledPanels>
