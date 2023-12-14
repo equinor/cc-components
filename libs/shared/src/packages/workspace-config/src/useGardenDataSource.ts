@@ -1,20 +1,21 @@
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenDataSource } from '@equinor/workspace-fusion/garden';
 
+type GroupingOption = {
+  displayName: string;
+  groupingKey: string;
+  timeInterval: string[] | null;
+  dateVariant: string[] | null;
+};
+
 type ApiGardenMeta = {
   startIndex: number | null;
   columnCount: number;
   columnWidth?: number;
   rowCount: number;
   subGroupCount: number;
-  allGroupingOptions:
-    | string[]
-    | {
-        groupingKey: string;
-        timeInterval: string[] | null;
-        dateVariant: string[] | null;
-      }[];
-  validGroupingOptions: string[];
+  allGroupingOptions: GroupingOption[];
+  validGroupingOptions: GroupingOption[];
 };
 
 type ApiHeader = {
@@ -72,24 +73,8 @@ export function useGardenDataSource(
       }
       const meta: ApiGardenMeta = await res.json();
 
-      const possibleItem = meta.allGroupingOptions.at(0);
-
-      //TODO: remove when api is migrated
-      const groupingOptions: {
-        groupingKey: string;
-        timeInterval: string[] | null;
-        dateVariant: string[] | null;
-      }[] =
-        typeof possibleItem === 'string'
-          ? meta.allGroupingOptions.map((s) => ({
-              timeInterval: null,
-              dateVariant: null,
-              groupingKey: s as string,
-            }))
-          : (meta.allGroupingOptions as any);
-
       return {
-        allGroupingOptions: groupingOptions,
+        allGroupingOptions: meta.allGroupingOptions,
         columnCount: meta.columnCount,
         validGroupingOptions: meta.validGroupingOptions,
         columnStart: meta.startIndex,

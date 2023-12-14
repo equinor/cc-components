@@ -1,5 +1,6 @@
-import { IHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { PropsWithChildren, createContext, useContext } from 'react';
+import { useFrameworkHttpClient } from '@equinor/fusion-framework-react/http';
+type IHttpClient = ReturnType<typeof useFrameworkHttpClient>;
 
 /**
  * Facade for fusion framework http client
