@@ -9,18 +9,23 @@ const HeaderContent = styled.div`
   align-items: center;
   font-weight: 600;
 `;
-const Count = styled.span`
+const Count = styled.h2`
   color: #000000;
   font-weight: 300;
   font-size: 0.8rem;
   margin-left: 0.8em;
 `;
+const StyledHeaderText = styled.h2`
+  white-space: pre-line;
+  font-size: 16px;
+`;
+
 const WorkOrderHeader = (props: CustomHeaderView) => {
   const { header } = props;
 
   return (
     <HeaderContent>
-      <div style={{ whiteSpace: 'pre-line' }}>{header.name}</div>
+      <StyledHeaderText>{header.name}</StyledHeaderText>
       <Count>({header.count})</Count>
     </HeaderContent>
   );
