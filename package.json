@@ -42,7 +42,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "nx": "15.9.7",
+    "nx": "999.9.9",
     "rollup-plugin-inject-process-env": "^1.3.1",
     "ts-node": "^10.9.1",
     "tsx": "^4.6.2",
