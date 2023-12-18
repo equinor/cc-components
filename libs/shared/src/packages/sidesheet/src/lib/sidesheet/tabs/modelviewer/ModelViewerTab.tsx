@@ -57,7 +57,7 @@ export const ModelViewerTab: React.FC<ModelViewerTabProps> = ({
     return (
       <StyledWrapper>
         <FusionModelViewer
-          facility={facility}
+          facility={facility[0]} //Cheeky. Might have to add support for multiple facilites in the future
           options={options ?? undefined}
           tagsOverlay={TagOverlay}
         ></FusionModelViewer>

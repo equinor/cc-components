@@ -3,7 +3,7 @@ import { ModelViewerConfig } from 'libs/modelviewer/dist/src/providers/configPro
 
 export type ModelViewerTabProps = {
   TagOverlay: string[] | TagOverlay[] | undefined;
-  facility: string;
+  facility: string[];
   isFetching: boolean;
   error: Error | null;
   options?: ModelViewerConfig;
