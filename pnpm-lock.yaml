@@ -575,6 +575,9 @@ importers:
 
   libs/shared:
     dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents

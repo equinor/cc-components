@@ -86,6 +86,7 @@
   },
   "dependencies": {
     "@cc-components/sharedcomponents": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@equinor/workspace-ag-grid": "2.0.3",

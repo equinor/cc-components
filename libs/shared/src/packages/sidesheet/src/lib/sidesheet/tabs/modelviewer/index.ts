@@ -1,0 +1,1 @@
+export { ModelViewerTab } from './ModelViewerTab';

@@ -3,7 +3,11 @@ import {
   LinkCell,
   MaterialTab,
   MccrTab,
+  ModelViewerTab,
+  PackageStatus,
   StatusCircle,
+  colorMap,
+  hasProperty,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
@@ -27,11 +31,11 @@ import {
 import { Tabs } from '@equinor/eds-core-react';
 
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
-import { MccrModelViewerTab } from './MccrModelViewerTab';
+import { TagOverlay } from 'libs/modelviewer/dist/src';
 
 export const WorkorderSidesheet = (props: {
   id: string;
@@ -74,6 +78,28 @@ export const WorkorderSidesheet = (props: {
     }
   );
 
+  const mccrIcon = (status: string) => {
+    return <h3>{status}</h3>;
+  };
+
+  const tagsOverlay = useMemo(() => {
+    return mccr?.map((mccr) => ({
+      tagNo: mccr.tagNumber,
+      description: mccr.description,
+      status: mccr.mccrStatus,
+      icon: mccrIcon(mccr.mccrStatus || ''),
+    })) as TagOverlay[];
+  }, [mccr]);
+
+  const viewerOptions = {
+    statusResolver: (status: string) => {
+      return hasProperty(colorMap, status)
+        ? colorMap[status as PackageStatus]
+        : '#009922';
+    },
+    defaultCroppingDistance: 3,
+  };
+
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;
   }
@@ -85,6 +111,7 @@ export const WorkorderSidesheet = (props: {
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
@@ -183,10 +210,12 @@ export const WorkorderSidesheet = (props: {
             />
           </Tabs.Panel>
           <Tabs.Panel>
-            <MccrModelViewerTab
-              mccr={mccr}
+            <ModelViewerTab
+              TagOverlay={tagsOverlay}
+              options={viewerOptions}
               isFetching={isFetchingMccr}
               error={mccrError as Error | null}
+              facility="JCA"
             />
           </Tabs.Panel>
         </StyledPanels>

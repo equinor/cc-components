@@ -65,7 +65,7 @@ export const SelectionContextProvider = ({
       setTagList(
         (tagOverlay as string[]).map((tag) => ({
           tagNo: tag,
-          description: 'Unknown tag',
+          description: tag,
           color: options?.color,
           icon: 'tag',
         }))

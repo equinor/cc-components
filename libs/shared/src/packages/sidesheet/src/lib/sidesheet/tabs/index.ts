@@ -10,3 +10,4 @@ export * from './details';
 export * from './material';
 export * from './cutoff';
 export * from './mccr';
+export * from './modelviewer';
