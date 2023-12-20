@@ -215,7 +215,7 @@ export const WorkorderSidesheet = (props: {
               options={viewerOptions}
               isFetching={isFetchingMccr}
               error={mccrError as Error | null}
-              facility="JCA"
+              facility={mccr?.map((item) => item.facility!) || ['']}
             />
           </Tabs.Panel>
         </StyledPanels>

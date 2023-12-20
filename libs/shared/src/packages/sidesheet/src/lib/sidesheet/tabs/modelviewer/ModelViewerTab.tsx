@@ -53,6 +53,20 @@ export const ModelViewerTab: React.FC<ModelViewerTabProps> = ({
     );
   }
 
+  if (TagOverlay?.length == 0) {
+    return (
+      <NoResourceData>
+        <Icon
+          name="error_outlined"
+          size={40}
+          color={tokens.colors.interactive.primary__resting.hsla}
+          rotation={180}
+        />
+        <InfoText>No 3D tags</InfoText>
+      </NoResourceData>
+    );
+  }
+
   if (facility && TagOverlay) {
     return (
       <StyledWrapper>
