@@ -33,8 +33,8 @@ export const useGardenConfig = (
     getHeader,
     getSubgroupItems,
     customViews: {
-      customItemView: GardenItem,
-      customHeaderView: GardenHeader,
+      customItemView: GardenItem as any,
+      customHeaderView: GardenHeader as any,
     },
     visuals: {
       rowHeight: 30,

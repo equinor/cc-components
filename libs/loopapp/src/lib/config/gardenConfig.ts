@@ -1,5 +1,5 @@
 import { Loop } from '@cc-components/loopshared';
-import { GardenConfig } from '@equinor/workspace-fusion/garden';
+import { CustomItemView, GardenConfig } from '@equinor/workspace-fusion/garden';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenItem } from '../ui-garden';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
@@ -25,7 +25,8 @@ export const useGardenConfig = (contextId: string): GardenConfig<Loop, FilterSta
     getDisplayName: (item) => item.loopNo,
     initialGrouping: ['Responsible'],
     customViews: {
-      customItemView: GardenItem,
+      //bs typescript error
+      customItemView: GardenItem as any,
     },
   };
 };
