@@ -2,7 +2,6 @@ export type HeatTraceChecklist = {
   heatTraceCableNo: string;
   heatTraceCableId: string;
   heatTraceCableIdUrlId: string;
-  heatTraceCableDescription: string;
   facility: string;
   project: string;
   projectDescription: string;
@@ -39,6 +38,10 @@ export type HeatTraceChecklist = {
   pipetestType: string;
   circuit: string;
   switchboard: string;
+  tagNo: string;
+  tagId: string;
+  tagUrlId: string;
+  tagDescription: string;
   heatTraceCableUrl: string | null;
   checklistUrl: string | null;
   commissioningPackageUrl: string | null;

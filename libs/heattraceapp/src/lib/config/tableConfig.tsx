@@ -1,5 +1,5 @@
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { CheckList, HeatTrace } from '@cc-components/heattraceshared';
+import { HeatTrace } from '@cc-components/heattraceshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
