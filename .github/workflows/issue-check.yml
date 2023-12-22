@@ -21,7 +21,12 @@ on:
   pull_request:
 
 jobs:
-  check-issue-linked:
-    uses: Gustav-Eikaas/issue-checker@v0.0.1
-    with:
-      pr: ${{github.event.number}}
+  update-issue:
+    name: Update issue
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check issue👮
+        uses: Gustav-Eikaas/issue-checker@v0.0.3
+        with:
+          pr-number: ${{github.event.number}}
