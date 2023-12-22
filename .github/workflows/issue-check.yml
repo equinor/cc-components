@@ -30,3 +30,4 @@ jobs:
         uses: Gustav-Eikaas/issue-checker@v0.0.3
         with:
           pr-number: ${{github.event.number}}
+          token: ${{secrets.GITHUB_TOKEN}}
