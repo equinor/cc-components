@@ -26,6 +26,10 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
       - name: Check issue👮
         uses: Gustav-Eikaas/issue-checker@v0.0.4
         with:
