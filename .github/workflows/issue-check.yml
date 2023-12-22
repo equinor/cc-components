@@ -1,0 +1,27 @@
+name: 👮Verify linked issue
+
+# This action works with pull requests and pushes
+permissions:
+  {
+    contents: read,
+    actions: read,
+    checks: read,
+    deployments: read,
+    discussions: read,
+    id-token: write,
+    issues: write,
+    packages: read,
+    pages: read,
+    pull-requests: write,
+    repository-projects: read,
+    security-events: read,
+    statuses: read,
+  }
+on:
+  pull_request:
+
+jobs:
+  check-issue-linked:
+    uses: equinor/fusion-workspace/.github/workflows/pr-check-issues.yml@ci/reusable-workflow
+    with:
+      pr: ${{github.event.number}}
