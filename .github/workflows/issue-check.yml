@@ -22,6 +22,6 @@ on:
 
 jobs:
   check-issue-linked:
-    uses: equinor/fusion-workspace/.github/workflows/pr-check-issues.yml@ci/reusable-workflow
+    uses: Gustav-Eikaas/issue-checker@v0.0.1
     with:
       pr: ${{github.event.number}}
