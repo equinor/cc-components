@@ -3,6 +3,7 @@ import {
   useCCApiAccessCheck,
   useContextId,
   useHttpClient,
+  useWorkspaceBookmarks,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
@@ -23,6 +24,7 @@ export const WorkspaceWrapper = () => {
     table: 'Dim_ProjectMaster',
   });
   const client = useHttpClient();
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');
 
   const filterOptions = useFilterConfig((req) =>
@@ -39,7 +41,9 @@ export const WorkspaceWrapper = () => {
 
   return (
     <Workspace
-      key={contextId}
+      key={bookmarkKey + contextId}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: (item) => item.checklistId,
         defaultTab: 'grid',

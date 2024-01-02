@@ -3,6 +3,7 @@ import {
   useContextId,
   useHttpClient,
   usePBIOptions,
+  useWorkspaceBookmarks,
 } from '@cc-components/shared';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
@@ -21,6 +22,7 @@ import { useGardenConfig } from './gardenConfig';
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
   const ccApi = useHttpClient();
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
   const pbi = usePBIOptions('cc-punch-analytics', {
     column: 'ProjectMaster GUID',
@@ -41,7 +43,9 @@ export const WorkspaceWrapper = () => {
 
   return (
     <Workspace
-      key={contextId}
+      key={contextId + bookmarkKey}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: (item) => item.punchItemNo,
         defaultTab: 'grid',
