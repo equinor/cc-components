@@ -5,7 +5,7 @@ import {
 } from '@equinor/fusion-framework-react-app';
 import { createRoot } from 'react-dom/client';
 
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsights-web';
 import { useState } from 'react';
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
@@ -35,6 +35,8 @@ export function createRender(
             enableAjaxPerfTracking: true,
           },
         });
+
+        appInsights.core.addTelemetryInitializer(ignorePowerBiGenericError);
 
         appInsights.loadAppInsights();
         appInsights.trackPageView();
@@ -462,3 +464,15 @@ const MergedPr = () => (
     <path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.25a.75.75 0 1 0 0 .005V3.25Z"></path>
   </svg>
 );
+
+//Will ignore the powerbi custom event isTrusted errors
+function ignorePowerBiGenericError<T extends ITelemetryItem>(a: T) {
+  if (
+    a.name === 'Microsoft.ApplicationInsights.{0}.Exception' &&
+    Object.keys(a.data ?? {}).includes('message') &&
+    a.data?.message == `CustomEvent: {"isTrusted":false}`
+  ) {
+    return false;
+  }
+  return true;
+}
