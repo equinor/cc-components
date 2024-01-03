@@ -1,7 +1,7 @@
 import { AabbModel, Echo3dViewer, combineHierarchyAabbs } from '@equinor/echo-3d-viewer';
 import { Cluster } from '../types/cluster';
 
-import { HtmlOverlayTool } from '@cognite/reveal';
+import { HtmlOverlayTool } from '@cognite/reveal/tools';
 import { OverlayTag, TagMap, TagOverlay } from '../types/overlayTags';
 import { HtmlOverlayToolHandler } from '../services';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';

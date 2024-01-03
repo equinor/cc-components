@@ -1,6 +1,5 @@
 import { useFramework } from '@equinor/fusion-framework-react';
-import type { IHttpClient } from '@equinor/fusion-framework-react/http';
-
+import { type IHttpClient } from '@equinor/fusion-framework-module-http';
 type ServiceDiscoTypes =
   | 'app-proxy'
   | 'pre-auth-proxy'

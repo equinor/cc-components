@@ -4,7 +4,12 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
-import { useContextId, useHttpClient, useCCApiAccessCheck } from '@cc-components/shared';
+import {
+  useContextId,
+  useHttpClient,
+  useCCApiAccessCheck,
+  useWorkspaceBookmarks,
+} from '@cc-components/shared';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './pipingSidesheet';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
@@ -13,6 +18,7 @@ export const WorkspaceWrapper = () => {
   const contextId = useContextId();
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
   const filterOptions = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/pipetest/filter-model`, req)
@@ -25,9 +31,11 @@ export const WorkspaceWrapper = () => {
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
-  console.log('RErender');
   return (
     <Workspace
+      key={contextId + bookmarkKey}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: (pt) => pt.id,
         defaultTab: 'grid',
