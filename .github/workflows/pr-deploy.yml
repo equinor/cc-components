@@ -8,6 +8,7 @@ permissions:
   issues: write
   checks: write
   contents: read
+  pull-requests: write
   deployments: write
   id-token: write
   statuses: write
