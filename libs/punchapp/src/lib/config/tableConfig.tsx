@@ -167,7 +167,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Priority',
-    headerName: 'priority',
+    headerName: 'Priority',
     headerTooltip: 'Priority',
     valueGetter: (o) => o.data?.priority,
   },

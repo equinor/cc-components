@@ -62,6 +62,7 @@ export const PunchSidesheet = (props: {
         title={punch.punchItemNo || ''}
         applicationTitle={'Punch'}
         onClose={props.close}
+        url={punch.punchUrl}
       />
       <StyledBanner>
         <BannerItem

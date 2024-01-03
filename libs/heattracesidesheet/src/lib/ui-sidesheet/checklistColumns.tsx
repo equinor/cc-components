@@ -2,7 +2,6 @@ import {
   BaseStatus,
   LinkCell,
   StatusCircle,
-  StyledMonospace,
   statusColorMap,
 } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
@@ -11,7 +10,7 @@ import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
   {
     headerName: 'Tag No',
-    valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
+    valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return (
         <LinkCell url={props.data?.heatTraceCableUrl ?? ''} urlText={props.value ?? ''} />
@@ -29,7 +28,7 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
   },
   {
     headerName: 'Responsible',
-    valueGetter: (pkg) => pkg.data?.mcResponsible,
+    valueGetter: (pkg) => pkg.data?.formResponsible,
   },
   {
     headerName: 'Status',

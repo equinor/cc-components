@@ -2,7 +2,7 @@ import { HandoverPackage } from '@cc-components/handovershared';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { GardenConfig } from '@equinor/workspace-fusion/garden';
+import { CustomItemView, GardenConfig } from '@equinor/workspace-fusion/garden';
 import { GardenHeader, GardenItem } from '../ui-garden';
 
 export const useGardenConfig = (
@@ -32,8 +32,9 @@ export const useGardenConfig = (
     getHeader,
     getSubgroupItems,
     customViews: {
-      customItemView: GardenItem,
-      customHeaderView: GardenHeader,
+      //bs typescript error
+      customItemView: GardenItem as any,
+      customHeaderView: GardenHeader as any,
     },
     visuals: {
       rowHeight: 31,

@@ -3,7 +3,7 @@ import {
   BaseConfigBuilder,
   ConfigBuilderCallbackArgs,
 } from '@equinor/fusion-framework-module';
-import { type IHttpClient } from '@equinor/fusion-framework-module-http';
+import { IAuthProvider } from '@equinor/fusion-framework-module-msal';
 
 export type ClientOptions = {
   baseUrl: string;
@@ -31,7 +31,7 @@ export class ModelViewerConfigurator extends BaseConfigBuilder<IModelViewerConfi
   protected async _getAutModule({
     hasModule,
     requireInstance,
-  }: ConfigBuilderCallbackArgs) {
+  }: ConfigBuilderCallbackArgs): Promise<IAuthProvider> {
     if (!hasModule('auth')) {
       throw new Error('Fusion MsalModule required to activate this module');
     }

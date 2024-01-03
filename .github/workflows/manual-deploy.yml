@@ -17,6 +17,7 @@ on:
           - punch
           - scopechangerequest
           - workorder
+          - '*'
 permissions:
   actions: read
   checks: write

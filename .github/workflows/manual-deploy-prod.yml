@@ -3,7 +3,7 @@ name: Manual deploy fusion app PROD
 on:
   workflow_dispatch:
     inputs:
-      category:
+      appKey:
         type: choice
         description: Which app to deploy to production
         options:
@@ -17,6 +17,7 @@ on:
           - punch
           - scopechangerequest
           - workorder
+          - '*'
 permissions:
   actions: read
   checks: write

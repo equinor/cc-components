@@ -16,7 +16,7 @@ import {
 import { PopoverContent } from './PopoverContent';
 import { ItemOptions } from './types';
 
-const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
+const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
   const [isOpen, setIsOpen] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -32,7 +32,7 @@ const HandoverItem = (props: CustomItemView<HandoverPackage>) => {
     rowStart,
     columnStart,
     parentRef,
-  } = props;
+  } = args;
 
   const size = getItemSize(data.volume, 100 || 0);
 

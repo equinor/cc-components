@@ -24,12 +24,12 @@ export const useGardenConfig = (contextId: string): GardenConfig<Punch, FilterSt
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.punchItemNo,
-    initialGrouping: ['System'],
+    initialGrouping: ['HandoverPlan'],
     visuals: {
       rowHeight: 25,
     },
     customViews: {
-      customItemView: PunchGardenItem,
+      customItemView: PunchGardenItem as any,
     },
   };
 };
