@@ -24,7 +24,7 @@ type ReleaseArgs = {
 
 program
   .command('release')
-  .option('-T, --token <token>', 'change the working directory')
+  .option('-T, --token <token>', 'azure token')
   .option('-pr, --pr <pr>', 'Pr number')
   .option('-ai, --ai <ai>', 'ai key')
   .option('-sha, --sha <sha>', 'commit sha')

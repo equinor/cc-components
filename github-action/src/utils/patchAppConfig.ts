@@ -47,12 +47,10 @@ export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}
   );
   if (patchResponse.message.statusCode !== 200) {
     logInfo(
-      `Failed to patch client config with pr number, Code: ${patchResponse.message.statusCode}`,
+      `Failed to patch client config, Code: ${patchResponse.message.statusCode}`,
       'Red'
     );
-    throw new Error(
-      `Failed to patch client config with pr number, ${await patchResponse.readBody()}`
-    );
+    throw new Error(`Failed to patch client config, ${await patchResponse.readBody()}`);
   }
   logInfo(`Sucessfully patched client config for ${appKey}`, 'Green');
 }
