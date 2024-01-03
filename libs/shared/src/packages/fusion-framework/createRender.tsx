@@ -469,7 +469,6 @@ const MergedPr = () => (
 function ignorePowerBiGenericError<T extends ITelemetryItem>(a: T) {
   if (
     a.name === 'Microsoft.ApplicationInsights.{0}.Exception' &&
-    typeof a === 'object' &&
     Object.keys(a.data ?? {}).includes('message') &&
     a.data?.message == `CustomEvent: {"isTrusted":false}`
   ) {
