@@ -54,8 +54,5 @@ export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}
       `Failed to patch client config with pr number, ${await patchResponse.readBody()}`
     );
   }
-  logInfo(
-    `Sucessfully patched client config for ${appKey} with ${await patchResponse.readBody()}`,
-    'Green'
-  );
+  logInfo(`Sucessfully patched client config for ${appKey}`, 'Green');
 }
