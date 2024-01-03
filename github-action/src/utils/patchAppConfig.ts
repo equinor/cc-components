@@ -42,7 +42,7 @@ export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}
   //patch
   const patchResponse = await client.put(
     `${url}/api/apps/${appKey}/config`,
-    JSON.stringify(config),
+    JSON.stringify(existingConfig),
     headers
   );
   if (patchResponse.message.statusCode !== 200) {
