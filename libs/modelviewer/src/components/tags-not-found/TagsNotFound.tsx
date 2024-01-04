@@ -56,15 +56,15 @@ const Message = {
   Wrapper: styled.div`
     display: flex;
     position: absolute;
-    top: 45%;
+    top: 40%;
     width: 100%;
     justify-content: center;
   `,
   Overlay: styled.div`
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.65);
     min-width: 250px;
+    width: 300px;
     border-radius: 4px;
   `,
 
@@ -73,21 +73,24 @@ const Message = {
     flex-direction: row;
     color: #fff;
     padding: 0.5rem;
-    background: none;
+    background: rgba(0, 0, 0, 0.75);
     border: none;
     width: 100%;
-    border-radius: 4px;
+    border-radius: 4px 4px 0 0;
     align-items: center;
     height: 2rem;
     gap: 1rem;
   `,
   TextWrapper: styled.div`
-    border-width: 1px;
+    width: 100%;
+    /* border-width: 1px;
     border-color: #e2e2e2;
-    border-top-style: solid;
+    border-top-style: solid; */
+    background: rgba(0, 0, 0, 0.65);
     padding-top: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    border-radius: 0 0 4px 4px;
   `,
   Text: styled(Typography)`
     display: flex;
@@ -118,17 +121,9 @@ export const TagsNotFound = () => {
 
           <Message.TextWrapper>
             <Message.Text>
-              We could not find any of the following tags in the selected model
+              The 3D model selected does not contain any of the specified tags.
             </Message.Text>
           </Message.TextWrapper>
-          <Style.MissingWrapper>
-            {notFoundTagList.map((tagItem) => (
-              <Style.MissingItem variant={'overline'} key={tagItem.tagNo}>
-                <span>{tagItem.tagNo}</span>
-                <span>{tagItem.status}</span>
-              </Style.MissingItem>
-            ))}
-          </Style.MissingWrapper>
         </Message.Overlay>
       </Message.Wrapper>
     );
