@@ -542,6 +542,9 @@ importers:
 
   libs/punchsidesheet:
     dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/punchshared':
         specifier: workspace:^
         version: link:../punchshared
