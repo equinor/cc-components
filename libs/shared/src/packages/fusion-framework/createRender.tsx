@@ -42,7 +42,10 @@ export function createRender(
         appInsights.trackPageView();
         appInsights.addTelemetryInitializer((envelope) => {
           (envelope.tags as any)['ai.cloud.role'] = appName;
-          (envelope.tags as any)['ai.cloud.roleInstance'] = appName;
+          const sha = (args.env.config?.environment as any)?.commit;
+          if (sha) {
+            (envelope.tags as any)['ai.cloud.roleInstance'] = `commit: ${sha}`;
+          }
         });
 
         appInsights.trackEvent({
@@ -51,6 +54,7 @@ export function createRender(
             appKey: appName,
             url: window.location.toString(),
             userId: tryGetAccountId(args),
+            build: `commit: ${(args.env.config?.environment as any)?.commit}`,
           },
         });
 
