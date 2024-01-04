@@ -88,23 +88,24 @@ export const Legend = () => {
   const legendData = useMemo(() => {
     return tagList.reduce((acc, item) => {
       if (!item.status) return acc;
-
-      if (acc[item.status]) {
-        acc[item.status].tags.push(item.tagNo);
-      } else {
-        acc[item.status] = {
-          status: item.status,
-          tags: [item.tagNo],
-          color: item.color || '',
-        };
+      if (!notFoundTagList.includes(item)) {
+        if (acc[item.status]) {
+          acc[item.status].tags.push(item.tagNo);
+        } else {
+          acc[item.status] = {
+            status: item.status,
+            tags: [item.tagNo],
+            color: item.color || '',
+          };
+        }
       }
       return acc;
     }, {} as Record<string, { status: string; color: string; tags: string[] }>);
-  }, [tagList]);
+  }, [tagList, notFoundTagList]);
 
   if (
     !Boolean(Object.values(legendData).length) ||
-    tagList.length == notFoundTagList.length
+    tagList.length === notFoundTagList.length
   )
     return null;
 
