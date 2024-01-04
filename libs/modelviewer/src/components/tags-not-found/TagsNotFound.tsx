@@ -102,12 +102,10 @@ const Message = {
 };
 
 export const TagsNotFound = () => {
-  const { tagList, notFoundTagList } = useSelectionContext();
+  const { viewNodes, tagList, notFoundTagList } = useSelectionContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (notFoundTagList.length === 0) return null;
-
-  if (notFoundTagList.length == tagList.length)
+  if (viewNodes.length === 0) {
     return (
       <Message.Wrapper>
         <Message.Overlay>
@@ -127,6 +125,9 @@ export const TagsNotFound = () => {
         </Message.Overlay>
       </Message.Wrapper>
     );
+  }
+
+  if (notFoundTagList.length === 0) return null;
 
   return (
     <Style.Overlay>

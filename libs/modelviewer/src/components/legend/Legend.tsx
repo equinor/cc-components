@@ -82,7 +82,8 @@ const Style = {
 };
 
 export const Legend = () => {
-  const { tagList, toggleTags, filterTags, notFoundTagList } = useSelectionContext();
+  const { viewNodes, tagList, toggleTags, filterTags, notFoundTagList } =
+    useSelectionContext();
   const [isExpanded, setIsExpanded] = useState(true);
 
   const legendData = useMemo(() => {
@@ -105,7 +106,8 @@ export const Legend = () => {
 
   if (
     !Boolean(Object.values(legendData).length) ||
-    tagList.length === notFoundTagList.length
+    tagList.length === notFoundTagList.length ||
+    viewNodes.length === 0
   )
     return null;
 
