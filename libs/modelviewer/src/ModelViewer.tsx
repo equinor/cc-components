@@ -13,6 +13,7 @@ import { PlantDataContextProvider } from './providers/plantDataProvider';
 import { Message } from './components/message/Message';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
 import { Legend } from './components/legend/Legend';
+import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
 
 type FusionModelViewerProps = {
   facility: string;
@@ -63,8 +64,9 @@ const ModelViewer = ({
             <SelectionContextProvider tagsOverlay={tagsOverlay}>
               <ModelSelection>
                 <ActionContextProvider>
-                  <TagsOverlay />
                   <Legend />
+                  <TagsNotFound />
+                  <TagsOverlay />
                   <ActionsMenu CustomActions={components.CustomActions} />
                 </ActionContextProvider>
               </ModelSelection>

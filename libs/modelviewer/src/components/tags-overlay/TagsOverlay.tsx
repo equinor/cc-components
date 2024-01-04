@@ -31,52 +31,54 @@ export const TagsOverlay = (): JSX.Element => {
 
   return (
     <div>
-      {overlayTags.map((tag, index) => {
-        const isSelected = selected === tag.tagNo;
-        return (
-          <div
-            key={`${tag.tagNo}_${index}`}
-            title={titleResolver ? titleResolver(tag) : tag.tagNo}
-            onClick={() => {
-              echoInstance?.viewer.cameraManager.fitCameraToBoundingBox(
-                tag.boundingBox,
-                defaultRadiusFactor
-              );
-            }}
-          >
-            <RevealHtmlOverlayWrapper
-              overlayTool={overlayTool.current}
-              position3d={tag.position}
-              tagNo={tag.tagNo}
-              aabb={tag.aabb}
+      {overlayTags
+        .filter((ot) => filterTags.includes(ot.tagNo))
+        .map((tag, index) => {
+          const isSelected = selected === tag.tagNo;
+          return (
+            <div
+              key={`${tag.tagNo}_${index}`}
+              title={titleResolver ? titleResolver(tag) : tag.tagNo}
+              onClick={() => {
+                echoInstance?.viewer.cameraManager.fitCameraToBoundingBox(
+                  tag.boundingBox,
+                  defaultRadiusFactor
+                );
+              }}
             >
-              {CustomOverlayComponent ? (
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelected(tag.tagNo);
-                  }}
-                >
-                  <CustomOverlayComponent
-                    {...tag}
-                    index={index}
-                    clearSelection={() => setSelected(tag.tagNo)}
+              <RevealHtmlOverlayWrapper
+                overlayTool={overlayTool.current}
+                position3d={tag.position}
+                tagNo={tag.tagNo}
+                aabb={tag.aabb}
+              >
+                {CustomOverlayComponent ? (
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelected(tag.tagNo);
+                    }}
+                  >
+                    <CustomOverlayComponent
+                      {...tag}
+                      index={index}
+                      clearSelection={() => setSelected(tag.tagNo)}
+                      isSelected={isSelected}
+                    />
+                  </div>
+                ) : (
+                  <TagItem
+                    tag={tag}
+                    iconResolver={iconResolver}
+                    statusResolver={statusResolver}
                     isSelected={isSelected}
+                    onSelected={() => setSelected(tag.tagNo)}
                   />
-                </div>
-              ) : (
-                <TagItem
-                  tag={tag}
-                  iconResolver={iconResolver}
-                  statusResolver={statusResolver}
-                  isSelected={isSelected}
-                  onSelected={() => setSelected(tag.tagNo)}
-                />
-              )}
-            </RevealHtmlOverlayWrapper>
-          </div>
-        );
-      })}
+                )}
+              </RevealHtmlOverlayWrapper>
+            </div>
+          );
+        })}
     </div>
   );
 };

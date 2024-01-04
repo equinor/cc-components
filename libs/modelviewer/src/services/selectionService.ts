@@ -56,7 +56,7 @@ export class SelectionService extends NodeService {
     if (!currentModel) throw new Error('No model Awaitable for SelectionService');
     return currentModel;
   }
-  
+
   findNodesByTags = async (tags: string[], signal?: AbortSignal) => {
     return (
       await this.hierarchyClient.findNodesByTagList(
@@ -211,7 +211,6 @@ export class SelectionService extends NodeService {
       this.viewer.setGlobalClippingPlanes(clipper.clippingPlanes);
     } else {
       this.viewer.setGlobalClippingPlanes([]);
-      
     }
   }
 
