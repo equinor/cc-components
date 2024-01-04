@@ -52,11 +52,86 @@ const Style = {
   `,
 };
 
+const Message = {
+  Wrapper: styled.div`
+    display: flex;
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    justify-content: center;
+  `,
+  Overlay: styled.div`
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.65);
+    min-width: 250px;
+    border-radius: 4px;
+  `,
+
+  Header: styled.div`
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+    align-items: center;
+    height: 2rem;
+    gap: 1rem;
+  `,
+  TextWrapper: styled.div`
+    border-width: 1px;
+    border-color: #e2e2e2;
+    border-top-style: solid;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  `,
+  Text: styled(Typography)`
+    display: flex;
+    color: #fff;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+  `,
+};
+
 export const TagsNotFound = () => {
-  const { notFoundTagList } = useSelectionContext();
+  const { tagList, notFoundTagList } = useSelectionContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (notFoundTagList.length === 0) return null;
+
+  if (notFoundTagList.length == tagList.length)
+    return (
+      <Message.Wrapper>
+        <Message.Overlay>
+          <Message.Header>
+            <Icon
+              data={warning_outlined}
+              color={tokens.colors.interactive.warning__resting.hex}
+            />
+            No tags found in 3D Model
+          </Message.Header>
+
+          <Message.TextWrapper>
+            <Message.Text>
+              We could not find any of the following tags in the selected model
+            </Message.Text>
+          </Message.TextWrapper>
+          <Style.MissingWrapper>
+            {notFoundTagList.map((tagItem) => (
+              <Style.MissingItem variant={'overline'} key={tagItem.tagNo}>
+                <span>{tagItem.tagNo}</span>
+                <span>{tagItem.status}</span>
+              </Style.MissingItem>
+            ))}
+          </Style.MissingWrapper>
+        </Message.Overlay>
+      </Message.Wrapper>
+    );
 
   return (
     <Style.Overlay>

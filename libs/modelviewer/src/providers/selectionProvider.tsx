@@ -207,7 +207,7 @@ export const SelectionContextProvider = ({
   };
 
   const notFoundTagList = useMemo(() => {
-    if (viewNodes.length === tagList.length || viewNodes.length === 0) return [];
+    if (viewNodes.length === tagList.length) return [];
 
     const tagSet = tagList.reduce((acc, item) => {
       acc[item.tagNo] = item;

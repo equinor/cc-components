@@ -102,7 +102,11 @@ export const Legend = () => {
     }, {} as Record<string, { status: string; color: string; tags: string[] }>);
   }, [tagList]);
 
-  if (!Boolean(Object.values(legendData).length)) return null;
+  if (
+    !Boolean(Object.values(legendData).length) ||
+    tagList.length == notFoundTagList.length
+  )
+    return null;
 
   return (
     <Style.Overlay>
