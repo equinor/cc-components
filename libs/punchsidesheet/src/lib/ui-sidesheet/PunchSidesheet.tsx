@@ -1,10 +1,13 @@
 import { Punch } from '@cc-components/punchshared';
-import { Tabs } from '@equinor/eds-core-react';
-import { useRef, useState } from 'react';
-import { DetailsTab } from './DetailsTab';
-import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
-import { useQuery } from '@tanstack/react-query';
-import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import {
+  LinkCell,
+  ModelViewerTab,
+  PackageStatus,
+  colorMap,
+  hasProperty,
+  useContextId,
+  useHttpClient,
+} from '@cc-components/shared';
 import {
   BannerItem,
   SidesheetHeader,
@@ -14,6 +17,12 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
 } from '@cc-components/sharedcomponents';
+import { Tabs } from '@equinor/eds-core-react';
+import { useQuery } from '@tanstack/react-query';
+import { TagOverlay } from 'libs/modelviewer/dist/src';
+import { useMemo, useRef, useState } from 'react';
+import { DetailsTab } from './DetailsTab';
+import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 
 export const PunchSidesheet = (props: {
   id: string;
@@ -55,6 +64,30 @@ export const PunchSidesheet = (props: {
   if (!punch || error) {
     return <div>Failed to get Punch with id: {props.id}</div>;
   }
+
+  const punchIcon = (category: string) => {
+    return <h3>{category}</h3>;
+  };
+
+  const tagsOverlay = useMemo(() => {
+    return [
+      {
+        tagNo: punch.tagNo,
+        description: punch.description,
+        status: punch.category,
+        icon: punchIcon(punch.category || ''),
+      },
+    ] as TagOverlay[];
+  }, [punch]);
+
+  const viewerOptions = {
+    statusResolver: (status: string) => {
+      return hasProperty(colorMap, status)
+        ? colorMap[status as PackageStatus]
+        : '#009922';
+    },
+    defaultCroppingDistance: 3,
+  };
 
   return (
     <StyledSideSheetContainer>
@@ -117,12 +150,22 @@ export const PunchSidesheet = (props: {
         <StyledTabListWrapper>
           <StyledTabsList ref={ref}>
             <Tabs.Tab>Details </Tabs.Tab>
+            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab punch={punch} />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <ModelViewerTab
+              TagOverlay={tagsOverlay}
+              options={viewerOptions}
+              isFetching={isLoadingSidesheet}
+              error={error as Error | null}
+              facility={[punch.facility!] || ['']}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
