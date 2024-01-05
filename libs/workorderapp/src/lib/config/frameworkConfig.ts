@@ -33,24 +33,38 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
-
   enableModelViewer(config, (builder) => {
     builder.setHierarchyClientConfig({
-      baseUrl: 'https://app-echo-hierarchy-dev.azurewebsites.net',
-      scope: 'ebc04930-bf9c-43e5-98bc-bc90865600b8/user_impersonation',
+      baseUrl: envConfig?.modelViewer!.hierarchyClient.baseUrl,
+      scope: envConfig?.modelViewer!.hierarchyClient.scope,
     });
     builder.setModelClientConfig({
-      baseUrl: 'https://app-echomodeldist-dev.azurewebsites.net',
-      scope: 'd484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation',
+      baseUrl: envConfig?.modelViewer!.modelClient.baseUrl,
+      scope: envConfig?.modelViewer!.modelClient.scope,
     });
     builder.setEchoClientConfig({
-      baseUrl: 'https://dt-echopedia-api-dev.azurewebsites.net',
-      scope: 'aef35d97-53d4-4fd0-adaf-c5a514b38436/user_impersonation',
+      baseUrl: envConfig?.modelViewer!.echoClient.baseUrl,
+      scope: envConfig?.modelViewer!.echoClient.scope,
     });
   });
 };
 
+type ModelViewerEnvConfig = {
+  hierarchyClient: {
+    baseUrl: string;
+    scope: string;
+  };
+  modelClient: {
+    baseUrl: string;
+    scope: string;
+  };
+  echoClient: {
+    baseUrl: string;
+    scope: string;
+  };
+};
 type WorkorderEnvConfig = {
   uri?: string;
   defaultScopes?: string[];
+  modelViewer?: ModelViewerEnvConfig;
 };
