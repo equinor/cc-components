@@ -37,6 +37,7 @@ interface SelectionContextState {
   setTags: (tagOverlay: string[] | TagOverlay[], options?: { color: string }) => void;
   toggleTags(tags: string[]): void;
   filterTags: string[];
+  isTagFetching: boolean;
 }
 
 const SelectionContext = createContext({} as SelectionContextState);
@@ -98,6 +99,7 @@ export const SelectionContextProvider = ({
   const { echoInstance } = useModelViewerContext();
   const { modelMeta } = useModelContext();
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
+  const [isTagFetching, SetIsTagFetching] = useState<boolean>(true);
 
   const selectionService = useMemo(() => {
     if (modelMeta && echoInstance) {
@@ -107,7 +109,12 @@ export const SelectionContextProvider = ({
 
   useEffect(() => {
     if (tagList.length > 0 && selectionService) {
-      selectNodesByTagsOverlay(tagList).then((nodes) => nodes && setCurrentNodes(nodes));
+      selectNodesByTagsOverlay(tagList).then((nodes) => {
+        if (nodes) {
+          setCurrentNodes(nodes);
+        }
+        SetIsTagFetching(false);
+      });
     }
   }, [tagList, selectionService]);
 
@@ -246,6 +253,7 @@ export const SelectionContextProvider = ({
         tagList,
         notFoundTagList,
         toggleTags,
+        isTagFetching,
       }}
     >
       {children}

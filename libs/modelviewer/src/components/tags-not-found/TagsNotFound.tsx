@@ -1,9 +1,9 @@
-import { Icon, Typography } from '@equinor/eds-core-react';
-import { useSelectionContext } from '../../providers';
+import { Icon, LinearProgress, Typography } from '@equinor/eds-core-react';
 import { arrow_drop_down, arrow_drop_up, warning_outlined } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+import { useSelectionContext } from '../../providers';
 
 const Style = {
   Overlay: styled.div`
@@ -83,9 +83,6 @@ const Message = {
   `,
   TextWrapper: styled.div`
     width: 100%;
-    /* border-width: 1px;
-    border-color: #e2e2e2;
-    border-top-style: solid; */
     background: rgba(0, 0, 0, 0.65);
     padding-top: 0.5rem;
     padding-left: 0.5rem;
@@ -99,13 +96,35 @@ const Message = {
     justify-content: space-between;
     padding-bottom: 0.5rem;
   `,
+
+  SpinnerWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 1rem 0.5rem;
+    border-radius: 0 0 4px 4px;
+  `,
 };
 
 export const TagsNotFound = () => {
-  const { viewNodes, tagList, notFoundTagList } = useSelectionContext();
+  const { viewNodes, notFoundTagList, isTagFetching } = useSelectionContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (viewNodes.length === 0) {
+  if (isTagFetching) {
+    return (
+      <Message.Wrapper>
+        <Message.Overlay>
+          <Message.Header>Loading tags...</Message.Header>
+          <Message.SpinnerWrapper>
+            <LinearProgress />
+          </Message.SpinnerWrapper>
+        </Message.Overlay>
+      </Message.Wrapper>
+    );
+  }
+
+  if (viewNodes.length === 0 && !isTagFetching) {
     return (
       <Message.Wrapper>
         <Message.Overlay>
