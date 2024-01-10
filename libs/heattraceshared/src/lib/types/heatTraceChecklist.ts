@@ -14,8 +14,11 @@ export type HeatTraceChecklist = {
   formularType: string;
   formularGroup: string;
   status: string;
+  statusFlag: string;
   revision: string;
   signedDate: string;
+  signedDateATest: string;
+  signedDateInsulation: string;
   pipeTest: string;
   tagArea: string;
   mechanicalCompletionArea: string;
@@ -28,7 +31,6 @@ export type HeatTraceChecklist = {
   priority2: string;
   priority3: string;
   rfC_Planned_Forecast_Date: string;
-  rfO_Planned_Forecast_Date: string;
   commissioningPackageNo: string;
   commissioningPackageId: string;
   commissioningPackageUrlId: string;
@@ -46,4 +48,6 @@ export type HeatTraceChecklist = {
   checklistUrl: string | null;
   commissioningPackageUrl: string | null;
   mechanicalCompletionUrl: string | null;
+  pipingRevisionMechanicalCompletionPackageNo: string;
+  register: string;
 };
