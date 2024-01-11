@@ -63,14 +63,16 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
           <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles
             mcColor={
-              data.mechanicalCompletionStatus
-                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
-                : null
+              null
+              // data.mechanicalCompletionStatus
+              //   ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
+              //   : null
             }
             commColor={
-              data.commissioningStatus
-                ? colorMap[data.commissioningStatus as PackageStatus]
-                : null
+              null
+              // data.commissioningStatus
+              //   ? colorMap[data.commissioningStatus as PackageStatus]
+              //   : null
             }
           />
         </StyledItemWrapper>
