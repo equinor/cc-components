@@ -10,10 +10,12 @@ export type HeatTrace = {
   commissioningPackageId: string | null;
   commissioningPackageUrlId: string | null;
   commissioningResponsible: string | null;
+  commissioningStatus: string | null;
   mechanicalCompletionPackageNo: string | null;
   mechanicalCompletionPackageId: string | null;
   mechanicalCompletionUrlId: string | null;
   mechanicalCompletionResponsible: string | null;
+  mechanicalCompletionStatus: string | null;
   status: string;
   discipline: string;
   location: string;
