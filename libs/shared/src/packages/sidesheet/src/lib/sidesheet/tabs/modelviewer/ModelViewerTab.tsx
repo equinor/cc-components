@@ -24,13 +24,23 @@ export const InfoText = styled.h3`
   margin: 0;
 `;
 
-export const ModelViewerTab: React.FC<ModelViewerTabProps> = ({
+export const ModelViewerTab = ({
+  TagOverlay,
+  facility,
+  options,
+  isFetching,
+  error,
+}: ModelViewerTabProps): JSX.Element | undefined => {
+  /*
+  
+  export const ModelViewerTab: React.FC<ModelViewerTabProps> = ({
   TagOverlay,
   facility,
   options,
   isFetching,
   error,
 }) => {
+  */
   if (isFetching) {
     return (
       <NoResourceData>
@@ -78,6 +88,4 @@ export const ModelViewerTab: React.FC<ModelViewerTabProps> = ({
       </StyledWrapper>
     );
   }
-
-  return null;
 };
