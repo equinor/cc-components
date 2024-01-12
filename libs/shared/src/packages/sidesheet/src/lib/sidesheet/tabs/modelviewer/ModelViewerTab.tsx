@@ -30,17 +30,7 @@ export const ModelViewerTab = ({
   options,
   isFetching,
   error,
-}: ModelViewerTabProps): JSX.Element | undefined => {
-  /*
-  
-  export const ModelViewerTab: React.FC<ModelViewerTabProps> = ({
-  TagOverlay,
-  facility,
-  options,
-  isFetching,
-  error,
-}) => {
-  */
+}: ModelViewerTabProps): JSX.Element => {
   if (isFetching) {
     return (
       <NoResourceData>
@@ -81,11 +71,18 @@ export const ModelViewerTab = ({
     return (
       <StyledWrapper>
         <FusionModelViewer
-          facility={facility[0]} //Cheeky. Might have to add support for multiple facilites in the future
+          facility={facility[0]}
           options={options ?? undefined}
           tagsOverlay={TagOverlay}
         ></FusionModelViewer>
       </StyledWrapper>
     );
   }
+
+  return (
+    //Sjekk senere
+    <NoResourceData>
+      <InfoText>No data available</InfoText>
+    </NoResourceData>
+  );
 };
