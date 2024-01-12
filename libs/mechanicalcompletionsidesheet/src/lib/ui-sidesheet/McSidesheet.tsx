@@ -14,10 +14,10 @@ import {
   StyledTabs,
   TabTitle,
 } from '@cc-components/sharedcomponents';
-import { Icon, Tabs } from '@equinor/eds-core-react';
+import { Icon, Switch, Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useMemo, useRef, useState } from 'react';
 import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 
@@ -36,6 +36,7 @@ Icon.add({ error_outlined });
 
 const McSideSheetComponent = (props: Required<McProps>) => {
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [ShowOnlyOutstandingPunch, setShowOnlyOutstandingPunch] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -65,6 +66,13 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     isFetching: isFetchingMccr,
     error: mccrError,
   } = useMcResource(props.id, 'mccr');
+
+  const filteredPunches = useMemo(() => {
+    if (ShowOnlyOutstandingPunch) {
+      return punchItems?.filter((punch) => punch.status === 'Open');
+    }
+    return punchItems;
+  }, [punchItems, ShowOnlyOutstandingPunch]);
 
   return (
     <StyledSideSheetContainer>
@@ -131,7 +139,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               Workorders <TabTitle data={workOrders} isLoading={isFetchingWorkOrders} />
             </Tabs.Tab>
             <Tabs.Tab>
-              Punch <TabTitle data={punchItems} isLoading={isFetchingPunchItems} />
+              Punch <TabTitle data={filteredPunches} isLoading={isFetchingPunchItems} />
             </Tabs.Tab>
             <Tabs.Tab>
               NCR <TabTitle data={ncr} isLoading={isFetchingNcr} />
@@ -154,10 +162,18 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             />
           </Tabs.Panel>
           <Tabs.Panel>
+            <Switch
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setShowOnlyOutstandingPunch(e.target.checked);
+              }}
+              checked={ShowOnlyOutstandingPunch}
+              label={`Show only outstanding`}
+              style={{ paddingLeft: '1rem', paddingTop: '0.5rem' }}
+            />
             <PunchTab
               error={punchError}
               isFetching={isFetchingPunchItems}
-              punches={punchItems}
+              punches={filteredPunches}
             />
           </Tabs.Panel>
           <Tabs.Panel>
