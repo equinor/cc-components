@@ -30,12 +30,12 @@ import {
 } from '@cc-components/workordershared';
 import { Tabs } from '@equinor/eds-core-react';
 
+import { TagOverlay } from '@cc-components/modelviewer';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
-import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
-import { TagOverlay } from '@cc-components/modelviewer';
+import { DetailsTab } from './DetailsTab';
 
 export const WorkorderSidesheet = (props: {
   id: string;

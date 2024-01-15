@@ -1,5 +1,5 @@
-import { TagOverlay } from 'libs/modelviewer/dist/src';
-import { ModelViewerConfig } from 'libs/modelviewer/dist/src/providers/configProvider';
+import { TagOverlay } from '@cc-components/modelviewer';
+import { ModelViewerConfig } from '@cc-components/modelviewer';
 
 export type ModelViewerTabProps = {
   TagOverlay: string[] | TagOverlay[] | undefined;
