@@ -10,18 +10,12 @@ export type HeatTrace = {
   commissioningPackageId: string | null;
   commissioningPackageUrlId: string | null;
   commissioningResponsible: string | null;
-  commissioningPhase: string | null;
-  commissioningArea: string | null;
   commissioningStatus: string | null;
   mechanicalCompletionPackageNo: string | null;
   mechanicalCompletionPackageId: string | null;
   mechanicalCompletionUrlId: string | null;
   mechanicalCompletionResponsible: string | null;
-  mechanicalCompletionPhase: string | null;
   mechanicalCompletionStatus: string | null;
-  mechanicalCompletionId: string | null;
-  mechanicalCompletionArea: string | null;
-  mechanicalCompletionDiscipline: string | null;
   status: string;
   discipline: string;
   location: string;
@@ -40,8 +34,6 @@ export type HeatTrace = {
   rfOPlannedForecastDate: string;
   m03PlannedForecastDate: string | null;
   signedDate: string;
-  identifier: string | null;
-  identifierId: string | null;
   heatTraceCableUrl: string | null;
   commissioningPackageUrl: string | null;
   mechanicalCompletionUrl: string | null;

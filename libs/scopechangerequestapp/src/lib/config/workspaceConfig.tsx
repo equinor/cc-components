@@ -6,7 +6,11 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useTableConfig } from './tableConfig';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
-import { useContextId, useHttpClient } from '@cc-components/shared';
+import {
+  useContextId,
+  useHttpClient,
+  useWorkspaceBookmarks,
+} from '@cc-components/shared';
 import { sidesheetConfig } from './sidesheetConfig';
 
 const options: WorkspaceConfig<ScopeChangeRequest> = {
@@ -21,13 +25,16 @@ export const WorkspaceWrapper = () => {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',
   });
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const filterConfig = useFilterConfig((req) =>
     client.fetch(`/api/scope-change-requests/filter-model`, req)
   );
   const tableConfig = useTableConfig(contextId);
   return (
     <Workspace
-      key={contextId}
+      key={contextId + bookmarkKey}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       workspaceOptions={options}
       powerBiOptions={pbi}
       gridOptions={tableConfig}

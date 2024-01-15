@@ -4,7 +4,12 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
-import { useCCApiAccessCheck, useContextId, useHttpClient } from '@cc-components/shared';
+import {
+  useCCApiAccessCheck,
+  useContextId,
+  useHttpClient,
+  useWorkspaceBookmarks,
+} from '@cc-components/shared';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './heattraceSidesheet';
@@ -18,6 +23,8 @@ export const WorkspaceWrapper = () => {
     client.fetch(`/api/contexts/${contextId}/heat-trace/filter-model`, req)
   );
 
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
+
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
@@ -28,6 +35,9 @@ export const WorkspaceWrapper = () => {
 
   return (
     <Workspace
+      key={contextId + bookmarkKey}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: (ht) => ht.heatTraceCableId,
         defaultTab: 'grid',

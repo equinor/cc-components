@@ -3,6 +3,7 @@ import {
   useContextId,
   useHttpClient,
   usePBIOptions,
+  useWorkspaceBookmarks,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
@@ -27,6 +28,8 @@ export const WorkspaceWrapper = () => {
     table: 'Dim_ProjectMaster',
   });
 
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
+
   const filterConfig = useFilterConfig((req) =>
     ccApi.fetch(`/api/contexts/${contextId}/swcr/filter-model`, req)
   );
@@ -41,7 +44,9 @@ export const WorkspaceWrapper = () => {
 
   return (
     <Workspace
-      key={contextId}
+      key={contextId + bookmarkKey}
+      currentBookmark={currentBookmark}
+      onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: (item) => item.softwareChangeRecordId,
         defaultTab: 'garden',

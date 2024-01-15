@@ -3,6 +3,7 @@ import {
   useContextId,
   useHttpClient,
   usePBIOptions,
+  useWorkspaceBookmarks,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
@@ -21,6 +22,7 @@ export const WorkspaceWrapper = () => {
   const contextId = useContextId();
 
   const client = useHttpClient();
+  const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'work-orders');
   const pbi = usePBIOptions('workorder-analytics', {
     column: 'ProjectMaster GUID',
@@ -41,7 +43,9 @@ export const WorkspaceWrapper = () => {
   return (
     <>
       <Workspace
-        key={contextId}
+        key={contextId + bookmarkKey}
+        currentBookmark={currentBookmark}
+        onBookmarkChange={onBookmarkChange}
         workspaceOptions={{
           getIdentifier: (item) => item.workOrderId,
           defaultTab: 'grid',

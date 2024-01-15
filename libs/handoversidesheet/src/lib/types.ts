@@ -35,6 +35,7 @@ export type HandoverPunch = {
   sorting: string | null;
   tagUrl: string;
   isOpen: boolean;
+  status: string | null;
 } & HandoverChild;
 
 export type HandoverQuery = {

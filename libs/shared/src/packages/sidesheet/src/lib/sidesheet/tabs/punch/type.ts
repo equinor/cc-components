@@ -8,4 +8,5 @@ export type PunchBase = {
   clearedBy: string | null;
   sorting: string | null;
   tagUrl: string;
+  status: string | null;
 };
