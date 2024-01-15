@@ -35,7 +35,7 @@ import { useMemo, useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
-import { TagOverlay } from 'libs/modelviewer/dist/src';
+import { TagOverlay } from '@cc-components/modelviewer';
 
 export const WorkorderSidesheet = (props: {
   id: string;
