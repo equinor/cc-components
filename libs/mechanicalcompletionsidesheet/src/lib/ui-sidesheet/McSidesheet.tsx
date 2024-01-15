@@ -14,10 +14,10 @@ import {
   StyledTabs,
   TabTitle,
 } from '@cc-components/sharedcomponents';
-import { Icon, Tabs } from '@equinor/eds-core-react';
+import { Icon, Switch, Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useMcResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 
@@ -41,6 +41,8 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     setActiveTab(index);
     ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };
+
+  const [showOnlyOutstandingPunch, setShowOnlyOutstandingPunch] = useState(true);
 
   const {
     data: workOrders,
@@ -154,10 +156,22 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             />
           </Tabs.Panel>
           <Tabs.Panel>
+            <Switch
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setShowOnlyOutstandingPunch(e.target.checked);
+              }}
+              checked={showOnlyOutstandingPunch}
+              label={`Show only outstanding`}
+              style={{ paddingLeft: '1rem', paddingTop: '0.5rem' }}
+            />
             <PunchTab
               error={punchError}
               isFetching={isFetchingPunchItems}
-              punches={punchItems}
+              punches={
+                showOnlyOutstandingPunch
+                  ? punchItems?.filter((punch) => !punch.clearedBy)
+                  : punchItems
+              }
             />
           </Tabs.Panel>
           <Tabs.Panel>
