@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli app dev",
-    "build": "tsc -b -f"
+    "dev:local": "fusion-framework-cli app dev -c app.config.local.js",
+    "build": "tsc -b -f",
+    "pr:deploy": "tsx ../../github-action/src/releasePr.ts release"
   },
   "dependencies": {
     "@cc-components/modelviewerapp": "workspace:^",
