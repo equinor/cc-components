@@ -31,7 +31,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@types/html-escaper": "^3.0.0",
     "@types/luxon": "^3.3.2",
-    "@types/node": "20.7.0",
+    "@types/node": "20.10.5",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "@types/react-is": "18.2.1",
