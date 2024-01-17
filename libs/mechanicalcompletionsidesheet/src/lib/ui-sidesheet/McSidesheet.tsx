@@ -36,7 +36,8 @@ Icon.add({ error_outlined });
 
 const McSideSheetComponent = (props: Required<McProps>) => {
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [ShowOnlyOutstandingPunch, setShowOnlyOutstandingPunch] = useState(true);
+  const [showOnlyOutstandingPunch, setShowOnlyOutstandingPunch] = useState(true);
+  const [showOnlyOutstandingWo, setShowOnlyOutstandingWo] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -68,11 +69,15 @@ const McSideSheetComponent = (props: Required<McProps>) => {
   } = useMcResource(props.id, 'mccr');
 
   const filteredPunches = useMemo(() => {
-    if (ShowOnlyOutstandingPunch) {
+    if (showOnlyOutstandingPunch) {
       return punchItems?.filter((punch) => punch.status === 'Open');
     }
     return punchItems;
-  }, [punchItems, ShowOnlyOutstandingPunch]);
+  }, [punchItems, showOnlyOutstandingPunch]);
+
+  const filteredWos = showOnlyOutstandingWo
+    ? workOrders?.filter((s) => s.projectProgress !== 100)
+    : workOrders;
 
   return (
     <StyledSideSheetContainer>
@@ -136,7 +141,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             <Tabs.Tab>Details</Tabs.Tab>
 
             <Tabs.Tab>
-              Workorders <TabTitle data={workOrders} isLoading={isFetchingWorkOrders} />
+              Workorders <TabTitle data={filteredWos} isLoading={isFetchingWorkOrders} />
             </Tabs.Tab>
             <Tabs.Tab>
               Punch <TabTitle data={filteredPunches} isLoading={isFetchingPunchItems} />
@@ -155,10 +160,18 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             <DetailsTab mcPackage={props?.item} />
           </Tabs.Panel>
           <Tabs.Panel>
+            <Switch
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setShowOnlyOutstandingWo(e.target.checked);
+              }}
+              checked={showOnlyOutstandingWo}
+              label="Show only outstanding"
+              style={{ paddingLeft: '1rem', paddingTop: '0.5rem' }}
+            />
             <WorkorderTab
               error={workOrderError}
               isFetching={isFetchingWorkOrders}
-              workorders={workOrders}
+              workorders={filteredWos}
             />
           </Tabs.Panel>
           <Tabs.Panel>
@@ -166,7 +179,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setShowOnlyOutstandingPunch(e.target.checked);
               }}
-              checked={ShowOnlyOutstandingPunch}
+              checked={showOnlyOutstandingPunch}
               label={`Show only outstanding`}
               style={{ paddingLeft: '1rem', paddingTop: '0.5rem' }}
             />
