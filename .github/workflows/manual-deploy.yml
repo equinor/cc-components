@@ -17,6 +17,7 @@ on:
           - punch
           - scopechangerequest
           - workorder
+          - model-viewer-test
           - '*'
 permissions:
   actions: read
