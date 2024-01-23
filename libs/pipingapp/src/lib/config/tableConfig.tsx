@@ -46,7 +46,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
 const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Pipetest',
-    valueGetter: (pkg) => pkg.data?.id,
+    valueGetter: (element) => element.data?.id,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
@@ -54,39 +54,36 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Description',
     colId: 'description',
-    valueGetter: (pkg) => pkg.data?.description,
+    valueGetter: (pkg) => "IS COMING",
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
     width: 300,
   },
-  { headerName: 'Priority', valueGetter: (pkg) => pkg.data?.commPkPriority1 },
+  { headerName: 'Priority1', valueGetter: (pkg) => pkg.data?.priority1 },
   {
     headerName: 'Location',
-    valueGetter: (pkg) => pkg.data?.location,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionArea,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
-  { headerName: 'Checklist status', valueGetter: (pkg) => 't.b.d :D' },
-  { headerName: 'Current step', valueGetter: (pkg) => 't.b.d :D' },
+  { headerName: 'Checklist status', valueGetter: (item) => "IS COMING" },
+  { headerName: 'Current step', valueGetter: (item) => "IS COMING" },
   {
     headerName: 'RFC',
-    valueGetter: (pkg) => pkg.data?.rfccPlanned,
+    valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },
   },
   {
     headerName: 'HT cables',
-    valueGetter: (pkg) => pkg.data?.checkLists,
-    cellRenderer: (props: ICellRendererProps<Pipetest, CheckList[]>) => {
-      if (!props.value) return null;
-      return (
-        <StyledMonospace>
-          {generateCommaSeperatedStringArrayColumn(getHTList(props.value))}
-        </StyledMonospace>
-      );
+    valueGetter: (pkg) => "IS COMING",
+    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
+      return <DescriptionCell description={props.value} />;
     },
   },
 ];
+
+// {generateCommaSeperatedStringArrayColumn(getHTList(props.value))}

@@ -53,22 +53,14 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
         >
           <StyledItemText>{displayName.replace('@PIPETEST-', '')}</StyledItemText>
           <StyledStatusCircles
-            mcColor={
-              data.shortformCompletionStatus
-                ? pipetestStatusColormap[data.shortformCompletionStatus]
-                : null
-            }
-            commColor={
-              data.shortformCompletionStatus
-                ? pipetestStatusColormap[data.shortformCompletionStatus]
-                : null
-            }
+            mcColor={null}
+            commColor={null}
           />
         </StyledItemWrapper>
 
         {columnExpanded && (
-          <StyledDescription title={data.description ?? ''}>
-            {data.description}
+          <StyledDescription title={data.id ?? ''}>
+            {data.id} // TODO: Add description
           </StyledDescription>
         )}
       </StyledRoot>
