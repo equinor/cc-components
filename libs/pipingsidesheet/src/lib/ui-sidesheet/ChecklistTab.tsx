@@ -15,7 +15,6 @@ export const ChecklistTab = ({
 }: ChecklistTabProps): JSX.Element => {
   return (
     <StyledContentWrapper>
-      {checklists ? <h4>Pipetest checklist:</h4> : ''}
       <TabTable
         columns={checklistColumns}
         error={error}

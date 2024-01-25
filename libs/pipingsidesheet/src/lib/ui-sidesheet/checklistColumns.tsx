@@ -11,29 +11,29 @@ import { Checklist } from '@cc-components/pipingshared';
 export const checklistColumns: ColDef<Checklist>[] = [
   {
     headerName: 'Tag No',
-    valueGetter: (pkg) => pkg.data?.tagNo,
+    valueGetter: (item) => item.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
-      return <LinkCell url={"TODO"} urlText={props.value ?? ''} />
+      return <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
     },
   },
   {
     headerName: 'Revision',
-    valueGetter: (pkg) => pkg.data?.revision,
+    valueGetter: (item) => item.data?.revision,
   },
   {
     headerName: 'Formular type',
-    valueGetter: (pkg) => pkg.data?.formularType,
+    valueGetter: (item) => item.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
       return <LinkCell url={"TODO"} urlText={props.value ?? ''} />
     },
   },
   {
     headerName: 'Responsible',
-    valueGetter: (pkg) => pkg.data?.responsible,
+    valueGetter: (item) => item.data?.responsible,
   },
   {
     headerName: 'Status',
-    valueGetter: (pkg) => pkg.data?.status,
+    valueGetter: (item) => item.data?.status,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
       if (!props.data?.status) return null;
       return (

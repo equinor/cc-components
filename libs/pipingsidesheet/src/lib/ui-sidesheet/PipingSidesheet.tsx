@@ -23,6 +23,7 @@ import { ChecklistTab } from './ChecklistTab';
 
 import { useGetWorkorders } from '../utils-sidesheet';
 import { useGetChecklists } from '../utils-sidesheet/useGetChecklists';
+import { useGetPipetest } from '../utils-sidesheet/usePipetest';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -49,39 +50,17 @@ type PipingProps = {
 export const PipingSidesheet = (props: PipingProps) => {
   const { id, item, close } = props;
 
-  if (!item) {
-    throw new Error('Pipetest undefined');
-  }
-
   const [activeTab, setActiveTab] = useState(0);
 
-  const client = useHttpClient();
-  const contextId = useContextId();
+  const { data: pipetest, isLoading: isLoadingPipetest, error: errorPipetest } = useGetPipetest(id, item)
 
-  // TODO: Fetch WorkOrders
-  const { data : workorders, isLoading: isLoadingWorkorders, error: errorWorkorders } = useGetWorkorders(item.pipetestMc);
+  const { data : workorders, isLoading: isLoadingWorkorders, error: errorWorkorders } = useGetWorkorders(pipetest?.pipetestMc);
 
-  const { data: checklists, isLoading: isLoadingChecklists, error: errorChecklists } = useGetChecklists(item.pipetestMc);
+  const { data: checklists, isLoading: isLoadingChecklists, error: errorChecklists } = useGetChecklists(pipetest?.pipetestMc);
 
-  console.log({workorders, checklists, isLoadingWorkorders, isLoadingChecklists});
-
-  // TODO: Fetch Checklists
   // TODO: Fetch Insulation Boxes
 
-  // const { data: pipetest } = useQuery<Pipetest>(
-  //   ['pipetest', props.id],
-  //   async () => {
-  //     const res = await client.fetch(`/api/contexts/${contextId}/pipetest/${props.id}`);
-  //     if (!res.ok) {
-  //       throw res;
-  //     }
-  //     return res.json();
-  //   },
-  //   {
-  //     suspense: true,
-  //     initialData: props.item,
-  //   }
-  // );
+  console.log({workorders, checklists, isLoadingWorkorders, isLoadingChecklists});
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -90,7 +69,7 @@ export const PipingSidesheet = (props: PipingProps) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${item.pipetestMc}, ${item.description}` || ''}
+        title={`${pipetest?.pipetestMc}, ${pipetest?.description}` || ''}
         onClose={props.close}
         applicationTitle="Pipetest"
       />
@@ -101,10 +80,10 @@ export const PipingSidesheet = (props: PipingProps) => {
           value="TODO" />
         { /* 
         TODO:
-                    item.shortformCompletionStatus ? (
+                    pipetest.shortformCompletionStatus ? (
               <StatusCircle
-                content={item.shortformCompletionStatus}
-                statusColor={pipetestStatusColormap[item.shortformCompletionStatus]}
+                content={pipetest.shortformCompletionStatus}
+                statusColor={pipetestStatusColormap[pipetest.shortformCompletionStatus]}
               />
             ) : (
               'N/A'
@@ -112,7 +91,7 @@ export const PipingSidesheet = (props: PipingProps) => {
         */} 
         <BannerItem
           title="RFC"
-          value={item.rfCPlannedForecastDate ? <DateCell dateString={item.rfCPlannedForecastDate} /> : 'N/A'}
+          value={pipetest?.rfCPlannedForecastDate ? <DateCell dateString={pipetest?.rfCPlannedForecastDate} /> : 'N/A'}
         />
       </StyledBanner>
       <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
@@ -120,20 +99,20 @@ export const PipingSidesheet = (props: PipingProps) => {
           <StyledTabsList>
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
-              Work orders <TabTitle isLoading={false} data={workorders} />
+              Work orders 
+              <TabTitle isLoading={false} data={workorders} />
             </Tabs.Tab>
             <Tabs.Tab>
-              Insulation
-              <TabTitle
-                isLoading={false}
-                data={[]} />
+              Insulation 
+              <TabTitle isLoading={false} data={[]} />
                 { /*
-                  data={[ ...(item.pipeInsulationBoxes ?? []), ...(item.insulationBoxes ?? []),
+                  data={[ ...(pipetest.pipeInsulationBoxes ?? []), ...(pipetest.insulationBoxes ?? []),
                   ]}
               */}
             </Tabs.Tab>
             <Tabs.Tab>
-              Checklists <TabTitle isLoading={false} data={checklists} />
+              Checklists 
+              <TabTitle isLoading={false} data={checklists} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
