@@ -58,6 +58,11 @@ export const domainNames = {
   mcStatus: 'MC Status',
 
   // Punch
+  punch: 'Punch',
+  verified: 'Verified',
+  handoverPlan: 'Handover Plan',
+  materialEstimate: 'Material Estimate',
+  materialRequired: 'Material Required',
   clearingBy: 'Clearing By',
   hasWorkorder: 'Has Workorder',
   punchPriority: `Punch ${'Priority'}`,
@@ -67,6 +72,7 @@ export const domainNames = {
 
   // Loop
   contentMCStatus: 'Content MC Status',
+  remainingManHours: 'Remaining Man Hours',
   loopTag: `Loop ${'Tag'}`,
   plannedMcComplete: 'Planned MC complete',
 
@@ -87,8 +93,10 @@ export const domainNames = {
   nextToSignRole: 'Next To Sign Role',
   nodeIdentifier: `Node ${'Identifier'}`,
   types: 'Types',
+  softwareChangeRequests: 'Software Change Requests',
 
   // Workorder
+  workorder: 'Workorder',
   finalizingOfWorkordersAtSite: 'Finalizing Of Workorders At Site',
   hold: 'Hold',
   hoursReadyForExecutionAtSite: 'Hours Ready For Execution At Site',
