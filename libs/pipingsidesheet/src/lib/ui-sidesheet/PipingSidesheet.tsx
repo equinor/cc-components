@@ -1,5 +1,5 @@
 import { Pipetest } from '@cc-components/pipingshared';
-import { useState } from 'react';
+import { lazy, useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
@@ -7,25 +7,29 @@ import { WorkorderBase, WorkorderTab } from '@cc-components/shared/sidesheet';
 import { StatusCircle } from '@cc-components/shared/common';
 import { pipetestStatusColormap } from '@cc-components/shared/mapping';
 import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
+
 import {
   BannerItem,
   SidesheetHeader,
   StyledBanner,
-  StyledPanels,
   StyledSideSheetContainer,
-  StyledTabs,
-  TabTitle,
+  CustomStyledTabs,
+  CustomStyledPanels,
+  TabTitle
 } from '@cc-components/sharedcomponents';
+
 import { InsultaionTab } from './InsultaionTab';
 import { ChecklistTab } from './ChecklistTab';
 
-const workorders: WorkorderBase[] = [];
+import { useGetWorkorders } from '../utils-sidesheet';
+import { useGetChecklists } from '../utils-sidesheet/useGetChecklists';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
 `;
+
 export const StyledTabsList = styled(Tabs.List)`
   overflow: auto;
   ::-webkit-scrollbar {
@@ -43,10 +47,27 @@ type PipingProps = {
 };
 
 export const PipingSidesheet = (props: PipingProps) => {
+  const { id, item, close } = props;
+
+  if (!item) {
+    throw new Error('Pipetest undefined');
+  }
+
   const [activeTab, setActiveTab] = useState(0);
 
   const client = useHttpClient();
   const contextId = useContextId();
+
+  // TODO: Fetch WorkOrders
+  const { data : workorders, isLoading: isLoadingWorkorders, error: errorWorkorders } = useGetWorkorders(item.pipetestMc);
+
+  const { data: checklists, isLoading: isLoadingChecklists, error: errorChecklists } = useGetChecklists(item.pipetestMc);
+
+  console.log({workorders, checklists, isLoadingWorkorders, isLoadingChecklists});
+
+  // TODO: Fetch Checklists
+  // TODO: Fetch Insulation Boxes
+
   // const { data: pipetest } = useQuery<Pipetest>(
   //   ['pipetest', props.id],
   //   async () => {
@@ -62,13 +83,6 @@ export const PipingSidesheet = (props: PipingProps) => {
   //   }
   // );
 
-  const pipetest = props.item;
-  if (!pipetest) {
-    throw new Error('Pipetest undefined');
-  }
-
-  // const { data, isLoading } = useGetWorkorders(pipetest.name);
-
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
@@ -76,33 +90,32 @@ export const PipingSidesheet = (props: PipingProps) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${pipetest.id}, ${pipetest.description}` || ''}
+        title={`${item.pipetestMc}, ${item.description}` || ''}
         onClose={props.close}
         applicationTitle="Pipetest"
       />
       <StyledBanner>
-        <BannerItem title="Current step" value={pipetest.step} />
+        <BannerItem title="Current step" value="TODO" /> { /* value={pipetest.step} */ }
         <BannerItem
           title="Checklist status"
-          value={
-            pipetest.shortformCompletionStatus ? (
+          value="TODO" />
+        { /* 
+        TODO:
+                    item.shortformCompletionStatus ? (
               <StatusCircle
-                content={pipetest.shortformCompletionStatus}
-                statusColor={pipetestStatusColormap[pipetest.shortformCompletionStatus]}
+                content={item.shortformCompletionStatus}
+                statusColor={pipetestStatusColormap[item.shortformCompletionStatus]}
               />
             ) : (
               'N/A'
             )
-          }
-        ></BannerItem>
+        */} 
         <BannerItem
           title="RFC"
-          value={
-            pipetest.rfccPlanned ? <DateCell dateString={pipetest.rfccPlanned} /> : 'N/A'
-          }
+          value={item.rfCPlannedForecastDate ? <DateCell dateString={item.rfCPlannedForecastDate} /> : 'N/A'}
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
@@ -113,42 +126,42 @@ export const PipingSidesheet = (props: PipingProps) => {
               Insulation
               <TabTitle
                 isLoading={false}
-                data={[
-                  ...(pipetest.pipeInsulationBoxes ?? []),
-                  ...(pipetest.insulationBoxes ?? []),
-                ]}
-                // data={pipetest.insulationBoxes}
-              />
+                data={[]} />
+                { /*
+                  data={[ ...(item.pipeInsulationBoxes ?? []), ...(item.insulationBoxes ?? []),
+                  ]}
+              */}
             </Tabs.Tab>
             <Tabs.Tab>
-              Checklists <TabTitle isLoading={false} data={pipetest.checkLists} />
+              Checklists <TabTitle isLoading={false} data={checklists} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>Circuit diagram is coming</Tabs.Panel>
           <Tabs.Panel>
-            <WorkorderTab error={null} isFetching={false} workorders={workorders} />
+            <WorkorderTab 
+              error={errorWorkorders} 
+              isFetching={isLoadingWorkorders} 
+              workorders={workorders} />
           </Tabs.Panel>
           <Tabs.Panel>
             <InsultaionTab
               error={null}
               isFetching={false}
-              pipeInsulations={pipetest.pipeInsulationBoxes}
-              boxInsulations={pipetest.insulationBoxes}
-            />
+              pipeInsulations={[]} 
+              boxInsulations={[]} />
           </Tabs.Panel>
           <Tabs.Panel>
             <ChecklistTab
-              error={null}
-              isFetching={false}
-              checklists={pipetest.checkLists}
-            />
+              error={errorChecklists}
+              isFetching={isLoadingChecklists}
+              checklists={checklists} />
           </Tabs.Panel>
           <Tabs.Panel>3D is coming</Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };

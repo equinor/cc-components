@@ -2,14 +2,15 @@ import { PipetestStep } from './drcEnums';
 
 export type Pipetest = {
   id:string;
+  description: string
   pipetestMc: string;
   pipetestType: string;
   facility: string;
   project: string;
-  rfCPlannedForecastDate: Date;
-  rfOPlannedForecastDate: Date;
-  m03PlannedForecastDate: Date;
-  signedDate: Date;
+  rfCPlannedForecastDate: string;
+  rfOPlannedForecastDate: string;
+  m03PlannedForecastDate: string;
+  signedDate: string;
   mechanicalCompletionUrlId: string;
   mechanicalCompletionResponsible: string;
   mechanicalCompletionPhase: string;
@@ -33,7 +34,8 @@ export type Pipetest = {
   projectSchema: string;
 };
 
-export type CheckList = {
+/*
+export type Checklist = {
   tagNo: string;
   responsible: string;
   formularType: string;
@@ -53,6 +55,19 @@ export type CheckList = {
   signedDate?: string;
   worstPipetestStep?: PipetestStep;
 };
+*/
+
+export type Checklist = {
+  checklistId: string;
+  checklistUrlId: string;
+  tagNo: string;
+  tagUrlId: string;
+  revision: string;
+  formularType: string;
+  responsible: string;
+  status: string;
+};
+
 
 export type InsulationBox = {
   objectNo: string;
@@ -66,13 +81,13 @@ export type InsulationBox = {
 export type Circuit = {
   switchBoardTagNo: string;
   circuitAndStarterTagNo: string;
-  checkLists: CheckList[];
+  checkLists: Checklist[];
   worstPipetestStep?: PipetestStep;
 };
 
-export type HeatTrace = CheckList;
+export type HeatTrace = Checklist;
 
-export type CheckListType = {
+export type ChecklistType = {
   tagNo: string;
   responsible: string;
   formularType: string;
@@ -83,6 +98,7 @@ export type CheckListType = {
   isHeatTrace?: boolean;
   workflowStepText?: string | undefined;
 };
+
 
 export type InsulationBoxType = {
   objectNo: string;
@@ -114,3 +130,4 @@ export type CircuitGrouped = {
   pipetests: Pipetest[];
   count: number;
 };
+  
