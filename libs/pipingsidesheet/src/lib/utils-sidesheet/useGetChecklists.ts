@@ -3,7 +3,7 @@ import { useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { Checklist } from '@cc-components/pipingshared';
 
-export const useGetChecklists = (pipetestId: string) => {
+export const useGetChecklists = (pipetestId?: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
 

@@ -2,7 +2,7 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { WorkorderBase, useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetWorkorders = (pipetestName: string) => {
+export const useGetWorkorders = (pipetestName?: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
 

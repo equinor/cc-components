@@ -66,6 +66,7 @@ export type Checklist = {
   formularType: string;
   responsible: string;
   status: string;
+  checklistUrl: string;
 };
 
 
