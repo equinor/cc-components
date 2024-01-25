@@ -6,6 +6,7 @@ export const StyledItemWrapper = styled.div<SwcrItemProps>`
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor};
   cursor: pointer;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;

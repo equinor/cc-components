@@ -1,45 +1,35 @@
-import { useContextId } from '@cc-components/shared/hooks';
 import { useHttpClient } from '@cc-components/shared';
-import { useCallback, useEffect, useState } from 'react';
+import { useContextId } from '@cc-components/shared/hooks';
+import { useQuery } from '@tanstack/react-query';
 import { SwcrSignature } from '../types';
 
 type UseSignatures = {
-  signatures: SwcrSignature[];
-  signaturesFetching: boolean;
+  data: SwcrSignature[] | undefined;
+  isLoading: boolean;
   error: Error | null;
 };
 
 export const useSignatures = (swcrId: string): UseSignatures => {
-  const [signatures, setSignatures] = useState<SwcrSignature[]>([]);
-  const [signaturesFetching, setSignaturesFetching] = useState<boolean>(false);
   const contextId = useContextId();
-  const [error, setError] = useState<Error | null>(null);
-  const dataProxy = useHttpClient();
-  const getSignatures = useCallback(async (swcrId: string) => {
-    setSignaturesFetching(true);
-    try {
-      const result = await dataProxy.fetch(
+  const client = useHttpClient();
+
+  const { isLoading, data, error } = useQuery<SwcrSignature[], Error>(
+    ['swcr', swcrId],
+    async () => {
+      const res = await client.fetch(
         `api/contexts/${contextId}/swcr/${swcrId}/signatures`
       );
-      if (!result.ok) {
-        throw new Error('Failed to fetch signatures');
+      if (!res.ok) {
+        throw new Error(`Failed to get signatures for swcr with id ${swcrId}`);
       }
-      const parsedSignatures = JSON.parse(await result.text()) as SwcrSignature[];
-      setSignatures(parsedSignatures);
-    } catch {
-      setSignatures([]);
-    } finally {
-      setSignaturesFetching(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getSignatures(swcrId);
-  }, [swcrId, getSignatures]);
+      return res.json() as Promise<SwcrSignature[]>;
+    },
+    { refetchOnWindowFocus: false }
+  );
 
   return {
-    signatures,
-    signaturesFetching,
+    data,
+    isLoading,
     error,
   };
 };

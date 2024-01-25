@@ -35,8 +35,7 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
       </StyledItemWrapper>
       {columnExpanded && (
         <>
-          {data.title}{' '}
-          {(data.estimatedManHours) > 0 ? `(${data.estimatedManHours}h)` : ''}
+          {data.title} {data.estimatedManHours > 0 ? `(${data.estimatedManHours}h)` : ''}
         </>
       )}
     </StyledRoot>
