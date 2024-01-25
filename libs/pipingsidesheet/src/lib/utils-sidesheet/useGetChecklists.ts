@@ -1,16 +1,17 @@
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { WorkorderBase, useContextId } from '@cc-components/shared';
+import { useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
+import { Checklist } from '@cc-components/pipingshared';
 
-export const useGetWorkorders = (pipetestName: string) => {
+export const useGetChecklists = (pipetestId: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
 
-  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
-    ['pipetest', pipetestName, 'workorders'],
+  const { data, isLoading, error } = useQuery<Checklist[], Error>(
+    ['pipetest', pipetestId, 'checklists'],
     async ({ signal }) => {
       const response = await client.fetch(
-        `/api/contexts/${contextId}/pipetest/${pipetestName}/work-orders`,
+        `/api/contexts/${contextId}/pipetest/${pipetestId}/checklists`,
         { signal }
       );
       if (!response.ok) {
@@ -20,9 +21,5 @@ export const useGetWorkorders = (pipetestName: string) => {
     }
   );
 
-  return {
-    data: data,
-    isLoading: isLoading,
-    error: error,
-  };
+  return { data, isLoading, error };
 };

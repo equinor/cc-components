@@ -1,5 +1,5 @@
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { CheckList, Pipetest } from '@cc-components/pipingshared';
+import { Checklist, Pipetest } from '@cc-components/pipingshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
@@ -54,7 +54,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Description',
     colId: 'description',
-    valueGetter: (pkg) => "IS COMING",
+    valueGetter: (pkg) => "TODO",
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
@@ -68,8 +68,8 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
-  { headerName: 'Checklist status', valueGetter: (item) => "IS COMING" },
-  { headerName: 'Current step', valueGetter: (item) => "IS COMING" },
+  { headerName: 'Checklist status', valueGetter: (item) => "TODO" },
+  { headerName: 'Current step', valueGetter: (item) => "TODO" },
   {
     headerName: 'RFC',
     valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
@@ -79,7 +79,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: 'HT cables',
-    valueGetter: (pkg) => "IS COMING",
+    valueGetter: (pkg) => "TODO",
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },

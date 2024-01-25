@@ -3,30 +3,28 @@ import {
   StatusCircle,
   StyledMonospace,
   statusColorMap,
+  LinkCell
 } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { CheckList } from '@cc-components/pipingshared';
+import { Checklist } from '@cc-components/pipingshared';
 
-export const checklistColumns: ColDef<CheckList>[] = [
+export const checklistColumns: ColDef<Checklist>[] = [
   {
-    headerName: 'Tag',
+    headerName: 'Tag No',
     valueGetter: (pkg) => pkg.data?.tagNo,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Checklist>) => {
+      return <LinkCell url={"TODO"} urlText={props.value ?? ''} />
     },
   },
   {
     headerName: 'Revision',
     valueGetter: (pkg) => pkg.data?.revision,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
-    },
   },
   {
     headerName: 'Formular type',
     valueGetter: (pkg) => pkg.data?.formularType,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+    cellRenderer: (props: ICellRendererProps<Checklist>) => {
+      return <LinkCell url={"TODO"} urlText={props.value ?? ''} />
     },
   },
   {
@@ -36,7 +34,7 @@ export const checklistColumns: ColDef<CheckList>[] = [
   {
     headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
+    cellRenderer: (props: ICellRendererProps<Checklist>) => {
       if (!props.data?.status) return null;
       return (
         <StatusCircle
