@@ -18,6 +18,7 @@ import {
   ICellRendererProps,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
+import { domainNames } from '@cc-components/shared';
 
 export const useTableConfig = (
   contextId: string
@@ -55,7 +56,7 @@ export const useTableConfig = (
 const columnDefinitions: ColDef<SwcrPackage>[] = [
   {
     colId: 'SwcrNo',
-    headerName: 'Software Change Requests',
+    headerName: domainNames.softwareChangeRequests,
     valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
       if (!props.data?.swcrUrl || !props.data?.softwareChangeRecordNo) {
@@ -78,15 +79,15 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'Contract',
-    headerName: 'Contract',
-    headerTooltip: 'Contract',
+    headerName: domainNames.contract,
+    headerTooltip: domainNames.contract,
     valueGetter: (pkg) => pkg.data?.contract,
     width: 200,
   },
   {
     colId: 'System',
-    headerName: 'System',
-    headerTooltip: 'System',
+    headerName: domainNames.system,
+    headerTooltip: domainNames.system,
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
       return <StyledMonospace>{props.data?.system}</StyledMonospace>;
@@ -96,8 +97,8 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   {
     colId: 'Status',
-    headerName: 'Status',
-    headerTooltip: 'Status',
+    headerName: domainNames.status,
+    headerTooltip: domainNames.status,
     valueGetter: (pkg) => pkg.data?.status,
     enableRowGroup: true,
     width: 200,
@@ -105,84 +106,84 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   // next sign by will be included with "Next sign role"
   {
     colId: 'NextSignBy',
-    headerName: 'Next sign by', //denne heter functionalrole i FAM.
-    headerTooltip: 'Next Sign by',
+    headerName: domainNames.nextSignBy, //denne heter functionalrole i FAM.
+    headerTooltip: domainNames.nextSignBy,
     valueGetter: (pkg) => {
       const ranking = pkg.data?.nextToSignRanking ?? '';
       const role = pkg.data?.nextToSignFunctionalRole ?? '';
-      return (ranking || role) ? `${ranking}: ${role}` : '';
+      return ranking || role ? `${ranking}: ${role}` : '';
     },
     width: 400,
   },
   {
     colId: 'NextSignRole',
-    headerName: 'Next Sign Role',
-    headerTooltip: 'Next Sign Role',
+    headerName: domainNames.nextToSignRole,
+    headerTooltip: domainNames.nextToSignRole,
     valueGetter: (pkg) => {
       const ranking = pkg.data?.nextToSignRanking ?? '';
       const role = pkg.data?.nextToSignRole ?? '';
-      return (ranking || role) ? `${ranking}: ${role}` : '';
+      return ranking || role ? `${ranking}: ${role}` : '';
     },
     enableRowGroup: true,
     minWidth: 200,
   },
   {
     colId: 'LatestSignBy',
-    headerName: 'Latest Sign By', 
-    headerTooltip: 'Latest Sign By',
+    headerName: domainNames.lastSignedBy,
+    headerTooltip: domainNames.lastSignedBy,
     valueGetter: (pkg) => {
       const ranking = pkg.data?.latestSignedRanking ?? '';
       const role = pkg.data?.latestSignedRoleFunctionalRole ?? '';
-      return (ranking || role) ? `${ranking}: ${role}` : '';
+      return ranking || role ? `${ranking}: ${role}` : '';
     },
   },
 
   {
     colId: 'LatestSignByRole',
-    headerName: 'Latest Signed By Role',
-    headerTooltip: 'Latest Signed Role',
+    headerName: domainNames.lastSignedByRole,
+    headerTooltip: domainNames.lastSignedByRole,
     valueGetter: (pkg) => {
       const ranking = pkg.data?.latestSignedRanking ?? '';
       const role = pkg.data?.latestSignedRole ?? '';
-      return (ranking || role) ? `${ranking}: ${role}` : '';
+      return ranking || role ? `${ranking}: ${role}` : '';
     },
     enableRowGroup: true,
     width: 300,
   },
   {
     colId: 'Supplier',
-    headerName: 'Supplier',
-    headerTooltip: 'Supplier',
+    headerName: domainNames.supplier,
+    headerTooltip: domainNames.supplier,
     valueGetter: (pkg) => pkg.data?.supplier,
     width: 150,
   },
   {
     colId: 'Types',
-    headerName: 'Types',
-    headerTooltip: 'Types',
+    headerName: domainNames.types,
+    headerTooltip: domainNames.types,
     valueGetter: (pkg) => pkg.data?.swcrTypes,
     enableRowGroup: true,
     width: 150,
   },
   {
     colId: 'Priority',
-    headerName: 'Priority',
-    headerTooltip: 'Priority',
+    headerName: domainNames.priority,
+    headerTooltip: domainNames.priority,
     valueGetter: (pkg) => pkg.data?.priority,
     enableRowGroup: true,
     width: 150,
   },
   {
     colId: 'AutomationControlSystem',
-    headerName: 'Control System',
-    headerTooltip: 'Control System',
+    headerName: domainNames.automationControlSystem,
+    headerTooltip: domainNames.automationControlSystem,
     valueGetter: (pkg) => pkg.data?.automationControlSystem,
     width: 200,
   },
   {
     colId: 'Node',
-    headerName: 'Node',
-    headerTooltip: 'Node',
+    headerName: domainNames.nodeIdentifier,
+    headerTooltip: domainNames.nodeIdentifier,
     valueGetter: (pkg) => pkg.data?.nodeIdentifier,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
       return <StyledMonospace>{props.data?.nodeIdentifier}</StyledMonospace>;

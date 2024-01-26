@@ -22,6 +22,7 @@ import {
   ColumnsToolPanelModule,
 } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { domainNames } from 'libs/shared/dist/src';
 
 export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState> => {
   const client = useHttpClient('cc-api');
@@ -57,8 +58,8 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
 const columnDefinitions: ColDef<Punch>[] = [
   {
     colId: 'Punch',
-    headerName: 'Punch',
-    headerTooltip: 'Punch',
+    headerName: domainNames.punch,
+    headerTooltip: domainNames.punch,
     valueGetter: (pkg) => pkg.data?.punchItemNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.punchUrl || !props.data?.punchItemNo) {
@@ -80,8 +81,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Category',
-    headerName: 'Category',
-    headerTooltip: 'Category',
+    headerName: domainNames.category,
+    headerTooltip: domainNames.category,
     valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.value) {
@@ -101,8 +102,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Status',
-    headerName: 'Status',
-    headerTooltip: 'Status',
+    headerName: domainNames.status,
+    headerTooltip: domainNames.status,
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.value) {
@@ -122,26 +123,26 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'FormType',
-    headerName: 'Form Type',
-    headerTooltip: 'Form Type',
+    headerName: domainNames.formType,
+    headerTooltip: domainNames.formType,
     valueGetter: (pkg) => pkg.data?.formularType,
   },
   {
     colId: 'Discipline',
-    headerName: 'Discipline',
-    headerTooltip: 'Discipline',
+    headerName: domainNames.discipline,
+    headerTooltip: domainNames.discipline,
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
     colId: 'PLSorting',
-    headerName: 'PL Sorting',
-    headerTooltip: 'PL Sorting',
+    headerName: domainNames.punchSorting,
+    headerTooltip: domainNames.punchSorting,
     valueGetter: (pkg) => pkg.data?.sorting,
   },
   {
     colId: 'PLType',
-    headerName: 'PL Type',
-    headerTooltip: 'PL Type',
+    headerName: domainNames.punchType,
+    headerTooltip: domainNames.punchType,
     valueGetter: (pkg) => pkg.data?.type,
   },
   {
@@ -155,20 +156,20 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'RaisedByOrg',
-    headerName: 'Raised by org',
-    headerTooltip: 'Raised by Org',
+    headerName: domainNames.raisedBy,
+    headerTooltip: domainNames.raisedBy,
     valueGetter: (pkg) => pkg.data?.raisedBy,
   },
   {
     colId: 'ClearingByOrg',
-    headerName: 'Clearing by org',
-    headerTooltip: 'Cleared by Org',
+    headerName: domainNames.clearingBy,
+    headerTooltip: domainNames.clearingBy,
     valueGetter: (pkg) => pkg.data?.clearedBy,
   },
   {
     colId: 'Priority',
-    headerName: 'Priority',
-    headerTooltip: 'Priority',
+    headerName: domainNames.priority,
+    headerTooltip: domainNames.priority,
     valueGetter: (o) => o.data?.priority,
   },
   {
@@ -182,8 +183,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Verified',
-    headerName: 'Verified',
-    headerTooltip: 'Verified',
+    headerName: domainNames.verified,
+    headerTooltip: domainNames.verified,
     valueGetter: (pkg) => pkg.data?.verifiedAtDate,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
@@ -191,8 +192,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'HandoverPlan',
-    headerName: 'Handover plan',
-    headerTooltip: 'Handover Plan',
+    headerName: domainNames.handoverPlan,
+    headerTooltip: domainNames.handoverPlan,
     valueGetter: (pkg) => pkg.data?.handoverPlan,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
@@ -200,8 +201,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'FormType',
-    headerName: 'Form type',
-    headerTooltip: 'Form Type',
+    headerName: domainNames.formType,
+    headerTooltip: domainNames.formType,
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
@@ -211,8 +212,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Tag',
-    headerName: 'Tag',
-    headerTooltip: 'Tag',
+    headerName: domainNames.tag,
+    headerTooltip: domainNames.tag,
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.tagUrl || !props.data?.tagNo) return null;
@@ -222,8 +223,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'CommPkg',
-    headerName: 'Comm Pkg',
-    headerTooltip: 'Commissioning Package',
+    headerName: domainNames.commPkg,
+    headerTooltip: domainNames.commPkg,
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.commissioningPackageUrl || !props.data.commissioningPackageNo) {
@@ -241,8 +242,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'WorkOrder',
-    headerName: 'Workorder',
-    headerTooltip: 'Workorder',
+    headerName: domainNames.workorder,
+    headerTooltip: domainNames.workorder,
     valueGetter: (pkg) => pkg.data?.workOrderNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.workOrderNo || !props.data.workorderUrl) return null;
@@ -252,14 +253,14 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'MaterialRequired',
-    headerName: 'Material required',
-    headerTooltip: 'Material Required',
+    headerName: domainNames.materialRequired,
+    headerTooltip: domainNames.materialRequired,
     valueGetter: (pkg) => (pkg.data?.materialRequired ? 'Yes' : 'No'),
   },
   {
     colId: 'MaterialEstimate',
-    headerName: 'Material estimate',
-    headerTooltip: 'Material Estimate',
+    headerName: domainNames.materialEstimate,
+    headerTooltip: domainNames.materialEstimate,
     valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
