@@ -5,6 +5,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCell,
+  domainNames,
   statusColorMap,
 } from '@cc-components/shared';
 
@@ -62,7 +63,7 @@ export const useTableConfig = (
 
 const columnDefinitions: ColDef<HandoverPackage>[] = [
   {
-    headerName: 'Comm pkg',
+    headerName: domainNames.commPkg,
     colId: 'CommPkgNo',
     headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
@@ -86,8 +87,8 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 300,
   },
   {
-    headerName: 'Disciplines',
-    headerTooltip: 'Disciplines',
+    headerName: domainNames.mcDisciplines,
+    headerTooltip: domainNames.mcDisciplines,
     valueGetter: (pkg) => pkg.data?.mcDisciplines,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       return <DescriptionCell description={props.value} />;
@@ -95,9 +96,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 150,
   },
   {
-    headerName: 'MC status',
+    headerName: domainNames.mcStatus,
     colId: 'MCStatus',
-    headerTooltip: 'Mechanical Completion Status',
+    headerTooltip: domainNames.mcStatus,
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
       if (props.node.group) return null;
@@ -114,9 +115,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 150,
   },
   {
-    headerName: 'Comm status',
+    headerName: domainNames.commPkgStatus,
     colId: 'CommStatus',
-    headerTooltip: 'Commissioning Status',
+    headerTooltip: domainNames.commPkgStatus,
     valueGetter: (pkg) => pkg.data?.commissioningPackageStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
       if (props.node.group) return null;
@@ -133,54 +134,54 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 150,
   },
   {
-    headerName: 'Responsible',
-    colId: 'Responsible',
-    headerTooltip: 'Responsible',
+    headerName: domainNames.responsible,
+    colId: domainNames.responsible,
+    headerTooltip: domainNames.responsible,
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: true,
     minWidth: 150,
   },
   {
-    headerName: 'Area',
-    colId: 'Area',
-    headerTooltip: 'Area',
+    headerName: domainNames.area,
+    colId: domainNames.area,
+    headerTooltip: domainNames.area,
     valueGetter: (pkg) => pkg.data?.location,
     enableRowGroup: true,
     minWidth: 135,
   },
   {
-    headerName: 'System',
-    colId: 'System',
-    headerTooltip: 'System',
+    headerName: domainNames.system,
+    colId: domainNames.system,
+    headerTooltip: domainNames.system,
     valueGetter: (pkg) => pkg.data?.system,
     enableRowGroup: true,
     minWidth: 150,
   },
   {
-    headerName: 'Priority 1',
+    headerName: domainNames.priority1,
     colId: 'Priority1',
-    headerTooltip: 'Priority 1',
+    headerTooltip: domainNames.priority1,
     valueGetter: (pkg) => pkg.data?.priority1,
     minWidth: 150,
   },
   {
-    headerName: 'Priority 2',
+    headerName: domainNames.priority2,
     colId: 'Priority2',
-    headerTooltip: 'Priority 2',
+    headerTooltip: domainNames.priority2,
     valueGetter: (pkg) => pkg.data?.priority2,
     minWidth: 150,
   },
   {
-    headerName: 'Priority 3',
+    headerName: domainNames.priority3,
     colId: 'Priority3',
-    headerTooltip: 'Priority 3',
+    headerTooltip: domainNames.priority3,
     valueGetter: (pkg) => pkg.data?.priority3,
     minWidth: 150,
   },
   {
-    headerName: 'Planned RFC',
+    headerName: domainNames.rfcPlannedDate,
     colId: 'PlannedRFC',
-    headerTooltip: 'Planned RFC',
+    headerTooltip: domainNames.rfcPlannedDate,
     valueGetter: (pkg) => pkg.data?.rfrcPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
@@ -189,9 +190,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 180,
   },
   {
-    headerName: 'Forecast RFC',
+    headerName: domainNames.rfcForecastDate,
     colId: 'ForecastRFC',
-    headerTooltip: 'Forecast RFC',
+    headerTooltip: domainNames.rfcForecastDate,
     valueGetter: (pkg) => pkg.data?.rfcForecastDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
@@ -200,9 +201,9 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 180,
   },
   {
-    headerName: 'Planned RFO',
+    headerName: domainNames.rfoPlannedDate,
     colId: 'PlannedRFO',
-    headerTooltip: 'Planned RFO',
+    headerTooltip: domainNames.rfoPlannedDate,
     valueGetter: (pkg) => pkg.data?.rfoPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
