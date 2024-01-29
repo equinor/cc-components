@@ -18,6 +18,7 @@ import {
   ICellRendererProps,
 } from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
+import { domainNames } from '@cc-components/shared';
 
 export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState> => {
   const client = useHttpClient('cc-api');
@@ -95,9 +96,9 @@ const columnDefinitions: ColDef<Loop>[] = [
     width: 350,
   },
   {
-    colId: 'System',
-    headerName: 'System',
-    headerTooltip: 'System',
+    colId: domainNames.system,
+    headerName: domainNames.system,
+    headerTooltip: domainNames.system,
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => (
       <StyledMonospace>{props.data?.system}</StyledMonospace>
@@ -106,8 +107,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CommPkgNo',
-    headerName: 'Comm Pkg',
-    headerTooltip: 'Commissioning Package Number',
+    headerName: domainNames.commPkg,
+    headerTooltip: domainNames.commPkg,
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (props.data?.commissioningPackageUrl && props.data.commissioningPackageNo) {
@@ -125,8 +126,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'MCPkgNo',
-    headerName: 'MC Pkg',
-    headerTooltip: 'Mechanical Completion Package Number',
+    headerName: domainNames.mcPkg,
+    headerTooltip: domainNames.mcPkg,
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (
@@ -147,8 +148,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Priority1',
-    headerName: 'Priority 1',
-    headerTooltip: 'Priority 1',
+    headerName: domainNames.priority1,
+    headerTooltip: domainNames.priority1,
     valueGetter: (pkg) => pkg.data?.priority1,
     enableRowGroup: false,
   },
@@ -174,8 +175,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'CLStatus',
-    headerName: 'Checklist status',
-    headerTooltip: 'Checklist status',
+    headerName: domainNames.checklistStatus,
+    headerTooltip: domainNames.checklistStatus,
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Loop, Status | null>) => {
       return (
@@ -193,15 +194,15 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Responsible',
-    headerName: 'Responsible',
-    headerTooltip: 'Responsible',
+    headerName: domainNames.responsible,
+    headerTooltip: domainNames.responsible,
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: false,
   },
   {
     colId: 'Location',
-    headerName: 'Location',
-    headerTooltip: 'Location',
+    headerName: domainNames.location,
+    headerTooltip: domainNames.location,
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <StyledMonospace>{props.data?.location}</StyledMonospace>;
@@ -210,8 +211,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'FormularType',
-    headerName: 'Form type',
-    headerTooltip: 'Formular type',
+    headerName: domainNames.formType,
+    headerTooltip: domainNames.formType,
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
@@ -223,7 +224,7 @@ const columnDefinitions: ColDef<Loop>[] = [
   {
     colId: 'SignedDate',
     headerName: 'Signed',
-    headerTooltip: 'Singed Date',
+    headerTooltip: 'Signed Date',
     valueGetter: (pkg) => pkg.data?.signedDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
@@ -268,30 +269,11 @@ const columnDefinitions: ColDef<Loop>[] = [
       return <DateCell dateString={props.value} />;
     },
   },
-  // {
-  //   colId: "WoActualCompletionDate",
-  //   headerName: 'Actual MC complete',
-  //   valueGetter: (pkg) => pkg.data?.woActualCompletionDate,
-  //   cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
-  //     return <DateCell dateString={props.value} />;
-  //   },
-  //   width: 150,
-  // },
   {
     colId: 'RemainingManHours',
-    headerName: 'Rem mhrs',
-    headerTooltip: 'Remaining Manhours',
+    headerName: domainNames.remainingManHours,
+    headerTooltip: domainNames.remainingManHours,
 
     valueGetter: (pkg) => pkg.data?.remainingManHours,
-    // valueFormatter: (pkg) => pkg.context.maxRemHrs,
-    // cellRenderer: (props: ICellRendererProps<Loop, number | null>) => {
-    //   if (props.node.group) return null;
-    //   return (
-    //     <EstimateCell
-    //       current={Number(props.value ?? '0')}
-    //       max={(props.valueFormatted as unknown as number) ?? 0}
-    //     />
-    //   );
-    // },
   },
 ];

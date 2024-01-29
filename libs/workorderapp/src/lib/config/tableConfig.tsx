@@ -5,6 +5,7 @@ import {
   StatusCell,
   StyledMonospace,
   YearAndWeekCell,
+  domainNames,
 } from '@cc-components/shared';
 import {
   defaultGridOptions,
@@ -53,8 +54,8 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
 const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   {
     colId: 'WorkOrderNumber',
-    headerName: 'Workorder',
-    headerTooltip: 'Workorder Number',
+    headerName: domainNames.workorder,
+    headerTooltip: domainNames.workorder,
     valueGetter: (pkg) => pkg.data?.workOrderNumber,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
       if (!props.data?.workorderUrl) {
@@ -77,20 +78,20 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'DisciplineCode',
-    headerName: 'Discipline',
-    headerTooltip: 'Discipline',
+    headerName: domainNames.discipline,
+    headerTooltip: domainNames.discipline,
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
     colId: 'MilestoneCode',
-    headerName: 'Milestone',
-    headerTooltip: 'Milestone',
+    headerName: domainNames.milestone,
+    headerTooltip: domainNames.milestone,
     valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
     colId: 'JobStatus',
-    headerName: 'Job status',
-    headerTooltip: 'Job Status',
+    headerName: domainNames.jobStatus,
+    headerTooltip: domainNames.jobStatus,
     valueGetter: (pkg) => pkg.data?.jobStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
       return <StyledMonospace>{props.data?.jobStatus}</StyledMonospace>;
@@ -98,8 +99,8 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'MaterialStatus',
-    headerName: 'Material',
-    headerTooltip: 'Material Status',
+    headerName: domainNames.materialStatus,
+    headerTooltip: domainNames.materialStatus,
     valueGetter: (pkg) => pkg.data?.materialStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (props.value) {
@@ -117,8 +118,8 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'HoldBy',
-    headerName: 'Hold',
-    headerTooltip: 'Hold By',
+    headerName: domainNames.hold,
+    headerTooltip: domainNames.hold,
     valueGetter: (pkg) => pkg.data?.holdBy,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (props.value) {
@@ -153,52 +154,10 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
       return <YearAndWeekCell dateString={props.value ?? null} />;
     },
   },
-  // {
-  //   headerName: 'Est mhr',
-  //   valueFormatter: (pkg) => pkg.context.maxEstHrs,
-  //   valueGetter: (pkg) => pkg.data?.estimatedHours,
-  //   cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-  //     if (props.node.group) return null;
-  //     return (
-  //       <EstimateCell
-  //         current={Number(props.value ?? '0')}
-  //         max={(props.valueFormatted as unknown as number) ?? 0}
-  //       />
-  //     );
-  //   },
-  // },
-  // {
-  //   headerName: 'Exp mhr',
-  //   valueFormatter: (pkg) => pkg.context.maxExpHrs,
-  //   valueGetter: (pkg) => pkg.data?.expendedHours,
-  //   cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-  //     if (props.node.group) return null;
-  //     return (
-  //       <EstimateCell
-  //         current={Number(props.value ?? '0')}
-  //         max={(props.valueFormatted as unknown as number) ?? 0}
-  //       />
-  //     );
-  //   },
-  // },
-  // {
-  //   headerName: 'Rem mhr',
-  //   valueFormatter: (pkg) => pkg.context.maxRemHrs,
-  //   valueGetter: (pkg) => pkg.data?.remainingHours,
-  //   cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
-  //     if (props.node.group) return null;
-  //     return (
-  //       <EstimateCell
-  //         current={Number(props.value ?? '0')}
-  //         max={(props.valueFormatted as unknown as number) ?? 0}
-  //       />
-  //     );
-  //   },
-  // },
   {
     colId: 'ProjectProgress',
-    headerName: 'Progress',
-    headerTooltip: 'Project Progress',
+    headerName: domainNames.progress,
+    headerTooltip: domainNames.progress,
     valueGetter: (pkg) => pkg.data?.projectProgress,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value || Number(props.value) === 0) {
@@ -210,8 +169,8 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'MCStatus',
-    headerName: 'MC',
-    headerTooltip: 'Mechanical Completion Status',
+    headerName: domainNames.mcStatus,
+    headerTooltip: domainNames.mcStatus,
     valueGetter: (pkg) => pkg.data?.mccrStatus,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value) return null;
@@ -228,14 +187,14 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'WorkBreakdownStructure',
-    headerName: 'WBS',
-    headerTooltip: 'Work breakdown structure code',
+    headerName: domainNames.wbs,
+    headerTooltip: domainNames.wbs,
     valueGetter: (pkg) => pkg.data?.workBreakdownStructure,
   },
   {
     colId: 'Systems',
-    headerName: 'Systems',
-    headerTooltip: 'Systems',
+    headerName: domainNames.systems,
+    headerTooltip: domainNames.systems,
     valueGetter: (pkg) => pkg.data?.systems,
   },
 ];

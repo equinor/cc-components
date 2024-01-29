@@ -25,7 +25,7 @@ type SwcrProps = {
 };
 
 export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) => {
-  const { signatures, signaturesFetching, error } = useSignatures(id);
+  const { data: signatures, isLoading: signaturesFetching, error } = useSignatures(id);
   const [activeTab, setActiveTab] = useState(0);
   const handleChange = (index: number) => {
     setActiveTab(index);
