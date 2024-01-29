@@ -1,4 +1,4 @@
-import { pipetestStatusColormap } from '@cc-components/shared/mapping';
+import { colorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import {
@@ -9,6 +9,7 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { Pipetest } from 'libs/pipingshared/dist/src';
+import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
 
 const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,30 +54,36 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
         >
           <StyledItemText>{displayName.replace('@PIPETEST-', '')}</StyledItemText>
           <StyledStatusCircles
-            mcColor={null}
-            commColor={null}
-          />
+            mcColor={
+              data.mechanicalCompletionStatus
+                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
+                : null
+            }
+            commColor={
+              data.commissioningStatus
+                ? colorMap[data.commissioningStatus as PackageStatus]
+                : null
+            } />
         </StyledItemWrapper>
 
         {columnExpanded && (
           <StyledDescription title={data.id ?? ''}>
-            {data.id} // TODO: Add description
+            {data.description}
           </StyledDescription>
         )}
       </StyledRoot>
 
-      {/* {isOpen && (
+       {isOpen && (
         <PopoverWrapper
           isOpen={isOpen}
           rowStart={rowStart}
           columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
-          popoverTitle={`${data.loopNo}`}
-        >
-          <PopoverContent loop={data} />
-        </PopoverWrapper>
-      )} */}
+          popoverTitle={`${data.description}`}
+          close={() => setIsOpen(false)}
+        />
+      )} 
     </>
   );
 };
