@@ -13,7 +13,7 @@ export const checklistColumns: ColDef<Checklist>[] = [
     headerName: 'Tag No',
     valueGetter: (item) => item.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
-      return <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
+      return <LinkCell url={props.data?.tagUrl ?? ''} urlText={props.value ?? ''} />
     },
   },
   {
@@ -24,7 +24,7 @@ export const checklistColumns: ColDef<Checklist>[] = [
     headerName: 'Formular type',
     valueGetter: (item) => item.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
-      return <LinkCell url={"TODO"} urlText={props.value ?? ''} />
+      return <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
     },
   },
   {
