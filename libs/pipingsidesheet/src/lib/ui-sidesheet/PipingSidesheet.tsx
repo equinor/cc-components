@@ -1,12 +1,12 @@
 import { Pipetest } from '@cc-components/pipingshared';
-import { lazy, useState } from 'react';
+import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { WorkorderBase, WorkorderTab } from '@cc-components/shared/sidesheet';
 import { StatusCircle } from '@cc-components/shared/common';
 import { pipetestStatusColormap } from '@cc-components/shared/mapping';
-import { DateCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { DateCell } from '@cc-components/shared';
 
 import {
   BannerItem,
@@ -15,7 +15,8 @@ import {
   StyledSideSheetContainer,
   CustomStyledTabs,
   CustomStyledPanels,
-  TabTitle
+  TabTitle,
+  SidesheetSkeleton
 } from '@cc-components/sharedcomponents';
 
 import { InsultaionTab } from './InsultaionTab';
@@ -24,6 +25,7 @@ import { ChecklistTab } from './ChecklistTab';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { useGetChecklists } from '../utils-sidesheet/useGetChecklists';
 import { useGetPipetest } from '../utils-sidesheet/usePipetest';
+import { useGetInsulationTags } from '../utils-sidesheet/useGetInsulationTags';
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -37,7 +39,6 @@ export const StyledTabsList = styled(Tabs.List)`
     width: 0;
     height: 0;
   }
-
   scroll-behavior: smooth;
 `;
 
@@ -47,20 +48,16 @@ type PipingProps = {
   close: VoidFunction;
 };
 
-export const PipingSidesheet = (props: PipingProps) => {
-  const { id, item, close } = props;
+const PipingSidesheetContent = (props: Required<PipingProps>) => {
+  const { item, close } = props;
 
   const [activeTab, setActiveTab] = useState(0);
 
-  const { data: pipetest, isLoading: isLoadingPipetest, error: errorPipetest } = useGetPipetest(id, item)
+  const { data : workorders, isLoading: isLoadingWorkorders, error: errorWorkorders } = useGetWorkorders(item.pipetestMc);
 
-  const { data : workorders, isLoading: isLoadingWorkorders, error: errorWorkorders } = useGetWorkorders(pipetest?.pipetestMc);
+  const { data: checklists, isLoading: isLoadingChecklists, error: errorChecklists } = useGetChecklists(item.pipetestMc);
 
-  const { data: checklists, isLoading: isLoadingChecklists, error: errorChecklists } = useGetChecklists(pipetest?.pipetestMc);
-
-  // TODO: Fetch Insulation Boxes
-
-  console.log({workorders, checklists, isLoadingWorkorders, isLoadingChecklists});
+  const { data: insulationTags, isLoading: isLoadingInsulationTags, error: errorInsulationTags } = useGetInsulationTags(item.pipetestMc);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -69,8 +66,8 @@ export const PipingSidesheet = (props: PipingProps) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${pipetest?.pipetestMc}, ${pipetest?.description}` || ''}
-        onClose={props.close}
+        title={`${item.pipetestMc}, ${item.description}` || ''}
+        onClose={close}
         applicationTitle="Pipetest"
       />
       <StyledBanner>
@@ -91,7 +88,7 @@ export const PipingSidesheet = (props: PipingProps) => {
         */} 
         <BannerItem
           title="RFC"
-          value={pipetest?.rfCPlannedForecastDate ? <DateCell dateString={pipetest?.rfCPlannedForecastDate} /> : 'N/A'}
+          value={item.rfCPlannedForecastDate ? <DateCell dateString={item.rfCPlannedForecastDate} /> : 'N/A'}
         />
       </StyledBanner>
       <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
@@ -100,19 +97,17 @@ export const PipingSidesheet = (props: PipingProps) => {
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
               Work orders 
-              <TabTitle isLoading={false} data={workorders} />
+              <TabTitle isLoading={isLoadingWorkorders} data={workorders} />
             </Tabs.Tab>
             <Tabs.Tab>
               Insulation 
-              <TabTitle isLoading={false} data={[]} />
-                { /*
-                  data={[ ...(pipetest.pipeInsulationBoxes ?? []), ...(pipetest.insulationBoxes ?? []),
-                  ]}
-              */}
+              <TabTitle 
+                isLoading={isLoadingInsulationTags} 
+                data={insulationTags ? [...insulationTags.boxInsulationTags, ...insulationTags.pipeInsulationTags] : []} />
             </Tabs.Tab>
             <Tabs.Tab>
               Checklists 
-              <TabTitle isLoading={false} data={checklists} />
+              <TabTitle isLoading={isLoadingChecklists} data={checklists} />
             </Tabs.Tab>
             <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
@@ -127,10 +122,9 @@ export const PipingSidesheet = (props: PipingProps) => {
           </Tabs.Panel>
           <Tabs.Panel>
             <InsultaionTab
-              error={null}
-              isFetching={false}
-              pipeInsulations={[]} 
-              boxInsulations={[]} />
+              error={errorInsulationTags}
+              isFetching={isLoadingInsulationTags}
+              insulationTags={insulationTags} />
           </Tabs.Panel>
           <Tabs.Panel>
             <ChecklistTab
@@ -143,4 +137,21 @@ export const PipingSidesheet = (props: PipingProps) => {
       </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
+};
+
+
+export const PipingSidesheet = (props: PipingProps) => {
+  const { id, item, close } = props;
+
+  const { data, isLoading, error } = useGetPipetest(id, item)
+
+  if (isLoading) {
+    return <SidesheetSkeleton close={close} />;
+  }
+
+  if (!data || error) {
+    return <div>Failed to get Pipetest with id: {id}</div>;
+  }
+
+  return (<PipingSidesheetContent id={id} item={data} close={close} />);
 };

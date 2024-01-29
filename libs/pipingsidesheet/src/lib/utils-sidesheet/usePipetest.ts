@@ -19,7 +19,8 @@ export const useGetPipetest = (pipetestId: string, initialData?: Pipetest) => {
         },
         {
           suspense: true,
-          initialData: initialData,
+          initialData: initialData ?? undefined,
+          useErrorBoundary: false
         }
     );
   

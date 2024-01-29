@@ -31,7 +31,9 @@ export type Pipetest = {
   identifier: string;
   identifierId: string;
   projectDescription: string;
-  projectSchema: string;
+  projectSchema?: string;
+  commissioningPackageUrl?: string;
+  mechanicalCompletionUrl?: string;
 };
 
 /*
@@ -69,14 +71,17 @@ export type Checklist = {
   checklistUrl: string;
 };
 
+export type InsulationTagResponse = {
+  pipeInsulationTags: InsulationTag[];
+  boxInsulationTags: InsulationTag[];
+}
 
-export type InsulationBox = {
-  objectNo: string;
-  objectName: string;
-  objectStatusName: string;
-  objectStatus: string;
-  object3dReference: string;
-  procosysStatus: string;
+export type InsulationTag = {
+  tagNo: string;
+  description: string;
+  status: string;
+  statusName: string;
+  checklistStatus: string;
 };
 
 export type Circuit = {
