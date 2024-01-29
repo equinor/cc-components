@@ -36,29 +36,6 @@ export type Pipetest = {
   mechanicalCompletionUrl?: string;
 };
 
-/*
-export type Checklist = {
-  tagNo: string;
-  responsible: string;
-  formularType: string;
-  formularGroup: string;
-  status: string;
-  revision?: string;
-  test?: string;
-  isHeatTrace?: boolean;
-  workflowStepText?: string | undefined;
-  stepName?: string;
-  c01Planned?: string;
-  c01Forecast?: string;
-  m03Planned?: string;
-  m03Forecast?: string;
-  m04Actual?: string;
-  underline?: string;
-  signedDate?: string;
-  worstPipetestStep?: PipetestStep;
-};
-*/
-
 export type Checklist = {
   checklistId: string;
   checklistUrlId: string;
@@ -69,6 +46,7 @@ export type Checklist = {
   responsible: string;
   status: string;
   checklistUrl: string;
+  tagUrl: string;
 };
 
 export type InsulationTagResponse = {
