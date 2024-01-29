@@ -46,7 +46,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
 const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Pipetest',
-    valueGetter: (element) => element.data?.id,
+    valueGetter: (element) => element.data?.pipetestMc,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
