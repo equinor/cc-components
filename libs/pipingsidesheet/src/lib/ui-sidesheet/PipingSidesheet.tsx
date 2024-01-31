@@ -80,7 +80,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     data: electricalNetworks,
     isLoading: isLoadingElecticalNetworks,
     error: errorElectricalNetworks,
-  } = useElectricalNetworks(item.facility, ['HT216013A', 'HT216013B', 'HT216378']);
+  } = useElectricalNetworks(item.facility, []);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -151,7 +151,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
         <CustomStyledPanels>
           <Tabs.Panel>
             <ElecticalNetworkTab
-              itemNo="HT216013B" // TODO: Use HT Calbe link when ready
+              itemNo={item.id} // TODO: Use HT Calbe link when ready
               networks={electricalNetworks}
               isFetching={isLoadingElecticalNetworks}
               error={errorElectricalNetworks}

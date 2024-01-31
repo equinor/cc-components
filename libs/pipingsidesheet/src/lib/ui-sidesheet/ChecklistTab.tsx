@@ -8,6 +8,7 @@ type ChecklistTabProps = {
   isFetching: boolean;
   error: Error | null;
 };
+
 export const ChecklistTab = ({
   checklists,
   error,

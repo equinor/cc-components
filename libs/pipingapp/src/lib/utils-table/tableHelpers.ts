@@ -1,5 +1,9 @@
-import { Checklist } from '@cc-components/pipingshared';
+export const generateCommaSeperatedString = (array: string[], length: number = 3): string => {
+  const value = array.slice(0, length).join(', ');
 
-export function getHTList(checkLists: Checklist[]): string[] {
-  return checkLists.filter((x) => x).map((ht: Checklist) => ht.tagNo);
-}
+  if (array.length > length) {
+    return `${value} (+${array.length - length})`;
+  }
+
+  return value;
+};
