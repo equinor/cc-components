@@ -1,37 +1,31 @@
 import { PipetestStep } from './drcEnums';
 
 export type Pipetest = {
-  id:string;
-  description: string
-  pipetestMc: string;
+  id: string;
   pipetestType: string;
   facility: string;
   project: string;
+  description: string;
   rfCPlannedForecastDate: string;
-  rfOPlannedForecastDate: string;
   m03PlannedForecastDate: string;
   signedDate: string;
   mechanicalCompletionUrlId: string;
   mechanicalCompletionResponsible: string;
-  mechanicalCompletionPhase: string;
   mechanicalCompletionStatus: string;
   mechanicalCompletionId: string;
-  mechanicalCompletionArea: string;
-  mechanicalCompletionDiscipline: string;
-  commissioningPackageNo: string;
-  commissioningPackageId: string;
   commissioningPackageUrlId: string;
   commissioningResponsible: string;
-  commissioningPhase: string;
-  commissioningArea: string;
   commissioningStatus: string;
+  dueDateTimePeriod: string;
+  isOverdue: string;
+  checklistStep: string;
+  formStatus: string;
+  checklistStepSequence: number;
   priority1: string;
-  priority2: string;
-  priority3: string;
-  identifier: string;
-  identifierId: string;
   projectDescription: string;
   projectSchema?: string;
+  heatTraceCableId: string;
+  heatTraceCableNo: string;
   commissioningPackageUrl?: string;
   mechanicalCompletionUrl?: string;
 };
