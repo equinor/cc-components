@@ -10,6 +10,7 @@ import {
 } from './garden.styles';
 import { Pipetest } from 'libs/pipingshared/dist/src';
 import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
+import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
 
 const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +35,8 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
+  const colors = getPipetestStatusColors(data);
+
   return (
     <>
       <StyledRoot>
@@ -47,7 +50,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
-          backgroundColor={'green'}
+          backgroundColor={colors.backgroundColor}
           onClick={onClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
@@ -63,17 +66,16 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
               data.commissioningStatus
                 ? colorMap[data.commissioningStatus as PackageStatus]
                 : null
-            } />
+            }
+          />
         </StyledItemWrapper>
 
         {columnExpanded && (
-          <StyledDescription title={data.id ?? ''}>
-            {data.description}
-          </StyledDescription>
+          <StyledDescription title={data.id ?? ''}>{data.description}</StyledDescription>
         )}
       </StyledRoot>
 
-       {isOpen && (
+      {isOpen && (
         <PopoverWrapper
           isOpen={isOpen}
           rowStart={rowStart}
@@ -83,7 +85,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
           popoverTitle={`${data.description}`}
           close={() => setIsOpen(false)}
         />
-      )} 
+      )}
     </>
   );
 };

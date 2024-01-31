@@ -1,5 +1,5 @@
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { Checklist, Pipetest } from '@cc-components/pipingshared';
+import { Pipetest } from '@cc-components/pipingshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
@@ -11,8 +11,7 @@ import {
   StyledMonospace,
   useHttpClient,
 } from '@cc-components/shared';
-import { generateCommaSeperatedStringArrayColumn } from '../utils-table/generateCommaSeperatedStringArrayColumn';
-import { getHTList } from '../utils-table/tableHelpers';
+
 
 export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterState> => {
   const client = useHttpClient();
