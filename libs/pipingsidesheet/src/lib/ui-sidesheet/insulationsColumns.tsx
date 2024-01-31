@@ -11,27 +11,27 @@ import {
 export const insulationsColumns: ColDef<InsulationTag>[] = [
   {
     headerName: 'Pipe insulations',
-    valueGetter: (pkg) => pkg.data?.tagNo,
+    valueGetter: (element) => element.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<InsulationTag>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
   {
     headerName: 'Description',
-    valueGetter: (pkg) => pkg.data?.description,
+    valueGetter: (element) => element.data?.description,
     cellRenderer: (props: ICellRendererProps<InsulationTag>) => {
       return <DescriptionCell description={props.value} />;
     },
   },
   {
     headerName: 'Checklist',
-    valueGetter: (pkg) => pkg.data?.checklistStatus,
+    valueGetter: (element) => element.data?.status,
     cellRenderer: (props: ICellRendererProps<InsulationTag>) => {
-      if (!props.data?.checklistStatus) return null;
+      if (!props.data?.status) return null;
       return (
         <StatusCircle
-          content={props.data.checklistStatus}
-          statusColor={statusColorMap[props.data.checklistStatus as BaseStatus]}
+          content={props.data?.status}
+          statusColor={statusColorMap[props.data.status as BaseStatus]}
         />
       );
     },

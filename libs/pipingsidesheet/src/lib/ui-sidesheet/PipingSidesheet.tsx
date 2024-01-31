@@ -4,7 +4,12 @@ import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
-import { DateCell } from '@cc-components/shared';
+import {
+  BaseStatus,
+  DateCell,
+  StatusCircle,
+  pipetestStatusColormap,
+} from '@cc-components/shared';
 
 import {
   BannerItem,
@@ -57,19 +62,19 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     data: workorders,
     isLoading: isLoadingWorkorders,
     error: errorWorkorders,
-  } = useGetWorkorders(item.pipetestMc);
+  } = useGetWorkorders(item.id);
 
   const {
     data: checklists,
     isLoading: isLoadingChecklists,
     error: errorChecklists,
-  } = useGetChecklists(item.pipetestMc);
+  } = useGetChecklists(item.id);
 
   const {
     data: insulationTags,
     isLoading: isLoadingInsulationTags,
     error: errorInsulationTags,
-  } = useGetInsulationTags(item.pipetestMc);
+  } = useGetInsulationTags(item.id);
 
   const {
     data: electricalNetworks,
@@ -84,24 +89,25 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${item.pipetestMc}, ${item.description}` || ''}
+        title={`${item.id}, ${item.description}` || ''}
         onClose={close}
         applicationTitle="Pipetest"
       />
       <StyledBanner>
-        <BannerItem title="Current step" value="TODO" /> {/* value={pipetest.step} */}
-        <BannerItem title="Checklist status" value="TODO" />
-        {/* 
-        TODO:
-                    pipetest.shortformCompletionStatus ? (
+        <BannerItem title="Current step" value={item.checklistStep} />
+        <BannerItem
+          title="Checklist status"
+          value={
+            item.formStatus ? (
               <StatusCircle
-                content={pipetest.shortformCompletionStatus}
-                statusColor={pipetestStatusColormap[pipetest.shortformCompletionStatus]}
+                content={item.formStatus}
+                statusColor={pipetestStatusColormap[item.formStatus as BaseStatus]}
               />
             ) : (
               'N/A'
             )
-        */}
+          }
+        />
         <BannerItem
           title="RFC"
           value={

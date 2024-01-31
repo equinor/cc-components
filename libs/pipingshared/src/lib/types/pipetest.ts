@@ -52,8 +52,6 @@ export type InsulationTag = {
   tagNo: string;
   description: string;
   status: string;
-  statusName: string;
-  checklistStatus: string;
 };
 
 export type Circuit = {
