@@ -46,7 +46,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
 const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Pipetest',
-    valueGetter: (element) => element.data?.pipetestMc,
+    valueGetter: (element) => element.data?.id,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
@@ -54,32 +54,33 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Description',
     colId: 'description',
-    valueGetter: (pkg) => "TODO",
+    valueGetter: (element) => element.data?.description,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
     width: 300,
   },
-  { headerName: 'Priority1', valueGetter: (pkg) => pkg.data?.priority1 },
+  { headerName: 'Priority1', valueGetter: (element) => element.data?.priority1 },
   {
     headerName: 'Location',
-    valueGetter: (pkg) => pkg.data?.mechanicalCompletionArea,
+    valueGetter: (element) => 'TODO',
+    // valueGetter: (element) => element.data?.mechanicalCompletionArea,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
-  { headerName: 'Checklist status', valueGetter: (item) => "TODO" },
-  { headerName: 'Current step', valueGetter: (item) => "TODO" },
+  { headerName: 'Checklist status', valueGetter: (element) => element.data?.formStatus },
+  { headerName: 'Current step', valueGetter: (element) => element.data?.checklistStep },
   {
     headerName: 'RFC',
-    valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
+    valueGetter: (element) => element.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },
   },
   {
     headerName: 'HT cables',
-    valueGetter: (pkg) => "TODO",
+    valueGetter: (element) => element.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
