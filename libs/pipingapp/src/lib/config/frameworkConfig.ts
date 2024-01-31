@@ -20,7 +20,6 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
       });
     });
   });
-  // Add more config if needed, e.g. enableAgGrid
 
   const envConfig: PipingEnvConfig = c.env.config?.environment as PipingEnvConfig;
 

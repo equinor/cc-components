@@ -1,10 +1,9 @@
-import { PipetestStep } from './drcEnums';
-
 export type Pipetest = {
   id: string;
   pipetestType: string;
   facility: string;
   project: string;
+  location: string;
   description: string;
   rfCPlannedForecastDate: string;
   m03PlannedForecastDate: string;
@@ -46,64 +45,10 @@ export type Checklist = {
 export type InsulationTagResponse = {
   pipeInsulationTags: InsulationTag[];
   boxInsulationTags: InsulationTag[];
-}
+};
 
 export type InsulationTag = {
   tagNo: string;
   description: string;
   status: string;
 };
-
-export type Circuit = {
-  switchBoardTagNo: string;
-  circuitAndStarterTagNo: string;
-  checkLists: Checklist[];
-  worstPipetestStep?: PipetestStep;
-};
-
-export type HeatTrace = Checklist;
-
-export type ChecklistType = {
-  tagNo: string;
-  responsible: string;
-  formularType: string;
-  formularGroup: string;
-  status: string;
-  revision?: string;
-  test?: string;
-  isHeatTrace?: boolean;
-  workflowStepText?: string | undefined;
-};
-
-
-export type InsulationBoxType = {
-  objectNo: string;
-  objectName: string;
-  objectStatusName: string;
-  objectStatus: string;
-  object3dReference: string;
-  procosysStatus: string;
-};
-
-export type Line = {
-  tagNo: string;
-  isCritical: boolean;
-};
-
-export type HTSidesheet = {
-  value: string;
-  items: Pipetest[];
-};
-
-export type HeatTraceGrouped = {
-  htTagNo: string;
-  pipetests: Pipetest[];
-  count: number;
-};
-
-export type CircuitGrouped = {
-  circuitTagNo: string;
-  pipetests: Pipetest[];
-  count: number;
-};
-  
