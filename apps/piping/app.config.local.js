@@ -8,7 +8,8 @@ export default () => ({
     name: name,
   },
   environment: {
-    uri: 'https://localhost:7074',
+    uri: 'https://localhost:7075',
+    electricalUri: 'https://localhost:7074',
     defaultScopes: ['api://ed6de162-dd30-4757-95eb-0ffc8d34fbe0/access_as_user'],
   },
   endpoints: {},
