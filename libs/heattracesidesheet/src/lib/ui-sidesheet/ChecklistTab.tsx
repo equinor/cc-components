@@ -1,5 +1,4 @@
 import { TabTable } from '@cc-components/shared';
-import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { checklistColumns } from './checklistColumns';
 import { HeatTraceChecklist } from 'libs/heattraceshared/dist/src';
 
@@ -14,14 +13,12 @@ export const ChecklistTab = ({
   isFetching,
 }: ChecklistTabProps): JSX.Element => {
   return (
-    <StyledContentWrapper>
-      <TabTable
-        columns={checklistColumns}
-        error={error}
-        isFetching={isFetching}
-        packages={checklists}
-        resourceName="Checklists"
-      />
-    </StyledContentWrapper>
+    <TabTable
+      columns={checklistColumns}
+      error={error}
+      isFetching={isFetching}
+      packages={checklists}
+      resourceName="Checklists"
+    />
   );
 };
