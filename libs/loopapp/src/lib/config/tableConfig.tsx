@@ -157,7 +157,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     colId: 'RfcPlannedForecastDate',
     headerName: 'Planned/Forecast RFC',
     headerTooltip: 'Planned/Forecast RFC',
-    valueGetter: (pkg) => pkg.data?.rfC_Planned_Forecast_Date,
+    valueGetter: (pkg) => pkg.data?.rfcPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
@@ -167,7 +167,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     colId: 'RfoPlannedForecastDate',
     headerName: 'Planned/Forecast RFO',
     headerTooltip: 'Planned/Forecast RFO',
-    valueGetter: (pkg) => pkg.data?.rfO_Planned_Forecast_Date,
+    valueGetter: (pkg) => pkg.data?.rfoPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
