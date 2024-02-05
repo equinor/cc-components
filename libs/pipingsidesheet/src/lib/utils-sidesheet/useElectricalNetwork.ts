@@ -8,7 +8,7 @@ export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
   const contextId = useContextId();
 
   const { data, isLoading, error } = useQuery<ElectricalNetwork[], Error>(
-    [facility],
+    [facility, tagNos],
     async ({ signal }) => {
       const url = `api/contexts/${contextId}/electrical/consumers/electrical-network/${facility}`;
 

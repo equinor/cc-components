@@ -15,6 +15,12 @@ export const ElecticalNetworkTab = (props: ElectricalNetworkTab): JSX.Element =>
     <CircuitDiagram network={network} isLoading={isFetching} itemNo={itemNo} />
   ));
 
+  if (!diagrams || diagrams.length < 1) {
+    return <div>No Circuit Diagram found</div>;
+  }
+
+  console.log({ diagrams });
+
   return (
     <StyledContentWrapper>
       {isFetching ? <CircuitDiagram isLoading={isFetching} itemNo={itemNo} /> : null}

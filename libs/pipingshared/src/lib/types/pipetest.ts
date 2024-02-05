@@ -1,5 +1,6 @@
 export type Pipetest = {
   id: string;
+  pipetestNo: string;
   pipetestType: string;
   facility: string;
   project: string;
@@ -23,8 +24,8 @@ export type Pipetest = {
   priority1: string;
   projectDescription: string;
   projectSchema?: string;
-  heatTraceCableId: string;
-  heatTraceCableNo: string;
+  heatTraceCableIds: string[];
+  heatTraceCableNos: string[];
   commissioningPackageUrl?: string;
   mechanicalCompletionUrl?: string;
 };

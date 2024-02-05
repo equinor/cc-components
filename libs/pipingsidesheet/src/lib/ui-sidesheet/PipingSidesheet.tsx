@@ -62,7 +62,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     data: workorders,
     isLoading: isLoadingWorkorders,
     error: errorWorkorders,
-  } = useGetWorkorders(item.id);
+  } = useGetWorkorders(item.pipetestNo);
 
   const {
     data: checklists,
@@ -80,7 +80,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     data: electricalNetworks,
     isLoading: isLoadingElecticalNetworks,
     error: errorElectricalNetworks,
-  } = useElectricalNetworks(item.facility, []);
+  } = useElectricalNetworks(item.facility, item.heatTraceCableNos);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -89,7 +89,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${item.id}, ${item.description}` || ''}
+        title={`${item.pipetestNo}, ${item.description}` || ''}
         onClose={close}
         applicationTitle="Pipetest"
       />

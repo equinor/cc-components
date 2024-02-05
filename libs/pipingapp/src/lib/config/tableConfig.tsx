@@ -11,7 +11,7 @@ import {
   StyledMonospace,
   useHttpClient,
 } from '@cc-components/shared';
-
+import { generateCommaSeperatedString } from '../utils-table/tableHelpers';
 
 export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterState> => {
   const client = useHttpClient();
@@ -45,7 +45,8 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
 const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Pipetest',
-    valueGetter: (element) => element.data?.id,
+    colId: 'pipetestNo',
+    valueGetter: (element) => element.data?.pipetestNo,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
@@ -59,18 +60,32 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     },
     width: 300,
   },
-  { headerName: 'Priority1', valueGetter: (element) => element.data?.priority1 },
+  {
+    headerName: 'Priority1',
+    colId: 'priority1',
+    valueGetter: (element) => element.data?.priority1,
+  },
   {
     headerName: 'Location',
+    colId: 'location',
     valueGetter: (element) => element.data?.location,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
-  { headerName: 'Checklist status', valueGetter: (element) => element.data?.formStatus },
-  { headerName: 'Current step', valueGetter: (element) => element.data?.checklistStep },
+  {
+    headerName: 'Checklist status',
+    colId: 'formStatus',
+    valueGetter: (element) => element.data?.formStatus,
+  },
+  {
+    headerName: 'Current step',
+    colId: 'currentStep',
+    valueGetter: (element) => element.data?.checklistStep,
+  },
   {
     headerName: 'RFC',
+    colId: 'rfCPlannedForecastDate',
     valueGetter: (element) => element.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
@@ -78,11 +93,11 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: 'HT cables',
-    valueGetter: (element) => element.data?.heatTraceCableNo,
+    colId: "heatTraceCableNos",
+    valueGetter: (element) => element.data?.heatTraceCableNos,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
-      return <DescriptionCell description={props.value} />;
+      const values = generateCommaSeperatedString(props.data?.heatTraceCableNos ?? []);
+      return <DescriptionCell description={values} />;
     },
   },
 ];
-
-// {generateCommaSeperatedStringArrayColumn(getHTList(props.value))}
