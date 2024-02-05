@@ -16,7 +16,6 @@ export const StyledSwitchboardWrapper = styled.div`
 
 export const StyledCircuitDiagramWrapper = styled.div`
   display: flex;
-
   flex-direction: column;
   height: 100%;
   margin-top: 20px;
