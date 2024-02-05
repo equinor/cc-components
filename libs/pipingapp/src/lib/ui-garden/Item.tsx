@@ -55,7 +55,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
         >
-          <StyledItemText>{displayName.replace('@PIPETEST-', '')}</StyledItemText>
+          <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles
             mcColor={
               data.mechanicalCompletionStatus

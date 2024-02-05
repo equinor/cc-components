@@ -25,7 +25,7 @@ export const useGardenConfig = (
     getGardenMeta,
     getHeader,
     getSubgroupItems,
-    getDisplayName: (item) => item.id,
+    getDisplayName: (item) => item.pipetestNo,
     initialGrouping: ['RFC'],
     customViews: {
       customItemView: GardenItem as any,
