@@ -28,7 +28,6 @@ export const StyledTabs: (props: TabsProps) => JSX.Element = styled(Tabs)`
 
 export const StyledPanels = styled(Tabs.Panels)`
   overflow: auto;
-  padding-left: 1em;
   /** Removing padding from Tabs.Panel components */
   > div {
     padding: 0;
