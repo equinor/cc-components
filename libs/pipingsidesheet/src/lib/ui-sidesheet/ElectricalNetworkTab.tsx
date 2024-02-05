@@ -11,15 +11,13 @@ type ElectricalNetworkTab = {
 export const ElecticalNetworkTab = (props: ElectricalNetworkTab): JSX.Element => {
   const { networks, isFetching, itemNo } = props;
 
-  const diagrams = networks?.map((network) => (
-    <CircuitDiagram network={network} isLoading={isFetching} itemNo={itemNo} />
-  ));
-
-  if (!diagrams || diagrams.length < 1) {
+  if (!networks || networks.length < 1) {
     return <div>No Circuit Diagram found</div>;
   }
 
-  console.log({ diagrams });
+  const diagrams = networks.map((network) => (
+    <CircuitDiagram network={network} isLoading={isFetching} itemNo={itemNo} />
+  ));
 
   return (
     <StyledContentWrapper>

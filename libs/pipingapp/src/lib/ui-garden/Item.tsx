@@ -82,7 +82,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
           columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
-          popoverTitle={`${data.description}`}
+          popoverTitle={data.description}
           close={() => setIsOpen(false)}
         />
       )}

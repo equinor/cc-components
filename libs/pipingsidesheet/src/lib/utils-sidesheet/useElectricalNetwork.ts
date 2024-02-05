@@ -8,7 +8,7 @@ export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
   const contextId = useContextId();
 
   const { data, isLoading, error } = useQuery<ElectricalNetwork[], Error>(
-    [facility, tagNos],
+    [facility, tagNos, 'electrical-networks'],
     async ({ signal }) => {
       const url = `api/contexts/${contextId}/electrical/consumers/electrical-network/${facility}`;
 
@@ -26,7 +26,7 @@ export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
       }
 
       if (!res.ok) {
-        throw new Error('Failed to fetch elenetwork');
+        throw new Error('Failed to get elenetwork', { cause: res });
       }
 
       return res.json();
