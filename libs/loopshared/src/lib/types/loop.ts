@@ -36,8 +36,8 @@ export type Loop = {
   remainingManHours: number | null;
   responsible: string | null;
   revision: string | null;
-  rfC_Planned_Forecast_Date: string | null;
-  rfO_Planned_Forecast_Date: string | null;
+  rfcPlannedForecastDate: string | null;
+  rfoPlannedForecastDate: string | null;
   signedDate: string | null;
   status: Status | null;
   system: string | null;

@@ -41,8 +41,8 @@ importers:
         specifier: 8.1.4
         version: 8.1.4(@types/react@18.2.22)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 7.0.1
-        version: 7.0.1(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@5.0.10)
+        specifier: 7.0.4
+        version: 7.0.4(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@5.0.10)
       '@microsoft/applicationinsights-web':
         specifier: ^3.0.3
         version: 3.0.3(tslib@2.6.2)
@@ -4071,8 +4071,8 @@ packages:
       - '@types/react'
     dev: false
 
-  /@equinor/workspace-filter@3.0.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-wpQ3a49rKnf7iNxDeTuc3QxDKyvzJD4Cly4AQRqjTvBhoqroFyPgLzLOHPVMpig35W1Awp3Z9j7jDxbuXHkATQ==}
+  /@equinor/workspace-filter@3.0.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-5nlTPQ/I8o+5vxgAXSPps5JLt0v2ZZHcpmlZn7AQfyBxVeV3mApgPs/pRCpPDYSLw4+D82QnwoOxjIS8Ddp8Gw==}
     peerDependencies:
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'
@@ -4103,8 +4103,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-fusion@7.0.1(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@5.0.10):
-    resolution: {integrity: sha512-nJaas9+bnuVhLnLeE9wcmTfLy9hGkcaKqeSXFC19jwkEm0wdm51xL59+Nk/1hhFAb/zG/CxKXadM+lQXdgYA1g==}
+  /@equinor/workspace-fusion@7.0.4(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(styled-components@5.3.6)(vite@5.0.10):
+    resolution: {integrity: sha512-SmoyejLs91MDVPMuLCl+nNe/jisEIZJVZ10nGd4gUGlInSMVl4GbvmnU5kpyOTQLf++AA/jMhmkD7SS7jBZShg==}
     peerDependencies:
       react-dom: '>= 16.8.0 || 18'
       react-is: '>= 16.8.0'
@@ -4117,9 +4117,9 @@ packages:
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/workspace-ag-grid': 2.0.5(@ag-grid-community/styles@29.3.5)(@ag-grid-enterprise/core@30.2.1)(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-filter': 3.0.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-garden': 7.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
-      '@equinor/workspace-powerbi': 1.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-filter': 3.0.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-garden': 7.0.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
+      '@equinor/workspace-powerbi': 1.0.14(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@equinor/workspace-react': 1.0.7(@types/react@18.2.22)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
       re-resizable: 6.9.11(react-dom@18.2.0)(react@18.2.0)
@@ -4141,8 +4141,8 @@ packages:
       - vite
     dev: false
 
-  /@equinor/workspace-garden@7.0.0(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-AozIflMO4dhenm3VnWjmf8n0sgRNnxHEFEd1WA1gdSuJ+rv57OM9JZRivokkp7b54M49GXWTOz0IA2eDjq5HEg==}
+  /@equinor/workspace-garden@7.0.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-IV4tG9fT2bOdKKnOjws552GkW/pmauam00Yt/VnrwTUXtENcnig8kwOe4H/Cku9ouY9RpOxa+gNgz8gPMDZ41A==}
     peerDependencies:
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'
@@ -4171,8 +4171,8 @@ packages:
       - supports-color
     dev: false
 
-  /@equinor/workspace-powerbi@1.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
-    resolution: {integrity: sha512-44iQbi0IQFaYhV2/Pg5i+pVOb3NKeMD6To5jwzCqRG359AY7tAS/DotP1WMJktlJ31KeqIreqdImgv1/qvV9dw==}
+  /@equinor/workspace-powerbi@1.0.14(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6):
+    resolution: {integrity: sha512-XyxzJekOj66KqLnqQhrGEOELDf5JMiEvu2IRRxBDsCRNCdhRHwiYKGCZ13DoNI5zNsoGYlR7AsisKKmIdk2KGw==}
     peerDependencies:
       react: '>= 16.8.0 || 18'
       react-dom: '>= 16.8.0 || 18'

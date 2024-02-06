@@ -23,8 +23,6 @@ export const StyledCircuitDiagramWrapper = styled.div`
 
 export const StyledCircuitDiagram = styled.div`
   display: flex;
-  width: 100%;
-  overflow: auto;
   font-size: 12px;
   padding: 10px;
   position: relative;
