@@ -25,6 +25,10 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     },
   },
   {
+    headerName: 'Formular group',
+    valueGetter: (pkg) => pkg.data?.formularGroup,
+  },
+  {
     headerName: 'Responsible',
     valueGetter: (pkg) => pkg.data?.formResponsible,
   },
