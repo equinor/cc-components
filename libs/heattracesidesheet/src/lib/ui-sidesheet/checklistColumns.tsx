@@ -12,9 +12,7 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     headerName: 'Tag No',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return (
-        <LinkCell url={props.data?.heatTraceCableUrl ?? ''} urlText={props.value ?? ''} />
-      );
+      return <LinkCell url={props.data?.tagUrl ?? ''} urlText={props.value ?? ''} />;
     },
   },
   {
