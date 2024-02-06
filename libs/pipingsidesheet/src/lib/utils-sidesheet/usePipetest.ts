@@ -1,7 +1,7 @@
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useContextId } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
-import { Pipetest } from 'libs/pipingshared/dist/src';
+import { Pipetest } from '@cc-components/pipingshared';
 
 
 export const useGetPipetest = (pipetestId: string, initialData?: Pipetest) => {
