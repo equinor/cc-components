@@ -48,6 +48,7 @@ export type HeatTraceChecklist = {
   checklistUrl: string | null;
   commissioningPackageUrl: string | null;
   mechanicalCompletionUrl: string | null;
+  tagUrl: string | null;
   pipingRevisionMechanicalCompletionPackageNo: string;
   register: string;
 };

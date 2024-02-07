@@ -1,5 +1,6 @@
 import { Punch } from '@cc-components/punchshared';
 import { statusColorMap } from '@cc-components/shared/mapping';
+import { domainNames } from '@cc-components/shared';
 import {
   DateCell,
   DescriptionCell,
@@ -22,7 +23,6 @@ import {
   ColumnsToolPanelModule,
 } from '@equinor/workspace-fusion/grid';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { domainNames } from '@cc-components/shared';
 
 export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState> => {
   const client = useHttpClient('cc-api');
