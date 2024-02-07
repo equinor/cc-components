@@ -89,9 +89,11 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${item.pipetestNo}, ${item.description}` || ''}
-        onClose={close}
+        title={item.pipetestNo}
+        description={item.description}
         applicationTitle="Pipetest"
+        url={item.mechanicalCompletionUrl}
+        onClose={close}
       />
       <StyledBanner>
         <BannerItem title="Current step" value={item.checklistStep} />
