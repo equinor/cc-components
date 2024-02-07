@@ -66,7 +66,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     valueGetter: (element) => element.data?.priority1,
   },
   {
-    headerName: 'Location',
+    headerName: 'Area',
     colId: 'location',
     valueGetter: (element) => element.data?.location,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
@@ -93,7 +93,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: 'HT cables',
-    colId: "heatTraceCableNos",
+    colId: 'heatTraceCableNos',
     valueGetter: (element) => element.data?.heatTraceCableNos,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       const values = generateCommaSeperatedString(props.data?.heatTraceCableNos ?? []);

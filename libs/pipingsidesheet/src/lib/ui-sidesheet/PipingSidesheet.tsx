@@ -62,7 +62,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     data: workorders,
     isLoading: isLoadingWorkorders,
     error: errorWorkorders,
-  } = useGetWorkorders(item.pipetestNo);
+  } = useGetWorkorders(item.id);
 
   const {
     data: checklists,
@@ -151,7 +151,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
         <CustomStyledPanels>
           <Tabs.Panel>
             <ElecticalNetworkTab
-              itemNo={item.id} // TODO: Use HT Calbe link when ready
+              itemNo={item.id}
               networks={electricalNetworks}
               isFetching={isLoadingElecticalNetworks}
               error={errorElectricalNetworks}
