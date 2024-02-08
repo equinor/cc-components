@@ -6,7 +6,7 @@ import { tokens } from '@equinor/eds-tokens';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BaseStatus,
-  DateCell,
+  LinkCell,
   StatusCircle,
   pipetestStatusColormap,
 } from '@cc-components/shared';
@@ -111,13 +111,12 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
           }
         />
         <BannerItem
-          title="RFC"
+          title="Comm Pkg"
           value={
-            item.rfCPlannedForecastDate ? (
-              <DateCell dateString={item.rfCPlannedForecastDate} />
-            ) : (
-              'N/A'
-            )
+            <LinkCell
+              url={item.commissioningPackageUrl}
+              urlText={item.commissioningPackageNo}
+            />
           }
         />
       </StyledBanner>
@@ -147,7 +146,6 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
               Checklists
               <TabTitle isLoading={isLoadingChecklists} data={checklists} />
             </Tabs.Tab>
-            <Tabs.Tab>3D</Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <CustomStyledPanels>
@@ -180,7 +178,6 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
               checklists={checklists}
             />
           </Tabs.Panel>
-          <Tabs.Panel>3D is coming</Tabs.Panel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>

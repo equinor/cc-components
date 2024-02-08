@@ -6,10 +6,13 @@ import {
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
+  BaseStatus,
   DateCell,
   DescriptionCell,
-  StyledMonospace,
+  LinkCell,
+  StatusCircle,
   domainNames,
+  pipetestStatusColormap,
   useHttpClient,
 } from '@cc-components/shared';
 import { generateCommaSeperatedString } from '../utils-table/tableHelpers';
@@ -48,31 +51,31 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     headerName: 'Pipetest',
     colId: 'pipetestNo',
     valueGetter: (element) => element.data?.pipetestNo,
-    cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
-    },
+    cellRenderer: (props: ICellRendererProps<Pipetest, string>) => (
+      <LinkCell url={props.data?.mechanicalCompletionUrl} urlText={props.value ?? ''} />
+    ),
   },
   {
     headerName: 'Description',
     colId: 'description',
     valueGetter: (element) => element.data?.description,
-    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
-      return <DescriptionCell description={props.value} />;
-    },
+    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => (
+      <DescriptionCell description={props.value} />
+    ),
     width: 300,
   },
   {
-    headerName: domainNames.priority1,
+    headerName: domainNames.commPriority1,
     colId: 'priority1',
     valueGetter: (element) => element.data?.priority1,
   },
   {
-    headerName: domainNames.priority2,
+    headerName: domainNames.commPriority2,
     colId: 'priority2',
     valueGetter: (element) => element.data?.priority2,
   },
   {
-    headerName: domainNames.priority3,
+    headerName: domainNames.commPriority3,
     colId: 'priority3',
     valueGetter: (element) => element.data?.priority3,
   },
@@ -80,14 +83,34 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     headerName: domainNames.mcLocation,
     colId: 'location',
     valueGetter: (element) => element.data?.location,
-    cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+  },
+  {
+    headerName: domainNames.mcStatus,
+    colId: 'MechanicalCompletionStatus',
+    valueGetter: (element) => element.data?.mechanicalCompletionStatus,
+    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
+      if (!props.value) return;
+      return (
+        <StatusCircle
+          content={props.value}
+          statusColor={pipetestStatusColormap[props.value as BaseStatus]}
+        />
+      );
     },
   },
   {
     headerName: domainNames.checklistStatus,
     colId: 'formStatus',
     valueGetter: (element) => element.data?.formStatus,
+    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
+      if (!props.value) return;
+      return (
+        <StatusCircle
+          content={props.value}
+          statusColor={pipetestStatusColormap[props.value as BaseStatus]}
+        />
+      );
+    },
   },
   {
     headerName: domainNames.currentStep,
@@ -104,7 +127,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.commIdentifier,
-    colId: 'mechanicalCompletionHandoverStatus',
+    colId: 'commIdentifier',
     valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
   },
   {

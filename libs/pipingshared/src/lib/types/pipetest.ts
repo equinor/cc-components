@@ -16,6 +16,7 @@ export type Pipetest = {
   commissioningPackageUrlId: string;
   commissioningResponsible: string;
   commissioningStatus: string;
+  commissioningPackageNo: string;
   dueDateTimePeriod: string;
   isOverdue: string;
   checklistStep: string;
