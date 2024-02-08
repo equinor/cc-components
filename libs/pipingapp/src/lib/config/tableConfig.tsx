@@ -9,6 +9,7 @@ import {
   DateCell,
   DescriptionCell,
   StyledMonospace,
+  domainNames,
   useHttpClient,
 } from '@cc-components/shared';
 import { generateCommaSeperatedString } from '../utils-table/tableHelpers';
@@ -61,12 +62,22 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     width: 300,
   },
   {
-    headerName: 'Priority1',
+    headerName: domainNames.priority1,
     colId: 'priority1',
     valueGetter: (element) => element.data?.priority1,
   },
   {
-    headerName: 'Area',
+    headerName: domainNames.priority2,
+    colId: 'priority2',
+    valueGetter: (element) => element.data?.priority2,
+  },
+  {
+    headerName: domainNames.priority3,
+    colId: 'priority3',
+    valueGetter: (element) => element.data?.priority3,
+  },
+  {
+    headerName: domainNames.mcLocation,
     colId: 'location',
     valueGetter: (element) => element.data?.location,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => {
@@ -74,12 +85,12 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     },
   },
   {
-    headerName: 'Checklist status',
+    headerName: domainNames.checklistStatus,
     colId: 'formStatus',
     valueGetter: (element) => element.data?.formStatus,
   },
   {
-    headerName: 'Current step',
+    headerName: domainNames.currentStep,
     colId: 'currentStep',
     valueGetter: (element) => element.data?.checklistStep,
   },
@@ -90,6 +101,26 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },
+  },
+  {
+    headerName: domainNames.commIdentifier,
+    colId: 'mechanicalCompletionHandoverStatus',
+    valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
+  },
+  {
+    headerName: 'MC Handover Status',
+    colId: 'mechanicalCompletionHandoverStatus',
+    valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
+  },
+  {
+    headerName: domainNames.mcResponsible,
+    colId: 'mechanicalCompletionResponsible',
+    valueGetter: (element) => element.data?.mechanicalCompletionResponsible,
+  },
+  {
+    headerName: domainNames.mcPhase,
+    colId: 'mechanicalCompletionPhase',
+    valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
   },
   {
     headerName: 'HT cables',

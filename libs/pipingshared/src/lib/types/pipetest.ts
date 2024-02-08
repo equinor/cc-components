@@ -22,6 +22,8 @@ export type Pipetest = {
   formStatus: string;
   checklistStepSequence: number;
   priority1: string;
+  priority2: string;
+  priority3: string;
   projectDescription: string;
   projectSchema?: string;
   heatTraceCableIds: string[];
