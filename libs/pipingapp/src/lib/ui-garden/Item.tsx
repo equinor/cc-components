@@ -1,4 +1,4 @@
-import { pipetestStatusColormap } from '@cc-components/shared/mapping';
+import { colorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import {
@@ -9,6 +9,8 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { Pipetest } from 'libs/pipingshared/dist/src';
+import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
+import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
 
 const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +35,8 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
+  const colors = getPipetestStatusColors(data);
+
   return (
     <>
       <StyledRoot>
@@ -46,45 +50,42 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
-          backgroundColor={'green'}
+          backgroundColor={colors.backgroundColor}
           onClick={onClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
         >
-          <StyledItemText>{displayName.replace('@PIPETEST-', '')}</StyledItemText>
+          <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles
             mcColor={
-              data.shortformCompletionStatus
-                ? pipetestStatusColormap[data.shortformCompletionStatus]
+              data.mechanicalCompletionStatus
+                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
                 : null
             }
             commColor={
-              data.shortformCompletionStatus
-                ? pipetestStatusColormap[data.shortformCompletionStatus]
+              data.commissioningStatus
+                ? colorMap[data.commissioningStatus as PackageStatus]
                 : null
             }
           />
         </StyledItemWrapper>
 
         {columnExpanded && (
-          <StyledDescription title={data.description ?? ''}>
-            {data.description}
-          </StyledDescription>
+          <StyledDescription title={data.id ?? ''}>{data.description}</StyledDescription>
         )}
       </StyledRoot>
 
-      {/* {isOpen && (
+      {isOpen && (
         <PopoverWrapper
           isOpen={isOpen}
           rowStart={rowStart}
           columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
-          popoverTitle={`${data.loopNo}`}
-        >
-          <PopoverContent loop={data} />
-        </PopoverWrapper>
-      )} */}
+          popoverTitle={data.description}
+          close={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 };

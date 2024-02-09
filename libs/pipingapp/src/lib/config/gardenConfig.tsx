@@ -25,10 +25,13 @@ export const useGardenConfig = (
     getGardenMeta,
     getHeader,
     getSubgroupItems,
-    getDisplayName: (item) => item.id,
-    initialGrouping: ['Priority1'],
+    getDisplayName: (item) => item.pipetestNo,
+    initialGrouping: ['RFC'],
     customViews: {
       customItemView: GardenItem as any,
+    },
+    visuals: {
+      rowHeight: 31,
     },
   };
 };

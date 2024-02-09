@@ -31,6 +31,7 @@ export const WorkspaceWrapper = () => {
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
+
   return (
     <Workspace
       key={contextId + bookmarkKey}
