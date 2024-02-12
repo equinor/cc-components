@@ -9,7 +9,9 @@ import {
   DateCell,
   DescriptionCell,
   LinkCell,
+  StatusCircle,
   StyledMonospace,
+  statusColorMap,
   useHttpClient,
 } from '@cc-components/shared';
 
@@ -63,9 +65,39 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     width: 300,
   },
   {
+    colId: '',
+    headerName: 'MC Handover Status',
+    valueGetter: (pkg) => 'todo',
+  },
+  {
     colId: 'Priority1',
-    headerName: 'Priority1',
+    headerName: 'Comm Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
+  },
+  {
+    colId: 'Priority2',
+    headerName: 'Comm Priority 2',
+    valueGetter: (pkg) => pkg.data?.priority2,
+  },
+  {
+    colId: 'Priority3',
+    headerName: 'Comm Priority 3',
+    valueGetter: (pkg) => pkg.data?.priority3,
+  },
+  {
+    colId: 'CommissioningIdentifier',
+    headerName: 'MC responsible',
+    valueGetter: (pkg) => 'todo',
+  },
+  {
+    colId: 'MechanicalCompletionResponsible',
+    headerName: 'MC responsible',
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionResponsible,
+  },
+  {
+    colId: 'MechanicalCompletionPhase',
+    headerName: 'MC phase',
+    valueGetter: (pkg) => 'todo',
   },
   {
     colId: 'Location',
