@@ -4,8 +4,11 @@ import { useMemo, useRef } from 'react';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
+  BaseStatus,
   ElectricalNetwork,
   LinkCell,
+  StatusCircle,
+  statusColorMap,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
@@ -44,19 +47,18 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
       />
       <StyledBanner>
         <BannerItem
-          title="Heat trace"
+          title="Checklist status"
           value={
-            props.item.heatTraceCableNo ? (
-              <LinkCell
-                url={props.item.heatTraceCableUrl ?? ''}
-                urlText={props.item.heatTraceCableNo}
-              />
-            ) : (
-              'N/A'
-            )
+            <StatusCircle
+              content={props?.item?.formStatus || 'N/A'}
+              statusColor={
+                props?.item?.formStatus
+                  ? statusColorMap[props.item.formStatus as BaseStatus]
+                  : 'transparent'
+              }
+            />
           }
-        ></BannerItem>
-        <BannerItem title="Checklist status" value={props.item.formStatus || 'N/A'} />
+        />
         <BannerItem
           title="Comm Pkg"
           value={

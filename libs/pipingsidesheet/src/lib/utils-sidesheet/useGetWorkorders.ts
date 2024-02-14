@@ -1,22 +1,20 @@
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
+import { WorkorderBase, useContextId, useHttpClient } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
-import { Workorder } from '../types';
 
-export const useGetWorkorders = (pipetestName: string) => {
-  const client = useHttpClient('cc-api');
+export const useGetWorkorders = (pipetestId: string) => {
+  const client = useHttpClient();
   const contextId = useContextId();
-  const { data, isLoading, error } = useQuery<Workorder[], Error>(
-    ['pipetest', pipetestName, 'workorders'],
+  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
+    ['pipetest', pipetestId, 'work-orders'],
     async ({ signal }) => {
-      const respons = await client.fetch(
-        `/api/contexts/${contextId}/pipetest/${pipetestName}/workorders`,
+      const response = await client.fetch(
+        `/api/contexts/${contextId}/pipetest/${pipetestId}/work-orders`,
         { signal }
       );
-      if (!respons.ok) {
-        throw new Error();
+      if (!response.ok) {
+        throw new Error('Failed to get work-orders', { cause: response });
       }
-      return respons.json();
+      return response.json();
     }
   );
 
