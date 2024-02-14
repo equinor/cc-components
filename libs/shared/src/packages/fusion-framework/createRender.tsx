@@ -483,6 +483,8 @@ function ignorePowerBiGenericError<T extends ITelemetryItem>(a: T) {
     Object.keys(a.data ?? {}).includes('message') &&
     a.data?.message ===
       'ErrorEvent: ResizeObserver loop completed with undelivered notifications.'
-  )
-    return true;
+  ) {
+    return false;
+  }
+  return true;
 }
