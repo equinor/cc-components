@@ -9,7 +9,9 @@ import {
   DateCell,
   DescriptionCell,
   LinkCell,
+  StatusCircle,
   StyledMonospace,
+  pipetestStatusColormap,
   useHttpClient,
 } from '@cc-components/shared';
 
@@ -76,7 +78,19 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     },
   },
   // Need to implement the visual checklistStatus
-  { headerName: 'Checklist status', valueGetter: (pkg) => pkg.data?.formStatus },
+  {
+    headerName: 'Checklist status',
+    valueGetter: (pkg) => pkg.data?.formStatus,
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
+      if (!props.data?.formStatus) return null;
+      return (
+        <StatusCircle
+          content={props.data.formStatus}
+          statusColor={pipetestStatusColormap[props.data.formStatus]}
+        />
+      );
+    },
+  },
   { headerName: 'Current step', valueGetter: (pkg) => pkg.data?.checklistStep },
   {
     headerName: 'RFC',
