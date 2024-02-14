@@ -51,7 +51,7 @@ export const domainNames = {
   // Mechanical completion package
   mcDiscipline: `MC Discipline`,
   mcDisciplines: `MC Disciplines`,
-  mcLocation: `MC ${'Area'}`,
+  mcLocation: `MC ${'Location'}`,
   mcPhase: `MC ${'Phase'}`,
   mcPkg: 'Mc Pkg',
   mcResponsible: `MC ${'Responsible'}`,

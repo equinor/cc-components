@@ -3,40 +3,38 @@ import {
   StatusCircle,
   StyledMonospace,
   statusColorMap,
+  LinkCell
 } from '@cc-components/shared';
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { CheckList } from '@cc-components/pipingshared';
+import { Checklist } from '@cc-components/pipingshared';
 
-export const checklistColumns: ColDef<CheckList>[] = [
+export const checklistColumns: ColDef<Checklist>[] = [
   {
-    headerName: 'Tag',
-    valueGetter: (pkg) => pkg.data?.tagNo,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+    headerName: 'Tag No',
+    valueGetter: (item) => item.data?.tagNo,
+    cellRenderer: (props: ICellRendererProps<Checklist>) => {
+      return <LinkCell url={props.data?.tagUrl ?? ''} urlText={props.value ?? ''} />
     },
   },
   {
     headerName: 'Revision',
-    valueGetter: (pkg) => pkg.data?.revision,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
-    },
+    valueGetter: (item) => item.data?.revision,
   },
   {
     headerName: 'Formular type',
-    valueGetter: (pkg) => pkg.data?.formularType,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
-      return <StyledMonospace>{props.value}</StyledMonospace>;
+    valueGetter: (item) => item.data?.formularType,
+    cellRenderer: (props: ICellRendererProps<Checklist>) => {
+      return <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
     },
   },
   {
     headerName: 'Responsible',
-    valueGetter: (pkg) => pkg.data?.responsible,
+    valueGetter: (item) => item.data?.responsible,
   },
   {
     headerName: 'Status',
-    valueGetter: (pkg) => pkg.data?.status,
-    cellRenderer: (props: ICellRendererProps<CheckList>) => {
+    valueGetter: (item) => item.data?.status,
+    cellRenderer: (props: ICellRendererProps<Checklist>) => {
       if (!props.data?.status) return null;
       return (
         <StatusCircle
