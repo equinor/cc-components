@@ -92,6 +92,8 @@ export const AccessErrorComponent = (props: Props) => {
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
+
+        <br />
       </StyledErrorContent>
     </StyledErrorWrapper>
   );

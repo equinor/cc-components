@@ -26,6 +26,7 @@ export const StyledErrorWrapper = styled.div`
   grid-row-gap: 10px;
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
 `;
 
 export const StyledReportDetailsWrapper = styled.div`
