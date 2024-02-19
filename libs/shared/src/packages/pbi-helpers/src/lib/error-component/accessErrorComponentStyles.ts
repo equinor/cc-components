@@ -5,6 +5,10 @@ export const StyledHeading = styled.h1`
   color: ${tokens.colors.interactive.warning__resting.rgba};
 `;
 
+export const StyledContentContainer = styled.div`
+  margin-bottom: 20px;
+`;
+
 export const StyledErrorContent = styled.div`
   width: 50vw;
   min-width: 650px;
