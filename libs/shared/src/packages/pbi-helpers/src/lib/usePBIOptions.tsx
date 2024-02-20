@@ -2,6 +2,7 @@ import { PowerBiConfig } from '@equinor/workspace-fusion/power-bi';
 import { ReportMeta } from './ReportMeta';
 import { usePBIHelpers } from './usePBIHelpers';
 import { useExternalContextId } from '../../../hooks';
+import { ErrorComponent } from './error-component/ErrorComponent';
 
 export type Filters = {
   table: string;
@@ -26,8 +27,8 @@ export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConf
           target: { column: filters.column, table: filters.table },
         }
       : undefined,
-    getErrorMessage,
     ReportMetaData: (props) => <ReportMeta {...props} />,
+    ErrorComponent,
     reportUri,
   };
 }
