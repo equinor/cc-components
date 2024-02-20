@@ -91,7 +91,7 @@ export const AccessErrorComponent = (props: Props) => {
           <Accordion>
             <Accordion.Item>
               <Accordion.Header>Access control description</Accordion.Header>
-              <Accordion.Panel>
+              <Accordion.Panel style={{ overflow: 'auto' }}>
                 <Markdown>{data.errorMessage}</Markdown>
               </Accordion.Panel>
             </Accordion.Item>
