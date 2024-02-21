@@ -89,6 +89,7 @@
     "@cc-components/modelviewer": "workspace:^",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@equinor/fusion-react-person": "^0.8.0",
     "@equinor/workspace-ag-grid": "2.0.5",
     "@remirror/pm": "^2.0.8",
     "@remirror/react": "^2.0.27",

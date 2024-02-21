@@ -60,7 +60,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     data: ncr,
     isFetching: isFetchingNcr,
     error: ncrError,
-  } = useMcResource(props.id, 'ncr');
+  } = useMcResource(props.item.commissioningPackageNo, 'ncr');
 
   const {
     data: mccrs,
