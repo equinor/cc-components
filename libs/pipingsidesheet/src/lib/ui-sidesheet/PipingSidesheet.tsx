@@ -132,14 +132,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
               Insulation
               <TabTitle
                 isLoading={isLoadingInsulationTags}
-                data={
-                  insulationTags
-                    ? [
-                        ...insulationTags.boxInsulationTags,
-                        ...insulationTags.pipeInsulationTags,
-                      ]
-                    : []
-                }
+                data={insulationTags ? insulationTags.pipeInsulationTags : []}
               />
             </Tabs.Tab>
             <Tabs.Tab>
