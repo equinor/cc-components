@@ -12,11 +12,14 @@ export type Pipetest = {
   mechanicalCompletionUrlId: string;
   mechanicalCompletionResponsible: string;
   mechanicalCompletionStatus: string;
+  mechanicalCompletionHandoverStatus: string;
+  mechanicalCompletionPhase: string;
   mechanicalCompletionId: string;
   commissioningPackageUrlId: string;
   commissioningResponsible: string;
   commissioningStatus: string;
   commissioningPackageNo: string;
+  commissioningIdentifierCode: string;
   dueDateTimePeriod: string;
   isOverdue: string;
   checklistStep: string;

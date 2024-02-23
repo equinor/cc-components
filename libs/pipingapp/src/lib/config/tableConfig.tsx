@@ -127,13 +127,13 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.commIdentifier,
-    colId: 'commIdentifier',
-    valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
+    colId: 'commissioningIdentifierCode',
+    valueGetter: (element) => element.data?.commissioningIdentifierCode,
   },
   {
     headerName: 'MC Handover Status',
     colId: 'mechanicalCompletionHandoverStatus',
-    valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
+    valueGetter: (element) => element.data?.mechanicalCompletionHandoverStatus,
   },
   {
     headerName: domainNames.mcResponsible,
@@ -143,7 +143,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: domainNames.mcPhase,
     colId: 'mechanicalCompletionPhase',
-    valueGetter: (element) => '', // TODO: Add this once it is ready in the backend
+    valueGetter: (element) => element.data?.mechanicalCompletionPhase,
   },
   {
     headerName: 'HT cables',
