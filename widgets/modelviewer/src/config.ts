@@ -1,7 +1,4 @@
-import {
-  WidgetModuleInitiator,
-  enableWidgetModule,
-} from '@equinor/fusion-framework-react-widget';
+import { WidgetModuleInitiator } from '@equinor/fusion-framework-react-widget';
 
 import { enableModelViewer } from '@cc-components/modelviewer';
 

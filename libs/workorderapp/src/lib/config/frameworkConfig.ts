@@ -33,38 +33,9 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
-  enableModelViewer(config, (builder) => {
-    builder.setHierarchyClientConfig({
-      baseUrl: envConfig?.modelViewer!.hierarchyClient.baseUrl,
-      scope: envConfig?.modelViewer!.hierarchyClient.scope,
-    });
-    builder.setModelClientConfig({
-      baseUrl: envConfig?.modelViewer!.modelClient.baseUrl,
-      scope: envConfig?.modelViewer!.modelClient.scope,
-    });
-    builder.setEchoClientConfig({
-      baseUrl: envConfig?.modelViewer!.echoClient.baseUrl,
-      scope: envConfig?.modelViewer!.echoClient.scope,
-    });
-  });
 };
 
-type ModelViewerEnvConfig = {
-  hierarchyClient: {
-    baseUrl: string;
-    scope: string;
-  };
-  modelClient: {
-    baseUrl: string;
-    scope: string;
-  };
-  echoClient: {
-    baseUrl: string;
-    scope: string;
-  };
-};
 type WorkorderEnvConfig = {
   uri?: string;
   defaultScopes?: string[];
-  modelViewer?: ModelViewerEnvConfig;
 };

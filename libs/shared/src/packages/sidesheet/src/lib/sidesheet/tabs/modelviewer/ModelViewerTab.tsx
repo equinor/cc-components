@@ -5,11 +5,6 @@ import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
 import { ModelViewerTabProps } from './types';
 
-const StyledWrapper = styled.div`
-  height: calc(100vh - 276px);
-  overflow: hidden;
-  position: relative;
-`;
 export const NoResourceData = styled.div`
   text-align: center;
   padding: 20px;
