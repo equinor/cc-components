@@ -44,6 +44,7 @@ const ModelViewer = ({
   tagsOverlay,
   children,
 }: PropsWithChildren<FusionModelViewerProps>) => {
+  /*
   const components: { CustomActions?: React.ReactElement } = {
     CustomActions: undefined,
   };
@@ -55,7 +56,7 @@ const ModelViewer = ({
       }
     });
   }
-
+*/
   return (
     <>
       <PlantDataContextProvider {...{ facility }}>
@@ -67,7 +68,7 @@ const ModelViewer = ({
                   <Legend />
                   <TagsNotFound />
                   <TagsOverlay />
-                  <ActionsMenu CustomActions={components.CustomActions} />
+                  {/* <ActionsMenu CustomActions={components.CustomActions} /> */}
                 </ActionContextProvider>
               </ModelSelection>
             </SelectionContextProvider>
@@ -78,4 +79,4 @@ const ModelViewer = ({
   );
 };
 
-FusionModelViewer.CustomActions = ({ children }: PropsWithChildren) => <>{children}</>;
+// FusionModelViewer.CustomActions = ({ children }: PropsWithChildren) => <>{children}</>;

@@ -1,0 +1,18 @@
+{
+  "name": "ModelViewer",
+  "version": "1.0.0",
+  "main": "/src/main.tsx",
+  "type": "module",
+  "scripts": {
+    "dev": "fusion-framework-cli widget dev",
+    "build": "fusion-framework-cli widget build"
+  },
+  "dependencies": {
+    "@cc-components/modelviewer": "workspace:^",
+    "styled-components": "5.3.6"
+  },
+  "files": [
+    "dist/widget-bundle.js",
+    "widget-manifest.json"
+  ]
+}

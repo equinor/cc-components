@@ -1,4 +1,4 @@
-import { FusionModelViewer } from '@cc-components/modelviewer';
+import { Widget } from '@equinor/fusion-framework-react-app/widget';
 import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
@@ -69,13 +69,15 @@ export const ModelViewerTab = ({
 
   if (facility && TagOverlay) {
     return (
-      <StyledWrapper>
-        <FusionModelViewer
-          facility={facility[0]}
-          options={options ?? undefined}
-          tagsOverlay={TagOverlay}
-        ></FusionModelViewer>
-      </StyledWrapper>
+      <Widget
+        name="ModelViewer"
+        props={{
+          env: 'CI',
+          facility: facility[0],
+          options: options ?? undefined,
+          tagsOverlay: TagOverlay,
+        }}
+      />
     );
   }
 
