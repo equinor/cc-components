@@ -3,11 +3,6 @@ import { InjectProcessPlugin } from '../../patches/3d-patch.ts';
 
 export default defineConfig({
   appType: 'custom',
-  server: {
-    fs: {
-      allow: ['c:/'],
-    },
-  },
   build: {
     emptyOutDir: true,
     rollupOptions: {
