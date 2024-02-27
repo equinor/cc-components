@@ -24,14 +24,6 @@ export const InsultaionTab = ({
         packages={insulationTags?.pipeInsulationTags}
         resourceName="Pipe insulations"
       />
-      {insulationTags?.boxInsulationTags ? <h4>Box insulations:</h4> : ''}
-      <TabTable
-        columns={insulationsColumns}
-        error={error}
-        isFetching={isFetching}
-        packages={insulationTags?.boxInsulationTags}
-        resourceName="Insulation boxes"
-      />
     </StyledContentWrapper>
   );
 };
