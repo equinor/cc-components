@@ -9,6 +9,11 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
     - name: Get fusion token
       id: token
       uses: ./.github/actions/reusable/get-fusion-token
