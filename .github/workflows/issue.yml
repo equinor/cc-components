@@ -35,8 +35,8 @@ jobs:
         uses: ./.github/actions/reusable/get-azure-token
         with:
           client-id: ${{ secrets.AZURE_PROD_CLIENT_ID }}
-          tenant-id: ${{ vars.TENANT_ID }}
           resource-id: ${{ secrets.AZURE_RESOURCE_PROD_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
 
       - name: "Update issue"
         shell: bash
