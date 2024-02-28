@@ -17,6 +17,7 @@ runs:
     - name: Get fusion token
       id: token
       uses: ./.github/actions/reusable/get-fusion-token
+      secrets: inherit
       with:
         client-id: ${{ vars.SP_CLIENT_ID }}
         tenant-id: ${{ vars.TENANT_ID }}
