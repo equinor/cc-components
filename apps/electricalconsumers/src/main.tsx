@@ -13,3 +13,4 @@ const ElectricalConsumersWorkspace = () => {
 
 export const render = createRender(ElectricalConsumersWorkspace, configure);
 export default render;
+
