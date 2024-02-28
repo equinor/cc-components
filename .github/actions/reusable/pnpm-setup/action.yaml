@@ -1,0 +1,27 @@
+# This actions are being used across repos, thread carefully
+name: PNPM setup
+description: "Set up pnpm with cache"
+inputs:
+  pnpm-version:
+    description: "pnpm version to use"
+    required: true
+  node-version:
+    description: "node version to use"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: "${{inputs.pnpm-version}}"
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: "${{inputs.node-version}}"
+        cache: "pnpm"
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
