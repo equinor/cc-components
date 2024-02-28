@@ -1,5 +1,5 @@
 # This actions are being used across repos, thread carefully
-name: Get Fusion token
+name: Get Azure token
 description: 'Runs a composite step action'
 inputs:
   client-id:
@@ -14,7 +14,7 @@ inputs:
 
 outputs:
   token:
-    description: 'Fusion token'
+    description: 'Azure token'
     value: ${{ steps.token.outputs.token }}
 
 runs:
