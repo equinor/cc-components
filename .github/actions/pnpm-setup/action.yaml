@@ -1,18 +1,25 @@
 name: PNPM setup
-description: 'Set up pnpm with cache'
+description: "Set up pnpm with cache"
+inputs:
+  pnpm-version:
+    description: "pnpm version to use"
+    required: true
+  node-version:
+    description: "node version to use"
+    required: true
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - uses: pnpm/action-setup@v2.2.4
       with:
-        version: 8.0.0
+        version: "${{inputs.pnpm-version}}"
 
     - name: Setup Node.js environment
       uses: actions/setup-node@v4
       with:
-        node-version: 18
-        cache: 'pnpm'
+        node-version: "${{inputs.node-version}}"
+        cache: "pnpm"
 
     - name: Install dependencies
       shell: bash
