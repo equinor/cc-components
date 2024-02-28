@@ -18,6 +18,6 @@ runs:
       id: token
       uses: ./.github/actions/reusable/get-fusion-token
       with:
-        client-id: ${{vars.SP_CLIENT_ID}}
-        tenant-id: ${{var.TENANT_ID}}
-        resource-id: ${{vars.FUSION_CLIENT_ID}}
+        client-id: ${{ vars.SP_CLIENT_ID }}
+        tenant-id: ${{ vars.TENANT_ID }}
+        resource-id: ${{ vars.FUSION_CLIENT_ID }}
