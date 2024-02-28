@@ -1,3 +1,4 @@
+# This actions are being used across repos, thread carefully
 name: PNPM setup
 description: "Set up pnpm with cache"
 inputs:
