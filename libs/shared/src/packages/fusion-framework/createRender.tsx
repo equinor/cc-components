@@ -478,5 +478,13 @@ function ignorePowerBiGenericError<T extends ITelemetryItem>(a: T) {
   ) {
     return false;
   }
+  if (
+    a.name === 'Microsoft.ApplicationInsights.{0}.Exception' &&
+    Object.keys(a.data ?? {}).includes('message') &&
+    a.data?.message ===
+      'ErrorEvent: ResizeObserver loop completed with undelivered notifications.'
+  ) {
+    return false;
+  }
   return true;
 }

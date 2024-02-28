@@ -1,113 +1,61 @@
-import { CheckListStatus, PipetestCompletionStatus, PipetestStep } from './drcEnums';
-
 export type Pipetest = {
   id: string;
-  step: PipetestStep;
-  htStep: PipetestStep;
-  circuitStep: PipetestStep;
-  steps: PipetestStep[];
-  completionStatus: PipetestCompletionStatus;
-  pipetestProcessDoneInRightOrder: boolean;
-  shortformCompletionStatus: CheckListStatus;
-  checkLists: CheckList[];
-  heatTraces: HeatTrace[];
-  insulationBoxes: InsulationBox[];
-  pipeInsulationBoxes: InsulationBox[];
-  circuits: Circuit[];
-  description: string;
-  commPkPriority1: string;
-  rfccPlanned: string;
-  htCableRfc: string;
-  overdue: string;
-  dueDateTimePeriod: string;
+  pipetestNo: string;
+  pipetestType: string;
+  facility: string;
+  project: string;
   location: string;
-  lines: Line[];
-  hasCriticalLine: boolean;
-  mcPkgId: string;
-  mcPkgUrlId: string;
-  hasDisconnectedEquipment: boolean;
-  hasIsolatedEquipment: boolean;
-  htCableExposed: string | null;
+  description: string;
+  rfCPlannedForecastDate: string;
+  m03PlannedForecastDate: string;
+  signedDate: string;
+  mechanicalCompletionUrlId: string;
+  mechanicalCompletionResponsible: string;
+  mechanicalCompletionStatus: string;
+  mechanicalCompletionHandoverStatus: string;
+  mechanicalCompletionPhase: string;
+  mechanicalCompletionId: string;
+  commissioningPackageUrlId: string;
+  commissioningResponsible: string;
+  commissioningStatus: string;
+  commissioningPackageNo: string;
+  commissioningIdentifierCode: string;
+  dueDateTimePeriod: string;
+  isOverdue: string;
+  checklistStep: string;
+  formStatus: string;
+  checklistStepSequence: number;
+  priority1: string;
+  priority2: string;
+  priority3: string;
+  projectDescription: string;
+  projectSchema?: string;
+  heatTraceCableIds: string[];
+  heatTraceCableNos: string[];
+  commissioningPackageUrl?: string;
+  mechanicalCompletionUrl?: string;
 };
 
-export type CheckList = {
+export type Checklist = {
+  checklistId: string;
+  checklistUrlId: string;
   tagNo: string;
-  responsible: string;
+  tagUrlId: string;
+  revision: string;
   formularType: string;
-  formularGroup: string;
-  status: string;
-  revision?: string;
-  test?: string;
-  isHeatTrace?: boolean;
-  workflowStepText?: string | undefined;
-  stepName?: string;
-  c01Planned?: string;
-  c01Forecast?: string;
-  m03Planned?: string;
-  m03Forecast?: string;
-  m04Actual?: string;
-  underline?: string;
-  signedDate?: string;
-  worstPipetestStep?: PipetestStep;
-};
-
-export type InsulationBox = {
-  objectNo: string;
-  objectName: string;
-  objectStatusName: string;
-  objectStatus: string;
-  object3dReference: string;
-  procosysStatus: string;
-};
-
-export type Circuit = {
-  switchBoardTagNo: string;
-  circuitAndStarterTagNo: string;
-  checkLists: CheckList[];
-  worstPipetestStep?: PipetestStep;
-};
-
-export type HeatTrace = CheckList;
-
-export type CheckListType = {
-  tagNo: string;
   responsible: string;
-  formularType: string;
-  formularGroup: string;
   status: string;
-  revision?: string;
-  test?: string;
-  isHeatTrace?: boolean;
-  workflowStepText?: string | undefined;
+  checklistUrl: string;
+  tagUrl: string;
 };
 
-export type InsulationBoxType = {
-  objectNo: string;
-  objectName: string;
-  objectStatusName: string;
-  objectStatus: string;
-  object3dReference: string;
-  procosysStatus: string;
+export type InsulationTagResponse = {
+  pipeInsulationTags: InsulationTag[];
+  boxInsulationTags: InsulationTag[];
 };
 
-export type Line = {
+export type InsulationTag = {
   tagNo: string;
-  isCritical: boolean;
-};
-
-export type HTSidesheet = {
-  value: string;
-  items: Pipetest[];
-};
-
-export type HeatTraceGrouped = {
-  htTagNo: string;
-  pipetests: Pipetest[];
-  count: number;
-};
-
-export type CircuitGrouped = {
-  circuitTagNo: string;
-  pipetests: Pipetest[];
-  count: number;
+  description: string;
+  status: string;
 };

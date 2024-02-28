@@ -137,7 +137,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     data: ncrPackages,
     dataIsFetching: isDataFetchingNcr,
     error: ncrError,
-  } = useHandoverResource(props.id, 'ncr');
+  } = useHandoverResource(props.item.commissioningPackageNo, 'ncr');
 
   const filteredPunches = useMemo(() => {
     if (ShowOnlyOutstandingPunch) {
