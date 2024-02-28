@@ -1,27 +1,16 @@
-# This actions are being used across repos, thread carefully
-name: PNPM setup
-description: "Set up pnpm with cache"
-inputs:
-  pnpm-version:
-    description: "pnpm version to use"
-    required: true
-  node-version:
-    description: "node version to use"
-    required: true
+name: Setup pnpm
+description: Configures pnpm with cache and install deps
 
 runs:
-  using: "composite"
+  using: composite
   steps:
-    - uses: pnpm/action-setup@v2.2.4
+    - name: Checkout
+      uses: actions/checkout@v4
       with:
-        version: "${{inputs.pnpm-version}}"
+        fetch-depth: 0
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v4
+    - name: pnpm setup
+      uses: ./.github/actions/reusable/pnpm-setup
       with:
-        node-version: "${{inputs.node-version}}"
-        cache: "pnpm"
-
-    - name: Install dependencies
-      shell: bash
-      run: pnpm install
+        node-version: 18
+        pnpm-version: 8.0.0

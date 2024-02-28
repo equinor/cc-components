@@ -1,33 +1,18 @@
-# This actions are being used across repos, thread carefully
-name: Get Fusion token
-description: 'Runs a composite step action'
-inputs:
-  client-id:
-    description: 'SP client id'
-    required: true
-  tenant-id:
-    description: 'Equinor tenant id'
-    required: true
-  resource-id:
-    description: 'Resource id'
-    required: true
+name: Get fusion token
+description: Gets a fusion token using the env vars
 
 outputs:
   token:
-    description: 'Fusion token'
+    description: "Fusion <env> token"
     value: ${{ steps.token.outputs.token }}
 
 runs:
-  using: 'composite'
+  using: composite
   steps:
-    - name: 'Login to Azure'
-      uses: azure/login@v1
-      with:
-        client-id: ${{inputs.client-id}}
-        tenant-id: ${{ inputs.tenant-id }}
-        allow-no-subscriptions: true
-
-    - name: 'Obtain token for upload'
+    - name: Get fusion token
       id: token
-      shell: bash
-      run: echo "token=$(az account get-access-token --resource '${{ inputs.resource-id }}' | jq '.accessToken')" >> $GITHUB_OUTPUT
+      uses: ./.github/actions/reusable/get-fusion-token
+      with:
+        client-id: ${{vars.SP_CLIENT_ID}}
+        tenant-id: ${{var.TENANT_ID}}
+        resource-id: ${{vars.FUSION_CLIENT_ID}}
