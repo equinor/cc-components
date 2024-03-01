@@ -7,7 +7,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useModelViewerContext } from './modelViewerProvider';
 
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Color, Vector3 } from 'three';
@@ -15,8 +14,8 @@ import { defaultTagColor } from '../components/tag-item/TagItem';
 import { SelectionService, TagColor } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
-import { useModelContext } from './modelsProvider';
 import { useConfig } from './configProvider';
+import { useSelectionService } from '../hooks/useSelectionService';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
@@ -96,25 +95,22 @@ export const SelectionContextProvider = ({
     }
   }, [tagsOverlay]);
 
-  const { echoInstance } = useModelViewerContext();
-  const { modelMeta } = useModelContext();
-  const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
-  const [isTagFetching, SetIsTagFetching] = useState<boolean>(true);
+  const { selectionService } = useSelectionService();
 
-  const selectionService = useMemo(() => {
-    if (modelMeta && echoInstance) {
-      return new SelectionService(modelMeta, echoInstance);
-    }
-  }, [modelMeta, echoInstance]);
+  const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
+  const [isTagFetching, setIsTagFetching] = useState<boolean>(true);
 
   useEffect(() => {
     if (tagList.length > 0 && selectionService) {
-      selectNodesByTagsOverlay(tagList).then((nodes) => {
-        if (nodes) {
-          setCurrentNodes(nodes);
-        }
-        SetIsTagFetching(false);
-      });
+      selectNodesByTagsOverlay(tagList)
+        .then((nodes) => {
+          if (nodes) {
+            setCurrentNodes(nodes);
+          }
+        })
+        .finally(() => {
+          setIsTagFetching(false);
+        });
     }
   }, [tagList, selectionService]);
 

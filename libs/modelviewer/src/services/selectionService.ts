@@ -1,7 +1,6 @@
 import {
   BoundingBoxClipper,
   CogniteCadModel,
-  IndexSet,
   InvertedNodeCollection,
   NodeAppearance,
   TreeIndexNodeCollection,
@@ -12,7 +11,6 @@ import CameraControls, {
   CameraControlsExtended,
   CancelToken,
   Echo3dViewer,
-  EchoSetupObject,
   HierarchyClient,
   HierarchyNodeModel,
   getTagNoRefNoAndAabbByNodeId,
@@ -39,22 +37,13 @@ export interface SelectNodesByTagOptions {
 }
 
 export class SelectionService extends NodeService {
-  private hierarchyClient: HierarchyClient;
-  private viewer: Echo3dViewer;
-
-  constructor(private modelMeta: AssetMetadataSimpleDto, echoInstance: EchoSetupObject) {
+  constructor(
+    private modelMeta: AssetMetadataSimpleDto,
+    private hierarchyClient: HierarchyClient,
+    private viewer: Echo3dViewer,
+    private model: CogniteCadModel
+  ) {
     super();
-    this.hierarchyClient = echoInstance.hierarchyApiClient;
-    this.viewer = echoInstance.viewer;
-  }
-
-  get model(): CogniteCadModel {
-    const currentModel = this.viewer.getModel(
-      this.modelMeta.id,
-      this.modelMeta.revisionNumber
-    );
-    if (!currentModel) throw new Error('No model Awaitable for SelectionService');
-    return currentModel;
   }
 
   findNodesByTags = async (tags: string[], signal?: AbortSignal) => {
@@ -133,6 +122,7 @@ export class SelectionService extends NodeService {
       appearance
     );
   }
+
   resetStyleToNodeAppearance(appearance?: NodeAppearance) {
     const newAppearance = appearance || this.model.getDefaultNodeAppearance();
     this.model.styledNodeCollections.forEach((nodeCollection) =>

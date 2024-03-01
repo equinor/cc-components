@@ -25,10 +25,6 @@ export const TagsOverlay = (): JSX.Element => {
     setSelected(tag);
   };
 
-  // useEffect(() => {
-  //   console.log(filterTags);
-  // }, [filterTags]);
-
   return (
     <div>
       {overlayTags

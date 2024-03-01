@@ -79,7 +79,6 @@ export const PlantDataContextProvider = ({
         setCurrentPlantData(plantByLocalInstCode);
         setIsLoading(false);
       }
-      console.log(plantByLocalInstCode);
 
       return;
     }
