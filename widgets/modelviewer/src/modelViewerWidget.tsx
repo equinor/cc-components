@@ -1,8 +1,4 @@
-import {
-  FusionModelViewer,
-  ModelViewerConfig,
-  TagOverlay,
-} from '@cc-components/modelviewer';
+import { ModelViewer, ModelViewerConfig, TagOverlay } from '@cc-components/modelviewer';
 import styled from 'styled-components';
 
 type FusionModelViewerProps = {
@@ -24,11 +20,7 @@ export const ModelViewerWidget = ({
 }: FusionModelViewerProps) => {
   return (
     <StyledWrapper>
-      <FusionModelViewer
-        facility={facility}
-        options={options}
-        tagsOverlay={tagsOverlay}
-      />
+      <ModelViewer facility={facility} options={options} tagsOverlay={tagsOverlay} />
     </StyledWrapper>
   );
 };

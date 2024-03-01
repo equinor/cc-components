@@ -15,13 +15,13 @@ import { ConfigContextProvider, ModelViewerConfig } from './providers/configProv
 import { Legend } from './components/legend/Legend';
 import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
 
-type FusionModelViewerProps = {
+type ModelViewerProps = {
   facility: string;
   tagsOverlay?: string[] | TagOverlay[];
   options?: ModelViewerConfig;
 };
 
-export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProps>) => {
+export const ModelViewer = (props: PropsWithChildren<ModelViewerProps>) => {
   const queryClient = new QueryClient();
 
   return (
@@ -32,25 +32,25 @@ export const FusionModelViewer = (props: PropsWithChildren<FusionModelViewerProp
             props.options?.fallbackComponent ? props.options.fallbackComponent : Message
           }
         >
-          <ModelViewer {...props} />
+          <ModelViewerContainer {...props} />
         </MessageBoundary>
       </ConfigContextProvider>
     </QueryClientProvider>
   );
 };
 
-const ModelViewer = ({
+const ModelViewerContainer = ({
   facility,
   tagsOverlay,
   children,
-}: PropsWithChildren<FusionModelViewerProps>) => {
+}: PropsWithChildren<ModelViewerProps>) => {
   const components: { CustomActions?: React.ReactElement } = {
     CustomActions: undefined,
   };
   if (Children.count(children) != 0) {
     Children.forEach(children, (child) => {
       if (!isValidElement(child)) return;
-      if (child.type === FusionModelViewer.CustomActions) {
+      if (child.type === ModelViewer.CustomActions) {
         components.CustomActions = cloneElement(child);
       }
     });
@@ -78,4 +78,4 @@ const ModelViewer = ({
   );
 };
 
-FusionModelViewer.CustomActions = ({ children }: PropsWithChildren) => <>{children}</>;
+ModelViewer.CustomActions = ({ children }: PropsWithChildren) => <>{children}</>;
