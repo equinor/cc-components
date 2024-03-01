@@ -196,36 +196,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             <MccrTab
               error={mccrError}
               isFetching={isFetchingMccr}
-              mccr={(mccrs ?? []).map(
-                (mccr): MccrBase => ({
-                  ...mccr,
-                  commissioningPackageId: mccr.commissioningPackageId,
-                  commissioningPackageUrl: mccr.commissioningPackageUrl,
-                  commissioningPackageUrlId: mccr.commissioningPackageUrlId,
-                  commpkgId: mccr.commissioningPackageId,
-                  commpkgNumber: mccr.commissioningPackageNo,
-                  description: mccr.description,
-                  facility: mccr.facility,
-                  mcPkgId: mccr.mechanicalCompletionPackageId,
-                  mccrId: mccr.checklistID,
-                  mccrResponsible: mccr.responsible,
-                  mccrStatus: mccr.status,
-                  mccrType: mccr.formularType,
-                  mccrUrl: mccr.checklistUrl,
-                  mccrUrlId: mccr.checklistUrlId,
-                  mcpkgNumber: mccr.mechanicalCompletionPackageNo,
-                  mechanicalCompletionPackageUrl: mccr.mechanicalCompletionPackageUrl,
-                  mechanicalCompletionPackageUrlId: mccr.mechanicalCompletionUrlId,
-                  project: mccr.project,
-                  tagId: mccr.tagId,
-                  tagNumber: mccr.tagNo,
-                  tagUrl: mccr.tagUrl,
-                  tagUrlId: mccr.tagUrlId,
-                  workOrderId: null,
-                  workOrderUrl: null,
-                  workOrderUrlId: null,
-                })
-              )}
+              mccr={mccrs}
             />
           </Tabs.Panel>
         </StyledPanels>
