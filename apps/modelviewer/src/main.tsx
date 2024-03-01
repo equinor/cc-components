@@ -1,4 +1,4 @@
-import { FusionModelViewer, useCustomAction } from '@cc-components/modelviewer';
+import { ModelViewer, useCustomAction } from '@cc-components/modelviewer';
 import { configure } from '@cc-components/modelviewerapp';
 import { createRender } from '@cc-components/shared';
 import { Button, Icon } from '@equinor/eds-core-react';
@@ -48,11 +48,11 @@ const StyledWrapper = styled.div`
 const App = () => {
   return (
     <StyledWrapper>
-      <FusionModelViewer facility="jca" tagsOverlay={mockedTagListA}>
-        <FusionModelViewer.CustomActions>
+      <ModelViewer facility="jca" tagsOverlay={mockedTagListA}>
+        <ModelViewer.CustomActions>
           <Test />
-        </FusionModelViewer.CustomActions>
-      </FusionModelViewer>
+        </ModelViewer.CustomActions>
+      </ModelViewer>
     </StyledWrapper>
   );
 };

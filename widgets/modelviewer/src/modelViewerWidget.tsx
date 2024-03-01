@@ -1,7 +1,7 @@
 import { ModelViewer, ModelViewerConfig, TagOverlay } from '@cc-components/modelviewer';
 import styled from 'styled-components';
 
-type FusionModelViewerProps = {
+type ModelViewerProps = {
   facility: string;
   tagsOverlay?: string[] | TagOverlay[];
   options?: ModelViewerConfig;
@@ -13,11 +13,7 @@ const StyledWrapper = styled.div`
   position: relative;
 `;
 
-export const ModelViewerWidget = ({
-  facility,
-  options,
-  tagsOverlay,
-}: FusionModelViewerProps) => {
+export const ModelViewerWidget = ({ facility, options, tagsOverlay }: ModelViewerProps) => {
   return (
     <StyledWrapper>
       <ModelViewer facility={facility} options={options} tagsOverlay={tagsOverlay} />
