@@ -1,9 +1,10 @@
 import { Widget } from '@equinor/fusion-framework-react-app/widget';
+import { TagOverlay } from '@cc-components/modelviewer';
+import { ModelViewerConfig } from '@cc-components/modelviewer';
 import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 import styled from 'styled-components';
-import { ModelViewerTabProps } from './types';
 
 export const NoResourceData = styled.div`
   text-align: center;
@@ -19,13 +20,17 @@ export const InfoText = styled.h3`
   margin: 0;
 `;
 
-export const ModelViewerTab = ({
-  TagOverlay,
-  facility,
-  options,
-  isFetching,
-  error,
-}: ModelViewerTabProps): JSX.Element => {
+export type ModelViewerTabProps = {
+  TagOverlay: string[] | TagOverlay[] | undefined;
+  facilities: string[];
+  isFetching: boolean;
+  error: Error | null;
+  options?: ModelViewerConfig;
+};
+
+export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
+  const { TagOverlay, facilities, options, isFetching, error } = props;
+
   if (isFetching) {
     return (
       <NoResourceData>
@@ -62,13 +67,13 @@ export const ModelViewerTab = ({
     );
   }
 
-  if (facility && TagOverlay) {
+  if (facilities[0] && TagOverlay) {
     return (
       <Widget
         name="ModelViewer"
         props={{
           env: 'CI',
-          facility: facility[0],
+          facility: facilities[0],
           options: options ?? undefined,
           tagsOverlay: TagOverlay,
         }}
@@ -77,7 +82,6 @@ export const ModelViewerTab = ({
   }
 
   return (
-    //Sjekk senere
     <NoResourceData>
       <InfoText>No data available</InfoText>
     </NoResourceData>

@@ -13,6 +13,8 @@ import {
 } from '@cc-components/shared';
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
@@ -36,6 +38,7 @@ import { useMemo, useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
 import { DetailsTab } from './DetailsTab';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 
 export const WorkorderSidesheet = (props: {
   id: string;
@@ -52,6 +55,12 @@ export const WorkorderSidesheet = (props: {
   } = useMaterial(props.id);
 
   const { data: cutoffList, error: cutoffError, isLoading } = useCutoff(props.id);
+
+  const {
+    data: modelConfig,
+    isFetching: isFetchingModelConfig,
+    error: modelConfigError,
+  } = useGetEchoConfig(props.id);
 
   const client = useHttpClient();
   const contextId = useContextId();
@@ -83,11 +92,11 @@ export const WorkorderSidesheet = (props: {
   };
 
   const tagsOverlay = useMemo(() => {
-    return mccr?.map((mccr) => ({
-      tagNo: mccr.tagNumber,
-      description: mccr.description,
-      status: mccr.mccrStatus,
-      icon: mccrIcon(mccr.mccrStatus || ''),
+    return modelConfig?.tags?.map((tag) => ({
+      tagNo: tag.tagNo,
+      description: tag.description,
+      status: tag.status,
+      icon: mccrIcon(tag.status || ''),
     })) as TagOverlay[];
   }, [mccr]);
 
@@ -165,7 +174,7 @@ export const WorkorderSidesheet = (props: {
           }
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
             <Tabs.Tab>Details</Tabs.Tab>
@@ -179,12 +188,12 @@ export const WorkorderSidesheet = (props: {
               Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
             </Tabs.Tab>
             <Tabs.Tab>
-              3D <TabTitle data={mccr} isLoading={isLoading} />
+              3D <TabTitle data={modelConfig?.tags} isLoading={isFetchingModelConfig} />
             </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>
             <DetailsTab workOrder={wo} />
           </Tabs.Panel>
@@ -213,13 +222,13 @@ export const WorkorderSidesheet = (props: {
             <ModelViewerTab
               TagOverlay={tagsOverlay}
               options={viewerOptions}
-              isFetching={isFetchingMccr}
-              error={mccrError as Error | null}
-              facility={mccr?.map((item) => item.facility!) || ['']}
+              isFetching={isFetchingModelConfig}
+              error={modelConfigError as Error | null}
+              facilities={modelConfig?.facilities ?? []}
             />
           </Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };
