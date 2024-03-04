@@ -69,34 +69,6 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   }
 `;
 
-export const StyledStatuses = styled.div`
-  margin-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-
-  > div {
-    margin-right: 16px;
-
-    &:last-child {
-      margin: 0;
-    }
-  }
-`;
-type NoStatusProps = {
-  size: 'small' | 'medium';
-};
-export const StyledNoStatus = styled.div<NoStatusProps>`
-  outline: ${(props) =>
-    `${props.size === 'small' ? '2px' : '4px'} dashed ${
-      tokens.colors.ui.background__medium.hex
-    }`};
-  border-radius: ${(props) => (props.size === 'small' ? '17px' : '21px')};
-  height: ${(props) => (props.size === 'small' ? '16px' : '20px')};
-  width: ${(props) => (props.size === 'small' ? '16px' : '20px')};
-`;
-
 export const StyledDescription = styled.p`
   all: unset;
   width: 50%;

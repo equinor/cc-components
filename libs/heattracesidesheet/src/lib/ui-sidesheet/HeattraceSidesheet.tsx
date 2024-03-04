@@ -42,7 +42,9 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${props.item.heatTraceCableNo} - ${props.item.heatTraceCableDescription}`}
+        title={props.item.heatTraceCableNo}
+        url={props.item.heatTraceCableUrl ?? ''}
+        description={props.item.heatTraceCableDescription || ''}
         onClose={props.close}
         applicationTitle="Heat Trace"
       />
