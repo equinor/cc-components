@@ -8,6 +8,7 @@ import {
   ElectricalNetwork,
   LinkCell,
   StatusCircle,
+  domainNames,
   statusColorMap,
   useContextId,
   useHttpClient,
@@ -49,7 +50,7 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
       />
       <StyledBanner>
         <BannerItem
-          title="Checklist status"
+          title={domainNames.checklistStatus}
           value={
             <StatusCircle
               content={props?.item?.formStatus || 'N/A'}
@@ -62,7 +63,7 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
           }
         />
         <BannerItem
-          title="Comm Pkg"
+          title={domainNames.commPkg}
           value={
             props.item.commissioningPackageNo ? (
               <LinkCell
@@ -75,7 +76,7 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
           }
         ></BannerItem>
         <BannerItem
-          title="MC Pkg"
+          title={domainNames.mcPkg}
           value={
             props.item.mechanicalCompletionPackageNo ? (
               <LinkCell
@@ -87,7 +88,10 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
             )
           }
         />
-        <BannerItem title="Priority1" value={props.item.priority1 ?? 'N/A'} />
+        <BannerItem
+          title={domainNames.commPriority1}
+          value={props.item.priority1 ?? 'N/A'}
+        />
       </StyledBanner>
       <Tabs tabs={[circuitDiagramTab, workorderTab, checklistTab, threeDTab]}></Tabs>
     </StyledSideSheetContainer>
