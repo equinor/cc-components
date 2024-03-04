@@ -1,4 +1,5 @@
 import {
+  IndexSet,
   BoundingBoxClipper,
   CogniteCadModel,
   InvertedNodeCollection,
@@ -14,11 +15,17 @@ import CameraControls, {
   HierarchyClient,
   HierarchyNodeModel,
   getTagNoRefNoAndAabbByNodeId,
+  SelectedNodeInformation,
+  combineHierarchyAabbs,
+  getNumericRange,
 } from '@equinor/echo-3d-viewer';
+
+import { get3dPositionFromAabbMinMaxValues } from '@equinor/echo-3d-viewer/dist/src/utils/calculationUtils';
+
+import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 
 import * as THREE from 'three';
 import { Box3, Color, Vector3 } from 'three';
-import { NodeService } from './nodeService';
 
 CameraControls.install({ THREE });
 
@@ -36,44 +43,35 @@ export interface SelectNodesByTagOptions {
   signal?: AbortSignal;
 }
 
-export class SelectionService extends NodeService {
-  constructor(
-    private modelMeta: AssetMetadataSimpleDto,
-    private hierarchyClient: HierarchyClient,
-    private viewer: Echo3dViewer,
-    private model: CogniteCadModel
-  ) {
-    super();
-  }
 
-  findNodesByTags = async (tags: string[], signal?: AbortSignal) => {
-    return (
-      await this.hierarchyClient.findNodesByTagList(
-        this.modelMeta.hierarchyId,
-        tags,
-        signal
-      )
-    ).results;
+type Props = {
+  modelMeta: AssetMetadataSimpleDto;
+  hierarchyClient: HierarchyClient;
+  viewer: Echo3dViewer;
+  model: CogniteCadModel;
+}
+
+export const useSelectionUtilities = (props: Props) => {
+  const { modelMeta, hierarchyClient, viewer, model } = props;
+
+
+  
+  const findNodesByTags = async (tags: string[], signal?: AbortSignal) => {
+    const request = await hierarchyClient.findNodesByTagList(modelMeta.hierarchyId, tags, signal);
+    return request.results;
   };
 
-  getNodeFromTreeId = async (
-    treeIndex: number,
-    cancellationToken: CancelToken = CancelToken.none
-  ) => {
-    return await getTagNoRefNoAndAabbByNodeId(
-      treeIndex,
-      this.modelMeta.hierarchyId,
-      cancellationToken
-    );
+  const getNodeFromTreeId = async (treeIndex: number, ct: CancelToken = CancelToken.none) => {
+    return await getTagNoRefNoAndAabbByNodeId(treeIndex, modelMeta.hierarchyId, ct);
   };
 
-  async selectNodesByTags(tags: string[], options?: SelectNodesByTagOptions) {
-    const nodes = await this.findNodesByTags(tags, options?.signal);
-    const nodeCollection = this.getNodeCollectionFromHierarchyNodeModel(nodes);
+  const selectNodesByTags = async (tags: string[], options?: SelectNodesByTagOptions) {
+    const nodes = await findNodesByTags(tags, options?.signal);
+    const nodeCollection = getNodeCollectionFromHierarchyNodeModel(nodes);
 
-    const appearance = this.resetStyleToNodeAppearance(options?.appearance);
+    const appearance = resetStyleToNodeAppearance(options?.appearance);
 
-    this.model.assignStyledNodeCollection(
+    model.assignStyledNodeCollection(
       nodeCollection,
       options?.appearance || {
         color: new Color(177 / 255, 140 / 255, 255 / 255),
@@ -81,68 +79,65 @@ export class SelectionService extends NodeService {
       }
     );
 
-    this.assignStyletToInvertedNodeCollection(nodeCollection, appearance);
+    assignStyletToInvertedNodeCollection(nodeCollection, appearance);
 
-    if (options?.fitToSelection)
-      this.fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
+    if (options?.fitToSelection) fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
 
     return nodes;
   }
 
-  async assignColorByTagColor(tagColors: TagColor[], options?: SelectNodesByTagOptions) {
-    const nodes = await this.findNodesByTags(tagColors.map((tagColor) => tagColor.tag));
-    this.assignColorToNodesByTagColor(nodes, tagColors);
+  const assignColorByTagColor = async (tagColors: TagColor[], options?: SelectNodesByTagOptions) => {
+    const nodes = await findNodesByTags(tagColors.map((tagColor) => tagColor.tag));
+    assignColorToNodesByTagColor(nodes, tagColors);
 
     if (options?.fitToSelection) {
-      this.fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
+      fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
     }
 
     return nodes;
   }
 
-  assignColorToNodesByTagColor(
-    nodes: HierarchyNodeModel[],
-    tagColors: TagColor[],
-    appearance: NodeAppearance = {}
-  ) {
-    const nodeCollectionsMap = this.getNodeCollectionsMap(nodes, tagColors);
+  const assignColorToNodesByTagColor = async (nodes: HierarchyNodeModel[], tagColors: TagColor[], appearance: NodeAppearance = {}) => {
+    const nodeCollectionsMap = getNodeCollectionsMap(nodes, tagColors);
 
     Object.values(nodeCollectionsMap).forEach((collection) => {
-      const nodeCollection = this.getNodeCollectionFromHierarchyNodeModel(
+      const nodeCollection = getNodeCollectionFromHierarchyNodeModel(
         collection.nodes
       );
-      this.model.assignStyledNodeCollection(nodeCollection, {
+
+      model.assignStyledNodeCollection(nodeCollection, {
         color: collection.color,
         renderInFront: true,
       });
     });
 
-    this.assignStyletToInvertedNodeCollection(
-      this.getNodeCollectionFromHierarchyNodeModel(nodes),
+    assignStyletToInvertedNodeCollection(
+      getNodeCollectionFromHierarchyNodeModel(nodes),
       appearance
     );
   }
 
-  resetStyleToNodeAppearance(appearance?: NodeAppearance) {
-    const newAppearance = appearance || this.model.getDefaultNodeAppearance();
-    this.model.styledNodeCollections.forEach((nodeCollection) =>
-      this.model.assignStyledNodeCollection(nodeCollection.nodeCollection, newAppearance)
+  const resetStyleToNodeAppearance = (appearance?: NodeAppearance) => {
+    const newAppearance = appearance || model.getDefaultNodeAppearance();
+    model.styledNodeCollections.forEach((nodeCollection) =>
+      model.assignStyledNodeCollection(nodeCollection.nodeCollection, newAppearance)
     );
 
     return newAppearance;
   }
 
-  async showNodesNotInSelection(nodes: HierarchyNodeModel[], show: boolean) {
+  const showNodesNotInSelection = async(nodes: HierarchyNodeModel[], show: boolean) =>{
     const newAppearance = {
       visible: show,
     };
-    this.assignStyletToInvertedNodeCollection(
-      this.getNodeCollectionFromHierarchyNodeModel(nodes),
+
+    assignStyletToInvertedNodeCollection(
+      getNodeCollectionFromHierarchyNodeModel(nodes),
       newAppearance
     );
   }
 
-  getNodeCollectionsMap(nodes: HierarchyNodeModel[], tagColors: TagColor[]) {
+  const getNodeCollectionsMap = (nodes: HierarchyNodeModel[], tagColors: TagColor[]) => {
     return tagColors.reduce((nodeCollectionsMap, tagColor) => {
       if (typeof tagColor.color === 'string') {
         tagColor.color = new Color(tagColor.color);
@@ -164,57 +159,46 @@ export class SelectionService extends NodeService {
     }, {} as Record<string, { color: Color; nodes: HierarchyNodeModel[] }>);
   }
 
-  assignStyletToInvertedNodeCollection(
-    nodeCollection: TreeIndexNodeCollection,
-    appearance: NodeAppearance
-  ) {
-    const unassignedNodes = new InvertedNodeCollection(this.model, nodeCollection);
-    this.model.assignStyledNodeCollection(unassignedNodes, appearance);
+  const assignStyletToInvertedNodeCollection = (nodeCollection: TreeIndexNodeCollection, appearance: NodeAppearance) => {
+    const unassignedNodes = new InvertedNodeCollection(model, nodeCollection);
+    model.assignStyledNodeCollection(unassignedNodes, appearance);
   }
 
-  fitCameraToNodeSelection(
-    nodes: HierarchyNodeModel[],
-    duration?: number | undefined,
-    radiusFactor?: number | undefined
-  ) {
-    const box = this.getBoxFromNodes(nodes);
-    if (box) this.fitCameraToBox3(box, duration, radiusFactor);
+  const fitCameraToNodeSelection = (nodes: HierarchyNodeModel[],duration?: number | undefined, radiusFactor?: number | undefined) => {
+    const box = getBoxFromNodes(nodes);
+    if (box) fitCameraToBox3(box, duration, radiusFactor);
   }
 
-  fitCameraToBox3(
-    box: Box3,
-    duration?: number | undefined,
-    radiusFactor?: number | undefined
-  ) {
-    this.viewer?.fitCameraToBoundingBox(box, duration, radiusFactor);
+  const fitCameraToBox3 = (box: Box3, duration?: number | undefined, radiusFactor?: number | undefined) => {
+    viewer?.fitCameraToBoundingBox(box, duration, radiusFactor);
   }
 
-  clipModelByNodes(nodes: HierarchyNodeModel[], isClipped: boolean, padding?: number) {
-    const aabb = this.getCombinedAAbbsFromNodes(nodes);
-    aabb && this.clipModelByAabbModel(aabb, isClipped, padding);
+  const clipModelByNodes = (nodes: HierarchyNodeModel[], isClipped: boolean, padding?: number) => {
+    const aabb = getCombinedAAbbsFromNodes(nodes);
+    aabb && clipModelByAabbModel(aabb, isClipped, padding);
   }
 
-  clipModelByAabbModel(aabb: AabbModel, isClipped: boolean, padding?: number): void {
-    const boundingBox = this.getBoundingBoxFormAabbModel(aabb, padding);
+  const clipModelByAabbModel = (aabb: AabbModel, isClipped: boolean, padding?: number) => {
+    const boundingBox = getBoundingBoxFormAabbModel(aabb, padding);
     if (isClipped) {
       const clipper = new BoundingBoxClipper(boundingBox);
-      this.viewer.setGlobalClippingPlanes(clipper.clippingPlanes);
+      viewer.setGlobalClippingPlanes(clipper.clippingPlanes);
     } else {
-      this.viewer.setGlobalClippingPlanes([]);
+      viewer.setGlobalClippingPlanes([]);
     }
   }
 
-  cameraObitTarget(target: Vector3) {
-    const camera = this.viewer.cameraManager.getCamera();
-    const cameraManager = this.viewer.getCameraManager();
+  const cameraObitTarget = (target: Vector3) => {
+    const camera = viewer.cameraManager.getCamera();
+    const cameraManager = viewer.getCameraManager();
 
     cameraManager.initializeOrbitControls(camera.position, target);
   }
 
-  cameraFirstPerson() {
-    const camera = this.viewer.cameraManager.getCamera();
+  const cameraFirstPerson = () => {
+    const camera = viewer.cameraManager.getCamera();
 
-    const cameraManager = this.viewer.getCameraManager();
+    const cameraManager = viewer.getCameraManager();
 
     const controls = cameraManager.getControls();
     if (controls instanceof CameraControlsExtended) {
@@ -222,5 +206,87 @@ export class SelectionService extends NodeService {
 
       cameraManager.initializeFirstPersonControlsUsingTarget(camera.position, target);
     }
+  }
+
+  const getViewerNodeSelection = (nodes: HierarchyNodeModel[]): ViewerNodeSelection[] => {
+    return nodes
+      .filter((nodeResult) => nodeResult.aabb && nodeResult.tag)
+      .map((nodeResult) => {
+        const { min, max } = nodeResult.aabb!;
+
+        const boundingBox = new THREE.Box3(
+          new THREE.Vector3(min.x, min.z, -max.y),
+          new THREE.Vector3(max.x, max.z, -min.y)
+        );
+
+        return {
+          position: get3dPositionFromAabbMinMaxValues(nodeResult.aabb!),
+          tagNo: nodeResult.tag!,
+          aabb: nodeResult.aabb!,
+          boundingBox,
+        };
+      });
+  };
+
+  const getNodeTagInfoFromHierarchyNodeModel = (nodes: HierarchyNodeModel[]): SelectedNodeInformation[] => {
+    return nodes.map((node) => {
+      return {
+        id: node.id,
+        endId: node.endId,
+        e3dTagNo: node.tag,
+        discipline: node.discipline,
+        system: node.system,
+        parentId: node.parentId,
+        referenceNo: node.pdmsData ? node.pdmsData.RefNo : undefined,
+        nodeAabb: node.aabb,
+        tag: node.tag,
+        point: node.aabb ? get3dPositionFromAabbMinMaxValues(node.aabb) : undefined,
+      };
+    });
+  };
+
+  const getNodeCollectionFromHierarchyNodeModel = (nodes: HierarchyNodeModel[]): TreeIndexNodeCollection => {
+    const indices = new IndexSet();
+    const numericRanges = nodes.filter((x) => x.endId).map((x) => getNumericRange(x));
+    numericRanges.forEach((range) => indices.addRange(range));
+    return new TreeIndexNodeCollection(indices);
+  }
+
+  const getCombinedAAbbsFromNodes = (nodes: HierarchyNodeModel[]): AabbModel | null => {
+    const aabbs = nodes.reduce((allAabbs: AabbModel[], highlightedNode) => {
+      if (highlightedNode.aabb) allAabbs.push(highlightedNode.aabb);
+      return allAabbs;
+    }, []);
+
+    return combineHierarchyAabbs(aabbs);
+  }
+
+  const getCenterFromNodes = (nodes?: HierarchyNodeModel[]) => {
+    if (!nodes) return new THREE.Vector3(0, 0, 0);
+
+    const aabb = getCombinedAAbbsFromNodes(nodes);
+    return aabb ? get3dPositionFromAabbMinMaxValues(aabb) : new THREE.Vector3(0, 0, 0);
+  }
+
+  const getBoxFromNodes = (nodes: HierarchyNodeModel[]): THREE.Box3 | undefined => {
+    const aabb = getCombinedAAbbsFromNodes(nodes);
+
+    if(!aabb) return;
+
+
+    return getBoundingBoxFormAabbModel(aabb);
+  }
+
+  const getBoundingBoxFormAabbModel = (aabb: AabbModel, padding = 1) => {
+    const { min, max } = aabb;
+    return new THREE.Box3(
+      new THREE.Vector3(min.x - padding, min.z - padding, -max.y - padding),
+      new THREE.Vector3(max.x + padding, max.z + padding, -min.y + padding)
+    );
+  }
+
+
+  return {
+
   }
 }
