@@ -84,32 +84,36 @@ const Style = {
 export const Legend = () => {
   const { viewNodes, tagList, toggleTags, filterTags, notFoundTagList } =
     useSelectionContext();
+
   const [isExpanded, setIsExpanded] = useState(true);
 
   const legendData = useMemo(() => {
     return tagList.reduce((acc, item) => {
       if (!item.status) return acc;
-      if (!notFoundTagList.includes(item)) {
-        if (acc[item.status]) {
-          acc[item.status].tags.push(item.tagNo);
-        } else {
-          acc[item.status] = {
-            status: item.status,
-            tags: [item.tagNo],
-            color: item.color || '',
-          };
-        }
+      if (notFoundTagList.includes(item)) return acc;
+
+      if (acc[item.status]) {
+        acc[item.status].tags.push(item.tagNo);
+        return acc;
       }
+
+      acc[item.status] = {
+        status: item.status,
+        tags: [item.tagNo],
+        color: item.color || '',
+      };
+
       return acc;
     }, {} as Record<string, { status: string; color: string; tags: string[] }>);
   }, [tagList, notFoundTagList]);
 
   if (
-    !Boolean(Object.values(legendData).length) ||
+    !Object.values(legendData).length ||
     tagList.length === notFoundTagList.length ||
     viewNodes.length === 0
-  )
+  ) {
     return null;
+  }
 
   return (
     <Style.Overlay>
