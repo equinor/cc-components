@@ -32,21 +32,20 @@ export const ModelViewer = (props: PropsWithChildren<ModelViewerProps>) => {
             props.options?.fallbackComponent ? props.options.fallbackComponent : Message
           }
         >
-          <ModelViewerContainer {...props} />
+          <ModelViewerContent {...props} />
         </MessageBoundary>
       </ConfigContextProvider>
     </QueryClientProvider>
   );
 };
 
-const ModelViewerContainer = ({
-  facility,
-  tagsOverlay,
-  children,
-}: PropsWithChildren<ModelViewerProps>) => {
+const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
+  const { facility, tagsOverlay, children } = props;
+
   const components: { CustomActions?: React.ReactElement } = {
     CustomActions: undefined,
   };
+
   if (Children.count(children) != 0) {
     Children.forEach(children, (child) => {
       if (!isValidElement(child)) return;

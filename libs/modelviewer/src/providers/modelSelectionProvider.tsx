@@ -9,8 +9,8 @@ import {
   useState,
 } from 'react';
 
-import { ModelService, ViewerOptions } from '../services/modelsService';
-import { useModelViewerContext } from './modelViewerProvider';
+import { useModelSelectionService } from '../services/useModelSelectionService';
+
 import { usePlantData } from './plantDataProvider';
 import ModelSelectionDialog from '../components/model-selection-dialog/modelSelectionDialog';
 import { Loading } from '../components/loading/loading';
@@ -22,7 +22,7 @@ type ModelSelectionContextType = {
   models: AssetMetadataSimpleDto[];
   modelMeta?: AssetMetadataSimpleDto;
   setShowModelDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  setModel: (model: AssetMetadataSimpleDto, options?: ViewerOptions) => void;
+  setModelMeta: (model: AssetMetadataSimpleDto) => void;
 };
 
 const ModelSelectionContext = createContext({} as ModelSelectionContextType);
@@ -30,55 +30,46 @@ const ModelSelectionContext = createContext({} as ModelSelectionContextType);
 export const useModelSelectionContext = () => useContext(ModelSelectionContext);
 
 export const ModelSelectionProvider = ({ children }: PropsWithChildren<{}>) => {
-  const { echoInstance } = useModelViewerContext();
+  const modelSelectionService = useModelSelectionService();
   const { plantData } = usePlantData();
 
   const [isModelSelectionVisible, setShowModelDialog] = useState(false);
   const [modelMeta, setModelMeta] = useState<AssetMetadataSimpleDto>();
 
-  const setModel = async (model: AssetMetadataSimpleDto, options?: ViewerOptions) => {
-    const modelMeta = await modelService.loadModelById(model.id, options);
-    setModelMeta(modelMeta);
-  };
-
-  // TODO: Fix this. Move away from using useMemo to load a class. Use a hook instead.
-  const modelService = useMemo(() => {
-    return new ModelService(echoInstance);
-  }, [echoInstance]);
-
   const { data: models, isLoading } = useQuery<AssetMetadataSimpleDto[]>({
     queryKey: ['models', plantData],
     queryFn: async () => {
-      return await modelService.getModelsForPlant(plantData.plantCode);
+      return await modelSelectionService.getModelsForPlant(plantData.plantCode);
     },
-    enabled: Boolean(modelService),
     refetchOnWindowFocus: false,
-    initialData: [],
   });
 
-  // Model ID of the default model (if the user have selected to store a default selected model)
   const defaultModel = useMemo(() => {
-    const localModelId = modelService?.getLocalModel(plantData.plantCode);
-    return models.find((x) => x.platformSectionId === localModelId);
-  }, [modelService, plantData.plantCode]);
+    const platformSectionId = modelSelectionService.getDefaultModel(plantData.plantCode);
+    return models?.find((x) => x.platformSectionId === platformSectionId);
+  }, [models, plantData.plantCode]);
 
+  /**
+   * Loads a default model if the user previously selected to remember
+   * the choice of model. If not, a dialog for model selection is shown.
+   */
   useEffect(() => {
-    if (defaultModel) setModel(defaultModel);
-    else setShowModelDialog(true);
-  }, [defaultModel]);
+    if (!defaultModel && models) setShowModelDialog(true);
+    else setModelMeta(defaultModel);
+  }, [models, defaultModel]);
 
   console.log({ component: 3 });
 
   return (
     <ModelSelectionContext.Provider
       value={{
-        hasAccess: models.length > 0,
+        hasAccess: models ? models.length > 0 : false,
         isModelSelectionVisible,
         isLoading,
-        models,
+        models: models ?? [],
         modelMeta,
         setShowModelDialog,
-        setModel,
+        setModelMeta,
       }}
     >
       <ModelSelectionDialog />

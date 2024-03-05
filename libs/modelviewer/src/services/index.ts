@@ -1,3 +1,3 @@
 export * from './htmlOverlayToolHandler';
-export * from './modelsService';
+export * from './useModelSelectionService';
 export * from './selectionService';

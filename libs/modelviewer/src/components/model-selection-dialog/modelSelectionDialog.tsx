@@ -1,23 +1,27 @@
-import { Button, Checkbox, Dialog } from '@equinor/eds-core-react';
+import { Button, Checkbox, Dialog, Divider } from '@equinor/eds-core-react';
 import { useState } from 'react';
 import styled from 'styled-components';
+
 import { useModelSelectionContext } from '../../providers/modelSelectionProvider';
 import ModelSelectionList from '../model-selection-list/modelSelectionList';
 import AccessDialog from '../access-dialog/accessDialog';
+import { useModelSelectionService } from '../../services';
 
 export const ModelSelectionDialog = (): JSX.Element => {
+  const modelSelectionService = useModelSelectionService();
+
   const {
     setShowModelDialog,
-    setModel,
+    setModelMeta,
     isModelSelectionVisible,
     models,
-    modelMeta,
     hasAccess,
     isLoading,
   } = useModelSelectionContext();
 
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
-  const [rememberSelectedModel, setRememberSelectedModel] = useState(!!modelMeta);
+
+  const [rememberSelectedModel, setRememberSelectedModel] = useState(true);
 
   const handleModelSelect = (id: number) => {
     setSelectedModelId(id);
@@ -31,7 +35,11 @@ export const ModelSelectionDialog = (): JSX.Element => {
       throw Error('The selected model does not exist');
     }
 
-    setModel(selectedModel);
+    if (rememberSelectedModel) {
+      modelSelectionService.setDefaultModel(selectedModel);
+    }
+
+    setModelMeta(selectedModel);
     setShowModelDialog(false);
   };
 
@@ -52,12 +60,15 @@ export const ModelSelectionDialog = (): JSX.Element => {
         <Selection>
           <span>Multiple models are available. Please choose a model to view.</span>
           <ModelSelectionList onModelSelect={handleModelSelect} />
-          <Checkbox
-            label="Remember Selection"
-            onChange={(e) => setRememberSelectedModel(e.target.checked)}
-            checked={rememberSelectedModel}
-          />
         </Selection>
+
+        <Divider />
+
+        <Checkbox
+          label="Remember selection"
+          onChange={(e) => setRememberSelectedModel(e.target.checked)}
+          checked={rememberSelectedModel}
+        />
       </Dialog.CustomContent>
       <Dialog.Actions>
         <Button onClick={onSelect} disabled={selectedModelId === -1}>

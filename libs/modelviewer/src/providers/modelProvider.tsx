@@ -6,7 +6,7 @@ import {
   HierarchyClient,
 } from '@equinor/echo-3d-viewer';
 
-import { useModelLoader } from '../hooks/useModel';
+import { useModelLoader } from '../hooks/useModelLoader';
 import { CogniteCadModel } from '@cognite/reveal';
 import { Loading } from '../components/loading/loading';
 
