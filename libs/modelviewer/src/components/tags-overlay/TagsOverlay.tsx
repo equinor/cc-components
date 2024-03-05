@@ -33,7 +33,7 @@ export const TagsOverlay = (): JSX.Element => {
           const isSelected = selected === tag.tagNo;
           return (
             <div
-              key={tag.tagNo}
+              key={`${tag.tagNo}_${index}`}
               title={titleResolver ? titleResolver(tag) : tag.tagNo}
               onClick={() => {
                 echoInstance?.viewer.cameraManager.fitCameraToBoundingBox(

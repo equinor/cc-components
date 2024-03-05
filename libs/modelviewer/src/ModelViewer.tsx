@@ -2,11 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Children, FC, PropsWithChildren, cloneElement, isValidElement } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundary/MessageBoundary';
-import ModelSelection from './components/model-selection/modelSelection';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { ActionContextProvider } from './providers/actionProvider';
-import { ModelViewerContextProvider } from './providers/modelViewerProvider';
-import { ModelContextProvider } from './providers/modelsProvider';
+import { ModelViewerProvider } from './providers/modelViewerProvider';
+import { ModelSelectionProvider } from './providers/modelSelectionProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { TagOverlay } from './types/overlayTags';
 import { PlantDataContextProvider } from './providers/plantDataProvider';
@@ -14,6 +13,7 @@ import { Message } from './components/message/Message';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
 import { Legend } from './components/legend/Legend';
 import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
+import { ModelProvider } from './providers/modelProvider';
 
 type ModelViewerProps = {
   facility: string;
@@ -57,24 +57,22 @@ const ModelViewerContainer = ({
   }
 
   return (
-    <>
-      <PlantDataContextProvider {...{ facility }}>
-        <ModelViewerContextProvider>
-          <ModelContextProvider>
+    <PlantDataContextProvider {...{ facility }}>
+      <ModelViewerProvider>
+        <ModelSelectionProvider>
+          <ModelProvider>
             <SelectionContextProvider tagsOverlay={tagsOverlay}>
-              <ModelSelection>
-                <ActionContextProvider>
-                  <Legend />
-                  <TagsNotFound />
-                  <TagsOverlay />
-                  <ActionsMenu CustomActions={components.CustomActions} />
-                </ActionContextProvider>
-              </ModelSelection>
+              <ActionContextProvider>
+                <Legend />
+                <TagsNotFound />
+                <TagsOverlay />
+                <ActionsMenu CustomActions={components.CustomActions} />
+              </ActionContextProvider>
             </SelectionContextProvider>
-          </ModelContextProvider>
-        </ModelViewerContextProvider>
-      </PlantDataContextProvider>
-    </>
+          </ModelProvider>
+        </ModelSelectionProvider>
+      </ModelViewerProvider>
+    </PlantDataContextProvider>
   );
 };
 

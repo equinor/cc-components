@@ -26,6 +26,7 @@ import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 
 import * as THREE from 'three';
 import { Box3, Color, Vector3 } from 'three';
+import { useModelContext } from '../providers/modelProvider';
 
 CameraControls.install({ THREE });
 
@@ -43,29 +44,26 @@ export interface SelectNodesByTagOptions {
   signal?: AbortSignal;
 }
 
+export const useSelectionControls = () => {
+  const { modelMeta, hierarchyClient, viewer, model } = useModelContext();
 
-type Props = {
-  modelMeta: AssetMetadataSimpleDto;
-  hierarchyClient: HierarchyClient;
-  viewer: Echo3dViewer;
-  model: CogniteCadModel;
-}
-
-export const useSelectionUtilities = (props: Props) => {
-  const { modelMeta, hierarchyClient, viewer, model } = props;
-
-
-  
   const findNodesByTags = async (tags: string[], signal?: AbortSignal) => {
-    const request = await hierarchyClient.findNodesByTagList(modelMeta.hierarchyId, tags, signal);
+    const request = await hierarchyClient.findNodesByTagList(
+      modelMeta.hierarchyId,
+      tags,
+      signal
+    );
     return request.results;
   };
 
-  const getNodeFromTreeId = async (treeIndex: number, ct: CancelToken = CancelToken.none) => {
+  const getNodeFromTreeId = async (
+    treeIndex: number,
+    ct: CancelToken = CancelToken.none
+  ) => {
     return await getTagNoRefNoAndAabbByNodeId(treeIndex, modelMeta.hierarchyId, ct);
   };
 
-  const selectNodesByTags = async (tags: string[], options?: SelectNodesByTagOptions) {
+  const selectNodesByTags = async (tags: string[], options?: SelectNodesByTagOptions) => {
     const nodes = await findNodesByTags(tags, options?.signal);
     const nodeCollection = getNodeCollectionFromHierarchyNodeModel(nodes);
 
@@ -81,12 +79,16 @@ export const useSelectionUtilities = (props: Props) => {
 
     assignStyletToInvertedNodeCollection(nodeCollection, appearance);
 
-    if (options?.fitToSelection) fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
+    if (options?.fitToSelection)
+      fitCameraToNodeSelection(nodes, options?.duration || 0, options?.radiusFactor);
 
     return nodes;
-  }
+  };
 
-  const assignColorByTagColor = async (tagColors: TagColor[], options?: SelectNodesByTagOptions) => {
+  const assignColorByTagColor = async (
+    tagColors: TagColor[],
+    options?: SelectNodesByTagOptions
+  ) => {
     const nodes = await findNodesByTags(tagColors.map((tagColor) => tagColor.tag));
     assignColorToNodesByTagColor(nodes, tagColors);
 
@@ -95,15 +97,17 @@ export const useSelectionUtilities = (props: Props) => {
     }
 
     return nodes;
-  }
+  };
 
-  const assignColorToNodesByTagColor = async (nodes: HierarchyNodeModel[], tagColors: TagColor[], appearance: NodeAppearance = {}) => {
+  const assignColorToNodesByTagColor = async (
+    nodes: HierarchyNodeModel[],
+    tagColors: TagColor[],
+    appearance: NodeAppearance = {}
+  ) => {
     const nodeCollectionsMap = getNodeCollectionsMap(nodes, tagColors);
 
     Object.values(nodeCollectionsMap).forEach((collection) => {
-      const nodeCollection = getNodeCollectionFromHierarchyNodeModel(
-        collection.nodes
-      );
+      const nodeCollection = getNodeCollectionFromHierarchyNodeModel(collection.nodes);
 
       model.assignStyledNodeCollection(nodeCollection, {
         color: collection.color,
@@ -115,7 +119,7 @@ export const useSelectionUtilities = (props: Props) => {
       getNodeCollectionFromHierarchyNodeModel(nodes),
       appearance
     );
-  }
+  };
 
   const resetStyleToNodeAppearance = (appearance?: NodeAppearance) => {
     const newAppearance = appearance || model.getDefaultNodeAppearance();
@@ -124,9 +128,9 @@ export const useSelectionUtilities = (props: Props) => {
     );
 
     return newAppearance;
-  }
+  };
 
-  const showNodesNotInSelection = async(nodes: HierarchyNodeModel[], show: boolean) =>{
+  const showNodesNotInSelection = async (nodes: HierarchyNodeModel[], show: boolean) => {
     const newAppearance = {
       visible: show,
     };
@@ -135,7 +139,7 @@ export const useSelectionUtilities = (props: Props) => {
       getNodeCollectionFromHierarchyNodeModel(nodes),
       newAppearance
     );
-  }
+  };
 
   const getNodeCollectionsMap = (nodes: HierarchyNodeModel[], tagColors: TagColor[]) => {
     return tagColors.reduce((nodeCollectionsMap, tagColor) => {
@@ -157,28 +161,47 @@ export const useSelectionUtilities = (props: Props) => {
 
       return nodeCollectionsMap;
     }, {} as Record<string, { color: Color; nodes: HierarchyNodeModel[] }>);
-  }
+  };
 
-  const assignStyletToInvertedNodeCollection = (nodeCollection: TreeIndexNodeCollection, appearance: NodeAppearance) => {
+  const assignStyletToInvertedNodeCollection = (
+    nodeCollection: TreeIndexNodeCollection,
+    appearance: NodeAppearance
+  ) => {
     const unassignedNodes = new InvertedNodeCollection(model, nodeCollection);
     model.assignStyledNodeCollection(unassignedNodes, appearance);
-  }
+  };
 
-  const fitCameraToNodeSelection = (nodes: HierarchyNodeModel[],duration?: number | undefined, radiusFactor?: number | undefined) => {
+  const fitCameraToNodeSelection = (
+    nodes: HierarchyNodeModel[],
+    duration?: number | undefined,
+    radiusFactor?: number | undefined
+  ) => {
     const box = getBoxFromNodes(nodes);
     if (box) fitCameraToBox3(box, duration, radiusFactor);
-  }
+  };
 
-  const fitCameraToBox3 = (box: Box3, duration?: number | undefined, radiusFactor?: number | undefined) => {
+  const fitCameraToBox3 = (
+    box: Box3,
+    duration?: number | undefined,
+    radiusFactor?: number | undefined
+  ) => {
     viewer?.fitCameraToBoundingBox(box, duration, radiusFactor);
-  }
+  };
 
-  const clipModelByNodes = (nodes: HierarchyNodeModel[], isClipped: boolean, padding?: number) => {
+  const clipModelByNodes = (
+    nodes: HierarchyNodeModel[],
+    isClipped: boolean,
+    padding?: number
+  ) => {
     const aabb = getCombinedAAbbsFromNodes(nodes);
     aabb && clipModelByAabbModel(aabb, isClipped, padding);
-  }
+  };
 
-  const clipModelByAabbModel = (aabb: AabbModel, isClipped: boolean, padding?: number) => {
+  const clipModelByAabbModel = (
+    aabb: AabbModel,
+    isClipped: boolean,
+    padding?: number
+  ) => {
     const boundingBox = getBoundingBoxFormAabbModel(aabb, padding);
     if (isClipped) {
       const clipper = new BoundingBoxClipper(boundingBox);
@@ -186,14 +209,14 @@ export const useSelectionUtilities = (props: Props) => {
     } else {
       viewer.setGlobalClippingPlanes([]);
     }
-  }
+  };
 
   const cameraObitTarget = (target: Vector3) => {
     const camera = viewer.cameraManager.getCamera();
     const cameraManager = viewer.getCameraManager();
 
     cameraManager.initializeOrbitControls(camera.position, target);
-  }
+  };
 
   const cameraFirstPerson = () => {
     const camera = viewer.cameraManager.getCamera();
@@ -206,7 +229,7 @@ export const useSelectionUtilities = (props: Props) => {
 
       cameraManager.initializeFirstPersonControlsUsingTarget(camera.position, target);
     }
-  }
+  };
 
   const getViewerNodeSelection = (nodes: HierarchyNodeModel[]): ViewerNodeSelection[] => {
     return nodes
@@ -228,7 +251,9 @@ export const useSelectionUtilities = (props: Props) => {
       });
   };
 
-  const getNodeTagInfoFromHierarchyNodeModel = (nodes: HierarchyNodeModel[]): SelectedNodeInformation[] => {
+  const getNodeTagInfoFromHierarchyNodeModel = (
+    nodes: HierarchyNodeModel[]
+  ): SelectedNodeInformation[] => {
     return nodes.map((node) => {
       return {
         id: node.id,
@@ -245,12 +270,14 @@ export const useSelectionUtilities = (props: Props) => {
     });
   };
 
-  const getNodeCollectionFromHierarchyNodeModel = (nodes: HierarchyNodeModel[]): TreeIndexNodeCollection => {
+  const getNodeCollectionFromHierarchyNodeModel = (
+    nodes: HierarchyNodeModel[]
+  ): TreeIndexNodeCollection => {
     const indices = new IndexSet();
     const numericRanges = nodes.filter((x) => x.endId).map((x) => getNumericRange(x));
     numericRanges.forEach((range) => indices.addRange(range));
     return new TreeIndexNodeCollection(indices);
-  }
+  };
 
   const getCombinedAAbbsFromNodes = (nodes: HierarchyNodeModel[]): AabbModel | null => {
     const aabbs = nodes.reduce((allAabbs: AabbModel[], highlightedNode) => {
@@ -259,23 +286,22 @@ export const useSelectionUtilities = (props: Props) => {
     }, []);
 
     return combineHierarchyAabbs(aabbs);
-  }
+  };
 
   const getCenterFromNodes = (nodes?: HierarchyNodeModel[]) => {
     if (!nodes) return new THREE.Vector3(0, 0, 0);
 
     const aabb = getCombinedAAbbsFromNodes(nodes);
     return aabb ? get3dPositionFromAabbMinMaxValues(aabb) : new THREE.Vector3(0, 0, 0);
-  }
+  };
 
   const getBoxFromNodes = (nodes: HierarchyNodeModel[]): THREE.Box3 | undefined => {
     const aabb = getCombinedAAbbsFromNodes(nodes);
 
-    if(!aabb) return;
-
+    if (!aabb) return;
 
     return getBoundingBoxFormAabbModel(aabb);
-  }
+  };
 
   const getBoundingBoxFormAabbModel = (aabb: AabbModel, padding = 1) => {
     const { min, max } = aabb;
@@ -283,10 +309,22 @@ export const useSelectionUtilities = (props: Props) => {
       new THREE.Vector3(min.x - padding, min.z - padding, -max.y - padding),
       new THREE.Vector3(max.x + padding, max.z + padding, -min.y + padding)
     );
-  }
-
+  };
 
   return {
-
-  }
-}
+    getCenterFromNodes,
+    cameraObitTarget,
+    cameraFirstPerson,
+    showNodesNotInSelection,
+    clipModelByNodes,
+    fitCameraToNodeSelection,
+    getNodeCollectionFromHierarchyNodeModel,
+    assignStyletToInvertedNodeCollection,
+    getNodeFromTreeId,
+    getViewerNodeSelection,
+    selectNodesByTags,
+    assignColorByTagColor,
+    getBoundingBoxFormAabbModel,
+    fitCameraToBox3,
+  };
+};

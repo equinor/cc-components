@@ -1,11 +1,11 @@
 import { Button, Icon, Menu } from '@equinor/eds-core-react';
 import { more_horizontal } from '@equinor/eds-icons';
 import { useMemo, useState } from 'react';
-import { useModelContext } from '../../providers/modelsProvider';
+import { useModelSelectionContext } from '../../providers/modelSelectionProvider';
 import { usePlantData } from '../../providers/plantDataProvider';
 Icon.add({ more_horizontal });
 export const ModelSettingsMenu = () => {
-  const { showSelector, setShowModelDialog } = useModelContext();
+  const { isModelSelectionVisible, setShowModelDialog } = useModelSelectionContext();
   const { togglePlantSelector } = usePlantData();
 
   const { plantsData } = usePlantData();
@@ -24,7 +24,7 @@ export const ModelSettingsMenu = () => {
   };
 
   const showModelSelector = () => {
-    setShowModelDialog(!showSelector);
+    setShowModelDialog(!isModelSelectionVisible);
   };
 
   const handleMenuItemClick = (event: React.MouseEvent, index: number) => {

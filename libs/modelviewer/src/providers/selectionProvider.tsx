@@ -11,11 +11,10 @@ import {
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
 import { Color, Vector3 } from 'three';
 import { defaultTagColor } from '../components/tag-item/TagItem';
-import { SelectionService, TagColor } from '../services/selectionService';
+import { TagColor, useSelectionControls } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 import { useConfig } from './configProvider';
-import { useSelectionService } from '../hooks/useSelectionService';
 
 interface SelectionContextState {
   selectNodesByTags(tags: string[]): Promise<HierarchyNodeModel[] | undefined>;
@@ -30,9 +29,7 @@ interface SelectionContextState {
   viewNodes: ViewerNodeSelection[];
   tagList: TagOverlay[];
   notFoundTagList: TagOverlay[];
-  selectionService?: SelectionService;
   getCurrentNodes(): HierarchyNodeModel[] | undefined;
-  getSelectionService(): SelectionService | undefined;
   setTags: (tagOverlay: string[] | TagOverlay[], options?: { color: string }) => void;
   toggleTags(tags: string[]): void;
   filterTags: string[];
@@ -48,14 +45,17 @@ interface Test extends Event {
   };
 }
 
-export const SelectionContextProvider = ({
-  children,
-  tagsOverlay,
-}: PropsWithChildren<{
+type Props = {
   tagsOverlay?: TagOverlay[] | string[];
-}>) => {
+} & PropsWithChildren;
+
+export const SelectionContextProvider = (props: Props) => {
+  const { tagsOverlay, children } = props;
+
   const [tagList, setTagList] = useState<TagOverlay[]>([]);
   const config = useConfig();
+
+  const selectionControls = useSelectionControls();
 
   const handleTagList = (
     tagOverlay: string[] | TagOverlay[],
@@ -95,13 +95,11 @@ export const SelectionContextProvider = ({
     }
   }, [tagsOverlay]);
 
-  const { selectionService } = useSelectionService();
-
   const [currentNodes, setCurrentNodes] = useState<HierarchyNodeModel[]>([]);
   const [isTagFetching, setIsTagFetching] = useState<boolean>(true);
 
   useEffect(() => {
-    if (tagList.length > 0 && selectionService) {
+    if (tagList.length > 0) {
       selectNodesByTagsOverlay(tagList)
         .then((nodes) => {
           if (nodes) {
@@ -112,28 +110,28 @@ export const SelectionContextProvider = ({
           setIsTagFetching(false);
         });
     }
-  }, [tagList, selectionService]);
+  }, [tagList]);
 
   useEffect(() => {
     window.addEventListener('selectionStarted', (e) => {
       const index = (e as Test).detail.treeIndex;
-      selectionService?.getNodeFromTreeId(index).then((data) => {
+      selectionControls?.getNodeFromTreeId(index).then((data) => {
         data;
       });
     });
     return () => {
       // window.removeEventListener('selectionStarted');
     };
-  }, [selectionService]);
+  }, [selectionControls]);
 
   const selectNodesByTags = async (tags: string[]) => {
-    const nodes = await selectionService?.selectNodesByTags(tags, {
+    const nodes = await selectionControls?.selectNodesByTags(tags, {
       fitToSelection: true,
       radiusFactor: config.defaultRadiusFactor,
     });
     setCurrentNodes(nodes || []);
     if (nodes)
-      selectionService?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
+      selectionControls?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
     return nodes;
   };
 
@@ -151,50 +149,47 @@ export const SelectionContextProvider = ({
     if (currentNodes) return currentNodes;
   };
 
-  const getSelectionService = () => {
-    if (selectionService) return selectionService;
-  };
-
   const selectNodesByTagColor = async (tags: TagColor[]) => {
-    const nodes = await selectionService?.assignColorByTagColor(tags, {
+    const nodes = await selectionControls?.assignColorByTagColor(tags, {
       fitToSelection: true,
       radiusFactor: config.defaultCroppingDistance,
     });
     if (nodes) {
       setCurrentNodes(nodes);
-      selectionService?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
+      selectionControls?.clipModelByNodes(nodes, true, config.defaultCroppingDistance);
     }
     return nodes;
   };
 
   const orbit = () => {
-    if (currentNodes && selectionService) {
-      const target = selectionService.getCenterFromNodes(currentNodes);
-      selectionService.cameraObitTarget(target);
+    if (currentNodes && selectionControls) {
+      const target = selectionControls.getCenterFromNodes(currentNodes);
+      selectionControls.cameraObitTarget(target);
     }
   };
 
   const firstPerson = () => {
-    selectionService?.cameraFirstPerson();
+    selectionControls?.cameraFirstPerson();
   };
+
   const [filterTags, setFilterTags] = useState<string[]>([]);
 
   const viewNodes = useMemo((): ViewerNodeSelection[] => {
-    return selectionService?.getViewerNodeSelection(currentNodes) || [];
-  }, [currentNodes, selectionService]);
+    return selectionControls?.getViewerNodeSelection(currentNodes) || [];
+  }, [currentNodes, selectionControls]);
 
   const fitCameraToAAbb = useCallback(
     (aabb: AabbModel, duration?: number) => {
-      if (selectionService) {
-        const box3 = selectionService.getBoundingBoxFormAabbModel(aabb);
-        selectionService.fitCameraToBox3(
+      if (selectionControls) {
+        const box3 = selectionControls.getBoundingBoxFormAabbModel(aabb);
+        selectionControls.fitCameraToBox3(
           box3,
           duration || config.defaultCameraMoveDuration,
           config.defaultRadiusFactor
         );
       }
     },
-    [selectionService]
+    [selectionControls]
   );
 
   const toggleTags = (tags: string[]) => {
@@ -230,6 +225,8 @@ export const SelectionContextProvider = ({
     setFilterTags(tagList.map((tagItem) => tagItem.tagNo));
   }, [tagList]);
 
+  console.log({ component: 5 });
+
   return (
     <SelectionContext.Provider
       value={{
@@ -242,9 +239,7 @@ export const SelectionContextProvider = ({
         currentNodes,
         viewNodes,
         filterTags,
-        selectionService,
         getCurrentNodes,
-        getSelectionService,
         setTags: handleTagList,
         tagList,
         notFoundTagList,
@@ -262,3 +257,6 @@ export const useSelectionContext = () => {
   if (!context) throw new Error('Context provider not found!');
   return context;
 };
+
+
+

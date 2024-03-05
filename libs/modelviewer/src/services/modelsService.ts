@@ -128,7 +128,7 @@ export class ModelService {
       throw new Error('No model selected!');
     }
 
-    this.#loadModel(modelMeta, options);
+    await this.#loadModel(modelMeta, options);
     return modelMeta;
   }
 

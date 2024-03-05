@@ -137,6 +137,8 @@ export const PlantDataContextProvider = ({
     return null;
   }
 
+  console.log({ component: 1 });
+
   return (
     <PlantDataContext.Provider
       value={{ plantData: currentPlantData, plantsData, togglePlantSelector }}

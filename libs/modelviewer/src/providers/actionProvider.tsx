@@ -1,9 +1,9 @@
-import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
+import { NodeAppearance } from '@cognite/reveal';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import { Color } from 'three';
-import { useModelContext } from './modelsProvider';
 import { useSelectionContext } from './selectionProvider';
 import { useConfig } from './configProvider';
+import { useSelectionControls } from '../services';
+import { useModelContext } from './modelProvider';
 
 interface ActionContextState {
   hideModel(): void;
@@ -21,8 +21,10 @@ interface ActionContextState {
 const ActionContext = createContext<ActionContextState | undefined>(undefined);
 
 export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { getModel } = useModelContext();
-  const { getCurrentNodes, getSelectionService } = useSelectionContext();
+  const selectionService = useSelectionControls();
+
+  const { model } = useModelContext();
+  const { getCurrentNodes } = useSelectionContext();
 
   const { defaultRadiusFactor, defaultCroppingDistance } = useConfig();
 
@@ -30,10 +32,8 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   const [isFocus, setIsFocus] = useState(false);
   const [isClipped, setClipped] = useState(true);
   const currentNodes = getCurrentNodes();
-  const selectionService = getSelectionService();
 
   const setModelVisibility = (isVisible: boolean) => {
-    const model = getModel();
     if (model) {
       const appearance = model.getDefaultNodeAppearance();
       model.setDefaultNodeAppearance({ ...appearance, visible: isVisible });
@@ -95,6 +95,8 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
       selectionService.assignStyletToInvertedNodeCollection(collection, appearance);
     }
   };
+
+  console.log({ component: 6 });
 
   return (
     <ActionContext.Provider
