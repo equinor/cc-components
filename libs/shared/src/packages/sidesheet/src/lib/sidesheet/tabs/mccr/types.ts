@@ -24,4 +24,6 @@ export type MccrBase = {
   workOrderId: string | null;
   workOrderUrl: string | null;
   workOrderUrlId: string | null;
+  signedDate: string | null;
+  verifiedDate: string | null;
 };
