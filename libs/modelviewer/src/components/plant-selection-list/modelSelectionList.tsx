@@ -1,7 +1,7 @@
 import { Radio } from '@equinor/eds-core-react';
 
 import styled from 'styled-components';
-import { PlantData } from '../../services/echoService';
+import { PlantData } from '../../services/usePlantSelectionService';
 import { FC, useState } from 'react';
 
 interface PlantSelectionListProps {

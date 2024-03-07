@@ -1,5 +1,5 @@
 import { Button, Dialog } from '@equinor/eds-core-react';
-import { usePlantData } from '../../providers/plantDataProvider';
+import { usePlantContext } from '../../providers/plantProvider';
 
 type Props = {
   isOpen: boolean;
@@ -9,7 +9,7 @@ type Props = {
 export const AccessDialog = (props: Props): JSX.Element => {
   const { isOpen, onCancel } = props;
 
-  const { plantData } = usePlantData();
+  const { currentPlant } = usePlantContext();
 
   return (
     <Dialog open={isOpen} style={{ width: 'auto' }}>
@@ -20,7 +20,7 @@ export const AccessDialog = (props: Props): JSX.Element => {
         <p>You don't have access to any 3D Models for this plant.</p>
         <p>
           Request access in <b>Access IT</b> to apply for access. <br />
-          Search for <b>Echo {' ' + plantData.projectDescription}</b>
+          Search for <b>Echo {' ' + currentPlant.projectDescription}</b>
         </p>
       </Dialog.CustomContent>
       <Dialog.Actions>

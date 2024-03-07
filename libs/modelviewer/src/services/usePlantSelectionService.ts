@@ -1,5 +1,3 @@
-import { IHttpClient } from '@equinor/fusion-framework-module-http';
-
 export type PlantData = {
   plantCode: string;
   installationCode: string;
@@ -9,26 +7,20 @@ export type PlantData = {
 };
 
 const LOCAL_PLANT_ID_KEY = 'echoPlantId';
-export class EchoService {
-  #client: IHttpClient;
-  constructor(client: IHttpClient) {
-    this.#client = client;
-  }
 
-  async getAvailablePlants() {
-    return await this.#client.json<PlantData[]>('/EchoHub/plant-info');
-  }
-
-  getLocalPlant(instCode: string): string | undefined {
+export const usePlantSelectionService = () => {
+  const getLocalPlant = (instCode: string): string | undefined => {
     const localPlantJson = localStorage.getItem(LOCAL_PLANT_ID_KEY);
+
     if (localPlantJson) {
       const localModels = JSON.parse(localPlantJson);
       return localModels[instCode.toLowerCase()] || undefined;
     }
-    return undefined;
-  }
 
-  setLocalPlant(plant: PlantData): void {
+    return undefined;
+  };
+
+  const setLocalPlant = (plant: PlantData) => {
     const plantCode = plant.plantCode;
     const instCode = plant.installationCode;
 
@@ -38,5 +30,10 @@ export class EchoService {
     existingModels[instCode.toLowerCase()] = plantCode;
 
     localStorage.setItem(LOCAL_PLANT_ID_KEY, JSON.stringify(existingModels));
-  }
-}
+  };
+
+  return {
+    getLocalPlant,
+    setLocalPlant,
+  };
+};

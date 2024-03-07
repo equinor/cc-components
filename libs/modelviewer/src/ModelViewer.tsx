@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Children, FC, PropsWithChildren, cloneElement, isValidElement } from 'react';
+import { Children, PropsWithChildren, cloneElement, isValidElement } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundary/MessageBoundary';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
@@ -8,12 +8,13 @@ import { ModelViewerProvider } from './providers/modelViewerProvider';
 import { ModelSelectionProvider } from './providers/modelSelectionProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { TagOverlay } from './types/overlayTags';
-import { PlantDataContextProvider } from './providers/plantDataProvider';
+import { PlantSelectionProvider } from './providers/plantSelectionProvider';
 import { Message } from './components/message/Message';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
 import { Legend } from './components/legend/Legend';
 import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
 import { ModelProvider } from './providers/modelProvider';
+import { PlantProvider } from './providers/plantProvider';
 
 type ModelViewerProps = {
   facility: string;
@@ -56,22 +57,24 @@ const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
   }
 
   return (
-    <PlantDataContextProvider {...{ facility }}>
-      <ModelViewerProvider>
-        <ModelSelectionProvider>
-          <ModelProvider>
-            <SelectionContextProvider tagsOverlay={tagsOverlay}>
-              <ActionContextProvider>
-                <Legend />
-                <TagsNotFound />
-                <TagsOverlay />
-                <ActionsMenu CustomActions={components.CustomActions} />
-              </ActionContextProvider>
-            </SelectionContextProvider>
-          </ModelProvider>
-        </ModelSelectionProvider>
-      </ModelViewerProvider>
-    </PlantDataContextProvider>
+    <PlantSelectionProvider {...{ facility }}>
+      <PlantProvider>
+        <ModelViewerProvider>
+          <ModelSelectionProvider>
+            <ModelProvider>
+              <SelectionContextProvider tagsOverlay={tagsOverlay}>
+                <ActionContextProvider>
+                  <Legend />
+                  <TagsNotFound />
+                  <TagsOverlay />
+                  <ActionsMenu CustomActions={components.CustomActions} />
+                </ActionContextProvider>
+              </SelectionContextProvider>
+            </ModelProvider>
+          </ModelSelectionProvider>
+        </ModelViewerProvider>
+      </PlantProvider>
+    </PlantSelectionProvider>
   );
 };
 

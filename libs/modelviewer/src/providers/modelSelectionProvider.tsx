@@ -11,9 +11,9 @@ import {
 
 import { useModelSelectionService } from '../services/useModelSelectionService';
 
-import { usePlantData } from './plantDataProvider';
 import ModelSelectionDialog from '../components/model-selection-dialog/modelSelectionDialog';
 import { Loading } from '../components/loading/loading';
+import { usePlantContext } from './plantProvider';
 
 type ModelSelectionContextType = {
   hasAccess: boolean;
@@ -31,23 +31,25 @@ export const useModelSelectionContext = () => useContext(ModelSelectionContext);
 
 export const ModelSelectionProvider = ({ children }: PropsWithChildren<{}>) => {
   const modelSelectionService = useModelSelectionService();
-  const { plantData } = usePlantData();
+  const { currentPlant } = usePlantContext();
 
   const [isModelSelectionVisible, setShowModelDialog] = useState(false);
   const [modelMeta, setModelMeta] = useState<AssetMetadataSimpleDto>();
 
   const { data: models, isLoading } = useQuery<AssetMetadataSimpleDto[]>({
-    queryKey: ['models', plantData],
+    queryKey: ['models', currentPlant],
     queryFn: async () => {
-      return await modelSelectionService.getModelsForPlant(plantData.plantCode);
+      return await modelSelectionService.getModelsForPlant(currentPlant.plantCode);
     },
     refetchOnWindowFocus: false,
   });
 
   const defaultModel = useMemo(() => {
-    const platformSectionId = modelSelectionService.getDefaultModel(plantData.plantCode);
+    const platformSectionId = modelSelectionService.getDefaultModel(
+      currentPlant.plantCode
+    );
     return models?.find((x) => x.platformSectionId === platformSectionId);
-  }, [models, plantData.plantCode]);
+  }, [models, currentPlant.plantCode]);
 
   /**
    * Loads a default model if the user previously selected to remember
