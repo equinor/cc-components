@@ -5,6 +5,7 @@ import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 import styled from 'styled-components';
+import { useModelViewerConfig } from '../../../../../../fusion-framework';
 
 export const NoResourceData = styled.div`
   text-align: center;
@@ -40,6 +41,8 @@ export type ModelViewerTabProps = {
 
 export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
   const { tagOverlay, facilities, options, isFetching, error } = props;
+
+  const modelViewerConfig = useModelViewerConfig();
 
   if (isFetching) {
     return (
@@ -93,12 +96,7 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
           facility: facilities[0],
           options: options ?? undefined,
           tagsOverlay: tagOverlay,
-          hierarchyClientBaseUrl: 'https://app-echo-hierarchy-dev.azurewebsites.net',
-          hierarchyClientScope: 'ebc04930-bf9c-43e5-98bc-bc90865600b8/user_impersonation',
-          modelClientBaseUrl: 'https://app-echomodeldist-dev.azurewebsites.net',
-          modelClientScope: 'd484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation',
-          echoClientBaseUrl: 'https://dt-echopedia-api-dev.azurewebsites.net',
-          echoClientScope: 'aef35d97-53d4-4fd0-adaf-c5a514b38436/user_impersonation',
+          ...modelViewerConfig,
         }}
       />
     </WidgetContainer>

@@ -9,6 +9,7 @@ import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsig
 import { useState } from 'react';
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { ModelViewerConfigProvider } from './modelViewerConfigProvider';
 
 /**
  * Facades the fusion-framework render setup, used in all apps
@@ -85,7 +86,11 @@ export function createRender(
      */
     const AppComponent = makeComponent(<Comp />, args, configure);
 
-    root.render(<AppComponent />);
+    root.render(
+      <ModelViewerConfigProvider args={args}>
+        <AppComponent />
+      </ModelViewerConfigProvider>
+    );
 
     /** Teardown */
     return () => {
