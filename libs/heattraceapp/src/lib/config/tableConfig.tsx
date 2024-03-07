@@ -139,17 +139,6 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     colId: 'MechanicalCompletionHandoverStatus',
     headerName: domainNames.mcHandoverStatus,
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionHandoverStatus,
-    // cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
-    //   if (!props.data?.mechanicalCompletionHandoverStatus) return null;
-    //   return (
-    //     <StatusCircle
-    //       content={props.data.mechanicalCompletionHandoverStatus}
-    //       statusColor={
-    //         statusColorMap[props.data.mechanicalCompletionHandoverStatus as BaseStatus]
-    //       }
-    //     />
-    //   );
-    // },
   },
   {
     colId: 'MechanicalCompletionResponsible',
