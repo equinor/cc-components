@@ -6,6 +6,7 @@ import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import {
+  
   useCCApiAccessCheck,
   useContextId,
   useHttpClient,
