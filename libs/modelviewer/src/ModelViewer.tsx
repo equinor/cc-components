@@ -17,7 +17,7 @@ import { ModelProvider } from './providers/modelProvider';
 
 type ModelViewerProps = {
   facility: string;
-  tagsOverlay?: string[] | TagOverlay[];
+  tagsOverlay: TagOverlay[];
   options?: ModelViewerConfig;
 };
 

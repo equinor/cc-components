@@ -7,10 +7,6 @@ import {
   WaringMessage,
 } from '../types/general-types';
 
-type MessageOptions = {
-  shouldNotThrow: boolean;
-};
-
 export const useMessageBoundary = () => {
   const [messageItem, setItem] = useState<
     ErrorMessage | WaringMessage | InfoMessage | undefined

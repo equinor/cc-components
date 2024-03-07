@@ -18,10 +18,8 @@ import {
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
-  StyledPanels,
   StyledSideSheetContainer,
   StyledTabListWrapper,
-  StyledTabs,
   StyledTabsList,
   TabTitle,
 } from '@cc-components/sharedcomponents';
@@ -34,11 +32,18 @@ import { Tabs } from '@equinor/eds-core-react';
 
 import { TagOverlay } from '@cc-components/modelviewer';
 import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
 import { DetailsTab } from './DetailsTab';
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(colorMap, status) ? colorMap[status as PackageStatus] : '#009922';
+  },
+  defaultCroppingDistance: 3,
+};
 
 export const WorkorderSidesheet = (props: {
   id: string;
@@ -87,27 +92,12 @@ export const WorkorderSidesheet = (props: {
     }
   );
 
-  const mccrIcon = (status: string) => {
-    return <h3>{status}</h3>;
-  };
-
-  const tagsOverlay = useMemo(() => {
-    return modelConfig?.tags?.map((tag) => ({
-      tagNo: tag.tagNo,
-      description: tag.description,
-      status: tag.status,
-      icon: mccrIcon(tag.status || ''),
-    })) as TagOverlay[];
-  }, [mccr]);
-
-  const viewerOptions = {
-    statusResolver: (status: string) => {
-      return hasProperty(colorMap, status)
-        ? colorMap[status as PackageStatus]
-        : '#009922';
-    },
-    defaultCroppingDistance: 3,
-  };
+  const tagsOverlay = modelConfig?.tags?.map((tag) => ({
+    tagNo: tag.tagNo,
+    description: tag.description,
+    status: tag.status,
+    icon: <h3>{tag.status}</h3>,
+  })) as TagOverlay[];
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;
@@ -220,7 +210,7 @@ export const WorkorderSidesheet = (props: {
           </Tabs.Panel>
           <Tabs.Panel>
             <ModelViewerTab
-              TagOverlay={tagsOverlay}
+              tagOverlay={tagsOverlay}
               options={viewerOptions}
               isFetching={isFetchingModelConfig}
               error={modelConfigError as Error | null}

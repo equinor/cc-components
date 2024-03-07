@@ -108,10 +108,10 @@ const Message = {
 };
 
 export const TagsNotFound = () => {
-  const { viewNodes, notFoundTagList, isTagFetching } = useSelectionContext();
+  const { viewNodes, notFoundTagList, isFetchingNodes } = useSelectionContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (isTagFetching) {
+  if (isFetchingNodes) {
     return (
       <Message.Wrapper>
         <Message.Overlay>
@@ -124,7 +124,7 @@ export const TagsNotFound = () => {
     );
   }
 
-  if (viewNodes.length === 0 && !isTagFetching) {
+  if (viewNodes.length === 0 && !isFetchingNodes) {
     return (
       <Message.Wrapper>
         <Message.Overlay>

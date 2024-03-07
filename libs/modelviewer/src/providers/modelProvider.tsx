@@ -28,7 +28,5 @@ export const ModelProvider = (props: PropsWithChildren) => {
     return <Loading />;
   }
 
-  console.log({ component: 4 });
-
   return <ModelContext.Provider value={data}>{props.children}</ModelContext.Provider>;
 };

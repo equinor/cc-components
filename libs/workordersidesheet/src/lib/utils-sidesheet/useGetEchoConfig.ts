@@ -1,9 +1,9 @@
 import { useContextId } from '@cc-components/shared';
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+import { useHttpClient } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetEchoConfig = (packageId: string) => {
-  const client = useHttpClient('cc-app');
+  const client = useHttpClient();
   const contextId = useContextId();
 
   const { data, isFetching, error } = useQuery<EchoConfig>({

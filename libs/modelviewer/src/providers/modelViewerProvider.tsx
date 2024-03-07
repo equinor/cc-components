@@ -72,8 +72,6 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
     };
   }, [viewerInstance.client]);
 
-  console.log({ component: 2, isLoaded });
-
   return (
     <ModelViewerContext.Provider
       value={{

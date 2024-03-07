@@ -58,8 +58,6 @@ export const ModelSelectionProvider = ({ children }: PropsWithChildren<{}>) => {
     else setModelMeta(defaultModel);
   }, [models, defaultModel]);
 
-  console.log({ component: 3 });
-
   return (
     <ModelSelectionContext.Provider
       value={{

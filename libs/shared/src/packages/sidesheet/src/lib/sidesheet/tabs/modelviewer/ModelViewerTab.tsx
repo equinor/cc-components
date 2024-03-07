@@ -21,7 +21,7 @@ export const InfoText = styled.h3`
 `;
 
 export type ModelViewerTabProps = {
-  TagOverlay: string[] | TagOverlay[] | undefined;
+  tagOverlay: string[] | TagOverlay[] | undefined;
   facilities: string[];
   isFetching: boolean;
   error: Error | null;
@@ -29,7 +29,7 @@ export type ModelViewerTabProps = {
 };
 
 export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
-  const { TagOverlay, facilities, options, isFetching, error } = props;
+  const { tagOverlay, facilities, options, isFetching, error } = props;
 
   if (isFetching) {
     return (
@@ -53,7 +53,7 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
     );
   }
 
-  if (TagOverlay?.length == 0) {
+  if (tagOverlay?.length == 0) {
     return (
       <NoResourceData>
         <Icon
@@ -67,7 +67,7 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
     );
   }
 
-  if (facilities[0] && TagOverlay) {
+  if (facilities[0] && tagOverlay) {
     return (
       <Widget
         name="ModelViewer"
@@ -75,7 +75,7 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
           env: 'CI',
           facility: facilities[0],
           options: options ?? undefined,
-          tagsOverlay: TagOverlay,
+          tagsOverlay: tagOverlay,
         }}
       />
     );

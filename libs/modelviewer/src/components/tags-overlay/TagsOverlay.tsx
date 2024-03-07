@@ -11,7 +11,7 @@ export const TagsOverlay = (): JSX.Element => {
 
   const [selected, setSelected] = useState<string>();
 
-  const { filterTags } = useSelectionContext();
+  const { visibleTags } = useSelectionContext();
   const { overlayTags, overlayTool } = useOverlay();
   const {
     defaultRadiusFactor,
@@ -21,14 +21,10 @@ export const TagsOverlay = (): JSX.Element => {
     statusResolver,
   } = useConfig();
 
-  const onSelected = (tag?: string) => {
-    setSelected(tag);
-  };
-
   return (
     <div>
       {overlayTags
-        .filter((ot) => filterTags.includes(ot.tagNo))
+        .filter((ot) => visibleTags.includes(ot.tagNo))
         .map((tag, index) => {
           const isSelected = selected === tag.tagNo;
           return (

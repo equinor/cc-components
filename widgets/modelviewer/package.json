@@ -13,6 +13,6 @@
   },
   "files": [
     "dist/widget-bundle.js",
-    "widget-manifest.json"
+    "widget.manifest.config.json"
   ]
 }

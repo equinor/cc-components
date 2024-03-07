@@ -24,14 +24,13 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   const selectionService = useSelectionControls();
 
   const { model } = useModelContext();
-  const { getCurrentNodes } = useSelectionContext();
+  const { currentNodes } = useSelectionContext();
 
   const { defaultRadiusFactor, defaultCroppingDistance } = useConfig();
 
   const [isOrbit, setIsOrbit] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
   const [isClipped, setClipped] = useState(true);
-  const currentNodes = getCurrentNodes();
 
   const setModelVisibility = (isVisible: boolean) => {
     if (model) {
@@ -95,8 +94,6 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
       selectionService.assignStyletToInvertedNodeCollection(collection, appearance);
     }
   };
-
-  console.log({ component: 6 });
 
   return (
     <ActionContext.Provider
