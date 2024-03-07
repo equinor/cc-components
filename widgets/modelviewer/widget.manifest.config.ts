@@ -3,13 +3,15 @@ import {
   mergeWidgetManifests,
 } from '@equinor/fusion-framework-cli';
 
+import pkg from './package.json';
+
 export default defineWidgetManifest((env, { base }) => {
   if (env.command === 'serve') {
     return mergeWidgetManifests(base, {
-      description: 'Just a test',
-      entryPoint: 'src/Widget/index.ts',
-      name: 'ModelViewer',
-      version: '0.0.0',
+      description: pkg.description,
+      entryPoint: pkg.main,
+      name: pkg.name,
+      version: pkg.version,
     });
   }
   return base;

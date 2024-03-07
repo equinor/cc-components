@@ -1,7 +1,8 @@
 {
   "name": "ModelViewer",
+  "description": "Widget for Echo Model Viewer",
   "version": "1.0.0",
-  "main": "/src/main.tsx",
+  "main": "src/Widget/index.ts",
   "type": "module",
   "scripts": {
     "dev": "fusion-framework-cli widget dev",

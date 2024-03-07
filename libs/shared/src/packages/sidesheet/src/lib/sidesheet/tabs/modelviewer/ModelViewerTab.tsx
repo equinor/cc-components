@@ -20,6 +20,16 @@ export const InfoText = styled.h3`
   margin: 0;
 `;
 
+const WidgetContainer = styled.div`
+  height: 100%;
+  > section {
+    height: 100%;
+    > div {
+      height: 100%;
+    }
+  }
+`;
+
 export type ModelViewerTabProps = {
   tagOverlay: string[] | TagOverlay[] | undefined;
   facilities: string[];
@@ -67,23 +77,30 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
     );
   }
 
-  if (facilities[0] && tagOverlay) {
+  if (facilities.length <= 0 || !tagOverlay) {
     return (
-      <Widget
-        name="ModelViewer"
-        props={{
-          env: 'CI',
-          facility: facilities[0],
-          options: options ?? undefined,
-          tagsOverlay: tagOverlay,
-        }}
-      />
+      <NoResourceData>
+        <InfoText>No data available</InfoText>
+      </NoResourceData>
     );
   }
 
   return (
-    <NoResourceData>
-      <InfoText>No data available</InfoText>
-    </NoResourceData>
+    <WidgetContainer>
+      <Widget
+        name="ModelViewer"
+        props={{
+          facility: facilities[0],
+          options: options ?? undefined,
+          tagsOverlay: tagOverlay,
+          hierarchyClientBaseUrl: 'https://app-echo-hierarchy-dev.azurewebsites.net',
+          hierarchyClientScope: 'ebc04930-bf9c-43e5-98bc-bc90865600b8/user_impersonation',
+          modelClientBaseUrl: 'https://app-echomodeldist-dev.azurewebsites.net',
+          modelClientScope: 'd484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation',
+          echoClientBaseUrl: 'https://dt-echopedia-api-dev.azurewebsites.net',
+          echoClientScope: 'aef35d97-53d4-4fd0-adaf-c5a514b38436/user_impersonation',
+        }}
+      />
+    </WidgetContainer>
   );
 };

@@ -8,7 +8,7 @@ type ModelViewerProps = {
 };
 
 const StyledWrapper = styled.div`
-  height: calc(100vh - 276px);
+  height: 100%;
   overflow: hidden;
   position: relative;
 `;
