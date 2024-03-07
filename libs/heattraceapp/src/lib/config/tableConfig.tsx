@@ -11,6 +11,7 @@ import {
   LinkCell,
   StatusCircle,
   StyledMonospace,
+  domainNames,
   pipetestStatusColormap,
   useHttpClient,
 } from '@cc-components/shared';
@@ -47,7 +48,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
 const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   {
     colId: 'HeatTraceCableNo',
-    headerName: 'Tag',
+    headerName: domainNames.tag,
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return (
@@ -66,12 +67,12 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   },
   {
     colId: 'Priority1',
-    headerName: 'Priority1',
+    headerName: domainNames.commPriority1,
     valueGetter: (pkg) => pkg.data?.priority1,
   },
   {
     colId: 'Location',
-    headerName: 'Location',
+    headerName: domainNames.mcLocation,
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
@@ -79,7 +80,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   },
   // Need to implement the visual checklistStatus
   {
-    headerName: 'Checklist status',
+    headerName: domainNames.checklistStatus,
     valueGetter: (pkg) => pkg.data?.formStatus,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       if (!props.data?.formStatus) return null;
@@ -91,7 +92,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
       );
     },
   },
-  { headerName: 'Current step', valueGetter: (pkg) => pkg.data?.checklistStep },
+  { headerName: domainNames.currentStep, valueGetter: (pkg) => pkg.data?.checklistStep },
   {
     headerName: 'RFC',
     valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
