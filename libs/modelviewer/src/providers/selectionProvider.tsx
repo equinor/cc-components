@@ -1,22 +1,11 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-
+import { PropsWithChildren, createContext, useCallback, useContext } from 'react';
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
-import { Color, Vector3 } from 'three';
-import { defaultTagColor } from '../components/tag-item/TagItem';
 import { useSelectionControls } from '../services/selectionService';
 import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 import { useConfig } from './configProvider';
-import { useQuery } from '@tanstack/react-query';
 import { useModelTags } from '../hooks/useModelTags';
+import { useModelNodes } from '../hooks/useModelNodes';
 
 interface SelectionContextState {
   currentNodes: HierarchyNodeModel[];
@@ -50,69 +39,14 @@ export const SelectionContextProvider = (props: Props) => {
 
   const { visibleTags, tagList, setVisibleTags } = useModelTags(tagsOverlay);
 
-  const { data: currentNodes, isFetching: isFetchingNodes } = useQuery({
-    queryKey: ['echo-viewer', tagList.map((x) => x.tagNo)],
-    queryFn: async () => {
-      return await selectNodes(tagList);
-    },
-    refetchOnWindowFocus: false,
-    initialData: [],
-  });
-
-  const viewNodes = useMemo((): ViewerNodeSelection[] => {
-    return selectionControls?.getViewerNodeSelection(currentNodes) || [];
-  }, [currentNodes]);
-
-  const notFoundTagList = useMemo(() => {
-    if (viewNodes.length === tagList.length || viewNodes.length === 0) return [];
-
-    const tagSet = tagList.reduce((acc, item) => {
-      acc[item.tagNo] = item;
-      return acc;
-    }, {} as Record<string, TagOverlay>);
-
-    viewNodes.forEach((node) => {
-      if (tagSet[node.tagNo]) {
-        delete tagSet[node.tagNo];
-      }
-    });
-
-    return Object.values(tagSet);
-  }, [viewNodes, tagList]);
-
-  const selectNodes = async (tags: TagOverlay[]) => {
-    const hasColors = tags.some((x) => x.color);
-
-    if (!hasColors) {
-      const elements = tags.map((x) => x.tagNo);
-      return await selectNodesByTags(elements);
-    }
-
-    return await selectNodesByTagColor(tags);
-  };
-
-  const selectNodesByTags = async (tags: string[]) => {
-    const nodes = await selectionControls?.selectNodesByTags(tags, {
-      fitToSelection: true,
-      radiusFactor: config.defaultRadiusFactor,
-    });
-
-    return nodes;
-  };
-
-  const selectNodesByTagColor = async (tags: TagOverlay[]) => {
-    const elements = tags.map((tag) => ({
-      tag: tag.tagNo,
-      color: new Color(tag.color),
-    }));
-
-    const nodes = await selectionControls?.assignColorByTagColor(elements, {
-      fitToSelection: true,
-      radiusFactor: config.defaultCroppingDistance,
-    });
-
-    return nodes;
-  };
+  const {
+    viewNodes,
+    currentNodes,
+    notFoundTagList,
+    selectNodes,
+    selectNodesByTags,
+    isFetchingNodes,
+  } = useModelNodes(tagList);
 
   const orbit = () => {
     if (currentNodes && selectionControls) {
@@ -151,11 +85,6 @@ export const SelectionContextProvider = (props: Props) => {
 
     setVisibleTags(elements);
   };
-
-  useEffect(() => {
-    const padding = config.defaultCroppingDistance;
-    selectionControls.clipModelByNodes(currentNodes, true, padding);
-  }, [currentNodes]);
 
   return (
     <SelectionContext.Provider
