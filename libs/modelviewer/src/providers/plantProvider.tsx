@@ -13,9 +13,9 @@ const PlantContext = createContext({} as PlantContextState);
 export const usePlantContext = () => useContext(PlantContext);
 
 export const PlantProvider = (props: PropsWithChildren) => {
-  const { currentPlant, isLoading } = usePlantSelectionContext();
+  const { currentPlant } = usePlantSelectionContext();
 
-  if (isLoading || !currentPlant) {
+  if (!currentPlant) {
     return <Loading />;
   }
 

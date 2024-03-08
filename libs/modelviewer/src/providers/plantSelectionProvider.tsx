@@ -1,26 +1,15 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
-import {
-  PlantData,
-  usePlantSelectionService,
-} from '../services/usePlantSelectionService';
+import { PlantData } from '../services/usePlantSelectionService';
 import { Loading } from '../components/loading/loading';
-import { useWarning } from '../hooks/useMessageBoundary';
 import PlantSelectionDialog from '../components/plant-selection-dialog/plantSelectionDialog';
-import { useAvailablePlants } from '../hooks/useAvailablePlants';
+import React from 'react';
+import { useCurrentPlant } from '../hooks/useCurrentPlant';
 
 type PlantSelectionContextType = {
   currentPlant?: PlantData;
-  plants: PlantData[];
   isPlantSelectionVisible: boolean;
-  isLoading: boolean;
+  plants: PlantData[];
   setShowPlantDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentPlant: (plant: PlantData) => void;
 };
@@ -34,31 +23,11 @@ type Props = {
 } & PropsWithChildren;
 
 export const PlantSelectionProvider = ({ children, facility }: Props) => {
-  const { setWarning } = useWarning();
-  const plantSelectionService = usePlantSelectionService();
+  const { plants, currentPlant, setCurrentPlant } = useCurrentPlant(facility);
 
-  const { data: plants, isLoading } = useAvailablePlants(facility);
+  const [isPlantSelectionVisible, setShowPlantDialog] = useState(!currentPlant);
 
-  const [isPlantSelectionVisible, setShowPlantDialog] = useState(false);
-  const [currentPlant, setCurrentPlant] = useState<PlantData>();
-
-  const defaultPlant = useMemo(() => {
-    const localPlantCode = plantSelectionService.getLocalPlant(facility);
-    return plants?.find(
-      (x) => x.plantCode.toLowerCase() === localPlantCode?.toLowerCase()
-    );
-  }, [plants, facility]);
-
-  useEffect(() => {
-    if (isLoading) return;
-    if (currentPlant) return;
-
-    if (defaultPlant) return setCurrentPlant(defaultPlant);
-    if (plants.length === 1) return setCurrentPlant(plants[0]);
-    if (plants.length > 1) return setShowPlantDialog(true);
-
-    setWarning('No Plant Data Available');
-  }, [isLoading, currentPlant, defaultPlant, plants]);
+  // TODO: Add error boundary handeling for this warning: setWarning('No Plant Data Available');
 
   return (
     <PlantSelectionContext.Provider
@@ -66,7 +35,6 @@ export const PlantSelectionProvider = ({ children, facility }: Props) => {
         currentPlant,
         plants,
         isPlantSelectionVisible,
-        isLoading,
         setShowPlantDialog,
         setCurrentPlant,
       }}
@@ -76,3 +44,5 @@ export const PlantSelectionProvider = ({ children, facility }: Props) => {
     </PlantSelectionContext.Provider>
   );
 };
+
+export default PlantSelectionProvider;

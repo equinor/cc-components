@@ -92,6 +92,7 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
     <WidgetContainer>
       <Widget
         name="ModelViewer"
+        widgetVersion={{ type: 'version', value: '1.0.0' }}
         props={{
           facility: facilities[0],
           options: options ?? undefined,

@@ -22,6 +22,7 @@ export const useAvailablePlants = (facility: string) => {
       return filtered;
     },
     cacheTime: 5 * 1000 * 60,
+    suspense: true,
   });
 
   return {
