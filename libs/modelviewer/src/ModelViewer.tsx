@@ -12,7 +12,6 @@ import MessageBoundary from './components/message-boundary/MessageBoundary';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { ActionContextProvider } from './providers/actionProvider';
 import { ModelViewerProvider } from './providers/modelViewerProvider';
-import { ModelSelectionProvider } from './providers/modelSelectionProvider';
 import { SelectionContextProvider } from './providers/selectionProvider';
 import { TagOverlay } from './types/overlayTags';
 
@@ -25,6 +24,7 @@ import { PlantProvider } from './providers/plantProvider';
 import { Loading } from './components/loading/loading';
 
 const PlantSelectionProvider = lazy(() => import('./providers/plantSelectionProvider'));
+const ModelSelectionProvider = lazy(() => import('./providers/modelSelectionProvider'));
 
 type ModelViewerProps = {
   facility: string;

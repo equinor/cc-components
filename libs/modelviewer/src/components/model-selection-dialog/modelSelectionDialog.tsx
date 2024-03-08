@@ -10,14 +10,8 @@ import { useModelSelectionService } from '../../services';
 export const ModelSelectionDialog = (): JSX.Element => {
   const modelSelectionService = useModelSelectionService();
 
-  const {
-    setShowModelDialog,
-    setModelMeta,
-    isModelSelectionVisible,
-    models,
-    hasAccess,
-    isLoading,
-  } = useModelSelectionContext();
+  const { setShowModelDialog, setModelMeta, isModelSelectionVisible, models, hasAccess } =
+    useModelSelectionContext();
 
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
 
@@ -47,7 +41,7 @@ export const ModelSelectionDialog = (): JSX.Element => {
     setShowModelDialog(false);
   };
 
-  if (!hasAccess && !isLoading) {
+  if (!hasAccess) {
     return <AccessDialog isOpen={isModelSelectionVisible} onCancel={onCancel} />;
   }
 
