@@ -1,14 +1,10 @@
-import { useAppModules } from '@equinor/fusion-framework-react-app';
 import {
   PropsWithChildren,
   RefObject,
   createContext,
   useContext,
   useEffect,
-  useRef,
-  useState,
 } from 'react';
-import { ModuleViewer } from '../modules';
 
 import {
   Echo3dViewer,
@@ -18,7 +14,7 @@ import {
 } from '@equinor/echo-3d-viewer';
 import { Canvas } from '../components/canvas/canvas';
 import { IHttpClient } from '@equinor/fusion-framework-module-http';
-import { Loading } from '../components/loading/loading';
+import { useLoadModelViewer } from '../hooks/useLoadModelViewer';
 
 type ModelViewerContextType = {
   viewer: Echo3dViewer;
@@ -36,20 +32,7 @@ const ModelViewerContext = createContext<ModelViewerContextType>(
 export const useModelViewerContext = () => useContext(ModelViewerContext);
 
 export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
-  const viewerRef = useRef<HTMLCanvasElement>(null);
-  const viewerInstance = useAppModules<[ModuleViewer]>().moduleViewer;
-
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const init = async () => {
-    await viewerInstance.setup({ canvas: viewerRef.current });
-    await viewerInstance.client?.authenticate();
-    setIsLoaded(true);
-  };
-
-  useEffect(() => {
-    if (!isLoaded) init();
-  }, [viewerInstance, isLoaded, viewerRef.current]);
+  const { viewerInstance, viewerRef, isLoading } = useLoadModelViewer();
 
   /* Add event listeners for re-authenticating every timewindow gains focus.
    * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
@@ -83,8 +66,7 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
       }}
     >
       <Canvas viewerRef={viewerRef} />
-      {!isLoaded ? <Loading /> : children}
+      {isLoading ? null : children}
     </ModelViewerContext.Provider>
   );
 };
-
