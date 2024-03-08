@@ -11,11 +11,15 @@ export type HeatTrace = {
   commissioningPackageUrlId: string | null;
   commissioningResponsible: string | null;
   commissioningStatus: string | null;
+  commissioningIdentifierCode: string | null;
+  commissioningIdentifierDescription: string | null;
   mechanicalCompletionPackageNo: string | null;
   mechanicalCompletionPackageId: string | null;
   mechanicalCompletionUrlId: string | null;
   mechanicalCompletionResponsible: string | null;
   mechanicalCompletionStatus: string | null;
+  mechanicalCompletionPhase: string | null;
+  mechanicalCompletionHandoverStatus: string | null;
   status: string;
   discipline: string;
   location: string;
