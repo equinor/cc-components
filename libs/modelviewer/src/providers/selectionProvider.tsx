@@ -16,6 +16,7 @@ import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 import { useConfig } from './configProvider';
 import { useQuery } from '@tanstack/react-query';
+import { useModelTags } from '../hooks/useModelTags';
 
 interface SelectionContextState {
   currentNodes: HierarchyNodeModel[];
@@ -47,22 +48,7 @@ export const SelectionContextProvider = (props: Props) => {
   const config = useConfig();
   const selectionControls = useSelectionControls();
 
-  const [visibleTags, setVisibleTags] = useState<string[]>([]);
-
-  const tagList: TagOverlay[] = useMemo(() => {
-    return tagsOverlay.map((tagOverlay) => {
-      if (!config.displayStatusColor) {
-        return tagOverlay;
-      }
-
-      const color =
-        tagOverlay.status && config.statusResolver
-          ? config.statusResolver(tagOverlay.status)
-          : defaultTagColor;
-
-      return { ...tagOverlay, color };
-    });
-  }, [tagsOverlay, config.displayStatusColor]);
+  const { visibleTags, tagList, setVisibleTags } = useModelTags(tagsOverlay);
 
   const { data: currentNodes, isFetching: isFetchingNodes } = useQuery({
     queryKey: ['echo-viewer', tagList.map((x) => x.tagNo)],
@@ -167,10 +153,6 @@ export const SelectionContextProvider = (props: Props) => {
   };
 
   useEffect(() => {
-    setVisibleTags(tagList.map((x) => x.tagNo));
-  }, [tagList]);
-
-  useEffect(() => {
     const padding = config.defaultCroppingDistance;
     selectionControls.clipModelByNodes(currentNodes, true, padding);
   }, [currentNodes]);
@@ -197,3 +179,4 @@ export const SelectionContextProvider = (props: Props) => {
   );
 };
 
+export default SelectionContextProvider;
