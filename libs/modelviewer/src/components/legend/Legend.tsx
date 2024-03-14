@@ -1,5 +1,5 @@
 import { Icon } from '@equinor/eds-core-react';
-import { useSelectionContext } from '../../providers';
+import { useTagSelectionContext } from '../../providers';
 
 import {
   arrow_drop_down,
@@ -13,7 +13,7 @@ import { tokens } from '@equinor/eds-tokens';
 import { Style } from './LegendStyles';
 
 export const Legend = () => {
-  const { tagList, toggleTags, visibleTags, notFoundTagList } = useSelectionContext();
+  const { tagList, toggleTags, visibleTags, notFoundTagList } = useTagSelectionContext();
 
   const [isExpanded, setIsExpanded] = useState(true);
 

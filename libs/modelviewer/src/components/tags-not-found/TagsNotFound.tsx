@@ -3,7 +3,7 @@ import { arrow_drop_down, arrow_drop_up, warning_outlined } from '@equinor/eds-i
 import { tokens } from '@equinor/eds-tokens';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useSelectionContext } from '../../providers';
+import { useTagSelectionContext } from '../../providers';
 
 const Style = {
   Overlay: styled.div`
@@ -108,7 +108,7 @@ const Message = {
 };
 
 export const TagsNotFound = () => {
-  const { viewNodes, notFoundTagList, isFetchingNodes } = useSelectionContext();
+  const { viewNodes, notFoundTagList, isFetchingNodes } = useTagSelectionContext();
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (isFetchingNodes) {

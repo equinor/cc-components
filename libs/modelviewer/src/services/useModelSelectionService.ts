@@ -2,9 +2,9 @@ import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 
 import { useModelViewerContext } from '../providers';
 
-const LOCAL_MODEL_ID_KEY = 'echoModelId';
-
 export const useModelSelectionService = () => {
+  const LOCAL_MODEL_ID_KEY = 'echoModelId';
+
   const { echoInstance } = useModelViewerContext();
 
   const { modelApiClient } = echoInstance;

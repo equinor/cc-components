@@ -1,4 +1,4 @@
-export type PlantData = {
+export type Plant = {
   plantCode: string;
   installationCode: string;
   projectDescription: string;
@@ -6,10 +6,10 @@ export type PlantData = {
   availableInEcho3DWebReveal: boolean;
 };
 
-const LOCAL_PLANT_ID_KEY = 'echoPlantId';
-
 export const usePlantSelectionService = () => {
-  const getLocalPlant = (instCode: string): string | undefined => {
+  const LOCAL_PLANT_ID_KEY = 'echoPlantId';
+
+  const getDefaultPlant = (instCode: string): string | undefined => {
     const localPlantJson = localStorage.getItem(LOCAL_PLANT_ID_KEY);
 
     if (localPlantJson) {
@@ -20,7 +20,7 @@ export const usePlantSelectionService = () => {
     return undefined;
   };
 
-  const setLocalPlant = (plant: PlantData) => {
+  const setDefaultPlant = (plant: Plant) => {
     const plantCode = plant.plantCode;
     const instCode = plant.installationCode;
 
@@ -33,7 +33,7 @@ export const usePlantSelectionService = () => {
   };
 
   return {
-    getLocalPlant,
-    setLocalPlant,
+    getDefaultPlant,
+    setDefaultPlant,
   };
 };

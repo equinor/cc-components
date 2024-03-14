@@ -1,17 +1,17 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
-import { PlantData } from '../services/usePlantSelectionService';
+import { Plant } from '../services/usePlantSelectionService';
 import { Loading } from '../components/loading/loading';
 import PlantSelectionDialog from '../components/plant-selection-dialog/plantSelectionDialog';
 import React from 'react';
 import { useCurrentPlant } from '../hooks/useCurrentPlant';
 
 type PlantSelectionContextType = {
-  currentPlant?: PlantData;
+  currentPlant?: Plant;
   isPlantSelectionVisible: boolean;
-  plants: PlantData[];
+  plants: Plant[];
   setShowPlantDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentPlant: (plant: PlantData) => void;
+  setCurrentPlant: (plant: Plant) => void;
 };
 
 const PlantSelectionContext = createContext({} as PlantSelectionContextType);

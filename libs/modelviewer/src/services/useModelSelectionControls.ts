@@ -1,18 +1,15 @@
 import {
   IndexSet,
   BoundingBoxClipper,
-  CogniteCadModel,
   InvertedNodeCollection,
   NodeAppearance,
   TreeIndexNodeCollection,
 } from '@cognite/reveal';
+
 import CameraControls, {
   AabbModel,
-  AssetMetadataSimpleDto,
   CameraControlsExtended,
   CancelToken,
-  Echo3dViewer,
-  HierarchyClient,
   HierarchyNodeModel,
   getTagNoRefNoAndAabbByNodeId,
   SelectedNodeInformation,
@@ -44,7 +41,7 @@ export interface SelectNodesByTagOptions {
   signal?: AbortSignal;
 }
 
-export const useSelectionControls = () => {
+export const useModelSelectionControls = () => {
   const { modelMeta, hierarchyClient, viewer, model } = useModelContext();
 
   const findNodesByTags = async (tags: string[], signal?: AbortSignal) => {

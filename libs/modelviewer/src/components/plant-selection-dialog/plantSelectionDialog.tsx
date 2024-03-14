@@ -2,10 +2,7 @@ import { Button, Checkbox, Dialog, Divider } from '@equinor/eds-core-react';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import {
-  PlantData,
-  usePlantSelectionService,
-} from '../../services/usePlantSelectionService';
+import { Plant, usePlantSelectionService } from '../../services/usePlantSelectionService';
 import PlantSelectionList from '../plant-selection-list/modelSelectionList';
 import { usePlantSelectionContext } from '../../providers/plantSelectionProvider';
 
@@ -15,10 +12,10 @@ export const PlantSelectionDialog = (): JSX.Element => {
   const { plants, setCurrentPlant, setShowPlantDialog, isPlantSelectionVisible } =
     usePlantSelectionContext();
 
-  const [selectedPlant, setSelectedPlant] = useState<PlantData>();
+  const [selectedPlant, setSelectedPlant] = useState<Plant>();
   const [rememberSelectedPlant, setRememberSelectedPlant] = useState(false);
 
-  const handleModelSelect = (plant: PlantData) => {
+  const handleModelSelect = (plant: Plant) => {
     setSelectedPlant(plant);
   };
 
@@ -28,7 +25,7 @@ export const PlantSelectionDialog = (): JSX.Element => {
     }
 
     if (rememberSelectedPlant) {
-      plantSelectionService.setLocalPlant(selectedPlant);
+      plantSelectionService.setDefaultPlant(selectedPlant);
     }
 
     setCurrentPlant(selectedPlant);

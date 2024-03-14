@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useOverlay } from '../../hooks/useOverlay';
-import { useModelViewerContext, useSelectionContext } from '../../providers';
+import { useModelViewerContext, useTagSelectionContext } from '../../providers';
 
 import { RevealHtmlOverlayWrapper } from '../reveal-hml-overlay-wrapper/revealHtmlOverlayWrapper';
 import { TagItem } from '../tag-item/TagItem';
@@ -11,7 +11,7 @@ export const TagsOverlay = (): JSX.Element => {
 
   const [selected, setSelected] = useState<string>();
 
-  const { visibleTags } = useSelectionContext();
+  const { visibleTags } = useTagSelectionContext();
   const { overlayTags, overlayTool } = useOverlay();
   const {
     defaultRadiusFactor,

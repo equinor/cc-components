@@ -1,13 +1,13 @@
 import { PropsWithChildren, createContext, useCallback, useContext } from 'react';
 import { AabbModel, HierarchyNodeModel } from '@equinor/echo-3d-viewer';
-import { useSelectionControls } from '../services/selectionService';
+import { useModelSelectionControls } from '../services/useModelSelectionControls';
 import { TagOverlay } from '../types/overlayTags';
 import { ViewerNodeSelection } from '../types/viewerNodeSelection';
 import { useConfig } from './configProvider';
 import { useModelTags } from '../hooks/useModelTags';
 import { useModelNodes } from '../hooks/useModelNodes';
 
-interface SelectionContextState {
+interface TagSelectionContextState {
   currentNodes: HierarchyNodeModel[];
   viewNodes: ViewerNodeSelection[];
   tagList: TagOverlay[];
@@ -23,19 +23,19 @@ interface SelectionContextState {
   toggleTags(tags: string[]): void;
 }
 
-const SelectionContext = createContext({} as SelectionContextState);
+const TagSelectionContext = createContext({} as TagSelectionContextState);
 
-export const useSelectionContext = () => useContext(SelectionContext);
+export const useTagSelectionContext = () => useContext(TagSelectionContext);
 
 type Props = {
   tagsOverlay: TagOverlay[];
 } & PropsWithChildren;
 
-export const SelectionContextProvider = (props: Props) => {
+export const TagSelectionProvider = (props: Props) => {
   const { tagsOverlay, children } = props;
 
   const config = useConfig();
-  const selectionControls = useSelectionControls();
+  const selectionControls = useModelSelectionControls();
 
   const { visibleTags, tagList, setVisibleTags } = useModelTags(tagsOverlay);
 
@@ -73,7 +73,7 @@ export const SelectionContextProvider = (props: Props) => {
     [selectionControls]
   );
 
-  const toggleVisibleTags = (tags: string[]) => {
+  const toggleTags = (tags: string[]) => {
     const elements: string[] = tags.reduce((acc, tag) => {
       if (acc.includes(tag)) {
         acc = acc.filter((tagNo) => tagNo !== tag);
@@ -87,7 +87,7 @@ export const SelectionContextProvider = (props: Props) => {
   };
 
   return (
-    <SelectionContext.Provider
+    <TagSelectionContext.Provider
       value={{
         currentNodes,
         viewNodes,
@@ -100,12 +100,12 @@ export const SelectionContextProvider = (props: Props) => {
         orbit,
         firstPerson,
         fitCameraToAAbb,
-        toggleTags: toggleVisibleTags,
+        toggleTags,
       }}
     >
       {children}
-    </SelectionContext.Provider>
+    </TagSelectionContext.Provider>
   );
 };
 
-export default SelectionContextProvider;
+export default TagSelectionProvider;

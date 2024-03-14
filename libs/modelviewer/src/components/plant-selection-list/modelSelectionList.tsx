@@ -1,13 +1,13 @@
 import { Radio } from '@equinor/eds-core-react';
 
 import styled from 'styled-components';
-import { PlantData } from '../../services/usePlantSelectionService';
+import { Plant } from '../../services/usePlantSelectionService';
 import { FC, useState } from 'react';
 
 interface PlantSelectionListProps {
-  onPlantSelect: (plant: PlantData) => void;
-  selectedPlant: PlantData | undefined;
-  plants: PlantData[];
+  onPlantSelect: (plant: Plant) => void;
+  selectedPlant: Plant | undefined;
+  plants: Plant[];
 }
 
 const PlantSelectionList: FC<PlantSelectionListProps> = ({

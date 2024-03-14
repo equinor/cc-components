@@ -1,11 +1,11 @@
 import { Color } from 'three';
-import { useSelectionControls } from '../services/selectionService';
+import { useModelSelectionControls } from '../services/useModelSelectionControls';
 import { TagOverlay } from '../types/overlayTags';
 import { useQuery } from '@tanstack/react-query';
 import { useConfig } from '../providers';
 
 export const useModelNodes = (tagList: TagOverlay[]) => {
-  const selectionControls = useSelectionControls();
+  const selectionControls = useModelSelectionControls();
   const config = useConfig();
 
   const tags = tagList.map((x) => x.tagNo);

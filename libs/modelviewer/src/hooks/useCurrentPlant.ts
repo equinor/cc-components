@@ -8,7 +8,7 @@ export const useCurrentPlant = (facility: string) => {
 
   const { data: plants } = useAvailablePlants(facility);
 
-  const localPlantCode = plantSelectionService.getLocalPlant(facility);
+  const localPlantCode = plantSelectionService.getDefaultPlant(facility);
 
   const defaultPlant = plants.find(
     (x) => x.plantCode.toLowerCase() === localPlantCode?.toLowerCase()

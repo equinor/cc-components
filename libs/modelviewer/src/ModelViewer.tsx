@@ -10,7 +10,7 @@ import {
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import MessageBoundary from './components/message-boundary/MessageBoundary';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
-import { ActionContextProvider } from './providers/actionProvider';
+import { ActionProvider } from './providers/actionProvider';
 import { ModelViewerProvider } from './providers/modelViewerProvider';
 import { TagOverlay } from './types/overlayTags';
 
@@ -21,10 +21,10 @@ import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
 import { ModelProvider } from './providers/modelProvider';
 import { PlantProvider } from './providers/plantProvider';
 import { Loading } from './components/loading/loading';
+import { TagSelectionProvider } from '.';
 
 const PlantSelectionProvider = lazy(() => import('./providers/plantSelectionProvider'));
 const ModelSelectionProvider = lazy(() => import('./providers/modelSelectionProvider'));
-const SelectionContextProvider = lazy(() => import('./providers/selectionProvider'));
 
 type ModelViewerProps = {
   facility: string;
@@ -35,6 +35,7 @@ type ModelViewerProps = {
 export const ModelViewer = (props: PropsWithChildren<ModelViewerProps>) => {
   const queryClient = new QueryClient();
 
+  // TODO: Replace this with an error boundary
   return (
     <QueryClientProvider client={queryClient}>
       <ConfigContextProvider config={props.options}>
@@ -73,14 +74,14 @@ const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
           <ModelViewerProvider>
             <ModelSelectionProvider>
               <ModelProvider>
-                <SelectionContextProvider tagsOverlay={tagsOverlay}>
-                  <ActionContextProvider>
+                <TagSelectionProvider tagsOverlay={tagsOverlay}>
+                  <ActionProvider>
                     <Legend />
                     <TagsNotFound />
                     <TagsOverlay />
                     <ActionsMenu CustomActions={components.CustomActions} />
-                  </ActionContextProvider>
-                </SelectionContextProvider>
+                  </ActionProvider>
+                </TagSelectionProvider>
               </ModelProvider>
             </ModelSelectionProvider>
           </ModelViewerProvider>

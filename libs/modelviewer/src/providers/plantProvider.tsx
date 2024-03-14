@@ -1,11 +1,11 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 
 import { Loading } from '../components/loading/loading';
-import { PlantData } from '../services/usePlantSelectionService';
+import { Plant } from '../services/usePlantSelectionService';
 import { usePlantSelectionContext } from './plantSelectionProvider';
 
 interface PlantContextState {
-  currentPlant: PlantData;
+  currentPlant: Plant;
 }
 
 const PlantContext = createContext({} as PlantContextState);

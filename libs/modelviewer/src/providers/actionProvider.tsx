@@ -1,16 +1,16 @@
 import { NodeAppearance } from '@cognite/reveal';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import { useSelectionContext } from './selectionProvider';
+import { useTagSelectionContext } from './tagSelectionProvider';
 import { useConfig } from './configProvider';
-import { useSelectionControls } from '../services';
+import { useModelSelectionControls } from '../services';
 import { useModelContext } from './modelProvider';
 
 interface ActionContextState {
-  hideModel(): void;
-  showModel(): void;
   isClipped: boolean;
   isOrbit: boolean;
   isFocus: boolean;
+  hideModel(): void;
+  showModel(): void;
   toggleFocus(): void;
   toggleClipping(): void;
   toggleCameraMode(): void;
@@ -18,13 +18,15 @@ interface ActionContextState {
   assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
-const ActionContext = createContext<ActionContextState | undefined>(undefined);
+const ActionContext = createContext({} as ActionContextState);
 
-export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const selectionService = useSelectionControls();
+export const useActions = () => useContext(ActionContext);
+
+export const ActionProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const selectionService = useModelSelectionControls();
 
   const { model } = useModelContext();
-  const { currentNodes } = useSelectionContext();
+  const { currentNodes } = useTagSelectionContext();
 
   const { defaultRadiusFactor, defaultCroppingDistance } = useConfig();
 
@@ -44,6 +46,7 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   }, [isOrbit, currentNodes]);
 
   const hideModel = () => setModelVisibility(false);
+
   const showModel = () => setModelVisibility(true);
 
   const orbit = () => {
@@ -115,8 +118,4 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   );
 };
 
-export const useActions = () => {
-  const context = useContext(ActionContext);
-  if (!context) throw new Error('useActions must be used within ActionContextProvider');
-  return context;
-};
+export default ActionProvider;
