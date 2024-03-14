@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { MessageBoundaryState } from '../message-boundary/MessageBoundary';
+import { error_outlined } from '@equinor/eds-icons';
 import { Icon, Typography } from '@equinor/eds-core-react';
-import { getIconByType } from '../../utils/message';
 
 const Styled = {
   Wrapper: styled.div`
@@ -22,11 +21,18 @@ const Styled = {
   `,
 };
 
-export const Message = ({ title, message, type }: MessageBoundaryState) => {
+type Props = {
+  title: string;
+  message: string;
+};
+
+export const ErrorMessage = (props: Props) => {
+  const { title, message } = props;
+
   return (
     <Styled.Wrapper>
       <Styled.Content>
-        <Icon data={getIconByType(type)} size={48} />
+        <Icon data={error_outlined} size={48} />
         <Styled.MessageContent>
           <Typography variant="h3">{title}</Typography>
           <Typography>{message}</Typography>

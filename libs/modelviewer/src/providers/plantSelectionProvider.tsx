@@ -27,8 +27,6 @@ export const PlantSelectionProvider = ({ children, facility }: Props) => {
 
   const [isPlantSelectionVisible, setShowPlantDialog] = useState(!currentPlant);
 
-  // TODO: Add error boundary handeling for this warning: setWarning('No Plant Data Available');
-
   return (
     <PlantSelectionContext.Provider
       value={{

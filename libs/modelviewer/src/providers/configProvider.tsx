@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, createContext, useContext } from 'react';
 
 import { TagOverlay } from '../types';
-import { MessageBoundaryState } from '../components/message-boundary/MessageBoundary';
+import { FallbackProps } from 'react-error-boundary';
 
 type ConfigContextType = {
   iconResolver?: (type: string) => string;
@@ -14,7 +14,7 @@ type ConfigContextType = {
       clearSelection: () => void;
     }
   >;
-  fallbackComponent?: FC<MessageBoundaryState>;
+  FallbackComponent?: React.ComponentType<FallbackProps>;
   defaultCroppingDistance: number;
   displayStatusColor: boolean;
   defaultRadiusFactor: number;

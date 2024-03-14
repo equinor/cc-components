@@ -8,13 +8,12 @@ import {
   lazy,
 } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
-import MessageBoundary from './components/message-boundary/MessageBoundary';
+import { ModelViewerErrorBoundary } from './components/error-boundary/ErrorBoundary';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
 import { ActionProvider } from './providers/actionProvider';
 import { ModelViewerProvider } from './providers/modelViewerProvider';
 import { TagOverlay } from './types/overlayTags';
 
-import { Message } from './components/message/Message';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
 import { Legend } from './components/legend/Legend';
 import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
@@ -33,19 +32,19 @@ type ModelViewerProps = {
 };
 
 export const ModelViewer = (props: PropsWithChildren<ModelViewerProps>) => {
+  const { facility, tagsOverlay, options } = props;
+
   const queryClient = new QueryClient();
 
-  // TODO: Replace this with an error boundary
   return (
     <QueryClientProvider client={queryClient}>
-      <ConfigContextProvider config={props.options}>
-        <MessageBoundary
-          fallbackComponent={
-            props.options?.fallbackComponent ? props.options.fallbackComponent : Message
-          }
+      <ConfigContextProvider config={options}>
+        <ModelViewerErrorBoundary
+          resetKeys={[facility, tagsOverlay]}
+          FallbackComponent={options?.FallbackComponent}
         >
           <ModelViewerContent {...props} />
-        </MessageBoundary>
+        </ModelViewerErrorBoundary>
       </ConfigContextProvider>
     </QueryClientProvider>
   );
