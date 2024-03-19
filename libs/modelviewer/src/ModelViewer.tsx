@@ -17,13 +17,16 @@ import { TagOverlay } from './types/overlayTags';
 import { ConfigContextProvider, ModelViewerConfig } from './providers/configProvider';
 import { Legend } from './components/legend/Legend';
 import { TagsNotFound } from './components/tags-not-found/TagsNotFound';
-import { ModelProvider } from './providers/modelProvider';
-import { PlantProvider } from './providers/plantProvider';
 import { Loading } from './components/loading/loading';
-import { TagSelectionProvider } from '.';
 
-const PlantSelectionProvider = lazy(() => import('./providers/plantSelectionProvider'));
-const ModelSelectionProvider = lazy(() => import('./providers/modelSelectionProvider'));
+import {
+  ModelSelectionProvider,
+  TagSelectionProvider,
+  PlantSelectionProvider,
+  PlantProvider,
+  ModelProvider,
+} from './providers';
+
 
 type ModelViewerProps = {
   facility: string;
