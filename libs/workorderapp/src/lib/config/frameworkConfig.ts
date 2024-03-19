@@ -4,6 +4,7 @@ import {
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
+
 import buildQuery from 'odata-query';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
