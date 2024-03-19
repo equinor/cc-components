@@ -1,7 +1,7 @@
 ---
 name: 🖌️ Scaling report
 about: Create a report regarding application scaling
-title: "🖌️: (Application) : <Title>"
+title: "🖌️: <app> : <title>"
 labels: scaling
 assignees: ''
 ---
