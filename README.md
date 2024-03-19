@@ -29,8 +29,9 @@
 
 ## Getting started
 
-```json
-//TLDR;
+### tldr;
+
+```
 pnpm first-time-setup //install pnpm, fusion-framework, vite and build repo
 pnpm serve <appname> //run app
 pnpm serve:local <appname> //run app pointing to local api
