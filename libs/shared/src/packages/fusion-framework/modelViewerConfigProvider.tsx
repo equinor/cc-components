@@ -32,13 +32,15 @@ type Props = {
 export const ModelViewerConfigProvider = (props: Props) => {
   const { args, children } = props;
 
+  const config = args.env.config.environment.modelViewerConfig;
+
   const data = {
-    hierarchyClientBaseUrl: args.env.config?.environment.hierarchyClientBaseUrl as string,
-    hierarchyClientScope: args.env.config?.environment.hierarchyClientScope as string,
-    modelClientBaseUrl: args.env.config?.environment.modelClientBaseUrl as string,
-    modelClientScope: args.env.config?.environment.modelClientScope as string,
-    echoClientBaseUrl: args.env.config?.environment.echoClientBaseUrl as string,
-    echoClientScope: args.env.config?.environment.echoClientScope as string,
+    hierarchyClientBaseUrl: config.hierarchyClientBaseUrl as string,
+    hierarchyClientScope: config.hierarchyClientScope as string,
+    modelClientBaseUrl: config.modelClientBaseUrl as string,
+    modelClientScope: config.modelClientScope as string,
+    echoClientBaseUrl: config.echoClientBaseUrl as string,
+    echoClientScope: config.echoClientScope as string,
   };
 
   return (
