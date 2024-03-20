@@ -1,6 +1,6 @@
 # Contributing
 
-Check out our development workflow [here](TODO://provide-link-to-diagram)
+Check out our development workflow [here](https://github.com/equinor/cc-component) (TODO)
 
 This repo uses [Trunk based development](https://trunkbaseddevelopment.com/) along with [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). When making contributions follow this checklist:
 

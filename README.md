@@ -36,12 +36,12 @@ Submitted issues will be prioritized and followed up in our Github Projects.
 
 ## CI/CD ⚙️
 
-Check out our development workflow [here](TODO://provide-link-to-diagram)
+Check out our development workflow [here](https://github.com/equinor/cc-component) (TODO)
 
 > [!IMPORTANT]  
 > Changes merged with main will be built and deployed to production without any additional approval steps.
 
-We continously build, test and verify all PRs submitted to GitHub. (Using TruffleHog and Snyk)
+We continously build, test and verify all PRs submitted to GitHub.
 
 **The following environments are availible:**
 
