@@ -61,3 +61,32 @@ To run an app run the following command `pnpm serve <appname>`
 
 [HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
 HMR is disabled due to an error in dependency resolution resulting in massive bundle sizes
+
+
+## Fusion app management
+
+Our applications are hosted in Fusion. Most of our apps are bootstrapped into the [Fusion Project Portal](https://project.fusion.equinor.com)
+
+## Api
+We have configured CI/CD pipelines to automatically deploy these bundles to the [Fusion app management api](https://fusion-s-portal-fprd.azurewebsites.net/swagger) whenever there is a change in the code.
+
+## CI/CD 
+We have made github actions pipelines relying on TS code written in our repository. This code is being transpiled on the fly to avoid the hassle of uploading bundled js.
+
+## Environment variables
+We have some app configuration files in the apps/** folder. These are for local development. 
+The permissions for modifying environment variables are given to personal accounts or service principals. We do have a service principal for deployment, but editing environment variables are done manually by developers.
+- [CI](https://admin.ci.fusion-dev.net/apps)
+- ~[FQA](https://admin.fqa.fusion-dev.net/apps)~ (Not in use for us)
+- [FPRD](https://admin.fprd.fusion-dev.net/apps)
+
+## Hosting environments (subject to change) 
+[Fusion Project Portal](https://project.fusion.equinor.com)
+
+[Fusion Classic](https://fusion.equinor.com) (Not here yet)
+
+[Johan Castberg portal](https://jc.fusion.equinor.com)
+
+## Fusion framework
+They way we bundle our applications makes it so that they can be used in any Fusion Portal. By utilzing the [Fusion Framework](https://github.com/equinor/fusion-framework) we allow for communication between the portal and the application. Our applications do not have an index.html but rather exposes a mount function that the portal can call when dynamically importing our bundle.
+You can read more about the fusion framework [here](https://equinor.github.io/fusion-framework/)
