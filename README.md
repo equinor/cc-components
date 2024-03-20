@@ -68,11 +68,11 @@ HMR is disabled due to an error in dependency resolution resulting in massive bu
 Our applications are hosted in Fusion. Most of our apps are bootstrapped into the [Fusion Project Portal](https://project.fusion.equinor.com)
 
 ## Api
-We have configured CI/CD pipelines to automatically deploy these bundles to the [Fusion app management api](https://fusion-s-portal-fprd.azurewebsites.net/swagger) whenever there is a change in the code.
+We have configured CI/CD pipelines to automatically deploy our app bundles to the [Fusion app management api](https://fusion-s-portal-fprd.azurewebsites.net/swagger) whenever there is a change in the code.
 
 ## CI/CD 
 We have made github actions pipelines relying on TS code written in our repository. This code is being transpiled on the fly to avoid the hassle of uploading bundled js.
-They are located in the `./github/workflows` folder
+The pipelines are located in the `./github/workflows` folder
 
 ## Environment variables
 We have some app configuration files in the `apps/**` folder. These are for local development. 
