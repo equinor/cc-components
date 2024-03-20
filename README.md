@@ -3,68 +3,83 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/pr-deploy.yml?label=PR%20deployment)
 ![SCM Compliance](https://scm-compliance-api.radix.equinor.com/repos/equinor/cc-components/badge)
 
-Construction and Commisioning (CC) web applications developed for the project portal. 
+Construction and Commisioning (CC) web applications developed for the Project Portal. This repo is a monorepo using [Turbo](https://turbo.build/) and [PNPM](https://pnpm.io/). Applications are developed using [React](https://react.dev/), [Typescript](https://www.typescriptlang.org/) and [Vite](https://vitejs.dev/).
 
-We maintain a overview over planned and implemented applications [here 🚀](https://github.com/equinor/cc-components/issues/693)
+> For a overview over status on planned and implemented applications, check out the overview [here 🚀](https://github.com/equinor/cc-components/issues/693)
 
+## Getting started 🚀
 
-This repo is a monorepo using [Turbo](https://turbo.build/). Applications are developed using [React](https://react.dev/), [Typescript](https://www.typescriptlang.org/) and [Vite](https://vitejs.dev/). We use [PNPM](https://pnpm.io/) as package manager.
+To install the dependencies required to run the project, run `pnpm first-time-setup`. You can then run one of the apps using one of the following commands:
 
-## CI/CD
+```bash
+pnpm serve <appname> # run app
+pnpm serve:local <appname> # run app pointing to local api
+pnpm build # Build monorepo in parallel 🚨 NB: Sometimes fails due to internal package dependencies
+pnpm ci:build # Build sequentially
+```
 
-how to install and run, link to documentation, status badges, code samples, citations.
+⚠️ [Hot module replacement](https://webpack.js.org/guides/hot-module-replacement/) is disabled due to an error in dependency resolution resulting in massive bundle sizes. To apply changes stop the server and run `pnpm serve <app>`.
 
-## Issues
+🛡️ In order to login to the apps you need to authenticate using an Equinor account with access to a valid context/project in ProCoSys.
 
-To submit an issue, use one of the predefined issue types [here](https://github.com/equinor/cc-components/issues/new/choose). Be sure to fill
-
-If the repository contains functional code, is there an issue handling system? (Github-issues, jira, trello, azure devops-board or similar?) If the issue handling is not in Github-issues (A good choice as it keeps issues close to the repo), README.md should link to where the issue-handling is managed.
-
-Transparent processes are good. Keep the issue list and your Scrum- or Kanban board just as accessible and open for your colleagues as your repository.
-
-## Contributing
+## Contributing ⚒️
 
 Check out our the [contributing guide](./CONTRIBUTING.md) for details on how to contribute.
 
+## Issues ✨
 
-## Strategy
+To submit an issue, use one of the predefined issue types in Github Issues.
+Be sure to give good explanation and context in the issue description.
 
-[Trunk based development](https://trunkbaseddevelopment.com/)
+Submitted issues will be prioritized and followed up in our Github Projects.
 
-[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+## CI/CD ⚙️
 
-## Getting started
+Check out our development workflow [here](TODO://provide-link-to-diagram)
 
-```bash
-pnpm first-time-setup # install pnpm, fusion-framework, vite and build repo
-pnpm serve <appname> # run app
-pnpm serve:local <appname> # run app pointing to local api
-pnpm build # Build monorepo in parallel NBNB: Sometimes fails due to internal package dependencies
-pnpm ci:build # Build sequentially
+> [!IMPORTANT]  
+> Changes merged with main will be built and deployed to production without any additional approval steps.
+
+We continously build, test and verify all PRs submitted to GitHub. (Using TruffleHog and Snyk)
+
+**The following environments are availible:**
+
+- [🧪 Test environment](https://webserver-fusion-project-portal-test.radix.equinor.com/)
+- [🏭 Production environment](https://project.fusion.equinor.com/)
+
+**The following manual deployment actions are availible:**
+
+- [Manual deployment to test](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
+- [Manual deployment to production](https://github.com/equinor/cc-components/actions/workflows/manual-deploy-prod.yml)
+
+## Project structure
+
+For project structure and development we use NX' recommendations. In general, we want to place every util, component, business logic in a library, and keep the application clean. Read more about it [here](https://nx.dev/more-concepts/monorepo-nx-enterprise#using-nx-at-enterpriseshere).
+
+> [!TIP]
+> Download the NX extension in VSCode to get some better support for when creating a new library or app.
+
+The following snippet provides a brief overview of how application code is structured within the repo.
+
+```js
+...
++-- github-action // Scripts for Github Actions
++-- apps // Configs for the different apps
+|    +-- <appname>
+|        +-- app.config.js // Configuration for (remote) test env
+|        +-- app.config.local.js // Configuration for local env
++-- libs
+|    +-- shared // Components and functionality shared between apps
+|    +-- <appname>app // The code for the application
+|    +-- <appname>shared // Code shared between the app and sidesheet
+|    +-- <appname>sidesheet // The code for the sidesheet
++-- widgets // Code for stand-alone widgets used in the apps
+...
 ```
-To run an app run the following command `pnpm serve <appname>`
-Run the following command `npm run first-time-setup`
 
+## Creating new apps
 
-## Deployment
-
-[Deploy PR to test env](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
-
-`PROD -> Automatically when merging to main`
-
-[Manual prod deployment](https://github.com/equinor/cc-components/actions/workflows/manual-deploy-prod.yml)
-
-
-
-
-## Creating a new Fusion app
-
-1. Run the following [action](https://github.com/equinor/cc-components/actions/workflows/create-fusion-app.yml)
-2. Create the app locally in CC-components, run the following command `pnpm new:app` or `pnpm new:report`
-3. Run this [action](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml) to deploy it to test
-4. Onboard the app to the project portal [HowTo](https://github.com/equinor/lighthouse/blob/main/docs/project-portal/administration.md)
-
-## Development
-
-[HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
-HMR is disabled due to an error in dependency resolution resulting in massive bundle sizes
+1. Run the following [action](https://github.com/equinor/cc-components/actions/workflows/create-fusion-app.yml) to create and register the app with the fusion portal.
+2. Create the app locally in CC-components. Run the following command `pnpm new:app` or `pnpm new:report`
+3. To deploy the app to test, run this [action](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
+4. Follow the [guide](https://github.com/equinor/lighthouse/blob/main/docs/project-portal/administration.md) to onboard the app to the project portal.
