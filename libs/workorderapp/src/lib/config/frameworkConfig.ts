@@ -4,6 +4,7 @@ import {
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
+import { enableWidgetModule } from '@equinor/fusion-framework-react-widget';
 
 import buildQuery from 'odata-query';
 
@@ -33,7 +34,13 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     defaultScopes: envConfig?.defaultScopes,
   });
 
+  config.configureHttpClient('apps', {
+    baseUri: envConfig?.uri,
+    defaultScopes: envConfig?.defaultScopes,
+  });
+
   enableAgGrid(config);
+  enableWidgetModule(config);
 };
 
 type WorkorderEnvConfig = {
