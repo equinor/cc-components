@@ -25,7 +25,7 @@ pnpm ci:build # Build sequentially
 
 ## Contributing ⚒️
 
-Check out our the [contributing guide](./CONTRIBUTING.md) for details on how to contribute.
+Contributing, check out our [contributing guide](./CONTRIBUTING.md)
 
 ## Issues ✨
 
@@ -36,7 +36,7 @@ Submitted issues will be prioritized and followed up in our Github Projects.
 
 ## CI/CD ⚙️
 
-Check out our development workflow [here](https://github.com/equinor/cc-component) (TODO)
+Check out our development workflow [here](./CONTRIBUTING.md)
 
 > [!IMPORTANT]  
 > Changes merged with main will be built and deployed to production without any additional approval steps.
