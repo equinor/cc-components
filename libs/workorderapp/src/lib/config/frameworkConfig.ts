@@ -4,7 +4,7 @@ import {
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
-import { enableWidgetModule } from '@equinor/fusion-framework-react-widget';
+import { enableWidgetModule } from '@equinor/fusion-framework-module-widget';
 
 import buildQuery from 'odata-query';
 
