@@ -8,8 +8,8 @@ Link to issue:
 - [ ] I have linked related issue to the PR
 
 > [!TIP]
-> To deploy the PR to Dev/Dev2, use the [Manual deploy fusion app TEST🚀](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml) action.
-> Remember to deploy any backend changes to Dev/Dev2 as well!
+> To deploy the PR to Test, use the [Manual deploy fusion app TEST🚀](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml) action.
+> Remember to deploy any backend changes to Test as well!
 
 > [!CAUTION]
 > ⛔ I understand by merging my PR, the changes will be deployed to production immediately ⛔
