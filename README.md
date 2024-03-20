@@ -62,19 +62,19 @@ For project structure and development we use NX' recommendations. In general, we
 
 The following snippet provides a brief overview of how application code is structured within the repo.
 
-```js
+```py
 ...
-+-- github-action // Scripts for Github Actions
-+-- apps // Configs for the different apps
++-- github-action # Scripts for Github Actions
++-- apps # Configs for the different apps
 |    +-- <appname>
-|        +-- app.config.js // Configuration for (remote) test env
-|        +-- app.config.local.js // Configuration for local env
+|        +-- app.config.js # Configuration for (remote) test env
+|        +-- app.config.local.js # Configuration for local env
 +-- libs
-|    +-- shared // Components and functionality shared between apps
-|    +-- <appname>app // The code for the application
-|    +-- <appname>shared // Code shared between the app and sidesheet
-|    +-- <appname>sidesheet // The code for the sidesheet
-+-- widgets // Code for stand-alone widgets used in the apps
+|    +-- shared # Components and functionality shared between apps
+|    +-- <appname>app # The code for the application
+|    +-- <appname>shared # Code shared between the app and sidesheet
+|    +-- <appname>sidesheet # The code for the sidesheet
++-- widgets # Code for stand-alone widgets used in the apps
 ...
 ```
 
