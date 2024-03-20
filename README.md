@@ -72,9 +72,10 @@ We have configured CI/CD pipelines to automatically deploy these bundles to the 
 
 ## CI/CD 
 We have made github actions pipelines relying on TS code written in our repository. This code is being transpiled on the fly to avoid the hassle of uploading bundled js.
+They are located in the `./github/workflows` folder
 
 ## Environment variables
-We have some app configuration files in the apps/** folder. These are for local development. 
+We have some app configuration files in the `apps/**` folder. These are for local development. 
 The permissions for modifying environment variables are given to personal accounts or service principals. We do have a service principal for deployment, but editing environment variables are done manually by developers.
 - [CI](https://admin.ci.fusion-dev.net/apps)
 - ~[FQA](https://admin.fqa.fusion-dev.net/apps)~ (Not in use for us)
