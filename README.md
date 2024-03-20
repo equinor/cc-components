@@ -89,4 +89,4 @@ The permissions for modifying environment variables are given to personal accoun
 
 ## Fusion framework
 They way we bundle our applications makes it so that they can be used in any Fusion Portal. By utilzing the [Fusion Framework](https://github.com/equinor/fusion-framework) we allow for communication between the portal and the application. Our applications do not have an index.html but rather exposes a mount function that the portal can call when dynamically importing our bundle.
-You can read more about the fusion framework [here](https://equinor.github.io/fusion-framework/)
+You can read more about the fusion framework [here](https://equinor.github.io/fusion-framework)
