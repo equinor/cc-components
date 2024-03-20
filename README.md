@@ -2,6 +2,7 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/fprd-deploy.yml?label=Prod%20deployment)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/pr-deploy.yml?label=PR%20deployment)
 ![SCM Compliance](https://scm-compliance-api.radix.equinor.com/repos/equinor/cc-components/badge)
+![Known Vulnerabilities](https://snyk.io/test/github/equinor/cc-components/badge.svg)
 
 Construction and Commisioning (CC) web applications developed for the Project Portal. This repo is a monorepo using [Turbo](https://turbo.build/) and [PNPM](https://pnpm.io/). Applications are developed using [React](https://react.dev/), [Typescript](https://www.typescriptlang.org/) and [Vite](https://vitejs.dev/).
 
