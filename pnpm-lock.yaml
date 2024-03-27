@@ -513,9 +513,6 @@ importers:
 
   libs/punchapp:
     dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../modelviewer
       '@cc-components/punchshared':
         specifier: workspace:^
         version: link:../punchshared
@@ -537,9 +534,6 @@ importers:
 
   libs/punchsidesheet:
     dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../modelviewer
       '@cc-components/punchshared':
         specifier: workspace:^
         version: link:../punchshared
@@ -585,9 +579,6 @@ importers:
 
   libs/shared:
     dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../modelviewer
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
