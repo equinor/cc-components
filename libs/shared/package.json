@@ -86,7 +86,6 @@
   },
   "dependencies": {
     "@cc-components/sharedcomponents": "workspace:^",
-    "@cc-components/modelviewer": "workspace:^",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@equinor/fusion-react-person": "^0.8.0",

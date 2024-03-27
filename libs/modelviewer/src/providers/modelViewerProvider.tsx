@@ -15,6 +15,7 @@ import {
 import { Canvas } from '../components/canvas/canvas';
 import { IHttpClient } from '@equinor/fusion-framework-module-http';
 import { useLoadModelViewer } from '../hooks/useLoadModelViewer';
+import styled from 'styled-components';
 
 type ModelViewerContextType = {
   viewer: Echo3dViewer;
@@ -65,8 +66,16 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
         echoClient: viewerInstance.echoClient,
       }}
     >
-      <Canvas viewerRef={viewerRef} />
-      {isLoading ? null : children}
+      <Container>
+        <Canvas viewerRef={viewerRef} />
+        {isLoading ? null : children}
+      </Container>
     </ModelViewerContext.Provider>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;

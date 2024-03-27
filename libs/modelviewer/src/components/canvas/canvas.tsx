@@ -23,6 +23,7 @@ const StyledCanvas = styled.canvas``;
 
 const ViewerWrapper = styled.div`
   height: inherit;
+  position: relative;
   overflow: hidden;
   > .reveal-viewer-spinner {
     display: none;

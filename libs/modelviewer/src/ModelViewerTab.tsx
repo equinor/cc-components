@@ -1,8 +1,12 @@
+import React, { Suspense, lazy } from 'react';
 import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 import styled from 'styled-components';
-import { ModelViewer, ModelViewerConfig, TagOverlay } from '.';
+import { ModelViewerConfig, TagOverlay } from '.';
+import { Loading } from './components/loading/loading';
+
+const ModelViewer = lazy(() => import('./ModelViewer'));
 
 export const NoResourceData = styled.div`
   text-align: center;
@@ -85,12 +89,14 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
 
   return (
     <WidgetContainer>
-      <ModelViewer
-        facility={facilities[0]}
-        options={options}
-        tagsOverlay={tagOverlay}
-        {...options}
-      />
+      <Suspense fallback={<Loading />}>
+        <ModelViewer
+          facility={facilities[0]}
+          options={options}
+          tagsOverlay={tagOverlay}
+          {...options}
+        />
+      </Suspense>
     </WidgetContainer>
   );
 };

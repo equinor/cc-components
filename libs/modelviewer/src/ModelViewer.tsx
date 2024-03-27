@@ -94,3 +94,5 @@ const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
 };
 
 ModelViewer.CustomActions = ({ children }: PropsWithChildren) => <>{children}</>;
+
+export default ModelViewer;
