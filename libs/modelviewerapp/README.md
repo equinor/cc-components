@@ -1,3 +1,0 @@
-# modelviewerapp
-
-Add readme

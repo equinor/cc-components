@@ -39,3 +39,23 @@ sequenceDiagram
 
 
 ```
+
+Get details about a clicked 3D element
+```ts
+
+  useEffect(() => {
+    const callback = async (e: Event) => {
+      const index = (e as Test).detail.treeIndex;
+
+      const data = selectionControls.getNodeFromTreeId(index);
+      console.log({ data });
+    };
+
+    window.addEventListener('selectionStarted', callback);
+
+    return () => {
+      window.removeEventListener('selectionStarted', callback);
+    };
+  }, [selectionControls]);
+```
+

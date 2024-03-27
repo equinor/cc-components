@@ -1,63 +1,74 @@
-import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
-import { Button, Checkbox, Dialog } from '@equinor/eds-core-react';
-import React, { useEffect, useState } from 'react';
+import { Button, Checkbox, Dialog, Divider } from '@equinor/eds-core-react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { useModelSelection } from '../../hooks/useModelSelection';
-import { useModelContext } from '../../providers/modelsProvider';
+
+import { useModelSelectionContext } from '../../providers/modelSelectionProvider';
 import ModelSelectionList from '../model-selection-list/modelSelectionList';
+import AccessDialog from '../access-dialog/accessDialog';
+import { useModelSelectionService } from '../../services';
 
-interface ModelSelectionDialogProps {
-  models: AssetMetadataSimpleDto[];
-}
+export const ModelSelectionDialog = (): JSX.Element => {
+  const modelSelectionService = useModelSelectionService();
 
-const ModelSelectionDialog: React.FC<ModelSelectionDialogProps> = () => {
+  const { setShowModelDialog, setModelMeta, isModelSelectionVisible, models, hasAccess } =
+    useModelSelectionContext();
+
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
+
+  const [rememberSelectedModel, setRememberSelectedModel] = useState(true);
 
   const handleModelSelect = (id: number) => {
     setSelectedModelId(id);
   };
 
-  const [rememberChecked, setRememberChecked] = useState(false);
-  const { setShowModelDialog, showSelector, modelMeta } = useModelContext();
-  const { handleGoToModel } = useModelSelection();
+  const onSelect = async () => {
+    const selectedModel = models.find((model) => model.id === selectedModelId);
 
-  useEffect(() => {
-    if (modelMeta) {
-      setRememberChecked(true);
+    if (!selectedModel) {
+      setShowModelDialog(false);
+      throw Error('The selected model does not exist');
     }
-  }, [modelMeta]);
+
+    if (rememberSelectedModel) {
+      modelSelectionService.setDefaultModel(selectedModel);
+    }
+
+    setModelMeta(selectedModel);
+    setShowModelDialog(false);
+  };
+
+  const onCancel = () => {
+    setShowModelDialog(false);
+  };
+
+  if (!hasAccess) {
+    return <AccessDialog isOpen={isModelSelectionVisible} onCancel={onCancel} />;
+  }
 
   return (
-    <Dialog open={showSelector} style={{ width: 'auto' }}>
+    <Dialog open={isModelSelectionVisible} style={{ width: 'auto' }}>
       <Dialog.Header>
-        <Dialog.Title>Select Model</Dialog.Title>
+        <Dialog.Title>Select model</Dialog.Title>
       </Dialog.Header>
       <Dialog.CustomContent>
         <Selection>
-          <p>Multiple models are available. Please choose a model to view.</p>
+          <span>Multiple models are available. Please choose a model to view.</span>
           <ModelSelectionList onModelSelect={handleModelSelect} />
-          <Checkbox
-            label="Remember Selection"
-            onChange={(e) => setRememberChecked(e.target.checked)}
-            checked={rememberChecked}
-          />
         </Selection>
+
+        <Divider />
+
+        <Checkbox
+          label="Remember selection"
+          onChange={(e) => setRememberSelectedModel(e.target.checked)}
+          checked={rememberSelectedModel}
+        />
       </Dialog.CustomContent>
       <Dialog.Actions>
-        <Button
-          onClick={() => {
-            handleGoToModel(selectedModelId, rememberChecked);
-          }}
-          disabled={selectedModelId === -1}
-        >
-          Go
+        <Button onClick={onSelect} disabled={selectedModelId === -1}>
+          Select
         </Button>
-        <Button
-          variant="ghost"
-          onClick={() => {
-            setShowModelDialog(false);
-          }}
-        >
+        <Button variant="ghost" onClick={onCancel}>
           Cancel
         </Button>
       </Dialog.Actions>

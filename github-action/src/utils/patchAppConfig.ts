@@ -21,6 +21,14 @@ export async function getAppConfig(token: string, appKey: string, url: string) {
 type AppConfig = {
   commit: string;
   ai: string;
+  modelViewerConfig: {
+    hierarchyClientBaseUrl: string;
+    hierarchyClientScope: string;
+    modelClientBaseUrl: string;
+    modelClientScope: string;
+    echoClientBaseUrl: string;
+    echoClientScope: string;
+  };
 };
 
 export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}>(

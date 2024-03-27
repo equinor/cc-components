@@ -130,7 +130,6 @@ export const TagItem = ({
             <Button
               variant="ghost_icon"
               onClick={(e) => {
-                console.log(tag);
                 tag.action && tag.action(tag);
                 e.stopPropagation();
                 e.preventDefault();

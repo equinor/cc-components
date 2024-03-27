@@ -1,12 +1,10 @@
-import { useSelectionContext } from '../providers/selectionProvider';
+import { useTagSelectionContext } from '../providers/tagSelectionProvider';
 
 export const useCustomAction = () => {
-  const { selectNodesByTags, selectNodesByTagColor, selectNodesByTagsOverlay } =
-    useSelectionContext();
+  const { selectNodesByTags, selectNodes } = useTagSelectionContext();
 
   return {
     selectNodesByTags,
-    selectNodesByTagColor,
-    selectNodesByTagsOverlay,
+    selectNodes,
   };
 };

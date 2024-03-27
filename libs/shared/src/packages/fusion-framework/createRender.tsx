@@ -3,6 +3,7 @@ import {
   ComponentRenderArgs,
   makeComponent,
 } from '@equinor/fusion-framework-react-app';
+
 import { createRoot } from 'react-dom/client';
 
 import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsights-web';
@@ -98,7 +99,8 @@ export function createRender(
 
 function tryGetAccountId(args: ComponentRenderArgs) {
   try {
-    return args.fusion.modules.auth.defaultAccount?.localAccountId;
+    const modules = args.fusion.modules as any;
+    return modules.auth.defaultAccount?.localAccountId;
   } catch (e) {
     return '';
   }

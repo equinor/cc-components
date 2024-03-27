@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { useModelViewerContext } from '../../providers/modelViewerProvider';
+import { RefObject } from 'react';
 
-const Canvas = ({}) => {
-  const { viewerRef } = useModelViewerContext();
+type Props = {
+  viewerRef: RefObject<HTMLCanvasElement>;
+};
 
+export const Canvas = ({ viewerRef }: Props) => {
   return (
     <ViewerWrapper>
       <StyledCanvas
@@ -21,6 +23,7 @@ const StyledCanvas = styled.canvas``;
 
 const ViewerWrapper = styled.div`
   height: inherit;
+  position: relative;
   overflow: hidden;
   > .reveal-viewer-spinner {
     display: none;

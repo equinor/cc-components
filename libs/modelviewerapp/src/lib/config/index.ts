@@ -1,2 +1,0 @@
-
-export { configure } from './frameworkConfig';

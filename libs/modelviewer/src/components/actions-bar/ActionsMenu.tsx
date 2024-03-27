@@ -30,13 +30,13 @@ export const ActionsMenu = (props: ActionsMenuProps) => {
         <IconButton
           iconName="crop"
           title="Crop Selection"
-          onClick={toggleClipping}
+          onClick={() => toggleClipping()}
           isActive={isClipped}
         />
         <IconButton
           iconName="visibility"
           title="Show selection only"
-          onClick={toggleFocus}
+          onClick={() => toggleFocus()}
           isActive={isFocus}
         />
         <ColorPaletteMenu />
@@ -50,7 +50,7 @@ export const ActionsMenu = (props: ActionsMenuProps) => {
         <IconButton
           iconName="rotate_3d"
           title="Free Camera / Orbit"
-          onClick={toggleCameraMode}
+          onClick={() => toggleCameraMode()}
           isActive={isOrbit}
         />
         <ModelSettingsMenu />

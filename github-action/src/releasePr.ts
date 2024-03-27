@@ -18,6 +18,7 @@ program.name('Release');
 type ReleaseArgs = {
   token: string;
   ai: string;
+  modelViewerConfig: string;
   pr: string;
   sha: string;
 };
@@ -27,6 +28,10 @@ program
   .option('-T, --token <token>', 'azure token')
   .option('-pr, --pr <pr>', 'Pr number')
   .option('-ai, --ai <ai>', 'ai key')
+  .option(
+    '-modelViewerConfig, --modelViewerConfig <modelViewerConfig>',
+    'modelviewer config'
+  )
   .option('-sha, --sha <sha>', 'commit sha')
   .action(async (args) => {
     if (!args.token) {
@@ -53,7 +58,12 @@ export async function release(context: ReleaseArgs) {
   }
   await uploadBundle(ciUrl, context.token, r.name, zipped);
   await patchAppConfig(
-    { ai: context.ai, commit: context.sha, pr: context.pr },
+    {
+      ai: context.ai,
+      commit: context.sha,
+      pr: context.pr,
+      modelViewerConfig: JSON.parse(context.modelViewerConfig),
+    },
     context.token,
     r.name,
     ciUrl

@@ -1,13 +1,10 @@
-import { useAppModules } from '@equinor/fusion-framework-react-app';
 import {
   PropsWithChildren,
+  RefObject,
   createContext,
   useContext,
   useEffect,
-  useRef,
-  useState,
 } from 'react';
-import { ModuleViewer } from '../modules';
 
 import {
   Echo3dViewer,
@@ -15,34 +12,28 @@ import {
   HierarchyClient,
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
-import Canvas from '../components/canvas/canvas';
+import { Canvas } from '../components/canvas/canvas';
 import { IHttpClient } from '@equinor/fusion-framework-module-http';
+import { useLoadModelViewer } from '../hooks/useLoadModelViewer';
+import styled from 'styled-components';
 
 type ModelViewerContextType = {
-  viewer?: Echo3dViewer;
-  modelApiClient?: ModelsClient;
-  hierarchyApiClient?: HierarchyClient;
-  echoInstance?: EchoSetupObject;
-  viewerRef?: React.RefObject<HTMLCanvasElement>;
+  viewer: Echo3dViewer;
+  modelApiClient: ModelsClient;
+  hierarchyApiClient: HierarchyClient;
+  echoInstance: EchoSetupObject;
   echoClient?: IHttpClient;
+  viewerRef?: RefObject<HTMLCanvasElement>;
 };
 
-const modelViewerContext = createContext<ModelViewerContextType>({});
+const ModelViewerContext = createContext<ModelViewerContextType>(
+  {} as ModelViewerContextType
+);
 
-export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
-  const viewerRef = useRef<HTMLCanvasElement>(null);
-  const viewerInstance = useAppModules<[ModuleViewer]>().moduleViewer;
+export const useModelViewerContext = () => useContext(ModelViewerContext);
 
-  const [isSetup, setIsSetup] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      if (!viewerRef.current || isSetup) return;
-      await viewerInstance.setup({ canvas: viewerRef.current }).finally(() => {
-        setIsSetup(true);
-      });
-    })();
-  }, [viewerInstance]);
+export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
+  const { viewerInstance, viewerRef, isLoading } = useLoadModelViewer();
 
   /* Add event listeners for re-authenticating every timewindow gains focus.
    * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
@@ -55,6 +46,7 @@ export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
 
       authenticateEchoClient();
     };
+
     if (viewerInstance.client) {
       window.addEventListener('focus', onFocusGained);
     }
@@ -64,27 +56,26 @@ export const ModelViewerContextProvider = ({ children }: PropsWithChildren) => {
     };
   }, [viewerInstance.client]);
 
-  const { viewer, modelApiClient, hierarchyApiClient, echoInstance } = viewerInstance;
-
   return (
-    <modelViewerContext.Provider
+    <ModelViewerContext.Provider
       value={{
-        viewer,
-        modelApiClient,
-        hierarchyApiClient,
-        echoInstance,
-        viewerRef,
+        viewer: viewerInstance.viewer as Echo3dViewer,
+        modelApiClient: viewerInstance.modelApiClient as ModelsClient,
+        hierarchyApiClient: viewerInstance.hierarchyApiClient as HierarchyClient,
+        echoInstance: viewerInstance.echoInstance as EchoSetupObject,
         echoClient: viewerInstance.echoClient,
       }}
     >
-      <Canvas />
-      {children}
-    </modelViewerContext.Provider>
+      <Container>
+        <Canvas viewerRef={viewerRef} />
+        {isLoading ? null : children}
+      </Container>
+    </ModelViewerContext.Provider>
   );
 };
 
-export const useModelViewerContext = () => {
-  const context = useContext(modelViewerContext);
-  if (!context) throw new Error('Context provider not found!');
-  return context;
-};
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
