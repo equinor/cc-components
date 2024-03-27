@@ -3,13 +3,13 @@ import {
   ComponentRenderArgs,
   makeComponent,
 } from '@equinor/fusion-framework-react-app';
+
 import { createRoot } from 'react-dom/client';
 
 import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsights-web';
 import { useState } from 'react';
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { ModelViewerConfigProvider } from './modelViewerConfigProvider';
 
 /**
  * Facades the fusion-framework render setup, used in all apps
@@ -86,11 +86,7 @@ export function createRender(
      */
     const AppComponent = makeComponent(<Comp />, args, configure);
 
-    root.render(
-      <ModelViewerConfigProvider args={args}>
-        <AppComponent />
-      </ModelViewerConfigProvider>
-    );
+    root.render(<AppComponent />);
 
     /** Teardown */
     return () => {
@@ -103,7 +99,8 @@ export function createRender(
 
 function tryGetAccountId(args: ComponentRenderArgs) {
   try {
-    return args.fusion.modules.auth.defaultAccount?.localAccountId;
+    const modules = args.fusion.modules as any;
+    return modules.auth.defaultAccount?.localAccountId;
   } catch (e) {
     return '';
   }

@@ -58,10 +58,10 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
   return (
     <ModelViewerContext.Provider
       value={{
-        viewer: viewerInstance.viewer,
-        modelApiClient: viewerInstance.modelApiClient,
-        hierarchyApiClient: viewerInstance.hierarchyApiClient,
-        echoInstance: viewerInstance.echoInstance,
+        viewer: viewerInstance.viewer as Echo3dViewer,
+        modelApiClient: viewerInstance.modelApiClient as ModelsClient,
+        hierarchyApiClient: viewerInstance.hierarchyApiClient as HierarchyClient,
+        echoInstance: viewerInstance.echoInstance as EchoSetupObject,
         echoClient: viewerInstance.echoClient,
       }}
     >

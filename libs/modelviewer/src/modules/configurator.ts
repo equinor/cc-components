@@ -28,7 +28,7 @@ export interface IModelViewerConfig {
 }
 
 export class ModelViewerConfigurator extends BaseConfigBuilder<IModelViewerConfig> {
-  protected async _getAutModule({
+  private async _getAutModule({
     hasModule,
     requireInstance,
   }: ConfigBuilderCallbackArgs): Promise<IAuthProvider> {
@@ -37,7 +37,8 @@ export class ModelViewerConfigurator extends BaseConfigBuilder<IModelViewerConfi
     }
     return await requireInstance('auth');
   }
-  protected async _getHttpModule({
+
+  private async _getHttpModule({
     hasModule,
     requireInstance,
   }: ConfigBuilderCallbackArgs) {
@@ -47,7 +48,7 @@ export class ModelViewerConfigurator extends BaseConfigBuilder<IModelViewerConfi
     return await requireInstance('http');
   }
 
-  protected async _getActionTokenGenerator(
+  private async _getActionTokenGenerator(
     scope: string,
     configBuilderArgs: ConfigBuilderCallbackArgs
   ) {

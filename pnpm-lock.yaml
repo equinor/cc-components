@@ -247,18 +247,6 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/modelviewer:
-    dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../../libs/modelviewer
-      '@cc-components/modelviewerapp':
-        specifier: workspace:^
-        version: link:../../libs/modelviewerapp
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
   apps/piping:
     dependencies:
       '@cc-components/pipingapp':
@@ -488,15 +476,6 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
 
-  libs/modelviewerapp:
-    dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../modelviewer
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
-
   libs/pipingapp:
     dependencies:
       '@cc-components/pipingshared':
@@ -725,15 +704,6 @@ importers:
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
-
-  widgets/modelviewer:
-    dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../../libs/modelviewer
-      styled-components:
-        specifier: 5.3.6
-        version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
 
 packages:
 

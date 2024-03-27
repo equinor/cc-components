@@ -1,6 +1,5 @@
 packages:
   - 'libs/**'
   - 'apps/*'
-  - 'widgets/*'
   - 'cli'
   - 'github-action'
