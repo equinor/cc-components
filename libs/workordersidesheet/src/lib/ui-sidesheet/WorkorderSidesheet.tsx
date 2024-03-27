@@ -1,9 +1,12 @@
+import { Tabs } from '@equinor/eds-core-react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import {
   CutoffTab,
   LinkCell,
   MaterialTab,
   MccrTab,
-  ModelViewerTab,
   PackageStatus,
   StatusCircle,
   colorMap,
@@ -11,6 +14,7 @@ import {
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
+
 import {
   BannerItem,
   CustomStyledPanels,
@@ -23,16 +27,15 @@ import {
   StyledTabsList,
   TabTitle,
 } from '@cc-components/sharedcomponents';
+
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { Tabs } from '@equinor/eds-core-react';
 
-import { TagOverlay } from '@cc-components/modelviewer';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
+
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
 import { DetailsTab } from './DetailsTab';

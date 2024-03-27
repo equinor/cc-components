@@ -29,6 +29,6 @@ export const useModels = () => {
     modelMeta,
     setModelMeta,
     models: models ?? [],
-    hasAccess: (models && models.length <= 0) ?? false,
+    hasAccess: (models && models.length >= 0) ?? false,
   };
 };

@@ -1,11 +1,8 @@
-import { Widget } from '@equinor/fusion-framework-react-app/widget';
-import { TagOverlay } from '@cc-components/modelviewer';
-import { ModelViewerConfig } from '@cc-components/modelviewer';
 import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 import styled from 'styled-components';
-import { useModelViewerConfig } from '../../../../../../fusion-framework';
+import { ModelViewer, ModelViewerConfig, TagOverlay } from '.';
 
 export const NoResourceData = styled.div`
   text-align: center;
@@ -32,7 +29,7 @@ const WidgetContainer = styled.div`
 `;
 
 export type ModelViewerTabProps = {
-  tagOverlay: string[] | TagOverlay[] | undefined;
+  tagOverlay: TagOverlay[] | undefined;
   facilities: string[];
   isFetching: boolean;
   error: Error | null;
@@ -41,8 +38,6 @@ export type ModelViewerTabProps = {
 
 export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
   const { tagOverlay, facilities, options, isFetching, error } = props;
-
-  const modelViewerConfig = useModelViewerConfig();
 
   if (isFetching) {
     return (
@@ -90,15 +85,11 @@ export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
 
   return (
     <WidgetContainer>
-      <Widget
-        name="modelviewer"
-        widgetVersion={{ type: 'version', value: '0.0.1' }}
-        props={{
-          facility: facilities[0],
-          options: options ?? undefined,
-          tagsOverlay: tagOverlay,
-          ...modelViewerConfig,
-        }}
+      <ModelViewer
+        facility={facilities[0]}
+        options={options}
+        tagsOverlay={tagOverlay}
+        {...options}
       />
     </WidgetContainer>
   );

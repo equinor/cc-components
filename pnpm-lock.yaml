@@ -689,6 +689,9 @@ importers:
 
   libs/workorderapp:
     dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -3555,8 +3558,6 @@ packages:
       rxjs: ^7.8.1
     peerDependenciesMeta:
       '@equinor/fusion-framework-module-feature-flag':
-        optional: true
-      '@equinor/fusion-framework-module-navigation':
         optional: true
       '@equinor/fusion-framework-react-module-bookmark':
         optional: true
@@ -7021,8 +7022,6 @@ packages:
     peerDependenciesMeta:
       '@types/prettier':
         optional: true
-      '@types/refractor':
-        optional: true
       prettier:
         optional: true
     dependencies:
@@ -7047,8 +7046,6 @@ packages:
       prettier: ^2.8.8
     peerDependenciesMeta:
       '@types/prettier':
-        optional: true
-      '@types/refractor':
         optional: true
       prettier:
         optional: true
