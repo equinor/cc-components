@@ -2,7 +2,9 @@ import { Button, Icon } from '@equinor/eds-core-react';
 import { close, external_link } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
-Icon.add({ close, external_link });
+
+// Icon.add({ "close"})
+// Icon.add({ close, external_link });
 
 const StyledContainer = styled.div`
   display: grid;
