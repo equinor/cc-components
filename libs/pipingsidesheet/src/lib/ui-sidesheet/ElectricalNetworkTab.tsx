@@ -14,6 +14,7 @@ type ElectricalNetworkTab = {
 export const ElecticalNetworkTab = (props: ElectricalNetworkTab): JSX.Element => {
   const { networks, isFetching, itemNo } = props;
 
+  console.log(isFetching)
   if (isFetching) {
     return <CircuitDiagram isLoading={isFetching} itemNo={itemNo} />;
   }
