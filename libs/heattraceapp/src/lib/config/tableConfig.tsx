@@ -6,12 +6,15 @@ import {
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
+  BaseStatus,
   DateCell,
   DescriptionCell,
   LinkCell,
   StatusCircle,
   StyledMonospace,
+  domainNames,
   pipetestStatusColormap,
+  statusColorMap,
   useHttpClient,
 } from '@cc-components/shared';
 
@@ -47,7 +50,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
 const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   {
     colId: 'HeatTraceCableNo',
-    headerName: 'Tag',
+    headerName: domainNames.tag,
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return (
@@ -66,20 +69,47 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
   },
   {
     colId: 'Priority1',
-    headerName: 'Priority1',
+    headerName: domainNames.commPriority1,
     valueGetter: (pkg) => pkg.data?.priority1,
   },
   {
+    colId: 'Priority2',
+    headerName: domainNames.commPriority2,
+    valueGetter: (pkg) => pkg.data?.priority2,
+  },
+  {
+    colId: 'Priority3',
+    headerName: domainNames.commPriority3,
+    valueGetter: (pkg) => pkg.data?.priority3,
+  },
+  {
     colId: 'Location',
-    headerName: 'Location',
+    headerName: domainNames.mcLocation,
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return <StyledMonospace>{props.value}</StyledMonospace>;
     },
   },
+  {
+    colId: 'MechanicalCompletionStatus',
+    headerName: domainNames.mcStatus,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
+    cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
+      if (!props.data?.mechanicalCompletionStatus) return null;
+      return (
+        <StatusCircle
+          content={props.data.mechanicalCompletionStatus}
+          statusColor={
+            statusColorMap[props.data.mechanicalCompletionStatus as BaseStatus]
+          }
+        />
+      );
+    },
+  },
   // Need to implement the visual checklistStatus
   {
-    headerName: 'Checklist status',
+    colId: 'FormStatus',
+    headerName: domainNames.checklistStatus,
     valueGetter: (pkg) => pkg.data?.formStatus,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       if (!props.data?.formStatus) return null;
@@ -91,13 +121,34 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
       );
     },
   },
-  { headerName: 'Current step', valueGetter: (pkg) => pkg.data?.checklistStep },
+  { headerName: domainNames.currentStep, valueGetter: (pkg) => pkg.data?.checklistStep },
   {
+    colId: 'RfCPlannedForecastDate',
     headerName: 'RFC',
     valueGetter: (pkg) => pkg.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
     },
+  },
+  {
+    colId: 'CommissioningIdentifierCode',
+    headerName: domainNames.commIdentifier,
+    valueGetter: (pkg) => pkg.data?.commissioningIdentifierDescription,
+  },
+  {
+    colId: 'MechanicalCompletionHandoverStatus',
+    headerName: domainNames.mcHandoverStatus,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionHandoverStatus,
+  },
+  {
+    colId: 'MechanicalCompletionResponsible',
+    headerName: domainNames.mcResponsible,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionResponsible,
+  },
+  {
+    colId: 'MechanicalCompletionPhase',
+    headerName: domainNames.mcPhase,
+    valueGetter: (pkg) => pkg.data?.mechanicalCompletionPhase,
   },
   {
     headerName: 'Pipetests',
