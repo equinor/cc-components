@@ -1,7 +1,7 @@
 ---
 name: 🖌️ Scaling report
 about: Create a report regarding application scaling
-title: "🖌️: (Application) : <Title>"
+title: "🖌️: <app>: <title>"
 labels: scaling
 assignees: ''
 ---
@@ -14,9 +14,3 @@ assignees: ''
 
 ## Acceptance Criteria
 <!-- How to test -->
-
-- [ ] when selecting 
-- [ ] items which covers
-- [ ] the expected outcome 
-
-<!-- Make sure correct milestone is selected! -->

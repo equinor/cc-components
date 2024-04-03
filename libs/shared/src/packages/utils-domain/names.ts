@@ -56,6 +56,7 @@ export const domainNames = {
   mcPkg: 'Mc Pkg',
   mcResponsible: `MC ${'Responsible'}`,
   mcStatus: 'MC Status',
+  mcHandoverStatus: 'MC Handover Status',
 
   // Punch
   punch: 'Punch',

@@ -86,7 +86,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.mcStatus,
-    colId: 'MechanicalCompletionStatus',
+    colId: 'mechanicalCompletionStatus',
     valueGetter: (element) => element.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       if (!props.value) return;
