@@ -1,5 +1,6 @@
 # CC Applications
 
+[![SCM Compliance](https://scm-compliance-api.radix.equinor.com/repos/equinor/cc-components/badge)](https://scm-compliance-api.radix.equinor.com/repos/equinor/cc-components/badge)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/fprd-deploy.yml?label=Prod%20deployment)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/pr-deploy.yml?label=PR%20deployment)
 
