@@ -43,6 +43,34 @@ pnpm ci:build //Build sequentially
 Run the following command `npm run first-time-setup`
 To run an app run the following command `pnpm serve <appname>`
 
+## Project and app structure
+### Project structure
+This project contains nine different apps, all related to Construction and Commission, except Scope Change Request. All the code that belongs to the apps can be found in the folders `apps` and `libs`. All the apps are located in both `apps` and `libs`.
+
+Each app in `apps` only contains one file in `src`, main.tsx. This is the root-file for the app and contains the minimum of code, and are linked to the corresponding app in `libs`.
+
+`libs` contains all the configurations, business logic and UI to each app.
+
+In addition, common code that are used across multiple apps should be put inside the `shared` or `sharedcomponents` library. If it's a shared function that is calculating something or anything similar, then put it in `shared`, but if it's a component that is beeing used in multiple apps then put it in `sharedcomponents`, e.g. SidesheetSkeleton that is beeing used in multiple apps when loading the sidesheet. 
+
+Note: `sharedcomponents` was created a long time after `shared`, so `sharedcomponents` is not well updated and does only contain a few shared components at this time. Please keep placing shared resources in the correct folders. 
+
+### App structure
+This chapter only refers to the `libs` folder.
+
+Each app has three different folders. The naming convention for the three folders are `<appname>app`, `<appname>shared` and `<appname>sidesheet`, e.g. handoverapp, handovershared and handoversidesheet.
+
+The `app` folder contains all the configurations, business logic and UI to the app, except the things that are related to the sidesheet.
+
+The `shared` folder contains all shared code/resources that are used in both `app` and `sidesheet`. This will typically be different types and maybe some styling.
+
+The `sidesheet` folder contains all the business logic and UI for the sidesheet. 
+
+### App config
+All the apps are build up by the same components and configuration options. These options can be found in `\libs\<appname>app\src\lib\config\workspaceConfig.tsx`.
+
+All the configuration options every app uses is filterOptions, gridOptions, gardenOptions, statusBarOptions, sidesheetOptions, powerBiOptions and workspaceOptions. Without the filterOptions you won't see any filters, without gridOptions you won't see any table, etc.
+
 ## Deployment
 
 [Deploy PR to test env](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
