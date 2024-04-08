@@ -62,7 +62,7 @@ The following snippet provides a brief overview of how application code is struc
 
 ### Project organization
 
-This project contains nine different apps, all related to Construction and Commission, except Scope Change Request. All the code that belongs to the apps can be found in the folders `apps` and `libs`. All the apps are located in both `apps` and `libs`.
+This project contains different apps, all related to Construction and Commission, except Scope Change Request. All the code that belongs to the apps can be found in the folders `apps` and `libs`. All the apps are located in both `apps` and `libs`.
 
 Each app in `apps` only contains one file in `src`, main.tsx. This is the root-file for the app and contains the minimum of code, and are linked to the corresponding app in `libs`.
 
@@ -114,7 +114,7 @@ The pipelines are located in the `./github/workflows` folder
 - [Manual deployment to test](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
 - [Manual deployment to production](https://github.com/equinor/cc-components/actions/workflows/manual-deploy-prod.yml)
 
-## Creating new apps
+## Creating new apps 🚀
 
 1. Run the following [action](https://github.com/equinor/cc-components/actions/workflows/create-fusion-app.yml) to create and register the app with the fusion portal.
 2. Create the app locally in CC-components. Run the following command `pnpm new:app` or `pnpm new:report`
