@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import {
+  Echo3dClient,
   Echo3dViewer,
   EchoSetupObject,
   HierarchyClient,
@@ -22,7 +23,7 @@ type ModelViewerContextType = {
   modelApiClient: ModelsClient;
   hierarchyApiClient: HierarchyClient;
   echoInstance: EchoSetupObject;
-  echoClient?: IHttpClient;
+  echoClient?: Echo3dClient;
   viewerRef?: RefObject<HTMLCanvasElement>;
 };
 
@@ -33,7 +34,15 @@ const ModelViewerContext = createContext<ModelViewerContextType>(
 export const useModelViewerContext = () => useContext(ModelViewerContext);
 
 export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
-  const { viewerInstance, viewerRef, isLoading } = useLoadModelViewer();
+  const {
+    viewer,
+    viewerInstance,
+    modelApiClient,
+    hierarchyApiClient,
+    client,
+    viewerRef,
+    isLoading,
+  } = useLoadModelViewer();
 
   /* Add event listeners for re-authenticating every timewindow gains focus.
    * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
@@ -41,29 +50,29 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const onFocusGained = () => {
       const authenticateEchoClient = async () => {
-        await viewerInstance.client?.authenticate();
+        await client?.authenticate();
       };
 
       authenticateEchoClient();
     };
 
-    if (viewerInstance.client) {
+    if (client) {
       window.addEventListener('focus', onFocusGained);
     }
 
     return () => {
       window.removeEventListener('focus', onFocusGained);
     };
-  }, [viewerInstance.client]);
+  }, [client]);
 
   return (
     <ModelViewerContext.Provider
       value={{
-        viewer: viewerInstance.viewer as Echo3dViewer,
-        modelApiClient: viewerInstance.modelApiClient as ModelsClient,
-        hierarchyApiClient: viewerInstance.hierarchyApiClient as HierarchyClient,
-        echoInstance: viewerInstance.echoInstance as EchoSetupObject,
-        echoClient: viewerInstance.echoClient,
+        viewer: viewer as Echo3dViewer,
+        modelApiClient: modelApiClient as ModelsClient,
+        hierarchyApiClient: hierarchyApiClient as HierarchyClient,
+        echoInstance: viewerInstance as EchoSetupObject,
+        echoClient: client as Echo3dClient,
       }}
     >
       <Container>
