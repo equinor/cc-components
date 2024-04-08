@@ -2,8 +2,8 @@
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/fprd-deploy.yml?label=Prod%20deployment)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/equinor/cc-components/pr-deploy.yml?label=PR%20deployment)
-[![GitHub issues](https://img.shields.io/github/issues/equinor/fusion-workspace)](https://github.com/equinor/fusion-workspace/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/equinor/fusion-workspace)](https://github.com/equinor/fusion-workspace/pulls)
+![GitHub issues](https://img.shields.io/github/issues/equinor/cc-components)
+![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/equinor/cc-components)
 ![SCM Compliance](https://scm-compliance-api.radix.equinor.com/repos/equinor/cc-components/badge)
 ![Known Vulnerabilities](https://snyk.io/test/github/equinor/cc-components/badge.svg)
 
