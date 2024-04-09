@@ -1,3 +1,0 @@
-# electrical-consumers
-
-Add readme
