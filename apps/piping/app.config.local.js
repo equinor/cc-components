@@ -9,9 +9,6 @@ export default () => ({
   },
   environment: {
     uri: 'https://localhost:7074',
-    electricalUri:
-      'https://electrical-consumers-fusion-data-gateway-test.radix.equinor.com',
-    // electricalUri: 'https://localhost:7075',
     defaultScopes: ['api://ed6de162-dd30-4757-95eb-0ffc8d34fbe0/access_as_user'],
   },
   endpoints: {},
