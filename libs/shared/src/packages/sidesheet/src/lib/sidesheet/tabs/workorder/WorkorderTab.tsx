@@ -39,10 +39,6 @@ export const WorkorderTab = <T extends WorkorderBase>({
     maxRemainingHours = findMaxHours(workorders || [], 'remainingHours');
   }
 
-  const additionalGridOptions = {
-    suppressColumnVirtualisation: true,
-  } as GridOptions;
-
   return (
     <StyledContentWrapper>
       <TabTable
@@ -51,7 +47,6 @@ export const WorkorderTab = <T extends WorkorderBase>({
         isFetching={isFetching}
         packages={workorders || []}
         resourceName="Workorders"
-        additionalGridOptions={additionalGridOptions}
       />
     </StyledContentWrapper>
   );

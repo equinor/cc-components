@@ -24,4 +24,5 @@ export const defaultGridOptions: GridOptions = {
     );
   },
   rowStyle: { fontSize: '14px' },
+  suppressColumnVirtualisation: true,
 };
