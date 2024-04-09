@@ -11,15 +11,15 @@ export const columns: ColDef<QueryBase>[] = [
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
       return <LinkCell url={props.data?.queryUrl} urlText={props.data?.queryNo} />;
     },
-    minWidth: 200,
   },
   {
+    colId: 'title',
     headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    minWidth: 200,
+    width: 200,
   },
   {
     headerName: 'Status',
@@ -28,7 +28,6 @@ export const columns: ColDef<QueryBase>[] = [
   {
     headerName: 'Type',
     valueGetter: (pkg) => pkg.data?.queryType,
-    width: 100,
   },
   {
     headerName: 'Next to sign',

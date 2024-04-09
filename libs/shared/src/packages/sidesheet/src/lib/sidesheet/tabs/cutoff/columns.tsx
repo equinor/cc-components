@@ -10,7 +10,6 @@ export const columns: ColDef<CutoffBase>[] = [
       pkg.data?.cutoffWeek
         ? `${pkg.data.cutoffWeek.slice(0, 4)}w${pkg.data.cutoffWeek.slice(4)}`
         : '',
-    minWidth: 150,
   },
   {
     headerName: 'Title',

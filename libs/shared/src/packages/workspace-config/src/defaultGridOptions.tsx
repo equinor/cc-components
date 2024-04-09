@@ -1,7 +1,7 @@
+import { Skeleton } from '@cc-components/sharedcomponents';
 import { GridOptions } from '@equinor/workspace-ag-grid';
 import { memo } from 'react';
 import { defaultColDef } from './defaultColDef';
-import { Skeleton } from '@cc-components/sharedcomponents';
 
 const LoadingCellRenderer = memo(() => {
   return <Skeleton height={'20px'} width={'100px'} />;
@@ -16,13 +16,14 @@ export const defaultGridOptions: GridOptions = {
   enableBrowserTooltips: true,
   enableCellTextSelection: true,
   ensureDomOrder: true,
-  onGridReady: (e) => {
+  onFirstDataRendered: (e) => {
     e.columnApi.autoSizeColumns(
       e.columnApi
         .getAllDisplayedColumns()
-        .filter((s) => !excludedColumns.includes(s.getColId()))
+        .filter((s) => !excludedColumns.includes(s.getColId().toLocaleLowerCase()))
     );
   },
   rowStyle: { fontSize: '14px' },
   suppressColumnVirtualisation: true,
+  autoSizePadding: 10,
 };
