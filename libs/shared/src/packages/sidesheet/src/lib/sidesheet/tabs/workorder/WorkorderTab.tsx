@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { WorkorderBase } from './types';
+import { GridOptions } from '@equinor/workspace-ag-grid';
 
 type WorkorderTabProps<T extends WorkorderBase> = {
   workorders: T[] | undefined;
@@ -38,6 +39,10 @@ export const WorkorderTab = <T extends WorkorderBase>({
     maxRemainingHours = findMaxHours(workorders || [], 'remainingHours');
   }
 
+  const additionalGridOptions = {
+    suppressColumnVirtualisation: true,
+  } as GridOptions;
+
   return (
     <StyledContentWrapper>
       <TabTable
@@ -46,6 +51,7 @@ export const WorkorderTab = <T extends WorkorderBase>({
         isFetching={isFetching}
         packages={workorders || []}
         resourceName="Workorders"
+        additionalGridOptions={additionalGridOptions}
       />
     </StyledContentWrapper>
   );

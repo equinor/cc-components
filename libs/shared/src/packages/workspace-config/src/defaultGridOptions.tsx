@@ -7,6 +7,8 @@ const LoadingCellRenderer = memo(() => {
   return <Skeleton height={'20px'} width={'100px'} />;
 });
 
+const excludedColumns = ['title', 'description'];
+
 export const defaultGridOptions: GridOptions = {
   loadingCellRenderer: LoadingCellRenderer,
   defaultColDef: defaultColDef,
@@ -14,9 +16,11 @@ export const defaultGridOptions: GridOptions = {
   enableBrowserTooltips: true,
   enableCellTextSelection: true,
   ensureDomOrder: true,
-  onFirstDataRendered: (e) => {
+  onGridReady: (e) => {
     e.columnApi.autoSizeColumns(
-      e.columnApi.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
+      e.columnApi
+        .getAllDisplayedColumns()
+        .filter((s) => !excludedColumns.includes(s.getColId()))
     );
   },
   rowStyle: { fontSize: '14px' },
