@@ -1,16 +1,15 @@
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { ElectricalNetwork, useContextId } from '@cc-components/shared';
+import { ElectricalNetwork, useContextId, useHttpClient } from '@cc-components/shared';
 
 import { useQuery } from '@tanstack/react-query';
 
 export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
-  const client = useHttpClient('electrical-api');
+  const client = useHttpClient();
   const contextId = useContextId();
 
   const { data, isLoading, error } = useQuery<ElectricalNetwork[], Error>(
-    [facility, tagNos, 'electrical-networks'],
+    [facility, tagNos.join(","), 'electrical-networks'],
     async ({ signal }) => {
-      const url = `api/contexts/${contextId}/electrical/consumers/electrical-network/${facility}`;
+      const url = `api/contexts/${contextId}/electrical/electrical-network/${facility}`;
 
       const res = await client.fetch(url, {
         method: 'POST',
@@ -30,7 +29,7 @@ export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
       }
 
       return res.json();
-    }
+    },
   );
 
   return {
