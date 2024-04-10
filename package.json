@@ -18,7 +18,9 @@
     "build:apps": "turbo run build --filter ./apps/** --parallel --output-logs errors-only",
     "build:libs": "turbo run build --filter ./libs/* --parallel --output-logs errors-only",
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
-    "new:report": "nx generate @cc-components/plugins:fusion-report-generator"
+    "new:report": "nx generate @cc-components/plugins:fusion-report-generator",
+    "link:workspace": "tsx ./github-action/src/link-ff.ts link",
+    "unlink:workspace": "tsx ./github-action/src/link-ff.ts unlink"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^9.4.1",
@@ -66,7 +68,7 @@
     "@equinor/fusion-framework-react-module-context": "^6.0.18",
     "@equinor/fusion-framework-react-module-http": "^4.0.3",
     "@equinor/fusion-observable": "8.1.4",
-    "@equinor/workspace-fusion": "8.0.0",
+    "@equinor/workspace-fusion": "link:workspace\\packages\\workspace-fusion",
     "@microsoft/applicationinsights-web": "^3.0.3",
     "@swc/helpers": "0.5.2",
     "@tanstack/react-query": "^4.35.3",
