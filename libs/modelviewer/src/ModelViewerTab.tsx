@@ -3,8 +3,9 @@ import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
 import styled from 'styled-components';
-import { ModelViewerConfig, TagOverlay } from '.';
 import { Loading } from './components/loading/loading';
+import { ModelViewerConfig } from './providers/configProvider';
+import { TagOverlay } from './types/overlayTags';
 
 const ModelViewer = lazy(() => import('./ModelViewer'));
 

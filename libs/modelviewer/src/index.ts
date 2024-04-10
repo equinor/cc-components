@@ -1,5 +1,3 @@
-export * from './ModelViewerTab';
-export * from './hooks/enableModelViewer';
-export * from './hooks/useCustomAction';
-export * from './types';
-export * from './providers';
+export { ModelViewerTab, ModelViewerTabProps } from './ModelViewerTab';
+export { enableModelViewer } from './hooks/enableModelViewer';
+export { ModelViewerEnvConfig, TagOverlay } from './types';
