@@ -1,11 +1,10 @@
-import { useAppModules } from '@equinor/fusion-framework-react-app';
 import { useQuery } from '@tanstack/react-query';
 
-import { ModuleViewer } from '../modules';
 import { Plant } from '../services/usePlantSelectionService';
+import { useModelViewerContext } from '../providers';
 
 export const useAvailablePlants = (facility: string) => {
-  const { echoClient } = useAppModules<[ModuleViewer]>().moduleViewer;
+  const { echoClient } = useModelViewerContext();
 
   const { data, isLoading, error } = useQuery<Plant[]>({
     queryKey: ['available-plants', facility],

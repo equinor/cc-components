@@ -1,20 +1,23 @@
 import { useAccessToken } from '@equinor/fusion-framework-react-app/msal';
+import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
+
 import { useQuery } from '@tanstack/react-query';
 import { setupEcho3dWeb } from '@equinor/echo-3d-viewer';
 import { tokens } from '@equinor/eds-tokens';
 import { useRef } from 'react';
-import { useModelViewerContainerContext } from '../providers/modelViewerContainerProvider';
 
 const tokenRequestA = {
-  scopes: ['d484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation'],
+  scopes: ['d484c551-acf8-45bc-b1e8-3f4373bd0d42/user_impersonation'], // TODO: Get from env
 };
 
 const tokenRequestB = {
-  scopes: ['ebc04930-bf9c-43e5-98bc-bc90865600b8/user_impersonation'],
+  scopes: ['ebc04930-bf9c-43e5-98bc-bc90865600b8/user_impersonation'], // TODO: Get from env
 };
 
 export const useLoadModelViewer = () => {
-  const { canvas } = useModelViewerContainerContext();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const echoClient = useHttpClient('echo');
 
   const { token: tokenA, error: tokenErrorA } = useAccessToken(tokenRequestA);
 
@@ -26,18 +29,18 @@ export const useLoadModelViewer = () => {
   const { isLoading, data } = useQuery({
     queryKey: ['model-viewer-loader'],
     queryFn: async () => {
-      if (!tokenA || !tokenB || !canvas.current) {
+      if (!tokenA || !tokenB || !canvasRef.current) {
         throw new Error('Tokens and ViewRef should be set');
       }
 
       const echoInstance = await setupEcho3dWeb(
-        canvas.current,
+        canvasRef.current,
         {
-          baseUrl: 'https://app-echomodeldist-dev.azurewebsites.net',
+          baseUrl: 'https://app-echomodeldist-dev.azurewebsites.net', // TODO: Get from env
           getAccessToken: async () => tokenA ?? '',
         },
         {
-          baseUrl: 'https://app-echo-hierarchy-dev.azurewebsites.net',
+          baseUrl: 'https://app-echo-hierarchy-dev.azurewebsites.net', // TODO: Get from env
           getAccessToken: async () => tokenB ?? '',
         },
         {
@@ -50,24 +53,13 @@ export const useLoadModelViewer = () => {
       return echoInstance;
     },
     refetchOnWindowFocus: false,
-    enabled: !!tokenA && !!tokenB && !!canvas.current,
-  });
-
-  console.log({
-    isLoading,
-    tokenA: !!tokenA,
-    tokenB: !!tokenB,
-    canvas: !!canvas.current,
-    tokenErrorA,
-    tokenErrorB,
+    enabled: !!tokenA && !!tokenB && !!canvasRef.current,
   });
 
   return {
-    viewerInstance: data, // TODO: REMOVE THIS
-    client: data?.client,
-    viewer: data?.viewer,
-    modelApiClient: data?.modelApiClient,
-    hierarchyApiClient: data?.hierarchyApiClient,
+    canvasRef,
+    echoClient,
+    echoInstance: data,
     isLoading: isLoading,
   };
 };

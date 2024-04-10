@@ -25,7 +25,6 @@ import {
   PlantProvider,
   ModelProvider,
 } from './providers';
-import { ModelViewerContainerProvider } from './providers/modelViewerContainerProvider';
 
 type ModelViewerProps = {
   facility: string;
@@ -70,26 +69,24 @@ const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <PlantSelectionProvider {...{ facility }}>
-        <PlantProvider>
-          <ModelViewerContainerProvider>
-            <ModelViewerProvider>
-              <ModelSelectionProvider>
-                <ModelProvider>
-                  <TagSelectionProvider tagsOverlay={tagsOverlay}>
-                    <ActionProvider>
-                      <Legend />
-                      <TagsNotFound />
-                      <TagsOverlay />
-                      <ActionsMenu CustomActions={components.CustomActions} />
-                    </ActionProvider>
-                  </TagSelectionProvider>
-                </ModelProvider>
-              </ModelSelectionProvider>
-            </ModelViewerProvider>
-          </ModelViewerContainerProvider>
-        </PlantProvider>
-      </PlantSelectionProvider>
+      <ModelViewerProvider>
+        <PlantSelectionProvider {...{ facility }}>
+          <PlantProvider>
+            <ModelSelectionProvider>
+              <ModelProvider>
+                <TagSelectionProvider tagsOverlay={tagsOverlay}>
+                  <ActionProvider>
+                    <Legend />
+                    <TagsNotFound />
+                    <TagsOverlay />
+                    <ActionsMenu CustomActions={components.CustomActions} />
+                  </ActionProvider>
+                </TagSelectionProvider>
+              </ModelProvider>
+            </ModelSelectionProvider>
+          </PlantProvider>
+        </PlantSelectionProvider>
+      </ModelViewerProvider>
     </Suspense>
   );
 };

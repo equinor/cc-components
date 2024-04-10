@@ -1,22 +1,14 @@
-import { PropsWithChildren, createContext, useContext, useRef } from 'react';
-
-import {
-  Echo3dClient,
-  Echo3dViewer,
-  EchoSetupObject,
-  HierarchyClient,
-  ModelsClient,
-} from '@equinor/echo-3d-viewer';
-
-import { useLoadModelViewer } from '../hooks/useLoadModelViewer';
+import { PropsWithChildren, createContext, useContext, useEffect } from 'react';
+import { EchoSetupObject } from '@equinor/echo-3d-viewer';
 import styled from 'styled-components';
 
+import { useLoadModelViewer } from '../hooks/useLoadModelViewer';
+import Canvas from '../components/canvas/canvas';
+import { IHttpClient } from '@equinor/fusion-framework-module-http';
+
 type ModelViewerContextType = {
-  viewer: Echo3dViewer;
-  modelApiClient: ModelsClient;
-  hierarchyApiClient: HierarchyClient;
   echoInstance: EchoSetupObject;
-  echoClient?: Echo3dClient;
+  echoClient: IHttpClient;
 };
 
 const ModelViewerContext = createContext<ModelViewerContextType>(
@@ -26,53 +18,40 @@ const ModelViewerContext = createContext<ModelViewerContextType>(
 export const useModelViewerContext = () => useContext(ModelViewerContext);
 
 export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
-  const {
-    viewer,
-    viewerInstance,
-    modelApiClient,
-    hierarchyApiClient,
-    client,
-    isLoading,
-  } = useLoadModelViewer();
+  const { canvasRef, echoClient, echoInstance, isLoading } = useLoadModelViewer();
 
   /* Add event listeners for re-authenticating every timewindow gains focus.
    * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
    */
-
-  /*
   useEffect(() => {
     const onFocusGained = () => {
       const authenticateEchoClient = async () => {
-        await client?.authenticate();
+        await echoInstance?.client?.authenticate();
       };
 
       authenticateEchoClient();
     };
 
-    if (client) {
+    if (echoInstance?.client) {
       window.addEventListener('focus', onFocusGained);
     }
 
     return () => {
       window.removeEventListener('focus', onFocusGained);
     };
-  }, [client]);
-
-  */
-
-  console.log({ isLoading, viewerInstance });
+  }, [echoInstance?.client]);
 
   return (
     <ModelViewerContext.Provider
       value={{
-        viewer: viewer as Echo3dViewer,
-        modelApiClient: modelApiClient as ModelsClient,
-        hierarchyApiClient: hierarchyApiClient as HierarchyClient,
-        echoInstance: viewerInstance as EchoSetupObject,
-        echoClient: client as Echo3dClient,
+        echoInstance: echoInstance as EchoSetupObject,
+        echoClient,
       }}
     >
-      <Container>{isLoading ? null : children}</Container>
+      <Container>
+        <Canvas viewerRef={canvasRef} />
+        {isLoading ? null : children}
+      </Container>
     </ModelViewerContext.Provider>
   );
 };
