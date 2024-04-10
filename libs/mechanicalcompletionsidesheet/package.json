@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
     "build": "tsc -b -f"
   },
   "module": "./dist/src/index.js",
@@ -11,7 +13,6 @@
   "dependencies": {
     "@cc-components/mechanicalcompletionshared": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^",
-    "@equinor/workspace-sidesheet": "^0.1.6"
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }

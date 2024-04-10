@@ -4,7 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "tsc -b -f"
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
+    "build": "tsc -b -"
   },
   "module": "./dist/src/index.js",
   "main": "./dist/src/index.js",

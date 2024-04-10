@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "tsc -b"
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
+    "build": "tsc -b -"
   },
   "module": "./dist/src/index.js",
   "main": "./dist/src/index.js",
