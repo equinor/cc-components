@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run build -- --watch",
     "dev:local": "npm run dev -- --watch",
-    "build": "tsc -b -"
+    "build": "tsc -b -f"
   },
   "module": "./dist/src/index.js",
   "main": "./dist/src/index.js",
