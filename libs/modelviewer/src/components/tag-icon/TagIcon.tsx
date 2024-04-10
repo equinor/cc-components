@@ -9,7 +9,7 @@ interface TagIconProps {
  *
  * @param {TagIconProps} {
  *  icon: Icon to be wrapped
- *  legendColor: background color to apply. Need to be valid css color
+ *  legendColor: background color to apply. Need to be valid 89 color
  * }
  * @return {*}  {JSX.Element} Wrapped icon with provided color
  */
