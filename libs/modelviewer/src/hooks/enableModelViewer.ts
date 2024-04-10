@@ -10,6 +10,4 @@ export const enableModelViewer = (
     baseUri: config.modelViewerConfig.echoClientBaseUrl,
     defaultScopes: [config.modelViewerConfig.echoClientScope],
   });
-
-  console.log({ config });
 };
