@@ -5,7 +5,6 @@ import {
   PropsWithChildren,
   cloneElement,
   isValidElement,
-  lazy,
 } from 'react';
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import { ModelViewerErrorBoundary } from './components/error-boundary/ErrorBoundary';
@@ -26,7 +25,7 @@ import {
   PlantProvider,
   ModelProvider,
 } from './providers';
-
+import { ModelViewerContainerProvider } from './providers/modelViewerContainerProvider';
 
 type ModelViewerProps = {
   facility: string;
@@ -73,20 +72,22 @@ const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
     <Suspense fallback={<Loading />}>
       <PlantSelectionProvider {...{ facility }}>
         <PlantProvider>
-          <ModelViewerProvider>
-            <ModelSelectionProvider>
-              <ModelProvider>
-                <TagSelectionProvider tagsOverlay={tagsOverlay}>
-                  <ActionProvider>
-                    <Legend />
-                    <TagsNotFound />
-                    <TagsOverlay />
-                    <ActionsMenu CustomActions={components.CustomActions} />
-                  </ActionProvider>
-                </TagSelectionProvider>
-              </ModelProvider>
-            </ModelSelectionProvider>
-          </ModelViewerProvider>
+          <ModelViewerContainerProvider>
+            <ModelViewerProvider>
+              <ModelSelectionProvider>
+                <ModelProvider>
+                  <TagSelectionProvider tagsOverlay={tagsOverlay}>
+                    <ActionProvider>
+                      <Legend />
+                      <TagsNotFound />
+                      <TagsOverlay />
+                      <ActionsMenu CustomActions={components.CustomActions} />
+                    </ActionProvider>
+                  </TagSelectionProvider>
+                </ModelProvider>
+              </ModelSelectionProvider>
+            </ModelViewerProvider>
+          </ModelViewerContainerProvider>
         </PlantProvider>
       </PlantSelectionProvider>
     </Suspense>

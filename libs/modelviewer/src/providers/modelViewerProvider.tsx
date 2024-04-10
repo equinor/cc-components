@@ -1,10 +1,4 @@
-import {
-  PropsWithChildren,
-  RefObject,
-  createContext,
-  useContext,
-  useEffect,
-} from 'react';
+import { PropsWithChildren, createContext, useContext, useRef } from 'react';
 
 import {
   Echo3dClient,
@@ -13,8 +7,7 @@ import {
   HierarchyClient,
   ModelsClient,
 } from '@equinor/echo-3d-viewer';
-import { Canvas } from '../components/canvas/canvas';
-import { IHttpClient } from '@equinor/fusion-framework-module-http';
+
 import { useLoadModelViewer } from '../hooks/useLoadModelViewer';
 import styled from 'styled-components';
 
@@ -24,7 +17,6 @@ type ModelViewerContextType = {
   hierarchyApiClient: HierarchyClient;
   echoInstance: EchoSetupObject;
   echoClient?: Echo3dClient;
-  viewerRef?: RefObject<HTMLCanvasElement>;
 };
 
 const ModelViewerContext = createContext<ModelViewerContextType>(
@@ -40,13 +32,14 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
     modelApiClient,
     hierarchyApiClient,
     client,
-    viewerRef,
     isLoading,
   } = useLoadModelViewer();
 
   /* Add event listeners for re-authenticating every timewindow gains focus.
    * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
    */
+
+  /*
   useEffect(() => {
     const onFocusGained = () => {
       const authenticateEchoClient = async () => {
@@ -65,6 +58,10 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
     };
   }, [client]);
 
+  */
+
+  console.log({ isLoading, viewerInstance });
+
   return (
     <ModelViewerContext.Provider
       value={{
@@ -75,10 +72,7 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
         echoClient: client as Echo3dClient,
       }}
     >
-      <Container>
-        <Canvas viewerRef={viewerRef} />
-        {isLoading ? null : children}
-      </Container>
+      <Container>{isLoading ? null : children}</Container>
     </ModelViewerContext.Provider>
   );
 };

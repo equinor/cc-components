@@ -23,6 +23,8 @@ export const ModelSelectionProvider = ({ children }: PropsWithChildren<{}>) => {
 
   const [isModelSelectionVisible, setShowModelDialog] = useState(!modelMeta);
 
+  console.log({ message: 'Rendering' });
+
   return (
     <ModelSelectionContext.Provider
       value={{
