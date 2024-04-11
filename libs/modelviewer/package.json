@@ -12,7 +12,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@equinor/echo-3d-viewer": "^0.0.1",
+    "@equinor/echo-3d-viewer": "^0.0.3",
     "@cognite/reveal": "4.2.2",
     "@cognite/sdk": "8.2.0",
     "three": "0.154.0",

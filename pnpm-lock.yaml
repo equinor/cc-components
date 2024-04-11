@@ -279,6 +279,9 @@ importers:
       '@cc-components/workorderapp':
         specifier: workspace:^
         version: link:../../libs/workorderapp
+      throttle-typescript:
+        specifier: ^1.1.0
+        version: 1.1.0
 
   github-action:
     dependencies:
@@ -442,8 +445,8 @@ importers:
         specifier: 8.2.0
         version: 8.2.0
       '@equinor/echo-3d-viewer':
-        specifier: ^0.0.1
-        version: 0.0.1(@cognite/reveal@4.2.2)(@cognite/sdk@8.2.0)(lodash@4.17.21)(three@0.154.0)
+        specifier: ^0.0.3
+        version: 0.0.3(@cognite/reveal@4.2.2)(@cognite/sdk@8.2.0)(lodash@4.17.21)(three@0.154.0)
       rxjs:
         specifier: ^7.5.7
         version: 7.8.1
@@ -2995,23 +2998,22 @@ packages:
     resolution: {integrity: sha512-EsBwpc7hBUJWAsNPBmJy4hxWx12v6bshQsldrVmjxJoc3isbxhOrF2IcCpaXxfvq03NwkI7sbsOLXbYuqF/8Ww==}
     dev: false
 
-  /@equinor/echo-3d-viewer@0.0.1(@cognite/reveal@4.2.2)(@cognite/sdk@8.2.0)(lodash@4.17.21)(three@0.154.0):
-    resolution: {integrity: sha512-4X2IgphwKztmWgICvDS/su7ypkQxNNLM8Hv5FEybi/c+R20l5FZJarRNZv8ifzZaYReyKmOhffpBAV7xG9Ii1Q==}
+  /@equinor/echo-3d-viewer@0.0.3(@cognite/reveal@4.2.2)(@cognite/sdk@8.2.0)(lodash@4.17.21)(three@0.154.0):
+    resolution: {integrity: sha512-EpVGVqrdeKqkFFso75fCUE/fjqSfsh8AYstdAUJXYrKEQaLeQq6B0xjklrHVVdJQO6oQY7WljlxN/xWEpqekBw==}
     peerDependencies:
-      '@cognite/reveal': 4.2.2
-      '@cognite/sdk': 7.18.0
+      '@cognite/reveal': 4.11.0
+      '@cognite/sdk': 8.3.0
       lodash: ^4.17.21
-      three: 0.149.0
+      three: 0.158.0
     dependencies:
       '@cognite/reveal': 4.2.2(@cognite/sdk@8.2.0)(three@0.154.0)
       '@cognite/sdk': 8.2.0
       '@esfx/canceltoken': 1.0.0
-      '@tweenjs/tween.js': 20.0.3
-      camera-controls: 2.3.4(three@0.154.0)
-      hold-event: 0.2.0
+      '@tweenjs/tween.js': 21.1.1
+      camera-controls: 2.8.3(three@0.154.0)
+      hold-event: 1.1.0
       lodash: 4.17.21
       three: 0.154.0
-      throttle-typescript: 1.1.0
     dev: false
 
   /@equinor/eds-core-react@0.27.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6):
@@ -9647,8 +9649,8 @@ packages:
   /@tweenjs/tween.js@18.6.4:
     resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
 
-  /@tweenjs/tween.js@20.0.3:
-    resolution: {integrity: sha512-SYUe1UgY5HM05EB4+0B4arq2IPjvyzKXoklXKxSYrc2IFxGm1cBrqg5XbiB5uwbs0xY5j+rj986NAJMM0KZaUw==}
+  /@tweenjs/tween.js@21.1.1:
+    resolution: {integrity: sha512-O2GetAwEC/0MOiRb3lxCLIt/eeugoDPX0nu+1SFWLqGKf835ZdWsfM9RzDpjF+aKkpYMhvOnEhO+SxMnHHjpfw==}
     dev: false
 
   /@types/adm-zip@0.5.3:
@@ -10833,8 +10835,8 @@ packages:
   /camelize@1.0.1:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
 
-  /camera-controls@2.3.4(three@0.154.0):
-    resolution: {integrity: sha512-swhc87YVHf9te0glBI7Oa/QBgsSCL4ZxtoR4V3vE6l7mEebsYRNL8y7Y2m2E6MrT0UTphM1S7mQqs0Sp7QTZ2g==}
+  /camera-controls@2.8.3(three@0.154.0):
+    resolution: {integrity: sha512-zFjqUR6onLkG+z1A6vAWfzovxZxWVSvp6e5t3lfZgfgPZtX3n74aykNAUaoRbq8Y3tOxadHkDjbfGDOP9hFf2w==}
     peerDependencies:
       three: '>=0.126.1'
     dependencies:
@@ -12977,8 +12979,8 @@ packages:
     dependencies:
       react-is: 16.13.1
 
-  /hold-event@0.2.0:
-    resolution: {integrity: sha512-rko5P1XgHzy4B0NR0xVHEpWPgj0i23f8Mf8qsOugd1CHvfLR0PyIyy+8TAQQA9v8qAa1OZ4XuCKk04rxmPGHNQ==}
+  /hold-event@1.1.0:
+    resolution: {integrity: sha512-dBziMRU5X/wT6Wc8mRnvqtrkCzUtzCYKK1l/lnhy1o1SIvhh2juuNL1pCgVq9JsL60LVyDNjQ8axI6UkWNI+Tw==}
     dev: false
 
   /hosted-git-info@7.0.1:

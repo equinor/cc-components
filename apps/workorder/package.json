@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@cc-components/workorderapp": "workspace:^"
+    "@cc-components/workorderapp": "workspace:^",
+    "throttle-typescript": "^1.1.0"
   },
   "files": [
     "dist/app-bundle.js",
