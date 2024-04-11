@@ -6,6 +6,7 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     rollupOptions: {
+      plugins: [InjectProcessPlugin],
       output: {
         manualChunks: {},
       },
