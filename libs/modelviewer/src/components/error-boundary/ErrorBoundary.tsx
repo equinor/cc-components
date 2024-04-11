@@ -2,13 +2,15 @@ import { ReactNode } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { ErrorMessage } from './ErrorMessage';
 
-interface Props {
+type ModelViewerErrorBoundaryProps = {
   children?: ReactNode;
   resetKeys: any[];
   FallbackComponent?: React.ComponentType<FallbackProps>;
-}
+};
 
-export const ModelViewerErrorBoundary = (props: Props): JSX.Element => {
+export const ModelViewerErrorBoundary = (
+  props: ModelViewerErrorBoundaryProps
+): JSX.Element => {
   const { children, resetKeys, FallbackComponent } = props;
 
   const fallback = (fallbackProps: FallbackProps) => {

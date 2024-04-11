@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { RefObject } from 'react';
 
-type Props = {
+type CanvasProps = {
   viewerRef: RefObject<HTMLCanvasElement>;
 };
 
-export const Canvas = ({ viewerRef }: Props) => {
+export const Canvas = ({ viewerRef }: CanvasProps) => {
   return (
     <ViewerWrapper>
       <StyledCanvas

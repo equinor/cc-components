@@ -12,11 +12,8 @@ export const ModelSettingsMenu = () => {
   const { isPlantSelectionVisible, setShowPlantDialog, plants } =
     usePlantSelectionContext();
 
-  const optionsSettings = useMemo(() => {
-    return plants.length === 0
-      ? ['Change 3d Model']
-      : ['Change 3d Model', 'Change Plant'];
-  }, [plants]);
+  const optionsSettings =
+    plants.length === 0 ? ['Change 3d Model'] : ['Change 3d Model', 'Change Plant'];
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
