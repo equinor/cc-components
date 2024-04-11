@@ -35,10 +35,10 @@ type ModelViewerProps = {
   options?: ModelViewerConfig;
 };
 
+const queryClient = new QueryClient();
+
 export const ModelViewer = (props: PropsWithChildren<ModelViewerProps>) => {
   const { facility, tagsOverlay, options } = props;
-
-  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
