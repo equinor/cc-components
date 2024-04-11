@@ -6,7 +6,9 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     rollupOptions: {
-      plugins: [InjectProcessPlugin],
+      output: {
+        manualChunks: {},
+      },
     },
     lib: {
       entry: './src/main.tsx',
