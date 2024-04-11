@@ -1,13 +1,13 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { MccrBase } from './types';
-import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { statusColorMap } from '../../../../../../mapping';
-import { BaseStatus } from '../../../../../../types';
 import {
   LinkCell,
-  StyledMonospace,
   StatusCell,
+  StyledMonospace,
 } from '../../../../../../table-helpers/src/lib/table/cells';
+import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { BaseStatus } from '../../../../../../types';
+import { MccrBase } from './types';
 
 export const columns: ColDef<MccrBase>[] = [
   {
@@ -24,6 +24,7 @@ export const columns: ColDef<MccrBase>[] = [
   },
   {
     headerName: 'Description',
+    colId: 'description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<MccrBase, string | null>) => {
       return <DescriptionCell description={props.value} />;

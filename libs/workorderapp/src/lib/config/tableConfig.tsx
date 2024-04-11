@@ -174,6 +174,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
       return <ProgressCell percentWidth={Number(props.value)} />;
     },
     cellStyle: progressBarCellStyle,
+    minWidth: 150,
   },
   {
     colId: 'MCStatus',

@@ -5,5 +5,5 @@
     "titleBar.activeBackground": "#1D4902",
     "titleBar.activeForeground": "#EEFEE4"
   },
-  "conventionalCommits.scopes": ["handover", "loop", "work order"]
+  "conventionalCommits.scopes": ["handover", "loop", "work order", "sidesheet"]
 }

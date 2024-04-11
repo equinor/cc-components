@@ -9,13 +9,13 @@ import {
 } from '@cc-components/shared';
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
-  StyledPanels,
   StyledSideSheetContainer,
   StyledTabListWrapper,
-  StyledTabs,
   StyledTabsList,
   TabTitle,
 } from '@cc-components/sharedcomponents';
@@ -29,8 +29,8 @@ import { Tabs } from '@equinor/eds-core-react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useMaterial, useMccr } from '../utils-sidesheet';
-import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
+import { DetailsTab } from './DetailsTab';
 
 export const WorkorderSidesheet = (props: {
   id: string;
@@ -137,7 +137,7 @@ export const WorkorderSidesheet = (props: {
           }
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
             <Tabs.Tab>Details</Tabs.Tab>
@@ -153,7 +153,7 @@ export const WorkorderSidesheet = (props: {
           </StyledTabsList>
         </StyledTabListWrapper>
 
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>
             <DetailsTab workOrder={wo} />
           </Tabs.Panel>
@@ -178,8 +178,8 @@ export const WorkorderSidesheet = (props: {
               error={cutoffError as Error | null}
             />
           </Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };
