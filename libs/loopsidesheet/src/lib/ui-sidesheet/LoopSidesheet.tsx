@@ -68,7 +68,8 @@ export const LoopSidesheet = (props: {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${loop.loopNo}, ${loop.description}` || ''}
+        title={loop.loopNo}
+        description={loop.description ?? undefined}
         onClose={props.close}
         applicationTitle="Loop"
       />
