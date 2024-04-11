@@ -11,15 +11,14 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
       return <LinkCell url={props.data?.unsignedTaskUrl} urlText={props.data?.taskId} />;
     },
-    minWidth: 150,
   },
   {
+    colId: 'title',
     headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase>) => (
       <DescriptionCell description={props.value} />
     ),
     flex: 1,
-    minWidth: 300,
   },
 ];

@@ -1,11 +1,7 @@
-import { ReactNode, useState } from 'react';
-import {
-  StyledTabs,
-  StyledTabListWrapper,
-  StyledTabsList,
-  StyledPanels,
-} from './tabs.styles';
 import { Tabs as EdsTabs } from '@equinor/eds-core-react';
+import { ReactNode, useState } from 'react';
+import { CustomStyledPanels, CustomStyledTabs } from './CustomTabs';
+import { StyledTabListWrapper, StyledTabsList } from './tabs.styles';
 
 export type TabConfig = {
   tabTitle: ReactNode;
@@ -25,7 +21,7 @@ export const Tabs = (props: TabsProps) => {
   };
 
   return (
-    <StyledTabs activeTab={activeTab} onChange={handleChange}>
+    <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
       <StyledTabListWrapper>
         <StyledTabsList>
           {props.tabs.map((tab, i) => (
@@ -33,7 +29,7 @@ export const Tabs = (props: TabsProps) => {
           ))}
         </StyledTabsList>
       </StyledTabListWrapper>
-      <StyledPanels>
+      <CustomStyledPanels>
         {props.tabs.map((tab, i) =>
           activeTab === i ? (
             <EdsTabs.Panel key={i}>{tab.tabContent}</EdsTabs.Panel>
@@ -41,7 +37,7 @@ export const Tabs = (props: TabsProps) => {
             <></>
           )
         )}
-      </StyledPanels>
-    </StyledTabs>
+      </CustomStyledPanels>
+    </CustomStyledTabs>
   );
 };

@@ -39,6 +39,7 @@ import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
 import { DetailsTab } from './DetailsTab';
+
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 
 const viewerOptions = {
