@@ -44,7 +44,7 @@ export const useTableConfig = (
         e.columnApi.autoSizeColumns(
           e.columnApi
             .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
+            .filter((s) => !['description', 'title'].includes(s.getColId()))
         );
       },
     },
@@ -69,6 +69,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     onCellClicked: () => {},
   },
   {
+    colId: 'title',
     headerName: 'Title',
     headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.title,

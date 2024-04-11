@@ -5,6 +5,8 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 import { MccrTab, NcrTab, PunchTab, WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
@@ -135,7 +137,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
           }
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <Tabs.List>
             <Tabs.Tab>Details</Tabs.Tab>
@@ -155,7 +157,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
           </Tabs.List>
         </StyledTabListWrapper>
 
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>
             <DetailsTab mcPackage={props?.item} />
           </Tabs.Panel>
@@ -228,8 +230,8 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               )}
             />
           </Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };

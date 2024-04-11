@@ -12,16 +12,14 @@ export const columns: ColDef<UnsignedActionBase>[] = [
         return <LinkCell url={props.data.unsignedTaskUrl} urlText={props.value} />;
       } else return null;
     },
-    flex: 1,
-    minWidth: 150,
   },
   {
+    colId: 'title',
     headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase, string | null>) => {
       return <DescriptionCell description={props.value} displayFullText />;
     },
     flex: 1,
-    minWidth: 300,
   },
 ];

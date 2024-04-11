@@ -6,11 +6,11 @@ import { tokens } from '@equinor/eds-tokens';
 
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   StyledBanner,
-  StyledPanels,
   StyledSideSheetContainer,
-  StyledTabs,
   TabTitle,
 } from '@cc-components/sharedcomponents';
 
@@ -194,7 +194,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           }
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList ref={ref}>
             <Tabs.Tab>Details </Tabs.Tab>
@@ -236,7 +236,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           </StyledTabsList>
         </StyledTabListWrapper>
 
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>
             <DetailsTab commpkg={props.item as HandoverPackage} />
           </Tabs.Panel>
@@ -315,8 +315,8 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               error={queryError}
             />
           </Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };
