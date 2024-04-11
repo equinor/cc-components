@@ -18,9 +18,9 @@ type ConfigContextType = {
   defaultCroppingDistance: number;
   displayStatusColor: boolean;
   defaultRadiusFactor: number;
-
   defaultCameraMoveDuration: number;
 };
+
 export type ModelViewerConfig = Partial<ConfigContextType>;
 
 const init: ConfigContextType = {
@@ -32,6 +32,8 @@ const init: ConfigContextType = {
 
 const ConfigContext = createContext<ConfigContextType>(init);
 
+export const useConfig = () => useContext(ConfigContext);
+
 export const ConfigContextProvider = ({
   children,
   config,
@@ -41,8 +43,3 @@ export const ConfigContextProvider = ({
   </ConfigContext.Provider>
 );
 
-export const useConfig = () => {
-  const context = useContext(ConfigContext);
-  if (!context) throw new Error('No Config Context found!');
-  return context;
-};

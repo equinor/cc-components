@@ -6,3 +6,4 @@ export * from './tagSelectionProvider';
 export * from './plantSelectionProvider';
 export * from './modelProvider';
 export * from './plantProvider';
+export * from './envConfigProvider';

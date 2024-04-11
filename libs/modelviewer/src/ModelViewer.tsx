@@ -6,6 +6,7 @@ import {
   cloneElement,
   isValidElement,
 } from 'react';
+
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
 import { ModelViewerErrorBoundary } from './components/error-boundary/ErrorBoundary';
 import { TagsOverlay } from './components/tags-overlay/TagsOverlay';
@@ -24,7 +25,9 @@ import {
   PlantSelectionProvider,
   PlantProvider,
   ModelProvider,
+  EnvConfigContextProvider,
 } from './providers';
+
 
 type ModelViewerProps = {
   facility: string;
@@ -69,24 +72,26 @@ const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <ModelViewerProvider>
-        <PlantSelectionProvider {...{ facility }}>
-          <PlantProvider>
-            <ModelSelectionProvider>
-              <ModelProvider>
-                <TagSelectionProvider tagsOverlay={tagsOverlay}>
-                  <ActionProvider>
-                    <Legend />
-                    <TagsNotFound />
-                    <TagsOverlay />
-                    <ActionsMenu CustomActions={components.CustomActions} />
-                  </ActionProvider>
-                </TagSelectionProvider>
-              </ModelProvider>
-            </ModelSelectionProvider>
-          </PlantProvider>
-        </PlantSelectionProvider>
-      </ModelViewerProvider>
+      <EnvConfigContextProvider>
+        <ModelViewerProvider>
+          <PlantSelectionProvider {...{ facility }}>
+            <PlantProvider>
+              <ModelSelectionProvider>
+                <ModelProvider>
+                  <TagSelectionProvider tagsOverlay={tagsOverlay}>
+                    <ActionProvider>
+                      <Legend />
+                      <TagsNotFound />
+                      <TagsOverlay />
+                      <ActionsMenu CustomActions={components.CustomActions} />
+                    </ActionProvider>
+                  </TagSelectionProvider>
+                </ModelProvider>
+              </ModelSelectionProvider>
+            </PlantProvider>
+          </PlantSelectionProvider>
+        </ModelViewerProvider>
+      </EnvConfigContextProvider>
     </Suspense>
   );
 };
