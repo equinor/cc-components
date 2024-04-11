@@ -24,25 +24,23 @@ export const columns = (
           />
         );
       },
-      minWidth: 200,
     },
     {
+      colId: 'title',
       headerName: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
       },
-      minWidth: 200,
+      width: 250,
     },
     {
       headerName: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
-      width: 130,
     },
     {
       headerName: 'Status',
       valueGetter: (pkg) => pkg.data?.jobStatus,
-      width: 120,
     },
     {
       headerName: 'Plan. finish',
@@ -50,7 +48,6 @@ export const columns = (
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
       },
-      width: 100,
     },
     {
       headerName: 'Act. finish',
@@ -58,7 +55,6 @@ export const columns = (
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
       },
-      width: 100,
     },
     {
       headerName: 'Progress',
@@ -70,7 +66,6 @@ export const columns = (
           </Center>
         );
       },
-      width: 140,
     },
     {
       headerName: 'Estimated',
@@ -89,7 +84,6 @@ export const columns = (
           </Center>
         );
       },
-      width: 140,
     },
     {
       headerName: 'Remaining',
@@ -108,7 +102,6 @@ export const columns = (
           </Center>
         );
       },
-      width: 140,
     },
   ];
 };
