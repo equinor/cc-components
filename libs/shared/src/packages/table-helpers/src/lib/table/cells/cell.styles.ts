@@ -22,12 +22,13 @@ export const StyledDescription = styled.div`
 `;
 
 export const StyledProgressBarContainer = styled.div`
-  height: 16px;
+  height: 8px;
   /* width: 68px; */
   background-color: #f5f5f5;
-  border-bottom: 2px #dcdcdc solid;
+  border: 2px #dcdcdc solid;
   width: -webkit-fill-available;
   position: relative;
+  border-radius: 10px;
 `;
 
 export const StyledActualProgress = styled.div<{
@@ -37,14 +38,16 @@ export const StyledActualProgress = styled.div<{
 }>`
   background-color: ${({ color }) => `${color ?? '#CCE6F3'}`};
   width: ${({ width }) => `${width}%`};
-  height: 16px;
-  border-bottom: ${({ borderColor }) => `2px ${borderColor ?? '#0084C4'} solid`};
+  height: 100%;
+  border: ${({ borderColor }) => `2px ${borderColor ?? '#0084C4'} solid`};
+  border-radius: 10px;
+  margin: -2px;
+  position: relative;
+  z-index: 1;
 `;
 export const StyledProgressNumber = styled.div`
-  position: absolute;
-  right: 5px;
-  top: 0px;
   line-height: normal;
+  z-index: 1;
 `;
 export const StyledLink = styled.a`
   font-variant-numeric: tabular-nums;

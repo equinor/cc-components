@@ -2,6 +2,13 @@ import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { CutoffBase } from './types';
 import { DateCell, DescriptionCell, ProgressCell } from '../../../../../../table-helpers';
 
+const progressBarCellStyle = () => {
+  return {
+    display: 'grid',
+    height: '100%',
+  };
+};
+
 export const columns: ColDef<CutoffBase>[] = [
   {
     headerName: 'Cutoff',
@@ -63,6 +70,7 @@ export const columns: ColDef<CutoffBase>[] = [
     cellRenderer: (props: ICellRendererProps<CutoffBase, string | null>) => (
       <ProgressCell percentWidth={Math.round(props.data?.projectProgress ?? 0)} />
     ),
+    cellStyle: progressBarCellStyle,
   },
 
   {

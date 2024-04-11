@@ -1,13 +1,9 @@
 {
-  "eslint.validate": [
-    "json"
-  ],
+  "eslint.validate": ["json"],
   "workbench.colorCustomizations": {
     "activityBar.background": "#153401",
     "titleBar.activeBackground": "#1D4902",
     "titleBar.activeForeground": "#EEFEE4"
   },
-  "conventionalCommits.scopes": [
-    "handover"
-  ]
+  "conventionalCommits.scopes": ["handover", "loop", "work order"]
 }

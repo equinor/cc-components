@@ -17,12 +17,23 @@ export const EstimateCell = ({ current, max }: EstimateCellProps): JSX.Element =
     () => (max === 0 ? 0 : (current / max) * 100),
     [current, max]
   );
+  if (Number.isNaN(current)) return <></>;
   return (
-    <StyledProgressBarContainer>
-      <StyledActualProgress borderColor="#0084C4" color="#CCE6F3" width={percentage} />
+    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', height: '100%' }}>
       <StyledProgressNumber>
         {parseFloat(Math.round(current).toString()).toLocaleString('no')}
       </StyledProgressNumber>
-    </StyledProgressBarContainer>
+      <StyledProgressBarContainer>
+        {percentage > 0 ? (
+          <StyledActualProgress
+            borderColor="#0084C4"
+            width={percentage}
+            color="#CCE6F3"
+          ></StyledActualProgress>
+        ) : (
+          <></>
+        )}
+      </StyledProgressBarContainer>
+    </div>
   );
 };

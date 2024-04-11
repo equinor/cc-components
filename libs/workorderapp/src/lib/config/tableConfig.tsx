@@ -27,6 +27,13 @@ import {
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
 
+const progressBarCellStyle = () => {
+  return {
+    display: 'grid',
+    height: '100%',
+  };
+};
+
 export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterState> => {
   const client = useHttpClient('cc-app');
 
@@ -166,6 +173,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
 
       return <ProgressCell percentWidth={Number(props.value)} />;
     },
+    cellStyle: progressBarCellStyle,
   },
   {
     colId: 'MCStatus',
