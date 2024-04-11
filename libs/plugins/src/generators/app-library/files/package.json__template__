@@ -2,7 +2,11 @@
   "name": "@cc-components/<%= projectName %>",
   "version": "0.0.1",
   "type": "module",
-  "scripts": { "dev": "npm run build -- --watch", "dev:local": "npm run dev -- --watch", "build": "tsc -b -f" },
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev",
+    "build": "tsc -b -f"
+  },
   "module": "./dist/src/index.js",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
