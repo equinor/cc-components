@@ -9,7 +9,6 @@ export default defineConfig({
       plugins: [],
       output: {
         inlineDynamicImports: true,
-        manualChunks: {},
       },
     },
     lib: {
