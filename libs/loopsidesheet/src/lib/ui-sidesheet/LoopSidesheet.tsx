@@ -1,15 +1,8 @@
 import { Loop } from '@cc-components/loopshared';
-import { useState } from 'react';
-import { DetailsTab } from './DetailsTab';
-import { Tabs } from '@equinor/eds-core-react';
-import { useGetWorkorders } from '../utils-sidesheet';
-import { Checklists } from './Checklists';
-import { ContentDetails } from './ContentDetails';
-import { WorkorderTab } from '@cc-components/shared/sidesheet';
+import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import { StatusCircle } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
-import { useQuery } from '@tanstack/react-query';
-import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BannerItem,
   SidesheetHeader,
@@ -22,6 +15,12 @@ import {
   StyledTabsList,
   TabTitle,
 } from '@cc-components/sharedcomponents';
+import { Tabs } from '@equinor/eds-core-react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useGetWorkorders } from '../utils-sidesheet';
+import { Checklists } from './Checklists';
+import { DetailsTab } from './DetailsTab';
 
 export const LoopSidesheet = (props: {
   item?: Loop | undefined;
@@ -128,7 +127,6 @@ export const LoopSidesheet = (props: {
           <Tabs.Panel>
             <DetailsTab loop={loop} />
             {loop.loopId && <Checklists loopId={loop.loopId} />}
-            <ContentDetails loop={loop} />
           </Tabs.Panel>
           <Tabs.Panel>
             <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
