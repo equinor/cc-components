@@ -39,8 +39,8 @@ jobs:
         id: "get-fusion-token"
         uses: ./.github/actions/get-fusion-token
         with:
-          client-id: ${{vars.FUSION_CLIENT_ID}}
-          resource-id: ${{vars.SP_CLIENT_ID}}
+          client-id: ${{vars.SP_CLIENT_ID}}
+          resource-id: ${{vars.FPP_CLIENT_ID}}
           tenant-id: ${{vars.TENANT_ID}}
 
       - name: PNPM setup
