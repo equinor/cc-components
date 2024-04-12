@@ -48,4 +48,4 @@ jobs:
 
       - name: Onboard app
         shell: bash
-        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{steps.get-fusion-token.outputs.token}} --appkey handover --env ci --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
+        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{steps.get-fusion-token.outputs.token}} --appkey handover --env CI --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
