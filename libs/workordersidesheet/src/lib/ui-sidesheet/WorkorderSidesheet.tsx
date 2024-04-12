@@ -1,36 +1,53 @@
+import { Tabs } from '@equinor/eds-core-react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import {
   CutoffTab,
   LinkCell,
   MaterialTab,
   MccrTab,
+  PackageStatus,
   StatusCircle,
+  colorMap,
+  hasProperty,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
+
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
-  StyledPanels,
   StyledSideSheetContainer,
   StyledTabListWrapper,
-  StyledTabs,
   StyledTabsList,
   TabTitle,
 } from '@cc-components/sharedcomponents';
+
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { Tabs } from '@equinor/eds-core-react';
 
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
+
 import { useMaterial, useMccr } from '../utils-sidesheet';
-import { DetailsTab } from './DetailsTab';
 import { useCutoff } from '../utils-sidesheet/useCutoff';
+import { DetailsTab } from './DetailsTab';
+
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(colorMap, status) ? colorMap[status as PackageStatus] : '#009922';
+  },
+  defaultCroppingDistance: 3,
+};
 
 export const WorkorderSidesheet = (props: {
   id: string;
@@ -47,6 +64,12 @@ export const WorkorderSidesheet = (props: {
   } = useMaterial(props.id);
 
   const { data: cutoffList, error: cutoffError, isLoading } = useCutoff(props.id);
+
+  const {
+    data: modelConfig,
+    isFetching: isFetchingModelConfig,
+    error: modelConfigError,
+  } = useGetEchoConfig(props.id);
 
   const client = useHttpClient();
   const contextId = useContextId();
@@ -73,6 +96,13 @@ export const WorkorderSidesheet = (props: {
     }
   );
 
+  const tagsOverlay = modelConfig?.tags?.map((tag) => ({
+    tagNo: tag.tagNo,
+    description: tag.description,
+    status: tag.status,
+    icon: <h3>{tag.status}</h3>,
+  })) as TagOverlay[];
+
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;
   }
@@ -84,6 +114,7 @@ export const WorkorderSidesheet = (props: {
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
@@ -137,7 +168,7 @@ export const WorkorderSidesheet = (props: {
           }
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList>
             <Tabs.Tab>Details</Tabs.Tab>
@@ -150,10 +181,13 @@ export const WorkorderSidesheet = (props: {
             <Tabs.Tab>
               Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              3D <TabTitle data={modelConfig?.tags} isLoading={isFetchingModelConfig} />
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>
             <DetailsTab workOrder={wo} />
           </Tabs.Panel>
@@ -178,8 +212,17 @@ export const WorkorderSidesheet = (props: {
               error={cutoffError as Error | null}
             />
           </Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+          <Tabs.Panel style={{ height: '100%' }}>
+            <ModelViewerTab
+              tagOverlay={tagsOverlay}
+              options={viewerOptions}
+              isFetching={isFetchingModelConfig}
+              error={modelConfigError as Error | null}
+              facilities={modelConfig?.facilities ?? []}
+            />
+          </Tabs.Panel>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };

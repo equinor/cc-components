@@ -1,16 +1,16 @@
-import { NodeAppearance, NodeOutlineColor } from '@cognite/reveal';
+import { NodeAppearance } from '@cognite/reveal';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import { Color } from 'three';
-import { useModelContext } from './modelsProvider';
-import { useSelectionContext } from './selectionProvider';
+import { useTagSelectionContext } from './tagSelectionProvider';
 import { useConfig } from './configProvider';
+import { useModelSelectionControls } from '../services';
+import { useModelContext } from './modelProvider';
 
 interface ActionContextState {
-  hideModel(): void;
-  showModel(): void;
   isClipped: boolean;
   isOrbit: boolean;
   isFocus: boolean;
+  hideModel(): void;
+  showModel(): void;
   toggleFocus(): void;
   toggleClipping(): void;
   toggleCameraMode(): void;
@@ -18,22 +18,23 @@ interface ActionContextState {
   assignAppearanceToInvertedNodeCollection(appearance: NodeAppearance): void;
 }
 
-const ActionContext = createContext<ActionContextState | undefined>(undefined);
+const ActionContext = createContext({} as ActionContextState);
 
-export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { getModel } = useModelContext();
-  const { getCurrentNodes, getSelectionService } = useSelectionContext();
+export const useActions = () => useContext(ActionContext);
+
+export const ActionProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const selectionService = useModelSelectionControls();
+
+  const { model } = useModelContext();
+  const { currentNodes } = useTagSelectionContext();
 
   const { defaultRadiusFactor, defaultCroppingDistance } = useConfig();
 
   const [isOrbit, setIsOrbit] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
   const [isClipped, setClipped] = useState(true);
-  const currentNodes = getCurrentNodes();
-  const selectionService = getSelectionService();
 
   const setModelVisibility = (isVisible: boolean) => {
-    const model = getModel();
     if (model) {
       const appearance = model.getDefaultNodeAppearance();
       model.setDefaultNodeAppearance({ ...appearance, visible: isVisible });
@@ -45,6 +46,7 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   }, [isOrbit, currentNodes]);
 
   const hideModel = () => setModelVisibility(false);
+
   const showModel = () => setModelVisibility(true);
 
   const orbit = () => {
@@ -116,8 +118,4 @@ export const ActionContextProvider: React.FC<PropsWithChildren> = ({ children })
   );
 };
 
-export const useActions = () => {
-  const context = useContext(ActionContext);
-  if (!context) throw new Error('useActions must be used within ActionContextProvider');
-  return context;
-};
+export default ActionProvider;
