@@ -24,6 +24,7 @@ permissions:
   deployments: write
   id-token: write
   statuses: write
+
 jobs:
   onboard-app:
     runs-on: ubuntu-latest
