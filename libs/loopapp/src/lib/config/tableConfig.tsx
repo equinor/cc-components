@@ -96,9 +96,9 @@ const columnDefinitions: ColDef<Loop>[] = [
     width: 350,
   },
   {
-    colId: domainNames.system,
-    headerName: domainNames.system,
-    headerTooltip: domainNames.system,
+    colId: domainNames.commSystem,
+    headerName: domainNames.commSystem,
+    headerTooltip: domainNames.commSystem,
     valueGetter: (pkg) => pkg.data?.system,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => (
       <StyledMonospace>{props.data?.system}</StyledMonospace>
@@ -148,9 +148,23 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Priority1',
-    headerName: domainNames.priority1,
-    headerTooltip: domainNames.priority1,
+    headerName: domainNames.commPriority1,
+    headerTooltip: domainNames.commPriority1,
     valueGetter: (pkg) => pkg.data?.priority1,
+    enableRowGroup: false,
+  },
+  {
+    colId: 'Priority2',
+    headerName: domainNames.commPriority2,
+    headerTooltip: domainNames.commPriority2,
+    valueGetter: (pkg) => pkg.data?.priority2,
+    enableRowGroup: false,
+  },
+  {
+    colId: 'Priority3',
+    headerName: domainNames.commPriority3,
+    headerTooltip: domainNames.commPriority3,
+    valueGetter: (pkg) => pkg.data?.priority3,
     enableRowGroup: false,
   },
   {
@@ -194,8 +208,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Responsible',
-    headerName: domainNames.responsible,
-    headerTooltip: domainNames.responsible,
+    headerName: domainNames.formResponsible,
+    headerTooltip: domainNames.formResponsible,
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: false,
   },
