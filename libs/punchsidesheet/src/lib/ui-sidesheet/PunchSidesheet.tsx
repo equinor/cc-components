@@ -1,5 +1,15 @@
-import { Punch } from '@cc-components/punchshared';
-import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
+import { Punch, PunchStatus } from '@cc-components/punchshared';
+import {
+  BaseStatus,
+  LinkCell,
+  colorMap,
+  hasProperty,
+  useContextId,
+  useHttpClient,
+} from '@cc-components/shared';
+
+import { statusColorMap } from '@cc-components/shared/mapping';
+
 import {
   BannerItem,
   SidesheetHeader,
@@ -9,11 +19,23 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
 } from '@cc-components/sharedcomponents';
+
+import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
+
 import { Tabs } from '@equinor/eds-core-react';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
+
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(colorMap, status)
+      ? statusColorMap[status as BaseStatus]
+      : '#9e9e9e';
+  },
+  defaultCroppingDistance: 3,
+};
 
 export const PunchSidesheet = (props: {
   id: string;
@@ -47,6 +69,17 @@ export const PunchSidesheet = (props: {
       useErrorBoundary: false,
     }
   );
+
+  const tagsOverlay = punch
+    ? ([
+        {
+          tagNo: punch.tagNo ?? '',
+          description: punch.description,
+          status: punch.category,
+          icon: <h3>{punch.category}</h3>,
+        },
+      ] as TagOverlay[])
+    : [];
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;
@@ -117,12 +150,22 @@ export const PunchSidesheet = (props: {
         <StyledTabListWrapper>
           <StyledTabsList ref={ref}>
             <Tabs.Tab>Details </Tabs.Tab>
+            <Tabs.Tab>3D </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab punch={punch} />
+          </Tabs.Panel>
+          <Tabs.Panel style={{ height: '100%' }}>
+            <ModelViewerTab
+              tagOverlay={tagsOverlay}
+              options={viewerOptions}
+              isFetching={false}
+              error={null}
+              facilities={[punch.facility ?? '']}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
