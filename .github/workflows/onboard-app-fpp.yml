@@ -1,21 +1,22 @@
 name: Onboard app to Fusion Project Portal
-run-name: ${{github.actor}} is onboarding ${{inputs.appKey}} to ${{inputs.contexId}}
-
+# run-name: ${{github.actor}} is onboarding ${{inputs.appKey}} to ${{inputs.contexId}}
+#
 on:
-  workflow_dispatch:
-    inputs:
-      appKey:
-        type: string
-        description: Which app to onboard
-      contextId:
-        type: string
-        description: Which contextId to onboard the app on
-      env:
-        type: choice
-        description: Which environment to use
-        options:
-          - ci
-          - fprd
+  pull_request:
+#   workflow_dispatch:
+#     inputs:
+#       appKey:
+#         type: string
+#         description: Which app to onboard
+#       contextId:
+#         type: string
+#         description: Which contextId to onboard the app on
+#       env:
+#         type: choice
+#         description: Which environment to use
+#         options:
+#           - ci
+#           - fprd
 
 permissions:
   actions: read
@@ -26,7 +27,7 @@ permissions:
 jobs:
   onboard-app:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.env }}
+    environment: ci
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,4 +47,4 @@ jobs:
 
       - name: Onboard app
         shell: bash
-        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{steps.get-fusion-token.outputs.token}} --appkey ${{inputs.appKey}} --env ${{inputs.env}} --context ${{inputs.contextId}}
+        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{steps.get-fusion-token.outputs.token}} --appkey handover --env ci --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
