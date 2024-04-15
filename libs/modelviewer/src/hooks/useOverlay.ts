@@ -44,10 +44,9 @@ export function useOverlay() {
     }
   }, [echoInstance]);
 
-  const overlayTags = useMemo(
-    () => (tagsOverlay ? createOverlayTags(viewNodes, createTagMap(tagsOverlay)) : []),
-    [viewNodes, tagsOverlay]
-  );
+  const overlayTags = tagsOverlay
+    ? createOverlayTags(viewNodes, createTagMap(tagsOverlay))
+    : [];
 
   return { overlayTags, overlayTool };
 }

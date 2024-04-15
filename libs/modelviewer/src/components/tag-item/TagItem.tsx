@@ -5,6 +5,7 @@ import { TagOverlay } from '../../types/overlayTags';
 import TagIcon from '../tag-icon/TagIcon';
 import TagIconShadowWrapper from '../tag-icon-shadow/TagIconShadow';
 import * as Icons from '@equinor/eds-icons';
+import { TagInfo } from '../tag-info/TagInfo';
 
 interface TagProps {
   iconResolver?: (type: string) => string;
@@ -66,10 +67,6 @@ const StyledDescriptionTypography = styled(Typography)`
   text-overflow: ellipsis;
 `;
 
-const StyledTagInfoIcon = styled.div`
-  margin: 3px;
-`;
-
 export const defaultTagColor = '#a0dd28';
 
 Icon.add(Icons);
@@ -126,18 +123,7 @@ export const TagItem = ({
             </StyledDescriptionTypography>
           </TagText>
 
-          <StyledTagInfoIcon>
-            <Button
-              variant="ghost_icon"
-              onClick={(e) => {
-                tag.action && tag.action(tag);
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-            >
-              <Icon name="info_circle" title="tag information"></Icon>
-            </Button>
-          </StyledTagInfoIcon>
+          <TagInfo tag={tag} />
         </TagInfoWrapper>
       </ContextWrapper>
     );
