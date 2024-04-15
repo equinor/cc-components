@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { defaultTagColor } from '../components/tag-item/TagItem';
 import { TagOverlay } from '../types/overlayTags';
@@ -20,7 +20,13 @@ export const useModelTags = (tagsOverlay: TagOverlay[]) => {
     return { ...tagOverlay, color };
   });
 
-  const [visibleTags, setVisibleTags] = useState<string[]>(tagList.map((x) => x.tagNo));
+  const [visibleTags, setVisibleTags] = useState<string[]>([]);
+
+  // When the tags overlay changes, reset state.
+  useEffect(() => {
+    const defaultVisibleTags = tagList.map((x) => x.tagNo);
+    setVisibleTags(defaultVisibleTags);
+  }, [tagsOverlay]);
 
   return {
     tagList,

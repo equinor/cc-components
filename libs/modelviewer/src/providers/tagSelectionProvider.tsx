@@ -37,7 +37,7 @@ export const TagSelectionProvider = (props: Props) => {
   const config = useConfig();
   const selectionControls = useModelSelectionControls();
 
-  const { visibleTags, tagList, setVisibleTags } = useModelTags(tagsOverlay);
+  const { tagList, visibleTags, setVisibleTags } = useModelTags(tagsOverlay);
 
   const {
     viewNodes,
@@ -59,19 +59,16 @@ export const TagSelectionProvider = (props: Props) => {
     selectionControls?.cameraFirstPerson();
   };
 
-  const fitCameraToAAbb = useCallback(
-    (aabb: AabbModel, duration?: number) => {
-      if (selectionControls) {
-        const box3 = selectionControls.getBoundingBoxFormAabbModel(aabb);
-        selectionControls.fitCameraToBox3(
-          box3,
-          duration || config.defaultCameraMoveDuration,
-          config.defaultRadiusFactor
-        );
-      }
-    },
-    [selectionControls]
-  );
+  const fitCameraToAAbb = (aabb: AabbModel, duration?: number) => {
+    if (selectionControls) {
+      const box3 = selectionControls.getBoundingBoxFormAabbModel(aabb);
+      selectionControls.fitCameraToBox3(
+        box3,
+        duration || config.defaultCameraMoveDuration,
+        config.defaultRadiusFactor
+      );
+    }
+  };
 
   const toggleTags = (tags: string[]) => {
     const elements: string[] = tags.reduce((acc, tag) => {
