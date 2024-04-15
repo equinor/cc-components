@@ -20,13 +20,14 @@ import {
   StyledTabs,
 } from '@cc-components/sharedcomponents';
 
-import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
+import { ModelViewerTab } from '@cc-components/modelviewer';
 
 import { Tabs } from '@equinor/eds-core-react';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { DetailsTab } from './DetailsTab';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
+import { useModelViewerTags } from '../utils-sidesheet/useModelViewerTags';
 
 const viewerOptions = {
   statusResolver: (status: string) => {
@@ -70,16 +71,7 @@ export const PunchSidesheet = (props: {
     }
   );
 
-  const tagsOverlay = punch
-    ? ([
-        {
-          tagNo: punch.tagNo ?? '',
-          description: punch.description,
-          status: punch.category,
-          icon: <h3>{punch.category}</h3>,
-        },
-      ] as TagOverlay[])
-    : [];
+  const tagsOverlay = useModelViewerTags(punch);
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;
