@@ -65,11 +65,33 @@ const columns: ColDef<LoopContent>[] = [
   {
     headerName: 'Comm Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
+    cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
+      if (props.valueFormatted) {
+        return (
+          <LinkCell
+            url={props.data?.commissioningPackageUrl ?? undefined}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+      return null;
+    },
     width: 120,
   },
   {
     headerName: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
+    cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
+      if (props.valueFormatted) {
+        return (
+          <LinkCell
+            url={props.data?.mechanicalCompletionPackageUrl ?? undefined}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+      return null;
+    },
     width: 140,
   },
 ];
