@@ -23,7 +23,7 @@ export const useGardenConfig = (contextId: string): GardenConfig<Loop, FilterSta
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.loopNo,
-    initialGrouping: ['Responsible'],
+    initialGrouping: ['RFC'],
     customViews: {
       //bs typescript error
       customItemView: GardenItem as any,
