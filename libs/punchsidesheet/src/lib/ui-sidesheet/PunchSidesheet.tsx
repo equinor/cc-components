@@ -1,9 +1,4 @@
 import { Punch } from '@cc-components/punchshared';
-import { Tabs } from '@equinor/eds-core-react';
-import { useRef, useState } from 'react';
-import { DetailsTab } from './DetailsTab';
-import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
-import { useQuery } from '@tanstack/react-query';
 import { LinkCell, useContextId, useHttpClient } from '@cc-components/shared';
 import {
   BannerItem,
@@ -14,6 +9,11 @@ import {
   StyledSideSheetContainer,
   StyledTabs,
 } from '@cc-components/sharedcomponents';
+import { Tabs } from '@equinor/eds-core-react';
+import { useQuery } from '@tanstack/react-query';
+import { useRef, useState } from 'react';
+import { DetailsTab } from './DetailsTab';
+import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 
 export const PunchSidesheet = (props: {
   id: string;

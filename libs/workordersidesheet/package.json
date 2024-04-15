@@ -13,6 +13,7 @@
   "dependencies": {
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
-    "@cc-components/workordershared": "workspace:^"
+    "@cc-components/workordershared": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^"
   }
 }

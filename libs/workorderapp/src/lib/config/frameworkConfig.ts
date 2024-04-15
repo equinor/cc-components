@@ -4,6 +4,8 @@ import {
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
+import { enableModelViewer, ModelViewerEnvConfig } from '@cc-components/modelviewer';
+
 import buildQuery from 'odata-query';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
@@ -21,17 +23,20 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig: WorkorderEnvConfig = c.env.config?.environment as WorkorderEnvConfig;
+  const envConfig = c.env.config?.environment as WorkorderEnvConfig &
+    ModelViewerEnvConfig;
 
   if (!envConfig) {
     throw new Error('Failed to load environemnt config for workorder');
   }
+
   config.configureHttpClient('cc-app', {
     baseUri: envConfig?.uri,
     defaultScopes: envConfig?.defaultScopes,
   });
 
   enableAgGrid(config);
+  enableModelViewer(config, envConfig);
 };
 
 type WorkorderEnvConfig = {

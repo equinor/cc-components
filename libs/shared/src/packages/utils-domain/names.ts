@@ -1,7 +1,7 @@
 export const domainNames = {
   // General
   area: 'Area',
-  location: 'Area',
+  location: 'Tag Location',
   category: 'Category',
   checklist: 'Checklist',
   completionStatus: 'Completion Status',
@@ -82,6 +82,7 @@ export const domainNames = {
   mccrStatus: `Checklist Status`,
   formGroup: 'Form Group',
   formType: 'Form Type',
+  formResponsible: 'Form Responsible',
 
   // SWCR
   action: 'Action',
