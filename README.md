@@ -22,7 +22,7 @@ pnpm build # Build monorepo in parallel 🚨 NB: Sometimes fails due to internal
 pnpm ci:build # Build sequentially
 ```
 
-⚠️ [Hot module replacement](https://webpack.js.org/guides/hot-module-replacement/) is disabled due to an error in dependency resolution resulting in massive bundle sizes. To apply changes stop the server and run `pnpm serve <app>`.
+[Hot module replacement](https://webpack.js.org/guides/hot-module-replacement/) is supported when using the watch command
 
 🛡️ In order to login to the apps you need to authenticate using an Equinor account with access to a valid context/project in ProCoSys.
 
