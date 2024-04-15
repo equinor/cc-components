@@ -48,6 +48,7 @@ export const StyledActualProgress = styled.div<{
 export const StyledProgressNumber = styled.div`
   line-height: normal;
   z-index: 1;
+  width: 36px;
 `;
 export const StyledLink = styled.a`
   font-variant-numeric: tabular-nums;
