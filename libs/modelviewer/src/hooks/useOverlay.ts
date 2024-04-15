@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useMemo, useState } from 'react';
-import { useModelViewerContext, useSelectionContext } from '../providers';
+import { useCallback, useEffect, useRef, useMemo } from 'react';
+import { useModelViewerContext, useTagSelectionContext } from '../providers';
 
 import { HtmlOverlayToolHandler } from '../services';
 
@@ -15,9 +15,7 @@ import { Cluster } from '../types/cluster';
 
 export function useOverlay() {
   const { echoInstance } = useModelViewerContext();
-  const { tagList: tagsOverlay } = useSelectionContext();
-
-  const { viewNodes } = useSelectionContext();
+  const { tagList: tagsOverlay, viewNodes } = useTagSelectionContext();
 
   const overlayTool = useRef<HtmlOverlayToolHandler | null>(null);
 
@@ -46,10 +44,9 @@ export function useOverlay() {
     }
   }, [echoInstance]);
 
-  const overlayTags = useMemo(
-    () => (tagsOverlay ? createOverlayTags(viewNodes, createTagMap(tagsOverlay)) : []),
-    [viewNodes, tagsOverlay]
-  );
+  const overlayTags = tagsOverlay
+    ? createOverlayTags(viewNodes, createTagMap(tagsOverlay))
+    : [];
 
   return { overlayTags, overlayTool };
 }

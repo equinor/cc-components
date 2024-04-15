@@ -3,6 +3,8 @@ import {
   ComponentRenderArgs,
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
+import { enableModelViewer, ModelViewerEnvConfig } from '@cc-components/modelviewer';
+
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 
@@ -21,7 +23,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig: PunchEnvConfig = c.env.config?.environment as PunchEnvConfig;
+  const envConfig = c.env.config?.environment as PunchEnvConfig & ModelViewerEnvConfig;
 
   if (!envConfig) {
     throw new Error('Failed to load environemnt config for workorder');
@@ -32,6 +34,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
+  enableModelViewer(config, envConfig);
 };
 
 type PunchEnvConfig = {
