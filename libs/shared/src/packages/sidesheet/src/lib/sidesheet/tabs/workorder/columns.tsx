@@ -24,25 +24,23 @@ export const columns = (
           />
         );
       },
-      minWidth: 200,
     },
     {
+      colId: 'title',
       headerName: 'Title',
       valueGetter: (pkg) => pkg.data?.title,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DescriptionCell description={props?.value} />;
       },
-      minWidth: 200,
+      width: 250,
     },
     {
       headerName: 'Discipline',
       valueGetter: (pkg) => pkg.data?.discipline,
-      width: 130,
     },
     {
       headerName: 'Status',
       valueGetter: (pkg) => pkg.data?.jobStatus,
-      width: 120,
     },
     {
       headerName: 'Plan. finish',
@@ -50,7 +48,6 @@ export const columns = (
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
       },
-      width: 100,
     },
     {
       headerName: 'Act. finish',
@@ -58,19 +55,15 @@ export const columns = (
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
         return <DateCell dateString={props.value} />;
       },
-      width: 100,
     },
     {
       headerName: 'Progress',
       valueGetter: (pkg) => pkg.data?.projectProgress,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        return (
-          <Center>
-            <ProgressCell percentWidth={props.value === null ? 0 : props.value} />
-          </Center>
-        );
+        return <ProgressCell percentWidth={props.value === null ? 0 : props.value} />;
       },
-      width: 140,
+      cellStyle: progressBarCellStyle,
+      minWidth: 150,
     },
     {
       headerName: 'Estimated',
@@ -81,15 +74,14 @@ export const columns = (
           maxEstimatedHours = maxCount;
         }
         return (
-          <Center>
-            <EstimateCell
-              current={Number(props.value === null ? 0 : props.value)}
-              max={maxEstimatedHours}
-            />
-          </Center>
+          <EstimateCell
+            current={Number(props.value === null ? 0 : props.value)}
+            max={maxEstimatedHours}
+          />
         );
       },
-      width: 140,
+      cellStyle: progressBarCellStyle,
+      minWidth: 150,
     },
     {
       headerName: 'Remaining',
@@ -100,22 +92,21 @@ export const columns = (
           maxRemainingHours = maxCount;
         }
         return (
-          <Center>
-            <EstimateCell
-              current={Number(props.value === null ? 0 : props.value)}
-              max={maxRemainingHours}
-            />
-          </Center>
+          <EstimateCell
+            current={Number(props.value === null ? 0 : props.value)}
+            max={maxRemainingHours}
+          />
         );
       },
-      width: 140,
+      cellStyle: progressBarCellStyle,
+      minWidth: 150,
     },
   ];
 };
 
-const Center = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-`;
+const progressBarCellStyle = () => {
+  return {
+    display: 'grid',
+    height: '100%',
+  };
+};

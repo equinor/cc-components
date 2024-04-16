@@ -13,13 +13,19 @@ type ProgressCellProps = {
  */
 export const ProgressCell = ({ percentWidth }: ProgressCellProps): JSX.Element => {
   return (
-    <StyledProgressBarContainer>
-      <StyledActualProgress
-        borderColor="#40D38F"
-        width={percentWidth}
-        color="#D9F6E9"
-      ></StyledActualProgress>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', height: '100%' }}>
       <StyledProgressNumber>{`${Math.round(percentWidth)}%`}</StyledProgressNumber>
-    </StyledProgressBarContainer>
+      <StyledProgressBarContainer>
+        {Math.round(percentWidth) > 0 ? (
+          <StyledActualProgress
+            borderColor="#40D38F"
+            width={percentWidth}
+            color="#D9F6E9"
+          ></StyledActualProgress>
+        ) : (
+          <></>
+        )}
+      </StyledProgressBarContainer>
+    </div>
   );
 };

@@ -14,7 +14,6 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <LinkCell url={props.data?.punchUrl ?? ''} urlText={props.value ?? ''} />;
     },
-    minWidth: 150,
   },
   {
     headerName: 'Tag',
@@ -22,21 +21,19 @@ export const columns: ColDef<PunchBase>[] = [
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
     },
-    minWidth: 150,
   },
   {
+    colId: 'description',
     headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
       return <DescriptionCell description={props.value} />;
     },
-    minWidth: 200,
-    flex: 2,
+    width: 250,
   },
   {
     headerName: 'To be cleared by',
     valueGetter: (pkg) => pkg.data?.clearedBy,
-    width: 160,
   },
   {
     headerName: 'Status',
@@ -57,13 +54,9 @@ export const columns: ColDef<PunchBase>[] = [
         />
       );
     },
-    minWidth: 100,
-    flex: 1,
   },
   {
     headerName: 'Sorting',
     valueGetter: (pkg) => pkg.data?.sorting,
-    minWidth: 100,
-    flex: 1,
   },
 ];
