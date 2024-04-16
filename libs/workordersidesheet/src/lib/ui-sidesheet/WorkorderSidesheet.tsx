@@ -174,18 +174,11 @@ export const WorkorderSidesheet = (props: {
             <Tabs.Tab>Details</Tabs.Tab>
             <Tabs.Tab>
               MCCR <TabTitle data={mccr} isLoading={isFetchingMccr} />
-            </Tabs.Tab>
-            <Tabs.Tab>
-              Material <TabTitle data={material} isLoading={isFetchingMaterial} />
-            </Tabs.Tab>
-            <Tabs.Tab>
-              Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
-            </Tabs.Tab>
-            <Tabs.Tab>
-              3D <TabTitle data={modelConfig?.tags} isLoading={isFetchingModelConfig} />
-            </Tabs.Tab>
-          </StyledTabsList>
-        </StyledTabListWrapper>
+            </Tabs.Tab>            <NcrTab
+              ncrs={ncrPackages}
+              isFetching={isDataFetchingQuery}
+              error={queryError}
+            />
 
         <CustomStyledPanels>
           <Tabs.Panel>
