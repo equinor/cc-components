@@ -14,6 +14,7 @@
     "@cc-components/punchshared": "workspace:^",
     "@cc-components/punchsidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^"
+    "@cc-components/sharedcomponents": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^"
   }
 }

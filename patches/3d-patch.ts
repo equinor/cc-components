@@ -9,5 +9,5 @@ var production = "production";
 
 export const InjectProcessPlugin = {
   name: 'rollup-plugin-metadata',
-  renderChunk: (code) => fix + code,
+  renderChunk: (code: any) => fix + code,
 };

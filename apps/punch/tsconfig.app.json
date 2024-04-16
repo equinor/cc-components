@@ -5,7 +5,6 @@
     "types": ["node"],
     "rootDir": "."
   },
-
   "exclude": [
     "jest.config.ts",
     "**/*.spec.ts",
@@ -16,7 +15,9 @@
     "**/*.test.js",
     "**/*.spec.jsx",
     "**/*.test.jsx",
-    "dist"
+    "dist",
+    "build.js",
+    "vite.config.ts"
   ],
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }
