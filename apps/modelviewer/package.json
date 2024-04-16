@@ -9,7 +9,6 @@
     "build": "tsc -b -f"
   },
   "dependencies": {
-    "@cc-components/modelviewerapp": "workspace:^",
     "@cc-components/shared": "workspace:^",
     "@cc-components/modelviewer": "workspace:^"
   },
