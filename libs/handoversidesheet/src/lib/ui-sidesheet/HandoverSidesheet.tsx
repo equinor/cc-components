@@ -29,6 +29,8 @@ import {
 } from '@cc-components/shared';
 
 import { ModelViewerTab } from '@cc-components/modelviewer';
+import styled from 'styled-components';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
@@ -353,8 +355,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   );
 };
 
-import styled from 'styled-components';
-import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+
 const ErrorWrapper = styled.div`
   text-align: center;
   padding: 20px;
