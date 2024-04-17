@@ -3,6 +3,11 @@ import { useHttpClient } from '@cc-components/shared';
 import { TagOverlay } from '@cc-components/modelviewer';
 
 import { useQuery } from '@tanstack/react-query';
+import styled from 'styled-components';
+
+const Icon = styled.h3`
+  overflow: hidden;
+`;
 
 export const useGetEchoConfig = (packageId: string) => {
   const client = useHttpClient();
@@ -28,7 +33,7 @@ export const useGetEchoConfig = (packageId: string) => {
     tagNo: tag.tagNo,
     description: tag.description,
     status: tag.status,
-    icon: <h3>{tag.status}</h3>,
+    icon: <Icon>{tag.status}</Icon>,
   }));
 
   return {

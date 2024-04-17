@@ -338,7 +338,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               error={queryError}
             />
           </Tabs.Panel>
-          <Tabs.Panel>
+          <Tabs.Panel style={{ height: '100%' }}>
             <ModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
