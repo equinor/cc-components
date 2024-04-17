@@ -1,12 +1,15 @@
 import { Pipetest } from '@cc-components/pipingshared';
-import { pipetestStatusColormap } from '@cc-components/shared/mapping';
-import { BaseStatus } from 'libs/shared/dist/src/packages';
+import { pipetestAndHeatTraceColorMap } from '@cc-components/shared/mapping';
+import { getTextColor } from './getTextColor';
 
 type PackageStatusReturn = {
   backgroundColor: string;
+  textColor: string;
 };
 
 export const getPipetestStatusColors = (data: Pipetest): PackageStatusReturn => {
-  const backgroundColor = pipetestStatusColormap[data.formStatus as BaseStatus];
-  return { backgroundColor };
+  const backgroundColor = pipetestAndHeatTraceColorMap[data.checklistStep || ''];
+  const textColor = getTextColor(data.checklistStep || '');
+
+  return { backgroundColor: backgroundColor, textColor: textColor };
 };
