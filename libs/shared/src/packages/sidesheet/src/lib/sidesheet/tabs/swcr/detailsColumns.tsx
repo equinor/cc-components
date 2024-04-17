@@ -16,27 +16,22 @@ export const columns: ColDef<SwcrBase>[] = [
         />
       );
     },
-    minWidth: 100,
   },
   {
+    colId: 'description',
     headerName: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    flex: 1,
-    minWidth: 200,
+    width: 250,
   },
   {
     headerName: 'Status',
     valueGetter: (pkg) => pkg.data?.status,
-    flex: 1,
-    minWidth: 100,
   },
   {
     headerName: 'Priority',
     valueGetter: (pkg) => pkg.data?.priority,
-    flex: 1,
-    minWidth: 100,
   },
 ];

@@ -40,4 +40,4 @@ jobs:
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run fprd:deploy --since ${{github.event.before}} --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --sha '${{github.sha}}'
+        run: npx turbo run fprd:deploy --since ${{github.event.before}} --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'

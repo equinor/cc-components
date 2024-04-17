@@ -1,7 +1,7 @@
 import { Radio } from '@equinor/eds-core-react';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useModelContext } from '../../providers/modelsProvider';
+import { useModelSelectionContext } from '../../providers/modelSelectionProvider';
 
 interface ModelSelectionListProps {
   onModelSelect: (id: number) => void;
@@ -9,7 +9,7 @@ interface ModelSelectionListProps {
 
 const ModelSelectionList: React.FC<ModelSelectionListProps> = ({ onModelSelect }) => {
   const [selectedModelId, setSelectedModelId] = useState<number>(-1);
-  const { models, modelMeta } = useModelContext();
+  const { models, modelMeta } = useModelSelectionContext();
 
   useEffect(() => {
     if (modelMeta) {
@@ -17,6 +17,7 @@ const ModelSelectionList: React.FC<ModelSelectionListProps> = ({ onModelSelect }
     }
   }, [modelMeta]);
 
+  // TODO: Fix this. Remove the inline mapping and get rid of the useEffect with setState
   return (
     <UnstyledList>
       {models!.map((model) => (

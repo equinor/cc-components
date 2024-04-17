@@ -18,16 +18,15 @@ export const columns: ColDef<McBase>[] = [
         />
       );
     },
-    minWidth: 150,
   },
   {
+    colId: 'title',
     headerName: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DescriptionCell description={props.value} />
     ),
-    minWidth: 150,
-    flex: 2,
+    width: 250,
   },
   {
     headerName: 'Status',
@@ -42,8 +41,6 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    minWidth: 100,
-    flex: 1,
   },
   {
     headerName: 'Punch Accepted Date',
@@ -51,8 +48,6 @@ export const columns: ColDef<McBase>[] = [
     cellRenderer: (props: ICellRendererProps<McBase>) => (
       <DateCell dateString={props.value} />
     ),
-    minWidth: 175,
-    flex: 2,
   },
   {
     headerName: 'RFCC',
@@ -70,8 +65,6 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    minWidth: 100,
-    flex: 1,
   },
   {
     headerName: 'RFOC',
@@ -89,7 +82,5 @@ export const columns: ColDef<McBase>[] = [
         })}
       />
     ),
-    minWidth: 100,
-    flex: 1,
   },
 ];

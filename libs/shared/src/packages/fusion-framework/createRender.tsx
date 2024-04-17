@@ -3,6 +3,7 @@ import {
   ComponentRenderArgs,
   makeComponent,
 } from '@equinor/fusion-framework-react-app';
+
 import { createRoot } from 'react-dom/client';
 
 import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsights-web';
@@ -83,7 +84,9 @@ export function createRender(
      * Second argu is the the render args (framework and env variables)
      * Third argument is the configuration callback
      */
-    const AppComponent = makeComponent(<Comp />, args, configure);
+    const AppComponent = makeComponent(<Comp />, args, (a, b) => {
+      configure(a, b);
+    });
 
     root.render(<AppComponent />);
 
@@ -98,7 +101,8 @@ export function createRender(
 
 function tryGetAccountId(args: ComponentRenderArgs) {
   try {
-    return args.fusion.modules.auth.defaultAccount?.localAccountId;
+    const modules = args.fusion.modules as any;
+    return modules.auth.defaultAccount?.localAccountId;
   } catch (e) {
     return '';
   }
