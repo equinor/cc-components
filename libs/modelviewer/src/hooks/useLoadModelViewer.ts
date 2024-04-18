@@ -14,9 +14,15 @@ export const useLoadModelViewer = () => {
 
   const env = useEnvConfig();
 
-  const modelRequest = useMemo(() => ({ scopes: [env.modelClientScope] }), [env]);
+  const modelRequest = useMemo(
+    () => ({ scopes: [env.modelClientScope], prompt: 'none' }),
+    [env]
+  );
 
-  const hierarchyRequest = useMemo(() => ({ scopes: [env.hierarchyClientScope] }), [env]);
+  const hierarchyRequest = useMemo(
+    () => ({ scopes: [env.hierarchyClientScope], prompt: 'none' }),
+    [env]
+  );
 
   const { token: modelToken, error: modelError } = useAccessToken(modelRequest);
 
@@ -25,6 +31,8 @@ export const useLoadModelViewer = () => {
 
   if (modelError) throw new Error('Token failed', { cause: modelError });
   if (hierarchyError) throw new Error('Token failed', { cause: hierarchyError });
+
+  console.log({ modelError, hierarchyError });
 
   const { isLoading, data: echoInstance } = useQuery({
     queryKey: ['model-viewer-loader'],
