@@ -18,7 +18,7 @@ export const useLoadModelViewer = () => {
   const modelRequest = useMemo(
     () => ({
       scopes: [env.modelClientScope],
-      prompt: 'none',
+      prompt: 'login',
       onRedirectNavigate: () => false,
     }),
     [env]
@@ -27,7 +27,7 @@ export const useLoadModelViewer = () => {
   const hierarchyRequest = useMemo(
     () => ({
       scopes: [env.hierarchyClientScope],
-      prompt: 'none',
+      prompt: 'login',
       popupWindowAttributes: null,
       onRedirectNavigate: () => false,
     }),
