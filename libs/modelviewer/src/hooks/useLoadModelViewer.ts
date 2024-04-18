@@ -15,12 +15,20 @@ export const useLoadModelViewer = () => {
   const env = useEnvConfig();
 
   const modelRequest = useMemo(
-    () => ({ scopes: [env.modelClientScope], prompt: 'none' }),
+    () => ({
+      scopes: [env.modelClientScope],
+      prompt: 'none',
+      popupWindowAttributes: null,
+    }),
     [env]
   );
 
   const hierarchyRequest = useMemo(
-    () => ({ scopes: [env.hierarchyClientScope], prompt: 'none' }),
+    () => ({
+      scopes: [env.hierarchyClientScope],
+      prompt: 'none',
+      popupWindowAttributes: null,
+    }),
     [env]
   );
 
