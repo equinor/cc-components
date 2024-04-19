@@ -35,17 +35,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get fusion token
-        id: "get-fusion-token"
-        uses: ./.github/actions/get-fusion-token
+      - name: "Login to Azure"
+        uses: azure/login@v1
         with:
-          client-id: ${{vars.SP_CLIENT_ID}}
-          resource-id: ${{vars.FPP_CLIENT_ID}}
-          tenant-id: ${{vars.TENANT_ID}}
+          client-id: ${{ vars.SP_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: "Obtain token for upload"
+        id: token
+        shell: bash
+        run: echo "token=$(az account get-access-token --resource '${{ vars.FPP_CLIENT_ID }}' --scope api://${{vars.FPP_CLIENT_ID}}/.default | jq '.accessToken')" >> $GITHUB_OUTPUT
 
       - name: PNPM setup
         uses: ./.github/actions/pnpm-setup
 
       - name: Onboard app
         shell: bash
-        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{steps.get-fusion-token.outputs.token}} --appkey handover --env CI --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
+        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{env.token}} --appkey handover --env CI --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
