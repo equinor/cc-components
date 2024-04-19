@@ -45,11 +45,11 @@ jobs:
       - name: "Obtain token for upload"
         id: token
         shell: bash
-        run: echo "token=$(az account get-access-token --resource '${{ vars.FPP_CLIENT_ID }}' --scope api://${{vars.FPP_CLIENT_ID}}/.default | jq '.accessToken')" >> $GITHUB_OUTPUT
+        run: echo "SP_TOKEN=$(az account get-access-token --resource '${{ vars.FPP_CLIENT_ID }}' --scope api://${{vars.FPP_CLIENT_ID}}/.default | jq '.accessToken')" >> $GITHUB_ENV
 
       - name: PNPM setup
         uses: ./.github/actions/pnpm-setup
 
       - name: Onboard app
         shell: bash
-        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{env.token}} --appkey handover --env CI --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
+        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{env.SP_TOKEN}} --appkey handover --env CI --context 07135497-aa7b-4a5e-b229-cdc326ddcaec
