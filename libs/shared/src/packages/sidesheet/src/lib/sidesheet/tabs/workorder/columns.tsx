@@ -60,12 +60,10 @@ export const columns = (
       headerName: 'Progress',
       valueGetter: (pkg) => pkg.data?.projectProgress,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        return (
-          <Center>
-            <ProgressCell percentWidth={props.value === null ? 0 : props.value} />
-          </Center>
-        );
+        return <ProgressCell percentWidth={props.value === null ? 0 : props.value} />;
       },
+      cellStyle: progressBarCellStyle,
+      minWidth: 150,
     },
     {
       headerName: 'Estimated',
@@ -76,14 +74,14 @@ export const columns = (
           maxEstimatedHours = maxCount;
         }
         return (
-          <Center>
-            <EstimateCell
-              current={Number(props.value === null ? 0 : props.value)}
-              max={maxEstimatedHours}
-            />
-          </Center>
+          <EstimateCell
+            current={Number(props.value === null ? 0 : props.value)}
+            max={maxEstimatedHours}
+          />
         );
       },
+      cellStyle: progressBarCellStyle,
+      minWidth: 150,
     },
     {
       headerName: 'Remaining',
@@ -94,21 +92,21 @@ export const columns = (
           maxRemainingHours = maxCount;
         }
         return (
-          <Center>
-            <EstimateCell
-              current={Number(props.value === null ? 0 : props.value)}
-              max={maxRemainingHours}
-            />
-          </Center>
+          <EstimateCell
+            current={Number(props.value === null ? 0 : props.value)}
+            max={maxRemainingHours}
+          />
         );
       },
+      cellStyle: progressBarCellStyle,
+      minWidth: 150,
     },
   ];
 };
 
-const Center = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-`;
+const progressBarCellStyle = () => {
+  return {
+    display: 'grid',
+    height: '100%',
+  };
+};

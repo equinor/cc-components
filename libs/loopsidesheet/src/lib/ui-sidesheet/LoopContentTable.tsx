@@ -16,18 +16,17 @@ const columns: ColDef<LoopContent>[] = [
   {
     headerName: 'Tag',
     valueGetter: (pkg) => pkg.data?.contentTagNo,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.contentTagId) {
-    //     return proCoSysUrls.getTagUrl(pkg.data.contentTagId);
-    //   }
-    //   return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    //   return null;
-    // },
+    cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
+      if (props.valueFormatted) {
+        return (
+          <LinkCell
+            url={props.data?.contentTagUrl ?? undefined}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+      return null;
+    },
     width: 120,
   },
   {
@@ -66,35 +65,33 @@ const columns: ColDef<LoopContent>[] = [
   {
     headerName: 'Comm Pkg',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.commissioningPackageUrlId) {
-    //     return proCoSysUrls.getCommPkgUrl(pkg.data.commissioningPackageUrlId);
-    //   }
-    //   return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    //   return null;
-    // },
+    cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
+      if (props.valueFormatted) {
+        return (
+          <LinkCell
+            url={props.data?.commissioningPackageUrl ?? undefined}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+      return null;
+    },
     width: 120,
   },
   {
     headerName: 'MC Pkg',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
-    // valueFormatter: (pkg) => {
-    //   if (pkg.data?.mechanicalCompletionPackageUrlId) {
-    //     return proCoSysUrls.getMcUrl(pkg.data.mechanicalCompletionPackageUrlId);
-    //   }
-    //   return '';
-    // },
-    // cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
-    //   if (props.valueFormatted) {
-    //     return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
-    //   }
-    //   return null;
-    // },
+    cellRenderer: (props: ICellRendererProps<LoopContent, string | null>) => {
+      if (props.valueFormatted) {
+        return (
+          <LinkCell
+            url={props.data?.mechanicalCompletionPackageUrl ?? undefined}
+            urlText={props.value ?? ''}
+          />
+        );
+      }
+      return null;
+    },
     width: 140,
   },
 ];
