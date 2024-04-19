@@ -27,7 +27,7 @@ permissions:
 jobs:
   onboard-app:
     runs-on: ubuntu-latest
-    environment: ci
+    environment: ${{ inputs.env }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
