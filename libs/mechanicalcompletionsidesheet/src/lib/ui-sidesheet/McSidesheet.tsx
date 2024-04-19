@@ -1,7 +1,6 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { hasProperty, useContextId } from '@cc-components/shared';
+import { hasProperty, useContextId, statusColorMap } from '@cc-components/shared';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { statusColorMap } from '@cc-components/shared/mapping';
 import { MccrTab, NcrTab, PunchTab, WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BannerItem,
@@ -28,7 +27,7 @@ import styled from 'styled-components';
 
 const viewerOptions = {
   statusResolver: (status: string) => {
-    return hasProperty(colorMap, status) ? colorMap[status] : '#009922';
+    return hasProperty(statusColorMap, status) ? statusColorMap[status] : '#009922';
   },
   defaultCroppingDistance: 3,
 };
@@ -84,7 +83,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     tagsOverlay,
     isFetching: isFetchingModelConfig,
     error: modelConfigError,
-  } = useGetEchoConfig(props.id);
+  } = useGetEchoConfig(props.item.mechanicalCompletionPackageId);
 
   const filteredPunches = useMemo(() => {
     if (showOnlyOutstandingPunch) {
