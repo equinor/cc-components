@@ -1,0 +1,54 @@
+name: Onboard app to Fusion Project Portal
+# run-name: ${{github.actor}} is onboarding ${{inputs.appKey}} to ${{inputs.contexId}}
+#
+on:
+  workflow_dispatch:
+    inputs:
+      appKey:
+        type: string
+        description: Which app to onboard
+      contextId:
+        type: string
+        description: Which contextId to onboard the app on
+      env:
+        type: choice
+        description: Which environment to use
+        options:
+          - CI
+          - FPRD
+
+permissions:
+  actions: read
+  contents: read
+  deployments: write
+  id-token: write
+  statuses: write
+
+jobs:
+  onboard-app:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Login to Azure"
+        uses: azure/login@v1
+        with:
+          client-id: ${{ vars.SP_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: "Obtain token for upload"
+        id: token
+        shell: bash
+        run: echo "SP_TOKEN=$(az account get-access-token --resource '${{ vars.FPP_CLIENT_ID }}' --scope api://${{vars.FPP_CLIENT_ID}}/.default | jq '.accessToken')" >> $GITHUB_ENV
+
+      - name: PNPM setup
+        uses: ./.github/actions/pnpm-setup
+
+      - name: Onboard app
+        shell: bash
+        run: npx tsx ./github-action/src/onboardApp.ts onboard --token ${{env.SP_TOKEN}} --appkey ${{inputs.appKey}} --env ${{inputs.env}} --context ${{inputs.contextId}}
