@@ -1,5 +1,6 @@
 import { LicenseManager } from '@ag-grid-enterprise/core';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
+import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import {
   ComponentRenderArgs,
   IAppConfigurator,
@@ -22,7 +23,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig: MechEnvConfig = c.env.config?.environment as MechEnvConfig;
+  const envConfig = c.env.config?.environment as MechEnvConfig & ModelViewerEnvConfig;
 
   if (envConfig.license) {
     LicenseManager.setLicenseKey(envConfig.license);
@@ -37,6 +38,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
+  enableModelViewer(config, envConfig);
 };
 
 type MechEnvConfig = {

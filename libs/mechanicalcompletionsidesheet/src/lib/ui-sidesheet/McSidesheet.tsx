@@ -1,7 +1,6 @@
 import { McPackage } from '@cc-components/mechanicalcompletionshared';
-import { useContextId } from '@cc-components/shared';
+import { hasProperty, useContextId, statusColorMap } from '@cc-components/shared';
 import { StatusCircle, StyledItemLink } from '@cc-components/shared/common';
-import { statusColorMap } from '@cc-components/shared/mapping';
 import { MccrTab, NcrTab, PunchTab, WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BannerItem,
@@ -10,12 +9,13 @@ import {
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
-  StyledPanels,
   StyledSideSheetContainer,
   StyledTabListWrapper,
-  StyledTabs,
   TabTitle,
 } from '@cc-components/sharedcomponents';
+
+import { ModelViewerTab } from '@cc-components/modelviewer';
+
 import { Icon, Switch, Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
@@ -25,11 +25,19 @@ import { DetailsTab } from './DetailsTab';
 
 import styled from 'styled-components';
 
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(statusColorMap, status) ? statusColorMap[status] : '#009922';
+  },
+  defaultCroppingDistance: 3,
+};
+
 type McProps = {
   id: string;
   item?: McPackage;
   close: VoidFunction;
 };
+
 export const McSideSheet = ({ id, close: closeSidesheet, item }: McProps) => {
   return <EnsureMcPkg id={id} item={item} close={closeSidesheet} />;
 };
@@ -69,6 +77,13 @@ const McSideSheetComponent = (props: Required<McProps>) => {
     isFetching: isFetchingMccr,
     error: mccrError,
   } = useMcResource(props.id, 'mccr');
+
+  const {
+    data: modelConfig,
+    tagsOverlay,
+    isFetching: isFetchingModelConfig,
+    error: modelConfigError,
+  } = useGetEchoConfig(props.item.mechanicalCompletionPackageId);
 
   const filteredPunches = useMemo(() => {
     if (showOnlyOutstandingPunch) {
@@ -154,6 +169,9 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             <Tabs.Tab>
               MCCR <TabTitle data={mccrs} isLoading={isFetchingMccr} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              3D <TabTitle data={tagsOverlay} isLoading={isFetchingModelConfig} />
+            </Tabs.Tab>
           </Tabs.List>
         </StyledTabListWrapper>
 
@@ -230,6 +248,15 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               )}
             />
           </Tabs.Panel>
+          <Tabs.Panel style={{ height: '100%' }}>
+            <ModelViewerTab
+              tagOverlay={tagsOverlay}
+              options={viewerOptions}
+              isFetching={isFetchingModelConfig}
+              error={modelConfigError as Error | null}
+              facilities={modelConfig?.facilities ?? []}
+            />
+          </Tabs.Panel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>
@@ -239,6 +266,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
 import { MccrBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/mccr/types';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 
 const EnsureMcPkg = ({ id, close, item }: McProps) => {
   const client = useHttpClient('cc-app');
