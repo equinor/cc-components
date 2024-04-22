@@ -12,6 +12,7 @@
     "@cc-components/mechanicalcompletionshared": "workspace:^",
     "@cc-components/mechanicalcompletionsidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^"
+    "@cc-components/sharedcomponents": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^"
   }
 }
