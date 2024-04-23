@@ -134,6 +134,13 @@ The permissions for modifying environment variables are given to personal accoun
 - ~[FQA](https://admin.fqa.fusion-dev.net/apps)~ (Not in use for us)
 - [FPRD](https://admin.fprd.fusion-dev.net/apps)
 
+## Onboarding new apps 🔩
+
+New apps has to be *onboarded* onto a context in order to be availible for end users. Use the [Onboard app to Fusion Project Portal](https://github.com/equinor/cc-components/actions/workflows/onboard-app-fpp.yml) to onboard a app to a new context. Context ids can be found by selecting the context in the portal, then copying the GUID in the url or by using the Fusion API.
+
+> [!NOTE]  
+> Context ids vary from different environments (they are different in test and prod)
+
 ## Hosting environments (subject to change)
 
 - [Fusion Project Portal](https://project.fusion.equinor.com)
