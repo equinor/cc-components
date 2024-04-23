@@ -1,5 +1,6 @@
 import { LicenseManager } from '@ag-grid-enterprise/core';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
+import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import {
   ComponentRenderArgs,
   IAppConfigurator,
@@ -22,7 +23,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig: HandoverEnvConfig = c.env.config?.environment as HandoverEnvConfig;
+  const envConfig = c.env.config?.environment as HandoverEnvConfig & ModelViewerEnvConfig;
 
   if (!envConfig.uri) {
     throw new Error('Failed to load environemnt config for workorder');
@@ -38,6 +39,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
+  enableModelViewer(config, envConfig);
 };
 
 type HandoverEnvConfig = {
