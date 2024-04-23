@@ -231,6 +231,15 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
+  apps/modelviewer:
+    dependencies:
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../../libs/modelviewer
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/piping:
     dependencies:
       '@cc-components/pipingapp':
@@ -302,6 +311,9 @@ importers:
       '@cc-components/handoversidesheet':
         specifier: workspace:^
         version: link:../handoversidesheet
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -320,6 +332,9 @@ importers:
       '@cc-components/handovershared':
         specifier: workspace:^
         version: link:../handovershared
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -407,6 +422,9 @@ importers:
       '@cc-components/mechanicalcompletionsidesheet':
         specifier: workspace:^
         version: link:../mechanicalcompletionsidesheet
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -425,15 +443,15 @@ importers:
       '@cc-components/mechanicalcompletionshared':
         specifier: workspace:^
         version: link:../mechanicalcompletionshared
+      '@cc-components/modelviewer':
+        specifier: workspace:^
+        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
-      '@equinor/workspace-sidesheet':
-        specifier: ^0.1.6
-        version: 0.1.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.6)
 
   libs/modelviewer:
     dependencies:
@@ -1122,7 +1140,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.23.2
       '@babel/helper-validator-option': 7.22.15
-      browserslist: 4.21.10
+      browserslist: 4.22.1
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -2647,6 +2665,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: true
 
   /@babel/runtime@7.23.2:
     resolution: {integrity: sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==}
@@ -3037,7 +3056,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.23.9
       '@equinor/eds-icons': 0.16.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/eds-utils': 0.7.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -3064,7 +3083,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.23.2
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/eds-utils': 0.7.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.6)
@@ -4290,9 +4309,9 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 3.1.4(react@18.2.0)
       react-is: 18.2.0
-      react-sortablejs: 6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.1)
+      react-sortablejs: 6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.2)
       react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.1
+      sortablejs: 1.15.2
       styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
@@ -4387,15 +4406,15 @@ packages:
       '@equinor/eds-tokens': 0.9.2
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
       markdown-to-jsx: 7.2.0(react@18.2.0)
-      powerbi-client: 2.22.3
+      powerbi-client: 2.23.1
       powerbi-client-react: 1.4.0(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 3.1.4(react@18.2.0)
       react-is: 18.2.0
-      react-sortablejs: 6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.1)
+      react-sortablejs: 6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.2)
       react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.1
+      sortablejs: 1.15.2
       styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
@@ -4424,7 +4443,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
       styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      zustand: 4.4.7(@types/react@18.2.22)(react@18.2.0)
+      zustand: 4.5.2(@types/react@18.2.22)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
@@ -6587,10 +6606,6 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
-  /@popperjs/core@2.11.7:
-    resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
-    dev: false
-
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
@@ -8562,7 +8577,7 @@ packages:
       '@emotion/styled': 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.22)(react@18.2.0)
       '@lingui/core': 3.17.2
       '@mui/material': 5.12.0(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@popperjs/core': 2.11.7
+      '@popperjs/core': 2.11.8
       '@remirror/core': 2.0.12(@remirror/pm@2.0.8)(@types/node@20.7.0)
       '@remirror/extension-blockquote': 2.0.13(@remirror/pm@2.0.8)(@types/node@20.7.0)
       '@remirror/extension-bold': 2.0.12(@remirror/pm@2.0.8)(@types/node@20.7.0)
@@ -9470,11 +9485,11 @@ packages:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
     dev: true
 
-  /@tanstack/match-sorter-utils@8.8.4:
-    resolution: {integrity: sha512-rKH8LjZiszWEvmi01NR72QWZ8m4xmXre0OOwlRGnjU01Eqz/QnN+cqpty2PJ0efHblq09+KilvyR7lsbzmXVEw==}
+  /@tanstack/match-sorter-utils@8.15.1:
+    resolution: {integrity: sha512-PnVV3d2poenUM31ZbZi/yXkBu3J7kd5k2u51CGwwNojag451AjTH9N6n41yjXz2fpLeewleyLBmNS6+HcGDlXw==}
     engines: {node: '>=12'}
     dependencies:
-      remove-accents: 0.4.2
+      remove-accents: 0.5.0
     dev: false
 
   /@tanstack/query-core@4.35.3:
@@ -9493,7 +9508,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@tanstack/match-sorter-utils': 8.8.4
+      '@tanstack/match-sorter-utils': 8.15.1
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10760,16 +10775,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       fill-range: 7.0.1
-
-  /browserslist@4.21.10:
-    resolution: {integrity: sha512-bipEBdZfVH5/pwrvqc+Ub0kUPVfGUhlKxbvfD+z1BDnPEO/X98ruXGA1WP5ASpAFKan7Qr6j736IacbZQuAlKQ==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001559
-      electron-to-chromium: 1.4.572
-      node-releases: 2.0.13
-      update-browserslist-db: 1.0.13(browserslist@4.21.10)
 
   /browserslist@4.22.1:
     resolution: {integrity: sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ==}
@@ -13803,7 +13808,7 @@ packages:
   /lit-element@3.3.3:
     resolution: {integrity: sha512-XbeRxmTHubXENkV4h8RIPyr8lXc+Ff28rkcQzw3G6up2xg5E8Zu1IgOWIwBLEQsu3cOVFqdYwiVi0hv0SlpqUA==}
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.1.2
+      '@lit-labs/ssr-dom-shim': 1.2.0
       '@lit/reactive-element': 1.6.3
       lit-html: 2.8.0
 
@@ -15351,21 +15356,21 @@ packages:
         optional: true
     dependencies:
       lodash.isequal: 4.5.0
-      powerbi-client: 2.22.3
+      powerbi-client: 2.23.1
       react: 18.2.0
     dev: false
 
-  /powerbi-client@2.22.3:
-    resolution: {integrity: sha512-IUf0OCXBR7sX1zcId47L94/TD9ljWztEqMPyhtMFZ9zFsdY4G68B1+7AAE9+bYqAQrKznJTHvcLQAnWvYQh/9A==}
+  /powerbi-client@2.23.1:
+    resolution: {integrity: sha512-r04gDDq8YkrkZjSwOw4UBgzPwudXnA+x8B9ekVE7XDlhTDC7tujbcT15Z+iLDrx+49Bj4qVez0PgjA9CgEFpGw==}
     dependencies:
       http-post-message: 0.2.3
-      powerbi-models: 1.13.0
+      powerbi-models: 1.15.2
       powerbi-router: 0.1.5
-      window-post-message-proxy: 0.2.6
+      window-post-message-proxy: 0.2.8
     dev: false
 
-  /powerbi-models@1.13.0:
-    resolution: {integrity: sha512-fToQmRqECBJSlHaKNAzFql52ryNnhSm2UwRXfsctcS5Hp//o9sExasVsASv6jZjXE8ACNyKjDUKdGqWsCjRd1Q==}
+  /powerbi-models@1.15.2:
+    resolution: {integrity: sha512-UcBLtBB2wa8pL412DxyVZvv/bKiUVJfLTCXAuGmIqnOkoA/EnYDUM3B8oS2piN1azyEN8pjN353rE9DeARCJtA==}
     dev: false
 
   /powerbi-router@0.1.5:
@@ -15782,7 +15787,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.23.9
       react: 18.2.0
 
   /react-error-boundary@4.0.11(react@18.2.0):
@@ -15846,7 +15851,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-sortablejs@6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.1):
+  /react-sortablejs@6.1.4(react-dom@18.2.0)(react@18.2.0)(sortablejs@1.15.2):
     resolution: {integrity: sha512-fc7cBosfhnbh53Mbm6a45W+F735jwZ1UFIYSrIqcO/gRIFoDyZeMtgKlpV4DdyQfbCzdh5LoALLTDRxhMpTyXQ==}
     peerDependencies:
       '@types/sortablejs': '1'
@@ -15864,7 +15869,7 @@ packages:
       classnames: 2.3.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sortablejs: 1.15.1
+      sortablejs: 1.15.2
       tiny-invariant: 1.2.0
     dev: false
 
@@ -16265,6 +16270,10 @@ packages:
 
   /remove-accents@0.4.2:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
+
+  /remove-accents@0.5.0:
+    resolution: {integrity: sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==}
     dev: false
 
   /require-directory@2.1.1:
@@ -16674,8 +16683,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /sortablejs@1.15.1:
-    resolution: {integrity: sha512-P5Cjvb0UG1ZVNiDPj/n4V+DinttXG6K8n7vM/HQf0C25K3YKQTQY6fsr/sEGsJGpQ9exmPxluHxKBc0mLKU1lQ==}
+  /sortablejs@1.15.2:
+    resolution: {integrity: sha512-FJF5jgdfvoKn1MAKSdGs33bIqLi3LmsgVTliuX6iITj834F+JRQZN90Z93yql8h0K2t0RwDPBmxwlbZfDcxNZA==}
     dev: false
 
   /source-map-js@1.0.2:
@@ -17694,16 +17703,6 @@ packages:
     resolution: {integrity: sha512-tdOvLfRzHolwYcHS6HIX860MkK9LQ4+oLuNwFYL7bpgTEO64PZrcQxkisgwJYCfF8sKiWLwwu1c83DvMkbefIQ==}
     dev: false
 
-  /update-browserslist-db@1.0.13(browserslist@4.21.10):
-    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.10
-      escalade: 3.1.1
-      picocolors: 1.0.0
-
   /update-browserslist-db@1.0.13(browserslist@4.22.1):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
     hasBin: true
@@ -18359,8 +18358,8 @@ packages:
       string-width: 5.1.2
     dev: false
 
-  /window-post-message-proxy@0.2.6:
-    resolution: {integrity: sha512-IwNWtUWVFarBa2F9vhmfv2yr0PfPm57QuOBCw3qSLaunhD3THcHUKQ4HrJQiCuYUT7LEjhUtaoA+hrV+wQzNmQ==}
+  /window-post-message-proxy@0.2.8:
+    resolution: {integrity: sha512-lAxMnXcKMR3UjFmeIWnl+1OdUBZI8l3RlCbr3TUALFpnWK6H6i6x+AHSp7Hs7PFGb08ct8BLT8CrCtESo+PyTQ==}
     dependencies:
       es6-promise: 3.3.1
     dev: false
@@ -18492,12 +18491,12 @@ packages:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
     dev: false
 
-  /zustand@4.4.7(@types/react@18.2.22)(react@18.2.0):
-    resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}
+  /zustand@4.5.2(@types/react@18.2.22)(react@18.2.0):
+    resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
-      immer: '>=9.0'
+      immer: '>=9.0.6'
       react: '>=16.8 || 18'
     peerDependenciesMeta:
       '@types/react':
