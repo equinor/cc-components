@@ -40,7 +40,7 @@ const viewerOptions = {
   statusResolver: (status: string) => {
     return hasProperty(pipetestStatusColormap, status)
       ? pipetestStatusColormap[status]
-      : '#009922';
+      : '#0084C4';
   },
   defaultCroppingDistance: 3,
 };
