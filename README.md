@@ -136,7 +136,7 @@ The permissions for modifying environment variables are given to personal accoun
 
 ## Onboarding new apps 🔩
 
-New apps has to be *onboarded* onto a context in order to be availible for end users. Use the [Onboard app to Fusion Project Portal](https://github.com/equinor/cc-components/actions/workflows/onboard-app-fpp.yml) to onboard a app to a new context. Context ids can be found by selecting the context in the portal, then copying the GUID in the url or by using the Fusion API.
+Apps has to be *onboarded* onto a context in order to be availible for end users. Use the [Onboard app to Fusion Project Portal](https://github.com/equinor/cc-components/actions/workflows/onboard-app-fpp.yml) to onboard an app to a new context. Context ids can be found by selecting the context in the portal, then copying the GUID in the url or by using the Fusion API.
 
 > [!NOTE]  
 > Context ids vary from different environments (they are different in test and prod)
