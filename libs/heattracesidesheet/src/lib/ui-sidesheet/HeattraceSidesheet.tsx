@@ -150,45 +150,46 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
             </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
+
+        <CustomStyledPanels>
+          <Tabs.Panel>
+            <CircuitDiagramTab
+              elenetwork={eleNetwork}
+              itemNo={props.item.heatTraceCableNo}
+              // onCircuitDiagramReady={(element) => {
+              //   if (reszied.current.hasResized) return;
+              //   const newWidth = element.scrollWidth;
+              //   if (sidesheetWidth !== 700) return;
+              //   setSidesheetWidth(newWidth + 50);
+              //   reszied.current = { hasResized: true, id: props.id };
+              // }}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <WorkorderTab
+              error={errorWorkorders}
+              isFetching={isLoadingWorkorders}
+              workorders={dataWorkorders}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <ChecklistTab
+              error={errorChecklists}
+              isFetching={isLoadingChecklists}
+              checklists={dataChecklists}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel style={{ height: '100%' }}>
+            <ModelViewerTab
+              tagOverlay={tagsOverlayEcho}
+              options={viewerOptions}
+              isFetching={isFetchingEcho}
+              error={errorEcho as Error | null}
+              facilities={dataEcho?.facilities ?? []}
+            />
+          </Tabs.Panel>
+        </CustomStyledPanels>
       </CustomStyledTabs>
-      <CustomStyledPanels>
-        <Tabs.Panel>
-          <CircuitDiagramTab
-            elenetwork={eleNetwork}
-            itemNo={props.item.heatTraceCableNo}
-            // onCircuitDiagramReady={(element) => {
-            //   if (reszied.current.hasResized) return;
-            //   const newWidth = element.scrollWidth;
-            //   if (sidesheetWidth !== 700) return;
-            //   setSidesheetWidth(newWidth + 50);
-            //   reszied.current = { hasResized: true, id: props.id };
-            // }}
-          />
-        </Tabs.Panel>
-        <Tabs.Panel>
-          <WorkorderTab
-            error={errorWorkorders}
-            isFetching={isLoadingWorkorders}
-            workorders={dataWorkorders}
-          />
-        </Tabs.Panel>
-        <Tabs.Panel>
-          <ChecklistTab
-            error={errorChecklists}
-            isFetching={isLoadingChecklists}
-            checklists={dataChecklists}
-          />
-        </Tabs.Panel>
-        <Tabs.Panel style={{ height: '100%' }}>
-          <ModelViewerTab
-            tagOverlay={tagsOverlayEcho}
-            options={viewerOptions}
-            isFetching={isFetchingEcho}
-            error={errorEcho as Error | null}
-            facilities={dataEcho?.facilities ?? []}
-          />
-        </Tabs.Panel>
-      </CustomStyledPanels>
     </StyledSideSheetContainer>
   );
 };
