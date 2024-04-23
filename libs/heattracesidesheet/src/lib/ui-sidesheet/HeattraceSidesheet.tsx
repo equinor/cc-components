@@ -9,11 +9,11 @@ import {
   LinkCell,
   StatusCircle,
   domainNames,
+  hasProperty,
   statusColorMap,
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
-import { useHttpClient as useFrameworkClient } from '@equinor/fusion-framework-react-app/http';
 import {
   BannerItem,
   SidesheetHeader,
@@ -26,6 +26,15 @@ import { ChecklistTab } from './ChecklistTab';
 import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
 import { useQuery } from '@tanstack/react-query';
 import { CircuitDiagramTab } from './CircuitDiagramTab';
+import { ModelViewerTab } from '@cc-components/modelviewer';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(statusColorMap, status) ? statusColorMap[status] : '#009922';
+  },
+  defaultCroppingDistance: 3,
+};
 
 type HeatTraceProps = {
   id: string;
@@ -119,6 +128,13 @@ export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
       useErrorBoundary: false,
     }
   );
+
+  const {
+    data: modelConfig,
+    tagsOverlay,
+    isFetching: isFetchingModelConfig,
+    error: modelConfigError,
+  } = useGetEchoConfig(id);
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={close} />;
