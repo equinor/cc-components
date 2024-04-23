@@ -57,12 +57,12 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
     ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };
 
-  // const { width: sidesheetWidth, setWidth: setSidesheetWidth } = useResizeContext();
-  // const reszied = useRef({ hasResized: false, id: props.id });
-  // if (reszied.current.id !== props.id) {
-  //   reszied.current = { hasResized: false, id: props.id };
-  //   setSidesheetWidth(700);
-  // }
+  const { width: sidesheetWidth, setWidth: setSidesheetWidth } = useResizeContext();
+  const reszied = useRef({ hasResized: false, id: props.id });
+  if (reszied.current.id !== props.id) {
+    reszied.current = { hasResized: false, id: props.id };
+    setSidesheetWidth(700);
+  }
 
   const { eleNetwork, errorEleNetwork, isLoadingEleNetwork } = useGetEleNetwork(
     props.item
@@ -156,13 +156,13 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
             <CircuitDiagramTab
               elenetwork={eleNetwork}
               itemNo={props.item.heatTraceCableNo}
-              // onCircuitDiagramReady={(element) => {
-              //   if (reszied.current.hasResized) return;
-              //   const newWidth = element.scrollWidth;
-              //   if (sidesheetWidth !== 700) return;
-              //   setSidesheetWidth(newWidth + 50);
-              //   reszied.current = { hasResized: true, id: props.id };
-              // }}
+              onCircuitDiagramReady={(element) => {
+                if (reszied.current.hasResized) return;
+                const newWidth = element.scrollWidth;
+                if (sidesheetWidth !== 700) return;
+                setSidesheetWidth(newWidth + 50);
+                reszied.current = { hasResized: true, id: props.id };
+              }}
             />
           </Tabs.Panel>
           <Tabs.Panel>
