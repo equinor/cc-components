@@ -7,6 +7,7 @@ import { FDataProxyUnauthorized } from './errors/FDataProxyUnauthorized';
 import { FusionDataProxyUnauthorized } from '../classes/FusionDataProxyUnauthorized';
 import { NoSelectedContextError } from '../classes/NoSelectedContextError';
 import { NoContext } from '../../../common';
+import { UnknownError } from './errors/UnknownError';
 
 export type AppErrorBoundaryProps = {
   children: ReactNode;
@@ -33,7 +34,7 @@ export function AppErrorBoundary({ children, resetKeys = [] }: AppErrorBoundaryP
           return <NoContext />;
         }
 
-        return <div>unknown error</div>;
+        return <UnknownError error={props.error} />;
       }}
     >
       {children}

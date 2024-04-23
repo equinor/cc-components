@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
     "build": "tsc -b -f"
   },
   "module": "./dist/src/index.js",
@@ -11,6 +13,7 @@
   "dependencies": {
     "@cc-components/handovershared": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^"
+    "@cc-components/sharedcomponents": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^"
   }
 }

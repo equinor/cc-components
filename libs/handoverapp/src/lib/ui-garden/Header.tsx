@@ -20,7 +20,7 @@ const HandoverGardenHeader = (props: CustomHeaderView) => {
   return (
     <HeaderContent>
       <div>
-        {header.name} 
+        {header.name}
       </div>
       <Count>({header.count})</Count>
     </HeaderContent>
