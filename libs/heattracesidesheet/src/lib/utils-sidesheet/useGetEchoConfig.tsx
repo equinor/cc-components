@@ -37,10 +37,10 @@ export const useGetEchoConfig = (heatTraceCableId: string) => {
   }));
 
   return {
-    data,
-    tagsOverlay: tagsOverlay ?? [],
-    isFetching,
-    error,
+    dataEcho: data,
+    tagsOverlayEcho: tagsOverlay ?? [],
+    isFetchingEcho: isFetching,
+    errorEcho: error,
   };
 };
 

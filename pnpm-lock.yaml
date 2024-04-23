@@ -231,15 +231,6 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/modelviewer:
-    dependencies:
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../../libs/modelviewer
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
   apps/piping:
     dependencies:
       '@cc-components/pipingapp':

@@ -1,11 +1,10 @@
 import { HeatTrace } from '@cc-components/heattraceshared';
 import { useResizeContext } from '@equinor/workspace-fusion';
-import { useMemo, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useGetWorkorders } from '../utils-sidesheet';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
 import {
   BaseStatus,
-  ElectricalNetwork,
   LinkCell,
   StatusCircle,
   domainNames,
@@ -16,11 +15,15 @@ import {
 } from '@cc-components/shared';
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
   StyledSideSheetContainer,
-  Tabs,
+  StyledTabListWrapper,
+  StyledTabsList,
+  TabTitle,
 } from '@cc-components/sharedcomponents';
 import { ChecklistTab } from './ChecklistTab';
 import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
@@ -28,6 +31,10 @@ import { useQuery } from '@tanstack/react-query';
 import { CircuitDiagramTab } from './CircuitDiagramTab';
 import { ModelViewerTab } from '@cc-components/modelviewer';
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+import { Icon, Tabs } from '@equinor/eds-core-react';
+import { useGetEleNetwork } from '../utils-sidesheet/useGetEleNetwork';
+import styled from 'styled-components';
+import { tokens } from '@equinor/eds-tokens';
 
 const viewerOptions = {
   statusResolver: (status: string) => {
@@ -43,10 +50,34 @@ type HeatTraceProps = {
 };
 
 const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
-  const circuitDiagramTab = useCircuitDiagramTab(props.item);
-  const workorderTab = useWorkorderTab(props.id);
-  const checklistTab = useChecklistTab(props.id);
-  const threeDTab = use3DTab(props.id);
+  const [activeTab, setActiveTab] = useState(0);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const handleChange = (index: number) => {
+    setActiveTab(index);
+    ref && ref.current && ref.current.scrollTo({ left: index ** index });
+  };
+
+  // const { width: sidesheetWidth, setWidth: setSidesheetWidth } = useResizeContext();
+  // const reszied = useRef({ hasResized: false, id: props.id });
+  // if (reszied.current.id !== props.id) {
+  //   reszied.current = { hasResized: false, id: props.id };
+  //   setSidesheetWidth(700);
+  // }
+
+  const { eleNetwork, errorEleNetwork, isLoadingEleNetwork } = useGetEleNetwork(
+    props.item
+  );
+
+  const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(
+    props.id
+  );
+
+  const { dataChecklists, errorChecklists, isLoadingChecklists } =
+    useGetHeatTraceChecklists(props.id);
+
+  const { dataEcho, errorEcho, isFetchingEcho, tagsOverlayEcho } = useGetEchoConfig(
+    props.id
+  );
 
   return (
     <StyledSideSheetContainer>
@@ -102,7 +133,62 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
           value={props.item.priority1 ?? 'N/A'}
         />
       </StyledBanner>
-      <Tabs tabs={[circuitDiagramTab, workorderTab, checklistTab, threeDTab]}></Tabs>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
+        <StyledTabListWrapper>
+          <StyledTabsList ref={ref}>
+            <Tabs.Tab>Circuit diagram</Tabs.Tab>
+            <Tabs.Tab>
+              Work orders
+              <TabTitle data={dataWorkorders} isLoading={isLoadingWorkorders} />
+            </Tabs.Tab>
+            <Tabs.Tab>
+              Checklists
+              <TabTitle data={dataChecklists} isLoading={isLoadingChecklists} />
+            </Tabs.Tab>
+            <Tabs.Tab>
+              3D <TabTitle data={tagsOverlayEcho} isLoading={isFetchingEcho} />
+            </Tabs.Tab>
+          </StyledTabsList>
+        </StyledTabListWrapper>
+      </CustomStyledTabs>
+      <CustomStyledPanels>
+        <Tabs.Panel>
+          <CircuitDiagramTab
+            elenetwork={eleNetwork}
+            itemNo={props.item.heatTraceCableNo}
+            // onCircuitDiagramReady={(element) => {
+            //   if (reszied.current.hasResized) return;
+            //   const newWidth = element.scrollWidth;
+            //   if (sidesheetWidth !== 700) return;
+            //   setSidesheetWidth(newWidth + 50);
+            //   reszied.current = { hasResized: true, id: props.id };
+            // }}
+          />
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <WorkorderTab
+            error={errorWorkorders}
+            isFetching={isLoadingWorkorders}
+            workorders={dataWorkorders}
+          />
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <ChecklistTab
+            error={errorChecklists}
+            isFetching={isLoadingChecklists}
+            checklists={dataChecklists}
+          />
+        </Tabs.Panel>
+        <Tabs.Panel style={{ height: '100%' }}>
+          <ModelViewerTab
+            tagOverlay={tagsOverlayEcho}
+            options={viewerOptions}
+            isFetching={isFetchingEcho}
+            error={errorEcho as Error | null}
+            facilities={dataEcho?.facilities ?? []}
+          />
+        </Tabs.Panel>
+      </CustomStyledPanels>
     </StyledSideSheetContainer>
   );
 };
@@ -129,128 +215,45 @@ export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
     }
   );
 
-  const {
-    data: modelConfig,
-    tagsOverlay,
-    isFetching: isFetchingModelConfig,
-    error: modelConfigError,
-  } = useGetEchoConfig(id);
-
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={close} />;
   }
 
   if (!heatTrace || error) {
-    return <div>Failed to get Heat Trace with id: {id}</div>;
+    return (
+      <ErrorContainer>
+        <ErrorWrapper>
+          <Icon
+            name="error_outlined"
+            size={48}
+            color={tokens.colors.interactive.primary__resting.hsla}
+          />
+          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
+        </ErrorWrapper>
+      </ErrorContainer>
+    );
   }
 
   return <HeattraceSidesheetComponent id={id} item={heatTrace} close={close} />;
 }
 
-const useCircuitDiagramTab = (ht: HeatTrace) => {
-  const client = useHttpClient();
-  const contextId = useContextId();
-  const { width, setWidth } = useResizeContext();
-  const reszied = useRef({ hasResized: false, id: ht.heatTraceCableId });
-  if (reszied.current.id !== ht.heatTraceCableId) {
-    reszied.current = { hasResized: false, id: ht.heatTraceCableId };
-    setWidth(700);
-  }
+const ErrorContainer = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
+`;
 
-  const {
-    data: elenetwork,
-    isLoading: isLoadingEle,
-    error: errorEle,
-  } = useQuery<ElectricalNetwork | null>(
-    /**Change facility to project */
-    /** facility*/[ht.heatTraceCableNo, ht.facility, ht.project],
-    async ({ signal }) => {
-      const res = await client.fetch(
-        `api/contexts/${contextId}/electrical/electrical-network/${encodeURIComponent(
-          ht.heatTraceCableNo
-        )}/${ht.facility}`,
-        { signal }
-      );
+const ErrorWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+`;
 
-      if (res.status === 204) {
-        return null;
-      }
-
-      if (!res.ok) {
-        if (res.status === 404) {
-          return null;
-        }
-        throw new Error('Failed to fetch elenetwork');
-      }
-      return res.json();
-    },
-    {
-      suspense: false,
-      useErrorBoundary: false,
-    }
-  );
-
-  const tab = useMemo(() => {
-    return {
-      tabTitle: 'Circuit diagram',
-      tabContent: (
-        <CircuitDiagramTab
-          elenetwork={elenetwork}
-          itemNo={ht.heatTraceCableNo}
-          onCircuitDiagramReady={(element) => {
-            if (reszied.current.hasResized) return;
-            const newWidth = element.scrollWidth;
-            if (width !== 700) return;
-            setWidth(newWidth + 50);
-            reszied.current = { hasResized: true, id: ht.heatTraceCableId };
-          }}
-        />
-      ),
-    };
-  }, [elenetwork, errorEle, isLoadingEle]);
-  return tab;
-};
-
-const useWorkorderTab = (htId: string) => {
-  const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(
-    htId ?? ''
-  );
-  const tab = useMemo(() => {
-    return {
-      tabTitle: `Work orders (${dataWorkorders ? dataWorkorders?.length : '...'})`,
-      tabContent: (
-        <WorkorderTab
-          error={errorWorkorders}
-          isFetching={isLoadingWorkorders}
-          workorders={dataWorkorders}
-        />
-      ),
-    };
-  }, [dataWorkorders, errorWorkorders, isLoadingWorkorders]);
-  return tab;
-};
-
-const useChecklistTab = (htId: string) => {
-  const { dataChecklists, errorChecklists, isLoadingChecklists } =
-    useGetHeatTraceChecklists(htId ?? '');
-  const tab = useMemo(() => {
-    return {
-      tabTitle: `Checklists (${dataChecklists ? dataChecklists?.length : '...'})`,
-      tabContent: (
-        <ChecklistTab
-          error={errorChecklists}
-          isFetching={isLoadingChecklists}
-          checklists={dataChecklists}
-        />
-      ),
-    };
-  }, [dataChecklists, errorChecklists, isLoadingChecklists]);
-  return tab;
-};
-
-const use3DTab = (htId?: string) => {
-  return {
-    tabTitle: '3D',
-    tabContent: <>3D is coming</>,
-  };
-};
+const ErrorMessage = styled.h3`
+  margin: 0;
+`;

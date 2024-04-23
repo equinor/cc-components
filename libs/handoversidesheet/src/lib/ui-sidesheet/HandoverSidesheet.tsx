@@ -355,7 +355,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   );
 };
 
-
 const ErrorWrapper = styled.div`
   text-align: center;
   padding: 20px;
