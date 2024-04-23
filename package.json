@@ -18,7 +18,11 @@
     "build:apps": "turbo run build --filter ./apps/** --parallel --output-logs errors-only",
     "build:libs": "turbo run build --filter ./libs/* --parallel --output-logs errors-only",
     "new:app": "nx generate @cc-components/plugins:fusion-app-generator",
-    "new:report": "nx generate @cc-components/plugins:fusion-report-generator"
+    "new:report": "nx generate @cc-components/plugins:fusion-report-generator",
+    "watch": "node ./run_watch.js dev",
+    "watch:local": "node ./run_watch.js dev:local",
+    "link:workspace": "tsx ./github-action/src/link-ff.ts link",
+    "unlink:workspace": "tsx ./github-action/src/link-ff.ts unlink"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^9.4.1",

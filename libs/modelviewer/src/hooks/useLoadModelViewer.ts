@@ -6,6 +6,7 @@ import { setupEcho3dWeb } from '@equinor/echo-3d-viewer';
 import { tokens } from '@equinor/eds-tokens';
 import { useMemo, useRef } from 'react';
 import { useEnvConfig } from '../providers/envConfigProvider';
+import { AccessError } from '../types/errors';
 
 export const useLoadModelViewer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,17 +15,39 @@ export const useLoadModelViewer = () => {
 
   const env = useEnvConfig();
 
-  const modelRequest = useMemo(() => ({ scopes: [env.modelClientScope] }), [env]);
+  const modelRequest = useMemo(
+    () => ({
+      scopes: [env.modelClientScope],
+      prompt: 'login',
+      onRedirectNavigate: () => false,
+    }),
+    [env]
+  );
 
-  const hierarchyRequest = useMemo(() => ({ scopes: [env.hierarchyClientScope] }), [env]);
+  const hierarchyRequest = useMemo(
+    () => ({
+      scopes: [env.hierarchyClientScope],
+      prompt: 'login',
+      popupWindowAttributes: null,
+      onRedirectNavigate: () => false,
+    }),
+    [env]
+  );
 
   const { token: modelToken, error: modelError } = useAccessToken(modelRequest);
 
   const { token: hierarchyToken, error: hierarchyError } =
     useAccessToken(hierarchyRequest);
 
-  if (modelError) throw new Error('Token failed', { cause: modelError });
-  if (hierarchyError) throw new Error('Token failed', { cause: hierarchyError });
+  if (modelError) {
+    throw new AccessError('Model distribution token request failed', {
+      cause: modelError,
+    });
+  }
+
+  if (hierarchyError) {
+    throw new AccessError('Hierarchy token request failed', { cause: hierarchyError });
+  }
 
   const { isLoading, data: echoInstance } = useQuery({
     queryKey: ['model-viewer-loader'],
@@ -53,6 +76,7 @@ export const useLoadModelViewer = () => {
       return echoInstance;
     },
     refetchOnWindowFocus: false,
+    cacheTime: 0,
     enabled: !!modelToken && !!hierarchyToken && !!canvasRef.current,
   });
 
