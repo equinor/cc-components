@@ -4,10 +4,13 @@ import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
+import { ModelViewerTab } from '@cc-components/modelviewer';
+
 import {
   BaseStatus,
   LinkCell,
   StatusCircle,
+  hasProperty,
   pipetestStatusColormap,
 } from '@cc-components/shared';
 
@@ -31,6 +34,16 @@ import { useGetPipetest } from '../utils-sidesheet/usePipetest';
 import { useGetInsulationTags } from '../utils-sidesheet/useGetInsulationTags';
 import { useElectricalNetworks } from '../utils-sidesheet/useElectricalNetwork';
 import { ElecticalNetworkTab } from './ElectricalNetworkTab';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(pipetestStatusColormap, status)
+      ? pipetestStatusColormap[status]
+      : '#009922';
+  },
+  defaultCroppingDistance: 3,
+};
 
 export const StyledTabListWrapper = styled.div`
   overflow: hidden;
@@ -81,6 +94,13 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     isLoading: isLoadingElecticalNetworks,
     error: errorElectricalNetworks,
   } = useElectricalNetworks(item.facility, item.heatTraceCableNos);
+
+  const {
+    data: modelConfig,
+    tagsOverlay,
+    isFetching: isFetchingModelConfig,
+    error: modelConfigError,
+  } = useGetEchoConfig(item.id);
 
   const handleChange = (index: number) => {
     setActiveTab(index);
@@ -139,6 +159,10 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
               Checklists
               <TabTitle isLoading={isLoadingChecklists} data={checklists} />
             </Tabs.Tab>
+            <Tabs.Tab>
+              3D
+              <TabTitle isLoading={isFetchingModelConfig} data={tagsOverlay} />
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
         <CustomStyledPanels>
@@ -169,6 +193,15 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
               error={errorChecklists}
               isFetching={isLoadingChecklists}
               checklists={checklists}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel style={{ height: '100%' }}>
+            <ModelViewerTab
+              tagOverlay={tagsOverlay}
+              options={viewerOptions}
+              isFetching={isFetchingModelConfig}
+              error={modelConfigError as Error | null}
+              facilities={modelConfig?.facilities ?? []}
             />
           </Tabs.Panel>
         </CustomStyledPanels>
