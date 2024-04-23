@@ -26,6 +26,14 @@ pnpm ci:build # Build sequentially
 
 🛡️ In order to login to the apps you need to authenticate using an Equinor account with access to a valid context/project in ProCoSys.
 
+
+## Developing Workspace
+
+In this project we heavily rely on @equinor/workspace-fusion. The best way to develop this package is by symlinking the package locally and make changes that are reflected directly in the app you are working on. 
+To symlink the package locally run this command in the cc-components folder `pnpm link:workspace`. This will create a subfolder in cc-components called workspace. This is a git submodule so remember that this is a git repository. The workspace folder is not a part of the cc-components folder but its rather a local copy of the [fusion-workspace](https://github.com/equinor/fusion-workspace) repository so pushing, pulling, pull requests etc still apply. 
+When you are done using the package locally run the command `pnpm unlink:workspace` to unlink the package.
+
+
 ## Contributing ⚒️
 
 Contributing, check out our [contributing guide](./CONTRIBUTING.md)
