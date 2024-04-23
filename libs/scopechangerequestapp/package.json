@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
     "build": "tsc -b -f"
   },
   "module": "./dist/src/index.js",
@@ -10,8 +12,7 @@
   "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@cc-components/scopechangerequestshared" : "workspace:^",
+    "@cc-components/scopechangerequestshared": "workspace:^",
     "@cc-components/scopechangerequestsidesheet": "workspace:^"
-
   }
 }
