@@ -87,6 +87,9 @@
     "rxjs": "^7.8.1",
     "styled-components": "5.3.6"
   },
+  "engines": {
+    "node": "20"
+  },
   "pnpm": {
     "overrides": {
       "react-dom": "18.2.0"
