@@ -22,9 +22,17 @@ pnpm build # Build monorepo in parallel 🚨 NB: Sometimes fails due to internal
 pnpm ci:build # Build sequentially
 ```
 
-⚠️ [Hot module replacement](https://webpack.js.org/guides/hot-module-replacement/) is disabled due to an error in dependency resolution resulting in massive bundle sizes. To apply changes stop the server and run `pnpm serve <app>`.
+[Hot module replacement](https://webpack.js.org/guides/hot-module-replacement/) is supported when using the watch command
 
 🛡️ In order to login to the apps you need to authenticate using an Equinor account with access to a valid context/project in ProCoSys.
+
+
+## Developing Workspace
+
+In this project we heavily rely on @equinor/workspace-fusion. The best way to develop this package is by symlinking the package locally and make changes that are reflected directly in the app you are working on. 
+To symlink the package locally run this command in the cc-components folder `pnpm link:workspace`. This will create a subfolder in cc-components called workspace. This is a git submodule so remember that this is a git repository. The workspace folder is not a part of the cc-components folder but its rather a local copy of the [fusion-workspace](https://github.com/equinor/fusion-workspace) repository so pushing, pulling, pull requests etc still apply. 
+When you are done using the package locally run the command `pnpm unlink:workspace` to unlink the package.
+
 
 ## Contributing ⚒️
 
@@ -133,6 +141,13 @@ The permissions for modifying environment variables are given to personal accoun
 - [CI](https://admin.ci.fusion-dev.net/apps)
 - ~[FQA](https://admin.fqa.fusion-dev.net/apps)~ (Not in use for us)
 - [FPRD](https://admin.fprd.fusion-dev.net/apps)
+
+## Onboarding new apps 🔩
+
+Apps has to be *onboarded* onto a context in order to be availible for end users. Use the [Onboard app to Fusion Project Portal](https://github.com/equinor/cc-components/actions/workflows/onboard-app-fpp.yml) to onboard an app to a new context. Context ids can be found by selecting the context in the portal, then copying the GUID in the url or by using the Fusion API.
+
+> [!NOTE]  
+> Context ids vary from different environments (they are different in test and prod)
 
 ## Hosting environments (subject to change)
 
