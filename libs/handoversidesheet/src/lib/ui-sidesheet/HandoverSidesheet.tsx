@@ -58,17 +58,18 @@ type HandoverProps = {
 export const HandoverSidesheet = ({ id, close: closeSidesheet, item }: HandoverProps) => {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
-  const { isLoading, data, error } = useQuery(
-    ['handover', id],
-    async () => {
+  const { isLoading, data, error } = useQuery({
+    queryKey: ['handover', id],
+    queryFn: async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
       if (!res.ok) {
         throw new Error(`Failed to get handover with id ${id}`);
       }
       return res.json() as Promise<HandoverPackage>;
     },
-    { refetchOnWindowFocus: false, initialData: item ?? undefined }
-  );
+    refetchOnWindowFocus: false,
+    initialData: item ?? undefined,
+  });
 
   if (isLoading) {
     return <SidesheetSkeleton close={() => closeSidesheet()} />;

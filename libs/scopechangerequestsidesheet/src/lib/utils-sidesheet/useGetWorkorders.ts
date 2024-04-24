@@ -4,9 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 export const useGetWorkorders = (scopeChangeRequestId: string) => {
   const client = useHttpClient();
   const contextId = useContextId();
-  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
-    ['scope-change-request', scopeChangeRequestId, 'workorders'],
-    async ({ signal }) => {
+  
+  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>({
+    queryKey: ['scope-change-request', scopeChangeRequestId, 'workorders'],
+    queryFn: async ({ signal }) => {
       const response = await client.fetch(
         `/api/scope-change-requests/${scopeChangeRequestId}/work-orders`,
         { signal, headers: { ['x-fusion-context-id']: contextId } }
@@ -18,8 +19,8 @@ export const useGetWorkorders = (scopeChangeRequestId: string) => {
         throw new Error();
       }
       return response.json();
-    }
-  );
+    },
+  });
 
   return {
     dataWorkorders: data,

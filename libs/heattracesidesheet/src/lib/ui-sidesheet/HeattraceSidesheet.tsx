@@ -106,19 +106,16 @@ export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
     data: heatTrace,
     error,
     isLoading: isLoadingSidesheet,
-  } = useQuery<HeatTrace>(
-    ['heat-trace', id],
-    async () => {
+  } = useQuery<HeatTrace>({
+    queryKey: ['heat-trace', id],
+    queryFn: async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/heat-trace/${id}`);
       if (!res.ok) throw res;
       return res.json();
     },
-    {
-      suspense: false,
-      initialData: item ?? undefined,
-      useErrorBoundary: false,
-    }
-  );
+    initialData: item ?? undefined,
+    throwOnError: false,
+  });
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={close} />;
@@ -145,10 +142,9 @@ const useCircuitDiagramTab = (ht: HeatTrace) => {
     data: elenetwork,
     isLoading: isLoadingEle,
     error: errorEle,
-  } = useQuery<ElectricalNetwork | null>(
-    /**Change facility to project */
-    /** facility*/[ht.heatTraceCableNo, ht.facility, ht.project],
-    async ({ signal }) => {
+  } = useQuery<ElectricalNetwork | null>({
+    queryKey: [ht.heatTraceCableNo, ht.facility, ht.project],
+    queryFn: async ({ signal }) => {
       const res = await client.fetch(
         `api/contexts/${contextId}/electrical/electrical-network/${encodeURIComponent(
           ht.heatTraceCableNo
@@ -168,11 +164,8 @@ const useCircuitDiagramTab = (ht: HeatTrace) => {
       }
       return res.json();
     },
-    {
-      suspense: false,
-      useErrorBoundary: false,
-    }
-  );
+    throwOnError: false,
+  });
 
   const tab = useMemo(() => {
     return {

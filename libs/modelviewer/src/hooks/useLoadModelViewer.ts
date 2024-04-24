@@ -76,7 +76,7 @@ export const useLoadModelViewer = () => {
       return echoInstance;
     },
     refetchOnWindowFocus: false,
-    cacheTime: 0,
+    gcTime: 0,
     enabled: !!modelToken && !!hierarchyToken && !!canvasRef.current,
   });
 

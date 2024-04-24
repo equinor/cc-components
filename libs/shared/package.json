@@ -88,17 +88,17 @@
   },
   "dependencies": {
     "@cc-components/sharedcomponents": "workspace:^",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@equinor/fusion-react-person": "^0.8.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@equinor/fusion-react-person": "^0.8.5",
     "@equinor/workspace-ag-grid": "2.0.5",
     "@remirror/pm": "^2.0.8",
-    "@remirror/react": "^2.0.27",
-    "@remirror/react-editors": "^1.0.38",
-    "@remirror/styles": "^2.0.4",
+    "@remirror/react": "^2.0.35",
+    "@remirror/react-editors": "^1.0.41",
+    "@remirror/styles": "^2.0.7",
     "@remirror/theme": "^2.0.9",
-    "date-fns": "^2.29.3",
-    "markdown-to-jsx": "^7.2.0",
-    "remirror": "^2.0.36"
+    "date-fns": "^3.6.0",
+    "markdown-to-jsx": "^7.4.7",
+    "remirror": "^2.0.39"
   }
 }
