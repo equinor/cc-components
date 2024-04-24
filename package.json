@@ -37,7 +37,7 @@
     "@types/luxon": "^3.3.2",
     "@types/node": "20.7.0",
     "@types/react": "18.2.22",
-    "@types/react-dom": "18.2.7",
+    "@types/react-dom": "18.2.23",
     "@types/react-is": "18.2.1",
     "@types/styled-components": "5.1.28",
     "cross-env": "^7.0.3",
