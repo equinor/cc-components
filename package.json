@@ -22,7 +22,9 @@
     "watch": "node ./run_watch.js dev",
     "watch:local": "node ./run_watch.js dev:local",
     "link:workspace": "tsx ./github-action/src/link-ff.ts link",
-    "unlink:workspace": "tsx ./github-action/src/link-ff.ts unlink"
+    "unlink:workspace": "tsx ./github-action/src/link-ff.ts unlink",
+    "bump-deps": "pnpm up --latest --prod --recursive --interactive",
+    "compile": "tsc -p tsconfig.base.json --noEmit"
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "^9.4.1",
