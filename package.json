@@ -4,10 +4,10 @@
   "license": "MIT",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@8.0.0",
+  "packageManager": "pnpm@9.0.5",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "first-time-setup": "npm i -g vite pnpm@8.0.0 @equinor/fusion-framework-cli turbo && pnpm i && pnpm ci:build",
+    "first-time-setup": "npm i -g vite pnpm@9.0.5 @equinor/fusion-framework-cli turbo && pnpm i && pnpm ci:build",
     "serve": "turbo run dev --filter",
     "serve:local": "turbo run dev:local --filter",
     "ci:build": "turbo run build --output-logs errors-only --concurrency 1",
@@ -88,6 +88,9 @@
     "react-is": "18.2.0",
     "rxjs": "^7.8.1",
     "styled-components": "6.1.8"
+  },
+  "engines": {
+    "node": "20"
   },
   "pnpm": {
     "overrides": {
