@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "strict": true
     "baseUrl": ".",
     "sourceMap": false,
     "declaration": true,
