@@ -9,15 +9,15 @@ const StyledIcon = styled.h3`
   overflow: hidden;
 `;
 
-export const useGetEchoConfig = (heatTraceCableId: string) => {
+export const useGetEchoConfig = (heatTraceCableId: string, facility: string) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  const { data, isFetching, error } = useQuery<EchoConfig>({
+  const { data, isFetching, error } = useQuery<EchoTag[]>({
     queryKey: ['model-tags', heatTraceCableId],
     queryFn: async ({ signal }) => {
       const response = await client.fetch(
-        `/api/contexts/${contextId}/heat-trace/${heatTraceCableId}/echo`,
+        `/api/contexts/${contextId}/electrical/tags-in-path-in-electrical-network/${heatTraceCableId}/${facility}`,
         { signal }
       );
 
@@ -29,7 +29,7 @@ export const useGetEchoConfig = (heatTraceCableId: string) => {
     },
   });
 
-  const tagsOverlay: TagOverlay[] | undefined = data?.tags?.map((tag) => ({
+  const tagsOverlay: TagOverlay[] | undefined = data?.map((tag) => ({
     tagNo: tag.tagNo,
     description: tag.description,
     status: tag.status,
