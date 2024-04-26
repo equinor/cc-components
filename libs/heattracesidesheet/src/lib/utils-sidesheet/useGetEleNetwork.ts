@@ -6,10 +6,9 @@ export const useGetEleNetwork = (ht: HeatTrace) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  const { data, isLoading, error } = useQuery<ElectricalNetwork | null>(
-    /**Change facility to project */
-    /** facility*/ [ht.heatTraceCableNo, ht.facility, ht.project],
-    async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<ElectricalNetwork | null>({
+    queryKey: [ht.heatTraceCableNo, ht.facility, ht.project],
+    queryFn: async ({ signal }) => {
       const res = await client.fetch(
         `api/contexts/${contextId}/electrical/electrical-network/${encodeURIComponent(
           ht.heatTraceCableNo
@@ -29,11 +28,8 @@ export const useGetEleNetwork = (ht: HeatTrace) => {
       }
       return res.json();
     },
-    {
-      suspense: false,
-      useErrorBoundary: false,
-    }
-  );
+    throwOnError: false,
+  });
 
   return {
     eleNetwork: data,
