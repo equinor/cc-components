@@ -8,9 +8,9 @@ export function useCCApiAccessCheck(
   client: IHttpClient,
   resource: string
 ) {
-  const { isLoading } = useQuery(
-    ['auth', contextId],
-    async ({ signal }) => {
+  const { isLoading } = useQuery({
+    queryKey: ['auth', contextId],
+    queryFn: async ({ signal }) => {
       const res = await client.fetch(
         `/api/contexts/${contextId}/${resource}/is-authorized`,
         { signal }
@@ -28,8 +28,8 @@ export function useCCApiAccessCheck(
       }
       return result;
     },
-    { useErrorBoundary: true }
-  );
+    throwOnError: true,
+  });
 
   return { isLoading };
 }

@@ -210,19 +210,16 @@ export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
     data: heatTrace,
     error,
     isLoading: isLoadingSidesheet,
-  } = useQuery<HeatTrace>(
-    ['heat-trace', id],
-    async () => {
+  } = useQuery<HeatTrace>({
+    queryKey: ['heat-trace', id],
+    queryFn: async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/heat-trace/${id}`);
       if (!res.ok) throw res;
       return res.json();
     },
-    {
-      suspense: false,
-      initialData: item ?? undefined,
-      useErrorBoundary: false,
-    }
-  );
+    initialData: item ?? undefined,
+    throwOnError: false,
+  });
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={close} />;

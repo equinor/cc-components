@@ -1,19 +1,15 @@
 import { Popover, Typography } from '@equinor/eds-core-react';
 import { ReportMetaDataProps } from '@equinor/workspace-fusion/power-bi';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { usePBIHelpers } from './usePBIHelpers';
 
 export const ReportMeta = ({ anchor, reportUri, close }: ReportMetaDataProps) => {
   const { getReportInfo } = usePBIHelpers();
-  const { data } = useQuery(
-    ['reportInfo', reportUri],
-    ({ signal }) => getReportInfo(reportUri, signal),
-    {
-      suspense: true,
-      useErrorBoundary: true,
-    }
-  );
+  const { data } = useSuspenseQuery({
+    queryKey: ['reportInfo', reportUri],
+    queryFn: ({ signal }) => getReportInfo(reportUri, signal),
+  });
 
   if (!data) {
     throw new Error();
