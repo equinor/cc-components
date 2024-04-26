@@ -1,5 +1,5 @@
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { useModelSelectionService } from '../services/useModelSelectionService';
@@ -10,13 +10,12 @@ export const useModels = () => {
 
   const { currentPlant } = usePlantContext();
 
-  const { data: models } = useQuery<AssetMetadataSimpleDto[]>({
+  const { data: models } = useSuspenseQuery<AssetMetadataSimpleDto[]>({
     queryKey: ['models', currentPlant],
     queryFn: async () => {
       return modelSelectionService.getModelsForPlant(currentPlant.plantCode);
     },
     refetchOnWindowFocus: false,
-    suspense: true,
   });
 
   const defaultModelId = modelSelectionService.getDefaultModel(currentPlant.plantCode);

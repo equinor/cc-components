@@ -78,9 +78,9 @@ export const WorkorderSidesheet = (props: {
     data: wo,
     error,
     isLoading: isLoadingSidesheet,
-  } = useQuery<WorkOrder>(
-    ['workorder', props.id],
-    async () => {
+  } = useQuery<WorkOrder>({
+    queryKey: ['workorder', props.id],
+    queryFn: async () => {
       const res = await client.fetch(
         `/api/contexts/${contextId}/work-orders/${props.id}`
       );
@@ -89,12 +89,9 @@ export const WorkorderSidesheet = (props: {
       }
       return res.json();
     },
-    {
-      suspense: false,
-      useErrorBoundary: false,
-      initialData: props.item ?? undefined,
-    }
-  );
+    throwOnError: false,
+    initialData: props.item ?? undefined,
+  });
 
   const tagsOverlay = modelConfig?.tags?.map((tag) => ({
     tagNo: tag.tagNo,

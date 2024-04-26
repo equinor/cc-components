@@ -17,9 +17,10 @@ export const usePackageResource = <T>(
   packageId: string,
   fetch: FetchPackageResource<T>
 ): PackageResourceReturn<T> => {
-  const { data, error, isLoading } = useQuery([resourceName, packageId], ({ signal }) =>
-    fetch(packageId, signal)
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: [resourceName, packageId],
+    queryFn: ({ signal }) => fetch(packageId, signal),
+  });
 
   return {
     data,
