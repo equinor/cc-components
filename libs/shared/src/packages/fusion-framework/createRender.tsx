@@ -84,9 +84,7 @@ export function createRender(
      * Second argu is the the render args (framework and env variables)
      * Third argument is the configuration callback
      */
-    const AppComponent = makeComponent(<Comp />, args, (a, b) => {
-      configure(a, b);
-    });
+    const AppComponent = makeComponent(<Comp />, args, configure);
 
     root.render(<AppComponent />);
 
