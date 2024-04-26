@@ -5,6 +5,7 @@ import {
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
+import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableContext(config, async (builder) => {
@@ -21,7 +22,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig: PipingEnvConfig = c.env.config?.environment as PipingEnvConfig;
+  const envConfig = c.env.config?.environment as PipingEnvConfig & ModelViewerEnvConfig;
 
   if (!envConfig) {
     throw new Error('Failed to load environemnt config for workorder');
@@ -32,6 +33,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
+  enableModelViewer(config, envConfig);
 };
 
 type PipingEnvConfig = {
