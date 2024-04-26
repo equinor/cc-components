@@ -29,7 +29,6 @@ export const useMccr = (packageId: string | null) => {
   const { data, isFetching, error } = useQuery({
     queryFn: (a) => fetchMccr(ccApp, contextId, packageId, a.signal),
     queryKey: ['mccr', packageId],
-    initialData: [],
   });
 
   return {
