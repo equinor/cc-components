@@ -143,8 +143,8 @@ export const CreateScopeChangeSidesheet = (props: { close: VoidFunction }) => {
           </StyledFormSection>
         </StyledFormWrapper>
         <StyledLineSeparator>
-          <Button type="submit" style={{ float: 'right' }} disabled={mutation.isLoading}>
-            {mutation.isLoading ? 'Creating...' : 'Create'}
+          <Button type="submit" style={{ float: 'right' }} disabled={mutation.isPending}>
+            {mutation.isPending ? 'Creating...' : 'Create'}
           </Button>
         </StyledLineSeparator>
       </form>

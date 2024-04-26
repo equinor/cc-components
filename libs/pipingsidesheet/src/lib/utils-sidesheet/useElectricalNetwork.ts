@@ -6,9 +6,9 @@ export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  const { data, isLoading, error } = useQuery<ElectricalNetwork[], Error>(
-    [facility, tagNos.join(","), 'electrical-networks'],
-    async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<ElectricalNetwork[], Error>({
+    queryKey: [facility, tagNos.join(','), 'electrical-networks'],
+    queryFn: async ({ signal }) => {
       const url = `api/contexts/${contextId}/electrical/electrical-network/${facility}`;
 
       const res = await client.fetch(url, {
@@ -30,7 +30,7 @@ export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
 
       return res.json();
     },
-  );
+  });
 
   return {
     data,

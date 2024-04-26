@@ -57,19 +57,16 @@ export const PunchSidesheet = (props: {
     data: punch,
     error,
     isLoading: isLoadingSidesheet,
-  } = useQuery(
-    ['punch', props.id],
-    async () => {
+  } = useQuery({
+    queryKey: ['punch', props.id],
+    queryFn: async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/punch/${props.id}`);
       if (!res.ok) throw res;
       return res.json() as Promise<Punch>;
     },
-    {
-      suspense: false,
-      initialData: props.item ?? undefined,
-      useErrorBoundary: false,
-    }
-  );
+    initialData: props.item ?? undefined,
+    throwOnError: false,
+  });
 
   const tagsOverlay = useModelViewerTags(punch);
 
