@@ -71,7 +71,7 @@ export const MarkdownEditor: FC<PropsWithChildren<MarkdownEditorProps>> = ({
   const extensions: any = useCallback(
     () => [
       new PlaceholderExtension({ placeholder }),
-      new BoldExtension({}),
+      new BoldExtension(),
       new ItalicExtension(),
       new BulletListExtension({ enableSpine: true }),
       new OrderedListExtension(),

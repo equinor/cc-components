@@ -18,7 +18,7 @@ const ModelViewerContext = createContext<ModelViewerContextType>(
 export const useModelViewerContext = () => useContext(ModelViewerContext);
 
 export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
-  const { canvasRef, echoClient, echoInstance, isPending } = useLoadModelViewer();
+  const { canvasRef, echoClient, echoInstance, isLoading } = useLoadModelViewer();
 
   /* Add event listeners for re-authenticating every timewindow gains focus.
    * This is needed since Reveal does not check if it should re-authenticate BEFORE sending the requests for downloading sector 3D files.
@@ -50,7 +50,7 @@ export const ModelViewerProvider = ({ children }: PropsWithChildren) => {
     >
       <Container>
         <Canvas viewerRef={canvasRef} />
-        {isPending ? null : children}
+        {isLoading ? null : children}
       </Container>
     </ModelViewerContext.Provider>
   );

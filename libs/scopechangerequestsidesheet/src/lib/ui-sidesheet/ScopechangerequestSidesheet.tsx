@@ -42,18 +42,21 @@ export const ScopechangerequestSidesheet = (props: {
     data: scopechange,
     error,
     isLoading: isLoadingSidesheet,
-  } = useQuery({
-    queryKey: ['scopechange', props.id],
-    queryFn: async () => {
+  } = useQuery(
+    ['scopechange', props.id],
+    async () => {
       const res = await client.fetch(`/api/scope-change-requests/${props.id}`, {
         headers: { ['x-fusion-context-id']: contextId },
       });
       if (!res.ok) throw res;
       return res.json() as Promise<ScopeChangeRequest>;
     },
-    initialData: props.item ?? undefined,
-    throwOnError: false,
-  });
+    {
+      suspense: false,
+      initialData: props.item ?? undefined,
+      useErrorBoundary: false,
+    }
+  );
 
   if (isLoadingSidesheet) {
     return <SidesheetSkeleton close={props.close} />;

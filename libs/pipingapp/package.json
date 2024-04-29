@@ -14,7 +14,6 @@
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
     "@cc-components/pipingshared": "workspace:^",
-    "@cc-components/pipingsidesheet": "workspace:^",
-    "@cc-components/modelviewer": "workspace:^"
+    "@cc-components/pipingsidesheet": "workspace:^"
   }
 }

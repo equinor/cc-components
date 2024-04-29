@@ -29,7 +29,7 @@ export const useMaterial = (packageId: string | null) => {
   const { data, isFetching, error } = useQuery({
     queryFn: (a) => fetchMaterials(ccApp, contextId, packageId, a.signal),
     queryKey: ['material', packageId],
-    throwOnError: false,
+    useErrorBoundary: false,
   });
   return {
     material: data?.filter(

@@ -38,7 +38,7 @@ export const useCutoff = (packageId: string | null) => {
   const { data, isLoading, error } = useQuery({
     queryFn: (a) => fetchCutoff(ccApp, contextId, packageId, a.signal),
     queryKey: ['cutoff', packageId],
-    throwOnError: false,
+    useErrorBoundary: false,
   });
   return {
     data,

@@ -5,10 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 export const useGetWorkorders = (loopNo: string | undefined) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
-  
-  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>({
-    queryKey: ['loop', loopNo, 'workorders'],
-    queryFn: async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
+    ['loop', loopNo, 'workorders'],
+    async ({ signal }) => {
       const respons = await client.fetch(
         `/api/contexts/${contextId}/loop/${loopNo}/workorders`,
         { signal }
@@ -18,8 +17,8 @@ export const useGetWorkorders = (loopNo: string | undefined) => {
       }
       return respons.json();
     },
-    enabled: !!loopNo,
-  });
+    { enabled: !!loopNo }
+  );
 
   return {
     data: data,

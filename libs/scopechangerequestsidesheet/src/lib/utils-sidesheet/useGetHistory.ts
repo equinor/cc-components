@@ -5,10 +5,9 @@ import { LogEntry } from 'libs/scopechangerequestshared/dist/src';
 export const useGetHistory = (scopeChangeRequestId: string) => {
   const client = useHttpClient();
   const contextId = useContextId();
-  
-  const { data, isLoading, error } = useQuery<LogEntry[], Error>({
-    queryKey: ['scope-change-request', scopeChangeRequestId, 'logs'],
-    queryFn: async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<LogEntry[], Error>(
+    ['scope-change-request', scopeChangeRequestId, 'logs'],
+    async ({ signal }) => {
       const response = await client.fetch(
         `/api/scope-change-requests/${scopeChangeRequestId}/history`,
 
@@ -21,8 +20,8 @@ export const useGetHistory = (scopeChangeRequestId: string) => {
         throw new Error();
       }
       return response.json();
-    },
-  });
+    }
+  );
 
   return {
     dataHistory: data,

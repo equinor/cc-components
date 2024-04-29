@@ -1,15 +1,14 @@
 import { WorkorderBase, useContextId, useHttpClient } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetWorkorders = (heatTraceCableId: string) => {
+export const useGetWorkorders = (heatTraceCabelId: string) => {
   const client = useHttpClient();
   const contextId = useContextId();
-
-  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>({
-    queryKey: ['heat-trace', heatTraceCableId, 'workorders'],
-    queryFn: async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<WorkorderBase[], Error>(
+    ['heat-trace', heatTraceCabelId, 'workorders'],
+    async ({ signal }) => {
       const response = await client.fetch(
-        `/api/contexts/${contextId}/heat-trace/${heatTraceCableId}/work-orders`,
+        `/api/contexts/${contextId}/heat-trace/${heatTraceCabelId}/work-orders`,
         { signal }
       );
       if (response.status === 204) {
@@ -19,8 +18,8 @@ export const useGetWorkorders = (heatTraceCableId: string) => {
         throw new Error();
       }
       return response.json();
-    },
-  });
+    }
+  );
 
   return {
     dataWorkorders: data,

@@ -35,18 +35,21 @@ export const LoopSidesheet = (props: {
     data: loop,
     error: sidesheetError,
     isLoading: isLoadingSidesheet,
-  } = useQuery<Loop>({
-    queryKey: ['loop', props.id],
-    queryFn: async () => {
+  } = useQuery<Loop>(
+    ['loop', props.id],
+    async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/loop/${props.id}`);
       if (!res.ok) {
         throw res;
       }
       return res.json();
     },
-    throwOnError: false,
-    initialData: props.item ?? undefined,
-  });
+    {
+      suspense: false,
+      useErrorBoundary: false,
+      initialData: props.item ?? undefined,
+    }
+  );
 
   const { data, isLoading, error } = useGetWorkorders(loop?.loopId);
 

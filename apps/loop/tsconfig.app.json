@@ -16,8 +16,7 @@
     "**/*.spec.jsx",
     "**/*.test.jsx",
     "dist",
-    ".turbo",
-    "vite.config.ts"
+    ".turbo"
   ],
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }

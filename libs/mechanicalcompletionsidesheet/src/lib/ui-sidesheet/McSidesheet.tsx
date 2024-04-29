@@ -271,10 +271,9 @@ import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 const EnsureMcPkg = ({ id, close, item }: McProps) => {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
-
-  const { isLoading, data, error } = useQuery({
-    queryKey: ['mcpkg', id],
-    queryFn: async () => {
+  const { isLoading, data, error } = useQuery(
+    ['mcpkg', id],
+    async () => {
       const res = await client.fetch(
         `/api/contexts/${contextId}/mechanical-completion/${id}`
       );
@@ -283,8 +282,8 @@ const EnsureMcPkg = ({ id, close, item }: McProps) => {
       }
       return res.json() as Promise<McPackage>;
     },
-    refetchOnWindowFocus: false,
-  });
+    { refetchOnWindowFocus: false }
+  );
 
   if (isLoading) {
     return <SidesheetSkeleton close={close} />;

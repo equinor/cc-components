@@ -4,7 +4,6 @@ import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
 import { setupEcho3dWeb } from '@equinor/echo-3d-viewer';
 import { tokens } from '@equinor/eds-tokens';
-
 import { useMemo, useRef } from 'react';
 import { useEnvConfig } from '../providers/envConfigProvider';
 import { AccessError } from '../types/errors';
@@ -29,6 +28,7 @@ export const useLoadModelViewer = () => {
     () => ({
       scopes: [env.hierarchyClientScope],
       prompt: 'login',
+      popupWindowAttributes: null,
       onRedirectNavigate: () => false,
     }),
     [env]
@@ -49,7 +49,7 @@ export const useLoadModelViewer = () => {
     throw new AccessError('Hierarchy token request failed', { cause: hierarchyError });
   }
 
-  const { isPending, data: echoInstance } = useQuery({
+  const { isLoading, data: echoInstance } = useQuery({
     queryKey: ['model-viewer-loader'],
     queryFn: async () => {
       if (!modelToken || !hierarchyToken || !canvasRef.current) {
@@ -76,7 +76,7 @@ export const useLoadModelViewer = () => {
       return echoInstance;
     },
     refetchOnWindowFocus: false,
-    gcTime: 0,
+    cacheTime: 0,
     enabled: !!modelToken && !!hierarchyToken && !!canvasRef.current,
   });
 
@@ -84,6 +84,6 @@ export const useLoadModelViewer = () => {
     canvasRef,
     echoClient,
     echoInstance,
-    isPending,
+    isLoading,
   };
 };

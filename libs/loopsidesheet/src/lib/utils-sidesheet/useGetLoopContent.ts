@@ -6,10 +6,9 @@ import { LoopContent } from '../types';
 export const useGetLoopContent = (loopNo: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
-  
-  const { data, isLoading, error } = useQuery<LoopContent[], Error>({
-    queryKey: ['loop', loopNo, 'content'],
-    queryFn: async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<LoopContent[], Error>(
+    ['loop', loopNo, 'content'],
+    async ({ signal }) => {
       const respons = await client.fetch(
         `/api/contexts/${contextId}/loop/${loopNo}/content`,
         { signal }
@@ -18,8 +17,8 @@ export const useGetLoopContent = (loopNo: string) => {
         throw new Error();
       }
       return respons.json();
-    },
-  });
+    }
+  );
 
   return {
     data: data,

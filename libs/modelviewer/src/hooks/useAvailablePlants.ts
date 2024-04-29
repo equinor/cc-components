@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { Plant } from '../services/usePlantSelectionService';
 import { useModelViewerContext } from '../providers';
@@ -6,7 +6,7 @@ import { useModelViewerContext } from '../providers';
 export const useAvailablePlants = (facility: string) => {
   const { echoClient } = useModelViewerContext();
 
-  const { data, isLoading, error } = useSuspenseQuery<Plant[]>({
+  const { data, isLoading, error } = useQuery<Plant[]>({
     queryKey: ['available-plants', facility],
     queryFn: async () => {
       const result = await echoClient.json<Plant[]>('/EchoHub/plant-info');
@@ -20,7 +20,8 @@ export const useAvailablePlants = (facility: string) => {
 
       return filtered;
     },
-    gcTime: 5 * 1000 * 60,
+    cacheTime: 5 * 1000 * 60,
+    suspense: true,
   });
 
   return {

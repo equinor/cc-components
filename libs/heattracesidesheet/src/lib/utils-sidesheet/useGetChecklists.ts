@@ -6,10 +6,9 @@ import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 export const useGetHeatTraceChecklists = (heatTraceCabelId: string) => {
   const client = useHttpClient('cc-api');
   const contextId = useContextId();
-  
-  const { data, isLoading, error } = useQuery<HeatTraceChecklist[], Error>({
-    queryKey: ['heat-trace', heatTraceCabelId, 'checklists'],
-    queryFn: async ({ signal }) => {
+  const { data, isLoading, error } = useQuery<HeatTraceChecklist[], Error>(
+    ['heat-trace', heatTraceCabelId, 'checklists'],
+    async ({ signal }) => {
       const respons = await client.fetch(
         `/api/contexts/${contextId}/heat-trace/${heatTraceCabelId}/checklists`,
         { signal }
@@ -18,8 +17,8 @@ export const useGetHeatTraceChecklists = (heatTraceCabelId: string) => {
         throw new Error();
       }
       return respons.json();
-    },
-  });
+    }
+  );
 
   return {
     dataChecklists: data,

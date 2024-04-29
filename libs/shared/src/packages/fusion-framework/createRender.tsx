@@ -84,7 +84,9 @@ export function createRender(
      * Second argu is the the render args (framework and env variables)
      * Third argument is the configuration callback
      */
-    const AppComponent = makeComponent(<Comp />, args, configure);
+    const AppComponent = makeComponent(<Comp />, args, (a, b) => {
+      configure(a, b);
+    });
 
     root.render(<AppComponent />);
 
@@ -127,10 +129,9 @@ function createPrLabel(prNumber: string, el: HTMLElement): VoidFunction {
 
 function PRLabel({ prNumber }: { prNumber: string }) {
   const [isOpen, setIsOpen] = useState(true);
-
-  const { data, isLoading, error } = useQuery<PullRequest>({
-    queryKey: ['pulls', prNumber],
-    queryFn: async () => {
+  const { data, isLoading, error } = useQuery<PullRequest>(
+    ['pulls', prNumber],
+    async () => {
       const res = await fetch(
         `https://api.github.com/repos/equinor/cc-components/pulls/${prNumber}`,
         { headers: { ['Accept']: 'application/vnd.github+json' } }
@@ -140,9 +141,8 @@ function PRLabel({ prNumber }: { prNumber: string }) {
       }
       return await res.json();
     },
-    throwOnError: false,
-  });
-  
+    { suspense: false, useErrorBoundary: false }
+  );
   if (!isOpen) return null;
   if (isLoading) {
     return (
