@@ -84,9 +84,6 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
     props.item.facility
   );
 
-  //change this
-  const newEchoData: EchoConfig = { facilities: ['JCA'], tags: dataEcho! };
-
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
@@ -193,7 +190,7 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
               options={viewerOptions}
               isFetching={isFetchingEcho}
               error={errorEcho as Error | null}
-              facilities={newEchoData?.facilities ?? []}
+              facilities={dataEcho?.facilities ?? []}
             />
           </Tabs.Panel>
         </CustomStyledPanels>
