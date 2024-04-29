@@ -133,6 +133,52 @@ The pipelines are located in the `./github/workflows` folder
    [HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
    HMR is disabled due to an error in dependency resolution resulting in massive bundle sizes
 
+## Rolling Back Changes
+When you need to revert changes that have been made to the production codebase, follow these steps:
+
+1. **Create a New Branch:**
+   This branch will be based on the current state of your main branch.
+
+   ```sh
+   git checkout -b rollback-branch
+   ```
+
+2. **Restore Code:**
+   Use `git restore` to revert the codebase to the state before the last commit or to a specific commit if needed.
+
+   ```sh
+   # Roll back to the state before the last commit
+   git restore . --source=HEAD^
+   
+   # Roll back to a specific commit
+   # git restore . --source=<commit-hash>
+   ```
+
+3. **Commit the Rollback:**
+   After restoring, commit the changes to the rollback branch.
+
+   ```sh
+   git add .
+   git commit -m "Rollback to previous stable state"
+   ```
+
+4. **Push the Changes:**
+   Push the rollback branch to the remote repository.
+
+   ```sh
+   git push origin rollback-branch
+   ```
+
+5. **Deploy to test** 
+Run this [action](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml). Verify the deployment before deploying to production
+
+
+5. **Deploy to production**
+Run this [action](https://github.com/equinor/cc-components/actions/workflows/manual-deploy-prod.yml)
+
+> [!IMPORTANT]
+> Remember to inform other team members as any changes merged to main after this will overwrite your deployment.
+
 ## Environment variables
 
 We have some app configuration files in the `apps/**` folder. These are for local development.
