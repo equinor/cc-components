@@ -17,7 +17,7 @@ export const useGetEchoConfig = (heatTraceCableNo: string, facility: string) => 
     queryKey: ['model-tags', heatTraceCableNo],
     queryFn: async ({ signal }) => {
       const response = await client.fetch(
-        `/api/contexts/${contextId}/electrical/${heatTraceCableNo}/${facility}/echo`,
+        `/api/contexts/${contextId}/heat-trace/${heatTraceCableNo}/${facility}/echo`,
         { signal }
       );
 
