@@ -69,4 +69,5 @@ export type HandoverPackage = {
   status: BaseStatus; //Comm. pkg status in procosys
   worstChecklistStatus: string;
   hasNonCountingScope: boolean | null;
+  descriptionOfWork: string | null;
 };

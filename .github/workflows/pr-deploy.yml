@@ -47,7 +47,7 @@ jobs:
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run pr:deploy --since origin/main  --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --pr '${{ github.event.issue.number }}' --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{steps.comment-branch.outputs.head_sha}}'
+        run: npx turbo run pr:deploy --since origin/main --scope * --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --pr '${{ github.event.issue.number }}' --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{steps.comment-branch.outputs.head_sha}}'
 
       - name: Comment pr
         uses: actions/github-script@v7

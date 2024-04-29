@@ -1,6 +1,6 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { StatusCircle } from '@cc-components/shared/common';
-import { statusColorMap } from '@cc-components/shared/mapping';
+import { colorMap, statusColorMap } from '@cc-components/shared';
 import { Icon, Switch } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
@@ -24,8 +24,14 @@ import {
   UnsignedTaskTab,
   WorkorderBase,
   WorkorderTab,
+  hasProperty,
   useContextId,
 } from '@cc-components/shared';
+
+import { ModelViewerTab } from '@cc-components/modelviewer';
+import styled from 'styled-components';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+
 import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
@@ -36,25 +42,34 @@ import { useHandoverResource } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTabs';
 import { StyledTabListWrapper, StyledTabsList } from './sidesheet.styles';
 
+const viewerOptions = {
+  statusResolver: (status: string) => {
+    return hasProperty(colorMap, status) ? colorMap[status] : '#009922';
+  },
+  defaultCroppingDistance: 3,
+};
+
 type HandoverProps = {
   id: string;
   item?: HandoverPackage;
   close: VoidFunction;
 };
+
 export const HandoverSidesheet = ({ id, close: closeSidesheet, item }: HandoverProps) => {
   const client = useHttpClient('cc-app');
   const contextId = useContextId();
-  const { isLoading, data, error } = useQuery(
-    ['handover', id],
-    async () => {
+  const { isLoading, data, error } = useQuery({
+    queryKey: ['handover', id],
+    queryFn: async () => {
       const res = await client.fetch(`/api/contexts/${contextId}/handover/${id}`);
       if (!res.ok) {
         throw new Error(`Failed to get handover with id ${id}`);
       }
       return res.json() as Promise<HandoverPackage>;
     },
-    { refetchOnWindowFocus: false, initialData: item ?? undefined }
-  );
+    refetchOnWindowFocus: false,
+    initialData: item ?? undefined,
+  });
 
   if (isLoading) {
     return <SidesheetSkeleton close={() => closeSidesheet()} />;
@@ -138,6 +153,13 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     dataIsFetching: isDataFetchingNcr,
     error: ncrError,
   } = useHandoverResource(props.item.commissioningPackageNo, 'ncr');
+
+  const {
+    data: modelConfig,
+    tagsOverlay,
+    isFetching: isFetchingModelConfig,
+    error: modelConfigError,
+  } = useGetEchoConfig(props.id);
 
   const filteredPunches = useMemo(() => {
     if (ShowOnlyOutstandingPunch) {
@@ -233,6 +255,10 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             <Tabs.Tab>
               NCR <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />{' '}
             </Tabs.Tab>
+
+            <Tabs.Tab>
+              3D <TabTitle data={tagsOverlay} isLoading={isFetchingModelConfig} />{' '}
+            </Tabs.Tab>
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -315,13 +341,22 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               error={queryError}
             />
           </Tabs.Panel>
+          <Tabs.Panel style={{ height: '100%' }}>
+            <ModelViewerTab
+              tagOverlay={tagsOverlay}
+              options={viewerOptions}
+              isFetching={isFetchingModelConfig}
+              error={modelConfigError as Error | null}
+              facilities={modelConfig?.facilities ?? []}
+            />
+          </Tabs.Panel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };
 
-import styled from 'styled-components';
+
 const ErrorWrapper = styled.div`
   text-align: center;
   padding: 20px;

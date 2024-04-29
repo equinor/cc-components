@@ -1,5 +1,5 @@
 import { ColDef } from '@equinor/workspace-ag-grid';
-import format from 'date-fns/format';
+import { format } from 'date-fns/format';
 
 export const defaultColDef: ColDef = {
   valueFormatter: (a) => tryFormat(a.value),
