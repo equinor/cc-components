@@ -134,7 +134,7 @@ The pipelines are located in the `./github/workflows` folder
    HMR is disabled due to an error in dependency resolution resulting in massive bundle sizes
 
 ## Rolling Back Changes
-When you need to revert changes that have been made to the production codebase, follow these steps:
+When there are bugs in production and you want production to be stable while you fix the issue. Follow these steps:
 
 1. **Create a New Branch:**
    This branch will be based on the current state of your main branch.
