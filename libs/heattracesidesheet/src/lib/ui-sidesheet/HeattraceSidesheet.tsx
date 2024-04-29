@@ -30,11 +30,7 @@ import { useGetHeatTraceChecklists } from '../utils-sidesheet/useGetChecklists';
 import { useQuery } from '@tanstack/react-query';
 import { CircuitDiagramTab } from './CircuitDiagramTab';
 import { ModelViewerTab } from '@cc-components/modelviewer';
-import {
-  EchoConfig,
-  EchoTag,
-  useGetEchoConfig,
-} from '../utils-sidesheet/useGetEchoConfig';
+import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 import { Icon, Tabs } from '@equinor/eds-core-react';
 import { useGetEleNetwork } from '../utils-sidesheet/useGetEleNetwork';
 import styled from 'styled-components';
