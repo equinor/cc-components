@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { security } from '@equinor/eds-icons';
 import { Icon, Typography } from '@equinor/eds-core-react';
+import { CustomError } from '../../types/errors';
 
 const Styled = {
   Wrapper: styled.div`
@@ -21,27 +21,24 @@ const Styled = {
   `,
 };
 
-type AccessErrorMessageProps = {
-  error: Error;
+type CustomErrorMessageProps = {
+  error: CustomError;
 };
 
-export const AccessErrorMessage = (props: AccessErrorMessageProps): JSX.Element => {
+export const CustomErrorMessage = (props: CustomErrorMessageProps): JSX.Element => {
   const { error } = props;
 
   return (
     <>
       <Styled.Wrapper>
         <Styled.Content>
-          <Icon data={security} size={48} />
+          <Icon data={error.icon} size={48} />
           <Styled.MessageContent>
-            <Typography variant="h5">
-              You don't have access to any 3D resources
+            <Typography variant="h5">{error.message}</Typography>
+            <Typography>{error.description}</Typography>
+            <Typography variant="body_short_italic">
+              {error.cause ? `Raw error: ${error.cause}` : null}
             </Typography>
-            <Typography>
-              Request access to Echo in <b>Access IT</b> to apply for access.
-            </Typography>
-            <br />
-            <Typography variant="body_short_italic">Error: {error.message}</Typography>
           </Styled.MessageContent>
         </Styled.Content>
       </Styled.Wrapper>
