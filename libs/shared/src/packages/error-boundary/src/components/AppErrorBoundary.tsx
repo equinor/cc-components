@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ReactNode } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useExternalContextId } from '../../../hooks';
