@@ -34,6 +34,8 @@ export const domainNames = {
   tagStatus: 'Tag Status',
   tag: 'Tag',
   wbs: 'WBS',
+  estimate: 'Estimate',
+  createdDate: 'Created Date',
 
   // Commissioning package
   commArea: `Comm ${'Area'}`,
@@ -61,15 +63,19 @@ export const domainNames = {
   // Punch
   punch: 'Punch',
   verified: 'Verified',
+  verifiedDate: 'Verified Date',
   handoverPlan: 'Handover Plan',
-  materialEstimate: 'Material Estimate',
-  materialRequired: 'Material Required',
-  clearingBy: 'Clearing By',
-  hasWorkorder: 'Has Workorder',
-  punchPriority: `Punch ${'Priority'}`,
+  materialEstimate: 'PL Material Est',
+  materialRequired: 'PL Material Req',
+  clearingBy: 'PL Clearing by Org',
+  hasWorkorder: 'PL HasWO',
+  punchPriority: `PL ${'Priority'}`,
+  punchStatus: `PL ${'Status'}`,
+  punchCategory: `PL ${'Category'}`,
   punchSorting: 'PL Sorting',
   punchType: 'PL Type',
-  raisedBy: 'Raised By',
+  raisedBy: 'PL Raised by Org',
+  clearedDate: 'Cleared Date',
 
   // Loop
   contentMCStatus: 'Content MC Status',
@@ -83,6 +89,7 @@ export const domainNames = {
   formGroup: 'Form Group',
   formType: 'Form Type',
   formResponsible: 'Form Responsible',
+  formDiscipline: 'Form Discipline',
 
   // SWCR
   action: 'Action',
