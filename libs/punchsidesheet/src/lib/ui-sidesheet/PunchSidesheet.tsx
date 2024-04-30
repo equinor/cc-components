@@ -12,6 +12,8 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 
 import {
   BannerItem,
+  CustomStyledPanels,
+  CustomStyledTabs,
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
@@ -135,7 +137,7 @@ export const PunchSidesheet = (props: {
           }
         />
       </StyledBanner>
-      <StyledTabs activeTab={activeTab} onChange={handleChange}>
+      <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
           <StyledTabsList ref={ref}>
             <Tabs.Tab>Details </Tabs.Tab>
@@ -143,7 +145,7 @@ export const PunchSidesheet = (props: {
           </StyledTabsList>
         </StyledTabListWrapper>
 
-        <StyledPanels>
+        <CustomStyledPanels>
           <Tabs.Panel>
             <DetailsTab punch={punch} />
           </Tabs.Panel>
@@ -156,8 +158,8 @@ export const PunchSidesheet = (props: {
               facilities={[punch.facility ?? '']}
             />
           </Tabs.Panel>
-        </StyledPanels>
-      </StyledTabs>
+        </CustomStyledPanels>
+      </CustomStyledTabs>
     </StyledSideSheetContainer>
   );
 };
