@@ -72,7 +72,7 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   justify-content: end;
   align-items: center;
 
-  ::before {
+  &:before {
     width: 12px;
     height: 12px;
     border: 1px solid white;
@@ -81,7 +81,7 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
     margin: 0px 1px;
     content: ' ';
   }
-  ::after {
+  &:after {
     width: 12px;
     height: 12px;
     border: 1px solid white;
