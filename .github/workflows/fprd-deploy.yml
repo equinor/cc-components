@@ -1,8 +1,6 @@
 name: 'Deploy PROD build'
 on:
   push:
-    branches:
-      - main
 
 permissions:
   actions: read
