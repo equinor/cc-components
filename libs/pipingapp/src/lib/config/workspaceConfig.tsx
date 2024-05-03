@@ -11,6 +11,7 @@ import {
   useCCApiAccessCheck,
   useWorkspaceBookmarks,
   usePBIOptions,
+  useCloseSidesheetOnContextChange,
 } from '@cc-components/shared';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './pipingSidesheet';
@@ -18,6 +19,7 @@ import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
