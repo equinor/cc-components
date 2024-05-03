@@ -4,6 +4,7 @@ import {
   useHttpClient,
   usePBIOptions,
   useWorkspaceBookmarks,
+  useCloseSidesheetOnContextChange
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
@@ -20,7 +21,7 @@ import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
-
+  useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'work-orders');
@@ -36,9 +37,11 @@ export const WorkspaceWrapper = () => {
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
+
 
   return (
     <>
