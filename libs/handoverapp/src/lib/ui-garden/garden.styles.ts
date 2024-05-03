@@ -104,7 +104,7 @@ export const StyledIconsContainer = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto;
-  padding-top: 10px;
+  padding: 10px 5px 0 5px;
 `;
 export const StyledWarningContainer = styled.div`
   display: flex;
@@ -118,9 +118,10 @@ export const StyledWarningContainer = styled.div`
 export const StyledWarningText = styled.div`
   display: flex;
   justify-content: flex-start;
-  flex-direction: column;
+  flex-direction: row;
   align-self: flex-end;
   white-space: initial;
+  gap: 10px;
 
   > p {
     text-decoration: underline;
@@ -142,7 +143,7 @@ export const StyledFlagUnsignedAction = styled.div`
   }
 `;
 export const StyledStatuses = styled.div`
-  margin-top: 24px;
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
