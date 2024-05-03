@@ -7,6 +7,7 @@ import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useTableConfig } from './tableConfig';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import {
+  useCloseSidesheetOnContextChange,
   useContextId,
   useHttpClient,
   useWorkspaceBookmarks,
@@ -19,6 +20,7 @@ const options: WorkspaceConfig<ScopeChangeRequest> = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  useCloseSidesheetOnContextChange();
   const client = useHttpClient();
 
   const pbi = usePBIOptions('pp-scope-change-analytics', {
