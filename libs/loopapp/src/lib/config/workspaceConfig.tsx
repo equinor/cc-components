@@ -4,6 +4,7 @@ import {
   useContextId,
   useHttpClient,
   useWorkspaceBookmarks,
+  useCloseSidesheetOnContextChange,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
@@ -19,6 +20,7 @@ import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  useCloseSidesheetOnContextChange();
   const pbi = usePBIOptions('loop-analytics', {
     column: 'ProjectMaster GUID',
     table: 'Dim_ProjectMaster',

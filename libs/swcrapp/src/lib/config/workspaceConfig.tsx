@@ -1,5 +1,6 @@
 import {
   useCCApiAccessCheck,
+  useCloseSidesheetOnContextChange,
   useContextId,
   useHttpClient,
   usePBIOptions,
@@ -21,6 +22,7 @@ import { useTableConfig } from './tableConfig';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  useCloseSidesheetOnContextChange();
   const ccApi = useHttpClient();
 
   const pbi = usePBIOptions('swcr-analytics', {

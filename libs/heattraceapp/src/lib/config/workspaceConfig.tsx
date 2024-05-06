@@ -7,6 +7,7 @@ import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import {
   useCCApiAccessCheck,
+  useCloseSidesheetOnContextChange,
   useContextId,
   useHttpClient,
   usePBIOptions,
@@ -18,6 +19,7 @@ import { sidesheetConfig } from './heattraceSidesheet';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'heat-trace');
 
