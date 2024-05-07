@@ -81,8 +81,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Category',
-    headerName: domainNames.category,
-    headerTooltip: domainNames.category,
+    headerName: domainNames.punchCategory,
+    headerTooltip: domainNames.punchCategory,
     valueGetter: (pkg) => pkg.data?.category,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.value) {
@@ -102,8 +102,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Status',
-    headerName: domainNames.status,
-    headerTooltip: domainNames.status,
+    headerName: domainNames.punchStatus,
+    headerTooltip: domainNames.punchStatus,
     valueGetter: (pkg) => pkg.data?.status,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.value) {
@@ -129,8 +129,8 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     colId: 'Discipline',
-    headerName: domainNames.discipline,
-    headerTooltip: domainNames.discipline,
+    headerName: domainNames.mcDiscipline,
+    headerTooltip: domainNames.mcDiscipline,
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
@@ -167,10 +167,22 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => pkg.data?.clearedBy,
   },
   {
-    colId: 'Priority',
-    headerName: domainNames.priority,
-    headerTooltip: domainNames.priority,
-    valueGetter: (o) => o.data?.priority,
+    colId: 'Priority1',
+    headerName: domainNames.commPriority1,
+    headerTooltip: domainNames.commPriority1,
+    valueGetter: (params) => params.data?.priority1,
+  },
+  {
+    colId: 'Priority2',
+    headerName: domainNames.commPriority2,
+    headerTooltip: domainNames.commPriority2,
+    valueGetter: (params) => params.data?.priority2,
+  },
+  {
+    colId: 'Priority3',
+    headerName: domainNames.commPriority3,
+    headerTooltip: domainNames.commPriority3,
+    valueGetter: (params) => params.data?.priority3,
   },
   {
     colId: 'Cleared',

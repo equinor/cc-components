@@ -1,5 +1,5 @@
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { useModelSelectionService } from '../services/useModelSelectionService';

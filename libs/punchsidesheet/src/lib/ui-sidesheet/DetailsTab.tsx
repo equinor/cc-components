@@ -6,6 +6,7 @@ import {
 import { Punch } from '@cc-components/punchshared';
 import { StyledTextBlock } from './sidesheet.styles';
 import { formatDateString } from '@cc-components/shared/utils-dates';
+import { domainNames } from '@cc-components/shared';
 
 type DetailsTabProps = {
   punch: Punch | undefined;
@@ -20,65 +21,73 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
       <StyledTable>
         <tbody>
           <tr>
-            <td>Category</td>
+            <td>{domainNames.punchCategory}</td>
             <td>{stringCell(punch.category)}</td>
           </tr>
           <tr>
-            <td>Status</td>
+            <td>{domainNames.punchStatus}</td>
             <td>{stringCell(punch.status)}</td>
           </tr>
           <tr>
-            <td>Priorty</td>
-            <td>{stringCell(punch.priority)}</td>
+            <td>{domainNames.commPriority1}</td>
+            <td>{stringCell(punch.priority1)}</td>
           </tr>
           <tr>
-            <td>Sorting</td>
+            <td>{domainNames.commPriority2}</td>
+            <td>{stringCell(punch.priority2)}</td>
+          </tr>
+          <tr>
+            <td>{domainNames.commPriority3}</td>
+            <td>{stringCell(punch.priority3)}</td>
+          </tr>
+          <tr>
+            <td>{domainNames.punchSorting}</td>
             <td>{stringCell(punch.sorting)}</td>
           </tr>
           <tr>
-            <td>Type</td>
+            <td>{domainNames.punchType}</td>
             <td>{stringCell(punch.type)}</td>
           </tr>
           <tr>
-            <td>Estimate</td>
+            <td>{domainNames.estimate}</td>
             <td>
               {stringCell(punch.estimate !== null ? punch.estimate.toString() : null)}
             </td>
           </tr>
           <tr>
-            <td>Raised by</td>
+            <td>{domainNames.raisedBy}</td>
             <td>{stringCell(punch.raisedBy)}</td>
           </tr>
           <tr>
-            <td>Clearing by</td>
+            <td>{domainNames.clearingBy}</td>
             <td>{stringCell(punch.clearedBy)}</td>
           </tr>
           <tr>
-            <td>Cleared date</td>
+            <td>{domainNames.clearedDate}</td>
             <td>{stringCell(formatDateString(punch.clearedAtDate))}</td>
           </tr>
           <tr>
-            <td>Verified date</td>
+            <td>{domainNames.verifiedDate}</td>
             <td>{stringCell(formatDateString(punch.verifiedAtDate))}</td>
           </tr>
           <tr>
-            <td>Handover plan</td>
+            <td>{domainNames.handoverPlan}</td>
             <td>{stringCell(formatDateString(punch.handoverPlan))}</td>
           </tr>
           <tr>
-            <td>Due date</td>
+            <td>{domainNames.dueDate}</td>
             <td>{stringCell(formatDateString(punch.dueDate))}</td>
           </tr>
           <tr>
-            <td>Material requried</td>
+            <td>{domainNames.materialRequired}</td>
             <td>{stringCell(punch.materialRequired ? 'Yes' : 'No')}</td>
           </tr>
           <tr>
-            <td>Material est. arrival</td>
+            <td>{domainNames.materialEstimate}</td>
             <td>{stringCell(formatDateString(punch.materialEstimatedTimeOfArrival))}</td>
           </tr>
           <tr>
-            <td>Created date</td>
+            <td>{domainNames.createdDate}</td>
             <td>{stringCell(formatDateString(punch.createdDate))}</td>
           </tr>
           <tr>
@@ -101,15 +110,15 @@ export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
       <StyledTable>
         <tbody>
           <tr>
-            <td>Form type</td>
+            <td>{domainNames.formType}</td>
             <td>{stringCell(punch.formularType)}</td>
           </tr>
           <tr>
-            <td>Form group</td>
+            <td>{domainNames.formGroup}</td>
             <td>{stringCell(punch.formularGroup)}</td>
           </tr>
           <tr>
-            <td>Form discipline</td>
+            <td>{domainNames.formDiscipline}</td>
             <td>{stringCell(punch.formularDiscipline)}</td>
           </tr>
         </tbody>

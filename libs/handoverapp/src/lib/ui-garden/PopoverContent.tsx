@@ -54,22 +54,24 @@ export const PopoverContent = ({
           <strong> {`Volume: ${data.volume} (${size})`}</strong>
         </span>
       </StyledPopoverProgressBar>
-      <StyledIconsContainer>
-        {showWarningIcon && (
-          <StyledWarningContainer>
-            <WarningIcon />
-            <StyledWarningText>
-              <strong>NB:</strong>
-              <p>RFCC with MC status OS</p>
-            </StyledWarningText>
-          </StyledWarningContainer>
-        )}
-        {data.hasUnsignedActions && (
-          <StyledFlagUnsignedAction>
-            <FlagIcon color={textColor} /> <p>Unsigned actions</p>
-          </StyledFlagUnsignedAction>
-        )}
-      </StyledIconsContainer>
+      {(showWarningIcon || data.hasUnsignedActions) && (
+        <StyledIconsContainer>
+          {showWarningIcon && (
+            <StyledWarningContainer>
+              <WarningIcon />
+              <StyledWarningText>
+                <strong>NB:</strong>
+                <p>RFCC with MC status OS</p>
+              </StyledWarningText>
+            </StyledWarningContainer>
+          )}
+          {data.hasUnsignedActions && (
+            <StyledFlagUnsignedAction>
+              <FlagIcon color={textColor} /> <p>Unsigned actions</p>
+            </StyledFlagUnsignedAction>
+          )}
+        </StyledIconsContainer>
+      )}
       <StyledStatuses>
         <h5>MC status</h5>
         <StyledPopoverStatus color={mcPackageColor}>
