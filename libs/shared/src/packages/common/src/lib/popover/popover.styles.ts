@@ -1,16 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledPopoverContainer = styled.div`
-  & *:last-child {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-  & *:first-child {
-      padding-top: 0px;
-      padding-bottom: 0px;
-  }
   white-space: nowrap;
+  padding-top: 0 !important;
 
   hr {
     border: 1px solid #dcdcdc;
@@ -24,6 +16,12 @@ export const StyledPopoverContainer = styled.div`
   p {
     margin: 0;
     font-size: 12px;
+  }
+  *:first-child {
+    padding-top: 0;
+  }
+  *:last-child {
+    padding-bottom: 0;
   }
 `;
 

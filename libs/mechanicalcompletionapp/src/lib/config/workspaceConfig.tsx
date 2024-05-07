@@ -1,5 +1,6 @@
 import {
   useCCApiAccessCheck,
+  useCloseSidesheetOnContextChange,
   useContextId,
   useWorkspaceBookmarks,
 } from '@cc-components/shared';
@@ -18,6 +19,7 @@ import { useTableConfig } from './tableConfig';
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  useCloseSidesheetOnContextChange();
   const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'mechanical-completion');
 

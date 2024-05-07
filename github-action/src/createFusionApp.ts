@@ -84,7 +84,7 @@ await program.parseAsync();
 async function getCategoriesAsync(
   env: 'CI' | 'FPRD',
   token: string
-): Promise<{ name: string; id: string }[]> {
+): Promise<{ name: string; id: string, color: string}[]> {
   const res = await fetch(`${env === 'CI' ? ciUrl : prodUrl}/api/apps/categories`, {
     method: 'GET',
     headers: {
@@ -119,7 +119,7 @@ export async function createFusionApp(
     description: '.',
     owners: [],
     admins: admins.map((s) => ({ azureUniqueId: s })),
-    accentColor: category.name,
+    accentColor: category.color,
     categoryId: category.id,
     icon: '',
     tags: [],
