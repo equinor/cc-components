@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { ErrorMessage } from './ErrorMessage';
-import { AccessError } from '../../types/errors';
-import { AccessErrorMessage } from './AccessErrorMessage';
+import { CustomError } from '../../types/errors';
+import { CustomErrorMessage } from './CustomErrorMessage';
 
 type ModelViewerErrorBoundaryProps = {
   children?: ReactNode;
@@ -19,8 +19,8 @@ export const ModelViewerErrorBoundary = (
     const { error } = fallbackProps;
     if (FallbackComponent) return <FallbackComponent {...fallbackProps} />;
 
-    if (error instanceof AccessError) {
-      return <AccessErrorMessage error={error} />;
+    if (error instanceof CustomError) {
+      return <CustomErrorMessage error={error} />;
     }
 
     if (error instanceof Error) {

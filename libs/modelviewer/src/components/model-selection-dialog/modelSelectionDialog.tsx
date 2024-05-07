@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { useModelSelectionContext } from '../../providers/modelSelectionProvider';
 import ModelSelectionList from '../model-selection-list/modelSelectionList';
-import AccessDialog from '../access-dialog/accessDialog';
 import { useModelSelectionService } from '../../services';
+import { AccessError, NoAvailableModelsError } from '../../types/errors';
 
 export const ModelSelectionDialog = (): JSX.Element => {
   const modelSelectionService = useModelSelectionService();
@@ -42,7 +42,11 @@ export const ModelSelectionDialog = (): JSX.Element => {
   };
 
   if (!hasAccess) {
-    return <AccessDialog isOpen={isModelSelectionVisible} onCancel={onCancel} />;
+    throw new AccessError("You don't have access to any 3D Models for this plant.");
+  }
+
+  if (models.length <= 0) {
+    throw new NoAvailableModelsError();
   }
 
   return (
