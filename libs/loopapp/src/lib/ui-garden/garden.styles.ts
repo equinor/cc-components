@@ -49,7 +49,7 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   justify-content: end;
   align-items: center;
 
-  ::before {
+  &:before {
     width: ${(props) => (props.mcColor ? '12px' : '13px')};
     height: ${(props) => (props.mcColor ? '12px' : '13px')};
     border: ${(props) => (props.mcColor ? '1px solid white' : `none`)};
@@ -60,7 +60,7 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
     outline-offset: -1px;
     content: ' ';
   }
-  ::after {
+  &:after {
     width: ${(props) => (props.commColor ? '12px' : '13px')};
     height: ${(props) => (props.commColor ? '12px' : '13px')};
     border: ${(props) => (props.commColor ? '1px solid white' : `none`)};

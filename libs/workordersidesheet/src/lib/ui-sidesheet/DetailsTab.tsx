@@ -58,7 +58,7 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null =
           </tr>
           <tr>
             <td>Responsible</td>
-            <td>{stringCell(workOrder.responsible)}</td>
+            <td>{stringCell(workOrder.responsibleCode)}</td>
           </tr>
           <tr>
             <td>Milestone</td>

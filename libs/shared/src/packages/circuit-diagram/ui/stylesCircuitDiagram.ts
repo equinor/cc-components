@@ -80,7 +80,7 @@ export const StyledHTCable = styled.div<{ backgroundColor: string }>`
   align-items: center;
   background-color: ${(props) => props.backgroundColor};
   border-radius: 0px 15px 0px 0px;
-  ::after {
+  &:after {
     width: 12px;
     height: 12px;
     border: 1px solid white;
