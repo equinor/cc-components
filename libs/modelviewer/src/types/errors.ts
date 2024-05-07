@@ -29,9 +29,9 @@ export class AccessError extends CustomError {
 
 export class NoAvailableModelsError extends CustomError {
   constructor() {
-    super('There are no models available for the given context.', {
+    super('No available models.', {
       icon: error_outlined,
-      description: 'Request access to Echo in Access IT.',
+      description: 'There are no models available for the given context.',
     });
   }
 }
