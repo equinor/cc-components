@@ -31,7 +31,7 @@ export class NoAvailableModelsError extends CustomError {
   constructor() {
     super('No available models.', {
       icon: error_outlined,
-      description: 'There are no models available for the given context.',
+      description: 'There are no available models for the given context.',
     });
   }
 }
