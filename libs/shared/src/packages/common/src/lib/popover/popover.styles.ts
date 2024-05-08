@@ -17,12 +17,6 @@ export const StyledPopoverContainer = styled.div`
     margin: 0;
     font-size: 12px;
   }
-  *:first-child {
-    padding-top: 0;
-  }
-  *:last-child {
-    padding-bottom: 0;
-  }
 `;
 
 export const StyledPopoverProjectTitle = styled.p`
