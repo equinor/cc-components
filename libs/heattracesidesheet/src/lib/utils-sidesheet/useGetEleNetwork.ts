@@ -2,9 +2,13 @@ import { ElectricalNetwork, useContextId, useHttpClient } from '@cc-components/s
 import { useQuery } from '@tanstack/react-query';
 import { HeatTrace } from '@cc-components/heattraceshared';
 
-export const useGetEleNetwork = (ht: HeatTrace) => {
+export const useGetEleNetwork = (ht: HeatTrace | null) => {
   const client = useHttpClient();
   const contextId = useContextId();
+
+  if (!ht) {
+    throw new Error(`Failed to resolve the heat trace`);
+  }
 
   const { data, isLoading, error } = useQuery<ElectricalNetwork | null>({
     queryKey: [ht.heatTraceCableNo, ht.facility, ht.project],

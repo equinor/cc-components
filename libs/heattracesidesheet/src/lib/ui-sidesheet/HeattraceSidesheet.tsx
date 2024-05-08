@@ -49,7 +49,7 @@ type HeatTraceProps = {
   close: () => void;
 };
 
-const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
+const HeattraceSidesheetComponent = ({ id, item, close }: HeatTraceProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
@@ -58,35 +58,32 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
   };
 
   const { width: sidesheetWidth, setWidth: setSidesheetWidth } = useResizeContext();
-  const reszied = useRef({ hasResized: false, id: props.id });
-  if (reszied.current.id !== props.id) {
-    reszied.current = { hasResized: false, id: props.id };
+  const reszied = useRef({ hasResized: false, id: id });
+  if (reszied.current.id !== id) {
+    reszied.current = { hasResized: false, id: id };
     setSidesheetWidth(700);
   }
 
   const { eleNetwork, errorEleNetwork, isLoadingEleNetwork } = useGetEleNetwork(
-    props.item
+    item ?? null
   );
 
-  const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(
-    props.id
-  );
+  const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(id);
 
   const { dataChecklists, errorChecklists, isLoadingChecklists } =
-    useGetHeatTraceChecklists(props.id);
+    useGetHeatTraceChecklists(id);
 
   const { dataEcho, errorEcho, isFetchingEcho, tagsOverlayEcho } = useGetEchoConfig(
-    props.item.heatTraceCableNo,
-    props.item.facility
+    item?.heatTraceCableId ?? ''
   );
 
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={props.item.heatTraceCableNo}
-        url={props.item.heatTraceCableUrl ?? ''}
-        description={props.item.heatTraceCableDescription || ''}
-        onClose={props.close}
+        title={item?.heatTraceCableNo ?? ''}
+        url={item?.heatTraceCableUrl ?? ''}
+        description={item?.heatTraceCableDescription || ''}
+        onClose={close}
         applicationTitle="Heat Trace"
       />
       <StyledBanner>
@@ -94,10 +91,10 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
           title={domainNames.checklistStatus}
           value={
             <StatusCircle
-              content={props?.item?.formStatus || 'N/A'}
+              content={item?.formStatus || 'N/A'}
               statusColor={
-                props?.item?.formStatus
-                  ? statusColorMap[props.item.formStatus as BaseStatus]
+                item?.formStatus
+                  ? statusColorMap[item.formStatus as BaseStatus]
                   : 'transparent'
               }
             />
@@ -106,10 +103,10 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
         <BannerItem
           title={domainNames.commPkg}
           value={
-            props.item.commissioningPackageNo ? (
+            item?.commissioningPackageNo ? (
               <LinkCell
-                url={props.item.commissioningPackageUrl ?? ''}
-                urlText={props.item.commissioningPackageNo}
+                url={item.commissioningPackageUrl ?? ''}
+                urlText={item.commissioningPackageNo}
               />
             ) : (
               'N/A'
@@ -119,20 +116,17 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
         <BannerItem
           title={domainNames.mcPkg}
           value={
-            props.item.mechanicalCompletionPackageNo ? (
+            item?.mechanicalCompletionPackageNo ? (
               <LinkCell
-                url={props.item.mechanicalCompletionUrl ?? ''}
-                urlText={props.item.mechanicalCompletionPackageNo}
+                url={item.mechanicalCompletionUrl ?? ''}
+                urlText={item.mechanicalCompletionPackageNo}
               />
             ) : (
               'N/A'
             )
           }
         />
-        <BannerItem
-          title={domainNames.commPriority1}
-          value={props.item.priority1 ?? 'N/A'}
-        />
+        <BannerItem title={domainNames.commPriority1} value={item?.priority1 ?? 'N/A'} />
       </StyledBanner>
       <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -156,13 +150,13 @@ const HeattraceSidesheetComponent = (props: Required<HeatTraceProps>) => {
           <Tabs.Panel>
             <CircuitDiagramTab
               elenetwork={eleNetwork}
-              itemNo={props.item.heatTraceCableNo}
+              itemNo={item?.heatTraceCableNo ?? ''}
               onCircuitDiagramReady={(element) => {
                 if (reszied.current.hasResized) return;
                 const newWidth = element.scrollWidth;
                 if (sidesheetWidth !== 700) return;
                 setSidesheetWidth(newWidth + 50);
-                reszied.current = { hasResized: true, id: props.id };
+                reszied.current = { hasResized: true, id: id };
               }}
             />
           </Tabs.Panel>

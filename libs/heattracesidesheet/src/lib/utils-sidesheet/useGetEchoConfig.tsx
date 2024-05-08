@@ -9,15 +9,15 @@ const StyledIcon = styled.h3`
   overflow: hidden;
 `;
 
-export const useGetEchoConfig = (heatTraceCableNo: string, facility: string) => {
+export const useGetEchoConfig = (heatTraceCableId: string) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
   const { data, isFetching, error } = useQuery<EchoConfig>({
-    queryKey: ['model-tags', heatTraceCableNo],
+    queryKey: ['model-tags', heatTraceCableId],
     queryFn: async ({ signal }) => {
       const response = await client.fetch(
-        `/api/contexts/${contextId}/heat-trace/${heatTraceCableNo}/${facility}/echo`,
+        `/api/contexts/${contextId}/heat-trace/${heatTraceCableId}/echo`,
         { signal }
       );
 
