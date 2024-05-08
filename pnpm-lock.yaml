@@ -55,8 +55,8 @@ importers:
         specifier: 8.3.0
         version: 8.3.0(@types/react@18.2.22)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.6-pr.0
-        version: 9.0.6-pr.0(@ag-grid-community/styles@31.2.1)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.4)(@types/react@18.2.22)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.2.0)
+        specifier: 9.0.6
+        version: 9.0.6(@ag-grid-community/styles@31.2.1)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.4)(@types/react@18.2.22)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.2.0)
       '@microsoft/applicationinsights-web':
         specifier: ^3.2.0
         version: 3.2.0(tslib@2.6.2)
@@ -2013,8 +2013,8 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: ^5.3.5
 
-  '@equinor/workspace-fusion@9.0.6-pr.0':
-    resolution: {integrity: sha512-GBRGm10J2+nkckyT+z62a5RwfvHJp257Zu750aYqPA8Wpgp07V3AOlFV4nsgy7N/fJjszedcD7hUcBZM8TmfXA==}
+  '@equinor/workspace-fusion@9.0.6':
+    resolution: {integrity: sha512-1L+/zd/Dsxby1sNQRd3VvbHZhpU/X9Kov34pGGuRATJCxM3ShV5kMFZey1aaZn0eBTmRg/FX6gl+xkv5TMJa8A==}
 
   '@equinor/workspace-garden@8.0.1':
     resolution: {integrity: sha512-mDqqJ2SZRPZyvIScc6rqYfmfOxte1tlnPHf8hc2aj4ZUoypg9MSKo0903B04nQi4gT/VOLhDGDsTy5MNFPZ5Pw==}
@@ -2024,8 +2024,8 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: ^5.3.6
 
-  '@equinor/workspace-powerbi@3.0.3-pr.1':
-    resolution: {integrity: sha512-WrUg8bCsc7scJ+jy1EwDRD9AXddT6eF7tIW8gRjMZ4m0Co4h2FD5bL7JP+qUVbCwaK77D4o88vLu7JKb47t4Jg==}
+  '@equinor/workspace-powerbi@3.0.3':
+    resolution: {integrity: sha512-neY2akZsqD8h2hfGQnZTHkkyoPV/aBlRokfGMW32RBCqf3ZMqgbddzuHh4sarfklNNV1EU/z73HQDWAI8gnr9A==}
 
   '@equinor/workspace-react@2.0.1':
     resolution: {integrity: sha512-EMOJU9XL7iVJfMXqcu8d1PjTK6Wblwy2hee9NlS7HNwbhvMy4bvmKV1civu4k5He8bBPfq/9s6XOy0vU63NfLg==}
@@ -10215,7 +10215,7 @@ snapshots:
 
   '@equinor/eds-core-react@0.28.0(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
-      '@babel/runtime': 7.24.4
+      '@babel/runtime': 7.23.2
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/eds-utils': 0.7.0(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
@@ -11052,7 +11052,7 @@ snapshots:
       - '@types/sortablejs'
       - supports-color
 
-  '@equinor/workspace-fusion@9.0.6-pr.0(@ag-grid-community/styles@31.2.1)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.4)(@types/react@18.2.22)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.2.0)':
+  '@equinor/workspace-fusion@9.0.6(@ag-grid-community/styles@31.2.1)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.4)(@types/react@18.2.22)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.2.0)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0
@@ -11060,7 +11060,7 @@ snapshots:
       '@equinor/workspace-ag-grid': 3.0.2(@ag-grid-community/styles@31.2.1)(@ag-grid-enterprise/core@31.2.1)(@types/react@18.2.22)(react-is@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/workspace-filter': 4.0.3(@babel/core@7.24.4)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/workspace-garden': 8.0.1(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@equinor/workspace-powerbi': 3.0.3-pr.1(@types/sortablejs@1.15.8)
+      '@equinor/workspace-powerbi': 3.0.3(@types/sortablejs@1.15.8)
       '@equinor/workspace-react': 2.0.1(@babel/core@7.24.4)(@types/react@18.2.22)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@tanstack/react-query': 5.32.0(react@18.2.0)
       re-resizable: 6.9.16(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -11095,7 +11095,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@equinor/workspace-powerbi@3.0.3-pr.1(@types/sortablejs@1.15.8)':
+  '@equinor/workspace-powerbi@3.0.3(@types/sortablejs@1.15.8)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0
