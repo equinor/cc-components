@@ -46,7 +46,9 @@ export const useLoadModelViewer = () => {
   }
 
   if (hierarchyError) {
-    throw new AccessError('Hierarchy token request failed', { cause: hierarchyError });
+    throw new AccessError('Hierarchy token request failed', {
+      cause: hierarchyError,
+    });
   }
 
   const { isPending, data: echoInstance } = useQuery({
