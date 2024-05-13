@@ -5,6 +5,7 @@ import {
 } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
+import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableContext(config, async (builder) => {
@@ -21,10 +22,11 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig: HeattraceEnvConfig = c.env.config?.environment as HeattraceEnvConfig;
+  const envConfig = c.env.config?.environment as HeattraceEnvConfig &
+    ModelViewerEnvConfig;
 
   if (!envConfig) {
-    throw new Error('Failed to load environemnt config for heat trace');
+    throw new Error('Failed to load environment config for heat trace');
   }
   config.configureHttpClient('cc-api', {
     baseUri: envConfig?.uri,
@@ -32,6 +34,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   enableAgGrid(config);
+  enableModelViewer(config, envConfig);
 };
 
 type HeattraceEnvConfig = {

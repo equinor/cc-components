@@ -59,7 +59,7 @@ const StyledUrlWrapper = styled.div`
 `;
 type HeaderProps = {
   title: string;
-  url?: string;
+  url?: string | null;
   description?: string;
   applicationTitle: string;
   color?: string;

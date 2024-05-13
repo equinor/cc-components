@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import EnvironmentPlugin from 'vite-plugin-environment';
-import { InjectProcessPlugin } from '../../patches/3d-patch.ts';
+import { InjectProcessPlugin } from '../../patches/3d-patch';
 
 export default defineConfig({
   plugins: [
