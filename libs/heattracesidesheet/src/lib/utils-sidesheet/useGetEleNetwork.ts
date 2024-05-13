@@ -7,15 +7,20 @@ export const useGetEleNetwork = (ht?: HeatTrace) => {
   const contextId = useContextId();
 
   const { data, isPending, error } = useQuery<ElectricalNetwork | null>({
-    queryKey: ['ht-elenetwork', ht?.heatTraceCableNo, ht?.facility, ht?.project],
+    queryKey: [
+      'heattrace-electrical-network',
+      ht?.heatTraceCableNo,
+      ht?.facility,
+      ht?.project,
+    ],
     queryFn: async ({ signal }) => {
       if (!ht) {
         throw new Error('The heat trace should not be null');
       }
       const res = await client.fetch(
-        `api/contexts/${contextId}/electrical/electrical-network/${encodeURIComponent(
-          ht.heatTraceCableNo
-        )}/${ht.facility}`,
+        `api/contexts/${contextId}/heat-trace/${encodeURIComponent(
+          ht.heatTraceCableId
+        )}/electrical-network`,
         { signal }
       );
 

@@ -43,13 +43,23 @@ const viewerOptions = {
   defaultCroppingDistance: 3,
 };
 
-type HeatTraceProps = {
+type HeattraceSidesheetComponentProps = {
+  id: string;
+  item: HeatTrace;
+  close: () => void;
+};
+
+type HeattraceSidesheetProps = {
   id: string;
   item?: HeatTrace;
   close: () => void;
 };
 
-const HeattraceSidesheetComponent = ({ id, item, close }: HeatTraceProps) => {
+const HeattraceSidesheetComponent = ({
+  id,
+  item,
+  close,
+}: HeattraceSidesheetComponentProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
   const handleChange = (index: number) => {
@@ -76,9 +86,9 @@ const HeattraceSidesheetComponent = ({ id, item, close }: HeatTraceProps) => {
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={item?.heatTraceCableNo ?? ''}
-        url={item?.heatTraceCableUrl ?? ''}
-        description={item?.heatTraceCableDescription || ''}
+        title={item.heatTraceCableNo}
+        url={item.heatTraceCableUrl}
+        description={item.heatTraceCableDescription}
         onClose={close}
         applicationTitle="Heat Trace"
       />
@@ -185,7 +195,7 @@ const HeattraceSidesheetComponent = ({ id, item, close }: HeatTraceProps) => {
   );
 };
 
-export function HeattraceSidesheet({ id, item, close }: HeatTraceProps) {
+export function HeattraceSidesheet({ id, item, close }: HeattraceSidesheetProps) {
   const client = useHttpClient();
   const contextId = useContextId();
 
