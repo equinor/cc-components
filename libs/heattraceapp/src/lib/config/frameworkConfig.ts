@@ -22,10 +22,11 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  const envConfig = c.env.config?.environment as HeattraceEnvConfig & ModelViewerEnvConfig;
+  const envConfig = c.env.config?.environment as HeattraceEnvConfig &
+    ModelViewerEnvConfig;
 
   if (!envConfig) {
-    throw new Error('Failed to load environemnt config for heat trace');
+    throw new Error('Failed to load environment config for heat trace');
   }
   config.configureHttpClient('cc-api', {
     baseUri: envConfig?.uri,

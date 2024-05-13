@@ -64,18 +64,14 @@ const HeattraceSidesheetComponent = ({ id, item, close }: HeatTraceProps) => {
     setSidesheetWidth(700);
   }
 
-  const { eleNetwork, errorEleNetwork, isLoadingEleNetwork } = useGetEleNetwork(
-    item ?? null
-  );
+  const { eleNetwork } = useGetEleNetwork(item);
 
   const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(id);
 
   const { dataChecklists, errorChecklists, isLoadingChecklists } =
     useGetHeatTraceChecklists(id);
 
-  const { dataEcho, errorEcho, isFetchingEcho, tagsOverlayEcho } = useGetEchoConfig(
-    item?.heatTraceCableId ?? ''
-  );
+  const { dataEcho, errorEcho, isFetchingEcho, tagsOverlayEcho } = useGetEchoConfig(id);
 
   return (
     <StyledSideSheetContainer>

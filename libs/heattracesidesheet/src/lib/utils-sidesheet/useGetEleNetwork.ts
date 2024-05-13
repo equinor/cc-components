@@ -2,17 +2,16 @@ import { ElectricalNetwork, useContextId, useHttpClient } from '@cc-components/s
 import { useQuery } from '@tanstack/react-query';
 import { HeatTrace } from '@cc-components/heattraceshared';
 
-export const useGetEleNetwork = (ht: HeatTrace | null) => {
+export const useGetEleNetwork = (ht?: HeatTrace) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
-  if (!ht) {
-    throw new Error(`Failed to resolve the heat trace`);
-  }
-
-  const { data, isLoading, error } = useQuery<ElectricalNetwork | null>({
-    queryKey: [ht.heatTraceCableNo, ht.facility, ht.project],
+  const { data, isPending, error } = useQuery<ElectricalNetwork | null>({
+    queryKey: ['ht-elenetwork', ht?.heatTraceCableNo, ht?.facility, ht?.project],
     queryFn: async ({ signal }) => {
+      if (!ht) {
+        throw new Error('The heat trace should not be null');
+      }
       const res = await client.fetch(
         `api/contexts/${contextId}/electrical/electrical-network/${encodeURIComponent(
           ht.heatTraceCableNo
@@ -33,11 +32,12 @@ export const useGetEleNetwork = (ht: HeatTrace | null) => {
       return res.json();
     },
     throwOnError: false,
+    enabled: !!ht,
   });
 
   return {
     eleNetwork: data,
-    isLoadingEleNetwork: isLoading,
+    isPendingEleNetwork: isPending,
     errorEleNetwork: error,
   };
 };
