@@ -2,23 +2,16 @@ import { ElectricalNetwork, useContextId, useHttpClient } from '@cc-components/s
 
 import { useQuery } from '@tanstack/react-query';
 
-export const useElectricalNetworks = (facility: string, tagNos: string[]) => {
+export const useElectricalNetworks = (pipetestId: string) => {
   const client = useHttpClient();
   const contextId = useContextId();
 
   const { data, isLoading, error } = useQuery<ElectricalNetwork[], Error>({
-    queryKey: [facility, tagNos.join(','), 'electrical-networks'],
+    queryKey: [pipetestId, 'electrical-networks'],
     queryFn: async ({ signal }) => {
-      const url = `api/contexts/${contextId}/electrical/electrical-network/${facility}`;
+      const url = `api/contexts/${contextId}/pipetest/${pipetestId}/electrical-networks`;
 
-      const res = await client.fetch(url, {
-        method: 'POST',
-        signal,
-        body: JSON.stringify({ tagNos }),
-        headers: {
-          ['content-type']: 'application/json',
-        },
-      });
+      const res = await client.fetch(url, { signal, });
 
       if ([204, 404].includes(res.status)) {
         return null;
