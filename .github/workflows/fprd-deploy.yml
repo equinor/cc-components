@@ -1,6 +1,5 @@
 name: 'Deploy PROD build'
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -22,9 +21,23 @@ jobs:
         with:
           fetch-depth: 0 # Required to fetch range
 
+      - name: Get fusion token
+        id: 'get-fusion-token'
+        uses: ./.github/actions/get-fusion-token
+        with:
+          client-id: ${{secrets.AZURE_PROD_CLIENT_ID}}
+          tenant-id: ${{secrets.AZURE_TENANT_ID}}
+          resource-id: ${{secrets.AZURE_RESOURCE_PROD_ID}}
+
+      - name: PNPM setup
+        uses: ./.github/actions/pnpm-setup
+
+      - name: Build monorepo
+        run: pnpm ci:build
+
       - name: 'Deploy affected apps to Fusion PROD'
         shell: bash
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           NODE_OPTIONS: '--max_old_space_size=4096'
-        run: npx turbo run fprd:deploy --filter=...[HEAD~1] --concurrency 1 --dry-run -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'
+        run: npx turbo run fprd:deploy --filter=...[HEAD^] --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'

@@ -1,6 +1,5 @@
 export type Kpi = {
   /** Mhrs total */
-
   estMhrs: number;
   /** Mhrs not available */
   remMhrsNotAvailable: number;
