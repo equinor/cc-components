@@ -14,6 +14,7 @@ export const useGetEchoConfig = (packageId: string) => {
   const contextId = useContextId();
 
   const { data, isFetching, error } = useQuery<EchoConfig>({
+
     queryKey: ['model-tags', packageId],
     queryFn: async ({ signal }) => {
       const response = await client.fetch(
