@@ -19,4 +19,3 @@ export const useStatusBarConfig = (contextId: string): StatusBarConfig => {
   };
 };
 
-export const statusBarConfig = {};
