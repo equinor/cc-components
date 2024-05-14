@@ -13,6 +13,7 @@
   "dependencies": {
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
-    "@cc-components/heattraceshared": "workspace:^"
+    "@cc-components/heattraceshared": "workspace:^",
+    "@cc-components/modelviewer": "workspace:^"
   }
 }
