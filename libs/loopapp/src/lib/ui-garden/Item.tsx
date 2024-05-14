@@ -3,7 +3,6 @@ import { PopoverWrapper } from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
-import { CustomGroupByKeys, ExtendedGardenFields } from '../types';
 import {
   StyledDescription,
   StyledItemText,
