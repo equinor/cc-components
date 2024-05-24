@@ -307,9 +307,6 @@ importers:
       '@cc-components/handoversidesheet':
         specifier: workspace:^
         version: link:../handoversidesheet
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
@@ -328,9 +325,6 @@ importers:
       '@cc-components/handovershared':
         specifier: workspace:^
         version: link:../handovershared
-      '@cc-components/modelviewer':
-        specifier: workspace:^
-        version: link:../modelviewer
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../shared
