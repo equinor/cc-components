@@ -14,7 +14,6 @@
     "@cc-components/handovershared": "workspace:^",
     "@cc-components/handoversidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^",
-    "@cc-components/modelviewer": "workspace:^"
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }
