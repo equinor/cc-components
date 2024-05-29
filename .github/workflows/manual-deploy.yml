@@ -17,7 +17,7 @@ on:
           - punch
           - scopechangerequest
           - workorder
-          - '*'
+          - "*"
 permissions:
   actions: read
   checks: write
@@ -35,8 +35,11 @@ jobs:
         with:
           fetch-depth: 0 # Required to fetch range
 
+      - name: List affected apps
+        run: turbo run build --filter='${{inputs.category}}' --dry-run json --summarize | jq .packages >> $GITHUB_STEP_SUMMARY
+
       - name: Get fusion token
-        id: 'get-fusion-token'
+        id: "get-fusion-token"
         uses: ./.github/actions/get-fusion-token
         with:
           client-id: ${{secrets.AZURE_CLIENT_ID}}
@@ -49,9 +52,9 @@ jobs:
       - name: Build monorepo
         run: npx turbo run build --filter='${{inputs.category}}'
 
-      - name: 'Deploy affected apps to Fusion CI env'
+      - name: "Deploy affected apps to Fusion CI env"
         shell: bash
         env:
           #Runs out of memory when bundling more apps otherwise even though concurrency is 1
-          NODE_OPTIONS: '--max_old_space_size=4096'
+          NODE_OPTIONS: "--max_old_space_size=4096"
         run: npx turbo run pr:deploy --filter='${{inputs.category}}' --concurrency 1 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'
