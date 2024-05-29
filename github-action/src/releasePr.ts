@@ -70,5 +70,5 @@ export async function release(context: ReleaseArgs) {
   //   ciUrl
   // );
 
-  execSync(`echo '| ${r.name} | 2 | ${r.version} |' >> $GITHUB_STEP_SUMMARY`);
+  execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
 }
