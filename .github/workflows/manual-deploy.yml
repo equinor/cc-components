@@ -51,8 +51,8 @@ jobs:
 
       - name: Start summary
         run: |
-          echo "| App          | Files    | Version |" >> $GITHUB_STEP_SUMMARY
-          echo "|--------------|----------|---------|" >> $GITHUB_STEP_SUMMARY
+          echo '| App          | Files    | Version |' >> $GITHUB_STEP_SUMMARY
+          echo '|--------------|----------|---------|' >> $GITHUB_STEP_SUMMARY
 
       - name: "Deploy affected apps to Fusion CI env"
         shell: bash
