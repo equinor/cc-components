@@ -36,7 +36,7 @@ jobs:
           fetch-depth: 0 # Required to fetch range
 
       - name: List affected apps
-        run: turbo run build --filter='${{inputs.category}}' --dry-run json --summarize | jq .packages >> $GITHUB_STEP_SUMMARY
+        run: npx turbo run build --filter='${{inputs.category}}' --dry-run json --summarize | jq .packages >> $GITHUB_STEP_SUMMARY
 
       - name: Get fusion token
         id: 'get-fusion-token'
