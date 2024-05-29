@@ -48,27 +48,27 @@ program
 await program.parseAsync();
 
 export async function release(context: ReleaseArgs) {
-  // prepareBundle();
-  // makeManifest('./package.json');
-  // const zipped = zipBundle();
+  prepareBundle();
+  makeManifest('./package.json');
+  const zipped = zipBundle();
   const r = parsePackageJson();
   if (!r.name) {
     throw new Error(
       `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
     );
   }
-  // await uploadBundle(ciUrl, context.token, r.name, zipped);
-  // await patchAppConfig(
-  //   {
-  //     ai: context.ai,
-  //     commit: context.sha,
-  //     pr: context.pr,
-  //     modelViewerConfig: JSON.parse(context.modelViewerConfig),
-  //   },
-  //   context.token,
-  //   r.name,
-  //   ciUrl
-  // );
+  await uploadBundle(ciUrl, context.token, r.name, zipped);
+  await patchAppConfig(
+    {
+      ai: context.ai,
+      commit: context.sha,
+      pr: context.pr,
+      modelViewerConfig: JSON.parse(context.modelViewerConfig),
+    },
+    context.token,
+    r.name,
+    ciUrl
+  );
 
   execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
 }
