@@ -35,6 +35,10 @@ jobs:
       - name: Build monorepo
         run: pnpm ci:build
 
+      - name: Start summary
+        run: |
+          echo '# FPRD deployment summary' >> $GITHUB_STEP_SUMMARY
+
       - name: 'Deploy affected apps to Fusion PROD'
         shell: bash
         env:

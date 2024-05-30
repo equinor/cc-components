@@ -49,6 +49,10 @@ jobs:
       - name: Build monorepo
         run: npx turbo run build --filter='${{inputs.category}}'
 
+      - name: Start summary
+        run: |
+          echo '# CI deployment summary' >> $GITHUB_STEP_SUMMARY
+
       - name: 'Deploy affected apps to Fusion CI env'
         shell: bash
         env:

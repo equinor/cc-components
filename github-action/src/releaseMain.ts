@@ -9,6 +9,7 @@ import { makeManifest } from './utils/makeManifest.js';
 import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
+import { execSync } from 'child_process';
 
 const prodUrl = 'https://fusion-s-portal-fprd.azurewebsites.net';
 
@@ -76,6 +77,8 @@ export async function release(config: ReleaseArgs) {
     pkg.name,
     prodUrl
   );
+
+  execSync(`echo '## ${pkg.name}' >> $GITHUB_STEP_SUMMARY`);
 }
 
 function shouldSkipProd() {

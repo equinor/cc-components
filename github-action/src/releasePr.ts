@@ -8,6 +8,7 @@ import { makeManifest } from './utils/makeManifest.js';
 import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
+import { execSync } from 'child_process';
 
 const ciUrl = 'https://fusion-s-portal-ci.azurewebsites.net';
 
@@ -68,4 +69,6 @@ export async function release(context: ReleaseArgs) {
     r.name,
     ciUrl
   );
+
+  execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
 }

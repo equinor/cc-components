@@ -49,6 +49,10 @@ jobs:
       - name: Build monorepo
         run: npx turbo run build --filter=${{inputs.appKey}}
 
+      - name: Start summary
+        run: |
+          echo '# FPRD deployment summary' >> $GITHUB_STEP_SUMMARY
+
       - name: 'Deploy affected apps to Fusion FPRD env'
         shell: bash
         env:
