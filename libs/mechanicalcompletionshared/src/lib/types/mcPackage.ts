@@ -38,10 +38,10 @@ export type McPackage = {
   rfO_ActualDate: string;
   rfO_Status: string;
   m01_PlannedForecastDate: string;
-  m01_Actual: string;
-  m02_Actual: string;
-  m03_Actual: string;
-  m04_Actual: string;
+  m01_Actual: boolean | null;
+  m02_Actual: boolean | null;
+  m03_Actual: boolean | null;
+  m04_Actual: boolean | null;
   finalPunchPlannedDate: string;
   finalPunchForecastDate: string;
   finalPunchActualDate: string;
