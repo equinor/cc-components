@@ -17,8 +17,8 @@ export const defaultGridOptions: GridOptions = {
   enableCellTextSelection: true,
   ensureDomOrder: true,
   onFirstDataRendered: (e) => {
-    e.columnApi.autoSizeColumns(
-      e.columnApi
+    e.api.autoSizeColumns(
+      e.api
         .getAllDisplayedColumns()
         .filter((s) => !excludedColumns.includes(s.getColId().toLocaleLowerCase()))
     );

@@ -77,7 +77,7 @@ export function useGridDataSource<TData>(
             return def;
           });
 
-          params.api.setColumnDefs(newColDefs);
+          params.api.updateGridOptions({ columnDefs: newColDefs });
           setColDefs(newColDefs);
         }
 
