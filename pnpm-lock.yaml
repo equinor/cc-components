@@ -56,7 +56,7 @@ importers:
         version: 8.3.0(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
         specifier: 9.0.8
-        version: 9.0.8(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
+        version: 9.0.8(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
       '@microsoft/applicationinsights-web':
         specifier: ^3.2.0
         version: 3.2.0(tslib@2.6.2)
@@ -271,6 +271,15 @@ importers:
       '@cc-components/swcrapp':
         specifier: workspace:^
         version: link:../../libs/swcrapp
+
+  apps/transfer:
+    dependencies:
+      '@cc-components/handoverapp':
+        specifier: workspace:^
+        version: link:../../libs/handoverapp
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
 
   apps/workorder:
     dependencies:
@@ -2205,6 +2214,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -2212,6 +2222,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@icons/material@0.2.4':
     resolution: {integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==}
@@ -10377,7 +10388,7 @@ snapshots:
       - '@types/sortablejs'
       - supports-color
 
-  '@equinor/workspace-fusion@9.0.8(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
+  '@equinor/workspace-fusion@9.0.8(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0

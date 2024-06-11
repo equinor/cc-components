@@ -1,0 +1,20 @@
+{
+  "name": "transfer-poc",
+  "displayName": "Transfer",
+  "version": "0.0.0",
+  "main": "/src/main.tsx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "fusion-framework-cli app dev",
+    "dev:local": "fusion-framework-cli app dev",
+    "build": "tsc -b -f",
+    "pr:deploy": "tsx ../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
+  },
+  "dependencies": {
+    "@cc-components/handoverapp": "workspace:^",
+    "@cc-components/shared": "workspace:^"
+  }
+}
+
