@@ -67,6 +67,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: fprd
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to fetch range
+
       - name: Get fusion token
         id: 'get-fusion-token-fprd'
         uses: ./.github/actions/get-fusion-token
