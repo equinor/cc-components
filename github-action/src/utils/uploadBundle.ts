@@ -34,6 +34,7 @@ export async function uploadBundle(
   notice(`bundle uploaded with status code ${r.message.statusCode}`);
   if (r.message.statusCode !== 200) {
     logInfo(`Failed to upload ${appKey}, code: ${r.message.statusCode}`, 'Red');
+    console.log(r.message.read().toString())
     throw new Error('Bundle failed to upload, fatal error');
   }
 
