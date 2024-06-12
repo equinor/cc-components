@@ -145,6 +145,14 @@ GROUP BY tag.tagNo
         </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">Please confirm that maintenance history has been handed over to operations</Typography>
+          <Typography>The following maintenance data should have been handed over</Typography>
+          <ul>
+            <li>ATEX inspection dates</li>
+            <li>Insulation Resistance (IR) test results</li>
+            <li>Resistance Test results</li>
+            <li>Pressure Safety Vale calibration</li>
+            <li>SIF/SIL shutdown open/close times</li>
+          </ul>
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Button onClick={() => {
