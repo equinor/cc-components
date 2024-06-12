@@ -9,7 +9,7 @@ import buildQuery from 'odata-query';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import { useHttpClient } from '@equinor/fusion-framework-react/http';
 import React, { useState } from 'react';
-import { Autocomplete, Button, CircularProgress } from '@equinor/eds-core-react'
+import { Autocomplete, Button, CircularProgress, Dialog, Typography } from '@equinor/eds-core-react'
 import { ICellRendererProps } from '@equinor/workspace-fusion/dist/lib/integrations/grid';
 
 const mccr_status_map = {
@@ -54,6 +54,14 @@ export interface Famtag {
 
 const CommPkg = () => {
   const [facility, setFacility] = useState("JCA")
+  const [maintenanceConfirmed, setMaintenanceConfirmed] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
   const [commpkg, setcommpkg] = useState<FamCommPkg | null>(null)
   const client = useHttpClient("cc-api")
   const { isLoading, data, error } = useQuery<FamCommPkg[]>({
@@ -125,11 +133,27 @@ GROUP BY tag.tagNo
         }} optionLabel={s => s.commissioningPackageNo} selectedOptions={[]} multiple={false} onSelect={(a) => { console.log(a) }} options={data} label={"Search commpkg for transfer"} />
       </div>
       <div style={{ width: "500px" }}>
-        {tagsLoading ? <CircularProgress /> : !!tags ? <div><ClientGrid height={500} rowData={tags} colDefs={tagsDef} /></div> : <div>uh-oh</div>}
+        {tagsLoading ? <CircularProgress /> : !!tags ? <div><ClientGrid height={500} rowData={tags} colDefs={tagsDef} /></div> : <div></div>}
       </div>
       <Button disabled={!tags || tags?.some(s => s.worstStatus < 2)} onClick={() => {
-        console.log("Certificate started")
+        handleOpen()
       }}>Generate certificate</Button>
+      {maintenanceConfirmed && (<div>✅ Success, certificate generated</div>)}
+      <Dialog open={isOpen} isDismissable onClose={handleClose}>
+        <Dialog.Header>
+          <Dialog.Title>Title</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.CustomContent>
+          <Typography variant="body_short">Please confirm that maintenance history has been handed over to operations</Typography>
+        </Dialog.CustomContent>
+        <Dialog.Actions>
+          <Button onClick={() => {
+            setMaintenanceConfirmed(true)
+            handleClose()
+          }}>Yes</Button>
+          <Button variant="ghost" onClick={handleClose}>Cancel</Button>
+        </Dialog.Actions>
+      </Dialog>
     </div>)
 }
 
