@@ -9,7 +9,7 @@ import buildQuery from 'odata-query';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import { useHttpClient } from '@equinor/fusion-framework-react/http';
 import React, { useState } from 'react';
-import { Autocomplete, Button, CircularProgress, Dialog, Typography } from '@equinor/eds-core-react'
+import { Accordion, Autocomplete, Button, CircularProgress, Dialog, Typography } from '@equinor/eds-core-react'
 import { ICellRendererProps } from '@equinor/workspace-fusion/dist/lib/integrations/grid';
 
 const mccr_status_map = {
@@ -51,7 +51,19 @@ export interface Famtag {
   worstStatus: 0 | 1 | 2 | 3
   mccrStatus: "OS" | "OK" | "PA" | "PB"
 }
-
+type RProps = {
+  header: string;
+  description: string;
+}
+const R = ({ header, description }: RProps) => (<Accordion.Item>
+  <Accordion.Header>
+    <Accordion.HeaderTitle>
+      {header}
+    </Accordion.HeaderTitle>
+  </Accordion.Header>
+  <Accordion.Panel>{description}</Accordion.Panel>
+</Accordion.Item>
+)
 const CommPkg = () => {
   const [facility, setFacility] = useState("JCA")
   const [maintenanceConfirmed, setMaintenanceConfirmed] = useState(false)
@@ -139,20 +151,22 @@ GROUP BY tag.tagNo
         handleOpen()
       }}>Generate certificate</Button>
       {maintenanceConfirmed && (<div>✅ Success, certificate generated</div>)}
-      <Dialog open={isOpen} isDismissable onClose={handleClose}>
+      <Dialog open={isOpen} isDismissable onClose={handleClose} style={{ width: "500px" }}>
         <Dialog.Header>
-          <Dialog.Title>Title</Dialog.Title>
+          <Dialog.Title>Confirm maintenance history handover</Dialog.Title>
         </Dialog.Header>
         <Dialog.CustomContent>
           <Typography variant="body_short">Please confirm that maintenance history has been handed over to operations</Typography>
+          <br />
           <Typography>The following maintenance data should have been handed over</Typography>
-          <ul>
-            <li>ATEX inspection dates</li>
-            <li>Insulation Resistance (IR) test results</li>
-            <li>Resistance Test results</li>
-            <li>Pressure Safety Vale calibration</li>
-            <li>SIF/SIL shutdown open/close times</li>
-          </ul>
+          <Accordion>
+            <R header='ATEX inspection dates' description='ATEX inspection dates on a tag indicate the schedule for mandatory safety checks of equipment used in explosive atmospheres. These dates ensure compliance with the ATEX directive by verifying that the equipment maintains its integrity and protective features. Regular adherence to these dates is essential for the prevention of accidents in hazardous zones.' />
+            <R header='Insulation Resistance (IR) test results' description='Insulation Resistance (IR) test results on a tag provide a snapshot of the electrical insulations integrity between conductive parts. These values, measured in megohms, indicate the effectiveness of the insulation in preventing leakage currents and potential equipment failures. Regular IR testing is crucial for predictive maintenance and ensuring electrical safety standards are met.' />
+            <R header='Resistance Test results' description='Resistance Test results on a tag reflect the measured electrical resistance of components, such as grounding connections or continuity paths, ensuring they meet specified parameters. These results are critical for verifying that the electrical system can safely conduct current and maintain proper function. Regular testing helps to identify potential issues before they lead to equipment malfunction or safety hazards.' />
+            <R header='Pressure safety valve calibration' description='Pressure Safety Valve (PSV) calibration results on a tag confirm the valves set pressure and blowdown characteristics, ensuring it operates correctly to prevent overpressure conditions. These calibration records are vital for maintaining system safety and compliance with regulatory standards. Regular checks and recalibration are necessary to guarantee the valves reliability and protective performance.' />
+            <R header='SIF/SIL shutdown open/close times' description='SIF/SIL shutdown open/close times on a tag document the response times for Safety Instrumented Functions/Systems to reach a safe state, either by opening or closing. These timings are critical for validating that the system meets the Safety Integrity Level requirements, ensuring rapid protective actions during hazardous events. Regular verification of these times is essential for maintaining operational safety and system effectiveness.' />
+          </Accordion>
+          <br />
         </Dialog.CustomContent>
         <Dialog.Actions>
           <Button onClick={() => {
