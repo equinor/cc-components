@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { StateProps } from "./main"
-import { Famtag } from "./types"
 import { Button, CircularProgress, Icon, Typography } from "@equinor/eds-core-react"
 import { tokens } from "@equinor/eds-tokens"
 import { useMutation } from "@tanstack/react-query"
@@ -10,16 +9,16 @@ export type SigningProps = {
 
 
 const signers = [
-  "Atle Wee Førre",
-  "Cato Dahl",
-  "Gustav Eikaas"
+  "Ola Nordmann",
+  "Jørn Olafsen",
+  "Børje Larsen"
 ]
 
 export function Signing(props: SigningProps) {
   const [signIndex, setsignIndex] = useState(0)
   const { isPending, isSuccess, mutateAsync } = useMutation({
     mutationFn: async () => {
-      return new Promise((res) => setTimeout(() => res(true), 50))
+      return new Promise((res) => setTimeout(() => res(true), 5000))
     }
   })
 
