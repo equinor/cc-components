@@ -1,14 +1,23 @@
 import { ClientGrid } from '@equinor/workspace-ag-grid';
 import { createRender } from '@cc-components/shared';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import React, { useState } from 'react';
-import { Accordion, Autocomplete, Button, CircularProgress, Dialog, Typography } from '@equinor/eds-core-react'
+import { QueryClient, QueryClientProvider, useMutation } from '@tanstack/react-query'
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Accordion, Autocomplete, Button, CircularProgress, Dialog, Icon, Typography } from '@equinor/eds-core-react'
 import { tagQuery, commpkgQuery } from './famqueries';
 import { FamCommPkg, Famtag } from './types';
 import { AccordionSection } from './Accordion';
 import { useFamQuery } from './useFamQuery';
 import { configure } from './framework-config';
 import { tagsDef } from './tagcolumns'
+import { tokens } from '@equinor/eds-tokens';
+import { check_circle_outlined, library_pdf } from '@equinor/eds-icons';
+import { Signing } from './Signing';
+import { MaintenanceHistory } from './MaintenanceHistory';
+
+Icon.add({
+  library_pdf,
+  check_circle_outlined
+})
 
 const mccr_status_map = {
   0: "OS",
@@ -21,47 +30,132 @@ function useCommissioningPackages(facility: string) {
   return useFamQuery<FamCommPkg[]>(["commpkgs"], commpkgQuery(facility))
 }
 
-const CommPkg = () => {
+
+function Transfer() {
   const [facility] = useState("JCA")
-  const [maintenanceConfirmed, setMaintenanceConfirmed] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const [state, setState] = useState<"SCOPING" | "SIGNING" | "MAINTENANCE HISTORY" | "ARCHIVED">("SCOPING");
+  const [tags, setTags] = useState<Famtag[] | null>(null);
 
-  const handleOpen = () => {
-    setIsOpen(true)
-  }
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-  const [commpkg, setcommpkg] = useState<FamCommPkg | null>(null)
-
-  const { isLoading, data, error } = useCommissioningPackages(facility)
-  const { isLoading: tagsLoading, data: tagsData, error: tagsError } = useFamQuery<Famtag[]>(["tags", commpkg?.commissioningPackageNo], tagQuery(commpkg?.commissioningPackageNo, facility), !!commpkg)
-  const tags = tagsData?.map(s => ({ ...s, mccrStatus: mccr_status_map[s.worstStatus] })) as Famtag[]
-
-  if (isLoading) {
-    return <CircularProgress />
-  }
-  if (!data) {
-    return <div>uh-oh</div>
-  }
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-      <div style={{ width: "500px" }}>
-        <Autocomplete onOptionsChange={(a) => {
-          setcommpkg(a.selectedItems[0] ?? null)
-        }} optionLabel={s => s.commissioningPackageNo} selectedOptions={[]} multiple={false} onSelect={(a) => { console.log(a) }} options={data} label={"Search commpkg for transfer"} />
+    <div style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+      <div style={{ height: "700px", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Scoping isActive={state == "SCOPING"} tags={tags} setTags={setTags} next={() => setState("SIGNING")} facility={facility} />
+        <Signing isActive={state == "SIGNING"} next={() => setState("MAINTENANCE HISTORY")} facility={facility} />
+        <MaintenanceHistory isActive={state == "MAINTENANCE HISTORY"} next={() => setState("ARCHIVED")} facility={facility} />
       </div>
-      <div style={{ width: "500px" }}>
-        {tagsLoading ? <CircularProgress /> : !!tags ? <div><ClientGrid height={500} rowData={tags} colDefs={tagsDef} /></div> : <div></div>}
-      </div>
-      <Button disabled={!tags || tags?.some(s => s.worstStatus < 2)} onClick={() => {
-        handleOpen()
-      }}>Generate certificate</Button>
-      <MaintenanceConfirmationDialog handleClose={handleClose} isOpen={isOpen} setMaintenanceConfirmed={setMaintenanceConfirmed} />
-      {maintenanceConfirmed && (<div>✅ Success, certificate generated</div>)}
-    </div>)
+    </div>
+  )
 }
 
+export type StateProps = {
+  next: () => void;
+  isActive: boolean;
+  facility: string;
+}
+
+type ScopingProps = {
+  tags: Famtag[] | null;
+  setTags: (tags: Famtag[]) => void;
+} & StateProps
+
+
+
+type ArchivedProps = {
+} & Omit<StateProps, "next">
+
+function Scoping(props: ScopingProps) {
+  const [commpkg, setCommPkg] = useState<FamCommPkg | null>(null)
+
+  const { isLoading: tagsLoading, data: tagsData, error: tagsError } = useFamQuery<Famtag[]>(["tags", commpkg?.commissioningPackageNo], tagQuery(commpkg?.commissioningPackageNo, props.facility), !!commpkg)
+  const tags = tagsData?.map(s => ({ ...s, mccrStatus: mccr_status_map[s.worstStatus] })) as Famtag[]
+  const [reports, setReports] = useState<string[]>([])
+
+
+  const { isPending, isSuccess, mutateAsync } = useMutation({
+    mutationFn: async () => {
+      const promise = Promise.all([
+        new Promise((res) => setTimeout(() => {
+          setReports(s => [...s, "MC21 - Commissioning package for certificate"]);
+          res("")
+        }, 500)),
+        new Promise((res) => setTimeout(() => {
+          setReports(s => [...s, "DCP01 - Dynamic Commissioning Procedure - Relevant parts of commissioning procedure signed out"]);
+          res("")
+        }, 1000)),
+        new Promise((res) => setTimeout(() => {
+          setReports(s => [...s, "MC22 - CPCL/RL content by comm.pkg - CPCL/RL content by comm.pkg for certificate"]);
+          res("")
+        }, 1500)),
+        new Promise((res) => setTimeout(() => {
+          setReports(s => [...s, "MC84 - Punchlist report for certificate"]);
+          res("")
+        }, 2000)),
+
+      ]);
+      return await promise
+    }
+  })
+
+  useEffect(() => {
+    props.setTags(tags)
+  }, [commpkg?.commissioningPackageNo, tagsData])
+
+  const { isLoading, data, error } = useCommissioningPackages("JCA")
+
+
+  return (
+    <div style={{ height: "100%", border: "2px solid grey", alignItems: "center", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <Typography variant='h1_bold'>Scoping</Typography>
+      <div style={{ width: "200px", display: "flex", alignItems: "center" }}>
+        <Autocomplete disabled={!props.isActive} onOptionsChange={(a) => {
+          setCommPkg(a.selectedItems[0] ?? null)
+          setReports([])
+          mutateAsync()
+        }} optionLabel={s => s.commissioningPackageNo} selectedOptions={[]} multiple={false} options={data ?? []} label={"Search commpkg for transfer"} />
+        {isLoading && (<CircularProgress size={16} />)}
+      </div>
+      <Typography style={{ display: "flex", alignItems: "center" }} variant='h3'>Tags {tagsLoading && (<CircularProgress size={16} />)}</Typography>
+      <div style={{ width: "500px" }}>
+        <ClientGrid height={250} rowData={tags ?? []} colDefs={tagsDef} />
+      </div>
+
+      <>{commpkg && (
+        <>
+          <Typography variant='h3'>Reports</Typography>
+          {isPending && (<div><CircularProgress size={16} /><Typography>Generating reports....</Typography></div>)}
+          <Reports reports={reports} />
+        </>
+      )}</>
+      <Button disabled={isPending || !tags || tags?.some(s => s.worstStatus < 2) || !props.isActive} onClick={() => {
+        props.next()
+      }}>Initiate RFOC certificate</Button>
+
+    </div>
+
+  )
+}
+
+function Archived(props: ArchivedProps) {
+
+  return (
+    <div style={{ height: "100%", border: "2px solid grey", display: "grid", alignContent: "center", justifyItems: "center" }}>
+      <Typography variant='h1_bold'>Archived</Typography>
+    </div>
+
+  )
+}
+
+
+type ReportsProps = {
+  reports: string[]
+}
+const Reports = (props: ReportsProps) => {
+  return (
+    <div>
+      {props.reports.map(s => <div><Icon name="library_pdf" color={tokens.colors.interactive.primary__resting.hex} />{s}</div>)}
+    </div>
+  )
+}
 export type MaintenanceConfirmationDialogProps = {
   handleClose: VoidFunction;
   isOpen: boolean;
@@ -102,7 +196,7 @@ const queryclient = new QueryClient()
 const TransferApp = () => {
   return (
     <QueryClientProvider client={queryclient}>
-      <CommPkg />
+      <Transfer />
     </QueryClientProvider>
   );
 };
