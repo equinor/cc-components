@@ -41,11 +41,11 @@ export function Scoping(props: ScopingProps) {
           res("")
         }, 500)),
         new Promise((res) => setTimeout(() => {
-          setReports(s => [...s, "DCP01 - Dynamic Commissioning Procedure - Relevant parts of commissioning procedure signed out"]);
+          setReports(s => [...s, "DCP01 - Dynamic Commissioning Procedure"]);
           res("")
         }, 1000)),
         new Promise((res) => setTimeout(() => {
-          setReports(s => [...s, "MC22 - CPCL/RL content by comm.pkg - CPCL/RL content by comm.pkg for certificate"]);
+          setReports(s => [...s, "MC22 - CPCL/RL content by comm.pkg"]);
           res("")
         }, 1500)),
         new Promise((res) => setTimeout(() => {
@@ -64,12 +64,13 @@ export function Scoping(props: ScopingProps) {
 
   const { isLoading, data, error } = useCommissioningPackages("JCA")
 
+  const isAllTagsValid = tags?.some(s => s.worstStatus < 2)
 
   return (
     <div style={{ height: "100%", border: "2px solid grey", alignItems: "center", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
       <Typography variant='h1_bold'><>{props.isCompleted && <Icon color={tokens.colors.interactive.primary__resting.hex} name="check_circle_outlined" />}</>Scoping</Typography>
       <div style={{ width: "200px", display: "flex", alignItems: "center" }}>
-        <Autocomplete disabled={!props.isActive} onOptionsChange={(a) => {
+        <Autocomplete disabled={!props.isActive} autoFocus onOptionsChange={(a) => {
           setCommPkg(a.selectedItems[0] ?? null)
           setReports([])
           mutateAsync()
@@ -88,7 +89,8 @@ export function Scoping(props: ScopingProps) {
           <Reports reports={reports} />
         </>
       )}</>
-      <Button disabled={isPending || !tags || tags?.some(s => s.worstStatus < 2) || !props.isActive} onClick={() => {
+
+      <Button disabled={isPending || !tags || !props.isActive} onClick={() => {
         props.next()
       }}>Initiate RFOC certificate</Button>
 
@@ -103,7 +105,7 @@ type ReportsProps = {
 const Reports = (props: ReportsProps) => {
   return (
     <div>
-      {props.reports.map(s => <div><Icon name="library_pdf" color={tokens.colors.interactive.primary__resting.hex} />{s}</div>)}
+      {props.reports.map(s => <div style={{ display: "flex", alignItems: "center", whiteSpace: "nowrap", textOverflow: "ellipsis", maxWidth: "500px", overflow: "hidden" }}><Icon name="library_pdf" color={tokens.colors.interactive.primary__resting.hex} />{s}</div>)}
     </div>
   )
 }

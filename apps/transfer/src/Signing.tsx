@@ -11,11 +11,25 @@ export type SigningProps = {
 const signers = [
   "Ola Nordmann",
   "Jørn Olafsen",
-  "Børje Larsen"
+  "Børje Larsen",
+  "Cathrine Iversen",
 ]
 
 export function Signing(props: SigningProps) {
   const [signIndex, setsignIndex] = useState(0)
+  const [signPending, setSignPending] = useState(false);
+
+  const initiateSign = async () => {
+    setSignPending(true)
+    await new Promise((res) => {
+      setTimeout(() => {
+        setsignIndex(s => s + 1)
+        res(false)
+      }, 500)
+    })
+    setSignPending(false)
+  }
+
   const { isPending, isSuccess, mutateAsync } = useMutation({
     mutationFn: async () => {
       return new Promise((res) => setTimeout(() => res(true), 5000))
@@ -25,9 +39,9 @@ export function Signing(props: SigningProps) {
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", border: "2px solid grey", width: "100%" }}>
       <Typography variant="h1_bold"><>{props.isCompleted && <Icon color={tokens.colors.interactive.primary__resting.hex} name="check_circle_outlined" />}</>Signing</Typography>
-      <div style={{ height: "100%", width: "200px", alignItems: "center", display: "grid", alignContent: "center", justifyContent: "center", gridTemplateColumns: "1fr auto" }}>
+      <div style={{ height: "100%", width: "200px", alignItems: "center", display: "grid", alignContent: "center", justifyContent: "center", gridTemplateColumns: "1fr auto", gap: "5px", gridTemplateRows: "40px 40px 40px 40px" }}>
         {signers.map((s, i) => <>
-          <Typography>{s}</Typography> {i < signIndex ? <Icon name="check_circle_outlined" color={tokens.colors.interactive.primary__resting.hex} /> : <Button onClick={() => setsignIndex(s => s + 1)} disabled={!props.isActive || i > signIndex}>Sign</Button>}</>)}
+          <Typography>{s}</Typography> {i < signIndex ? <Icon style={{width: "48px"}} name="check_circle_outlined" color={tokens.colors.interactive.primary__resting.hex} /> : <Button onClick={() => initiateSign()} disabled={!props.isActive || i > signIndex}>{(signPending && i == signIndex) ? <CircularProgress size={16} /> : "Sign"}</Button>}</>)}
       </div>
       {isPending && (
         <div style={{ display: "flex", flexDirection: "row", gap: "5px", justifyContent: "center", alignItems: "center" }}>

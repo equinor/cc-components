@@ -19,7 +19,7 @@ export function MaintenanceHistory(props: MaintenanceHistoryProps) {
         <AccordionSection header='Pressure safety valve calibration' description='Pressure Safety Valve (PSV) calibration results on a tag confirm the valves set pressure and blowdown characteristics, ensuring it operates correctly to prevent overpressure conditions. These calibration records are vital for maintaining system safety and compliance with regulatory standards. Regular checks and recalibration are necessary to guarantee the valves reliability and protective performance.' />
         <AccordionSection header='SIF/SIL shutdown open/close times' description='SIF/SIL shutdown open/close times on a tag document the response times for Safety Instrumented Functions/Systems to reach a safe state, either by opening or closing. These timings are critical for validating that the system meets the Safety Integrity Level requirements, ensuring rapid protective actions during hazardous events. Regular verification of these times is essential for maintaining operational safety and system effectiveness.' />
       </Accordion>
-      <Typography variant="body_long">
+      <Typography style={{margin: "10px"}} variant="body_long">
         Please confirm that the maintenance history for the tags has been handed over to operations.
       </Typography>
       <Button disabled={!props.isActive} onClick={() => {
