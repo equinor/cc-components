@@ -20,11 +20,11 @@ function Transfer() {
   const [tags, setTags] = useState<Famtag[] | null>(null);
 
   return (
-    <div style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
-      <div style={{ height: "700px", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Scoping isActive={state == "SCOPING"} tags={tags} setTags={setTags} next={() => setState("SIGNING")} facility={facility} />
-        <Signing isActive={state == "SIGNING"} next={() => setState("MAINTENANCE HISTORY")} facility={facility} />
-        <MaintenanceHistory isActive={state == "MAINTENANCE HISTORY"} next={() => setState("ARCHIVED")} facility={facility} />
+    <div style={{ width: "100%", height: "99%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+      <div style={{ height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Scoping isCompleted={state !== "SCOPING"} isActive={state == "SCOPING"} tags={tags} setTags={setTags} next={() => setState("SIGNING")} facility={facility} />
+        <Signing isCompleted={state !== "SCOPING" && state !== "SIGNING"} isActive={state == "SIGNING"} next={() => setState("MAINTENANCE HISTORY")} facility={facility} />
+        <MaintenanceHistory isCompleted={state == "ARCHIVED"} isActive={state == "MAINTENANCE HISTORY"} next={() => setState("ARCHIVED")} facility={facility} />
       </div>
     </div>
   )
@@ -33,6 +33,7 @@ function Transfer() {
 export type StateProps = {
   next: () => void;
   isActive: boolean;
+  isCompleted: boolean;
   facility: string;
 }
 

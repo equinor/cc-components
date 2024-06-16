@@ -67,7 +67,7 @@ export function Scoping(props: ScopingProps) {
 
   return (
     <div style={{ height: "100%", border: "2px solid grey", alignItems: "center", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-      <Typography variant='h1_bold'>Scoping</Typography>
+      <Typography variant='h1_bold'><>{props.isCompleted && <Icon color={tokens.colors.interactive.primary__resting.hex} name="check_circle_outlined" />}</>Scoping</Typography>
       <div style={{ width: "200px", display: "flex", alignItems: "center" }}>
         <Autocomplete disabled={!props.isActive} onOptionsChange={(a) => {
           setCommPkg(a.selectedItems[0] ?? null)
