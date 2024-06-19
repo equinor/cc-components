@@ -1,0 +1,43 @@
+{
+  "title": "Delta live table",
+  "description": "Schema for the Delta live table configuration",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the delta live table job."
+    },
+    "maxWorkers": {
+      "type": "integer",
+      "description": "The maximum number of workers to be used. Defaults to (<number of jobs> - 1)",
+      "minimum": 1
+    },
+    "jobs": {
+      "type": "array",
+      "description": "A list of jobs to execute in the delta live table.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outputTableName": {
+            "type": "string",
+            "description": "The name of the output table."
+          },
+          "viewName": {
+            "type": "string",
+            "description": "The name of the view. (Can be found in the hive metastore)"
+          },
+          "indexes": {
+            "type": "array",
+            "description": "A list of clustering indexes to apply. (Typically used for lookup properties like Facility and Project)",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["outputTableName", "viewName", "indexes"]
+      }
+    }
+  },
+  "required": ["name", "jobs"]
+}
+
