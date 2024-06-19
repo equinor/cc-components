@@ -12,6 +12,34 @@
       "description": "The maximum number of workers to be used. Defaults to (<number of jobs> - 1)",
       "minimum": 1
     },
+    "prodSchedule": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
+          "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
+        },
+        {
+          "type": "string",
+          "enum": ["continuous"],
+          "description": "A specific string value to indicate continuous scheduling."
+        }
+      ]
+    },
+    "devSchedule": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
+          "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
+        },
+        {
+          "type": "string",
+          "enum": ["continuous"],
+          "description": "A specific string value to indicate continuous scheduling."
+        }
+      ]
+    },
     "jobs": {
       "type": "array",
       "description": "A list of jobs to execute in the delta live table.",
@@ -22,34 +50,7 @@
             "type": "string",
             "description": "The name of the output table."
           },
-          "prodSchedule": {
-            "oneOf": [
-              {
-                "type": "string",
-                "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
-                "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
-              },
-              {
-                "type": "string",
-                "enum": ["continuous"],
-                "description": "A specific string value to indicate continuous scheduling."
-              }
-            ]
-          },
-          "devSchedule": {
-            "oneOf": [
-              {
-                "type": "string",
-                "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
-                "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
-              },
-              {
-                "type": "string",
-                "enum": ["continuous"],
-                "description": "A specific string value to indicate continuous scheduling."
-              }
-            ]
-          },
+
           "viewName": {
             "type": "string",
             "description": "The name of the view. (Can be found in the hive metastore)"
@@ -62,10 +63,10 @@
             }
           }
         },
-        "required": ["outputTableName", "prodSchedule", "devSchedule", "viewName", "indexes"]
+        "required": ["outputTableName", "viewName", "indexes"]
       }
     }
   },
-  "required": ["name", "jobs"]
+  "required": ["name", "jobs", "prodSchedule", "devSchedule",]
 }
 
