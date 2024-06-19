@@ -16,12 +16,12 @@
       "oneOf": [
         {
           "type": "string",
-          "enum": ["continuous"],
-          "description": "A specific string value to indicate continuous scheduling."
+          "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
+          "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
         },
         {
           "type": "string",
-          "enum": ["not continuous"],
+          "enum": ["continuous"],
           "description": "A specific string value to indicate continuous scheduling."
         }
       ]
@@ -30,12 +30,12 @@
       "oneOf": [
         {
           "type": "string",
-          "enum": ["continuous"],
-          "description": "A specific string value to indicate continuous scheduling."
+          "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
+          "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
         },
         {
           "type": "string",
-          "enum": ["not continuous"],
+          "enum": ["continuous"],
           "description": "A specific string value to indicate continuous scheduling."
         }
       ]
