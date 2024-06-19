@@ -22,6 +22,20 @@
             "type": "string",
             "description": "The name of the output table."
           },
+          "schedule": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^\\s*([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+(|\\s([0-9]|\\*|\\?|\\-|\\/|,|L|W|C|\\#)+){5}\\s*$",
+                "description": "Quartz cron schedule expression for job scheduling. Must consist of 5 or 6 fields (seconds optional)."
+              },
+              {
+                "type": "string",
+                "enum": ["continuous"],
+                "description": "A specific string value to indicate continuous scheduling."
+              }
+            ]
+          },
           "viewName": {
             "type": "string",
             "description": "The name of the view. (Can be found in the hive metastore)"
@@ -34,7 +48,7 @@
             }
           }
         },
-        "required": ["outputTableName", "viewName", "indexes"]
+        "required": ["outputTableName", "schedule", "viewName", "indexes"]
       }
     }
   },
