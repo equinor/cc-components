@@ -67,6 +67,6 @@
       }
     }
   },
-  "required": ["name", "jobs", "prodSchedule", "devSchedule",]
+  "required": ["name", "jobs", "prodSchedule", "devSchedule"]
 }
 
