@@ -274,6 +274,12 @@ importers:
 
   apps/transfer:
     dependencies:
+      '@cc-components/handoverapp':
+        specifier: workspace:^
+        version: link:../../libs/handoverapp
+      '@cc-components/handovershared':
+        specifier: workspace:^
+        version: link:../../libs/handovershared
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../../libs/shared

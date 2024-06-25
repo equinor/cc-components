@@ -1,14 +1,14 @@
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenDataSource } from '@equinor/workspace-fusion/garden';
 
-type GroupingOption = {
+export type GroupingOption = {
   displayName: string;
   groupingKey: string;
   timeInterval: string[] | null;
   dateVariant: string[] | null;
 };
 
-type ApiGardenMeta = {
+export type ApiGardenMeta = {
   startIndex: number | null;
   columnCount: number;
   columnWidth?: number;
@@ -18,7 +18,7 @@ type ApiGardenMeta = {
   validGroupingOptions: GroupingOption[];
 };
 
-type ApiHeader = {
+export type ApiHeader = {
   columnName: string;
   totalItemsCount: number;
 };

@@ -13,7 +13,9 @@
     "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
-    "@cc-components/shared": "workspace:^"
+    "@cc-components/shared": "workspace:^",
+    "@cc-components/handoverapp": "workspace:^",
+    "@cc-components/handovershared": "workspace:^"
   }
 }
 
