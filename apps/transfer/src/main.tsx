@@ -1,5 +1,5 @@
 import { createRender } from '@cc-components/shared';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react';
 import { Famtag } from './types';
 import { configure } from './framework-config';
@@ -8,6 +8,7 @@ import { Signing } from './Signing';
 import { MaintenanceHistory } from './MaintenanceHistory';
 import { Scoping } from './Scoping';
 import { Icon, Typography } from '@equinor/eds-core-react';
+import { useHttpClient } from '@equinor/fusion-framework-react-module-http';
 
 Icon.add({
   library_pdf,
@@ -15,17 +16,17 @@ Icon.add({
 })
 
 function Transfer() {
-  const [facility] = useState("JCA")
-  const [state, setState] = useState<"SCOPING" | "SIGNING" | "MAINTENANCE HISTORY" | "ARCHIVED">("SCOPING");
-  const [tags, setTags] = useState<Famtag[] | null>(null);
-
+  const ccApi = useHttpClient("cc-api");
+  const { data, isLoading } = useQuery({
+    queryKey: ["meta"], queryFn: async () => {
+      const res = await ccApi.fetchAsync(`api/contexts/94dd5f4d-17f1-4312-bf75-ad75f4d9572c/handover/garden-meta`)
+      return res.json();
+    }
+  })
+  console.log(data)
   return (
     <div style={{ width: "100%", height: "99%", justifyContent: "center", alignItems: "center", display: "flex" }}>
-      <div style={{ height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Scoping isCompleted={state !== "SCOPING"} isActive={state == "SCOPING"} tags={tags} setTags={setTags} next={() => setState("SIGNING")} facility={facility} />
-        <Signing isCompleted={state !== "SCOPING" && state !== "SIGNING"} isActive={state == "SIGNING"} next={() => setState("MAINTENANCE HISTORY")} facility={facility} />
-        <MaintenanceHistory isCompleted={state == "ARCHIVED"} isActive={state == "MAINTENANCE HISTORY"} next={() => setState("ARCHIVED")} facility={facility} />
-      </div>
+      <p>Its something</p>
     </div>
   )
 }
@@ -51,6 +52,7 @@ function Archived(props: ArchivedProps) {
 }
 
 const queryclient = new QueryClient()
+
 const TransferApp = () => {
   return (
     <QueryClientProvider client={queryclient}>

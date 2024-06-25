@@ -21,6 +21,11 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   config.configureHttpClient('cc-api', {
+    baseUri: 'https://backend-fusion-data-gateway-test.radix.equinor.com',
+    defaultScopes: ['api://ed6de162-dd30-4757-95eb-0ffc8d34fbe0/access_as_user']
+  });
+
+  config.configureHttpClient('fam-api', {
     baseUri: "https://famapi.equinor.com",
     defaultScopes: ["api://958bef40-48c3-496e-bc0b-0fe5783f196b/access_as_user"],
   });
