@@ -13,6 +13,7 @@ import { StyledSizes } from './garden.styles';
 import { Punch, Workorder } from './types';
 import styled from 'styled-components';
 import { Module } from 'module';
+import { X509Certificate } from 'crypto';
 
 export type FilterModel = FilterGroup[]
 
@@ -39,11 +40,28 @@ const filterGroups: FilterGroupDef[] = [
   },
   {
     name: "Comm Status",
-    valueGetter: (s: HandoverPackage) => s.commissioningPackageStatus
+    valueGetter: (s: HandoverPackage) => s.dynamicCommissioningStatus
   },
   {
     name: "MC Disciplines",
     valueGetter: (s: HandoverPackage) => s.mcDisciplines?.split(",") ?? "(Blank)"
+  },
+  {
+    name: "Missing PunchOut",
+    valueGetter: (s: HandoverPackage) => {
+
+      switch (true) {
+        case !s.remainingPunchOutCount || s.remainingPunchOutCount == 0:
+          return "0"
+        case s!.remainingPunchOutCount! <= 5:
+          return "1-5"
+        case s.remainingPunchOutCount! <= 10:
+          return "5-10"
+        default:
+          return "11+"
+
+      }
+    }
   }
 ]
 
@@ -89,6 +107,7 @@ function Transfer() {
         body: body
       })
       const currentWeek = (await res.json())[0] as { items: HandoverPackage[] };
+      currentWeek.items = currentWeek.items.filter(s => s.commissioningPackageStatus !== "RFO Accepted")
       const s = filterGroups.map((s): { name: string, values: string[], valueGetter: (s: HandoverPackage) => string | string[], allValues: Set<string> } => ({ name: s.name, values: [], allValues: new Set<string>(), valueGetter: s.valueGetter }))
       s.forEach(s => {
         currentWeek.items.forEach(element => {
