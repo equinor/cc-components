@@ -99,6 +99,15 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
     }
   })
 
+  const { data: unsignedTasks, isLoading: isUnsignedTasksLoading } = useQuery({
+    queryKey: ["unsignedTasks", commPkg.commissioningPackageNo],
+    refetchOnWindowFocus: false,
+    queryFn: async () => {
+      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/unsigned-tasks`)
+      return (await res.json()).length
+    }
+  })
+
   const { data: unsignedActions, isLoading: isUnsignedActionsLoading } = useQuery({
     queryKey: ["unsignedActions", commPkg.commissioningPackageNo],
     refetchOnWindowFocus: false,
@@ -110,7 +119,7 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
   })
 
   return (
-    <div style={{ height: "150px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
+    <div style={{ height: "150px", gap: "10px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", gap: "5px", position: "relative" }}>
         <div>
           <StyledSizes size='large' color='grey' />
@@ -118,7 +127,7 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
         </div>
         <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
           {isWorkordersLoading ? <Skeleton height='24px' width='140px' /> : <StyledStatusProperty title="WO progress:" value={`${workorders?.reduce((acc, curr) => curr.projectProgress < acc ? curr.projectProgress : acc, 0)}%`} />}
-          <StyledStatusProperty title="RFC status:" value={"27/27"} />
+          <StyledStatusProperty title="RFC status:" value={`${commPkg.mechanicalCompletionPkgsRfccSignedCount} / ${commPkg.mechanicalCompletionPkgsCount}`} />
           <StyledStatusProperty title="MC status:" value={<StatusCircle content={commPkg.mechanicalCompletionStatus} statusColor={statusColorMap[commPkg.mechanicalCompletionStatus]} />} />
           <StyledStatusProperty title="Commissioning status:" value={<StatusCircle content={commPkg.dynamicCommissioningStatus} statusColor={statusColorMap[commPkg.dynamicCommissioningStatus]} />} />
         </div>
@@ -138,7 +147,7 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
         <span style={{ display: "flex", gap: "5px" }}>
           <StyledStatusProperty title="Unsigned CPCL:" value="3" />
           {isUnsignedActionsLoading ? <Skeleton width='140px' height='20px' /> : <StyledStatusProperty title="Unsigned Actions:" value={commPkg.hasUnsignedActions ? unsignedActions : 0} />}
-          <StyledStatusProperty title="Unsigned Tasks:" value="3" />
+          {isUnsignedTasksLoading ? <Skeleton width='140px' height='20px' /> : <StyledStatusProperty title="Unsigned Tasks:" value={unsignedTasks} />}
         </span>
       </div>
     </div>
