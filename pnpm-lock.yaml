@@ -283,6 +283,9 @@ importers:
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../../libs/shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../../libs/sharedcomponents
 
   apps/workorder:
     dependencies:
