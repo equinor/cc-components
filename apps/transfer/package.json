@@ -13,10 +13,10 @@
     "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
-    "@cc-components/shared": "workspace:^",
     "@cc-components/handoverapp": "workspace:^",
     "@cc-components/handovershared": "workspace:^",
-    "@cc-components/sharedcomponents": "workspace:^"
+    "@cc-components/shared": "workspace:^",
+    "@cc-components/sharedcomponents": "workspace:^",
+    "@tanstack/react-virtual": "^3.7.0"
   }
 }
-

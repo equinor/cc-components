@@ -1,19 +1,19 @@
 import { Skeleton } from '@cc-components/sharedcomponents';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { RootAppWrapper, StatusCircle, createRender, statusColorMap, useContextId } from '@cc-components/shared';
 import { HandoverPackage } from '@cc-components/handovershared';
 import { ApiGardenMeta } from '@cc-components/shared/workspace-config';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider, useQuery, keepPreviousData } from '@tanstack/react-query'
 import React, { useMemo, useRef, useState, useCallback, useEffect, MutableRefObject } from 'react';
 import { configure } from './framework-config';
 import * as icons from '@equinor/eds-icons';
-import { Checkbox, CircularProgress, Icon, Popover, Typography } from '@equinor/eds-core-react';
+import { Checkbox, Icon, Popover, Typography } from '@equinor/eds-core-react';
 import { useHttpClient } from '@equinor/fusion-framework-react-module-http';
 import { GardenItem } from '@cc-components/handoverapp';
 import { StyledSizes } from './garden.styles';
 import { Punch, Workorder } from './types';
 import styled from 'styled-components';
-import { Module } from 'module';
-import { X509Certificate } from 'crypto';
+import { tokens } from '@equinor/eds-tokens';
 
 export type FilterModel = FilterGroup[]
 
@@ -74,9 +74,16 @@ Icon.add(icons)
 
 function Transfer() {
   const ccApi = useHttpClient("cc-api");
+  const [selected, setSelected] = useState<string | null>(null)
   const vRef = useRef<HTMLDivElement | null>(null)
   const contextId = useContextId();
   const [filterState, setFilterState] = useState<FilterState>([]);
+  const [startIndex, setStartIndex] = useState(-1);
+
+  const setSelectedAndScroll = (value: string) => {
+    setSelected(value)
+    //TODO: add scrolling
+  }
 
   const { data, isLoading } = useQuery<unknown, unknown, ApiGardenMeta>({
     queryKey: ["meta"],
@@ -90,41 +97,52 @@ function Transfer() {
         body: body,
       })
 
-      return res.json();
+      const s = await res.json();
+      if (startIndex === -1 && s.startIndex !== 0) {
+        setStartIndex(s.startIndex)
+      }
+      return s;
     }
   })
 
-  const { data: gardenRaw, isLoading: gardenLoading } = useQuery<unknown, unknown, { items: HandoverPackage[], columnName: string }>({
+  const { data: gardenRaw, isLoading: gardenLoading, isPending } = useQuery<unknown, unknown, { items: HandoverPackage[], columnName: string }[]>({
     queryKey: ["garden"],
     enabled: !!data,
     refetchOnWindowFocus: false,
+    placeholderData: keepPreviousData,
     staleTime: Infinity,
     queryFn: async () => {
-      const body = `{"columnStart":${data?.startIndex ?? 0},"columnEnd":${data?.startIndex ?? 0},"rowStart":0,"rowEnd":${data?.rowCount},"groupingKeys":["RFOC"],"dateVariant":"Forecast","timeInterval":"Weekly","filter":{"groups":[],"search":""}}`
+      const body = `{"columnStart":${0},"columnEnd":${data?.columnCount},"rowStart":0,"rowEnd":${data?.rowCount},"groupingKeys":["RFOC"],"dateVariant":"Forecast","timeInterval":"Weekly","filter":{"groups":[],"search":""}}`
       const res = await ccApi.fetchAsync(`api/contexts/${contextId}/handover/garden`, {
         method: "POST",
         headers: { ["content-type"]: "application/json" },
         body: body
       })
-      const currentWeek = (await res.json())[0] as { items: HandoverPackage[] };
-      currentWeek.items = currentWeek.items.filter(s => s.commissioningPackageStatus !== "RFO Accepted")
-      const s = filterGroups.map((s): { name: string, values: string[], valueGetter: (s: HandoverPackage) => string | string[], allValues: Set<string> } => ({ name: s.name, values: [], allValues: new Set<string>(), valueGetter: s.valueGetter }))
-      s.forEach(s => {
-        currentWeek.items.forEach(element => {
-          const value = s.valueGetter(element)
-          const r = Array.isArray(value) ? value : [value]
-          r.forEach(aa => s.allValues.add(aa))
-        });
+      const columns = (await res.json()) as { items: HandoverPackage[] }[];
+      const generatedFilterGroups = filterGroups.map((s): { name: string, values: string[], valueGetter: (s: HandoverPackage) => string | string[], allValues: Set<string> } => ({ name: s.name, values: [], allValues: new Set<string>(), valueGetter: s.valueGetter }))
+      generatedFilterGroups.forEach(group => {
+        columns.forEach(column => {
+          column.items.forEach(element => {
+            const value = group.valueGetter(element)
+            const r = Array.isArray(value) ? value : [value]
+            r.forEach(aa => group.allValues.add(aa))
+          })
+        })
       })
-      const r: FilterState = s.map((s): FilterState[number] => ({ name: s.name, valueGetter: s.valueGetter, values: [], allValues: [...s.allValues] }))
+      const r: FilterState = generatedFilterGroups.map((s): FilterState[number] => ({ name: s.name, valueGetter: s.valueGetter, values: [], allValues: [...s.allValues] }))
       setFilterState(r)
-      return currentWeek
+      // debugger;
+      return columns
     }
   })
 
 
+  console.log(gardenRaw)
+
+
   const gardenFiltered = useMemo(() => {
-    return gardenRaw?.items.filter(s => {
+    if (!gardenRaw) return []
+    return gardenRaw[startIndex].items.filter(s => {
       if (filterState.length == 0) {
         return true
       }
@@ -140,7 +158,7 @@ function Transfer() {
         }
       })
     })
-  }, [filterState, gardenRaw])
+  }, [filterState, gardenRaw, startIndex])
 
 
   const onClickFilter = useCallback((name: string, value: string, add: boolean) => {
@@ -159,7 +177,7 @@ function Transfer() {
 
   }, [filterState, setFilterState])
 
-  if (isLoading || gardenLoading) {
+  if (isLoading || gardenLoading || isPending) {
     return <div>Loading...</div>
   }
   console.log(filterState)
@@ -167,22 +185,82 @@ function Transfer() {
     throw new Error("uh-oh")
   }
   return (
-    <div style={{ width: "100%", height: "100%", overflow: "auto", justifyContent: "center", alignItems: "center", display: "flex", boxSizing: "border-box", padding: "5px" }}>
+    <div style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex", boxSizing: "border-box", padding: "5px" }}>
       <div ref={vRef} style={{ flexDirection: "column", height: "100%", width: "300px", display: "flex" }}>
-        {gardenFiltered.map(s => <div key={s.commissioningPackageNo} style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={false} key={s.commissioningPackageNo} data={s} onClick={() => { console.log("clicked") }} /> </div>)}
+        {gardenFiltered.map(s => <div key={s.commissioningPackageNo} style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={selected == s.commissioningPackageNo} key={s.commissioningPackageNo} data={s} onClick={() => { setSelectedAndScroll(s.commissioningPackageNo) }} /> </div>)}
       </div>
       <div style={{ height: "100%", width: "100%" }}>
-        <Typography variant="h1_bold">Planned Packages for RFOC</Typography> <span>{"<"} Week {gardenRaw?.columnName.slice(5)} {">"} </span>
+        <Typography variant="h1_bold">Planned Packages for RFOC</Typography> <span style={{ display: "flex", alignItems: "center", fontWeight: 500 }}><Icon style={{ cursor: "pointer" }} name="chevron_left" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s - 1) }} /> Week {gardenRaw?.at(startIndex)?.columnName.slice(5)} <Icon name="chevron_right" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s + 1) }} style={{ cursor: "pointer" }} /> </span>
         <div> <div style={{ display: "flex", gap: "20px", fontWeight: 500 }}>
           {filterState.map(s => <FilterGroup onCheck={onClickFilter} key={s.name} group={s} />)}
         </div></div>
         <div style={{ boxSizing: "border-box", padding: "20px", height: "100%", width: "100%", display: "flex", flexDirection: "column", gap: "20px" }}>
-          {gardenFiltered.map(s => <CommPkgCard key={s.commissioningPackageNo} commPkg={s} />)}
+          <VirtualCommPkgCards selected={selected} commPkg={gardenFiltered} />
         </div>
       </div>
     </div>
   )
 }
+
+type VirtualCommPkgCardsProps = {
+  commPkg: HandoverPackage[];
+  selected: string | null;
+}
+function VirtualCommPkgCards({ commPkg, selected }: VirtualCommPkgCardsProps) {
+  const parentRef = React.useRef<HTMLDivElement | null>(null)
+
+  const rowVirtualizer = useVirtualizer({
+    count: commPkg.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 180,
+  })
+
+  useEffect(() => {
+    if (selected) {
+      rowVirtualizer.scrollToIndex(commPkg.findIndex(s => s.commissioningPackageNo == selected), {align: "center"})
+    }
+  }, [selected])
+  return (
+    <>
+      {/* The scrollable element for your list */}
+      <div
+        ref={parentRef}
+        style={{
+          height: `100%`,
+          overflow: 'auto', // Make it scroll!
+        }}
+      >
+        {/* The large inner element to hold all of the items */}
+        <div
+          style={{
+            height: `${rowVirtualizer.getTotalSize()}px`,
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          {/* Only the visible items in the virtualizer, manually positioned to be in view */}
+          {rowVirtualizer.getVirtualItems().map((virtualItem) => (
+            <div
+              key={virtualItem.key}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: `${virtualItem.size}px`,
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
+            >
+              <CommPkgCard isSelected={selected == commPkg[virtualItem.index].commissioningPackageNo} commPkg={commPkg[virtualItem.index]} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  )
+}
+
+
 export const useOutsideClick = (
   handler: (e: MouseEvent, el: HTMLElement) => void,
   ...refs: MutableRefObject<HTMLElement | null>[]
@@ -254,8 +332,9 @@ export const getItemSize = (
 
 type CommPkgCardProps = {
   commPkg: HandoverPackage
+  isSelected: boolean;
 }
-const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
+const CommPkgCard = ({ commPkg, isSelected }: CommPkgCardProps) => {
   const contextId = useContextId();
   const ccapi = useHttpClient("cc-api");
   const { data: punch, isLoading: isPunchLoading } = useQuery({
@@ -263,25 +342,27 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     queryFn: async (): Promise<Punch[]> => {
-      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/punch`)
+      const res = await ccapi.fetchAsync(`api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/punch`)
       return res.json();
     }
   })
   const { data: workorders, isLoading: isWorkordersLoading } = useQuery({
     queryKey: ["workorders", commPkg.commissioningPackageNo],
+    enabled: false,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     queryFn: async (): Promise<Workorder[]> => {
-      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/work-orders`)
+      const res = await ccapi.fetchAsync(`api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/work-orders`)
       return res.json();
     }
   })
 
   const { data: unsignedTasks, isLoading: isUnsignedTasksLoading } = useQuery({
     queryKey: ["unsignedTasks", commPkg.commissioningPackageNo],
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
     queryFn: async () => {
-      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/unsigned-tasks`)
+      const res = await ccapi.fetchAsync(`api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/unsigned-tasks`)
       return (await res.json()).length
     }
   })
@@ -292,20 +373,20 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
     refetchOnWindowFocus: false,
     enabled: !!commPkg.hasUnsignedActions,
     queryFn: async () => {
-      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/unsigned-actions`)
+      const res = await ccapi.fetchAsync(`api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/unsigned-actions`)
       return (await res.json()).length
     }
   })
   const size = getItemSize(commPkg.volume, 100 || 0)
   return (
-    <div style={{ height: "150px", gap: "10px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
+    <div style={{ height: "150px", border: isSelected ? "1px solid red" : undefined, gap: "10px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", gap: "5px", position: "relative" }}>
         <div>
           <StyledSizes size={size} color='grey' />
           <Typography bold style={{ marginLeft: "24px" }}>{commPkg.commissioningPackageNo}</Typography>
         </div>
         <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          {isWorkordersLoading ? <Skeleton height='24px' width='140px' /> : <StyledStatusProperty title="WO progress:" value={`${workorders?.reduce((acc, curr) => curr.projectProgress < acc ? curr.projectProgress : acc, 0)}%`} />}
+          {true ? <></> : isWorkordersLoading ? <Skeleton height='24px' width='140px' /> : <StyledStatusProperty title="WO progress:" value={`${workorders?.reduce((acc, curr) => curr.projectProgress < acc ? curr.projectProgress : acc, 0)}%`} />}
           <StyledStatusProperty title="RFC status:" value={`${commPkg.mechanicalCompletionPkgsRfccSignedCount} / ${commPkg.mechanicalCompletionPkgsCount}`} />
           <StyledStatusProperty title="MC status:" value={<StatusCircle content={commPkg.mechanicalCompletionStatus} statusColor={statusColorMap[commPkg.mechanicalCompletionStatus]} />} />
           <StyledStatusProperty title="Commissioning status:" value={<StatusCircle content={commPkg.dynamicCommissioningStatus} statusColor={statusColorMap[commPkg.dynamicCommissioningStatus]} />} />
