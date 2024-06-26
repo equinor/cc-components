@@ -1,4 +1,5 @@
-import { StatusCircle, createRender } from '@cc-components/shared';
+import { Skeleton } from '@cc-components/sharedcomponents';
+import { RootAppWrapper, StatusCircle, createRender, statusColorMap, useContextId } from '@cc-components/shared';
 import { HandoverPackage } from '@cc-components/handovershared';
 import { ApiGardenMeta } from '@cc-components/shared/workspace-config';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
@@ -9,16 +10,20 @@ import { Icon, Typography } from '@equinor/eds-core-react';
 import { useHttpClient } from '@equinor/fusion-framework-react-module-http';
 import { GardenItem } from '@cc-components/handoverapp';
 import { StyledSizes } from './garden.styles';
+import { Punch, Workorder } from './types';
 
 Icon.add(icons)
 
 function Transfer() {
   const ccApi = useHttpClient("cc-api");
   const vRef = useRef<HTMLDivElement | null>(null)
+  const contextId = useContextId();
   const { data, isLoading } = useQuery<unknown, unknown, ApiGardenMeta>({
-    queryKey: ["meta"], queryFn: async () => {
+    queryKey: ["meta"],
+    refetchOnWindowFocus: false,
+    queryFn: async () => {
       const body = `{"groupingKeys":["RFOC"],"dateVariant":"Forecast","timeInterval":"Weekly","filter":{"groups":[],"search":""}}`
-      const res = await ccApi.fetchAsync(`api/contexts/94dd5f4d-17f1-4312-bf75-ad75f4d9572c/handover/garden-meta`, {
+      const res = await ccApi.fetchAsync(`api/contexts/${contextId}/handover/garden-meta`, {
         method: "POST",
         headers: { ["content-type"]: "application/json" },
         body: body,
@@ -28,13 +33,13 @@ function Transfer() {
     }
   })
 
-
   const { data: garden, isLoading: gardenLoading } = useQuery<unknown, unknown, { items: HandoverPackage[], columnName: string }>({
     queryKey: ["garden"],
     enabled: !!data,
+    refetchOnWindowFocus: false,
     queryFn: async () => {
       const body = `{"columnStart":${data?.startIndex ?? 0},"columnEnd":${data?.startIndex ?? 0},"rowStart":0,"rowEnd":${data?.rowCount},"groupingKeys":["RFOC"],"dateVariant":"Forecast","timeInterval":"Weekly","filter":{"groups":[],"search":""}}`
-      const res = await ccApi.fetchAsync(`api/contexts/94dd5f4d-17f1-4312-bf75-ad75f4d9572c/handover/garden`, {
+      const res = await ccApi.fetchAsync(`api/contexts/${contextId}/handover/garden`, {
         method: "POST",
         headers: { ["content-type"]: "application/json" },
         body: body
@@ -42,7 +47,7 @@ function Transfer() {
       return (await res.json())[0];
     }
   })
-  console.log(garden)
+
   if (isLoading || gardenLoading) {
     return <div>Loading...</div>
   }
@@ -75,6 +80,35 @@ type CommPkgCardProps = {
   commPkg: HandoverPackage
 }
 const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
+  const contextId = useContextId();
+  const ccapi = useHttpClient("cc-api");
+  const { data: punch, isLoading: isPunchLoading } = useQuery({
+    queryKey: ["punch", commPkg.commissioningPackageNo],
+    refetchOnWindowFocus: false,
+    queryFn: async (): Promise<Punch[]> => {
+      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/punch`)
+      return res.json();
+    }
+  })
+  const { data: workorders, isLoading: isWorkordersLoading } = useQuery({
+    queryKey: ["workorders", commPkg.commissioningPackageNo],
+    refetchOnWindowFocus: false,
+    queryFn: async (): Promise<Workorder[]> => {
+      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/work-orders`)
+      return res.json();
+    }
+  })
+
+  const { data: unsignedActions, isLoading: isUnsignedActionsLoading } = useQuery({
+    queryKey: ["unsignedActions", commPkg.commissioningPackageNo],
+    refetchOnWindowFocus: false,
+    enabled: !!commPkg.hasUnsignedActions,
+    queryFn: async () => {
+      const res = await ccapi.fetchAsync(`https://backend-fusion-data-gateway-test.radix.equinor.com/api/contexts/${contextId}/handover/${commPkg.commissioningPackageUrlId}/unsigned-actions`)
+      return (await res.json()).length
+    }
+  })
+
   return (
     <div style={{ height: "150px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", gap: "5px", position: "relative" }}>
@@ -83,34 +117,49 @@ const CommPkgCard = ({ commPkg }: CommPkgCardProps) => {
           <Typography bold style={{ marginLeft: "24px" }}>{commPkg.commissioningPackageNo}</Typography>
         </div>
         <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          <StyledStatusProperty title="WO progress:" value={"100%"} />
+          {isWorkordersLoading ? <Skeleton height='24px' width='140px' /> : <StyledStatusProperty title="WO progress:" value={`${workorders?.reduce((acc, curr) => curr.projectProgress < acc ? curr.projectProgress : acc, 0)}%`} />}
           <StyledStatusProperty title="RFC status:" value={"27/27"} />
-          <StyledStatusProperty title="MC status:" value={<StatusCircle content='OS' statusColor='red' />} />
-          <StyledStatusProperty title="Commissioning status:" value={<StatusCircle content='OK' statusColor='green' />} />
+          <StyledStatusProperty title="MC status:" value={<StatusCircle content={commPkg.mechanicalCompletionStatus} statusColor={statusColorMap[commPkg.mechanicalCompletionStatus]} />} />
+          <StyledStatusProperty title="Commissioning status:" value={<StatusCircle content={commPkg.dynamicCommissioningStatus} statusColor={statusColorMap[commPkg.dynamicCommissioningStatus]} />} />
         </div>
       </div>
 
       <div style={{ display: "flex", gap: "5px", justifyContent: "space-between", alignItems: 'center', }}>
         <span style={{ display: "flex", gap: "20px" }}>
-          <StyledStatusProperty title="Punch A:" value={<div style={{ display: "flex", gap: "5px", alignItems: "center" }}>2<Icon name="info_circle" color="red" /></div>} />
-          <StyledStatusProperty title="Punch B:" value={<div style={{ display: "flex", gap: "5px", alignItems: "center" }}>2<Icon name="info_circle" color="orange" /></div>} />
+          {isPunchLoading ? <>
+            <Skeleton height='24px' width='120px' />
+            <Skeleton height='24px' width='120px' />
+          </> :
+            <>
+              <StyledStatusProperty title="Punch A:" value={<div style={{ display: "flex", gap: "5px", alignItems: "center" }}>{punch && punch.filter(s => s.category == "PA").length}<Icon name="info_circle" color="red" /></div>} />
+              <StyledStatusProperty title="Punch B:" value={<div style={{ display: "flex", gap: "5px", alignItems: "center" }}>{punch && punch.filter(s => s.category == "PB").length}<Icon name="info_circle" color="orange" /></div>} />
+            </>}
         </span>
         <span style={{ display: "flex", gap: "5px" }}>
           <StyledStatusProperty title="Unsigned CPCL:" value="3" />
+          {isUnsignedActionsLoading ? <Skeleton width='140px' height='20px' /> : <StyledStatusProperty title="Unsigned Actions:" value={commPkg.hasUnsignedActions ? unsignedActions : 0} />}
           <StyledStatusProperty title="Unsigned Tasks:" value="3" />
-          <StyledStatusProperty title="Unsigned Actions:" value="3" />
         </span>
       </div>
     </div>
   )
 }
 
-const queryclient = new QueryClient()
+const queryclient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    }
+  }
+})
 
 const TransferApp = () => {
+  const ccApi = useHttpClient("cc-api")
   return (
     <QueryClientProvider client={queryclient}>
-      <Transfer />
+      <RootAppWrapper client={ccApi}>
+        <Transfer />
+      </RootAppWrapper>
     </QueryClientProvider>
   );
 };

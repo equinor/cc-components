@@ -15,7 +15,8 @@
   "dependencies": {
     "@cc-components/shared": "workspace:^",
     "@cc-components/handoverapp": "workspace:^",
-    "@cc-components/handovershared": "workspace:^"
+    "@cc-components/handovershared": "workspace:^",
+    "@cc-components/sharedcomponents": "workspace:^"
   }
 }
 
