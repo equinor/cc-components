@@ -201,11 +201,10 @@ function FilterGroup({ group, onCheck }: FilterGroupProps) {
     <div ref={groupRef} key={group.name} onClick={() => setIsOpen(s => !s)} style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>{group.name}<Icon name="chevron_down" /></div>
     <Popover style={{ boxSizing: "border-box", padding: "0px" }} anchorEl={groupRef.current} open={isOpen}>
       <Popover.Header>
-        <Popover.Title>Filter group </Popover.Title>
+        <Popover.Title>{group.name}</Popover.Title>
       </Popover.Header>
       <Popover.Content>
         {group.allValues.map(s => <StyledFilterItem key={s}><Checkbox onChange={() => {
-          console.log("wtf")
           onCheck(group.name, s, !group.values.includes(s))
         }} checked={group.values.includes(s)} />{s}</StyledFilterItem>)}
       </Popover.Content>
