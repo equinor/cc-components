@@ -4,16 +4,13 @@ import { ApiGardenMeta } from '@cc-components/shared/workspace-config';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import React, { useRef } from 'react';
 import { configure } from './framework-config';
-import { check_circle_outlined, library_pdf } from '@equinor/eds-icons';
+import * as icons from '@equinor/eds-icons';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { useHttpClient } from '@equinor/fusion-framework-react-module-http';
 import { GardenItem } from '@cc-components/handoverapp';
 import { StyledSizes } from './garden.styles';
 
-Icon.add({
-  library_pdf,
-  check_circle_outlined
-})
+Icon.add(icons)
 
 function Transfer() {
   const ccApi = useHttpClient("cc-api");
@@ -47,7 +44,7 @@ function Transfer() {
   })
   console.log(garden)
   if (isLoading || gardenLoading) {
-    return <div>Be patient little one</div>
+    return <div>Loading...</div>
   }
   if (!garden) {
     throw new Error("uh-oh")
