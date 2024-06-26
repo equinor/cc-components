@@ -55,7 +55,7 @@ function Transfer() {
     throw new Error("uh-oh")
   }
   return (
-    <div style={{ width: "100%", height: "99%", justifyContent: "center", alignItems: "center", display: "flex", boxSizing: "border-box", padding: "5px" }}>
+    <div style={{ width: "100%", height: "100%", overflow: "auto", justifyContent: "center", alignItems: "center", display: "flex", boxSizing: "border-box", padding: "5px" }}>
       <div ref={vRef} style={{ flexDirection: "column", height: "100%", width: "300px", display: "flex" }}>
         {garden.items.map(s => <div style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={false} key={s.commissioningPackageNo} data={s} onClick={() => { console.log("clicked") }} /> </div>)}
       </div>
