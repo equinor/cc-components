@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import { PersonAvatar } from '@equinor/fusion-react-person';
 import { useCurrentUser } from '@equinor/fusion-framework-react-app/framework';
+import { Icon } from "@equinor/eds-core-react";
 
 const sendingAnimation = keyframes`
   0%, 100% { transform: scale(0.7); opacity: 0.7; }
@@ -39,7 +40,7 @@ export const ChatBubble = ({ message, isMine, isSending }: ChatBubbleProps) => {
   const user = useCurrentUser()
   if (!isMine) {
     return <span style={{ display: "flex", gap: "10px", alignItems: "flex-end" }}>
-      <PersonAvatar size="small" azureId={user?.localAccountId} />
+      <Icon size={32} name="help_outline" />
       <Bubble isSending={isSending} isMine={isMine}>{message}</Bubble>
     </span>
   }
