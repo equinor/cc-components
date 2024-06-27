@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import { CommPkgCard } from "./CommPkgCard";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { HandoverPackage } from "@cc-components/handovershared";
+import { Skeleton } from "@cc-components/sharedcomponents";
 
 export type VirtualCommPkgCardsProps = {
   commPkgs: HandoverPackage[];
   selected: string | null;
   setSelected: (value: string | null) => void;
+  isLoading: boolean;
 }
-export function VirtualCommPkgCards({ commPkgs, selected, setSelected }: VirtualCommPkgCardsProps) {
+export function VirtualCommPkgCards({ commPkgs, selected, setSelected, isLoading }: VirtualCommPkgCardsProps) {
   const parentRef = React.useRef<HTMLDivElement | null>(null)
 
   const rowVirtualizer = useVirtualizer({
-    count: commPkgs.length,
+    count: isLoading ? 15 : commPkgs.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 200,
     paddingStart: 40,
@@ -20,7 +22,7 @@ export function VirtualCommPkgCards({ commPkgs, selected, setSelected }: Virtual
   })
 
   useEffect(() => {
-    if (selected) {
+    if (selected && commPkgs) {
       rowVirtualizer.scrollToIndex(commPkgs.findIndex(s => s.commissioningPackageNo == selected), { align: "center" })
     }
   }, [selected])
@@ -41,6 +43,21 @@ export function VirtualCommPkgCards({ commPkgs, selected, setSelected }: Virtual
           }}
         >
           {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+            if (isLoading) {
+              return (<div
+                key={virtualItem.key}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: `${virtualItem.size}px`,
+                  transform: `translateY(${virtualItem.start}px)`,
+                }}
+              >
+                <Skeleton width="100%" height="100%" />
+              </div>)
+            }
             const virtualCommPkg = commPkgs[virtualItem.index]
             const isSelected = selected == virtualCommPkg.commissioningPackageNo
             return (

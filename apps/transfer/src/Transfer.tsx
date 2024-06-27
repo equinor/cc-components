@@ -13,6 +13,8 @@ import { VirtualCommPkgCards } from './components/VirtualCommpkgList';
 import { FilterGroup } from './components/Filter';
 import { TransferSidesheet } from './sidesheet/index'
 import { SidesheetWrapper } from './SidesheetWrapper';
+import { Skeleton } from '@cc-components/sharedcomponents';
+import styled from 'styled-components';
 
 
 export function Transfer() {
@@ -23,7 +25,7 @@ export function Transfer() {
   const [filterState, setFilterState] = useState<FilterState>([]);
   const [startIndex, setStartIndex] = useState(-1);
 
-  const { data, isLoading } = useQuery<unknown, unknown, ApiGardenMeta>({
+  const { data, isLoading: isMetaLoading } = useQuery<unknown, unknown, ApiGardenMeta>({
     queryKey: ["meta"],
     staleTime: Infinity,
     refetchOnWindowFocus: false,
@@ -74,7 +76,7 @@ export function Transfer() {
 
   const gardenFiltered = useMemo(() => {
     if (!gardenRaw) return []
-    return gardenRaw[startIndex].items.filter(s => {
+    return gardenRaw[startIndex]?.items.filter(s => {
       if (filterState.length == 0) {
         return true
       }
@@ -109,37 +111,49 @@ export function Transfer() {
 
   }, [filterState, setFilterState])
 
-  if (isLoading || gardenLoading || isPending) {
-    return <div>Loading...</div>
-  }
-
-  if (!gardenFiltered) {
-    throw new Error("uh-oh")
-  }
+  const isLoading = isMetaLoading || gardenLoading || isPending
 
   return (
     <div style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex", boxSizing: "border-box", padding: "5px" }}>
       <div ref={vRef} style={{ flexDirection: "column", height: "100%", width: "300px", display: "flex" }}>
-        {gardenFiltered.map(s => <div key={s.commissioningPackageNo} style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={selected == s.commissioningPackageNo} key={s.commissioningPackageNo} data={s} onClick={() => { setSelected(s.commissioningPackageNo) }} /> </div>)}
+        {isLoading ? <>
+          {new Array(24).fill(null).map(s => <StyledGardenItemWrapper> <Skeleton height={"35px"} width={"100%"} /> </StyledGardenItemWrapper>)}
+        </> : <>
+          {gardenFiltered.map(s => <div key={s.commissioningPackageNo} style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={selected == s.commissioningPackageNo} key={s.commissioningPackageNo} data={s} onClick={() => { setSelected(s.commissioningPackageNo) }} /> </div>)}
+        </>}
       </div>
       <div style={{ height: "100%", width: "100%" }}>
-        <Typography variant="h1_bold">Planned Packages for RFOC</Typography> <span style={{ display: "flex", alignItems: "center", fontWeight: 500 }}><Icon style={{ cursor: "pointer" }} name="chevron_left" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s - 1) }} /> Week {gardenRaw?.at(startIndex)?.columnName.slice(5)} <Icon name="chevron_right" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s + 1) }} style={{ cursor: "pointer" }} /> </span>
-        <div> <div style={{ display: "flex", gap: "20px", fontWeight: 500 }}>
-          {filterState.map(filterStateGroup => <FilterGroup onCheck={onClickFilter} key={filterStateGroup.name} group={filterStateGroup} />)}
-        </div></div>
+        <Typography variant="h1_bold">Planned Packages for RFOC</Typography>
+        <span style={{ display: "flex", alignItems: "center", fontWeight: 500 }}>
+          <Icon style={{ cursor: "pointer" }} name="chevron_left" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s - 1) }} />
+          Week {gardenRaw?.at(startIndex)?.columnName.slice(5)}
+          <Icon name="chevron_right" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s + 1) }} style={{ cursor: "pointer" }} />
+        </span>
+        <div>
+          <div style={{ display: "flex", gap: "20px", fontWeight: 500 }}>
+            {isLoading ? new Array(4).fill(null).map(s => <Skeleton height={"24px"} width={"100%"} />) :filterState.map(filterStateGroup => <FilterGroup onCheck={onClickFilter} key={filterStateGroup.name} group={filterStateGroup} />) }
+          </div>
+        </div>
         <div style={{ height: "100%", width: "100%", display: "flex", flexDirection: "column", gap: "20px" }}>
-          <VirtualCommPkgCards setSelected={setSelected} selected={selected} commPkgs={gardenFiltered} />
+          <VirtualCommPkgCards isLoading={isLoading} setSelected={setSelected} selected={selected} commPkgs={gardenFiltered} />
         </div>
       </div>
       {selected && (
-        <div style={{position: "absolute", top: 0, right: 0, height: "100%"}}>
-        <SidesheetWrapper>
-          <TransferSidesheet id={gardenFiltered.find(s => s.commissioningPackageNo == selected)?.commissioningPackageUrlId!} close={() => setSelected(null)} item={gardenFiltered.find(s => s.commissioningPackageNo == selected)} />
-        </SidesheetWrapper>
+        <div style={{ position: "absolute", top: 0, right: 0, height: "100%" }}>
+          <SidesheetWrapper>
+            <TransferSidesheet id={gardenFiltered?.find(s => s.commissioningPackageNo == selected)?.commissioningPackageUrlId!} close={() => setSelected(null)} item={gardenFiltered.find(s => s.commissioningPackageNo == selected)} />
+          </SidesheetWrapper>
         </div>
-  )}
+      )}
     </div>
   )
 }
-
+const StyledGardenItemWrapper = styled.div`
+height: 40px;
+box-sizing: border-box;
+padding: 0px 7px;
+display: flex;
+align-items: center;
+justify-content: center;
+`
 
