@@ -7,17 +7,19 @@ import styled from "styled-components"
 import { tokens } from "@equinor/eds-tokens"
 import { useVirtualizer } from "@tanstack/react-virtual"
 
+const oldHours = new Date().getHours() - 2
+
 const default_messages: Message[] = [
-  { content: "We have to resolve 3929018 (Punch A) before initiating RFOC", isMine: false, isSending: false },
-  { content: "I will have someone look at it", isMine: true, isSending: false },
+  { content: "We have to resolve 3929018 (Punch A) before initiating RFOC", isMine: false, isSending: false, timestamp: "27 feb" },
+  { content: "I will have someone look at it", isMine: true, isSending: false, timestamp: "1 mar" },
   { content: "Fixed, are we ready to initiate now?", isMine: true, isSending: false },
   { content: "Sorry for spamming but a scrollbar was necessary to simulate a heated argument", isMine: true, isSending: false },
   { content: "Sorry for spamming but a scrollbar was necessary to simulate a heated argument", isMine: true, isSending: false },
-  { content: "Sorry for spamming but a scrollbar was necessary to simulate a heated argument", isMine: true, isSending: false },
+  { content: "Sorry for spamming but a scrollbar was necessary to simulate a heated argument", isMine: true, isSending: false, timestamp: "2 mar"},
   { content: "Sorry for spamming but a scrollbar was necessary to simulate a heated argument", isMine: true, isSending: false },
   { content: "Sorry for spamming but a scrollbar was necessary to simulate a heated argument", isMine: true, isSending: false },
   { content: "Creating a virtualized list can be challenging, especially when it comes to managing the height of list items. Accurate height calculation is essential for the correct functioning of the virtualization process. Virtualized lists only render items that are currently in the viewport, thereby improving performance for lists with a large number of items. However, any miscalculation in the height of these items can lead to issues like incorrect item positioning, erratic scrolling, or clipping of content.", isMine: true, isSending: false },
-  { content: "Yep", isMine: false, isSending: false },
+  { content: "Yep", isMine: false, isSending: false, timestamp: `${oldHours}:37` },
 ]
 
 
@@ -61,7 +63,8 @@ export function RFOCTab({ commPkg }: RFOCTabProps) {
   )
 }
 
-type Message = {
+export type Message = {
+  timestamp?: string;
   isSending: boolean;
   isMine: boolean;
   content: string;
@@ -76,15 +79,19 @@ function Chat({ messages }: ChatProps) {
     count: messages.length,
     getScrollElement: () => parentRef.current,
     //HACK: Bruh
-    estimateSize: (i) => 50 + (Math.floor(messages[i].content.length / 50) * 20.5),
+    estimateSize: (i) => {
+      const msg = messages[i]
+      if (!msg) return 0
+      return 50 + (msg?.timestamp ? 20 : 0) + (Math.floor(messages[i].content.length / 50) * 20.5)
+    },
     paddingStart: 20,
     paddingEnd: 20,
   })
 
 
   useLayoutEffect(() => {
-    rowVirtualizer.scrollToIndex(messages.length-1, {align: "center"})
-  },[messages.length])
+    rowVirtualizer.scrollToIndex(messages.length - 1, { align: "center" })
+  }, [messages.length])
 
   return (
     <>
@@ -113,10 +120,10 @@ function Chat({ messages }: ChatProps) {
                 left: 0,
                 width: '100%',
                 height: `${virtualItem.size}px`,
-                transform: `translateY(${virtualItem.start}px)`,
+                transform: `translateY(${virtualItem.start + (msg.timestamp ? 20 : 0)}px)`,
               }}
             >
-              <ChatBubble isMine={msg.isMine} isSending={msg.isSending} message={msg.content} />
+              <ChatBubble message={msg} />
             </div>
             )
           })}
