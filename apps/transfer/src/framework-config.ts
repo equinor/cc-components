@@ -20,7 +20,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     });
   });
 
-  config.configureHttpClient('cc-api', {
+  config.configureHttpClient('cc-app', {
     baseUri: 'https://backend-fusion-data-gateway-test.radix.equinor.com',
     defaultScopes: ['api://ed6de162-dd30-4757-95eb-0ffc8d34fbe0/access_as_user']
   });

@@ -280,6 +280,9 @@ importers:
       '@cc-components/handovershared':
         specifier: workspace:^
         version: link:../../libs/handovershared
+      '@cc-components/handoversidesheet':
+        specifier: workspace:^
+        version: link:../../libs/handoversidesheet
       '@cc-components/shared':
         specifier: workspace:^
         version: link:../../libs/shared
