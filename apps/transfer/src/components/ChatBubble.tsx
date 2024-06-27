@@ -1,5 +1,7 @@
 import React from "react";
-import styled, {css, keyframes} from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+import { PersonAvatar } from '@equinor/fusion-react-person';
+import { useCurrentUser } from '@equinor/fusion-framework-react-app/framework';
 
 const sendingAnimation = keyframes`
   0%, 100% { transform: scale(0.7); opacity: 0.7; }
@@ -17,7 +19,7 @@ const Bubble = styled.div<{ isMine: boolean, isSending: boolean }>`
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 20px;
-   border-bottom-right-radius: ${props => (props.isMine ? "0px" : undefined)};
+  border-bottom-right-radius: ${props => (props.isMine ? "0px" : undefined)};
   border-bottom-left-radius: ${props => (props.isMine ? undefined : "0px")};
   background-color: ${props => (props.isMine ? '#0078ff' : '#e5e5ea')};
   color: ${props => (props.isMine ? 'white' : '#333')};
@@ -34,5 +36,16 @@ type ChatBubbleProps = {
   isSending: boolean;
 }
 export const ChatBubble = ({ message, isMine, isSending }: ChatBubbleProps) => {
-  return <Bubble isSending={isSending} isMine={isMine}>{message}</Bubble>;
+  const user = useCurrentUser()
+  if (!isMine) {
+    return <span style={{ display: "flex", gap: "10px", alignItems: "flex-end" }}>
+      <PersonAvatar size="small" azureId={user?.localAccountId} />
+      <Bubble isSending={isSending} isMine={isMine}>{message}</Bubble>
+    </span>
+  }
+  return <span style={{ display: "flex", width: "100%", gap: "10px", alignItems: "flex-end", justifyContent: "end" }}>
+    <Bubble isSending={isSending} isMine={isMine}>{message}</Bubble>
+    <PersonAvatar size="small" azureId={user?.localAccountId} />
+  </span>
+
 };
