@@ -12,6 +12,7 @@ import { Icon, Typography } from '@equinor/eds-core-react';
 import { VirtualCommPkgCards } from './components/VirtualCommpkgList';
 import { FilterGroup } from './components/Filter';
 import { TransferSidesheet } from './sidesheet/index'
+import { SidesheetWrapper } from './SidesheetWrapper';
 
 
 export function Transfer() {
@@ -118,11 +119,9 @@ export function Transfer() {
 
   return (
     <div style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex", boxSizing: "border-box", padding: "5px" }}>
-      {!selected && (
-        <div ref={vRef} style={{ flexDirection: "column", height: "100%", width: "300px", display: "flex" }}>
-          {gardenFiltered.map(s => <div key={s.commissioningPackageNo} style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={selected == s.commissioningPackageNo} key={s.commissioningPackageNo} data={s} onClick={() => { setSelected(s.commissioningPackageNo) }} /> </div>)}
-        </div>
-      )}
+      <div ref={vRef} style={{ flexDirection: "column", height: "100%", width: "300px", display: "flex" }}>
+        {gardenFiltered.map(s => <div key={s.commissioningPackageNo} style={{ height: "40px", boxSizing: "border-box", padding: "0px 7px", display: "flex", alignItems: "center", justifyContent: "center" }}> <GardenItem height={100} width={200} parentRef={vRef} depth={0} columnExpanded={false} isSelected={selected == s.commissioningPackageNo} key={s.commissioningPackageNo} data={s} onClick={() => { setSelected(s.commissioningPackageNo) }} /> </div>)}
+      </div>
       <div style={{ height: "100%", width: "100%" }}>
         <Typography variant="h1_bold">Planned Packages for RFOC</Typography> <span style={{ display: "flex", alignItems: "center", fontWeight: 500 }}><Icon style={{ cursor: "pointer" }} name="chevron_left" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s - 1) }} /> Week {gardenRaw?.at(startIndex)?.columnName.slice(5)} <Icon name="chevron_right" color={tokens.colors.interactive.primary__resting.hex} onClick={() => { setStartIndex(s => s + 1) }} style={{ cursor: "pointer" }} /> </span>
         <div> <div style={{ display: "flex", gap: "20px", fontWeight: 500 }}>
@@ -132,9 +131,13 @@ export function Transfer() {
           <VirtualCommPkgCards setSelected={setSelected} selected={selected} commPkgs={gardenFiltered} />
         </div>
       </div>
-      {selected && (<div style={{ height: "100%", width: "100%", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
-        <TransferSidesheet id={gardenFiltered.find(s => s.commissioningPackageNo == selected)?.commissioningPackageUrlId!} close={() => setSelected(null)} item={gardenFiltered.find(s => s.commissioningPackageNo == selected)} />
-      </div>)}
+      {selected && (
+        <div style={{position: "absolute", top: 0, right: 0, height: "100%"}}>
+        <SidesheetWrapper>
+          <TransferSidesheet id={gardenFiltered.find(s => s.commissioningPackageNo == selected)?.commissioningPackageUrlId!} close={() => setSelected(null)} item={gardenFiltered.find(s => s.commissioningPackageNo == selected)} />
+        </SidesheetWrapper>
+        </div>
+  )}
     </div>
   )
 }

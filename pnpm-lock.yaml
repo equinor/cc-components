@@ -289,6 +289,9 @@ importers:
       '@tanstack/react-virtual':
         specifier: ^3.7.0
         version: 3.7.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      re-resizable:
+        specifier: ^6.9.17
+        version: 6.9.17(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   apps/workorder:
     dependencies:
@@ -7175,6 +7178,12 @@ packages:
 
   re-resizable@6.9.16:
     resolution: {integrity: sha512-D9+ofwgPQRC6PL6cwavCZO9MUR8TKKxV1nHjbutSdNaFHK9v5k8m6DcESMXrw1+mRJn7fBHJRhZpa7EQ1ZWEEA==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
+  re-resizable@6.9.17:
+    resolution: {integrity: sha512-OBqd1BwVXpEJJn/yYROG+CbeqIDBWIp6wathlpB0kzZWWZIY1gPTsgK2yJEui5hOvkCdC2mcexF2V3DZVfLq2g==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
@@ -17500,6 +17509,11 @@ snapshots:
       unpipe: 1.0.0
 
   re-resizable@6.9.16(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
+  re-resizable@6.9.17(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

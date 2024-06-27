@@ -1,6 +1,6 @@
 import { HandoverPackage } from "@cc-components/handovershared"
 import { Button, CircularProgress, Icon, TextField } from "@equinor/eds-core-react"
-import React, { useLayoutEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 import { useHandoverResource } from "../utils-sidesheet"
 import { ChatBubble } from "../../../components/ChatBubble"
 import styled from "styled-components"
@@ -40,18 +40,13 @@ export function RFOCTab({ commPkg }: RFOCTabProps) {
   return (
     <div style={{ display: "grid", gridTemplateRows: "1fr auto", height: "100%", boxSizing: "border-box", padding: "10px" }}>
       <Chat messages={messages} />
-      <div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <TextField onKeyUp={(a) => {
-            if(a.code == "Enter"){
-              sendMessage()
-            }
-          }} id="Sender" value={message} onChange={(e) => setMessage(e.target.value)} />
+          <TextField onKeyUp={(a) => a.code == "Enter" && sendMessage()} placeholder="Add a reply" id="Sender" value={message} onChange={(e) => setMessage(e.target.value)} />
           <Icon size={32} name="send" color={tokens.colors.interactive.primary__resting.hex} style={{ cursor: "pointer" }} onClick={() => sendMessage()} />
         </span>
         <span style={{ display: "flex", gap: "10px" }}>
-
-          <Button disabled={isDataFetchingPunch || !punchPackages || hasPunchA}>Initiate RFOC</Button> {hasPunchA && (<Icon name="info_circle" color="red" />)}
+          <Button title={isDataFetchingPunch || !punchPackages || hasPunchA ? `Fix all punch A` : undefined} disabled={isDataFetchingPunch || !punchPackages || hasPunchA}>Initiate RFOC</Button> {hasPunchA && (<Icon name="info_circle" color="red" />)}
           <Button>Postpone</Button>
           {isDataFetchingPunch && (<CircularProgress size={16} />)}
         </span>
