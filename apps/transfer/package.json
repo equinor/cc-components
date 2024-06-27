@@ -15,7 +15,6 @@
   "dependencies": {
     "@cc-components/handoverapp": "workspace:^",
     "@cc-components/handovershared": "workspace:^",
-    "@cc-components/handoversidesheet": "workspace:^",
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
     "@tanstack/react-virtual": "^3.7.0"

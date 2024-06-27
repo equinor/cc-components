@@ -11,7 +11,7 @@ import React from 'react';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { VirtualCommPkgCards } from './components/VirtualCommpkgList';
 import { FilterGroup } from './components/Filter';
-import { HandoverSidesheet } from '@cc-components/handoversidesheet'
+import { TransferSidesheet } from './sidesheet/index'
 
 
 export function Transfer() {
@@ -132,7 +132,9 @@ export function Transfer() {
           <VirtualCommPkgCards setSelected={setSelected} selected={selected} commPkgs={gardenFiltered} />
         </div>
       </div>
-      {selected && (<div style={{ height: "100%", width: "100%", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}><HandoverSidesheet id={gardenFiltered.find(s => s.commissioningPackageNo == selected)?.commissioningPackageUrlId!} close={() => setSelected(null)} item={gardenFiltered.find(s => s.commissioningPackageNo == selected)} /></div>)}
+      {selected && (<div style={{ height: "100%", width: "100%", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
+        <TransferSidesheet id={gardenFiltered.find(s => s.commissioningPackageNo == selected)?.commissioningPackageUrlId!} close={() => setSelected(null)} item={gardenFiltered.find(s => s.commissioningPackageNo == selected)} />
+      </div>)}
     </div>
   )
 }
