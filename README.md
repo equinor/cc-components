@@ -209,3 +209,17 @@ You can read more about the fusion framework [here](https://equinor.github.io/fu
 ## Updating package dependencies
 
 To update all package dependencies, use the command `pnpm run bump-deps` to open the interactive pnpm package update propt in the terminal. Use `pnpm run compile` to compile all packages/apps in the repo.
+
+## Service message
+Link to [dev/test](https://admin.ci.fusion-dev.net/service-messages/manage).  
+Link to [prod](https://admin.fprd.fusion-dev.net/service-messages/manage).
+
+1. Navigate to the correct link above.
+2. Click on "+ New service message". 
+3. Fill out all fields. 
+4. We don't have permission to publish service messages in Portal (Fusion Portal). We have only permission to publish service messages in the apps. Choose which apps to publish the message to.
+5. To publish the message, press the floppy disk icon in the top right corner.
+
+The service message will look like this
+
+![image](https://github.com/equinor/lighthouse/assets/54101675/f793da1f-e27c-4713-91b2-99ceea9cf8a1)
