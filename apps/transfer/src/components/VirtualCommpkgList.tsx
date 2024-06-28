@@ -23,7 +23,7 @@ export function VirtualCommPkgCards({ commPkgs, selected, setSelected, isLoading
 
   useEffect(() => {
     if (selected && commPkgs) {
-      rowVirtualizer.scrollToIndex(commPkgs.findIndex(s => s.commissioningPackageNo == selected), { align: "center" })
+      rowVirtualizer.scrollToIndex(commPkgs.findIndex(s => s.commissioningPackageNo == selected), { align: "center", behavior: "smooth" })
     }
   }, [selected])
   return (

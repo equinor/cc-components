@@ -90,7 +90,7 @@ function Chat({ messages }: ChatProps) {
 
 
   useLayoutEffect(() => {
-    rowVirtualizer.scrollToIndex(messages.length - 1, { align: "center" })
+    rowVirtualizer.scrollToIndex(messages.length - 1, { align: "center", behavior: "smooth" })
   }, [messages.length])
 
   return (
