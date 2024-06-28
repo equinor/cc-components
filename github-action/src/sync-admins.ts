@@ -152,11 +152,7 @@ export async function syncAdmins(context: SyncArgs) {
   console.log(summary)
 }
 
-
 async function delay(delay: number) {
   return new Promise((res) => setTimeout(() => res(undefined), delay))
 }
-
-
-
 
