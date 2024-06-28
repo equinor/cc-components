@@ -17,6 +17,7 @@ on:
           - punch
           - scopechangerequest
           - workorder
+          - transfer-poc
           - '*'
 permissions:
   actions: read
