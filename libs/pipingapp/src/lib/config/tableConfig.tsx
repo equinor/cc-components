@@ -34,8 +34,8 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
+        e.api.autoSizeColumns(
+          e.api
             .getAllDisplayedColumns()
             .filter((column) => column.getColId() !== 'description')
         );

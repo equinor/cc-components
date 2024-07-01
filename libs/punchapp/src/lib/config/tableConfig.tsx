@@ -43,8 +43,8 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
+        e.api.autoSizeColumns(
+          e.api
             .getAllDisplayedColumns()
             .filter((s) => s.getColId() !== 'description')
         );
