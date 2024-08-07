@@ -33,11 +33,7 @@ export const useGetLoopContent = (loopNo: string) => {
         throw new Error();
       }
       const loopContent = await response.json() as LoopContent[]
-      const data = loopContent.sort((a, b) => {
-        return compareMcStatus(a.clStatus as McStatus | undefined, b.clStatus as McStatus | undefined)
-      })
-      console.debug(data)
-      return data;
+      return loopContent.sort((a, b) => compareMcStatus(a.clStatus as McStatus | undefined, b.clStatus as McStatus | undefined))
     },
   });
 
