@@ -50,8 +50,8 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
+        e.api.autoSizeColumns(
+          e.api
             .getAllDisplayedColumns()
             .filter((s) => s.getColId() !== 'description')
         );

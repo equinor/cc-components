@@ -41,8 +41,8 @@ export const useTableConfig = (
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
-        e.columnApi.autoSizeColumns(
-          e.columnApi
+        e.api.autoSizeColumns(
+          e.api
             .getAllDisplayedColumns()
             .filter((s) => !['description', 'title'].includes(s.getColId()))
         );
