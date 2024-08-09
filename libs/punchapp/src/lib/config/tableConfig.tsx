@@ -122,12 +122,6 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
-    colId: 'FormType',
-    headerName: domainNames.formType,
-    headerTooltip: domainNames.formType,
-    valueGetter: (pkg) => pkg.data?.formularType,
-  },
-  {
     colId: 'Discipline',
     headerName: domainNames.mcDiscipline,
     headerTooltip: domainNames.mcDiscipline,
@@ -144,6 +138,12 @@ const columnDefinitions: ColDef<Punch>[] = [
     headerName: domainNames.punchType,
     headerTooltip: domainNames.punchType,
     valueGetter: (pkg) => pkg.data?.type,
+  },
+  {
+    colId: 'Priority',
+    headerName: domainNames.punchPriority,
+    headerTooltip: domainNames.punchPriority,
+    valueGetter: (pkg) => pkg.data?.priority,
   },
   {
     colId: 'Estimate',
