@@ -9,6 +9,7 @@ import {
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
+  StyledPanel,
   StyledSideSheetContainer,
   StyledTabListWrapper,
   TabTitle,
@@ -176,10 +177,10 @@ const McSideSheetComponent = (props: Required<McProps>) => {
         </StyledTabListWrapper>
 
         <CustomStyledPanels>
-          <Tabs.Panel>
+          <StyledPanel>
             <DetailsTab mcPackage={props?.item} />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <Switch
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setShowOnlyOutstandingWo(e.target.checked);
@@ -193,8 +194,8 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               isFetching={isFetchingWorkOrders}
               workorders={filteredWos}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <Switch
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setShowOnlyOutstandingPunch(e.target.checked);
@@ -208,11 +209,11 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               isFetching={isFetchingPunchItems}
               punches={filteredPunches}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <NcrTab error={ncrError} isFetching={isFetchingNcr} ncrs={ncr} />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <MccrTab
               error={mccrError}
               isFetching={isFetchingMccr}
@@ -247,8 +248,8 @@ const McSideSheetComponent = (props: Required<McProps>) => {
                 })
               )}
             />
-          </Tabs.Panel>
-          <Tabs.Panel style={{ height: '100%' }}>
+          </StyledPanel>
+          <StyledPanel style={{ height: '100%' }}>
             <ModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
@@ -256,7 +257,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
               error={modelConfigError as Error | null}
               facilities={modelConfig?.facilities ?? []}
             />
-          </Tabs.Panel>
+          </StyledPanel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>
