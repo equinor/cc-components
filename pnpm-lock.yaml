@@ -272,6 +272,12 @@ importers:
         specifier: workspace:^
         version: link:../../libs/swcrapp
 
+  apps/transfer:
+    dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+
   apps/workorder:
     dependencies:
       '@cc-components/shared':
