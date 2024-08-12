@@ -111,7 +111,6 @@ export const ContentTable = ({ loop }: ContentTableProps) => {
         isFetching={isLoading}
         resourceName="ContentTable"
         columns={columns}
-        height={300}
       />
     </div>
   );
