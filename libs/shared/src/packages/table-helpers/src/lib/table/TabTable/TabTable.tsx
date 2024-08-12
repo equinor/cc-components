@@ -11,7 +11,6 @@ type TabTableProps<T> = {
   isFetching: boolean;
   error: Error | null;
   resourceName: string;
-  height?: number;
   additionalGridOptions?: GridOptions;
 };
 
@@ -24,7 +23,7 @@ Icon.add({ info_circle, error_outlined });
 export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {
-  const { columns, error, isFetching, packages, resourceName, height } = props;
+  const { columns, error, isFetching, packages, resourceName } = props;
 
   if (isFetching) {
     return (
@@ -65,8 +64,8 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
     <ClientGrid
       rowData={packages}
       colDefs={columns}
-      height={height || 500}
-      gridOptions={{ ...defaultGridOptions, ...props.additionalGridOptions }}
+      height={500}
+      gridOptions={{ ...defaultGridOptions, ...props.additionalGridOptions, domLayout: "autoHeight" }}
     />
   );
 };
