@@ -23,6 +23,7 @@ import {
   CustomStyledPanels,
   TabTitle,
   SidesheetSkeleton,
+  StyledPanel,
 } from '@cc-components/sharedcomponents';
 
 import { InsultaionTab } from './InsultaionTab';
@@ -166,36 +167,36 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
           </StyledTabsList>
         </StyledTabListWrapper>
         <CustomStyledPanels>
-          <Tabs.Panel>
+          <StyledPanel>
             <ElecticalNetworkTab
               itemNo={item.id}
               networks={electricalNetworks}
               isFetching={isLoadingElecticalNetworks}
               error={errorElectricalNetworks}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <WorkorderTab
               error={errorWorkorders}
               isFetching={isLoadingWorkorders}
               workorders={workorders}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <InsultaionTab
               error={errorInsulationTags}
               isFetching={isLoadingInsulationTags}
               insulationTags={insulationTags}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <ChecklistTab
               error={errorChecklists}
               isFetching={isLoadingChecklists}
               checklists={checklists}
             />
-          </Tabs.Panel>
-          <Tabs.Panel style={{ height: '100%' }}>
+          </StyledPanel>
+          <StyledPanel>
             <ModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
@@ -203,7 +204,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
               error={modelConfigError as Error | null}
               facilities={modelConfig?.facilities ?? []}
             />
-          </Tabs.Panel>
+          </StyledPanel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>
