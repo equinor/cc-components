@@ -4,6 +4,9 @@ import { tokens } from '@equinor/eds-tokens';
 import { ColDef, ClientGrid, GridOptions } from '@equinor/workspace-ag-grid';
 import { InfoText, NoResourceData } from './tabTable.styles';
 import { defaultGridOptions } from '../../../../../workspace-config/src/defaultGridOptions';
+import { useRef } from 'react';
+import { useResizeObserver } from '../../../../../hooks/src/lib/useResizeObserver';
+
 
 type TabTableProps<T> = {
   packages: T[] | undefined;
@@ -23,7 +26,10 @@ Icon.add({ info_circle, error_outlined });
 export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [_, refHeight] = useResizeObserver(ref);
   const { columns, error, isFetching, packages, resourceName } = props;
+  const gridHeight = packages && packages.length > 30 ? refHeight : "auto-height"
 
   if (isFetching) {
     return (
@@ -61,11 +67,13 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
   }
 
   return (
-    <ClientGrid
-      rowData={packages}
-      colDefs={columns}
-      height={500}
-      gridOptions={{ ...defaultGridOptions, ...props.additionalGridOptions, domLayout: "autoHeight" }}
-    />
+    <div ref={ref} style={{ height: "100%", width: "100%" }}>
+      <ClientGrid
+        rowData={packages}
+        colDefs={columns}
+        height={typeof (gridHeight) === "number" ? gridHeight : 500}
+        gridOptions={{ ...defaultGridOptions, ...props.additionalGridOptions, domLayout: gridHeight === "auto-height" ? "autoHeight" : undefined }}
+      />
+    </div>
   );
 };
