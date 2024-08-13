@@ -56,7 +56,6 @@ jobs:
       - name: "Deploy affected apps to Fusion CI env"
         shell: bash
         env:
-          #Runs out of memory when bundling more apps otherwise even though concurrency is 1
           #Public hosted runners has 16GB available (linux | windows runners)
           NODE_OPTIONS: "--max_old_space_size=12288"
         run: npx turbo run pr:deploy --filter='${{inputs.category}}' --concurrency 4 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'
