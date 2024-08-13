@@ -20,6 +20,7 @@ import {
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
+  StyledPanel,
   StyledSideSheetContainer,
   StyledTabListWrapper,
   StyledTabsList,
@@ -153,7 +154,7 @@ const HeattraceSidesheetComponent = ({
         </StyledTabListWrapper>
 
         <CustomStyledPanels>
-          <Tabs.Panel>
+          <StyledPanel>
             <CircuitDiagramTab
               elenetwork={eleNetwork}
               itemNo={item?.heatTraceCableNo ?? ''}
@@ -165,22 +166,22 @@ const HeattraceSidesheetComponent = ({
                 reszied.current = { hasResized: true, id: id };
               }}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <WorkorderTab
               error={errorWorkorders}
               isFetching={isLoadingWorkorders}
               workorders={dataWorkorders}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <ChecklistTab
               error={errorChecklists}
               isFetching={isLoadingChecklists}
               checklists={dataChecklists}
             />
-          </Tabs.Panel>
-          <Tabs.Panel style={{ height: '100%' }}>
+          </StyledPanel>
+          <StyledPanel>
             <ModelViewerTab
               tagOverlay={tagsOverlayEcho}
               options={viewerOptions}
@@ -188,7 +189,7 @@ const HeattraceSidesheetComponent = ({
               error={errorEcho as Error | null}
               facilities={dataEcho?.facilities ?? []}
             />
-          </Tabs.Panel>
+          </StyledPanel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>

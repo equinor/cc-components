@@ -22,6 +22,7 @@ import {
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
+  StyledPanel,
   StyledSideSheetContainer,
   StyledTabListWrapper,
   StyledTabsList,
@@ -185,31 +186,31 @@ export const WorkorderSidesheet = (props: {
         </StyledTabListWrapper>
 
         <CustomStyledPanels>
-          <Tabs.Panel>
+          <StyledPanel>
             <DetailsTab workOrder={wo} />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <MccrTab
               mccr={mccr}
               isFetching={isFetchingMccr}
               error={mccrError as Error | null}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <MaterialTab
               material={material}
               isFetching={isFetchingMaterial}
               error={materialError as Error | null}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <CutoffTab
               cutoff={cutoffList}
               isFetching={isLoading}
               error={cutoffError as Error | null}
             />
-          </Tabs.Panel>
-          <Tabs.Panel style={{ height: '100%' }}>
+          </StyledPanel>
+          <StyledPanel style={{ height: '100%' }}>
             <ModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
@@ -217,7 +218,7 @@ export const WorkorderSidesheet = (props: {
               error={modelConfigError as Error | null}
               facilities={modelConfig?.facilities ?? []}
             />
-          </Tabs.Panel>
+          </StyledPanel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>
