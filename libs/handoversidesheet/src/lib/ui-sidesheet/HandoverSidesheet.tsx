@@ -10,6 +10,7 @@ import {
   CustomStyledTabs,
   SidesheetHeader,
   StyledBanner,
+  StyledPanel,
   StyledSideSheetContainer,
   TabTitle,
 } from '@cc-components/sharedcomponents';
@@ -242,13 +243,13 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
         </StyledTabListWrapper>
 
         <CustomStyledPanels>
-          <Tabs.Panel>
+          <StyledPanel>
             <DetailsTab commpkg={props.item as HandoverPackage} />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <McTab mc={mcPackages} isFetching={isDataFetchingMc} error={mcError} />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <WorkorderTab
               workorders={(workOrderPackages ?? []).map(
                 (workorder): WorkorderBase => ({
@@ -268,22 +269,22 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               isFetching={isDataFetchingWorkOrder}
               error={woError}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <UnsignedTaskTab
               unsignedTasks={unsignedTasks}
               isFetching={isDataFetchingUnsignedTasks}
               error={unsignedTasksError}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <UnsignedActionTab
               unsignedActions={unsignedActions}
               isFetching={isDataFetchingUnsignedActions}
               error={unsignedActionsError}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <Switch
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setShowOnlyOutstandingPunch(e.target.checked);
@@ -297,29 +298,29 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               isFetching={isDataFetchingPunch}
               error={punchError}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <SwcrTab
               swcrs={swcrPackages}
               isFetching={isDataFetchingSwcr}
               error={swcrError}
             />
-          </Tabs.Panel>
+          </StyledPanel>
 
-          <Tabs.Panel>
+          <StyledPanel>
             <QueryTab
               queries={queryPackages}
               isFetching={isDataFetchingQuery}
               error={queryError}
             />
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <NcrTab
               ncrs={ncrPackages}
               isFetching={isDataFetchingQuery}
-              error={queryError}
+              error={ncrError}
             />
-          </Tabs.Panel>
+          </StyledPanel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>

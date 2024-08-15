@@ -10,6 +10,7 @@ import {
   SidesheetHeader,
   SidesheetSkeleton,
   StyledBanner,
+  StyledPanel,
   StyledSideSheetContainer,
   StyledTabListWrapper,
   StyledTabsList,
@@ -122,13 +123,13 @@ export const LoopSidesheet = (props: {
           </StyledTabsList>
         </StyledTabListWrapper>
         <CustomStyledPanels>
-          <Tabs.Panel>
+          <StyledPanel>
             <DetailsTab loop={loop} />
             {loop.loopId && <Checklists loopId={loop.loopId} />}
-          </Tabs.Panel>
-          <Tabs.Panel>
+          </StyledPanel>
+          <StyledPanel>
             <WorkorderTab error={error} isFetching={isLoading} workorders={data} />
-          </Tabs.Panel>
+          </StyledPanel>
         </CustomStyledPanels>
       </CustomStyledTabs>
     </StyledSideSheetContainer>

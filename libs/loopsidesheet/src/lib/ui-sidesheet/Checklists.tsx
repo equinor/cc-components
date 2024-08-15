@@ -95,7 +95,6 @@ export const Checklists = ({ loopId }: ChecklistsProps) => {
         isFetching={isLoading}
         resourceName="Checklists"
         columns={columns}
-        height={120}
       />
     </div>
   );

@@ -55,8 +55,8 @@ importers:
         specifier: 8.3.0
         version: 8.3.0(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.8
-        version: 9.0.8(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
+        specifier: 9.0.10
+        version: 9.0.10(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
       '@microsoft/applicationinsights-web':
         specifier: ^3.3.0
         version: 3.3.0(tslib@2.6.2)
@@ -1963,8 +1963,8 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: ^5.3.5
 
-  '@equinor/workspace-fusion@9.0.8':
-    resolution: {integrity: sha512-O3gU1t4HvZ+4cGCpL1T/NdBXZA8RUSK7LLc5KIGLFUD/hU1cWUb4lUCQQdipC6x2smhRXmIr/7B4q7SQ9jRq9A==}
+  '@equinor/workspace-fusion@9.0.10':
+    resolution: {integrity: sha512-uIzyFFR8QleoTNJM4fWMgbRVIGQX2lP0uKx+/ItK5SMOcJaHxFtCLMB8CMZ4SRZbPSXtIB9gp4xo/Js5m+B4jg==}
 
   '@equinor/workspace-garden@8.0.1':
     resolution: {integrity: sha512-mDqqJ2SZRPZyvIScc6rqYfmfOxte1tlnPHf8hc2aj4ZUoypg9MSKo0903B04nQi4gT/VOLhDGDsTy5MNFPZ5Pw==}
@@ -10390,7 +10390,7 @@ snapshots:
       - '@types/sortablejs'
       - supports-color
 
-  '@equinor/workspace-fusion@9.0.8(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
+  '@equinor/workspace-fusion@9.0.10(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0

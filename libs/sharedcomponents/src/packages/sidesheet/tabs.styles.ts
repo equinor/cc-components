@@ -2,7 +2,9 @@ import { Tabs, TabsProps } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
 
-export const StyledContentWrapper = styled.div``;
+export const StyledContentWrapper = styled.div`
+  height: 100%
+`;
 
 export const StyledTabs: (props: TabsProps) => JSX.Element = styled(Tabs)`
   overflow: hidden;
@@ -18,6 +20,12 @@ export const StyledPanels = styled(Tabs.Panels)`
     padding: 0;
   }
 `;
+
+export const StyledPanel = styled(Tabs.Panel)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`
 
 export const StyledTabsList = styled(Tabs.List)`
   overflow: auto;
