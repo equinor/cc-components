@@ -7,18 +7,20 @@ import { Skeleton } from "@cc-components/sharedcomponents";
 export type VirtualCommPkgCardsProps = {
   commPkgs: HandoverPackage[];
   selected: string | null;
-  setSelected: (value: string | null) => void;
+  onClickCard: (value: string | null) => void;
   isLoading: boolean;
+  setSelected: (value: string) => void;
+  selectedPackages: string[]
 }
-export function VirtualCommPkgCards({ commPkgs, selected, setSelected, isLoading }: VirtualCommPkgCardsProps) {
+export function VirtualCommPkgCards({ commPkgs, selected, onClickCard, setSelected, selectedPackages, isLoading }: VirtualCommPkgCardsProps) {
   const parentRef = React.useRef<HTMLDivElement | null>(null)
 
   const rowVirtualizer = useVirtualizer({
     count: isLoading ? 15 : commPkgs.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 200,
-    paddingStart: 40,
-    paddingEnd: 40,
+    estimateSize: () => 170,
+    paddingStart: 20,
+    paddingEnd: 100,
   })
 
   useEffect(() => {
@@ -71,9 +73,8 @@ export function VirtualCommPkgCards({ commPkgs, selected, setSelected, isLoading
                   height: `${virtualItem.size}px`,
                   transform: `translateY(${virtualItem.start}px)`,
                 }}
-                onClick={() => setSelected(isSelected ? null : virtualCommPkg.commissioningPackageNo)}
               >
-                <CommPkgCard isSelected={isSelected} commPkg={virtualCommPkg} />
+                <CommPkgCard onClick={() => onClickCard(isSelected ? null : virtualCommPkg.commissioningPackageNo)} isHighlighted={isSelected} commPkg={virtualCommPkg} setSelected={setSelected} isChecked={selectedPackages.includes(virtualCommPkg.commissioningPackageNo)} />
               </div>
             )
           })}

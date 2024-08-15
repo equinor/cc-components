@@ -1,6 +1,6 @@
 import { HandoverPackage } from "@cc-components/handovershared";
 import { StatusCircle, statusColorMap, useContextId } from "@cc-components/shared";
-import { Icon, Typography } from "@equinor/eds-core-react";
+import { Checkbox, Icon, Typography } from "@equinor/eds-core-react";
 import { useQuery } from "@tanstack/react-query";
 import { useHttpClient } from "@equinor/fusion-framework-react-module-http";
 import React from "react";
@@ -27,9 +27,12 @@ const getItemSize = (
 
 export type CommPkgCardProps = {
   commPkg: HandoverPackage
-  isSelected: boolean;
+  isHighlighted: boolean;
+  setSelected: (i: string) => void;
+  isChecked: boolean;
+  onClick: VoidFunction;
 }
-export const CommPkgCard = ({ commPkg, isSelected }: CommPkgCardProps) => {
+export const CommPkgCard = ({ commPkg, onClick, isHighlighted, setSelected, isChecked }: CommPkgCardProps) => {
   const contextId = useContextId();
   const ccapi = useHttpClient("cc-app");
   const { data: punch, isLoading: isPunchLoading } = useQuery({
@@ -74,7 +77,13 @@ export const CommPkgCard = ({ commPkg, isSelected }: CommPkgCardProps) => {
   })
   const size = getItemSize(commPkg.volume, 100 || 0)
   return (
-    <div style={{ height: "150px", border: isSelected ? "1px solid red" : undefined, gap: "10px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
+    <div onClick={() => onClick()} style={{ height: "150px", border: isHighlighted ? "1px solid red" : undefined, gap: "10px", padding: "10px", boxSizing: "border-box", width: "100%", display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "50px 1fr", background: "white", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)" }}>
+      <div style={{height: "100%", display: "flex", alignItems: "center", gridRow: "span 2" }}>
+      <Checkbox onClick={(e) => {
+          e.stopPropagation()
+          setSelected(commPkg.commissioningPackageNo)}
+        } checked={isChecked} />
+      </div>
       <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", gap: "5px", position: "relative" }}>
         <div>
           <StyledSizes size={size} color='grey' />
@@ -88,7 +97,7 @@ export const CommPkgCard = ({ commPkg, isSelected }: CommPkgCardProps) => {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "5px", justifyContent: "space-between", alignItems: 'center', }}>
+      <div style={{ display: "flex", gap: "5px", justifyContent: "space-between", alignItems: 'center', gridColumn: "2" }}>
         <span style={{ display: "flex", gap: "20px" }}>
           {isPunchLoading ? <>
             <Skeleton height='24px' width='120px' />
