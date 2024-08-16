@@ -19,14 +19,14 @@ export function useCCApiAccessCheck(
       if (res.status === 403 || res.status === 401) {
         throw new CCApiUnauthorizedError('');
       }
-      const { result } = await res.json();
-      if (!result) {
+      const json = await res.json();
+      if (json && json.result == false) {
         throw new CCApiUnauthorizedError('');
       }
       if (res.ok === false) {
-        throw new Error('Unknown error');
+        throw new Error(`Unknown error, code: ${res.status}, body: ${JSON.stringify(json)}`);
       }
-      return result;
+      return json.result;
     },
     throwOnError: true,
   });
