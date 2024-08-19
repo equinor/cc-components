@@ -29,7 +29,6 @@ import {
 } from '@cc-components/shared';
 
 import styled from 'styled-components';
-import { SidesheetSkeleton } from '@cc-components/sharedcomponents';
 import { Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
