@@ -47,7 +47,7 @@ export const WorkspaceWrapper = () => {
       currentBookmark={currentBookmark}
       onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
-        getIdentifier: (pt) => pt.id,
+        getIdentifier: (pt) => pt.pipetestNo,
         defaultTab: 'grid',
       }}
       filterOptions={filterOptions}

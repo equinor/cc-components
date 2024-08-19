@@ -101,7 +101,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     tagsOverlay,
     isFetching: isFetchingModelConfig,
     error: modelConfigError,
-  } = useGetEchoConfig(item.id);
+  } = useGetEchoConfig(item.pipetestNo);
 
   const handleChange = (index: number) => {
     setActiveTab(index);

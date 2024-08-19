@@ -1,10 +1,9 @@
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
+import { useContextId, useHttpClient } from '@cc-components/shared';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Pipetest } from '@cc-components/pipingshared';
 
 export const useGetPipetest = (pipetestId: string, initialData?: Pipetest) => {
-  const client = useHttpClient('cc-api');
+  const client = useHttpClient();
   const contextId = useContextId();
 
   const { data, isLoading, error } = useSuspenseQuery<Pipetest>({
@@ -25,4 +24,4 @@ export const useGetPipetest = (pipetestId: string, initialData?: Pipetest) => {
     error: error,
   };
 };
-  
+
