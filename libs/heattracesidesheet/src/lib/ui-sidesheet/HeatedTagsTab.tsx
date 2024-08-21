@@ -1,6 +1,6 @@
 import { TabTable } from '@cc-components/shared';
 import { heatedTagsColumns } from './heatedTagsColumns';
-import { HeatTraceHeatedTag } from 'libs/heattraceshared/dist/src';
+import { HeatTraceHeatedTag } from '@cc-components/heattraceshared';
 
 type HeatedTagsTabProps = {
   data: HeatTraceHeatedTag[] | undefined;

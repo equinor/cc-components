@@ -1,23 +1,22 @@
-import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
-import { useContextId } from '@cc-components/shared';
+import { useContextId, useHttpClient } from '@cc-components/shared';
 import { useQuery } from '@tanstack/react-query';
 import { HeatTraceHeatedTag } from '@cc-components/heattraceshared';
 
-export const useGetHeatedTags = (heatTraceCabelId: string) => {
-  const client = useHttpClient('cc-api');
+export const useGetHeatedTags = (heatTraceCableId: string) => {
+  const client = useHttpClient();
   const contextId = useContextId();
 
   const { data, isLoading, error } = useQuery<HeatTraceHeatedTag[], Error>({
-    queryKey: ['heat-trace', heatTraceCabelId, 'heated-tags'],
+    queryKey: ['heat-trace', heatTraceCableId, 'heated-tags'],
     queryFn: async ({ signal }) => {
-      const respons = await client.fetch(
-        `/api/contexts/${contextId}/heat-trace/${heatTraceCabelId}/heated-tags`,
+      const response = await client.fetch(
+        `/api/contexts/${contextId}/heat-trace/${heatTraceCableId}/heated-tags`,
         { signal }
       );
-      if (!respons.ok) {
+      if (!response.ok) {
         throw new Error();
       }
-      return respons.json();
+      return response.json();
     },
   });
 
