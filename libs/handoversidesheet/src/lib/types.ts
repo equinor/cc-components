@@ -84,24 +84,25 @@ export type HandoverUnsignedTask = {
 } & HandoverChild;
 
 export type HandoverWorkOrder = {
-  workOrderNo: string;
+  workOrderNumber: string;
   workOrderId: string;
   workOrderUrlId: string;
   projectProgress: number | null;
-  title: string | null;
-  description: null | null;
-  jobStatus: string | null;
-  materialStatus: string | null;
-  commissioningPackageNo: string | null;
-  commissioningPackageId: string | null;
-  facility: string | null;
-  commissioningPackageUrlId: string | null;
-  discipline: string | null;
-  plannedCompletionDate: string | null;
+  title: string;
+  jobStatus: string;
+  materialStatus: string;
+  commissioningPackageUrl: string;
+  facility: string;
+  discipline: string;
+  workOrderUrl: string | null;
   actualCompletionDate: string | null;
-  workOrderUrl: string;
-  estimatedManHours: number | null;
-  remainingManHours: number | null;
-  workBreakdownStructure: string | null;
-  responsible: string | null;
+  plannedFinishDate: string | null;
+  remainingHours: number | null;
+  estimatedHours: number | null;
+  responsible: string;
+  workBreakdownStructure: string;
+  commpkgId: string | null;
+  commissioningPackageUrlId: string | null;
+  commpkgNumber: string | null;
 } & HandoverChild;
+
