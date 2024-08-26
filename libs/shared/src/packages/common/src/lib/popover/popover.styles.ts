@@ -29,8 +29,8 @@ export const StyledPopoverProjectDescription = styled.p`
 `;
 
 type PopoverProgressBarProps = {
-  barColor: string;
-  textColor: string;
+  $barColor: string;
+  $textColor: string;
 };
 export const StyledPopoverProgressBar = styled.div<PopoverProgressBarProps>`
   display: flex;
@@ -40,8 +40,8 @@ export const StyledPopoverProgressBar = styled.div<PopoverProgressBarProps>`
   padding: 4px 8px;
   margin-top: 16px;
   text-transform: capitalize;
-  background: ${(p) => p.barColor};
-  color: ${(p) => p.textColor};
+  background: ${(p) => p.$barColor};
+  color: ${(p) => p.$textColor};
   line-height: 24px;
   text-align: center;
   justify-content: space-between;
@@ -52,7 +52,7 @@ export const StyledPopoverProgressBar = styled.div<PopoverProgressBarProps>`
 `;
 
 type StatusProps = {
-  color: string;
+  $color: string;
 };
 export const StyledPopoverStatus = styled.div<StatusProps>`
   width: 40px;
@@ -65,5 +65,5 @@ export const StyledPopoverStatus = styled.div<StatusProps>`
   font-size: 12px;
   font-weight: 600;
   border-radius: 12px;
-  background: ${(p) => p.color};
+  background: ${(p) => p.$color};
 `;

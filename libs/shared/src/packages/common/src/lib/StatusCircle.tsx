@@ -10,10 +10,10 @@ const Wrapper = styled.div`
   font-size: 13px;
 `;
 type StatusCircleProps = {
-  statusColor: string;
+  $statusColor: string;
 };
 const StyledStatusCircle = styled.div<StatusCircleProps>`
-  background-color: ${(props) => props.statusColor};
+  background-color: ${(props) => props.$statusColor};
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -28,7 +28,7 @@ type StatusProps = {
 export const StatusCircle = ({ content, statusColor, infoMessage }: StatusProps) => {
   return (
     <Wrapper>
-      <StyledStatusCircle statusColor={statusColor} />
+      <StyledStatusCircle $statusColor={statusColor} />
       {infoMessage ? (
         <Tooltip title={infoMessage}>
           <Icon data={info_circle} size={18} color="rgb(0, 112, 121)" rotation={180} />

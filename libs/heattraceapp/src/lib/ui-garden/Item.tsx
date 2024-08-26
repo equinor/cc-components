@@ -54,20 +54,20 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
-          backgroundColor={backgroundColor}
+          $backgroundColor={backgroundColor}
           color={textColor}
           onClick={onClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
-          isSelected={isSelected}
+          $isSelected={isSelected}
         >
           <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles
-            mcColor={
+            $mcColor={
               data.mechanicalCompletionStatus
                 ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
                 : null
             }
-            commColor={
+            $commColor={
               data.commissioningStatus
                 ? colorMap[data.commissioningStatus as PackageStatus]
                 : null

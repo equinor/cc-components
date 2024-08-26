@@ -26,10 +26,10 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
     <StyledRoot>
       <StyledItemWrapper
         style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
-        backgroundColor={statusColor}
-        textColor={textColor}
+        $backgroundColor={statusColor}
+        $textColor={textColor}
         onClick={onClick}
-        isSelected={isSelected}
+        $isSelected={isSelected}
       >
         {displayName}
       </StyledItemWrapper>

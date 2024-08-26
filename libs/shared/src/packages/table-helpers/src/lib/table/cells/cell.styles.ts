@@ -32,14 +32,14 @@ export const StyledProgressBarContainer = styled.div`
 `;
 
 export const StyledActualProgress = styled.div<{
-  width: number;
-  borderColor?: string;
-  color?: string;
+  $width: number;
+  $borderColor?: string;
+  $color?: string;
 }>`
-  background-color: ${({ color }) => `${color ?? '#CCE6F3'}`};
-  width: ${({ width }) => `${width}%`};
+  background-color: ${({ $color }) => `${$color ?? '#CCE6F3'}`};
+  width: ${({ $width: width }) => `${width}%`};
   height: 100%;
-  border: ${({ borderColor }) => `2px ${borderColor ?? '#0084C4'} solid`};
+  border: ${({ $borderColor }) => `2px ${$borderColor ?? '#0084C4'} solid`};
   border-radius: 10px;
   margin: -2px;
   position: relative;

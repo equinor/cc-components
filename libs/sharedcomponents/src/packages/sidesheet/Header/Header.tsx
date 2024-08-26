@@ -42,11 +42,11 @@ const StyledWrapTitles = styled.div`
   overflow: hidden;
   white-space: nowrap;
 `;
-const StyledColor = styled.div<{ color?: string }>`
+const StyledColor = styled.div<{ $color?: string }>`
   width: 20px;
   height: 100%;
   display: flex;
-  background-color: ${(prop) => prop.color || '#8c1159'};
+  background-color: ${(prop) => prop.$color || '#8c1159'};
 `;
 const StyledButton = styled.div`
   position: absolute;

@@ -3,6 +3,7 @@ import { SwcrPackage } from '@cc-components/swcrshared';
 import { SwcrSignature } from '../types';
 import { PreBlock, StyledTextBlock, StyledTextBlockEmpty } from './sidesheet.styles';
 import styled from 'styled-components';
+
 type DetailsTabProps = {
   item: SwcrPackage | undefined;
   signatures: SwcrSignature[] | undefined;

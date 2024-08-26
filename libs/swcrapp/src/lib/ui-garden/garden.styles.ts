@@ -1,10 +1,10 @@
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
-type SwcrItemProps = { backgroundColor: string; textColor: string; isSelected: boolean };
+type SwcrItemProps = { $backgroundColor: string; $textColor: string; $isSelected: boolean };
 
 export const StyledItemWrapper = styled.div<SwcrItemProps>`
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.textColor};
+  background-color: ${(props) => props.$backgroundColor};
+  color: ${(props) => props.$textColor};
   cursor: pointer;
   font-weight: 500;
   display: flex;
@@ -12,8 +12,8 @@ export const StyledItemWrapper = styled.div<SwcrItemProps>`
   justify-content: center;
   border-radius: 5px;
   height: 100%;
-  outline: ${(props) => (props.isSelected ? '2px dashed green' : '')};
-  outline-offset: ${(props) => (props.isSelected ? '2px' : '')};
+  outline: ${(props) => (props.$isSelected ? '2px dashed green' : '')};
+  outline-offset: ${(props) => (props.$isSelected ? '2px' : '')};
 `;
 
 export const StyledRoot = styled.div`

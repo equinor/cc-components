@@ -9,7 +9,7 @@ export const StyledRoot = styled.div`
   margin-left: 5px;
   position: relative;
 `;
-export type ItemProps = { backgroundColor: string; isSelected: boolean };
+export type ItemProps = { $backgroundColor: string; $isSelected: boolean };
 
 export const StyledItemWrapper = styled.div<ItemProps>`
   display: grid;
@@ -17,7 +17,7 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   align-items: center;
   box-sizing: border-box;
   position: relative;
-  background: ${(props) => props.backgroundColor};
+  background: ${(props) => props.$backgroundColor};
   color: ${tokens.colors.text.static_icons__default.rgba};
   cursor: pointer;
   border: 1px solid #ededed;
@@ -27,8 +27,8 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   font-size: 13px;
   padding-left: 20px;
   padding-right: 2px;
-  outline: ${(props) => (props.isSelected ? '2px dashed green' : '')};
-  outline-offset: ${(props) => (props.isSelected ? '2px' : '')};
+  outline: ${(props) => (props.$isSelected ? '2px dashed green' : '')};
+  outline-offset: ${(props) => (props.$isSelected ? '2px' : '')};
   width: 100%;
 `;
 
@@ -40,8 +40,8 @@ export const StyledItemText = styled.div`
 `;
 
 type StatusCirclesProps = {
-  mcColor: string | null;
-  commColor: string | null;
+  $mcColor: string | null;
+  $commColor: string | null;
 };
 export const StyledStatusCircles = styled.div<StatusCirclesProps>`
   display: flex;
@@ -53,7 +53,7 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
     width: 12px;
     height: 12px;
     border: 1px solid white;
-    background-color: ${(props) => props.mcColor};
+    background-color: ${(props) => props.$mcColor};
     border-radius: 50%;
     margin: 0px 1px;
     content: ' ';
@@ -62,7 +62,7 @@ export const StyledStatusCircles = styled.div<StatusCirclesProps>`
     width: 12px;
     height: 12px;
     border: 1px solid white;
-    background-color: ${(props) => props.commColor};
+    background-color: ${(props) => props.$commColor};
     border-radius: 50%;
     margin: 0px 1px;
     content: ' ';

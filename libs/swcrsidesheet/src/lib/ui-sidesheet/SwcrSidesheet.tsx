@@ -1,8 +1,10 @@
 import { StatusCircle } from '@cc-components/shared/common';
+import { useContextId, useHttpClient } from '@cc-components/shared';
 import { LinkCell } from '@cc-components/shared/table-helpers';
 import {
   BannerItem,
   SidesheetHeader,
+  SidesheetSkeleton,
   StyledBanner,
   StyledPanels,
   StyledSideSheetContainer,
@@ -12,11 +14,14 @@ import {
   TabTitle,
 } from '@cc-components/sharedcomponents';
 import { SwcrPackage, getSwcrStatusColor } from '@cc-components/swcrshared';
-import { Tabs } from '@equinor/eds-core-react';
+import { Icon, Tabs } from '@equinor/eds-core-react';
 import { useState } from 'react';
 import { useSignatures } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { SignaturesTab } from './SignaturesTab';
+import { useQuery } from '@tanstack/react-query';
+import { tokens } from '@equinor/eds-tokens';
+import styled from 'styled-components';
 
 type SwcrProps = {
   id: string;
@@ -25,16 +30,60 @@ type SwcrProps = {
 };
 
 export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) => {
+  const client = useHttpClient();
+  const contextId = useContextId();
+
+  const { isLoading, data, error } = useQuery({
+    queryKey: ['swcr', id],
+    queryFn: async () => {
+      const res = await client.fetch(`/api/contexts/${contextId}/swcr/${id}`);
+      if (!res.ok) {
+        throw new Error(`Failed to get swcr with id ${id}`);
+      }
+      return res.json() as Promise<SwcrPackage>;
+    },
+    refetchOnWindowFocus: false,
+    initialData: item ?? undefined,
+  });
+
+  if (isLoading) {
+    return <SidesheetSkeleton close={() => closeSidesheet()} />;
+  }
+
+  if (error || !data) {
+    return (
+      <div
+        style={{ display: 'grid', placeItems: 'center', height: '100%', width: '100%' }}
+      >
+        <ErrorWrapper>
+          <Icon
+            name="error_outlined"
+            size={48}
+            color={tokens.colors.interactive.primary__resting.hsla}
+          />
+          <ErrorMessage>{`Failed to load details for ${id}`}</ErrorMessage>
+        </ErrorWrapper>
+      </div>
+    );
+  }
+
+  return <SwcrSidesheetComponent id={id} item={data} close={closeSidesheet} />;
+};
+
+export const SwcrSidesheetComponent = ({ id, close: closeSidesheet, item }: Required<SwcrProps>) => {
+  console.log(item);
+
   const { data: signatures, isLoading: signaturesFetching, error } = useSignatures(id);
   const [activeTab, setActiveTab] = useState(0);
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
-  const attachmentsUrls = item?.swcrUrl.replace('#', '#tab=attachments&');
+  //TODO: move to backend
+  // const attachmentsUrls = item?.swcrUrl.replace('#', '#tab=attachments&');
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
-        title={`${item?.softwareChangeRecordNo || ''}, ${item?.title || ''} `}
+        title={`${item.softwareChangeRecordNo}, ${item.title} `}
         applicationTitle={'Software change record'}
         onClose={closeSidesheet}
       />
@@ -42,10 +91,10 @@ export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) =>
         <BannerItem
           title="SWCR"
           value={
-            item?.softwareChangeRecordNo && item?.swcrUrl ? (
+            item.softwareChangeRecordNo && item.swcrUrl ? (
               <LinkCell url={item.swcrUrl} urlText={item.softwareChangeRecordNo} />
             ) : (
-              item?.softwareChangeRecordNo ?? 'N/A'
+              item.softwareChangeRecordNo ?? 'N/A'
             )
           }
         />
@@ -53,15 +102,15 @@ export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) =>
           title="Status"
           value={
             <StatusCircle
-              content={item?.status || ''}
-              statusColor={getSwcrStatusColor(item?.status)}
+              content={item.status}
+              statusColor={getSwcrStatusColor(item.status)}
             />
           }
         />
-        <BannerItem title="Contract" value={item?.contract ?? 'N/A'} />
-        <BannerItem title="Priority" value={item?.priority ?? 'N/A'} />
-        <BannerItem title="Supplier" value={item?.supplier ?? 'N/A'} />
-        <BannerItem title="System" value={item?.system ?? 'N/A'} />
+        <BannerItem title="Contract" value={item.contract ?? 'N/A'} />
+        <BannerItem title="Priority" value={item.priority ?? 'N/A'} />
+        <BannerItem title="Supplier" value={item.supplier ?? 'N/A'} />
+        <BannerItem title="System" value={item.system ?? 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
@@ -75,21 +124,31 @@ export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) =>
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab
-              attachmentsUrls={attachmentsUrls}
+              attachmentsUrls={""}
               item={item}
               signatures={signatures}
               signaturesFetching={signaturesFetching}
             />
           </Tabs.Panel>
           <Tabs.Panel>
-            <SignaturesTab
-              error={error}
-              isFetching={signaturesFetching}
-              signatures={signatures}
-            />
+            <SignaturesTab signatures={signatures} isFetching={signaturesFetching} error={error} />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
     </StyledSideSheetContainer>
   );
 };
+const ErrorWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ErrorMessage = styled.h3`
+  margin: 0;
+`;
+
