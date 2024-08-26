@@ -46,7 +46,7 @@ export const PopoverContent = ({
         {data.description}
       </StyledPopoverProjectDescription>
       <hr />
-      <StyledPopoverProgressBar barColor={barColor} textColor={textColor}>
+      <StyledPopoverProgressBar $barColor={barColor} $textColor={textColor}>
         <strong>{`Milestone: ${status}`}</strong>
         <span>
           <SizeIcons color={getTextColor(status)} size={size} />
@@ -74,14 +74,14 @@ export const PopoverContent = ({
       )}
       <StyledStatuses>
         <h5>MC status</h5>
-        <StyledPopoverStatus color={mcPackageColor}>
+        <StyledPopoverStatus $color={mcPackageColor}>
           {['OS', 'OK', 'PA'].includes(data.mechanicalCompletionStatus)
             ? data.mechanicalCompletionStatus
             : 'PB'}
         </StyledPopoverStatus>
 
         <h5>CommPkg status</h5>
-        <StyledPopoverStatus color={commStatusColor}>
+        <StyledPopoverStatus $color={commStatusColor}>
           {['OS', 'OK', 'PA'].includes(data.status) ? data.status : 'PB'}
         </StyledPopoverStatus>
       </StyledStatuses>

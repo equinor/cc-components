@@ -14,7 +14,7 @@ export const useSignatures = (swcrId: string): UseSignatures => {
   const client = useHttpClient();
 
   const { isLoading, data, error } = useQuery<SwcrSignature[], Error>({
-    queryKey: ['swcr', swcrId],
+    queryKey: ['swcr', "signatures", swcrId],
     queryFn: async () => {
       const res = await client.fetch(
         `api/contexts/${contextId}/swcr/${swcrId}/signatures`

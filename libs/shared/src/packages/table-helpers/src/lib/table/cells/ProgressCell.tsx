@@ -18,9 +18,9 @@ export const ProgressCell = ({ percentWidth }: ProgressCellProps): JSX.Element =
       <StyledProgressBarContainer>
         {Math.round(percentWidth) > 0 ? (
           <StyledActualProgress
-            borderColor="#40D38F"
-            width={percentWidth}
-            color="#D9F6E9"
+            $borderColor="#40D38F"
+            $width={percentWidth}
+            $color="#D9F6E9"
           ></StyledActualProgress>
         ) : (
           <></>

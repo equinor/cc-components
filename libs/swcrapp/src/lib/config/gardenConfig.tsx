@@ -25,7 +25,7 @@ export const useGardenConfig = (
     getHeader,
     getSubgroupItems,
     getDisplayName: (item) => item.softwareChangeRecordNo,
-    initialGrouping: ['RFC_PlannedDate'],
+    initialGrouping: ['RFO_ForecastDate'],
     visuals: {
       rowHeight: 25,
     },
