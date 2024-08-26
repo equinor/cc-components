@@ -24,7 +24,7 @@ export const PopoverContent = ({ loop }: PopoverContentProps) => {
       <StyledStatuses>
         <h5>MC content status</h5>
         {loop.loopContentStatus ? (
-          <StyledPopoverStatus color={statusColorMap[loop.loopContentStatus]}>
+          <StyledPopoverStatus $color={statusColorMap[loop.loopContentStatus]}>
             {loop.loopContentStatus}
           </StyledPopoverStatus>
         ) : (
@@ -32,7 +32,7 @@ export const PopoverContent = ({ loop }: PopoverContentProps) => {
         )}
         <h5>Loop checklist status</h5>
         {loop.status ? (
-          <StyledPopoverStatus color={statusColorMap[loop.status]}>
+          <StyledPopoverStatus $color={statusColorMap[loop.status]}>
             {loop.status}
           </StyledPopoverStatus>
         ) : (
