@@ -8,7 +8,6 @@ type DetailsTabProps = {
   item: SwcrPackage | undefined;
   signatures: SwcrSignature[] | undefined;
   signaturesFetching: boolean;
-  attachmentsUrls: string | undefined;
 };
 export const DetailsTab = ({ item }: DetailsTabProps) => {
   return (

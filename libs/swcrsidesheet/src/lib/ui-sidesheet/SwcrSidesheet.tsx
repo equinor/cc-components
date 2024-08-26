@@ -73,11 +73,11 @@ export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) =>
 export const SwcrSidesheetComponent = ({ id, close: closeSidesheet, item }: Required<SwcrProps>) => {
   const { data: signatures, isLoading: signaturesFetching, error } = useSignatures(id);
   const [activeTab, setActiveTab] = useState(0);
+
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
-  //TODO: move to backend
-  // const attachmentsUrls = item?.swcrUrl.replace('#', '#tab=attachments&');
+
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
