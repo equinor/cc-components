@@ -122,7 +122,6 @@ export const SwcrSidesheetComponent = ({ id, close: closeSidesheet, item }: Requ
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab
-              attachmentsUrls={""}
               item={item}
               signatures={signatures}
               signaturesFetching={signaturesFetching}
