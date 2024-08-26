@@ -9,6 +9,7 @@ import {
   StyledPopoverProjectDescription,
 } from '@cc-components/shared/common';
 import { McPackage } from '../../../../../mechanicalcompletionshared';
+
 type ItemOptions = {
   size: TagSize;
   backgroundColor: string;
@@ -17,10 +18,12 @@ type ItemOptions = {
   commDotColor: string;
   status: string;
 };
+
 type PopoverContentProps = {
   data: McPackage;
   options: ItemOptions;
 };
+
 export const PopoverContent = ({
   data,
   options: { size, backgroundColor, contentsColor, mcDotColor, commDotColor, status },
@@ -33,7 +36,7 @@ export const PopoverContent = ({
         {data.description}
       </StyledPopoverProjectDescription>
       <hr />
-      <StyledPopoverProgressBar barColor={backgroundColor} textColor={contentsColor}>
+      <StyledPopoverProgressBar $barColor={backgroundColor} $textColor={contentsColor}>
         <span>
           <strong>Milestone: {status}</strong>
         </span>
@@ -46,14 +49,14 @@ export const PopoverContent = ({
       </StyledPopoverProgressBar>
       <Statuses>
         <h5>MC status</h5>
-        <StyledPopoverStatus color={mcDotColor}>
+        <StyledPopoverStatus $color={mcDotColor}>
           {['OS', 'OK', 'PA'].includes(data.mechanicalCompletionStatus)
             ? data.mechanicalCompletionStatus
             : 'PB'}
         </StyledPopoverStatus>
 
         <h5>Comm status</h5>
-        <StyledPopoverStatus color={commDotColor}>
+        <StyledPopoverStatus $color={commDotColor}>
           {['OS', 'OK', 'PA'].includes(data.commpkgStatus) ? data.commpkgStatus : 'PB'}
         </StyledPopoverStatus>
       </Statuses>

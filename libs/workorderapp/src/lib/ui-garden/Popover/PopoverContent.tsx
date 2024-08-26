@@ -38,7 +38,7 @@ const WorkOrderPopoverWrapper = ({ data, itemOptions }: WorkOrderPopoverProps) =
         {data.description}
       </StyledPopoverProjectDescription>
       <hr />
-      <StyledPopoverProgressBar barColor={barColor} textColor={textColor}>
+      <StyledPopoverProgressBar $barColor={barColor} $textColor={textColor}>
         <strong>Status: {milestone}</strong>
 
         <div>
@@ -55,7 +55,7 @@ const WorkOrderPopoverWrapper = ({ data, itemOptions }: WorkOrderPopoverProps) =
       )}
       <StyledStatuses>
         <h5>Material status</h5>
-        <StyledPopoverStatus color={matColor}>
+        <StyledPopoverStatus $color={matColor}>
           {matStatus === 'NOT_AVAILABLE'
             ? 'NA'
             : matStatus === 'AVAILABLE'
@@ -65,7 +65,7 @@ const WorkOrderPopoverWrapper = ({ data, itemOptions }: WorkOrderPopoverProps) =
             : 'OS'}
         </StyledPopoverStatus>
         <h5>MCCR status</h5>
-        <StyledPopoverStatus color={mccrColor}>
+        <StyledPopoverStatus $color={mccrColor}>
           {!data.mccrStatus ? 'OS' : data.mccrStatus}
         </StyledPopoverStatus>
       </StyledStatuses>
