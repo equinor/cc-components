@@ -251,21 +251,7 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
           </StyledPanel>
           <StyledPanel>
             <WorkorderTab
-              workorders={(workOrderPackages ?? []).map(
-                (workorder): WorkorderBase => ({
-                  ...workorder,
-                  workOrderNumber: workorder.workOrderNo,
-                  actualCompletionDate: workorder.actualCompletionDate,
-                  plannedFinishDate: workorder.plannedCompletionDate,
-                  discipline: workorder.discipline,
-                  estimatedHours: workorder.estimatedManHours,
-                  jobStatus: workorder.jobStatus,
-                  remainingHours: workorder.remainingManHours,
-                  title: workorder.title,
-                  workOrderUrl: workorder.workOrderUrl,
-                  projectProgress: workorder.projectProgress,
-                })
-              )}
+              workorders={(workOrderPackages ?? [])}
               isFetching={isDataFetchingWorkOrder}
               error={woError}
             />
