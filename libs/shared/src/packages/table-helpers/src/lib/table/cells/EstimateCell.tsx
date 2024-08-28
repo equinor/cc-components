@@ -26,9 +26,9 @@ export const EstimateCell = ({ current, max }: EstimateCellProps): JSX.Element =
       <StyledProgressBarContainer>
         {percentage > 0 ? (
           <StyledActualProgress
-            borderColor="#0084C4"
-            width={percentage}
-            color="#CCE6F3"
+            $borderColor="#0084C4"
+            $width={percentage}
+            $color="#CCE6F3"
           ></StyledActualProgress>
         ) : (
           <></>

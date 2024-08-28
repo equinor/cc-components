@@ -1,6 +1,4 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import styled from 'styled-components';
-
 import { DateCell } from '../../../../../../table-helpers/src/lib/table/cells/DateCell';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
 import { EstimateCell } from '../../../../../../table-helpers/src/lib/table/cells/EstimateCell';
@@ -19,7 +17,7 @@ export const columns = (
       cellRenderer: (props: ICellRendererProps<WorkorderBase, string | null>) => {
         return (
           <LinkCell
-            url={props.data?.workOrderUrl}
+            url={props.data?.workOrderUrl ?? undefined}
             urlText={props.data?.workOrderNumber}
           />
         );

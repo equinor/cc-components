@@ -36,6 +36,8 @@ import { Icon, Tabs } from '@equinor/eds-core-react';
 import { useGetEleNetwork } from '../utils-sidesheet/useGetEleNetwork';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
+import { useGetHeatedTags } from '../utils-sidesheet/useGetHeatedTags';
+import { HeatedTagsTab } from './HeatedTagsTab';
 
 const viewerOptions = {
   statusResolver: (status: string) => {
@@ -78,6 +80,8 @@ const HeattraceSidesheetComponent = ({
   const { eleNetwork } = useGetEleNetwork(item);
 
   const { dataWorkorders, errorWorkorders, isLoadingWorkorders } = useGetWorkorders(id);
+
+  const { dataHeatedTags, errorHeatedTags, isLoadingHeatedTags } = useGetHeatedTags(id);
 
   const { dataChecklists, errorChecklists, isLoadingChecklists } =
     useGetHeatTraceChecklists(id);
@@ -140,6 +144,10 @@ const HeattraceSidesheetComponent = ({
           <StyledTabsList ref={ref}>
             <Tabs.Tab>Circuit diagram</Tabs.Tab>
             <Tabs.Tab>
+              Heated tags
+              <TabTitle data={dataHeatedTags} isLoading={isLoadingHeatedTags} />
+            </Tabs.Tab>
+            <Tabs.Tab>
               Work orders
               <TabTitle data={dataWorkorders} isLoading={isLoadingWorkorders} />
             </Tabs.Tab>
@@ -165,6 +173,13 @@ const HeattraceSidesheetComponent = ({
                 setSidesheetWidth(newWidth + 50);
                 reszied.current = { hasResized: true, id: id };
               }}
+            />
+          </StyledPanel>
+          <StyledPanel>
+            <HeatedTagsTab
+              error={errorHeatedTags}
+              isFetching={isLoadingHeatedTags}
+              data={dataHeatedTags}
             />
           </StyledPanel>
           <StyledPanel>
