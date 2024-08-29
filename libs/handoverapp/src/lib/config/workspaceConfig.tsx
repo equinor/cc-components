@@ -25,7 +25,7 @@ export const WorkspaceWrapper = () => {
 
   const pbi = usePBIOptions('handoveranalytics', {
     column: 'Facility',
-    table: 'Dim_Facility ',
+    table: 'Dim_Facility',
   });
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
