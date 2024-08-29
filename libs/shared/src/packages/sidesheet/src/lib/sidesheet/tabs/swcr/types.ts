@@ -3,6 +3,7 @@ export type SwcrBase = {
   softwareChangeRecordUrl: string;
   softwareChangeRecordId: string;
   description: string;
+  title: string;
   priority: string;
   status: string;
 };
