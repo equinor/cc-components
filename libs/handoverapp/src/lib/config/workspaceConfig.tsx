@@ -24,8 +24,8 @@ export const WorkspaceWrapper = () => {
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
   const pbi = usePBIOptions('handoveranalytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
+    column: 'Facility',
+    table: 'Dim_Facility ',
   });
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
