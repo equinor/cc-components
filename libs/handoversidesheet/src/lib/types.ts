@@ -64,6 +64,7 @@ export type HandoverSWCR = {
   softwareChangeRecordUrl: string;
   status: string;
   description: string;
+  title: string;
   priority: string;
 } & HandoverChild;
 
