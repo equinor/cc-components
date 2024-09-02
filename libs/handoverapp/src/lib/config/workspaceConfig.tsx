@@ -16,6 +16,19 @@ import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './sidesheetConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useTableConfig } from './tableConfig';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const r = {
+  Facility: {
+    column: "Facility",
+    table: "Dim_Facility"
+  },
+  ProjectMaster: {
+    column: "ProjectMaster GUID",
+    table: "Dim_ProjectMaster"
+  },
+} as const
+
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
@@ -23,10 +36,15 @@ export const WorkspaceWrapper = () => {
   const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
-  const pbi = usePBIOptions('handoveranalytics', {
-    column: 'Facility',
-    table: 'Dim_Facility',
-  });
+
+  const { currentContext } = useModuleCurrentContext()
+
+  const { column, table } = r[(currentContext?.type.id) as "ProjectMaster" | "Facility"]
+  const pbi = usePBIOptions('handoveranalytics',
+    {
+      column,
+      table
+    });
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
