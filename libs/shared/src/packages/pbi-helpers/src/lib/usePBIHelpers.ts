@@ -28,8 +28,7 @@ export const usePBIHelpers = () => {
     }
     const client = await serviceDisco.createClient('reports');
 
-    console.log(currentContext)
-    await checkAccess(client, contextId, reportUri, currentContext!);
+    await checkAccess(client, reportUri, currentContext!);
 
     const res = await client.fetch(`reports/${reportUri}/config/embedinfo`, { signal });
     if (!res.ok) {
@@ -81,10 +80,10 @@ export const usePBIHelpers = () => {
   };
 };
 
-async function checkAccess(client: IHttpClient, contextId: string, reportUri: string, ctx: ContextItem) {
+async function checkAccess(client: IHttpClient, reportUri: string, ctx: ContextItem) {
 
   const res = await client.fetch(
-    `reports/${reportUri}/contexts/${contextId}/contexttypes/${ctx.type.id!}/checkaccess`,
+    `reports/${reportUri}/contexts/${ctx.externalId}/contexttypes/${ctx.type.id!}/checkaccess`,
     { method: 'OPTIONS' }
   );
 

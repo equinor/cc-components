@@ -18,7 +18,7 @@ import { useStatusBarConfig } from './statusBarConfig';
 import { useTableConfig } from './tableConfig';
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
 
-const r = {
+const pbi_context_mapping = {
   Facility: {
     column: "Facility",
     table: "Dim_Facility"
@@ -39,13 +39,7 @@ export const WorkspaceWrapper = () => {
 
   const { currentContext } = useModuleCurrentContext()
 
-  const { column, table } = r[(currentContext?.type.id) as "ProjectMaster" | "Facility"]
-  const pbi = usePBIOptions('handoveranalytics',
-    {
-      column,
-      table
-    });
-
+  const pbi = usePBIOptions('handoveranalytics', pbi_context_mapping[(currentContext?.type.id) as "ProjectMaster" | "Facility"]);
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
   const filterConfig = useFilterConfig((req) =>
