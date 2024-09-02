@@ -78,7 +78,7 @@ export const usePBIHelpers = () => {
 };
 
 async function checkAccess(client: IHttpClient, contextId: string, reportUri: string) {
-  const contextType = 'ProjectMaster';
+  const contextType = 'Facility';
 
   const res = await client.fetch(
     `reports/${reportUri}/contexts/${contextId}/contexttypes/${contextType}/checkaccess`,
