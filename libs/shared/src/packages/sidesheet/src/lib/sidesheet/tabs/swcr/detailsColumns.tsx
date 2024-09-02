@@ -18,9 +18,9 @@ export const columns: ColDef<SwcrBase>[] = [
     },
   },
   {
-    colId: 'description',
-    headerName: 'Description',
-    valueGetter: (pkg) => pkg.data?.description,
+    colId: 'title',
+    headerName: 'Title',
+    valueGetter: (pkg) => pkg.data?.title,
     cellRenderer: (props: ICellRendererProps<SwcrBase>) => (
       <DescriptionCell description={props.value} />
     ),
