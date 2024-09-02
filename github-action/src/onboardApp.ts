@@ -80,7 +80,7 @@ async function onboardAppForProjectMaster(appkey: string, token: string, env: Fu
     ['Content-Type']: 'application/json',
   };
   const payload = {
-    type: "Facility"
+    type: "ProjectMaster"
   }
   const url = `${env === 'CI' ? testEnv.url : productionEnv.url}/api/onboarded-apps/${appkey}/context-type`
   console.log(`Sending ${payload} to ${url}`)
@@ -139,7 +139,7 @@ async function onboardAppWithCategory(appkey: string, token: string, env: Fusion
       ['Authorization']: `Bearer ${token}`,
       ['Content-Type']: 'application/json',
     };
-    const payload = { appKey: appkey, isLegacy: false, appGroupId: env == "CI" ? testEnv.categoryId : productionEnv.categoryId, contextTypes: ["Facility"] }
+    const payload = { appKey: appkey, isLegacy: false, appGroupId: env == "CI" ? testEnv.categoryId : productionEnv.categoryId, contextTypes: ["ProjectMaster"] }
     const res = await client.postJson(
       `${env === 'CI' ? testEnv.url : productionEnv.url}/api/onboarded-apps`,
       payload,
