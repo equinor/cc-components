@@ -142,7 +142,7 @@ function PRLabel({ prNumber }: { prNumber: string }) {
     },
     throwOnError: false,
   });
-  
+
   if (!isOpen) return null;
   if (isLoading) {
     return (
@@ -177,10 +177,6 @@ function PRLabel({ prNumber }: { prNumber: string }) {
       }}
     >
       <section style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-        {data.assignee && (
-          <img height={'40px'} width={'40px'} src={data.assignee?.avatar_url} />
-        )}
-
         {data.state === 'open' ? <OpenPR /> : <MergedPr />}
         <a href={`https://github.com/equinor/cc-components/pull/${prNumber}`}>
           {data.title} #{prNumber}
