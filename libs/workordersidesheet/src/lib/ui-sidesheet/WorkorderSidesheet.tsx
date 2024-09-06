@@ -98,11 +98,9 @@ export const WorkorderSidesheet = (props: {
   if (!wo || error) {
     return <div>Failed to get Workorder with id: {props.id}</div>;
   }
-
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
-
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
