@@ -11,5 +11,5 @@ const MyApp = () => {
   );
 };
 
-export const render = createRender(MyApp, configure);
+export const render = createRender(MyApp, configure, "heat-trace");
 export default render;
