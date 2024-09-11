@@ -232,7 +232,8 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               />
             </Tabs.Tab>
             <Tabs.Tab>
-              Unsigned Checklists{' '}
+              Unsigned Checklists
+
               <TabTitle
                 data={unsignedChecklists}
                 isLoading={isDataFetchingUnsignedChecklists}
