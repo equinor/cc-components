@@ -29,7 +29,10 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
   const ref = useRef<HTMLDivElement | null>(null);
   const [_, refHeight] = useResizeObserver(ref);
   const { columns, error, isFetching, packages, resourceName } = props;
-  const gridHeight = packages && packages.length > 30 ? refHeight : "auto-height"
+
+  const refMinHeight = refHeight < 50 ? 500 : refHeight;
+
+  const gridHeight = packages && packages.length > 30 ? refMinHeight : "auto-height"
 
   if (isFetching) {
     return (

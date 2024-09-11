@@ -23,7 +23,6 @@ import {
   SwcrTab,
   UnsignedActionTab,
   UnsignedTaskTab,
-  WorkorderBase,
   WorkorderTab,
   useContextId,
 } from '@cc-components/shared';
