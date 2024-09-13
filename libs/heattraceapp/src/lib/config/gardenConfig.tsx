@@ -31,5 +31,8 @@ export const useGardenConfig = (
     customViews: {
       customItemView: GardenItem as any,
     },
+    visuals: {
+      rowHeight: 31,
+    },
   };
 };
