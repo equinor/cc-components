@@ -1,5 +1,4 @@
 import { Progress } from '@equinor/eds-core-react';
-import { StatusCircle, statusColorMap } from '@cc-components/shared'
 
 type LoadingTabTitleProps<T> = {
   isLoading: boolean;
@@ -24,14 +23,6 @@ export const TabTitle = <T extends Record<string, unknown>>({
   }
 
   if (total > 0 && completed !== undefined) {
-    if (completed == total) {
-      return <>
-        {" "}
-        ({total})
-        {" "}
-        <StatusCircle content={``} statusColor={statusColorMap["OK"]} />
-      </>
-    }
     return <>({completed}/{total})</>;
   }
 
