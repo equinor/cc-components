@@ -1,5 +1,9 @@
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { Pipetest } from '@cc-components/pipingshared';
+import {
+  Pipetest,
+  PipetestWorkflowStep,
+  mapWorkflowStepsToStep,
+} from '@cc-components/pipingshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
@@ -11,6 +15,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCircle,
+  WorkflowVisual,
   domainNames,
   pipetestStatusColormap,
   useHttpClient,
@@ -83,6 +88,16 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     headerName: domainNames.mcLocation,
     colId: 'location',
     valueGetter: (element) => element.data?.location,
+  },
+  {
+    headerName: 'Checklist status',
+    colId: 'workflow',
+    valueGetter: (element) => element.data?.workflow,
+    cellRenderer: (props: ICellRendererProps<Pipetest, PipetestWorkflowStep[]>) => {
+      if (!props.value) return;
+
+      return <WorkflowVisual workflowSteps={mapWorkflowStepsToStep(props.value)} />;
+    },
   },
   {
     headerName: domainNames.mcStatus,

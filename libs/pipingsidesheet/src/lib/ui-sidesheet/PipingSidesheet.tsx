@@ -1,4 +1,4 @@
-import { Pipetest } from '@cc-components/pipingshared';
+import { mapWorkflowStepsToStep, Pipetest } from '@cc-components/pipingshared';
 import { useState } from 'react';
 import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import {
   BaseStatus,
   LinkCell,
   StatusCircle,
+  WorkflowVisual,
   hasProperty,
   pipetestStatusColormap,
 } from '@cc-components/shared';
@@ -120,16 +121,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
         <BannerItem title="Current step" value={item.checklistStep} />
         <BannerItem
           title="Checklist status"
-          value={
-            item.formStatus ? (
-              <StatusCircle
-                content={item.formStatus}
-                statusColor={pipetestStatusColormap[item.formStatus as BaseStatus]}
-              />
-            ) : (
-              'N/A'
-            )
-          }
+          value={<WorkflowVisual workflowSteps={mapWorkflowStepsToStep(item.workflow)} />}
         />
         <BannerItem
           title="Comm Pkg"
@@ -211,11 +203,10 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
   );
 };
 
-
 export const PipingSidesheet = (props: PipingProps) => {
   const { id, item, close } = props;
 
-  const { data, isLoading, error } = useGetPipetest(id, item)
+  const { data, isLoading, error } = useGetPipetest(id, item);
 
   if (isLoading) {
     return <SidesheetSkeleton close={close} />;
@@ -225,5 +216,5 @@ export const PipingSidesheet = (props: PipingProps) => {
     return <div>Failed to get Pipetest with id: {id}</div>;
   }
 
-  return (<PipingSidesheetContent id={id} item={data} close={close} />);
+  return <PipingSidesheetContent id={id} item={data} close={close} />;
 };
