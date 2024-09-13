@@ -2,6 +2,8 @@ import { useServiceDiscovery } from '../../../hooks/src/lib/useServiceDiscovery'
 import { EmbedInfo, EmbedToken, ReportInfo } from './types';
 import { useExternalContextId } from '../../../hooks';
 import { type IHttpClient } from '@equinor/fusion-framework-module-http';
+import { useContext } from 'react';
+import { ContextItem, useCurrentContext, useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
 
 const isEmbedInfo = (embedInfo: unknown): embedInfo is EmbedInfo => {
   return (embedInfo as EmbedInfo).embedConfig.embedUrl !== undefined ? true : false;
@@ -18,6 +20,7 @@ const isEmbedToken = (embedToken: unknown): embedToken is EmbedToken => {
 export const usePBIHelpers = () => {
   const serviceDisco = useServiceDiscovery();
   const contextId = useExternalContextId();
+  const { currentContext } = useModuleCurrentContext();
 
   const getEmbed = async (reportUri: string, _token: string, signal?: AbortSignal) => {
     if (!contextId) {
@@ -25,7 +28,7 @@ export const usePBIHelpers = () => {
     }
     const client = await serviceDisco.createClient('reports');
 
-    await checkAccess(client, contextId, reportUri);
+    await checkAccess(client, reportUri, currentContext!);
 
     const res = await client.fetch(`reports/${reportUri}/config/embedinfo`, { signal });
     if (!res.ok) {
@@ -77,11 +80,10 @@ export const usePBIHelpers = () => {
   };
 };
 
-async function checkAccess(client: IHttpClient, contextId: string, reportUri: string) {
-  const contextType = 'ProjectMaster';
+async function checkAccess(client: IHttpClient, reportUri: string, ctx: ContextItem) {
 
   const res = await client.fetch(
-    `reports/${reportUri}/contexts/${contextId}/contexttypes/${contextType}/checkaccess`,
+    `reports/${reportUri}/contexts/${ctx.externalId}/contexttypes/${ctx.type.id!}/checkaccess`,
     { method: 'OPTIONS' }
   );
 
