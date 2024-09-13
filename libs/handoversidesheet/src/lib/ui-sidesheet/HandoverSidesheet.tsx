@@ -210,7 +210,8 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               <TabTitle
                 data={workOrderPackages}
                 isLoading={isDataFetchingWorkOrder}
-              />{' '}
+                completed={workOrderPackages?.filter(s => s.projectProgress == 100).length}
+              />
             </Tabs.Tab>
             <Tabs.Tab>
               Unsigned Tasks{' '}
