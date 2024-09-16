@@ -90,7 +90,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     valueGetter: (element) => element.data?.location,
   },
   {
-    headerName: 'Checklist status',
+    headerName: domainNames.checklistStatus,
     colId: 'workflow',
     valueGetter: (element) => element.data?.workflow,
     cellRenderer: (props: ICellRendererProps<Pipetest, PipetestWorkflowStep[]>) => {
@@ -103,20 +103,6 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     headerName: domainNames.mcStatus,
     colId: 'mechanicalCompletionStatus',
     valueGetter: (element) => element.data?.mechanicalCompletionStatus,
-    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
-      if (!props.value) return;
-      return (
-        <StatusCircle
-          content={props.value}
-          statusColor={pipetestStatusColormap[props.value as BaseStatus]}
-        />
-      );
-    },
-  },
-  {
-    headerName: domainNames.checklistStatus,
-    colId: 'formStatus',
-    valueGetter: (element) => element.data?.formStatus,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       if (!props.value) return;
       return (
