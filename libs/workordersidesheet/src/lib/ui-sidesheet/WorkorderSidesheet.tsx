@@ -1,9 +1,7 @@
 import { Tabs } from '@equinor/eds-core-react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-
 import {
-  CutoffTab,
   LinkCell,
   MaterialTab,
   MccrTab,
@@ -14,7 +12,6 @@ import {
   useContextId,
   useHttpClient,
 } from '@cc-components/shared';
-
 import {
   BannerItem,
   CustomStyledPanels,
@@ -28,19 +25,14 @@ import {
   StyledTabsList,
   TabTitle,
 } from '@cc-components/sharedcomponents';
-
 import {
   WorkOrder,
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-
 import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
-
 import { useMaterial, useMccr } from '../utils-sidesheet';
-import { useCutoff } from '../utils-sidesheet/useCutoff';
 import { DetailsTab } from './DetailsTab';
-
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 
 const viewerOptions = {
@@ -63,8 +55,6 @@ export const WorkorderSidesheet = (props: {
     isFetching: isFetchingMaterial,
     error: materialError,
   } = useMaterial(props.id);
-
-  const { data: cutoffList, error: cutoffError, isLoading } = useCutoff(props.id);
 
   const {
     data: modelConfig,
@@ -108,11 +98,9 @@ export const WorkorderSidesheet = (props: {
   if (!wo || error) {
     return <div>Failed to get Workorder with id: {props.id}</div>;
   }
-
   const handleChange = (index: number) => {
     setActiveTab(index);
   };
-
   return (
     <StyledSideSheetContainer>
       <SidesheetHeader
@@ -177,9 +165,6 @@ export const WorkorderSidesheet = (props: {
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
             </Tabs.Tab>
             <Tabs.Tab>
-              Cutoff <TabTitle data={cutoffList} isLoading={isLoading} />
-            </Tabs.Tab>
-            <Tabs.Tab>
               3D <TabTitle data={modelConfig?.tags} isLoading={isFetchingModelConfig} />
             </Tabs.Tab>
           </StyledTabsList>
@@ -201,13 +186,6 @@ export const WorkorderSidesheet = (props: {
               material={material}
               isFetching={isFetchingMaterial}
               error={materialError as Error | null}
-            />
-          </StyledPanel>
-          <StyledPanel>
-            <CutoffTab
-              cutoff={cutoffList}
-              isFetching={isLoading}
-              error={cutoffError as Error | null}
             />
           </StyledPanel>
           <StyledPanel style={{ height: '100%' }}>
