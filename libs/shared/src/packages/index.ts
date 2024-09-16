@@ -17,3 +17,4 @@ export * from './cc-api';
 export * from './root-app-wrapper';
 export * from './fusion-framework';
 export * from './utils-domain';
+export * from './workflow-visual';

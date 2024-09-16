@@ -1,5 +1,9 @@
 import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
-import { Pipetest } from '@cc-components/pipingshared';
+import {
+  Pipetest,
+  PipetestWorkflowStep,
+  mapWorkflowStepsToStep,
+} from '@cc-components/pipingshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
@@ -11,6 +15,7 @@ import {
   DescriptionCell,
   LinkCell,
   StatusCircle,
+  WorkflowVisual,
   domainNames,
   pipetestStatusColormap,
   useHttpClient,
@@ -85,23 +90,19 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     valueGetter: (element) => element.data?.location,
   },
   {
-    headerName: domainNames.mcStatus,
-    colId: 'mechanicalCompletionStatus',
-    valueGetter: (element) => element.data?.mechanicalCompletionStatus,
-    cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
+    headerName: domainNames.checklistStatus,
+    colId: 'workflow',
+    valueGetter: (element) => element.data?.workflow,
+    cellRenderer: (props: ICellRendererProps<Pipetest, PipetestWorkflowStep[]>) => {
       if (!props.value) return;
-      return (
-        <StatusCircle
-          content={props.value}
-          statusColor={pipetestStatusColormap[props.value as BaseStatus]}
-        />
-      );
+
+      return <WorkflowVisual workflowSteps={mapWorkflowStepsToStep(props.value)} />;
     },
   },
   {
-    headerName: domainNames.checklistStatus,
-    colId: 'formStatus',
-    valueGetter: (element) => element.data?.formStatus,
+    headerName: domainNames.mcStatus,
+    colId: 'mechanicalCompletionStatus',
+    valueGetter: (element) => element.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       if (!props.value) return;
       return (

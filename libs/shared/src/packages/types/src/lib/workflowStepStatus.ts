@@ -1,0 +1,1 @@
+export type WorkflowStepStatus = 'OS' | 'OK' | 'PA' | 'PB' | 'IN';
