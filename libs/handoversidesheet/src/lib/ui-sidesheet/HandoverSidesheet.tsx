@@ -23,6 +23,8 @@ import {
   SwcrTab,
   UnsignedActionTab,
   UnsignedTaskTab,
+  UnsignedChecklistTab,
+  WorkorderBase,
   WorkorderTab,
   useContextId,
 } from '@cc-components/shared';
@@ -118,6 +120,12 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
     dataIsFetching: isDataFetchingUnsignedActions,
     error: unsignedActionsError,
   } = useHandoverResource(props.id, 'unsigned-actions');
+
+  const {
+    data: unsignedChecklists,
+    dataIsFetching: isDataFetchingUnsignedChecklists,
+    error: unsignedChecklistsError,
+  } = useHandoverResource(props.id, 'unsigned-checklists');
 
   const {
     data: punchPackages,
@@ -224,6 +232,14 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               />
             </Tabs.Tab>
             <Tabs.Tab>
+              Unsigned Checklists
+
+              <TabTitle
+                data={unsignedChecklists}
+                isLoading={isDataFetchingUnsignedChecklists}
+              />
+            </Tabs.Tab>
+            <Tabs.Tab>
               Punch <TabTitle data={filteredPunches} isLoading={isDataFetchingPunch} />{' '}
             </Tabs.Tab>
             <Tabs.Tab>
@@ -237,7 +253,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             <Tabs.Tab>
               NCR <TabTitle data={ncrPackages} isLoading={isDataFetchingNcr} />{' '}
             </Tabs.Tab>
-
           </StyledTabsList>
         </StyledTabListWrapper>
 
@@ -267,6 +282,13 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               unsignedActions={unsignedActions}
               isFetching={isDataFetchingUnsignedActions}
               error={unsignedActionsError}
+            />
+          </StyledPanel>
+          <StyledPanel>
+            <UnsignedChecklistTab
+              unsignedChecklists={unsignedChecklists}
+              isFetching={isDataFetchingUnsignedChecklists}
+              error={unsignedChecklistsError}
             />
           </StyledPanel>
           <StyledPanel>

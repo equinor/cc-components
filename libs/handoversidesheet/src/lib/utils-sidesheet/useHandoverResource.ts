@@ -10,6 +10,7 @@ import {
   HandoverQuery,
   HandoverSWCR,
   HandoverUnsignedAction,
+  HandoverUnsignedChecklist,
   HandoverUnsignedTask,
   HandoverWorkOrder,
 } from '../types';
@@ -19,6 +20,7 @@ export type HandoverResourceTypeMap = {
   'work-orders': HandoverWorkOrder;
   'unsigned-tasks': HandoverUnsignedTask;
   'unsigned-actions': HandoverUnsignedAction;
+  'unsigned-checklists': HandoverUnsignedChecklist;
   punch: HandoverPunch;
   swcr: HandoverSWCR;
   details: HandoverDetails;
