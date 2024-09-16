@@ -68,6 +68,15 @@ export type HandoverSWCR = {
   priority: string;
 } & HandoverChild;
 
+export type HandoverUnsignedChecklist = {
+  type: string;
+  group: string;
+  discipline: string;
+  responsible: string;
+  tagNo: string;
+  checklistUrl: string;
+} & HandoverChild;
+
 export type HandoverUnsignedAction = {
   actionNo: string;
   commissioningPackageUrlId: string;
@@ -106,4 +115,3 @@ export type HandoverWorkOrder = {
   commissioningPackageUrlId: string | null;
   commpkgNumber: string | null;
 } & HandoverChild;
-
