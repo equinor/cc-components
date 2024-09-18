@@ -95,7 +95,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     data: electricalNetworks,
     isLoading: isLoadingElecticalNetworks,
     error: errorElectricalNetworks,
-  } = useElectricalNetworks(item.facility, item.heatTraceCableNos);
+  } = useElectricalNetworks(item.id);
 
   const {
     data: modelConfig,
