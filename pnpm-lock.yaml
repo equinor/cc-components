@@ -55,8 +55,8 @@ importers:
         specifier: 8.3.0
         version: 8.3.0(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.11
-        version: 9.0.11(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
+        specifier: 9.0.12
+        version: 9.0.12(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
       '@microsoft/applicationinsights-web':
         specifier: ^3.3.0
         version: 3.3.0(tslib@2.6.2)
@@ -1934,16 +1934,16 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: '>= 5.0.0'
 
-  '@equinor/workspace-filter@4.0.3':
-    resolution: {integrity: sha512-fD4hQ5ZRZdimffziKBZr8Wie6qZgtJmK6wchh+PTcpPMsAntnb6Khq+nRPfLj50CeHoQgMZTlHdIE/XAxChn6w==}
+  '@equinor/workspace-filter@4.0.4':
+    resolution: {integrity: sha512-FrV3OunzRUBhp1VcxSdGHn0U9KPDG+LCvr/d18LwvqANnjbv9VLfQugbdzWQuATfU3iUiLX+YIJn88xtrTp+mw==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
       react-is: '>= 16.8.0'
       styled-components: ^5.3.5
 
-  '@equinor/workspace-fusion@9.0.11':
-    resolution: {integrity: sha512-/ldx7Zty/CKvTwTFcyYFaAibWYCdeDD6oEgh8RoA3kxMAocWAooHlytJgqcSxZ1c1XNfhRGJcn/aKeyNnolf8Q==}
+  '@equinor/workspace-fusion@9.0.12':
+    resolution: {integrity: sha512-bJKfTp0p/id3YLxeMPTMCdfx9mlNtMBCGQ4kY7HOtehj0pnuKytdl6HpDqX8BW0PvflHtCrTR4kmQU8o+IJGhg==}
 
   '@equinor/workspace-garden@8.0.1':
     resolution: {integrity: sha512-mDqqJ2SZRPZyvIScc6rqYfmfOxte1tlnPHf8hc2aj4ZUoypg9MSKo0903B04nQi4gT/VOLhDGDsTy5MNFPZ5Pw==}
@@ -4047,13 +4047,13 @@ packages:
   '@tanstack/query-core@5.51.21':
     resolution: {integrity: sha512-POQxm42IUp6n89kKWF4IZi18v3fxQWFRolvBA6phNVmA8psdfB1MvDnGacCJdS+EOX12w/CyHM62z//rHmYmvw==}
 
-  '@tanstack/query-devtools@5.32.1':
-    resolution: {integrity: sha512-7Xq57Ctopiy/4atpb0uNY5VRuCqRS/1fi/WBCKKX6jHMa6cCgDuV/AQuiwRXcKARbq2OkVAOrW2v4xK9nTbcCA==}
+  '@tanstack/query-devtools@5.56.1':
+    resolution: {integrity: sha512-xnp9jq/9dHfSCDmmf+A5DjbIjYqbnnUL2ToqlaaviUQGRTapXQ8J+GxusYUu1IG0vZMaWdiVUA4HRGGZYAUU+A==}
 
-  '@tanstack/react-query-devtools@5.35.1':
-    resolution: {integrity: sha512-G2TP8ekCo+C9IPdEswKB9mqG5pxV+DWq86lmNw/VbUpdyNwNFvKi7GdcqW1pLDi5al+zifSjGSO7QZ7zDMJcQg==}
+  '@tanstack/react-query-devtools@5.56.2':
+    resolution: {integrity: sha512-7nINJtRZZVwhTTyDdMIcSaXo+EHMLYJu1S2e6FskvvD5prx87LlAXXWZDfU24Qm4HjshEtM5lS3HIOszNGblcw==}
     peerDependencies:
-      '@tanstack/react-query': ^5.35.1
+      '@tanstack/react-query': ^5.56.2
       react: 18.2.0
 
   '@tanstack/react-query@5.51.21':
@@ -7529,8 +7529,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  sortablejs@1.15.2:
-    resolution: {integrity: sha512-FJF5jgdfvoKn1MAKSdGs33bIqLi3LmsgVTliuX6iITj834F+JRQZN90Z93yql8h0K2t0RwDPBmxwlbZfDcxNZA==}
+  sortablejs@1.15.3:
+    resolution: {integrity: sha512-zdK3/kwwAK1cJgy1rwl1YtNTbRmc8qW/+vgXf75A7NHag5of4pyI6uK86ktmQETyWRH7IGaE73uZOOBcGxgqZg==}
 
   source-map-js@1.2.0:
     resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
@@ -8083,8 +8083,8 @@ packages:
     peerDependencies:
       react: 18.2.0
 
-  use-sync-external-store@1.2.0:
-    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+  use-sync-external-store@1.2.2:
+    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
     peerDependencies:
       react: 18.2.0
 
@@ -8290,8 +8290,8 @@ packages:
     resolution: {integrity: sha512-o0cyEG0e8GPzT4iGHphIOh0cJOV8fivsXxddQasHPHfoZf1ZexrfeA21w2NaEN1RHE+fXlfISmOE8R9N3u3Qig==}
     engines: {node: '>=12'}
 
-  window-post-message-proxy@0.2.8:
-    resolution: {integrity: sha512-lAxMnXcKMR3UjFmeIWnl+1OdUBZI8l3RlCbr3TUALFpnWK6H6i6x+AHSp7Hs7PFGb08ct8BLT8CrCtESo+PyTQ==}
+  window-post-message-proxy@0.2.9:
+    resolution: {integrity: sha512-hHmF5dvY27wy4EKN9c5qukPtzlbrdUzkMiCHud4gYKXCFAiGOBhCfi/dVBvwbUf0qrEGwFNnqkvk6DE54sdlcw==}
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -8385,8 +8385,8 @@ packages:
   zstddec@0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
 
-  zustand@4.5.2:
-    resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
+  zustand@4.5.5:
+    resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -10335,7 +10335,7 @@ snapshots:
       - '@ag-grid-community/styles'
       - '@types/react'
 
-  '@equinor/workspace-filter@4.0.3(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@equinor/workspace-filter@4.0.4(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@equinor/eds-core-react': 0.28.0(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.18.0
@@ -10345,22 +10345,22 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.0.13(react@18.2.0)
       react-is: 18.3.1
-      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.2)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.3)
       react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.2
+      sortablejs: 1.15.3
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/sortablejs'
       - supports-color
 
-  '@equinor/workspace-fusion@9.0.11(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
+  '@equinor/workspace-fusion@9.0.12(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0
       '@equinor/eds-tokens': 0.9.2
       '@equinor/workspace-ag-grid': 3.0.2(@ag-grid-community/styles@31.2.0)(@ag-grid-enterprise/core@31.2.1)(@types/react@18.3.2)(react-is@18.3.1)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@equinor/workspace-filter': 4.0.3(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-filter': 4.0.4(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/workspace-garden': 8.0.1(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/workspace-powerbi': 3.0.5(@types/sortablejs@1.15.8)
       '@equinor/workspace-react': 2.0.1(@babel/core@7.24.5)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
@@ -10386,7 +10386,7 @@ snapshots:
       '@equinor/eds-icons': 0.18.0
       '@equinor/eds-tokens': 0.9.0
       '@tanstack/react-query': 5.51.21(react@18.2.0)
-      '@tanstack/react-query-devtools': 5.35.1(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)
+      '@tanstack/react-query-devtools': 5.56.2(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.0.13(react@18.2.0)
@@ -10410,9 +10410,9 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.0.13(react@18.2.0)
       react-is: 18.3.1
-      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.2)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.3)
       react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.2
+      sortablejs: 1.15.3
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@types/sortablejs'
@@ -10426,7 +10426,7 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.3.1
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      zustand: 4.5.2(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0)
+      zustand: 4.5.5(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
@@ -13689,11 +13689,11 @@ snapshots:
 
   '@tanstack/query-core@5.51.21': {}
 
-  '@tanstack/query-devtools@5.32.1': {}
+  '@tanstack/query-devtools@5.56.1': {}
 
-  '@tanstack/react-query-devtools@5.35.1(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)':
+  '@tanstack/react-query-devtools@5.56.2(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@tanstack/query-devtools': 5.32.1
+      '@tanstack/query-devtools': 5.56.1
       '@tanstack/react-query': 5.51.21(react@18.2.0)
       react: 18.2.0
 
@@ -17216,7 +17216,7 @@ snapshots:
       http-post-message: 0.2.3
       powerbi-models: 1.15.2
       powerbi-router: 0.1.5
-      window-post-message-proxy: 0.2.8
+      window-post-message-proxy: 0.2.9
 
   powerbi-models@1.15.2: {}
 
@@ -17527,13 +17527,13 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-sortablejs@6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.2):
+  react-sortablejs@6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.3):
     dependencies:
       '@types/sortablejs': 1.15.8
       classnames: 2.3.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sortablejs: 1.15.2
+      sortablejs: 1.15.3
       tiny-invariant: 1.2.0
 
   react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
@@ -18073,7 +18073,7 @@ snapshots:
 
   slash@3.0.0: {}
 
-  sortablejs@1.15.2: {}
+  sortablejs@1.15.3: {}
 
   source-map-js@1.2.0: {}
 
@@ -18667,7 +18667,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  use-sync-external-store@1.2.0(react@18.2.0):
+  use-sync-external-store@1.2.2(react@18.2.0):
     dependencies:
       react: 18.2.0
 
@@ -18907,7 +18907,7 @@ snapshots:
     dependencies:
       string-width: 5.1.2
 
-  window-post-message-proxy@0.2.8:
+  window-post-message-proxy@0.2.9:
     dependencies:
       es6-promise: 3.3.1
 
@@ -18988,9 +18988,9 @@ snapshots:
 
   zstddec@0.0.2: {}
 
-  zustand@4.5.2(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0):
+  zustand@4.5.5(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0):
     dependencies:
-      use-sync-external-store: 1.2.0(react@18.2.0)
+      use-sync-external-store: 1.2.2(react@18.2.0)
     optionalDependencies:
       '@types/react': 18.3.2
       immer: 9.0.21
