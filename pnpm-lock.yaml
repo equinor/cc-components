@@ -272,6 +272,27 @@ importers:
         specifier: workspace:^
         version: link:../../libs/swcrapp
 
+  apps/transfer:
+    dependencies:
+      '@cc-components/handoverapp':
+        specifier: workspace:^
+        version: link:../../libs/handoverapp
+      '@cc-components/handovershared':
+        specifier: workspace:^
+        version: link:../../libs/handovershared
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../../libs/shared
+      '@cc-components/sharedcomponents':
+        specifier: workspace:^
+        version: link:../../libs/sharedcomponents
+      '@tanstack/react-virtual':
+        specifier: ^3.7.0
+        version: 3.7.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      re-resizable:
+        specifier: ^6.9.17
+        version: 6.9.17(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
   apps/workorder:
     dependencies:
       '@cc-components/shared':
@@ -4072,11 +4093,20 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0
 
+  '@tanstack/react-virtual@3.7.0':
+    resolution: {integrity: sha512-3RtOwEU1HKS4iFBoTcCrV3Szqt4KoERMhZr8v57dvnh5o70sR9GAdF+0aE/qhiOmePrKujGwAayFNJSr/8Dbqw==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
   '@tanstack/virtual-core@3.0.0-beta.30':
     resolution: {integrity: sha512-fewNoKiJeG5v0T4jg7UO99G+hUYDHig6AkiIeqvC1O2zEw96MlzR6DXw91aqxcsIPSVp83IPsgNa7su8yZWldw==}
 
   '@tanstack/virtual-core@3.2.0':
     resolution: {integrity: sha512-P5XgYoAw/vfW65byBbJQCw+cagdXDT/qH6wmABiLt4v4YBT2q2vqCOhihe+D1Nt325F/S/0Tkv6C5z0Lv+VBQQ==}
+
+  '@tanstack/virtual-core@3.7.0':
+    resolution: {integrity: sha512-p0CWuqn+n8iZmsL7/l0Xg7kbyIKnHNqkEJkMDOkg4x3Ni3LohszmnJY8FPhTgG7Ad9ZFGcdKmn1R1mKUGEh9Xg==}
 
   '@testing-library/dom@10.1.0':
     resolution: {integrity: sha512-wdsYKy5zupPyLCW2Je5DLHSxSfbIp6h80WoHOQc+RPtmPGA52O9x5MJEkv92Sjonpq+poOAtUKhh1kBGAXBrNA==}
@@ -7135,6 +7165,12 @@ packages:
 
   re-resizable@6.9.16:
     resolution: {integrity: sha512-D9+ofwgPQRC6PL6cwavCZO9MUR8TKKxV1nHjbutSdNaFHK9v5k8m6DcESMXrw1+mRJn7fBHJRhZpa7EQ1ZWEEA==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
+  re-resizable@6.9.17:
+    resolution: {integrity: sha512-OBqd1BwVXpEJJn/yYROG+CbeqIDBWIp6wathlpB0kzZWWZIY1gPTsgK2yJEui5hOvkCdC2mcexF2V3DZVfLq2g==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
@@ -13713,9 +13749,17 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
+  '@tanstack/react-virtual@3.7.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@tanstack/virtual-core': 3.7.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
   '@tanstack/virtual-core@3.0.0-beta.30': {}
 
   '@tanstack/virtual-core@3.2.0': {}
+
+  '@tanstack/virtual-core@3.7.0': {}
 
   '@testing-library/dom@10.1.0':
     dependencies:
@@ -17432,6 +17476,11 @@ snapshots:
       unpipe: 1.0.0
 
   re-resizable@6.9.16(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
+  re-resizable@6.9.17(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
