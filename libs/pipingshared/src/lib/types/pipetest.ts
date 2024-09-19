@@ -34,6 +34,7 @@ export type Pipetest = {
   heatTraceCableNos: string[];
   commissioningPackageUrl?: string;
   mechanicalCompletionUrl?: string;
+  workflow: PipetestWorkflowStep[]
 };
 
 export type Checklist = {
@@ -57,5 +58,12 @@ export type InsulationTagResponse = {
 export type InsulationTag = {
   tagNo: string;
   description: string;
+  status: string;
+};
+
+export type PipetestWorkflowStep = {
+  stepTag: string;
+  stepName: string;
+  stepValue: string;
   status: string;
 };

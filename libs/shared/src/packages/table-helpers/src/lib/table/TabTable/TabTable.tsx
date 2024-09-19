@@ -55,7 +55,7 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
         </NoResourceData>
       )}
 
-      {packages && packages.length === 0 && (
+      {!isFetching && packages && packages.length === 0 && (
         <NoResourceData>
           <Icon
             name="info_circle"

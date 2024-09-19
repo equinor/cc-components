@@ -9,3 +9,4 @@ export {
   orderedProCoSysStatuses,
 } from './procosys';
 export { pipetestAndHeatTraceColorMap } from './pipetestAndHeatTraceColor';
+export { workflowStatusColorMap, workflowStatusTextColorMap } from './workflowStatusColorMap';
