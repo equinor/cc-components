@@ -8,16 +8,16 @@ export const materialColorMap: Record<MappedMaterialStatus, string> = {
 };
 export const materialPackageStatusMap: Partial<
   Record<MaterialStatus, MappedMaterialStatus>
-> = {
-  MN: 'OK',
-  M10: 'OK',
-  M11: 'OK',
-  M12: 'OK',
-  M5: 'AVAILABLE',
-  M6: 'AVAILABLE',
-  M7: 'AVAILABLE',
-  M9: 'AVAILABLE',
-  M2: 'NOT_AVAILABLE',
-  M3: 'NOT_AVAILABLE',
-  M4: 'NOT_AVAILABLE',
+  > = {
+    M02: 'NOT_AVAILABLE',
+    M03: 'NOT_AVAILABLE',
+    M04: 'NOT_AVAILABLE',
+    M05: 'AVAILABLE',
+    M06: 'AVAILABLE',
+    M07: 'AVAILABLE',
+    M09: 'AVAILABLE',
+    M10: 'OK',
+    M11: 'OK',
+    M12: 'OK',
+    MN: 'OK',
 };
