@@ -2,7 +2,7 @@ import { hasProperty } from '@cc-components/shared';
 import { WorkOrder, materialPackageStatusMap } from '@cc-components/workordershared';
 import { MappedMaterialStatus } from '@cc-components/workordershared';
 
-const DEFAULT_MAT_STATUS = materialPackageStatusMap.M4 as MappedMaterialStatus;
+const DEFAULT_MAT_STATUS = materialPackageStatusMap.M04 as MappedMaterialStatus;
 export const getMatStatus = (workOrder: WorkOrder): MappedMaterialStatus => {
   if (!workOrder.materialStatus) {
     return DEFAULT_MAT_STATUS;
