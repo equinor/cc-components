@@ -115,3 +115,11 @@ export type HandoverWorkOrder = {
   commissioningPackageUrlId: string | null;
   commpkgNumber: string | null;
 } & HandoverChild;
+
+export type HandoverNotification = {
+  notificationNo: string;
+  type: string;
+  title: string;
+  status: string;
+  nextToSign: string;
+}

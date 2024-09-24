@@ -21,6 +21,7 @@ import {
   PunchTab,
   QueryTab,
   SwcrTab,
+  NotificationTab,
   UnsignedActionTab,
   UnsignedTaskTab,
   UnsignedChecklistTab,
@@ -146,6 +147,12 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   } = useHandoverResource(props.id, 'query');
 
   const {
+    data: notifications,
+    dataIsFetching: isDataFetchingNotifications,
+    error: notificationsError,
+  } = useHandoverResource(props.item.commissioningPackageId, 'notifications');
+
+  const {
     data: ncrPackages,
     dataIsFetching: isDataFetchingNcr,
     error: ncrError,
@@ -233,7 +240,6 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
             </Tabs.Tab>
             <Tabs.Tab>
               Unsigned Checklists
-
               <TabTitle
                 data={unsignedChecklists}
                 isLoading={isDataFetchingUnsignedChecklists}
@@ -248,6 +254,14 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
 
             <Tabs.Tab>
               Query <TabTitle data={queryPackages} isLoading={isDataFetchingQuery} />{' '}
+            </Tabs.Tab>
+
+            <Tabs.Tab>
+              Notifications
+              <TabTitle
+                data={notifications}
+                isLoading={isDataFetchingNotifications}
+              />{' '}
             </Tabs.Tab>
 
             <Tabs.Tab>
@@ -319,6 +333,13 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
               queries={queryPackages}
               isFetching={isDataFetchingQuery}
               error={queryError}
+            />
+          </StyledPanel>
+          <StyledPanel>
+            <NotificationTab
+              notifications={notifications}
+              isFetching={isDataFetchingNotifications}
+              error={notificationsError}
             />
           </StyledPanel>
           <StyledPanel>
