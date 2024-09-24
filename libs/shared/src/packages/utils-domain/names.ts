@@ -49,6 +49,7 @@ export const domainNames = {
   commPriority3: `Comm Priority 3`,
   commSubSystem: `Comm Sub${'System'}`,
   commSystem: `Comm ${'System'}`,
+  commSystems: `Comm Systems`,
 
   // Mechanical completion package
   mcDiscipline: `MC Discipline`,
@@ -117,15 +118,22 @@ export const domainNames = {
   // Workorder
   workorder: 'Workorder',
   finalizingOfWorkordersAtSite: 'Finalizing Of Workorders At Site',
-  hold: 'Hold',
+  hold: 'WO Hold',
   hoursReadyForExecutionAtSite: 'Hours Ready For Execution At Site',
-  jobStatus: 'Job Status',
-  materialStatus: 'Material Status',
-  onOrOffshore: 'On/Offshore',
-  typeOfWork: 'TypeOfWork',
+  jobStatus: 'WO Job Status',
+  materialStatus: 'WO Material Status',
+  onOrOffshore: 'WO On/Offshore',
+  typeOfWork: 'WO Type Of Work',
   workorderPlannedEndAfterC01: 'Is Workorder Planned End After C01',
-  workorderProduction: 'Workorder Production',
-  workorderType: 'Workorder Type',
+  workorderProduction: 'WO Production',
+  workorderType: 'WO Type',
+  workorderDiscipline: 'WO Discipline',
+  workorderResponsible: 'WO Responsible',
+  workorderStatus: 'WO Status',
+  workorderMilestone: 'WO Milestone',
+  workorderProgress: 'WO Progress',
+  workorderLocation: 'WO Location',
+  workorderWBS: 'WO WBS',
 
   // Pipetest
   pipetest: 'Pipetest',
