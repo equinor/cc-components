@@ -103,6 +103,16 @@ export const domainNames = {
   nodeIdentifier: `Node ${'Identifier'}`,
   types: 'Types',
   softwareChangeRequests: 'Software Change Requests',
+  handoverStatus: 'Handover Status',
+  swcrContract: `SWCR Contract`,
+  swcrStatus: 'SWCR Status',
+  swcrSupplier: 'SWCR Supplier',
+  swcrFunctionalSystem: 'SWCR Functional System',
+  swcrPriority: 'SWCR Priority',
+  swcrControlSystem: 'SWCR Control System',
+  swcrTypes: 'SWCR Types',
+  swcrNodeIdentifier: 'SWCR Node Identifier',
+  swcrAction: 'SWCR Action',
 
   // Workorder
   workorder: 'Workorder',
