@@ -203,7 +203,6 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     headerName: domainNames.commPriority1,
     headerTooltip: domainNames.commPriority1,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
-      console.log(props.data?.priority1, props.data);
       return <StyledMonospace>{props.data?.priority1}</StyledMonospace>;
     },
     width: 200,
