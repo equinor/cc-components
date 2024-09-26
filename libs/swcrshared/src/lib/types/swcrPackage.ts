@@ -45,4 +45,8 @@ export type SwcrPackage = {
   automationControlSystem: string;
   swcrTypes: string
   commissioningPackageArea: string;
+  priority1: number;
+  priority2: number;
+  priority3: number;
+  handoverStatus: number;
 };
