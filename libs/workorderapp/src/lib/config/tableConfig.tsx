@@ -85,14 +85,14 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'DisciplineCode',
-    headerName: domainNames.discipline,
-    headerTooltip: domainNames.discipline,
+    headerName: domainNames.workorderDiscipline,
+    headerTooltip: domainNames.workorderDiscipline,
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
     colId: 'MilestoneCode',
-    headerName: domainNames.milestone,
-    headerTooltip: domainNames.milestone,
+    headerName: domainNames.workorderMilestone,
+    headerTooltip: domainNames.workorderMilestone,
     valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
@@ -163,8 +163,8 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'ProjectProgress',
-    headerName: domainNames.progress,
-    headerTooltip: domainNames.progress,
+    headerName: domainNames.workorderProgress,
+    headerTooltip: domainNames.workorderProgress,
     valueGetter: (pkg) => pkg.data?.projectProgress,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
       if (!props.value || Number(props.value) === 0) {
@@ -196,14 +196,34 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     colId: 'WorkBreakdownStructure',
-    headerName: domainNames.wbs,
-    headerTooltip: domainNames.wbs,
+    headerName: domainNames.workorderWBS,
+    headerTooltip: domainNames.workorderWBS,
     valueGetter: (pkg) => pkg.data?.workBreakdownStructure,
   },
   {
     colId: 'Systems',
-    headerName: domainNames.systems,
-    headerTooltip: domainNames.systems,
+    headerName: domainNames.commSystems,
+    headerTooltip: domainNames.commSystems,
     valueGetter: (pkg) => pkg.data?.systems,
+  },
+  {
+    colId: 'EstimatedHours',
+    headerName: domainNames.remainingManHours,
+    headerTooltip: domainNames.remainingManHours,
+    valueGetter: (pkg) => pkg.data?.remainingHours,
+    cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+      if (!props.value) return null;
+      return <StyledMonospace>{props.value ?? null}</StyledMonospace>;
+    },
+  },
+  {
+    colId: 'RemainingHours',
+    headerName: domainNames.estimatedManHours,
+    headerTooltip: domainNames.estimatedManHours,
+    valueGetter: (pkg) => pkg.data?.estimatedHours,
+    cellRenderer: (props: ICellRendererProps<WorkOrder, string>) => {
+      if (!props.value) return null;
+      return <StyledMonospace>{props.value ?? null}</StyledMonospace>;
+    },
   },
 ];
