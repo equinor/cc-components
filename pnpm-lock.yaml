@@ -1953,8 +1953,8 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: ^5.3.6
 
-  '@equinor/workspace-powerbi@3.0.6':
-    resolution: {integrity: sha512-wycH4c/kGTS3WPwQB4J7tTXt+bMfjV1xAdxBMxmCqwQA48js3PnR+KvWAGP/9EULRMHBCJHNZBxy6BS/R65nBg==}
+  '@equinor/workspace-powerbi@3.0.7':
+    resolution: {integrity: sha512-vD/3NCsudVYjuRH5+lIe5A6/+HXH+T0ozgHlbirbXB1LqZfZdNFDwjMOv5GO+wN53l2mg/LEIkBDsvlNDkFAVA==}
 
   '@equinor/workspace-react@2.0.1':
     resolution: {integrity: sha512-EMOJU9XL7iVJfMXqcu8d1PjTK6Wblwy2hee9NlS7HNwbhvMy4bvmKV1civu4k5He8bBPfq/9s6XOy0vU63NfLg==}
@@ -10397,7 +10397,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@equinor/workspace-powerbi@3.0.6(@types/sortablejs@1.15.8)':
+  '@equinor/workspace-powerbi@3.0.7(@types/sortablejs@1.15.8)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0
