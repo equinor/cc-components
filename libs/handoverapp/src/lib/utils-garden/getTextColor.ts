@@ -1,5 +1,7 @@
 import { PackageStatus } from '@cc-components/shared/types';
 import { tokens } from '@equinor/eds-tokens';
+import { itemContentColors } from '@cc-components/shared/mapping';
+import { it } from 'node:test';
 
 export const getTextColor = (status: PackageStatus) => {
   return (
@@ -11,6 +13,6 @@ export const getTextColor = (status: PackageStatus) => {
       'RFO Rejected',
     ] as PackageStatus[]
   ).includes(status)
-    ? tokens.colors.text.static_icons__primary_white.rgba
-    : tokens.colors.text.static_icons__default.rgba;
+    ? itemContentColors.Dark
+    : itemContentColors.Light;
 };

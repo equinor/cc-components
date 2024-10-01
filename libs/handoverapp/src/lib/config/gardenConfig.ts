@@ -3,7 +3,7 @@ import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { CustomItemView, GardenConfig } from '@equinor/workspace-fusion/garden';
-import { GardenHeader, GardenItem } from '../ui-garden';
+import { GardenItem } from '../ui-garden';
 
 export const useGardenConfig = (
   contextId: string
@@ -34,7 +34,6 @@ export const useGardenConfig = (
     customViews: {
       //bs typescript error
       customItemView: GardenItem as any,
-      customHeaderView: GardenHeader as any,
     },
     visuals: {
       rowHeight: 31,
