@@ -1,16 +1,21 @@
 import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';
+import { LinkCell } from '../../../../../../table-helpers/src/lib/table/cells/LinkCell';
 import { NotificationBase } from './types';
 
 export const columns: ColDef<NotificationBase>[] = [
   {
     headerName: 'Document No.',
     valueGetter: (pkg) => pkg.data?.notificationNo,
-  },
-  {
-    headerName: 'Type',
-    valueGetter: (pkg) => pkg.data?.type,
+    cellRenderer: (props: ICellRendererProps<NotificationBase, string | null>) => {
+      return (
+        <LinkCell
+          url={props.data?.notificationUrl}
+          urlText={props.data?.notificationNo}
+        />
+      );
+    },
   },
   {
     colId: 'title',

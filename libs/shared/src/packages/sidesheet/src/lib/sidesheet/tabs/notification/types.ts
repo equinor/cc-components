@@ -4,4 +4,5 @@ export type NotificationBase = {
   title: string;
   status: string;
   nextToSign: string;
+  notificationUrl: string;
 };

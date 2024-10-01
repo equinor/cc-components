@@ -122,4 +122,5 @@ export type HandoverNotification = {
   title: string;
   status: string;
   nextToSign: string;
+  notificationUrl: string;
 }
