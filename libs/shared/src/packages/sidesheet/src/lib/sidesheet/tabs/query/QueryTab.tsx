@@ -20,7 +20,7 @@ export const QueryTab = <T extends QueryBase>({
         error={error}
         isFetching={isFetching}
         packages={queries}
-        resourceName="Query / Notification"
+        resourceName="Query"
       />
     </StyledContentWrapper>
   );
