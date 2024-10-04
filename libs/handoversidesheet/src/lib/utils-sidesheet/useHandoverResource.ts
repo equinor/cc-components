@@ -13,6 +13,7 @@ import {
   HandoverUnsignedChecklist,
   HandoverUnsignedTask,
   HandoverWorkOrder,
+  HandoverNotification
 } from '../types';
 
 export type HandoverResourceTypeMap = {
@@ -26,6 +27,7 @@ export type HandoverResourceTypeMap = {
   details: HandoverDetails;
   ncr: HandoverNCR;
   query: HandoverQuery;
+  notifications: HandoverNotification;
 };
 
 type UseHandoverResource<T extends keyof HandoverResourceTypeMap> = {
