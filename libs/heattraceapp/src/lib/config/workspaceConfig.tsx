@@ -16,6 +16,18 @@ import {
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './heattraceSidesheet';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const pbi_context_mapping = {
+  Facility: {
+    column: 'Facility',
+    table: 'Dim_Facility',
+  },
+  ProjectMaster: {
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
+  },
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
@@ -27,16 +39,18 @@ export const WorkspaceWrapper = () => {
     client.fetch(`/api/contexts/${contextId}/heat-trace/filter-model`, req)
   );
 
+  const { currentContext } = useModuleCurrentContext();
+
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
-  const pbi = usePBIOptions('cc-heattrace-analytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
-  });
+  const pbi = usePBIOptions(
+    'cc-heattrace-analytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
 
   if (isLoading) {
     return <CCApiAccessLoading />;
