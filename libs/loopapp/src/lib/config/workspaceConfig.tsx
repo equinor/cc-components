@@ -17,14 +17,30 @@ import { gardenModule } from '@equinor/workspace-fusion/garden-module';
 import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const pbi_context_mapping = {
+  Facility: {
+    column: 'Facility',
+    table: 'Dim_Facility',
+  },
+  ProjectMaster: {
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
+  },
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
   useCloseSidesheetOnContextChange();
-  const pbi = usePBIOptions('loop-analytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
-  });
+
+  const { currentContext } = useModuleCurrentContext();
+
+  const pbi = usePBIOptions(
+    'loop-analytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
+
   const client = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');

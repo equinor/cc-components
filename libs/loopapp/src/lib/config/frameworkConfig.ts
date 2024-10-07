@@ -9,7 +9,7 @@ import buildQuery from 'odata-query';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableContext(config, async (builder) => {
-    builder.setContextType(['ProjectMaster']);
+    builder.setContextType(['ProjectMaster', 'Facility']);
     builder.setContextParameterFn(({ search, type }) => {
       return buildQuery({
         search,
