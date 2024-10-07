@@ -16,6 +16,18 @@ import {
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './pipingSidesheet';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const pbi_context_mapping = {
+  Facility: {
+    column: 'Facility',
+    table: 'Dim_Facility',
+  },
+  ProjectMaster: {
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
+  },
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
@@ -32,10 +44,12 @@ export const WorkspaceWrapper = () => {
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
-  const pbi = usePBIOptions('cc-pipetest-analytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
-  });
+  const { currentContext } = useModuleCurrentContext();
+
+  const pbi = usePBIOptions(
+    'cc-pipetest-analytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
 
   if (isLoading) {
     return <CCApiAccessLoading />;
