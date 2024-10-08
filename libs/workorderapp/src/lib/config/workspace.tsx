@@ -4,7 +4,7 @@ import {
   useHttpClient,
   usePBIOptions,
   useWorkspaceBookmarks,
-  useCloseSidesheetOnContextChange
+  useCloseSidesheetOnContextChange,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
@@ -18,6 +18,18 @@ import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useGardenConfig } from './gardenConfig';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const pbi_context_mapping = {
+  Facility: {
+    column: 'Facility',
+    table: 'Dim_Facility',
+  },
+  ProjectMaster: {
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
+  },
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
@@ -25,10 +37,13 @@ export const WorkspaceWrapper = () => {
   const client = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'work-orders');
-  const pbi = usePBIOptions('workorder-analytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
-  });
+
+  const { currentContext } = useModuleCurrentContext();
+
+  const pbi = usePBIOptions(
+    'workorder-analytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
 
   const filterConfig = useFilterConfig((req) =>
     client.fetch(`/api/contexts/${contextId}/work-orders/filter-model`, req)
@@ -37,11 +52,9 @@ export const WorkspaceWrapper = () => {
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
-
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
-
 
   return (
     <>

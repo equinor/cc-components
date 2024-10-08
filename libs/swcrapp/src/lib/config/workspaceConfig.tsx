@@ -19,16 +19,30 @@ import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { useGardenConfig } from './gardenConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useTableConfig } from './tableConfig';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const pbi_context_mapping = {
+  Facility: {
+    column: 'Facility',
+    table: 'Dim_Facility',
+  },
+  ProjectMaster: {
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
+  },
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
   useCloseSidesheetOnContextChange();
   const ccApi = useHttpClient();
 
-  const pbi = usePBIOptions('swcr-analytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
-  });
+  const { currentContext } = useModuleCurrentContext();
+
+  const pbi = usePBIOptions(
+    'swcr-analytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
