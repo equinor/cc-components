@@ -20,15 +20,14 @@ import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-
 
 const pbi_context_mapping = {
   Facility: {
-    column: "Facility",
-    table: "Dim_Facility"
+    column: 'Facility',
+    table: 'Dim_Facility',
   },
   ProjectMaster: {
-    column: "ProjectMaster GUID",
-    table: "Dim_ProjectMaster"
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
   },
-} as const
-
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
@@ -36,10 +35,12 @@ export const WorkspaceWrapper = () => {
   const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
+  const { currentContext } = useModuleCurrentContext();
 
-  const { currentContext } = useModuleCurrentContext()
-
-  const pbi = usePBIOptions('handoveranalytics', pbi_context_mapping[(currentContext?.type.id) as "ProjectMaster" | "Facility"]);
+  const pbi = usePBIOptions(
+    'handoveranalytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
   const filterConfig = useFilterConfig((req) =>

@@ -19,6 +19,18 @@ import { gridModule } from '@equinor/workspace-fusion/grid-module';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useGardenConfig } from './gardenConfig';
+import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+
+const pbi_context_mapping = {
+  Facility: {
+    column: 'Facility',
+    table: 'Dim_Facility',
+  },
+  ProjectMaster: {
+    column: 'ProjectMaster GUID',
+    table: 'Dim_ProjectMaster',
+  },
+} as const;
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
@@ -26,10 +38,12 @@ export const WorkspaceWrapper = () => {
   const ccApi = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
-  const pbi = usePBIOptions('cc-punch-analytics', {
-    column: 'ProjectMaster GUID',
-    table: 'Dim_ProjectMaster',
-  });
+  const { currentContext } = useModuleCurrentContext();
+
+  const pbi = usePBIOptions(
+    'cc-punch-analytics',
+    pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
+  );
 
   const filterConfig = useFilterConfig((req) =>
     ccApi.fetch(`/api/contexts/${contextId}/punch/filter-model`, req)
