@@ -1,12 +1,9 @@
 import { Icon, Progress } from '@equinor/eds-core-react';
-import { info_circle, error_outlined } from '@equinor/eds-icons';
+import { error_outlined, info_circle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { ColDef, ClientGrid, GridOptions } from '@equinor/workspace-ag-grid';
-import { InfoText, NoResourceData } from './tabTable.styles';
+import { ClientGrid, ColDef, GridOptions } from '@equinor/workspace-ag-grid';
 import { defaultGridOptions } from '../../../../../workspace-config/src/defaultGridOptions';
-import { useRef } from 'react';
-import { useResizeObserver } from '../../../../../hooks/src/lib/useResizeObserver';
-
+import { InfoText, NoResourceData, TabTableStyles } from './tabTable.styles';
 
 type TabTableProps<T> = {
   packages: T[] | undefined;
@@ -26,18 +23,11 @@ Icon.add({ info_circle, error_outlined });
 export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
 ): JSX.Element => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [_, refHeight] = useResizeObserver(ref);
   const { columns, error, isFetching, packages, resourceName } = props;
 
-
-  const gridHeight = packages && packages.length > 30 ? refHeight : "auto-height"
-
-
   return (
-    <div ref={ref} style={{ height: "100%", width: "100%" }}>
+    <TabTableStyles style={{ width: '100%' }}>
       {isFetching && (
-
         <NoResourceData>
           <Progress.Circular />
           <InfoText>{`Fetching ${resourceName}`}</InfoText>
@@ -70,10 +60,13 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
         <ClientGrid
           rowData={packages}
           colDefs={columns}
-          height={typeof (gridHeight) === "number" ? gridHeight : 500}
-          gridOptions={{ ...defaultGridOptions, ...props.additionalGridOptions, domLayout: gridHeight === "auto-height" ? "autoHeight" : undefined }}
+          gridOptions={{
+            ...defaultGridOptions,
+            ...props.additionalGridOptions,
+            domLayout: 'autoHeight',
+          }}
         />
       )}
-    </div>
+    </TabTableStyles>
   );
 };
