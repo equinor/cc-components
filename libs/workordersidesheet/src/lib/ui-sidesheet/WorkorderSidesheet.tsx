@@ -173,7 +173,7 @@ export const WorkorderSidesheet = (props: {
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
             </Tabs.Tab>
             <Tabs.Tab>
-              Notifications{' '}
+              Notifications
               <TabTitle data={notifications} isLoading={isFetchingNotifications} />
             </Tabs.Tab>
             <Tabs.Tab>
