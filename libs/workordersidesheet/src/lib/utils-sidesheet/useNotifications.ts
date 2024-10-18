@@ -7,7 +7,7 @@ export const useNotifications = (workOrderId: string) => {
   const contextId = useContextId();
 
   const { data, isFetching, error } = useQuery<WorkOrderNotification[], Error>({
-    queryKey: ['workOrder','notification', workOrderId],
+    queryKey: ['workOrder', workOrderId, 'notification'],
     queryFn: async({ signal }) => {
         const response = await client.fetch(`/api/contexts/${contextId}/work-orders/${workOrderId}/notifications`, { signal });
 
