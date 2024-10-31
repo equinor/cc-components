@@ -5,6 +5,7 @@ import {
   LinkCell,
   MaterialTab,
   MccrTab,
+  NotificationTab,
   PackageStatus,
   StatusCircle,
   colorMap,
@@ -34,6 +35,7 @@ import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
+import { useNotifications } from '../utils-sidesheet/useNotifications';
 
 const viewerOptions = {
   statusResolver: (status: string) => {
@@ -55,6 +57,12 @@ export const WorkorderSidesheet = (props: {
     isFetching: isFetchingMaterial,
     error: materialError,
   } = useMaterial(props.id);
+
+  const {
+    data: notifications,
+    isFetching: isFetchingNotifications,
+    error: notificationsError,
+  } = useNotifications(props.id);
 
   const {
     data: modelConfig,
@@ -165,6 +173,10 @@ export const WorkorderSidesheet = (props: {
               Material <TabTitle data={material} isLoading={isFetchingMaterial} />
             </Tabs.Tab>
             <Tabs.Tab>
+              Notifications
+              <TabTitle data={notifications} isLoading={isFetchingNotifications} />
+            </Tabs.Tab>
+            <Tabs.Tab>
               3D <TabTitle data={modelConfig?.tags} isLoading={isFetchingModelConfig} />
             </Tabs.Tab>
           </StyledTabsList>
@@ -186,6 +198,13 @@ export const WorkorderSidesheet = (props: {
               material={material}
               isFetching={isFetchingMaterial}
               error={materialError as Error | null}
+            />
+          </StyledPanel>
+          <StyledPanel>
+            <NotificationTab
+              notifications={notifications}
+              isFetching={isFetchingNotifications}
+              error={notificationsError}
             />
           </StyledPanel>
           <StyledPanel style={{ height: '100%' }}>
