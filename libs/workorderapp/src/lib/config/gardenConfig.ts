@@ -1,7 +1,7 @@
 import { WorkOrder } from '@cc-components/workordershared';
 import { GardenConfig } from '@equinor/workspace-fusion/garden';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { GardenHeader, GardenItem } from '../ui-garden';
+import { GardenItem } from '../ui-garden';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
 
@@ -34,10 +34,9 @@ export const useGardenConfig = (
     getSubgroupItems,
     customViews: {
       customItemView: GardenItem as any,
-      customHeaderView: GardenHeader as any,
     },
     visuals: {
-      rowHeight: 30,
+      rowHeight: 31,
     },
   };
 };

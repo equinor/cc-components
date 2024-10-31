@@ -28,7 +28,7 @@ export const useGardenConfig = (contextId: string): GardenConfig<Loop, FilterSta
       customItemView: GardenItem,
     },
     visuals: {
-      rowHeight: 30,
+      rowHeight: 31,
     },
   };
 };

@@ -26,7 +26,7 @@ export const useGardenConfig = (contextId: string): GardenConfig<Punch, FilterSt
     getDisplayName: (item) => item.punchItemNo,
     initialGrouping: ['HandoverPlan'],
     visuals: {
-      rowHeight: 25,
+      rowHeight: 31,
     },
     customViews: {
       customItemView: PunchGardenItem as any,
