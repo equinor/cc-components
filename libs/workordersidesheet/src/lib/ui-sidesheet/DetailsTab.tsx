@@ -8,11 +8,15 @@ import {
 } from '@cc-components/shared';
 
 import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
+import { WorkOrderDescription } from './WorkorderDescription';
+
 type DetailsTabProps = {
   workOrder: WorkOrder | undefined;
 };
+
 export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null => {
   if (!workOrder) return null;
+
   return (
     <StyledTabContent>
       <h3>Details</h3>
@@ -119,6 +123,7 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null =
           </tr>
         </tbody>
       </StyledTable>
+      <WorkOrderDescription workOrderId={workOrder.workOrderId} />
     </StyledTabContent>
   );
 };
