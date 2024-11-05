@@ -70,6 +70,7 @@
     "@equinor/fusion-framework-module-msal": "^3.1.5",
     "@equinor/fusion-framework-react": "7.3.0",
     "@equinor/fusion-framework-react-app": "5.2.10",
+    "@equinor/fusion-framework-react-module-bookmark": "^2.1.18",
     "@equinor/fusion-framework-react-module-context": "^6.2.13",
     "@equinor/fusion-framework-react-module-http": "^8.0.0",
     "@equinor/fusion-observable": "8.4.1",
