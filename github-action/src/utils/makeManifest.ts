@@ -13,7 +13,7 @@ export function makeManifest(path: string) {
     //required
     entryPoint: "app-bundle.js",
     //required
-    version: version,
+    version: new Date().toLocaleDateString(),
     //TODO: add commit sha and github repo
     //timestamp: "string",
     //commitSha: "string",
