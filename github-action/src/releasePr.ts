@@ -58,7 +58,7 @@ export async function release(context: ReleaseArgs) {
   }
 
   const version = await getVersion(ciUrl, context.token, r.name);
-  makeManifest('./package.json', version);
+  makeManifest('./package.json', version, context.sha);
   const zipped = zipBundle();
   await uploadBundle(ciUrl, context.token, r.name, zipped, version);
   console.log("Skipping patchAppConfig");

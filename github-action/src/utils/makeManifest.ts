@@ -2,7 +2,7 @@ import { parsePackageJson } from './parsePackageJson.js';
 import fs from 'fs';
 import { notice } from '@actions/core';
 
-export function makeManifest(path: string, version: string) {
+export function makeManifest(path: string, version: string, sha: string) {
   // Create manifest
   notice('making manifest');
   const { name } = parsePackageJson(path);
@@ -13,11 +13,11 @@ export function makeManifest(path: string, version: string) {
     //required
     entryPoint: "app-bundle.js",
     //required
-    version: version
+    version: version,
+    githubRepo: "cc-components",
     //TODO: add commit sha and github repo
-    //timestamp: "string",
-    //commitSha: "string",
-    //githubRepo: "string",
+    timestamp: new Date().toISOString(),
+    commitSha: sha,
   };
 
   const data = JSON.stringify(manifest, null, 2);
