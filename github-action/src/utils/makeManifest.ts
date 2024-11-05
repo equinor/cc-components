@@ -16,19 +16,14 @@ export function makeManifest(path: string) {
   const displayName = maybe?.['displayName'] ?? name[0].toUpperCase() + name.slice(1);
 
   const manifest = {
-    name: displayName,
-    shortName: shortName,
-    key: name,
+    //required
     entryPoint: "./app-bundle.js",
+    //required
+    version: version,
     //TODO: add commit sha and github repo
     //timestamp: "string",
     //commitSha: "string",
     //githubRepo: "string",
-    version: {
-      major: major,
-      minor: minor,
-      patch: patch,
-    },
   };
 
   const data = JSON.stringify(manifest, null, 2);
