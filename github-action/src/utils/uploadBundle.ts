@@ -10,7 +10,8 @@ export async function uploadBundle(
   baseUrl: string,
   token: string,
   appKey: string,
-  zipped: AdmZip
+  zipped: AdmZip,
+  version: string
 ) {
   const client = new HttpClient();
 
@@ -41,9 +42,9 @@ export async function uploadBundle(
   }
 
   /** Publish bundle */
-  const publishResponse = await client.post(
+  const publishResponse = await client.put(
     `${baseUrl}/apps/${appKey}/tags/latest`,
-    '',
+    JSON.stringify({ version: version }),
     {
       ['Authorization']: `Bearer ${token}`,
       ["Content-Type"]: 'application/json',

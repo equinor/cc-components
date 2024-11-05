@@ -49,7 +49,7 @@ await program.parseAsync();
 
 export async function release(context: ReleaseArgs) {
   prepareBundle();
-  makeManifest('./package.json');
+  const  manifest = makeManifest('./package.json');
   const zipped = zipBundle();
   const r = parsePackageJson();
   if (!r.name) {
@@ -57,7 +57,7 @@ export async function release(context: ReleaseArgs) {
       `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
     );
   }
-  await uploadBundle(ciUrl, context.token, r.name, zipped);
+  await uploadBundle(ciUrl, context.token, r.name, zipped, manifest.version);
   console.log("Skipping patchAppConfig");
   // await patchAppConfig(
   //   {

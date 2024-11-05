@@ -13,7 +13,7 @@ export function makeManifest(path: string) {
     //required
     entryPoint: "app-bundle.js",
     //required
-    version: "1.0.5"
+    version: "1.0.6"
     //TODO: add commit sha and github repo
     //timestamp: "string",
     //commitSha: "string",
@@ -23,5 +23,6 @@ export function makeManifest(path: string) {
   const data = JSON.stringify(manifest, null, 2);
 
   fs.writeFileSync('./dist/app-manifest.json', data);
+  return manifest
 }
 
