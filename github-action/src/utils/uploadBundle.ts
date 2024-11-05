@@ -46,7 +46,7 @@ export async function uploadBundle(
     '',
     {
       ['Authorization']: `Bearer ${token}`,
-      contentType: 'application/json',
+      ["Content-Type"]: 'application/json',
     }
   );
 
