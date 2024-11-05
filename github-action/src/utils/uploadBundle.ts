@@ -46,7 +46,7 @@ export async function uploadBundle(
     '',
     headers
   );
-  if (publishResponse.message.statusCode !== 201) {
+  if (publishResponse.message.statusCode[0] !== 2) {
     logInfo(`Failed to publish ${appKey}, code: ${r.message.statusCode}`, 'Red');
     throw new Error(JSON.stringify(publishResponse.message));
   }
