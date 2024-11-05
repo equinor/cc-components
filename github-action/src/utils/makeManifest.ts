@@ -17,7 +17,7 @@ export function makeManifest(path: string) {
 
   const manifest = {
     //required
-    entryPoint: "./app-bundle.js",
+    entryPoint: "app-bundle.js",
     //required
     version: version,
     //TODO: add commit sha and github repo
