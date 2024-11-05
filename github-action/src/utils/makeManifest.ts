@@ -13,8 +13,7 @@ export function makeManifest(path: string, version: string, sha: string) {
     //required
     entryPoint: "app-bundle.js",
     //required
-    // version: version,
-    version: "1.0.0",
+    version: version,
     githubRepo: "https://github.com/equinor/cc-components",
     timestamp: new Date().toISOString(),
     commitSha: sha,
