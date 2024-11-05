@@ -24,6 +24,7 @@ export async function uploadBundle(
 
   const stream = Readable.from(zipped.toBuffer());
 
+  console.log(`Sending payload to ${baseUrl}/bundles/apps${appKey}`);
   const r = await client.sendStream(
     'POST',
     `${baseUrl}/bundles/apps${appKey}`,
