@@ -46,6 +46,8 @@ export async function uploadBundle(
     '',
     headers
   );
+  console.log(publishResponse.message.statusCode);
+  console.log(typeof (publishResponse.message.statusCode));
   if (publishResponse.message.statusCode !== 201) {
     logInfo(`Failed to publish ${appKey}, code: ${r.message.statusCode}`, 'Red');
     const body = await publishResponse.readBody()
