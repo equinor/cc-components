@@ -57,11 +57,11 @@ export async function release(context: ReleaseArgs) {
     );
   }
 
-  const version = "1.0.20" // await getVersion(ciUrl, context.token, r.name);
+  const version = await getVersion(ciUrl, context.token, r.name);
   makeManifest('./package.json', version, context.sha);
   const zipped = zipBundle();
   await uploadBundle(ciUrl, context.token, r.name, zipped, version);
-  console.log("Skipping patchAppConfig");
+  // console.log("Skipping patchAppConfig");
   // await patchAppConfig(
   //   {
   //     ai: context.ai,
