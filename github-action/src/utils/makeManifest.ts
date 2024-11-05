@@ -19,6 +19,11 @@ export function makeManifest(path: string) {
     name: displayName,
     shortName: shortName,
     key: name,
+    entryPoint: "./app-bundle.js",
+    //TODO: add commit sha and github repo
+    //timestamp: "string",
+    //commitSha: "string",
+    //githubRepo: "string",
     version: {
       major: major,
       minor: minor,
