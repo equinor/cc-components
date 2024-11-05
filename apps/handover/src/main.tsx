@@ -6,6 +6,7 @@ const HandoverApp = () => {
   const client = useHttpClient('cc-app');
   return (
     <RootAppWrapper client={client}>
+      <div>New pipeline woohooo</div>
       <WorkspaceWrapper />
     </RootAppWrapper>
   );
