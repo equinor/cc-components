@@ -10,7 +10,7 @@ import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { execSync } from 'child_process';
 
-const ciUrl = 'https://fusion-s-portal-ci.azurewebsites.net';
+const ciUrl = 'https://apps.ci.api.fusion-dev.net';
 
 const program = new Command();
 
@@ -58,17 +58,18 @@ export async function release(context: ReleaseArgs) {
     );
   }
   await uploadBundle(ciUrl, context.token, r.name, zipped);
-  await patchAppConfig(
-    {
-      ai: context.ai,
-      commit: context.sha,
-      pr: context.pr,
-      modelViewerConfig: JSON.parse(context.modelViewerConfig),
-    },
-    context.token,
-    r.name,
-    ciUrl
-  );
+  console.log("Skipping patchAppConfig");
+  // await patchAppConfig(
+  //   {
+  //     ai: context.ai,
+  //     commit: context.sha,
+  //     pr: context.pr,
+  //     modelViewerConfig: JSON.parse(context.modelViewerConfig),
+  //   },
+  //   context.token,
+  //   r.name,
+  //   ciUrl
+  // );
 
   execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
 }

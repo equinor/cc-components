@@ -14,7 +14,7 @@ export async function uploadBundle(
 ) {
   const client = new HttpClient();
 
-  await ensureAppExists(baseUrl, token, appKey);
+  // await ensureAppExists(baseUrl, token, appKey);
 
   const headers: OutgoingHttpHeaders = {
     ['Authorization']: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export async function uploadBundle(
 
   const r = await client.sendStream(
     'POST',
-    `${baseUrl}/api/apps/${appKey}/versions`,
+    `${baseUrl}/bundles/apps${appKey}`,
     stream,
     headers
   );
@@ -39,7 +39,7 @@ export async function uploadBundle(
 
   /** Publish bundle */
   const publishResponse = await client.post(
-    `${baseUrl}/api/apps/${appKey}/publish`,
+    `${baseUrl}/apps/${appKey}/tags/latest`,
     '',
     headers
   );
