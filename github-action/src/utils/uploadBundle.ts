@@ -44,13 +44,14 @@ export async function uploadBundle(
   const publishResponse = await client.post(
     `${baseUrl}/apps/${appKey}/tags/latest`,
     '',
-    headers
+    {
+      ['Authorization']: `Bearer ${token}`,
+      contentType: 'application/json',
+    }
   );
-  console.log(publishResponse.message.statusCode);
-  console.log("length: ", publishResponse.message.statusCode.toString().length);
-  console.log(typeof (publishResponse.message.statusCode));
+
   if (publishResponse.message.statusCode !== 201) {
-    logInfo(`Failed to publish ${appKey}, code: ${r.message.statusCode}`, 'Red');
+    logInfo(`Failed to publish ${appKey}, code: ${publishResponse.message.statusCode}`, 'Red');
     const body = await publishResponse.readBody()
     throw new Error(body)
   }
