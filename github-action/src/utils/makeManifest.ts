@@ -2,10 +2,10 @@ import { parsePackageJson } from './parsePackageJson.js';
 import fs from 'fs';
 import { notice } from '@actions/core';
 
-export function makeManifest(path: string) {
+export function makeManifest(path: string, version: string) {
   // Create manifest
   notice('making manifest');
-  const { version, name } = parsePackageJson(path);
+  const { name } = parsePackageJson(path);
   if (!version || !name) {
     throw new Error('Name or version missing in package.json');
   }
@@ -13,7 +13,7 @@ export function makeManifest(path: string) {
     //required
     entryPoint: "app-bundle.js",
     //required
-    version: "1.0.6"
+    version: version
     //TODO: add commit sha and github repo
     //timestamp: "string",
     //commitSha: "string",
@@ -23,6 +23,5 @@ export function makeManifest(path: string) {
   const data = JSON.stringify(manifest, null, 2);
 
   fs.writeFileSync('./dist/app-manifest.json', data);
-  return manifest
 }
 

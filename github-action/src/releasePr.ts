@@ -2,6 +2,7 @@
 
 import { Command } from 'commander';
 import { setSecret } from '@actions/core';
+import { HttpClient } from '@actions/http-client';
 import { parsePackageJson } from './utils/parsePackageJson.js';
 import { prepareBundle } from './utils/prepareBundle.js';
 import { makeManifest } from './utils/makeManifest.js';
@@ -49,15 +50,17 @@ await program.parseAsync();
 
 export async function release(context: ReleaseArgs) {
   prepareBundle();
-  const  manifest = makeManifest('./package.json');
-  const zipped = zipBundle();
   const r = parsePackageJson();
   if (!r.name) {
     throw new Error(
       `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
     );
   }
-  await uploadBundle(ciUrl, context.token, r.name, zipped, manifest.version);
+
+  const version = await getVersion(ciUrl, context.token, r.name);
+  makeManifest('./package.json');
+  const zipped = zipBundle();
+  await uploadBundle(ciUrl, context.token, r.name, zipped, version);
   console.log("Skipping patchAppConfig");
   // await patchAppConfig(
   //   {
@@ -72,4 +75,27 @@ export async function release(context: ReleaseArgs) {
   // );
 
   execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
+}
+
+
+async function getVersion(ciUrl: string, token: string, name: string) {
+  const client = new HttpClient();
+  const response = await client.get(`${ciUrl}/apps/${name}?api-version=1.0`, {
+    ['Authorization']: `Bearer ${token}`,
+  });
+  const body = await response.readBody();
+  const json = JSON.parse(body);
+  console.log(`Latest version is ${json.build.version}`);
+  const v = incrementPatchVersion(json.build.version);
+  console.log(`Incrementing to ${v}`);
+  return v;
+}
+
+function incrementPatchVersion(semver: string) {
+  const parts = semver.split('.');
+  if (parts.length !== 3) {
+    throw new Error('Invalid semver format');
+  }
+  const patch = parseInt(parts[2], 10) + 1;
+  return `${parts[0]}.${parts[1]}.${patch}`;
 }
