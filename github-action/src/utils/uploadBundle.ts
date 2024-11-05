@@ -23,10 +23,10 @@ export async function uploadBundle(
   };
 
   const stream = Readable.from(zipped.toBuffer());
-  logInfo(`Sending payload to ${baseUrl}/bundles/apps${appKey}`, "Green");
+  logInfo(`Sending payload to ${baseUrl}/bundles/apps/${appKey}`, "Green");
   const r = await client.sendStream(
     'POST',
-    `${baseUrl}/bundles/apps${appKey}`,
+    `${baseUrl}/bundles/apps/${appKey}`,
     stream,
     headers
   );
