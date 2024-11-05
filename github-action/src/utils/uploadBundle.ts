@@ -32,7 +32,7 @@ export async function uploadBundle(
   );
 
   notice(`bundle uploaded with status code ${r.message.statusCode}`);
-  if (r.message.statusCode !== 200) {
+  if (r.message.statusCode !== 201) {
     const body = await r.readBody()
     logInfo(`Failed to upload ${appKey}, code: ${r.message.statusCode}`, 'Red');
     logInfo(body, 'Red');
