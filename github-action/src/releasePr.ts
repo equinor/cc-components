@@ -57,11 +57,10 @@ export async function release(context: ReleaseArgs) {
     );
   }
 
-  const version = await getVersion(ciUrl, context.token, pkg.name);
+  const version = "1.2.0" // await getVersion(ciUrl, context.token, pkg.name);
   makeManifest('./package.json', version, context.sha);
   const zipped = zipBundle();
   await uploadBundle(ciUrl, context.token, pkg.name, zipped, version);
-  console.log("Patch app config");
   await patchAppConfig(
     {
       ai: context.ai,
@@ -92,7 +91,7 @@ async function getVersion(ciUrl: string, token: string, name: string) {
 function incrementPatchVersion(semver: string) {
   const parts = semver.split('.');
   if (parts.length !== 3) {
-    throw new Error('Invalid semver format');
+    throw new Error('Invalid semver format: ' + semver);
   }
   const patch = parseInt(parts[2], 10) + 1;
   return `${parts[0]}.${parts[1]}.${patch}`;
