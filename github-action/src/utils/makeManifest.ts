@@ -1,10 +1,8 @@
 import { parsePackageJson } from './parsePackageJson.js';
 import fs from 'fs';
-import { notice } from '@actions/core';
 
 export function makeManifest(path: string, version: string, sha: string) {
   // Create manifest
-  notice('making manifest');
   const { name } = parsePackageJson(path);
   if (!version || !name) {
     throw new Error('Name or version missing in package.json');

@@ -15,8 +15,6 @@ export async function uploadBundle(
 ) {
   const client = new HttpClient();
 
-  // await ensureAppExists(baseUrl, token, appKey);
-
   const headers: OutgoingHttpHeaders = {
     ['Authorization']: `Bearer ${token}`,
     ['Content-Type']: 'application/zip',
@@ -32,13 +30,11 @@ export async function uploadBundle(
     headers
   );
 
-  notice(`bundle uploaded with status code ${r.message.statusCode}`);
+  notice(`${appKey} bundle uploaded with status code ${r.message.statusCode}`);
   if (r.message.statusCode !== 201) {
     const body = await r.readBody()
     logInfo(`Failed to upload ${appKey}, code: ${r.message.statusCode}`, 'Red');
     logInfo(body, 'Red');
-    // logInfo(`Failed to upload ${appKey}, code: ${r.message.statusCode}`, 'Red');
-    // throw new Error('Bundle failed to upload, fatal error');
   }
 
   /** Publish bundle */
@@ -57,25 +53,4 @@ export async function uploadBundle(
     throw new Error(body)
   }
   logInfo(`Sucessfully published ${appKey}`, 'Green');
-}
-
-async function ensureAppExists(baseUrl: string, token: string, appKey: string) {
-  const client = new HttpClient();
-
-  const headers: OutgoingHttpHeaders = {
-    ['Authorization']: `Bearer ${token}`,
-    ['Content-Type']: 'application/zip',
-  };
-
-  const res = await client.get(
-    `${baseUrl}/api/admin/apps/${appKey}/versions?api-version=1.0`,
-    headers
-  );
-
-  if (res.message.statusCode === 404) {
-    logInfo(`Unknown app: ${appKey}`, 'Red');
-    throw new Error(
-      'App doesnt exist please use the manual create fusion app to create this app first'
-    );
-  }
 }

@@ -50,17 +50,17 @@ await program.parseAsync();
 
 export async function release(context: ReleaseArgs) {
   prepareBundle();
-  const r = parsePackageJson();
-  if (!r.name) {
+  const pkg = parsePackageJson();
+  if (!pkg.name) {
     throw new Error(
       `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
     );
   }
 
-  const version = await getVersion(ciUrl, context.token, r.name);
+  const version = await getVersion(ciUrl, context.token, pkg.name);
   makeManifest('./package.json', version, context.sha);
   const zipped = zipBundle();
-  await uploadBundle(ciUrl, context.token, r.name, zipped, version);
+  await uploadBundle(ciUrl, context.token, pkg.name, zipped, version);
   console.log("Patch app config");
   await patchAppConfig(
     {
@@ -70,11 +70,11 @@ export async function release(context: ReleaseArgs) {
       modelViewerConfig: JSON.parse(context.modelViewerConfig),
     },
     context.token,
-    r.name,
+    pkg.name,
     ciUrl
   );
 
-  execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
+  execSync(`echo '## ${pkg.name}' >> $GITHUB_STEP_SUMMARY`);
 }
 
 
