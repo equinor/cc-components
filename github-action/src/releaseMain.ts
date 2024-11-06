@@ -86,7 +86,7 @@ export async function release(config: ReleaseArgs) {
 
   prepareBundle();
 
-  const version = "1.0.0" //await getVersion(prodUrl, config.token, pkg.name);
+  const version = "1.0.1" //await getVersion(prodUrl, config.token, pkg.name);
   makeManifest('./package.json', version, config.sha);
 
   const zipped = zipBundle();
