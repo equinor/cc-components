@@ -2,7 +2,6 @@
 
 import { Command } from 'commander';
 import { setSecret } from '@actions/core';
-import { HttpClient } from '@actions/http-client';
 import { parsePackageJson } from './utils/parsePackageJson.js';
 import { prepareBundle } from './utils/prepareBundle.js';
 import { makeManifest } from './utils/makeManifest.js';
@@ -10,6 +9,7 @@ import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { execSync } from 'child_process';
+import { getVersion } from './utils/bumpVersion.js';
 
 const ciUrl = 'https://apps.ci.api.fusion-dev.net';
 
@@ -77,22 +77,3 @@ export async function release(context: ReleaseArgs) {
 }
 
 
-async function getVersion(ciUrl: string, token: string, name: string) {
-  const client = new HttpClient();
-  const response = await client.get(`${ciUrl}/apps/${name}?api-version=1.0`, {
-    ['Authorization']: `Bearer ${token}`,
-  });
-  const body = await response.readBody();
-  const json = JSON.parse(body);
-  const v = incrementPatchVersion(json.build.version);
-  return v;
-}
-
-function incrementPatchVersion(semver: string) {
-  const parts = semver.split('.');
-  if (parts.length !== 3) {
-    throw new Error('Invalid semver format: ' + semver);
-  }
-  const patch = parseInt(parts[2], 10) + 1;
-  return `${parts[0]}.${parts[1]}.${patch}`;
-}

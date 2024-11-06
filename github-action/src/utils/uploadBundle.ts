@@ -35,6 +35,7 @@ export async function uploadBundle(
     const body = await r.readBody()
     logInfo(`Failed to upload ${appKey}, code: ${r.message.statusCode}`, 'Red');
     logInfo(body, 'Red');
+    throw new Error('Bundle failed to upload, fatal error');
   }
 
   /** Publish bundle */

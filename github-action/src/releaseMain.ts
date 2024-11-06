@@ -11,6 +11,7 @@ import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { execSync } from 'child_process';
+import { getVersion } from './utils/bumpVersion.js';
 
 const prodUrl = 'https://apps.api.fusion.equinor.com';
 
@@ -47,28 +48,6 @@ program
   });
 
 await program.parseAsync();
-
-
-function incrementPatchVersion(semver: string) {
-  const parts = semver.split('.');
-  if (parts.length !== 3) {
-    throw new Error('Invalid semver format');
-  }
-  const patch = parseInt(parts[2], 10) + 1;
-  return `${parts[0]}.${parts[1]}.${patch}`;
-}
-
-async function getVersion(ciUrl: string, token: string, name: string) {
-  const client = new HttpClient();
-  const response = await client.get(`${ciUrl}/apps/${name}?api-version=1.0`, {
-    ['Authorization']: `Bearer ${token}`,
-  });
-  const body = await response.readBody();
-  const json = JSON.parse(body);
-  const v = incrementPatchVersion(json.build.version);
-  return v;
-}
-
 
 
 export async function release(config: ReleaseArgs) {
