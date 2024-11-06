@@ -61,7 +61,7 @@ export async function release(context: ReleaseArgs) {
   makeManifest('./package.json', version, context.sha);
   const zipped = zipBundle();
   await uploadBundle(ciUrl, context.token, r.name, zipped, version);
-  // console.log("Skipping patchAppConfig");
+  console.log("Patch app config");
   await patchAppConfig(
     {
       ai: context.ai,
@@ -85,9 +85,7 @@ async function getVersion(ciUrl: string, token: string, name: string) {
   });
   const body = await response.readBody();
   const json = JSON.parse(body);
-  console.log(`Latest version is ${json.build.version}`);
   const v = incrementPatchVersion(json.build.version);
-  console.log(`Incrementing to ${v}`);
   return v;
 }
 
