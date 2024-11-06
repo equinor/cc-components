@@ -57,7 +57,7 @@ export async function release(context: ReleaseArgs) {
     );
   }
 
-  const version = "1.2.0" // await getVersion(ciUrl, context.token, pkg.name);
+  const version = await getVersion(ciUrl, context.token, pkg.name);
   makeManifest('./package.json', version, context.sha);
   const zipped = zipBundle();
   await uploadBundle(ciUrl, context.token, pkg.name, zipped, version);
