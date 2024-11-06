@@ -10,11 +10,10 @@ export async function uploadBundle(
   baseUrl: string,
   token: string,
   appKey: string,
-  zipped: AdmZip
+  zipped: AdmZip,
+  version: string
 ) {
   const client = new HttpClient();
-
-  await ensureAppExists(baseUrl, token, appKey);
 
   const headers: OutgoingHttpHeaders = {
     ['Authorization']: `Bearer ${token}`,
@@ -23,50 +22,36 @@ export async function uploadBundle(
   };
 
   const stream = Readable.from(zipped.toBuffer());
-
+  logInfo(`Sending payload to ${baseUrl}/bundles/apps/${appKey}`, "Green");
   const r = await client.sendStream(
     'POST',
-    `${baseUrl}/api/apps/${appKey}/versions`,
+    `${baseUrl}/bundles/apps/${appKey}`,
     stream,
     headers
   );
 
-  notice(`bundle uploaded with status code ${r.message.statusCode}`);
-  if (r.message.statusCode !== 200) {
+  notice(`${appKey} bundle uploaded with status code ${r.message.statusCode}`);
+  if (r.message.statusCode !== 201) {
+    const body = await r.readBody()
     logInfo(`Failed to upload ${appKey}, code: ${r.message.statusCode}`, 'Red');
+    logInfo(body, 'Red');
     throw new Error('Bundle failed to upload, fatal error');
   }
 
   /** Publish bundle */
-  const publishResponse = await client.post(
-    `${baseUrl}/api/apps/${appKey}/publish`,
-    '',
-    headers
+  const publishResponse = await client.put(
+    `${baseUrl}/apps/${appKey}/tags/latest`,
+    JSON.stringify({ version: version }),
+    {
+      ['Authorization']: `Bearer ${token}`,
+      ["Content-Type"]: 'application/json',
+    }
   );
+
   if (publishResponse.message.statusCode !== 200) {
-    logInfo(`Failed to publish ${appKey}, code: ${r.message.statusCode}`, 'Red');
-    throw new Error(JSON.stringify(publishResponse.message));
+    logInfo(`Failed to publish ${appKey}, code: ${publishResponse.message.statusCode}`, 'Red');
+    const body = await publishResponse.readBody()
+    throw new Error(body)
   }
   logInfo(`Sucessfully published ${appKey}`, 'Green');
-}
-
-async function ensureAppExists(baseUrl: string, token: string, appKey: string) {
-  const client = new HttpClient();
-
-  const headers: OutgoingHttpHeaders = {
-    ['Authorization']: `Bearer ${token}`,
-    ['Content-Type']: 'application/zip',
-  };
-
-  const res = await client.get(
-    `${baseUrl}/api/admin/apps/${appKey}/versions?api-version=1.0`,
-    headers
-  );
-
-  if (res.message.statusCode === 404) {
-    logInfo(`Unknown app: ${appKey}`, 'Red');
-    throw new Error(
-      'App doesnt exist please use the manual create fusion app to create this app first'
-    );
-  }
 }

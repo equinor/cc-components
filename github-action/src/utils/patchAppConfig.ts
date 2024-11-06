@@ -10,7 +10,7 @@ export async function getAppConfig(token: string, appKey: string, url: string) {
     ['Content-Type']: 'application/json',
   };
 
-  const res = await client.get(`${url}/api/apps/${appKey}/config`, headers);
+  const res = await client.get(`${url}/apps/${appKey}/builds/latest/config`, headers);
   if (res.message.statusCode !== 200) {
     logInfo(`Failed to fetch client config, Code: ${res.message.statusCode}`, 'Red');
     throw new Error('Failed to fetch client config');
@@ -49,7 +49,7 @@ export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}
 
   //patch
   const patchResponse = await client.put(
-    `${url}/api/apps/${appKey}/config`,
+    `${url}/apps/${appKey}/builds/latest/config`,
     JSON.stringify(existingConfig),
     headers
   );
