@@ -12,7 +12,7 @@ import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { execSync } from 'child_process';
 
-const prodUrl = 'https://apps.fprd.api.fusion-dev.net';
+const prodUrl = 'https://apps.api.fusion.equinor.com';
 
 const program = new Command();
 
