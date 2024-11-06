@@ -2,7 +2,7 @@
   "name": "pipetest",
   "displayName": "Pipetest",
   "version": "0.0.1",
-  "main": "/src/main.tsx",
+  "main": "src/main.tsx",
   "private": true,
   "type": "module",
   "scripts": {
