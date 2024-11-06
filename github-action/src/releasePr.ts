@@ -62,17 +62,17 @@ export async function release(context: ReleaseArgs) {
   const zipped = zipBundle();
   await uploadBundle(ciUrl, context.token, r.name, zipped, version);
   // console.log("Skipping patchAppConfig");
-  // await patchAppConfig(
-  //   {
-  //     ai: context.ai,
-  //     commit: context.sha,
-  //     pr: context.pr,
-  //     modelViewerConfig: JSON.parse(context.modelViewerConfig),
-  //   },
-  //   context.token,
-  //   r.name,
-  //   ciUrl
-  // );
+  await patchAppConfig(
+    {
+      ai: context.ai,
+      commit: context.sha,
+      pr: context.pr,
+      modelViewerConfig: JSON.parse(context.modelViewerConfig),
+    },
+    context.token,
+    r.name,
+    ciUrl
+  );
 
   execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
 }
