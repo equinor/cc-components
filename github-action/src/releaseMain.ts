@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { HttpClient } from '@actions/http-client';
 import { readdirSync } from 'fs';
 import { Command } from 'commander';
 import { setSecret, warning } from '@actions/core';
@@ -10,8 +11,9 @@ import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { execSync } from 'child_process';
+import { getVersion } from './utils/bumpVersion.js';
 
-const prodUrl = 'https://fusion-s-portal-fprd.azurewebsites.net';
+const prodUrl = 'https://apps.api.fusion.equinor.com';
 
 const program = new Command();
 
@@ -47,6 +49,7 @@ program
 
 await program.parseAsync();
 
+
 export async function release(config: ReleaseArgs) {
   const pkg = parsePackageJson();
   if (!pkg.name) {
@@ -62,11 +65,12 @@ export async function release(config: ReleaseArgs) {
 
   prepareBundle();
 
-  makeManifest('./package.json');
+  const version = await getVersion(prodUrl, config.token, pkg.name);
+  makeManifest('./package.json', version, config.sha);
 
   const zipped = zipBundle();
 
-  await uploadBundle(prodUrl, config.token, pkg.name, zipped);
+  await uploadBundle(prodUrl, config.token, pkg.name, zipped, version);
   await patchAppConfig(
     {
       ai: config.ai,
