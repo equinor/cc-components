@@ -215,8 +215,8 @@ const columnDefinitions: ColDef<Loop>[] = [
   },
   {
     colId: 'Location',
-    headerName: domainNames.location,
-    headerTooltip: domainNames.location,
+    headerName: domainNames.tagArea,
+    headerTooltip: domainNames.tagArea,
     valueGetter: (pkg) => pkg.data?.location,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       return <StyledMonospace>{props.data?.location}</StyledMonospace>;

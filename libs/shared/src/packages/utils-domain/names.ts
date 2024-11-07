@@ -33,6 +33,7 @@ export const domainNames = {
   systems: 'Systems',
   tagStatus: 'Tag Status',
   tag: 'Tag',
+  tagArea: 'Tag Area',
   wbs: 'WBS',
   estimate: 'Estimate',
   createdDate: 'Created Date',
