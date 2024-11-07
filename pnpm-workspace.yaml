@@ -1,5 +1,6 @@
 packages:
   - 'libs/**'
   - 'apps/*'
+  - 'fusion-portal/**'
   - 'cli'
   - 'github-action'
