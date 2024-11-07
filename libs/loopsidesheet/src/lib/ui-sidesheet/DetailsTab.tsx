@@ -30,11 +30,11 @@ export const DetailsTab = ({ loop }: DetailsTabProps): JSX.Element | null => {
             <td>{stringCell(loop.project)}</td>
           </tr>
           <tr>
-            <td>Area</td>
+            <td>Tag Area</td>
             <td>{stringCell(loop.location)}</td>
           </tr>
           <tr>
-            <td>Status</td>
+            <td>Tag Status</td>
             <td>{stringCell(loop.tagStatus)}</td>
           </tr>
           <tr>
@@ -65,6 +65,18 @@ export const DetailsTab = ({ loop }: DetailsTabProps): JSX.Element | null => {
                 ? stringCell(formatDateString(loop.woActualCompletionDate))
                 : '-'}
             </td>
+          </tr>
+          <tr>
+            <td>Comm Priority 1</td>
+            <td>{stringCell(loop.priority1)}</td>
+          </tr>
+          <tr>
+            <td>Comm Priority 2</td>
+            <td>{stringCell(loop.priority2)}</td>
+          </tr>
+          <tr>
+            <td>Comm Priority 3</td>
+            <td>{stringCell(loop.priority3)}</td>
           </tr>
         </tbody>
       </StyledTable>
