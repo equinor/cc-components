@@ -28,5 +28,9 @@
     "@equinor/project-portal-common": "workspace:^",
     "@equinor/fusion-portal-react-utils": "workspace:^",
     "react-router-dom": "^6.27.0"
-  }
+  },
+  "files": [
+    "dist/app-bundle.js",
+    "app-manifest.json"
+  ]
 }

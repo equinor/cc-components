@@ -18,7 +18,7 @@ export default defineConfig({
       },
     },
     lib: {
-      entry: './src/index.tsx',
+      entry: './src/index.ts',
       fileName: 'app-bundle',
       formats: ['es'],
     },
