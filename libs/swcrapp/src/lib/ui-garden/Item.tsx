@@ -3,6 +3,7 @@ import { tokens } from '@equinor/eds-tokens';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo } from 'react';
 import { StyledItemWrapper, StyledRoot } from './garden.styles';
+import { itemContentColors } from '@cc-components/shared/mapping';
 
 export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   const {
@@ -17,8 +18,8 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
 
   const statusColor = getSwcrStatusColor(data.status);
   const textColor = ['Closed - Rejected', 'Closed'].includes(data.status)
-    ? tokens.colors.text.static_icons__primary_white.rgba
-    : tokens.colors.text.static_icons__default.rgba;
+    ? itemContentColors.Dark
+    : itemContentColors.Light;
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
 

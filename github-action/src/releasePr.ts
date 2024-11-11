@@ -9,8 +9,9 @@ import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { execSync } from 'child_process';
+import { getVersion } from './utils/bumpVersion.js';
 
-const ciUrl = 'https://fusion-s-portal-ci.azurewebsites.net';
+const ciUrl = 'https://apps.ci.api.fusion-dev.net';
 
 const program = new Command();
 
@@ -49,15 +50,17 @@ await program.parseAsync();
 
 export async function release(context: ReleaseArgs) {
   prepareBundle();
-  makeManifest('./package.json');
-  const zipped = zipBundle();
-  const r = parsePackageJson();
-  if (!r.name) {
+  const pkg = parsePackageJson();
+  if (!pkg.name) {
     throw new Error(
       `No name in package json, cannot deploy unknown app at path ${process.cwd()}`
     );
   }
-  await uploadBundle(ciUrl, context.token, r.name, zipped);
+
+  const version = await getVersion(ciUrl, context.token, pkg.name);
+  makeManifest('./package.json', version, context.sha);
+  const zipped = zipBundle();
+  await uploadBundle(ciUrl, context.token, pkg.name, zipped, version);
   await patchAppConfig(
     {
       ai: context.ai,
@@ -66,9 +69,11 @@ export async function release(context: ReleaseArgs) {
       modelViewerConfig: JSON.parse(context.modelViewerConfig),
     },
     context.token,
-    r.name,
+    pkg.name,
     ciUrl
   );
 
-  execSync(`echo '## ${r.name}' >> $GITHUB_STEP_SUMMARY`);
+  execSync(`echo '## ${pkg.name}' >> $GITHUB_STEP_SUMMARY`);
 }
+
+

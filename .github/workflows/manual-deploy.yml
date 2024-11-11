@@ -17,6 +17,7 @@ on:
           - punch
           - scopechangerequest
           - workorder
+          - project-portal-landingpage
           - "*"
 permissions:
   actions: read

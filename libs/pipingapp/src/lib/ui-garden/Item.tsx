@@ -11,6 +11,7 @@ import {
 import { Pipetest } from 'libs/pipingshared/dist/src';
 import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
 import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
+import { itemContentColors } from '@cc-components/shared/mapping';
 
 const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +55,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
           onClick={onClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
+          textColor={itemContentColors.Light}
         >
           <StyledItemText>{displayName}</StyledItemText>
           <StyledStatusCircles

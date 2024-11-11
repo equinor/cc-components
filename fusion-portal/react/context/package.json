@@ -1,0 +1,22 @@
+{
+  "name": "@equinor/fusion-portal-react-context",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
+    "build": "tsc -b -f"
+  },
+  "dependencies": {
+    "@equinor/fusion-framework-module-context": "^5.0.12",
+    "@equinor/fusion-framework-module-http": "^6.2.0",
+    "@equinor/fusion-framework-react": "^7.3.0",
+    "@equinor/fusion-react-context-selector": "^0.6.6",
+    "@equinor/fusion-framework-react-app": "5.2.10"
+  }
+}
