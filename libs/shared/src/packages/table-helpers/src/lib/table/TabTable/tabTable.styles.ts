@@ -12,3 +12,9 @@ export const NoResourceData = styled.div`
 export const InfoText = styled.h3`
   margin: 0;
 `;
+
+export const TabTableStyles = styled.div`
+  .ag-center-cols-viewport {
+    min-height: unset !important;
+  }
+`;

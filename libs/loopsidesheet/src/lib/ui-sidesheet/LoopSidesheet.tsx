@@ -20,7 +20,6 @@ import { Tabs } from '@equinor/eds-core-react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useGetWorkorders } from '../utils-sidesheet';
-import { Checklists } from './Checklists';
 import { DetailsTab } from './DetailsTab';
 
 export const LoopSidesheet = (props: {
@@ -125,7 +124,6 @@ export const LoopSidesheet = (props: {
         <CustomStyledPanels>
           <StyledPanel>
             <DetailsTab loop={loop} />
-            {loop.loopId && <Checklists loopId={loop.loopId} />}
           </StyledPanel>
           <StyledPanel>
             <WorkorderTab error={error} isFetching={isLoading} workorders={data} />

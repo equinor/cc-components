@@ -1,7 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-
-
 # compiled output
 /.nx
 /workspace
@@ -49,5 +47,3 @@ Thumbs.db
 
 .astro
 .turbo
-
-!import.d.ts
