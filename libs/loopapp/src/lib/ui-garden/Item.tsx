@@ -11,6 +11,8 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { PopoverContent } from './Popover';
+import { itemContentColors } from '@cc-components/shared/mapping';
+
 const createProgressBackground = (progress: number) => {
   const standardColor = '#ffffff';
   return `linear-gradient(90deg, #d9eaf2 ${progress}%, ${standardColor} ${progress}%)`;
@@ -54,6 +56,7 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
             setIsOpen(false);
           }}
           backgroundColor={linear}
+          textColor={itemContentColors.Light}
           onClick={onClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}

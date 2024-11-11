@@ -27,7 +27,7 @@ export const useGardenConfig = (
     getDisplayName: (item) => item.softwareChangeRecordNo,
     initialGrouping: ['RFO_ForecastDate'],
     visuals: {
-      rowHeight: 25,
+      rowHeight: 31,
     },
     customViews: {
       customItemView: SwcrItem as any,

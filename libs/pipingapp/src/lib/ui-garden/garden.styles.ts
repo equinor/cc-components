@@ -9,7 +9,11 @@ export const StyledRoot = styled.div`
   margin-left: 5px;
   position: relative;
 `;
-export type ItemProps = { backgroundColor: string; isSelected: boolean };
+export type ItemProps = {
+  backgroundColor: string;
+  isSelected: boolean;
+  textColor: string;
+};
 
 export const StyledItemWrapper = styled.div<ItemProps>`
   display: grid;
@@ -18,7 +22,7 @@ export const StyledItemWrapper = styled.div<ItemProps>`
   box-sizing: border-box;
   position: relative;
   background: ${(props) => props.backgroundColor};
-  color: ${tokens.colors.text.static_icons__default.rgba};
+  color: ${(props) => props.textColor};
   cursor: pointer;
   border: 1px solid #ededed;
   height: 100%;
