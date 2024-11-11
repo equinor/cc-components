@@ -1,0 +1,20 @@
+{
+  "name": "@equinor/project-portal-common",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
+    "build": "tsc -b -f"
+  },
+  "dependencies": {
+    "@equinor/fusion-portal-react-context": "workspace:^",
+    "@equinor/fusion-portal-react-components": "workspace:^",
+    "@equinor/fusion-framework-module-context": "^5.0.12",
+    "@equinor/fusion-portal-react-utils": "workspace:^",
+    "@equinor/fusion-react-person": "^0.9.2"
+  }
+}
