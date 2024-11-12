@@ -104,7 +104,7 @@ export const ContentTable = ({ loop }: ContentTableProps) => {
   const { data, error, isLoading } = useGetLoopContent(loop.loopId);
 
   return (
-    <div>
+    <>
       <TabTable
         packages={data}
         error={error}
@@ -112,6 +112,6 @@ export const ContentTable = ({ loop }: ContentTableProps) => {
         resourceName="ContentTable"
         columns={columns}
       />
-    </div>
+    </>
   );
 };
