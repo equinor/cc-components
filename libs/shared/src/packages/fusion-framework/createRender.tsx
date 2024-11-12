@@ -10,6 +10,7 @@ import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsig
 import { useState } from 'react';
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { switch_on } from '@equinor/eds-icons';
 
 /**
  * Facades the fusion-framework render setup, used in all apps
@@ -69,7 +70,7 @@ export function createRender(
 
     const possiblePrNumber = (args.env.config?.environment as any)?.pr;
 
-    let cleanup = () => {};
+    let cleanup = () => { };
 
     if (possiblePrNumber) {
       console.log(`creating pr ${possiblePrNumber}`);
@@ -471,20 +472,18 @@ const MergedPr = () => (
 
 //Will ignore the powerbi custom event isTrusted errors
 function ignorePowerBiGenericError<T extends ITelemetryItem>(a: T) {
-  if (
-    a.name === 'Microsoft.ApplicationInsights.{0}.Exception' &&
-    Object.keys(a.data ?? {}).includes('message') &&
-    a.data?.message == `CustomEvent: {"isTrusted":false}`
-  ) {
-    return false;
+  if (a.name !== 'Microsoft.ApplicationInsights.{0}.Exception' || !Object.keys(a.data ?? {}).includes('message')) {
+    return true;
   }
-  if (
-    a.name === 'Microsoft.ApplicationInsights.{0}.Exception' &&
-    Object.keys(a.data ?? {}).includes('message') &&
-    a.data?.message ===
-      'ErrorEvent: ResizeObserver loop completed with undelivered notifications.'
-  ) {
-    return false;
+
+  switch (a.data?.message) {
+    case 'CustomEvent: {"isTrusted":false}':
+      return false;
+    case 'ErrorEvent: ResizeObserver loop completed with undelivered notifications.':
+      return false;
+    case "Uncaught TypeError: Cannot read properties of undefined (reading 'path')":
+      return false;
   }
+
   return true;
 }
