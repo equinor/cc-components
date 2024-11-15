@@ -1,21 +1,14 @@
-// Todo useAppModule PortalApp env
-export const getFusionPortalURL = () => {
-  switch (window._config_?.fusionLegacyEnvIdentifier?.toLowerCase()) {
+
+export const getFusionPortalURL = (env: string) => {
+  switch (env) {
     case 'fprd':
       return 'https://fusion.equinor.com';
     case 'ci':
-      return 'https://fusion-s-portal-ci.azurewebsites.net';
+      return 'https://fusion.ci.fusion-dev.net';
     case 'fqa':
-      return 'https://fusion-s-portal-fqa.azurewebsites.net';
+      return 'https://fusion.fqa.fusion-dev.net';
     default:
-      return 'https://fusion-s-portal-ci.azurewebsites.net';
+      return 'https://fusion.equinor.com';
   }
 };
 
-declare global {
-  interface Window {
-    _config_: {
-      fusionLegacyEnvIdentifier: string;
-    };
-  }
-}

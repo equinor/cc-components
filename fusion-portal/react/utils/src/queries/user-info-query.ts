@@ -11,3 +11,9 @@ export async function getCurrentUserInfo(
   if (!res.ok) throw res;
   return res.json();
 }
+
+export async function getUserInfo(client: IHttpClient, azureUserId?: string): Promise<PersonDetails> {
+	const res = await client.fetch(`/persons/${azureUserId}?api-version=3.0`);
+	if (!res.ok) throw res;
+	return res.json();
+}

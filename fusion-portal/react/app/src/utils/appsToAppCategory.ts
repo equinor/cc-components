@@ -1,4 +1,4 @@
-import { AppCategory, AppManifest } from "@equinor/fusion-portal-module-app";
+import { AppCategory, AppManifest } from "@equinor/fusion-portal-module-app-config";
 
 
 export const appsToAppCategory = (apps?: AppManifest[]): AppCategory[] => {

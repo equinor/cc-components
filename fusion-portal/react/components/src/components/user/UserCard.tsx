@@ -2,7 +2,7 @@ import { Card } from '@equinor/eds-core-react';
 
 import { useCurrentUserInfo } from '@equinor/fusion-portal-react-utils';
 
-import { ProfileCardHeader } from '../../profile-card-header/ProfileCardHeader';
+import { ProfileCardHeader } from '../profile-card-header/ProfileCardHeader';
 import { ProjectPosition } from '../project-position/ProjectPosition';
 
 export const User = () => {

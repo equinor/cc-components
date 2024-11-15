@@ -4,11 +4,11 @@ import { useCallback, useEffect, useMemo } from 'react';
 
 
 import {  AppModule } from '@equinor/fusion-framework-module-app';
-import type { AppManifest, AppCategory } from '@equinor/fusion-portal-module-app';
+import type { AppManifest, AppCategory } from '@equinor/fusion-portal-module-app-config';
 import { menuFavoritesController } from '../utils/menuFavorites';
 import { getDisabledApps, getPinnedAppsKeys } from '../utils';
 import { usePortalApps } from './use-portal-apps';
-import { useFramework } from '@equinor/fusion-framework-react';
+import { useFramework } from '@equinor/fusion-framework-react-app/framework';
 
 export const useApps = () => {
 	const { apps, appCategories, isLoading } = usePortalApps();

@@ -1,5 +1,5 @@
 import { tokens } from '@equinor/eds-tokens';
-import { AppCategory, AppManifest } from '@equinor/fusion-portal-module-app';
+import { AppCategory, AppManifest } from '@equinor/fusion-portal-module-app-config';
 
 import { OperatorFunction, filter } from 'rxjs';
 
