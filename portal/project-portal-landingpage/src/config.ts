@@ -20,14 +20,9 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
 	}
 
   enableContext(configurator, async (builder) => {
-    try {
-      const { current } = await builder.requireInstance<{ current: IPortal }>('portalConfig');
-      builder.setContextType(current.portalAppConfig.contextTypes.map((ct) => ct.type));
-    } catch (error) {
-      console.error('Failed to load portal config', error);
-    }
-
+    builder.setContextType(['ProjectMaster', "Facility"]);
   });
+
   enableNavigation(configurator, basename);
 	configurator.configureHttpClient('portal-client', environment.portalClient);
 
