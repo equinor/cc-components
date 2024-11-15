@@ -1,4 +1,4 @@
-import { useFramework } from '@equinor/fusion-framework-react';
+import { useFramework } from '@equinor/fusion-framework-react-app/framework';
 import { useQuery } from '@tanstack/react-query';
 import { getPimsTasks } from '../work-assigned/assignment-queries';
 import { getMyMeetingsActions, getMyReviewActions, myMeetingsActionSelector } from '../queries/fusion-meetings-queries';

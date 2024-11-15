@@ -1,4 +1,4 @@
-import { useFramework } from '@equinor/fusion-framework-react';
+import { useFramework } from '@equinor/fusion-framework-react-app/framework';
 import { useCurrentUser } from '@equinor/fusion-framework-react/hooks';
 
 import { useQuery } from '@tanstack/react-query';
