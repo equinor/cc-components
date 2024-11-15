@@ -65,7 +65,7 @@ export const ProjectPortalPage = (): JSX.Element => {
                 applications associated with the selected context through the menu.
               </Typography>
             </Styles.Section>
-            {/* <PortalContextSelector /> */}
+            <PortalContextSelector />
           </Styles.ContentWrapper>
           {feature?.enabled && <Allocations />}
         </Styles.Content>

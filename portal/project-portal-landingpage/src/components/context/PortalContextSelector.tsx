@@ -8,7 +8,7 @@ import {
 } from '@equinor/fusion-portal-react-context';
 import { getContextPageURL } from '@equinor/project-portal-common';
 import { NavigationModule } from '@equinor/fusion-framework-module-navigation';
-import { useFramework } from '@equinor/fusion-framework-react';
+import { useFramework } from '@equinor/fusion-framework-react-app/framework';
 import { useMemo } from 'react';
 
 const StyledWrapper = styled.div`
