@@ -30,10 +30,11 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
   });
   enableNavigation(configurator, basename);
 	configurator.configureHttpClient('portal-client', environment.portalClient);
+
 	enablePortalAppConfig(configurator, (builder) => {
 		builder.selPortalConfig(async (arg) => {
 			try {
-				const { current } = await arg.requireInstance<{ current: IPortal }>('portalConfig');
+				const { current } = (arg.ref as { portalConfig: { current: IPortal }})?.portalConfig;
 				return current.portalAppConfig;
 			} catch (error) {
 				console.error('Failed to load portal config', error);
