@@ -29,8 +29,8 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
 	enablePortalAppConfig(configurator, (builder) => {
 		builder.selPortalConfig(async (arg) => {
 			try {
-				const { current } = (arg.ref as { portalServices: { current: IPortal }})?.portalServices;
-				return current.portalAppConfig;
+				const portalAppConfig = (arg.ref as { portalConfig: { current: IPortal }})?.portalConfig.current.portalAppConfig;
+				return portalAppConfig;
 			} catch (error) {
 				console.error('Failed to load portal config', error);
 				return { id: "cli", contextTypes: [{ type: "ProjectMaster" }], env: "ci" };
