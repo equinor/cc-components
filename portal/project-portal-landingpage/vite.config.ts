@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import EnvironmentPlugin from 'vite-plugin-environment';
+import { InjectProcessPlugin } from '@equinor/project-portal-common';
 
 export default defineConfig({
   plugins: [
@@ -12,6 +13,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
+        plugins: [InjectProcessPlugin],
         inlineDynamicImports: true,
       },
     },
