@@ -19,7 +19,7 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
 		throw new Error('Failed to load environment config for project-portal-landingpage');
 	}
 
-  enableContext(configurator, async (builder) => {
+  enableContext(configurator, (builder) => {
     builder.setContextType(['ProjectMaster', "Facility"]);
   });
 
@@ -28,12 +28,11 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
 
 	enablePortalAppConfig(configurator, (builder) => {
 		builder.selPortalConfig(async (arg) => {
-			try {
-				const portalAppConfig = (arg.ref as { portalConfig: { current: IPortal }})?.portalConfig.current.portalAppConfig;
-				return portalAppConfig;
-			} catch (error) {
-				console.error('Failed to load portal config', error);
-				return { id: "cli", contextTypes: [{ type: "ProjectMaster" }], env: "ci" };
+      const ref = arg.ref as { portalConfig?: { current: IPortal }};
+      if (ref.portalConfig) {
+				return ref.portalConfig.current.portalAppConfig;
+			}else{
+        return { id: "cli", contextTypes: [{ type: "ProjectMaster" }], env: "ci" };
 			}
 		});
 	});
