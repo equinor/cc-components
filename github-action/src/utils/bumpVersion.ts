@@ -4,13 +4,20 @@ import { HttpClient } from '@actions/http-client';
 // For now we ask the server what the latest version is and bump the patch version
 export async function getVersion(ciUrl: string, token: string, name: string) {
   const client = new HttpClient();
-  const response = await client.get(`${ciUrl}/apps/${name}?api-version=1.0`, {
-    ['Authorization']: `Bearer ${token}`,
-  });
-  const body = await response.readBody();
-  const json = JSON.parse(body);
-  const v = incrementPatchVersion(json.build.version);
-  return v;
+  try {
+    const response = await client.get(`${ciUrl}/apps/${name}?api-version=1.0`, {
+      ['Authorization']: `Bearer ${token}`,
+    });
+    const body = await response.readBody();
+    const json = JSON.parse(body);
+    const v = incrementPatchVersion(json.build.version);
+    return v;
+
+  } catch (error) {
+    console.warn("Failed to get version from server", error);
+    console.info("Falling back to 0.0.1");
+    return "0.0.1";
+  }
 }
 
 function incrementPatchVersion(semver: string) {
