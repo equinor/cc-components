@@ -60,11 +60,10 @@ export const configure: AppModuleInitiator = (configurator, { env }) => {
 
 	enablePortalAppConfig(configurator, (builder) => {
 		builder.selPortalConfig(async (arg) => {
-			try {
-				const { current } = await arg.requireInstance<{ current: IPortal }>('portalConfig');
-				return current.portalAppConfig;
-			} catch (error) {
-				console.error('Failed to load portal config', error);
+			const ref = arg.ref as { portalConfig?: { current: IPortal }};
+			if (ref.portalConfig) {
+				return ref.portalConfig.current.portalAppConfig;
+			}else{
 				return { id: "cli", contextTypes: [{ type: "ProjectMaster" }], env: "ci" };
 			}
 		});
