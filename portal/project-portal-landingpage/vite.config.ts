@@ -1,6 +1,21 @@
 import { defineConfig } from 'vite';
 import EnvironmentPlugin from 'vite-plugin-environment';
-import { InjectProcessPlugin } from '@equinor/project-portal-common';
+
+
+const fix = `
+var process = {
+  env: {
+    NODE_ENV: "production"
+  }
+};
+var production = "production";
+`;
+
+export const InjectProcessPlugin = {
+  name: 'rollup-plugin-metadata',
+  renderChunk: (code: any) => fix + code,
+};
+
 
 export default defineConfig({
   plugins: [
@@ -12,8 +27,8 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     rollupOptions: {
+      plugins: [InjectProcessPlugin],
       output: {
-        plugins: [InjectProcessPlugin],
         inlineDynamicImports: true,
       },
     },

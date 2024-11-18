@@ -96,13 +96,13 @@
   },
   "pnpm": {
     "overrides": {
-      "react-dom": "18.2.0",
-      "react": "18.2.0"
+      "react-dom": "18.3.1",
+      "react": "18.3.1"
     },
     "peerDependencyRules": {
       "allowedVersions": {
-        "react-dom": "18.2.0",
-        "react": "18.2.0"
+        "react-dom": "18.3.1",
+        "react": "18.3.1"
       },
       "ignoreMissing": [
         "react",
