@@ -16,7 +16,7 @@ export async function getVersion(ciUrl: string, token: string, name: string) {
   } catch (error) {
     console.warn("Failed to get version from server", error);
     console.info("Falling back to 0.0.1");
-    return "0.0.2";
+    return "0.0.1";
   }
 }
 
