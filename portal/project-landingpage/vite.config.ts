@@ -7,15 +7,15 @@ export default defineConfig({
       NODE_ENV: 'production',
     }),
   ],
+  define: {
+    'process.env': {
+      NODE_ENV: JSON.stringify('production'),
+    },
+  },
   appType: 'custom',
   build: {
     emptyOutDir: true,
     rollupOptions: {
-      plugins: [
-        EnvironmentPlugin({
-          NODE_ENV: 'production',
-        }),
-      ],
       output: {
         inlineDynamicImports: true,
       },
