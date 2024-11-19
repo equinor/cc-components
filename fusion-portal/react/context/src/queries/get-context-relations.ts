@@ -1,4 +1,4 @@
-import { useFramework } from '@equinor/fusion-framework-react';
+import { useFramework } from '@equinor/fusion-framework-react-app/framework';
 import { useQuery } from '@tanstack/react-query';
 import { IHttpClient } from '@equinor/fusion-framework-module-http';
 import { RelationReturnType, RelationsTypes } from '../types/relations';

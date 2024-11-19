@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { NavigationModule } from '@equinor/fusion-framework-module-navigation';
-import { useFramework } from '@equinor/fusion-framework-react-app/framework';
-import { EventModule } from '@equinor/fusion-framework-module-event';
+import { useFramework } from '@equinor/fusion-framework-react';
 
 import { getContextPageURL } from '../utils';
 
@@ -15,13 +14,17 @@ import { getContextPageURL } from '../utils';
  * @returns {void}
  */
 export const useNavigateOnContextChange = () => {
-  const { modules } = useFramework<[NavigationModule, EventModule]>();
+  const { modules } = useFramework<[NavigationModule]>();
 
   useEffect(() => {
     return modules.event.addEventListener('onCurrentContextChanged', (event) => {
-      const url = new URL(getContextPageURL(event.detail.next), location.origin);
+      const path = getContextPageURL(event.detail.next);
+      console.log('path:', path);
+      if (!path) return;
+
+      const url = new URL(path, location.origin);
 
       modules.navigation.push(url);
     });
-  }, [modules]);
+  }, []);
 };

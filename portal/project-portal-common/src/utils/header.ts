@@ -19,3 +19,9 @@ export const getGreeting = () => {
     return 'Good evening';
   }
 };
+
+
+export function getBackgroundURL(instCode?: string) {
+	if (!instCode) return;
+	return `https://stiddata.equinor.com/public/${instCode}.jpg`;
+}

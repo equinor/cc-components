@@ -3,7 +3,7 @@ import { Typography } from '@equinor/eds-core-react';
 
 import { PersonAvatar } from '@equinor/fusion-react-person';
 
-import { Skeleton } from '../components/skeleton/Skeleton';
+import { Skeleton } from '../skeleton/Skeleton';
 import {
   PersonDetails,
   getDepartment,

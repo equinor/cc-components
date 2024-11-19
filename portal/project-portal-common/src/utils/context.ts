@@ -12,7 +12,7 @@ export function getContextTypeName(contextTypeId?: string | null) {
 export function getContextPageURL(context?: ContextItem | null) {
   if (!context) return `/`;
 
-  if (location.pathname.includes('apps')) return `/${location.pathname}/${context.id}`;
+  if (location.href.includes('apps')) return;
 
   return `${getContextTypeName(context.type.id).toLowerCase()}/${context.id}`;
 }

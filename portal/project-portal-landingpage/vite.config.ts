@@ -1,6 +1,21 @@
 import { defineConfig } from 'vite';
 import EnvironmentPlugin from 'vite-plugin-environment';
-import { InjectProcessPlugin } from '../../patches/3d-patch.ts';
+
+
+const fix = `
+var process = {
+  env: {
+    NODE_ENV: "production"
+  }
+};
+var production = "production";
+`;
+
+export const InjectProcessPlugin = {
+  name: 'rollup-plugin-metadata',
+  renderChunk: (code: any) => fix + code,
+};
+
 
 export default defineConfig({
   plugins: [

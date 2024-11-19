@@ -8,7 +8,8 @@ import {
 } from '@equinor/fusion-portal-react-context';
 import { getContextPageURL } from '@equinor/project-portal-common';
 import { NavigationModule } from '@equinor/fusion-framework-module-navigation';
-import { useFramework } from '@equinor/fusion-framework-react';
+import { useFramework } from '@equinor/fusion-framework-react-app/framework';
+import { useMemo } from 'react';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -48,16 +49,20 @@ export const PortalContextSelector = () => {
   const currentContext = useCurrentContext();
   const { modules } = useFramework<[NavigationModule]>();
 
+  const url = useMemo(() => {
+    return getContextPageURL(currentContext);
+  },[currentContext]);
+
   return (
     <ContextProvider>
       <StyledWrapper>
         <ContextSelector />
         <StyledActionWrapper>
-          {currentContext && (
+          {currentContext && url && (
             <StyledButton
               variant="ghost"
               onClick={() => {
-                modules.navigation.push(getContextPageURL(currentContext));
+                  modules.navigation.push(url);
               }}
             >
               Go to {currentContext.title}

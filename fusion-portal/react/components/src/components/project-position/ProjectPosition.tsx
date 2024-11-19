@@ -8,6 +8,7 @@ import { external_link, tag_relations } from '@equinor/eds-icons';
 import { useMemo } from 'react';
 
 import { useRelationsByType } from '@equinor/fusion-portal-react-context';
+import { usePortalEnv } from '@equinor/fusion-portal-react-app';
 
 import { useFrameworkCurrentContext } from '@equinor/fusion-framework-react-app/context';
 import { PersonPosition, getFusionPortalURL } from '@equinor/fusion-portal-react-utils';
@@ -57,6 +58,7 @@ const Style = {
 export const ProjectPosition = ({ positions }: { positions?: PersonPosition[] }) => {
   const { currentContext } = useFrameworkCurrentContext();
   const { relations: equinorTask } = useRelationsByType('OrgChart', currentContext?.id);
+  const env = usePortalEnv();
 
   const projectPositions = useMemo(() => {
     return (
@@ -79,7 +81,7 @@ export const ProjectPosition = ({ positions }: { positions?: PersonPosition[] })
               key={position.id}
               target="_blank"
               aria-label={position.name}
-              href={`${getFusionPortalURL()}/apps/pro-org/${position.project.id}/chart/${
+              href={`${getFusionPortalURL(env)}/apps/pro-org/${position.project.id}/chart/${
                 position.parentPositionId
               }`}
               role="link"
