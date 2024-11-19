@@ -15,12 +15,12 @@ import { getContextPageURL } from '../utils';
  * @returns {void}
  */
 export const useNavigateOnContextChange = () => {
-  const {modules} = useFramework<[NavigationModule, EventModule]>();
+  const { modules } = useFramework<[NavigationModule, EventModule]>();
 
   useEffect(() => {
     return modules.event.addEventListener('onCurrentContextChanged', (event) => {
-      const path = getContextPageURL(event.detail.next)
-
+      const path = getContextPageURL(event.detail.next);
+      console.log('path:', path);
       if (!path) return;
 
       const url = new URL(path, location.origin);
