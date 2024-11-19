@@ -1,6 +1,5 @@
-
 export const getFusionPortalURL = (env: string) => {
-  switch (env) {
+  switch (env.toLowerCase()) {
     case 'fprd':
       return 'https://fusion.equinor.com';
     case 'ci':
@@ -11,4 +10,3 @@ export const getFusionPortalURL = (env: string) => {
       return 'https://fusion.equinor.com';
   }
 };
-
