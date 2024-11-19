@@ -27,6 +27,7 @@
     "@equinor/fusion-portal-react-components": "workspace:^",
     "@equinor/project-portal-common": "workspace:^",
     "@equinor/fusion-portal-react-utils": "workspace:^",
+    "@equinor/fusion-portal-module-menu": "workspace:^",
     "react-router-dom": "^6.27.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"

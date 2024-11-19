@@ -20,6 +20,7 @@
     "@equinor/fusion-portal-react-components": "workspace:^",
     "@equinor/fusion-portal-react-app": "workspace:^",
     "@equinor/fusion-portal-module-app-config": "workspace:^",
-    "@equinor/fusion-portal-react-utils": "workspace:^"
+    "@equinor/fusion-portal-react-utils": "workspace:^",
+    "@equinor/fusion-portal-module-menu": "workspace:^"
   }
 }

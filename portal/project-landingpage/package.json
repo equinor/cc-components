@@ -30,6 +30,7 @@
     "@equinor/fusion-portal-react-extensions": "workspace:^",
     "@equinor/project-portal-common": "workspace:^",
     "@equinor/fusion-portal-react-utils": "workspace:^",
+    "@equinor/fusion-portal-module-menu": "workspace:^",
     "react-router-dom": "^6.27.0"
   },
   "files": [

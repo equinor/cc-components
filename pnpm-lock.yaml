@@ -300,6 +300,8 @@ importers:
         specifier: ^4.3.5
         version: 4.3.5(@types/semver@7.5.8)
 
+  fusion-portal/module/menu: {}
+
   fusion-portal/react/app:
     dependencies:
       '@equinor/fusion-framework-module-context':
@@ -356,6 +358,9 @@ importers:
       '@equinor/fusion-portal-module-app-config':
         specifier: workspace:^
         version: link:../../module/app-config
+      '@equinor/fusion-portal-module-menu':
+        specifier: workspace:^
+        version: link:../../module/menu
       '@equinor/fusion-portal-react-app':
         specifier: workspace:^
         version: link:../app
@@ -838,6 +843,9 @@ importers:
       '@equinor/fusion-portal-module-app-config':
         specifier: workspace:^
         version: link:../../fusion-portal/module/app-config
+      '@equinor/fusion-portal-module-menu':
+        specifier: workspace:^
+        version: link:../../fusion-portal/module/menu
       '@equinor/fusion-portal-react-app':
         specifier: workspace:^
         version: link:../../fusion-portal/react/app
@@ -910,6 +918,9 @@ importers:
       '@equinor/fusion-framework-react-module-context':
         specifier: ^6.2.13
         version: 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-portal-module-menu':
+        specifier: workspace:^
+        version: link:../../fusion-portal/module/menu
       '@equinor/fusion-portal-react-components':
         specifier: workspace:^
         version: link:../../fusion-portal/react/components
