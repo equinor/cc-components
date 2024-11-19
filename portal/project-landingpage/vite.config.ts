@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import EnvironmentPlugin from 'vite-plugin-environment';
 
-
 export default defineConfig({
   plugins: [
     EnvironmentPlugin({
@@ -12,6 +11,11 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     rollupOptions: {
+      plugins: [
+        EnvironmentPlugin({
+          NODE_ENV: 'production',
+        }),
+      ],
       output: {
         inlineDynamicImports: true,
       },
