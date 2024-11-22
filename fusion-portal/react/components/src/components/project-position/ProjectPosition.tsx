@@ -54,7 +54,13 @@ const Style = {
   `,
 };
 
-export const ProjectPosition = ({ positions }: { positions?: PersonPosition[] }) => {
+export const ProjectPosition = ({
+  positions,
+  date,
+}: {
+  positions?: PersonPosition[];
+  date: Date;
+}) => {
   const { currentContext } = useFrameworkCurrentContext();
   const { relations: equinorTask } = useRelationsByType('OrgChart', currentContext?.id);
 
@@ -63,12 +69,13 @@ export const ProjectPosition = ({ positions }: { positions?: PersonPosition[] })
       positions?.filter((item) => {
         return (
           item.appliesTo &&
-          new Date(item.appliesTo) > new Date() &&
-          item.project.id === equinorTask[0]?.externalId
+          new Date(item.appliesTo) > date &&
+          item.appliesFrom &&
+          new Date(item.appliesFrom) < date
         );
       }) || []
     );
-  }, [positions, equinorTask]);
+  }, [positions, equinorTask, date]);
 
   return (
     <>
