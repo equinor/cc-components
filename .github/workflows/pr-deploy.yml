@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ci
     steps:
-      - uses: xt0rted/pull-request-comment-branch@v2
+      - uses: xt0rted/pull-request-comment-branch@v3
         id: comment-branch
 
       - uses: actions/checkout@v4
