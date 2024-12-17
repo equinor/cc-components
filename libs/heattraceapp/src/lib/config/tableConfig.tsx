@@ -151,7 +151,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPhase,
   },
   {
-    headerName: 'Pipetests',
+    headerName: 'Pipetest',
     valueGetter: (pkg) => pkg.data?.pipetest,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       if (!props.value) return null;

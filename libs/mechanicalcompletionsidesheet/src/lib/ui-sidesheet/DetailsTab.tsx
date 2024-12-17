@@ -59,19 +59,19 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
             <td>{stringCell(mcPackage.remark)}</td>
           </tr>
           <tr>
-            <td>M-01 Contractor Final Punch Actual date</td>
+            <td>Contractor Final Punch Actual date (M01)</td>
             <td>{stringCell(formatDateString(mcPackage.finalPunchActualDate))}</td>
           </tr>
           <tr>
-            <td>M-02 Punch Status Accepted Actual Date</td>
+            <td>Punch Status Accepted Actual Date (M02)</td>
             <td>{stringCell(formatDateString(mcPackage.punchAcceptedActualtDate))}</td>
           </tr>
           <tr>
-            <td>M-03 RFC MC to Commissioning Actual Date</td>
+            <td>RFC MC to Commissioning Actual Date (M03)</td>
             <td>{stringCell(formatDateString(mcPackage.rfC_ForecastDate))}</td>
           </tr>
           <tr>
-            <td>M-04 RFCC Actual Date</td>
+            <td>RFCC Accepted (M04)</td>
             <td>{stringCell(formatDateString(mcPackage.rfC_ActualDate))}</td>
           </tr>
           <tr>
@@ -100,22 +100,22 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
         </thead>
         <tbody>
           <tr>
-            <td>Final punch</td>
+            <td>Final punch (M01)</td>
             <td>{stringCell(formatDateString(mcPackage.finalPunchPlannedDate))}</td>
             <td>{stringCell(formatDateString(mcPackage.finalPunchForecastDate))}</td>
           </tr>
           <tr>
-            <td>RFCC</td>
+            <td>RFCC (M03)</td>
             <td>{stringCell(formatDateString(mcPackage.rfC_PlannedDate))}</td>
             <td>{stringCell(formatDateString(mcPackage.rfC_ForecastDate))}</td>
           </tr>
           <tr>
-            <td>TAC</td>
+            <td>TAC (C06)</td>
             <td>{stringCell(formatDateString(mcPackage.taC_PlannedDate))}</td>
             <td>{stringCell(formatDateString(mcPackage.taC_ForecastDate))}</td>
           </tr>
           <tr>
-            <td>RFOC</td>
+            <td>RFOC (M07)</td>
             <td>{stringCell(formatDateString(mcPackage.rfO_PlannedDate))}</td>
             <td>{stringCell(formatDateString(mcPackage.rfO_ForecastDate))}</td>
           </tr>
