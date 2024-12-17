@@ -3,6 +3,7 @@ import { Icon } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
 import { PropsWithChildren } from 'react';
+import { PortalMessage } from '../portal-message/PortalMessage';
 
 export type Variant = 'Warning' | 'Error' | 'Info' | 'NoContent';
 
@@ -39,6 +40,7 @@ export const getIconVariant = (type: Variant) => {
 export type MessageProps = {
 	type?: Variant;
 	title: string;
+	center?: boolean;
 	messages?: string[];
 };
 
@@ -89,8 +91,10 @@ export const Styled = {
 	`,
 };
 
-export const Message = ({ title, messages, type = 'Info', children }: PropsWithChildren<MessageProps>) => {
+export const Message = ({ title, messages, type = 'Info', children, center }: PropsWithChildren<MessageProps>) => {
 	const variant = getIconVariant(type);
+
+	if (center)return <PortalMessage title={title}  type={variant.type} >{children}</PortalMessage>;
 
 	return (
 		<Styled.Content>

@@ -16,6 +16,7 @@
     "@equinor/fusion-react-skeleton": "^0.3.0",
     "@equinor/fusion-react-person": "^0.9.2",
     "@equinor/fusion-portal-react-context": "workspace:^",
-    "@equinor/fusion-portal-react-utils": "workspace:^"
+    "@equinor/fusion-portal-react-utils": "workspace:^",
+    "@equinor/fusion-portal-react-app": "workspace:^"
   }
 }

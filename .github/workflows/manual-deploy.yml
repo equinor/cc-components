@@ -18,6 +18,7 @@ on:
           - scopechangerequest
           - workorder
           - project-portal-landingpage
+          - project-landingpage
           - "*"
 permissions:
   actions: read
