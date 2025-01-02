@@ -43,6 +43,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: ci
     steps:
+      - name: Deprecated
+        shell: bash
+        run: |
+          echo "This action does not work anymore"
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
