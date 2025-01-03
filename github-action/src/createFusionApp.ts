@@ -29,6 +29,7 @@ type FusionApp = {
   hide: boolean;
 };
 
+//TODO: update urls
 const prodUrl = 'https://fusion-s-portal-fprd.azurewebsites.net';
 const ciUrl = 'https://fusion-s-portal-ci.azurewebsites.net';
 
