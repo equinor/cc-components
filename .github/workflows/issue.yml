@@ -2,8 +2,8 @@ name: Update issue
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 7 * * *'
+  # schedule:
+  #   - cron: '0 7 * * *'
 permissions:
   issues: write
   id-token: write
