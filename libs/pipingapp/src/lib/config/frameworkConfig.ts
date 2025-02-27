@@ -6,8 +6,10 @@ import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
+import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
+  enableNavigation(config, c.env.basename);
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster', 'Facility']);
     builder.setContextParameterFn(({ search, type }) => {

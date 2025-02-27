@@ -4,11 +4,12 @@ import {
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
 import { enableModelViewer, ModelViewerEnvConfig } from '@cc-components/modelviewer';
-
+import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
+  enableNavigation(config, c.env.basename);
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster', 'Facility']);
     builder.setContextParameterFn(({ search, type }) => {

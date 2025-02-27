@@ -58,8 +58,8 @@ importers:
         specifier: 8.4.1
         version: 8.4.1(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.17
-        version: 9.0.17(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@10.1.1)(react-is@18.3.1)
+        specifier: 9.0.25
+        version: 9.0.25(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)
       '@microsoft/applicationinsights-web':
         specifier: ^3.3.0
         version: 3.3.0(tslib@2.8.1)
@@ -283,6 +283,57 @@ importers:
       '@cc-components/workorderapp':
         specifier: workspace:^
         version: link:../../libs/workorderapp
+
+  fusion-portal/react/components:
+    dependencies:
+      '@equinor/fusion-portal-react-context':
+        specifier: workspace:^
+        version: link:../context
+      '@equinor/fusion-portal-react-utils':
+        specifier: workspace:^
+        version: link:../utils
+      '@equinor/fusion-react-person':
+        specifier: ^0.9.2
+        version: 0.9.2(react@18.3.1)
+      '@equinor/fusion-react-skeleton':
+        specifier: ^0.3.0
+        version: 0.3.0(react@18.3.1)
+
+  fusion-portal/react/context:
+    dependencies:
+      '@equinor/fusion-framework-module-context':
+        specifier: ^5.0.12
+        version: 5.0.12(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-framework-module-http':
+        specifier: ^6.2.0
+        version: 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react':
+        specifier: ^7.3.0
+        version: 7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-app':
+        specifier: 5.2.10
+        version: 5.2.10(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module-msal@3.1.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-bookmark@2.1.18(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@equinor/fusion-observable@8.4.1(@types/react@18.3.2)(react@18.2.0))(@remix-run/router@1.20.0)(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-react-context-selector':
+        specifier: ^0.6.6
+        version: 0.6.6(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  fusion-portal/react/utils:
+    dependencies:
+      '@equinor/fusion-framework-module-http':
+        specifier: ^6.2.0
+        version: 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react':
+        specifier: ^7.3.0
+        version: 7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-portal-react-context':
+        specifier: workspace:^
+        version: link:../context
+      '@equinor/fusion-react-person':
+        specifier: ^0.9.2
+        version: 0.9.2(react@18.3.1)
+      '@equinor/fusion-react-skeleton':
+        specifier: ^0.3.0
+        version: 0.3.0(react@18.3.1)
 
   github-action:
     dependencies:
@@ -599,8 +650,8 @@ importers:
         specifier: ^0.8.5
         version: 0.8.6(react@18.2.0)
       '@equinor/workspace-ag-grid':
-        specifier: 3.0.2
-        version: 3.0.2(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@32.3.2)(@types/react@18.3.12)(react-is@18.3.1)(styled-components@6.1.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+        specifier: 3.0.3
+        version: 3.0.3(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@32.3.2)(@types/react@18.3.12)(react-is@18.3.1)(styled-components@6.1.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@remirror/pm':
         specifier: ^2.0.8
         version: 2.0.8
@@ -662,7 +713,7 @@ importers:
         version: link:../swcrshared
       '@equinor/workspace-sidesheet':
         specifier: ^0.1.6
-        version: 0.1.6(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 0.1.6(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
 
   libs/workorderapp:
     dependencies:
@@ -702,6 +753,69 @@ importers:
       '@cc-components/workordershared':
         specifier: workspace:^
         version: link:../workordershared
+
+  portal/project-portal-common:
+    dependencies:
+      '@equinor/fusion-framework-module-context':
+        specifier: ^5.0.12
+        version: 5.0.12(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-portal-react-components':
+        specifier: workspace:^
+        version: link:../../fusion-portal/react/components
+      '@equinor/fusion-portal-react-context':
+        specifier: workspace:^
+        version: link:../../fusion-portal/react/context
+      '@equinor/fusion-portal-react-utils':
+        specifier: workspace:^
+        version: link:../../fusion-portal/react/utils
+      '@equinor/fusion-react-person':
+        specifier: ^0.9.2
+        version: 0.9.2(react@18.3.1)
+
+  portal/project-portal-landingpage:
+    dependencies:
+      '@equinor/fusion-framework-module-context':
+        specifier: ^5.0.12
+        version: 5.0.12(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-framework-module-event':
+        specifier: ^4.2.4
+        version: 4.2.4(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-feature-flag':
+        specifier: ^1.1.9
+        version: 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
+      '@equinor/fusion-framework-module-http':
+        specifier: ^6.2.0
+        version: 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react-app':
+        specifier: 5.2.10
+        version: 5.2.10(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module-msal@3.1.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-bookmark@2.1.18(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(@equinor/fusion-observable@8.4.1(@types/react@18.3.2)(react@18.2.0))(@remix-run/router@1.20.0)(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-framework-react-module-context':
+        specifier: ^6.2.13
+        version: 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-portal-react-components':
+        specifier: workspace:^
+        version: link:../../fusion-portal/react/components
+      '@equinor/fusion-portal-react-context':
+        specifier: workspace:^
+        version: link:../../fusion-portal/react/context
+      '@equinor/fusion-portal-react-utils':
+        specifier: workspace:^
+        version: link:../../fusion-portal/react/utils
+      '@equinor/fusion-react-context-selector':
+        specifier: ^0.6.6
+        version: 0.6.6(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-react-person':
+        specifier: ^0.9.2
+        version: 0.9.2(react@18.3.1)
+      '@equinor/fusion-react-skeleton':
+        specifier: ^0.3.0
+        version: 0.3.0(react@18.3.1)
+      '@equinor/project-portal-common':
+        specifier: workspace:^
+        version: link:../project-portal-common
+      react-router-dom:
+        specifier: ^6.27.0
+        version: 6.27.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
 packages:
 
@@ -1948,12 +2062,6 @@ packages:
       react:
         optional: true
 
-  '@equinor/fusion-react-ag-grid-styles@31.2.1':
-    resolution: {integrity: sha512-AX52K3IV3FW10WMUYKc18JlAp2HPj12/ttawxalkBsPz4/Ebkte3m6ciaK5Ja70JjBMkbGiVCIwRa0sSrHpnSA==}
-    peerDependencies:
-      '@ag-grid-community/styles': 31.2.0
-      '@equinor/fusion-react-styles': ^0.6.0
-
   '@equinor/fusion-react-ag-grid-styles@31.2.4':
     resolution: {integrity: sha512-hJ+2xtKmBedJwjKDGrQvcaPppX7/mrNel1XzlPU9DO4ZLiU6misACESqNq3gyiY1+ad7etH07v4EHWXJ3dw85w==}
     peerDependencies:
@@ -1961,8 +2069,20 @@ packages:
       '@equinor/eds-tokens': ^0.9.2
       '@equinor/fusion-react-styles': ^0.6.2
 
+  '@equinor/fusion-react-context-selector@0.6.6':
+    resolution: {integrity: sha512-ZTyXR1XQu/Vfl2WRwThU9xew+49v0UjIzQrLws/3NqaT/Fovm9WnMO917FKM76+4ozuWPoKmZofgHbmO8Bs2iQ==}
+
   '@equinor/fusion-react-person@0.8.6':
     resolution: {integrity: sha512-TqV1mGPHwm9vZouGh7GsDHfCbvy8v24mWzYAMmwiYSDqGBTiBy91QJ4YzTt/D3+TBsZNmEQ76usA1wK+1O4nBQ==}
+
+  '@equinor/fusion-react-person@0.9.2':
+    resolution: {integrity: sha512-FmKZTHkup0zLtKmIBPQ+QUwG8gwo1CCyPYbEtZC1NTV1IYSTS7tIm1jdiQi45DLWOIrilTIvFbNiHf3b4ynuvA==}
+
+  '@equinor/fusion-react-searchable-dropdown@0.5.2':
+    resolution: {integrity: sha512-spfXwfFBMyv8c8biX0tn3GJhzM5TOWoxTRBgNBbzuDZzBKZ8KpmdzzHth5EOgV7BqsiVGLtQheZBZP9rNI1G/A==}
+
+  '@equinor/fusion-react-skeleton@0.3.0':
+    resolution: {integrity: sha512-7YBUC2M2FcrV1XmHqjHb243kptPFW5LQZR5C+ejFCbYJltfRiHDCbXIRC8l1G7URPbt6h8TgJGbyGnNanoIC6w==}
 
   '@equinor/fusion-react-styles@0.6.2':
     resolution: {integrity: sha512-cfyq1TCrXffsv4mekdIJyzocvkiHpga708o+W9RsgvMCv076qV1pIau1fLNmbXLpeCtMzEG0V9soIVKRylJ4uw==}
@@ -1984,14 +2104,26 @@ packages:
   '@equinor/fusion-wc-avatar@3.2.1':
     resolution: {integrity: sha512-JpqJt88pHDJekuh+IlIa2TnZeKhQc4ox7LABQeFMnneqFGK+BxqgBCIxx+zeqxVsXmWeKg4H2G6ktasyMwV5Tg==}
 
+  '@equinor/fusion-wc-avatar@3.2.3':
+    resolution: {integrity: sha512-R4QrPz+lzIdYnc1s/6RixQb6MQ/sn1t1h+/P9MictC1bpxXaBKNA7XonxOXQyP9ivZHXLIZK8lNW6vtxiZXurQ==}
+
   '@equinor/fusion-wc-badge@1.3.1':
     resolution: {integrity: sha512-Tf3+vRg/CP8b9BwnQkJZYJhnKy5c6/QrP97a/cMF5VBiqDo81pOI0ckTILNEIgxIJ7XEgEwlB/H8ahjQGSoEng==}
+
+  '@equinor/fusion-wc-badge@1.3.2':
+    resolution: {integrity: sha512-RnwtNC+USW388qFafoOxM+7EEmCgWC2sxbjlcyIfBlp0ladgMCEdSnJiSJL1Nb/Qdne7BJWQi3oAA9xnku4Rhg==}
 
   '@equinor/fusion-wc-button@2.4.1':
     resolution: {integrity: sha512-ESPnClP78oOX1YYBgBtHXPS6pH5wgd5O19AlAD39w05Zeyqdd0i0gQ8M7YUH0grIZuQw4IEQ7tKE9OVxkJsPAg==}
 
+  '@equinor/fusion-wc-button@2.4.2':
+    resolution: {integrity: sha512-NPhY6GLO6MQnZLNnqtLrAbZrodm1ogsK65OL+VleN0NlYZzZ7i2li99itXSMSgXg5fit1YZ4ONonPzZ9BN4HFw==}
+
   '@equinor/fusion-wc-checkbox@1.1.1':
     resolution: {integrity: sha512-anLfHPuyO9VIsByGp5BAZEMo/wRy/YiCilnE0dlqi4AY5/DxfnjHkvMEinbQ9yeu2y3r/Mp3Oi6TBmYN4cIBXw==}
+
+  '@equinor/fusion-wc-checkbox@1.1.2':
+    resolution: {integrity: sha512-lAD6yh4cvuTCNisiYjyB1BvGg566YkQFa9m+/hzIVIlQRk0UQn9/FHa8BB/DnAj9O/K6IrgRx7tabrXIDrzHUg==}
 
   '@equinor/fusion-wc-core@2.0.0':
     resolution: {integrity: sha512-yxUepfQhMIkKNYn2Vc73R6/cyvyO0hde3LXFitCCaa8QR9woK0UXZlxP+RwnEYzve528l9K1t7SnEsX6x5eyPg==}
@@ -1999,45 +2131,68 @@ packages:
   '@equinor/fusion-wc-divider@1.1.1':
     resolution: {integrity: sha512-vM09tJy8yoGXVSwCVlptb1uu/9PeOON84vZiSmsuWySkNiDM3xpRARjLhT83XWW/rO7Y8oyM/3D61LVvX274gA==}
 
+  '@equinor/fusion-wc-divider@1.1.2':
+    resolution: {integrity: sha512-kb5kmq8S+aMqe+91RNHmJtjCg8ecrnB5DYrcm6RzucLicxL0NTwlLAJfy49xDR5kzt2laoyq6XsQ+4MqnlTbyw==}
+
   '@equinor/fusion-wc-icon@2.3.0':
     resolution: {integrity: sha512-CRyIHnvmZ/WOzZwhsoxNL3DkN30wk7jskEa6i+YsiqFkV1xAGgMPQJjhmXI1jhewRoT4o09WcUjnLaYQ6CUdsQ==}
+
+  '@equinor/fusion-wc-icon@2.3.1':
+    resolution: {integrity: sha512-uwmlMWb0/ZOXzHgzFge7x3ZEWfDzvuHPhTfBe9gF4hCNE2ZpQU3TlQd/UZh4B6/0xVhdfAMdZyhAOmjW7OzDZA==}
 
   '@equinor/fusion-wc-list@1.1.2':
     resolution: {integrity: sha512-oY8P7t/h/BMkK8h0CNKqvbvRk02OiIKxKwd5o5HmA3IKmBDrY49PvlEEVyhP5yjshbEfolIPnhe8tSeigKVbYA==}
 
+  '@equinor/fusion-wc-list@1.1.3':
+    resolution: {integrity: sha512-eKzpPA1/8k6uQu6/5ozfywJWHUBPcwOzcZbHz4/Rzu1fb5b932Eot/yUsacDRhnSigbgBvsOqU0phDp2OuV6yA==}
+
   '@equinor/fusion-wc-person@2.6.7':
     resolution: {integrity: sha512-uSb1GCWthFmJmjcP/binAN/GK3Ph/x4MPWHl0tGiUEk8zGkhLOs+URG3wk3mLTIDlY3LtnjDA1mnRbeLhPU80w==}
+
+  '@equinor/fusion-wc-person@3.0.3':
+    resolution: {integrity: sha512-e+c/3UvldhNoeHqLl2kHDNF9YCnA0srMv9h2lHBZFxSfWZLszrVdbnXxEPNrd9au1C8fp2NYN3arEvuJO5X+GA==}
 
   '@equinor/fusion-wc-picture@3.1.0':
     resolution: {integrity: sha512-3RQmbd0ZBJ4IBI93EP5e7P535qCG8BMKYkEAi67O9vKPOppzijtRenrdKQKHLAZ7jBtW7bRPTsW8dl6hyunjig==}
 
+  '@equinor/fusion-wc-picture@3.1.1':
+    resolution: {integrity: sha512-TeZd46sjyg43HHlbE4h9Ebk9wCBnif5j9XGodIdVTCaC7rLz2YEd7C6RS7vj3nS+goFIZmowiUUmg6gZemzY4w==}
+
   '@equinor/fusion-wc-radio@1.1.1':
     resolution: {integrity: sha512-Id5krecYRBFbeaIn0S22RNZzHiJ8ZSJnsaeXcqgjy61u4w88bguDaVmwH2kBO0kCG31HBJiBilvrs2YwnxdqzA==}
+
+  '@equinor/fusion-wc-radio@1.1.2':
+    resolution: {integrity: sha512-XO0rGD74dVQTtyI4GIjg1CuINbQ7DUUiNohvBWsYoLdG6TmvnCuO+2KfRNMdlwVTyog7Nm6qIl9agjQUOHQS0Q==}
 
   '@equinor/fusion-wc-ripple@1.1.0':
     resolution: {integrity: sha512-eoWfj39NFnNhT4/stqw3x706pT68Kkc9oA6LIeOJW2H5rBKhJ/5vzMWwFo7CWPISd7jf52t/wlLF9Zfj0JXW7A==}
 
+  '@equinor/fusion-wc-ripple@1.1.1':
+    resolution: {integrity: sha512-TuyBqTRekg7Kh+09+guD7P0HldGOkE7gicYF+rW1yfVFJGwCjBWQ+2EDqhImDPViRq5RWvE73Y8Ajayt/wO0Qw==}
+
   '@equinor/fusion-wc-searchable-dropdown@3.7.3':
     resolution: {integrity: sha512-2NzLqDK6zQpYTRNWYeemoY9Bz0O1HzG1bVjKZuFExCoSHThMeBXXaf5+WTWtkhpikSGU9GAjFMgDVGhQ0/8T0w==}
+
+  '@equinor/fusion-wc-searchable-dropdown@3.7.4':
+    resolution: {integrity: sha512-ED34b/1f6Sg05TT5lUhakhZHGfWiLpMLy0PhAuO18BhWVpHMHikQeoaZU1P13he6ks/GCIXt+K+2/Y47nBi4Ng==}
 
   '@equinor/fusion-wc-skeleton@2.1.1':
     resolution: {integrity: sha512-X0z5EHEShzANHTrw3BPvpNJUMDdmlU9OcOucfYfzk2sY0adqVPNEPnnDV56hP+0JMsQ7OYgFPsfrEf+44yTutw==}
 
+  '@equinor/fusion-wc-skeleton@2.1.2':
+    resolution: {integrity: sha512-LqrfUAg6BEqBi59kNs08UG+K7ESCvYJ6NMDIXI8EBTy1x2nt12D2JRXAE5zIeYU4+I084/zwKwt62Gx3yFtSkA==}
+
   '@equinor/fusion-wc-textinput@1.1.1':
     resolution: {integrity: sha512-vEjbkiKulwTPesTl0mycNKtiA2/rZoJSJPlPZA1KmOwy6INDHaIP86QwfHiA3/nzqSAg8XRNcpZlLdN2XGr16g==}
+
+  '@equinor/fusion-wc-textinput@1.1.2':
+    resolution: {integrity: sha512-ZnN3nCCIvSJnfN6aLiE6Zr2euC0gSQB9X6R/2RxQYRPK++vRfbMH5gkafCJDDyS89A1WU0orDL7Ulgkq1XowMw==}
 
   '@equinor/fusion-wc-theme@1.1.1':
     resolution: {integrity: sha512-zuiBp3pzVCwQtJ2zoejBdkdillx95R//NAw4rutYIwtrM/08V6J1T5OgFRY5w7nGwTjxL0D/KC3ZNrppG3wsVA==}
 
   '@equinor/fusion-web-theme@0.1.10':
     resolution: {integrity: sha512-/Yzfie73UvMoBMo35gmeHO+5nTty5EyemomcB5ZbEDyHFNIodgCL1JGm2KfrIwqez9w9CTneHjnJWvwhu9TM+w==}
-
-  '@equinor/workspace-ag-grid@3.0.2':
-    resolution: {integrity: sha512-m6A9FkbBZiKCyVXvtLZwHl/21NY/mTl+XNWuMbtpMJKBjsg7GSJrj0a6QlTorvHwltMBq5SCsSG0HTIyI2qNcg==}
-    peerDependencies:
-      '@ag-grid-enterprise/core': 30.2.1
-      react-is: '>= 16.8.0'
-      styled-components: '>= 5.0.0'
 
   '@equinor/workspace-ag-grid@3.0.3':
     resolution: {integrity: sha512-mjuIUh/EWnaBwvau+wALbSNuxgdklp8q3ljeUaeoiN3s37rK5W5AdlNBvp5hW2Mh2U+e2O5CN2OCzKdqG4GbIA==}
@@ -2046,27 +2201,27 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: '>= 5.0.0'
 
-  '@equinor/workspace-filter@4.0.5':
-    resolution: {integrity: sha512-fpQUjy7fOBZo+yQA0bVayA1MoTxPMMnH2gojYU0XxvQHwvZOHB4A4hauFg85Scive5lTWiFWfbRqFuCBmOCF4g==}
+  '@equinor/workspace-filter@4.0.11':
+    resolution: {integrity: sha512-xhR7Hwu96DsrxqR/Br37Nwb1n/YWb7AWJXNL+bd8kLc5Y2sQnkXnbQ5xAMx6Q/xAHcf7/Ji+QiKyVMwpmQDprg==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
       react-is: '>= 16.8.0'
       styled-components: ^5.3.5
 
-  '@equinor/workspace-fusion@9.0.17':
-    resolution: {integrity: sha512-0auCaI0cTD90ZBO7Fp8QsVaUnmj5J+o8B3Gf+nk73sFSR+Oe8G8Dp2TwXkeT8HZv3UlAtvbuhiBcRxooWKI0yg==}
+  '@equinor/workspace-fusion@9.0.25':
+    resolution: {integrity: sha512-aoyMCSV/0QdC/ZVMfISNWLFME6fvKwQdNOWUHk4zRr+FFlokGYQ1zxgN+KFuQmjuu2k8pECnJ3dbGb1n5L/SxQ==}
 
-  '@equinor/workspace-garden@8.0.2':
-    resolution: {integrity: sha512-I6uL05+HBxcLSYCsYhJAeSKJqe1NedSQFLTQ1imRxmSCzTPx/GpdGVY3amC+4eekhdWAJnwG2FmypgNIGUtzmA==}
+  '@equinor/workspace-garden@8.0.3':
+    resolution: {integrity: sha512-K8cz4iHaiVUUGNdchRitxlSo9eDtyoInmi5QziBQGEfSjvqmrSzHvOdC8XWjtqv3/v5XGj5muxBGgCl5zy0mVA==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
       react-is: '>= 16.8.0'
       styled-components: ^5.3.6
 
-  '@equinor/workspace-powerbi@3.0.7':
-    resolution: {integrity: sha512-vD/3NCsudVYjuRH5+lIe5A6/+HXH+T0ozgHlbirbXB1LqZfZdNFDwjMOv5GO+wN53l2mg/LEIkBDsvlNDkFAVA==}
+  '@equinor/workspace-powerbi@3.0.11':
+    resolution: {integrity: sha512-lmVVjnJ4JiKSra/tWAi/fsx/ms0oyNz90r61v06N30QMX0lJZzIHTY7VmDulWOSHTH3ig0W7SJuR3BDMzvW1ng==}
 
   '@equinor/workspace-react@2.0.1':
     resolution: {integrity: sha512-EMOJU9XL7iVJfMXqcu8d1PjTK6Wblwy2hee9NlS7HNwbhvMy4bvmKV1civu4k5He8bBPfq/9s6XOy0vU63NfLg==}
@@ -2410,6 +2565,9 @@ packages:
   '@floating-ui/core@1.6.1':
     resolution: {integrity: sha512-42UH54oPZHPdRHdw6BgoBD6cg/eVTmVrFcgeRDM3jbO7uxSoipVcmcIGFcA5jmOHO5apcyvBhkSKES3fQJnu7A==}
 
+  '@floating-ui/dom@1.6.12':
+    resolution: {integrity: sha512-NP83c0HjokcGVEMeoStg317VD9W7eDlGK7457dMBANbKA6GJZdc7rjujdgqzTaz93jkGgc5P/jeWbaCHnMNc+w==}
+
   '@floating-ui/dom@1.6.5':
     resolution: {integrity: sha512-Nsdud2X65Dz+1RHjAIP0t8z5e2ff/IRbei6BqFrl1urT8sDVzM1HMQ+R0XcU5ceRfyO3I6ayeqIfh+6Wb8LGTw==}
 
@@ -2446,6 +2604,9 @@ packages:
 
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
+
+  '@floating-ui/utils@0.2.8':
+    resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
   '@formatjs/ecma402-abstract@1.18.2':
     resolution: {integrity: sha512-+QoPW4csYALsQIl8GbN14igZzDbuwzcpWrku9nyMXlaqAlwRBgl5V+p0vWMGFqHOw37czNXaP/lEk4wbLgcmtA==}
@@ -2683,6 +2844,9 @@ packages:
 
   '@lit-labs/observers@2.0.2':
     resolution: {integrity: sha512-eZb5+W9Cb0e/Y5m1DNxBSGTvGB2TAVTGMnTxL/IzFhPQEcZIAHewW1eVBhN8W07A5tirRaAmmF6fGL1V20p3gQ==}
+
+  '@lit-labs/observers@2.0.4':
+    resolution: {integrity: sha512-x95jhDPGb+HtYU3hEdqkcLxb6v2JBP3tcajaiOijs1F/ZmOgRT0pRPn0v+jhhk8mAAbEO12SZJjPCmuysunssQ==}
 
   '@lit-labs/ssr-dom-shim@1.2.0':
     resolution: {integrity: sha512-yWJKmpGE6lUURKAaIltoPIE/wrbY3TEkqQt+X0m+7fQNnAv0keydnYvbiJFP1PnMhizmIWRWOG5KLhYyc/xl+g==}
@@ -4413,13 +4577,13 @@ packages:
   '@tanstack/query-core@5.51.21':
     resolution: {integrity: sha512-POQxm42IUp6n89kKWF4IZi18v3fxQWFRolvBA6phNVmA8psdfB1MvDnGacCJdS+EOX12w/CyHM62z//rHmYmvw==}
 
-  '@tanstack/query-devtools@5.59.19':
-    resolution: {integrity: sha512-Gw+3zsADpqiYgx/6MMr9bP1+x2LR8vOuGjo5Un/89qwwP3z7WAHPWFagLFDYkLq68NX7ekUpW/EOYlUMugMXGA==}
+  '@tanstack/query-devtools@5.65.0':
+    resolution: {integrity: sha512-g5y7zc07U9D3esMdqUfTEVu9kMHoIaVBsD0+M3LPdAdD710RpTcLiNvJY1JkYXqkq9+NV+CQoemVNpQPBXVsJg==}
 
-  '@tanstack/react-query-devtools@5.59.19':
-    resolution: {integrity: sha512-mYFWTHLtJr2HdyYPZPzzvQ2ksCsSL6L04fCtusPFD3waskXrtmvWvyuDIGeEGdVAYS0Urwxw/0sYvcTVQZH+zQ==}
+  '@tanstack/react-query-devtools@5.65.1':
+    resolution: {integrity: sha512-PKUBz7+FAP3eI1zoWrP5vxNQXs+elPz3u/3cILGhNZl2dufgbU9OJRpbC+BAptLXTsGxTwkAlrWBIZbD/c7CDw==}
     peerDependencies:
-      '@tanstack/react-query': ^5.59.19
+      '@tanstack/react-query': ^5.65.1
       react: 18.2.0
 
   '@tanstack/react-query@5.51.21':
@@ -4690,6 +4854,9 @@ packages:
 
   '@types/unist@3.0.2':
     resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
+
+  '@types/uuid@10.0.0':
+    resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
 
   '@types/uuid@9.0.8':
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
@@ -6004,6 +6171,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -6192,9 +6360,6 @@ packages:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
 
-  immer@10.1.1:
-    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
-
   immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
 
@@ -6219,6 +6384,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -6642,11 +6808,17 @@ packages:
   lit-element@4.0.5:
     resolution: {integrity: sha512-iTWskWZEtn9SyEf4aBG6rKT8GABZMrTWop1+jopsEOgEcugcXJGKuX5bEbkq9qfzY+XB4MAgCaSPwnNpdsNQ3Q==}
 
+  lit-element@4.1.1:
+    resolution: {integrity: sha512-HO9Tkkh34QkTeUmEdNYhMT8hzLid7YlMlATSi1q4q17HE5d9mrrEHJ/o8O2D0cMi182zK1F3v7x0PWFjrhXFew==}
+
   lit-html@2.8.0:
     resolution: {integrity: sha512-o9t+MQM3P4y7M7yNzqAyjp7z+mQGa4NS4CxiyLqFPyFWyc4O+nodLrkrxSaCTrla6M5YOLaT3RpbbqjszB5g3Q==}
 
   lit-html@3.1.3:
     resolution: {integrity: sha512-FwIbqDD8O/8lM4vUZ4KvQZjPPNx7V1VhT7vmRB8RBAO0AU6wuTVdoXiu2CivVjEGdugvcbPNBLtPE1y0ifplHA==}
+
+  lit-html@3.2.1:
+    resolution: {integrity: sha512-qI/3lziaPMSKsrwlxH/xMgikhQ0EGOX2ICU73Bi/YHFvz2j/yMCIrw4+puF2IpQ4+upd3EWbvnHM9+PnJn48YA==}
 
   lit@2.8.0:
     resolution: {integrity: sha512-4Sc3OFX9QHOJaHbmTMk28SYgVxLN3ePDjg7hofEft2zWlehFL3LiAuapWc4U/kYwMYJSh2hTCPZ6/LIC7ii0MA==}
@@ -6656,6 +6828,9 @@ packages:
 
   lit@3.1.2:
     resolution: {integrity: sha512-VZx5iAyMtX7CV4K8iTLdCkMaYZ7ipjJZ0JcSdJ0zIdGxxyurjIn7yuuSxNBD7QmjvcNJwr0JS4cAdAtsy7gZ6w==}
+
+  lit@3.2.0:
+    resolution: {integrity: sha512-s6tI33Lf6VpDu7u4YqsSX78D28bYQulM+VAzsGch4fx2H0eLZnJsUBsPWmGYSGoKDNbjtRv02rio1o+UdPVwvw==}
 
   load-yaml-file@0.2.0:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
@@ -6689,6 +6864,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -6760,12 +6936,6 @@ packages:
 
   markdown-to-jsx@7.4.7:
     resolution: {integrity: sha512-0+ls1IQZdU6cwM1yu0ZjjiVWYtkbExSyUIFU2ZeDIFuZM1W42Mh4OlJ4nb4apX4H8smxDHRdFaoIVJGwfv5hkg==}
-    engines: {node: '>= 10'}
-    peerDependencies:
-      react: 18.2.0
-
-  markdown-to-jsx@7.5.0:
-    resolution: {integrity: sha512-RrBNcMHiFPcz/iqIj0n3wclzHXjwS7mzjBNWecKKVhNTIxQepIix6Il/wZCn2Cg5Y1ow2Qi84+eJrryFRWBEWw==}
     engines: {node: '>= 10'}
     peerDependencies:
       react: 18.2.0
@@ -7493,12 +7663,6 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  re-resizable@6.10.0:
-    resolution: {integrity: sha512-hysSK0xmA5nz24HBVztlk4yCqCLCvS32E6ZpWxVKop9x3tqCa4yAj1++facrmkOf62JsJHjmjABdKxXofYioCw==}
-    peerDependencies:
-      react: 18.2.0
-      react-dom: 18.2.0
-
   re-resizable@6.9.16:
     resolution: {integrity: sha512-D9+ofwgPQRC6PL6cwavCZO9MUR8TKKxV1nHjbutSdNaFHK9v5k8m6DcESMXrw1+mRJn7fBHJRhZpa7EQ1ZWEEA==}
     peerDependencies:
@@ -7565,6 +7729,19 @@ packages:
   react-refresh@0.14.2:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
+
+  react-router-dom@6.27.0:
+    resolution: {integrity: sha512-+bvtFWMC0DgAFrfKXKG9Fc+BcXWRUO1aJIihbB79xaeq0v5UzfvnM5houGUm1Y461WVRcgAQ+Clh5rdb1eCx4g==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
+  react-router@6.27.0:
+    resolution: {integrity: sha512-YA+HGZXz4jaAkVoYBE98VQl+nVzI+cVI2Oj/06F5ZM+0u3TgedN9Y9kmMRo2mnkSK2nCpNQn0DVob4HCsY/WLw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: 18.2.0
 
   react-sortablejs@6.1.4:
     resolution: {integrity: sha512-fc7cBosfhnbh53Mbm6a45W+F735jwZ1UFIYSrIqcO/gRIFoDyZeMtgKlpV4DdyQfbCzdh5LoALLTDRxhMpTyXQ==}
@@ -7896,8 +8073,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  sortablejs@1.15.3:
-    resolution: {integrity: sha512-zdK3/kwwAK1cJgy1rwl1YtNTbRmc8qW/+vgXf75A7NHag5of4pyI6uK86ktmQETyWRH7IGaE73uZOOBcGxgqZg==}
+  sortablejs@1.15.6:
+    resolution: {integrity: sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==}
 
   source-map-js@1.2.0:
     resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
@@ -8454,8 +8631,8 @@ packages:
     peerDependencies:
       react: 18.2.0
 
-  use-sync-external-store@1.2.2:
-    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
+  use-sync-external-store@1.4.0:
+    resolution: {integrity: sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==}
     peerDependencies:
       react: 18.2.0
 
@@ -8794,8 +8971,8 @@ packages:
   zstddec@0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
 
-  zustand@4.5.5:
-    resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
+  zustand@4.5.6:
+    resolution: {integrity: sha512-ibr/n1hBzLLj5Y+yUcU7dYw8p6WnIVzdJbnX+1YpaScvZVF2ziugqHs+LAmHw4lWO9c/zRj+K1ncgWDQuthEdQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -8836,11 +9013,11 @@ snapshots:
   '@ag-grid-community/client-side-row-model@31.2.1':
     dependencies:
       '@ag-grid-community/core': 31.2.1
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@ag-grid-community/core@31.2.1':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@ag-grid-community/core@32.2.2':
     dependencies:
@@ -8855,7 +9032,7 @@ snapshots:
   '@ag-grid-community/csv-export@31.2.1':
     dependencies:
       '@ag-grid-community/core': 31.2.1
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@ag-grid-community/react@31.2.1(@ag-grid-community/core@31.2.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -8947,7 +9124,7 @@ snapshots:
     dependencies:
       '@ag-grid-community/core': 31.2.1
       '@ag-grid-enterprise/core': 31.2.1
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@ampproject/remapping@2.3.0':
     dependencies:
@@ -9310,29 +9487,14 @@ snapshots:
       '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
 
-  '@babel/plugin-syntax-async-generators@7.8.4(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/helper-plugin-utils': 7.24.5
-
   '@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
 
-  '@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/helper-plugin-utils': 7.24.5
-
   '@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-
-  '@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.24.5
 
   '@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.24.5)':
@@ -9370,19 +9532,9 @@ snapshots:
       '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
 
-  '@babel/plugin-syntax-import-meta@7.10.4(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/helper-plugin-utils': 7.24.5
-
   '@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-
-  '@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.24.5
 
   '@babel/plugin-syntax-jsx@7.24.1(@babel/core@7.24.5)':
@@ -9395,19 +9547,9 @@ snapshots:
       '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
 
-  '@babel/plugin-syntax-logical-assignment-operators@7.10.4(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/helper-plugin-utils': 7.24.5
-
   '@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-
-  '@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.24.5
 
   '@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.24.5)':
@@ -9415,19 +9557,9 @@ snapshots:
       '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
 
-  '@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/helper-plugin-utils': 7.24.5
-
   '@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-
-  '@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.24.5
 
   '@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.24.5)':
@@ -9435,19 +9567,9 @@ snapshots:
       '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
 
-  '@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/helper-plugin-utils': 7.24.5
-
   '@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-
-  '@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.24.5
 
   '@babel/plugin-syntax-private-property-in-object@7.14.5(@babel/core@7.24.5)':
@@ -9458,11 +9580,6 @@ snapshots:
   '@babel/plugin-syntax-top-level-await@7.14.5(@babel/core@7.24.5)':
     dependencies:
       '@babel/core': 7.24.5
-      '@babel/helper-plugin-utils': 7.24.5
-
-  '@babel/plugin-syntax-top-level-await@7.14.5(@babel/core@7.26.0)':
-    dependencies:
-      '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.24.5
 
   '@babel/plugin-syntax-typescript@7.24.1(@babel/core@7.24.5)':
@@ -10042,7 +10159,7 @@ snapshots:
 
   '@emnapi/runtime@1.1.1':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
     optional: true
 
   '@emotion/babel-plugin@11.11.0':
@@ -10223,12 +10340,12 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@equinor/eds-core-react@0.28.0(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@equinor/eds-core-react@0.28.0(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@babel/runtime': 7.24.5
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
-      '@equinor/eds-utils': 0.7.0(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@equinor/eds-utils': 0.7.0(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@floating-ui/react-dom-interactions': 0.10.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-virtual': 3.0.0-beta.30(react@18.3.1)
       downshift: 7.6.2(react@18.3.1)
@@ -10284,12 +10401,12 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@equinor/eds-utils@0.7.0(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@equinor/eds-utils@0.7.0(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@babel/runtime': 7.24.5
       '@equinor/eds-tokens': 0.9.0
       '@popperjs/core': 2.11.6
-      babel-jest: 29.7.0(@babel/core@7.26.0)
+      babel-jest: 29.7.0(@babel/core@7.24.5)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-popper: 2.3.0(@popperjs/core@2.11.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -10316,6 +10433,23 @@ snapshots:
       '@equinor/fusion-framework-module-msal': 3.1.5(@types/semver@7.5.8)
     optionalDependencies:
       '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/semver'
+      - chalk
+      - odata-query
+      - react
+
+  '@equinor/fusion-framework-app@9.1.10(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework': 7.2.8(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-app': 6.0.0(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
+      '@equinor/fusion-framework-module-event': 4.2.4(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-msal': 3.1.5(@types/semver@7.5.8)
+    optionalDependencies:
+      '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - '@types/semver'
@@ -10374,6 +10508,18 @@ snapshots:
       - chalk
       - react
 
+  '@equinor/fusion-framework-module-app@6.0.0(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      '@equinor/fusion-query': 5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
+      immer: 9.0.21
+      rxjs: 7.8.1
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - '@types/react'
+      - chalk
+      - react
+
   '@equinor/fusion-framework-module-bookmark@1.2.12(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react@18.2.0)':
     dependencies:
       '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
@@ -10390,6 +10536,17 @@ snapshots:
     dependencies:
       '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
       '@equinor/fusion-query': 5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.2.0)
+      fast-deep-equal: 3.1.3
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - chalk
+      - react
+
+  '@equinor/fusion-framework-module-context@5.0.12(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)(rxjs@7.8.1)':
+    dependencies:
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-query': 5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
       fast-deep-equal: 3.1.3
       rxjs: 7.8.1
     transitivePeerDependencies:
@@ -10416,6 +10573,18 @@ snapshots:
       - '@types/semver'
       - react
     optional: true
+
+  '@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      immer: 9.0.21
+      rxjs: 7.8.1
+      uuid: 10.0.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/semver'
+      - react
 
   '@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8)':
     dependencies:
@@ -10444,6 +10613,19 @@ snapshots:
       '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
       '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
       '@equinor/fusion-query': 5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.2.0)
+      rxjs: 7.8.1
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/semver'
+      - chalk
+      - react
+
+  '@equinor/fusion-framework-module-service-discovery@8.0.1(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-query': 5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
       rxjs: 7.8.1
       zod: 3.23.8
     transitivePeerDependencies:
@@ -10482,6 +10664,62 @@ snapshots:
       '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.2.0)
       '@types/react': 18.3.2
       react-dom: 18.2.0(react@18.2.0)
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module-event'
+      - '@equinor/fusion-framework-module-http'
+      - '@equinor/fusion-framework-react-module-signalr'
+      - '@remix-run/router'
+      - '@types/semver'
+      - chalk
+      - odata-query
+
+  ? '@equinor/fusion-framework-react-app@5.2.10(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module-msal@3.1.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-bookmark@2.1.18(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@equinor/fusion-observable@8.4.1(@types/react@18.3.2)(react@18.2.0))(@remix-run/router@1.20.0)(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)'
+  : dependencies:
+      '@equinor/fusion-framework-app': 9.1.10(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-app': 6.0.0(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
+      '@equinor/fusion-framework-module-msal': 3.1.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-navigation': 4.0.7(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@remix-run/router@1.20.0)(rxjs@7.8.1)
+      '@equinor/fusion-framework-react': 7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module-http': 8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
+      '@equinor/fusion-framework-react-module-bookmark': 2.1.18(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1)
+      '@equinor/fusion-framework-react-module-context': 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.2.0)
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module-event'
+      - '@equinor/fusion-framework-module-http'
+      - '@equinor/fusion-framework-react-module-signalr'
+      - '@remix-run/router'
+      - '@types/semver'
+      - chalk
+      - odata-query
+
+  ? '@equinor/fusion-framework-react-app@5.2.10(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module-msal@3.1.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-bookmark@2.1.18(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(@equinor/fusion-observable@8.4.1(@types/react@18.3.2)(react@18.2.0))(@remix-run/router@1.20.0)(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)'
+  : dependencies:
+      '@equinor/fusion-framework-app': 9.1.10(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-app': 6.0.0(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
+      '@equinor/fusion-framework-module-msal': 3.1.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-navigation': 4.0.7(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@remix-run/router@1.20.0)(rxjs@7.8.1)
+      '@equinor/fusion-framework-react': 7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module-http': 8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
+      '@equinor/fusion-framework-react-module-bookmark': 2.1.18(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.2.0))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1)
+      '@equinor/fusion-framework-react-module-context': 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.2.0)
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
       rxjs: 7.8.1
     transitivePeerDependencies:
       - '@equinor/fusion-framework-module-event'
@@ -10532,6 +10770,22 @@ snapshots:
       - chalk
       - rxjs
 
+  '@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)':
+    dependencies:
+      '@equinor/fusion-framework-module-context': 5.0.12(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      '@equinor/fusion-query': 5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+      - '@types/semver'
+      - chalk
+      - rxjs
+
   '@equinor/fusion-framework-react-module-http@8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.3.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
@@ -10541,6 +10795,24 @@ snapshots:
       '@types/react': 18.3.2
       react-dom: 18.2.0(react@18.2.0)
 
+  '@equinor/fusion-framework-react-module-http@8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react-dom: 18.2.0(react@18.3.1)
+
+  '@equinor/fusion-framework-react-module-http@8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
+
   '@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
@@ -10548,6 +10820,26 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.2
       react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/semver'
+
+  '@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react-dom: 18.2.0(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/semver'
+
+  '@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
       - '@types/semver'
 
@@ -10572,6 +10864,69 @@ snapshots:
       - chalk
       - odata-query
 
+  '@equinor/fusion-framework-react@7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework': 7.2.8(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module-http': 8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      react: 18.3.1
+      rxjs: 7.8.1
+    optionalDependencies:
+      '@equinor/fusion-framework-module-event': 4.2.4(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
+      '@equinor/fusion-framework-react-module-context': 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1)
+      '@types/react': 18.3.2
+      react-dom: 18.2.0(react@18.3.1)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module-http'
+      - '@types/semver'
+      - chalk
+      - odata-query
+
+  '@equinor/fusion-framework-react@7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework': 7.2.8(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module-http': 8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      react: 18.3.1
+      rxjs: 7.8.1
+    optionalDependencies:
+      '@equinor/fusion-framework-module-event': 4.2.4(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
+      '@equinor/fusion-framework-react-module-context': 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.1)
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module-http'
+      - '@types/semver'
+      - chalk
+      - odata-query
+
+  '@equinor/fusion-framework-react@7.3.0(@equinor/fusion-framework-module-event@4.2.4(@types/semver@7.5.8))(@equinor/fusion-framework-module-feature-flag@1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1))(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module-context@6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework': 7.2.8(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-react-module': 3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-framework-react-module-http': 8.0.0(@equinor/fusion-framework-module-http@6.2.0(@types/semver@7.5.8))(@equinor/fusion-framework-react-module@3.1.6(@types/react@18.3.2)(@types/semver@7.5.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      react: 18.3.1
+      rxjs: 7.8.1
+    optionalDependencies:
+      '@equinor/fusion-framework-module-event': 4.2.4(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-feature-flag': 1.1.9(@types/react@18.3.2)(@types/semver@7.5.8)(react@18.3.1)
+      '@equinor/fusion-framework-react-module-context': 6.2.13(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module-http'
+      - '@types/semver'
+      - chalk
+      - odata-query
+
   '@equinor/fusion-framework@7.2.8(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.2.0)':
     dependencies:
       '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
@@ -10580,6 +10935,23 @@ snapshots:
       '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
       '@equinor/fusion-framework-module-msal': 3.1.5(@types/semver@7.5.8)
       '@equinor/fusion-framework-module-service-discovery': 8.0.1(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react@18.2.0)
+      '@equinor/fusion-framework-module-services': 4.1.5(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(odata-query@7.0.6)
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/semver'
+      - chalk
+      - odata-query
+      - react
+
+  '@equinor/fusion-framework@7.2.8(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(odata-query@7.0.6)(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-framework-module': 4.3.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-context': 5.0.12(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)(rxjs@7.8.1)
+      '@equinor/fusion-framework-module-event': 4.2.4(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-http': 6.2.0(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-msal': 3.1.5(@types/semver@7.5.8)
+      '@equinor/fusion-framework-module-service-discovery': 8.0.1(@types/react@18.3.2)(@types/semver@7.5.8)(chalk@5.3.0)(react@18.3.1)
       '@equinor/fusion-framework-module-services': 4.1.5(@equinor/fusion-framework-module@4.3.5(@types/semver@7.5.8))(odata-query@7.0.6)
       rxjs: 7.8.1
     transitivePeerDependencies:
@@ -10603,6 +10975,15 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.2
 
+  '@equinor/fusion-observable@8.4.1(@types/react@18.3.2)(react@18.3.1)':
+    dependencies:
+      immer: 9.0.21
+      react: 18.3.1
+      rxjs: 7.8.1
+      uuid: 10.0.0
+    optionalDependencies:
+      '@types/react': 18.3.2
+
   '@equinor/fusion-query@5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.2.0)':
     dependencies:
       '@equinor/fusion-log': 1.1.0(chalk@5.3.0)(rxjs@7.8.1)
@@ -10616,9 +10997,23 @@ snapshots:
     transitivePeerDependencies:
       - chalk
 
-  '@equinor/fusion-react-ag-grid-styles@31.2.1(@ag-grid-community/styles@32.3.2)(@equinor/fusion-react-styles@0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@equinor/fusion-query@5.1.3(@types/react@18.3.2)(chalk@5.3.0)(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-log': 1.1.0(chalk@5.3.0)(rxjs@7.8.1)
+      '@equinor/fusion-observable': 8.4.1(@types/react@18.3.2)(react@18.3.1)
+      immer: 9.0.21
+      rxjs: 7.8.1
+      uuid: 10.0.0
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react: 18.3.1
+    transitivePeerDependencies:
+      - chalk
+
+  '@equinor/fusion-react-ag-grid-styles@31.2.4(@ag-grid-community/styles@32.3.2)(@equinor/eds-tokens@0.9.2)(@equinor/fusion-react-styles@0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@ag-grid-community/styles': 32.3.2
+      '@equinor/eds-tokens': 0.9.2
       '@equinor/fusion-react-styles': 0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   '@equinor/fusion-react-ag-grid-styles@31.2.4(@ag-grid-community/styles@32.3.2)(@equinor/eds-tokens@0.9.2)(@equinor/fusion-react-styles@0.6.2(@types/react@18.3.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
@@ -10627,10 +11022,44 @@ snapshots:
       '@equinor/eds-tokens': 0.9.2
       '@equinor/fusion-react-styles': 0.6.2(@types/react@18.3.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
+  '@equinor/fusion-react-context-selector@0.6.6(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-react-searchable-dropdown': 0.5.2(react@18.3.1)
+      '@equinor/fusion-react-styles': 0.6.2(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@equinor/fusion-react-utils': 2.1.1(react@18.3.1)
+      '@equinor/fusion-wc-icon': 2.3.0
+      '@equinor/fusion-wc-searchable-dropdown': 3.7.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - react-dom
+
   '@equinor/fusion-react-person@0.8.6(react@18.2.0)':
     dependencies:
       '@equinor/fusion-react-utils': 2.1.1(react@18.2.0)
       '@equinor/fusion-wc-person': 2.6.7
+    transitivePeerDependencies:
+      - react
+
+  '@equinor/fusion-react-person@0.9.2(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-react-utils': 2.1.1(react@18.3.1)
+      '@equinor/fusion-wc-person': 3.0.3
+    transitivePeerDependencies:
+      - react
+
+  '@equinor/fusion-react-searchable-dropdown@0.5.2(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-react-utils': 2.1.1(react@18.3.1)
+      '@equinor/fusion-wc-icon': 2.3.0
+      '@equinor/fusion-wc-searchable-dropdown': 3.7.3
+    transitivePeerDependencies:
+      - react
+
+  '@equinor/fusion-react-skeleton@0.3.0(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-react-utils': 2.1.1(react@18.3.1)
+      '@equinor/fusion-wc-skeleton': 2.1.1
     transitivePeerDependencies:
       - react
 
@@ -10656,10 +11085,26 @@ snapshots:
       '@types/react': 18.3.2
       react-dom: 18.2.0(react@18.2.0)
 
+  '@equinor/fusion-react-styles@0.6.2(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@equinor/fusion-wc-theme': 1.1.1
+      '@equinor/fusion-web-theme': 0.1.10
+      '@material-ui/styles': 4.11.5(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      clsx: 2.1.1
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.2
+      react-dom: 18.3.1(react@18.3.1)
+
   '@equinor/fusion-react-utils@2.1.1(react@18.2.0)':
     dependencies:
       date-fns: 3.6.0
       react: 18.2.0
+
+  '@equinor/fusion-react-utils@2.1.1(react@18.3.1)':
+    dependencies:
+      date-fns: 3.6.0
+      react: 18.3.1
 
   '@equinor/fusion-wc-avatar@3.2.1':
     dependencies:
@@ -10669,12 +11114,27 @@ snapshots:
       '@equinor/fusion-web-theme': 0.1.10
       lit: 3.1.2
 
+  '@equinor/fusion-wc-avatar@3.2.3':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-picture': 3.1.1
+      '@equinor/fusion-wc-ripple': 1.1.1
+      '@equinor/fusion-web-theme': 0.1.10
+      lit: 3.2.0
+
   '@equinor/fusion-wc-badge@1.3.1':
     dependencies:
       '@equinor/fusion-wc-core': 2.0.0
       '@equinor/fusion-wc-icon': 2.3.0
       '@equinor/fusion-web-theme': 0.1.10
       lit: 3.1.2
+
+  '@equinor/fusion-wc-badge@1.3.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-web-theme': 0.1.10
+      lit: 3.2.0
 
   '@equinor/fusion-wc-button@2.4.1':
     dependencies:
@@ -10686,12 +11146,29 @@ snapshots:
       '@material/mwc-icon-button-toggle': 0.27.0
       lit: 3.1.2
 
+  '@equinor/fusion-wc-button@2.4.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-web-theme': 0.1.10
+      '@material/mwc-button': 0.27.0
+      '@material/mwc-icon-button': 0.27.0
+      '@material/mwc-icon-button-toggle': 0.27.0
+      lit: 3.2.0
+
   '@equinor/fusion-wc-checkbox@1.1.1':
     dependencies:
       '@equinor/fusion-wc-core': 2.0.0
       '@equinor/fusion-web-theme': 0.1.10
       '@material/mwc-checkbox': 0.27.0
       lit: 3.1.2
+
+  '@equinor/fusion-wc-checkbox@1.1.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-web-theme': 0.1.10
+      '@material/mwc-checkbox': 0.27.0
+      lit: 3.2.0
 
   '@equinor/fusion-wc-core@2.0.0': {}
 
@@ -10701,11 +11178,23 @@ snapshots:
       '@equinor/fusion-web-theme': 0.1.10
       lit: 3.1.2
 
+  '@equinor/fusion-wc-divider@1.1.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-web-theme': 0.1.10
+      lit: 3.2.0
+
   '@equinor/fusion-wc-icon@2.3.0':
     dependencies:
       '@equinor/eds-icons': 0.19.3
       '@equinor/fusion-wc-core': 2.0.0
       lit: 3.0.2
+
+  '@equinor/fusion-wc-icon@2.3.1':
+    dependencies:
+      '@equinor/eds-icons': 0.21.0
+      '@equinor/fusion-wc-core': 2.0.0
+      lit: 3.2.0
 
   '@equinor/fusion-wc-list@1.1.2':
     dependencies:
@@ -10717,6 +11206,17 @@ snapshots:
       '@equinor/fusion-web-theme': 0.1.10
       '@material/mwc-list': 0.27.0
       lit: 3.1.2
+
+  '@equinor/fusion-wc-list@1.1.3':
+    dependencies:
+      '@equinor/fusion-wc-checkbox': 1.1.2
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-divider': 1.1.2
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-wc-radio': 1.1.2
+      '@equinor/fusion-web-theme': 0.1.10
+      '@material/mwc-list': 0.27.0
+      lit: 3.2.0
 
   '@equinor/fusion-wc-person@2.6.7':
     dependencies:
@@ -10735,10 +11235,32 @@ snapshots:
       '@lit-labs/task': 3.1.0
       lit: 3.1.2
 
+  '@equinor/fusion-wc-person@3.0.3':
+    dependencies:
+      '@equinor/fusion-wc-avatar': 3.2.3
+      '@equinor/fusion-wc-badge': 1.3.2
+      '@equinor/fusion-wc-button': 2.4.2
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-wc-list': 1.1.3
+      '@equinor/fusion-wc-searchable-dropdown': 3.7.4
+      '@equinor/fusion-wc-skeleton': 2.1.2
+      '@equinor/fusion-wc-textinput': 1.1.2
+      '@equinor/fusion-web-theme': 0.1.10
+      '@floating-ui/dom': 1.6.12
+      '@lit-labs/observers': 2.0.4
+      '@lit-labs/task': 3.1.0
+      lit: 3.2.0
+
   '@equinor/fusion-wc-picture@3.1.0':
     dependencies:
       '@equinor/fusion-wc-core': 2.0.0
       lit: 3.0.2
+
+  '@equinor/fusion-wc-picture@3.1.1':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      lit: 3.2.0
 
   '@equinor/fusion-wc-radio@1.1.1':
     dependencies:
@@ -10747,11 +11269,24 @@ snapshots:
       '@material/mwc-radio': 0.27.0
       lit: 3.1.2
 
+  '@equinor/fusion-wc-radio@1.1.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-web-theme': 0.1.10
+      '@material/mwc-radio': 0.27.0
+      lit: 3.2.0
+
   '@equinor/fusion-wc-ripple@1.1.0':
     dependencies:
       '@equinor/fusion-wc-core': 2.0.0
       '@material/mwc-ripple': 0.27.0
       lit: 3.0.2
+
+  '@equinor/fusion-wc-ripple@1.1.1':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@material/mwc-ripple': 0.27.0
+      lit: 3.2.0
 
   '@equinor/fusion-wc-searchable-dropdown@3.7.3':
     dependencies:
@@ -10767,11 +11302,31 @@ snapshots:
       lit: 3.1.2
       uuid: 9.0.1
 
+  '@equinor/fusion-wc-searchable-dropdown@3.7.4':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-divider': 1.1.2
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-wc-list': 1.1.3
+      '@equinor/fusion-wc-textinput': 1.1.2
+      '@equinor/fusion-web-theme': 0.1.10
+      '@lit-labs/task': 3.1.0
+      '@material/mwc-textfield': 0.27.0
+      '@types/uuid': 10.0.0
+      lit: 3.2.0
+      uuid: 10.0.0
+
   '@equinor/fusion-wc-skeleton@2.1.1':
     dependencies:
       '@equinor/fusion-wc-core': 2.0.0
       '@equinor/fusion-web-theme': 0.1.10
       lit: 3.1.2
+
+  '@equinor/fusion-wc-skeleton@2.1.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-web-theme': 0.1.10
+      lit: 3.2.0
 
   '@equinor/fusion-wc-textinput@1.1.1':
     dependencies:
@@ -10780,6 +11335,14 @@ snapshots:
       '@equinor/fusion-web-theme': 0.1.10
       '@material/mwc-textfield': 0.27.0
       lit: 3.1.2
+
+  '@equinor/fusion-wc-textinput@1.1.2':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-web-theme': 0.1.10
+      '@material/mwc-textfield': 0.27.0
+      lit: 3.2.0
 
   '@equinor/fusion-wc-theme@1.1.1':
     dependencies:
@@ -10792,36 +11355,6 @@ snapshots:
     dependencies:
       '@equinor/eds-tokens': 0.9.2
       csstype: 3.1.3
-
-  '@equinor/workspace-ag-grid@3.0.2(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@32.3.2)(@types/react@18.3.12)(react-is@18.3.1)(styled-components@6.1.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
-    dependencies:
-      '@ag-grid-community/client-side-row-model': 31.2.1
-      '@ag-grid-community/core': 31.2.1
-      '@ag-grid-community/react': 31.2.1(@ag-grid-community/core@31.2.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@ag-grid-enterprise/column-tool-panel': 31.2.1
-      '@ag-grid-enterprise/core': 32.3.2
-      '@ag-grid-enterprise/excel-export': 31.2.1
-      '@ag-grid-enterprise/filter-tool-panel': 31.2.1
-      '@ag-grid-enterprise/master-detail': 31.2.1
-      '@ag-grid-enterprise/menu': 31.2.1
-      '@ag-grid-enterprise/multi-filter': 31.2.1
-      '@ag-grid-enterprise/range-selection': 31.2.1
-      '@ag-grid-enterprise/rich-select': 31.2.1
-      '@ag-grid-enterprise/row-grouping': 31.2.1
-      '@ag-grid-enterprise/server-side-row-model': 31.2.1
-      '@ag-grid-enterprise/set-filter': 31.2.1
-      '@ag-grid-enterprise/side-bar': 31.2.1
-      '@ag-grid-enterprise/status-bar': 31.2.1
-      '@equinor/eds-tokens': 0.9.2
-      '@equinor/fusion-react-ag-grid-styles': 31.2.1(@ag-grid-community/styles@32.3.2)(@equinor/fusion-react-styles@0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@equinor/fusion-react-styles': 0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-is: 18.3.1
-      styled-components: 6.1.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-    transitivePeerDependencies:
-      - '@ag-grid-community/styles'
-      - '@types/react'
 
   '@equinor/workspace-ag-grid@3.0.3(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@types/react@18.3.2)(react-is@18.3.1)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
@@ -10853,7 +11386,37 @@ snapshots:
       - '@ag-grid-community/styles'
       - '@types/react'
 
-  '@equinor/workspace-filter@4.0.5(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@equinor/workspace-ag-grid@3.0.3(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@32.3.2)(@types/react@18.3.12)(react-is@18.3.1)(styled-components@6.1.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@ag-grid-community/client-side-row-model': 31.2.1
+      '@ag-grid-community/core': 31.2.1
+      '@ag-grid-community/react': 31.2.1(@ag-grid-community/core@31.2.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@ag-grid-enterprise/column-tool-panel': 31.2.1
+      '@ag-grid-enterprise/core': 32.3.2
+      '@ag-grid-enterprise/excel-export': 31.2.1
+      '@ag-grid-enterprise/filter-tool-panel': 31.2.1
+      '@ag-grid-enterprise/master-detail': 31.2.1
+      '@ag-grid-enterprise/menu': 31.2.1
+      '@ag-grid-enterprise/multi-filter': 31.2.1
+      '@ag-grid-enterprise/range-selection': 31.2.1
+      '@ag-grid-enterprise/rich-select': 31.2.1
+      '@ag-grid-enterprise/row-grouping': 31.2.1
+      '@ag-grid-enterprise/server-side-row-model': 31.2.1
+      '@ag-grid-enterprise/set-filter': 31.2.1
+      '@ag-grid-enterprise/side-bar': 31.2.1
+      '@ag-grid-enterprise/status-bar': 31.2.1
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/fusion-react-ag-grid-styles': 31.2.4(@ag-grid-community/styles@32.3.2)(@equinor/eds-tokens@0.9.2)(@equinor/fusion-react-styles@0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/fusion-react-styles': 0.6.2(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-is: 18.3.1
+      styled-components: 6.1.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@ag-grid-community/styles'
+      - '@types/react'
+
+  '@equinor/workspace-filter@4.0.11(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@equinor/eds-core-react': 0.28.0(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.18.0
@@ -10863,27 +11426,27 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.1.2(react@18.2.0)
       react-is: 18.3.1
-      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.3)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6)
       react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.3
+      sortablejs: 1.15.6
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/sortablejs'
       - supports-color
 
-  '@equinor/workspace-fusion@9.0.17(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@10.1.1)(react-is@18.3.1)':
+  '@equinor/workspace-fusion@9.0.25(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0
       '@equinor/eds-tokens': 0.9.2
       '@equinor/workspace-ag-grid': 3.0.3(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@types/react@18.3.2)(react-is@18.3.1)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@equinor/workspace-filter': 4.0.5(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@equinor/workspace-garden': 8.0.2(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@equinor/workspace-powerbi': 3.0.7(@types/sortablejs@1.15.8)
-      '@equinor/workspace-react': 2.0.1(@babel/core@7.24.5)(@types/react@18.3.2)(immer@10.1.1)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-filter': 4.0.11(@babel/core@7.24.5)(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-garden': 8.0.3(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-powerbi': 3.0.11(@types/sortablejs@1.15.8)
+      '@equinor/workspace-react': 2.0.1(@babel/core@7.24.5)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@tanstack/react-query': 5.51.21(react@18.2.0)
-      re-resizable: 6.10.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      re-resizable: 6.9.16(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.1.2(react@18.2.0)
@@ -10898,13 +11461,13 @@ snapshots:
       - react-is
       - supports-color
 
-  '@equinor/workspace-garden@8.0.2(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@equinor/workspace-garden@8.0.3(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@equinor/eds-core-react': 0.28.0(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.18.0
       '@equinor/eds-tokens': 0.9.0
       '@tanstack/react-query': 5.51.21(react@18.2.0)
-      '@tanstack/react-query-devtools': 5.59.19(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)
+      '@tanstack/react-query-devtools': 5.65.1(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.1.2(react@18.2.0)
@@ -10915,27 +11478,27 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@equinor/workspace-powerbi@3.0.7(@types/sortablejs@1.15.8)':
+  '@equinor/workspace-powerbi@3.0.11(@types/sortablejs@1.15.8)':
     dependencies:
       '@equinor/eds-core-react': 0.37.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.21.0
       '@equinor/eds-tokens': 0.9.2
       '@tanstack/react-query': 5.51.21(react@18.2.0)
-      markdown-to-jsx: 7.5.0(react@18.2.0)
+      markdown-to-jsx: 7.4.7(react@18.2.0)
       powerbi-client: 2.23.1
       powerbi-client-react: 1.4.0(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-error-boundary: 4.1.2(react@18.2.0)
       react-is: 18.3.1
-      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.3)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6)
       react-virtual: 2.10.4(react@18.2.0)
-      sortablejs: 1.15.3
+      sortablejs: 1.15.6
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@types/sortablejs'
 
-  '@equinor/workspace-react@2.0.1(@babel/core@7.24.5)(@types/react@18.3.2)(immer@10.1.1)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@equinor/workspace-react@2.0.1(@babel/core@7.24.5)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react-is@18.3.1)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@equinor/eds-core-react': 0.28.0(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.18.0
@@ -10944,16 +11507,16 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.3.1
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      zustand: 4.5.5(@types/react@18.3.2)(immer@10.1.1)(react@18.2.0)
+      zustand: 4.5.6(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
       - immer
       - supports-color
 
-  '@equinor/workspace-sidesheet@0.1.6(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@equinor/workspace-sidesheet@0.1.6(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
-      '@equinor/eds-core-react': 0.28.0(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@equinor/eds-core-react': 0.28.0(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@equinor/eds-icons': 0.18.0
       '@equinor/eds-tokens': 0.9.2
       re-resizable: 6.9.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -11160,6 +11723,11 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.2
 
+  '@floating-ui/dom@1.6.12':
+    dependencies:
+      '@floating-ui/core': 1.6.1
+      '@floating-ui/utils': 0.2.8
+
   '@floating-ui/dom@1.6.5':
     dependencies:
       '@floating-ui/core': 1.6.1
@@ -11215,29 +11783,31 @@ snapshots:
 
   '@floating-ui/utils@0.2.2': {}
 
+  '@floating-ui/utils@0.2.8': {}
+
   '@formatjs/ecma402-abstract@1.18.2':
     dependencies:
       '@formatjs/intl-localematcher': 0.5.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/fast-memoize@2.2.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/icu-messageformat-parser@2.7.6':
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/icu-skeleton-parser': 1.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/icu-skeleton-parser@1.8.0':
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/intl-localematcher@0.5.4':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@humanfs/core@0.19.1': {}
 
@@ -11470,6 +12040,11 @@ snapshots:
     dependencies:
       '@lit/reactive-element': 2.0.4
 
+  '@lit-labs/observers@2.0.4':
+    dependencies:
+      '@lit/reactive-element': 2.0.4
+      lit-html: 3.2.1
+
   '@lit-labs/ssr-dom-shim@1.2.0': {}
 
   '@lit-labs/task@3.1.0':
@@ -11490,7 +12065,7 @@ snapshots:
 
   '@material-ui/styles@4.11.5(@types/react@18.3.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       '@emotion/hash': 0.8.0
       '@material-ui/types': 5.1.0(@types/react@18.3.12)
       '@material-ui/utils': 4.11.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -11513,7 +12088,7 @@ snapshots:
 
   '@material-ui/styles@4.11.5(@types/react@18.3.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       '@emotion/hash': 0.8.0
       '@material-ui/types': 5.1.0(@types/react@18.3.2)
       '@material-ui/utils': 4.11.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -11534,6 +12109,29 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.2
 
+  '@material-ui/styles@4.11.5(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.26.0
+      '@emotion/hash': 0.8.0
+      '@material-ui/types': 5.1.0(@types/react@18.3.2)
+      '@material-ui/utils': 4.11.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      clsx: 1.2.1
+      csstype: 2.6.21
+      hoist-non-react-statics: 3.3.2
+      jss: 10.10.0
+      jss-plugin-camel-case: 10.10.0
+      jss-plugin-default-unit: 10.10.0
+      jss-plugin-global: 10.10.0
+      jss-plugin-nested: 10.10.0
+      jss-plugin-props-sort: 10.10.0
+      jss-plugin-rule-value-function: 10.10.0
+      jss-plugin-vendor-prefixer: 10.10.0
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.3.2
+
   '@material-ui/types@5.1.0(@types/react@18.3.12)':
     optionalDependencies:
       '@types/react': 18.3.12
@@ -11544,28 +12142,36 @@ snapshots:
 
   '@material-ui/utils@4.11.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-is: 17.0.2
 
+  '@material-ui/utils@4.11.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.26.0
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-is: 17.0.2
+
   '@material/animation@14.0.0-canary.53b3cad2f.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/base@14.0.0-canary.53b3cad2f.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/density@14.0.0-canary.53b3cad2f.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/dom@14.0.0-canary.53b3cad2f.0':
     dependencies:
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/elevation@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11574,15 +12180,15 @@ snapshots:
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
       '@material/rtl': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/feature-targeting@14.0.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/feature-targeting@14.0.0-canary.53b3cad2f.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/floating-label@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11593,7 +12199,7 @@ snapshots:
       '@material/rtl': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
       '@material/typography': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/focus-ring@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11607,7 +12213,7 @@ snapshots:
       '@material/base': 14.0.0-canary.53b3cad2f.0
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/list@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11620,14 +12226,14 @@ snapshots:
       '@material/shape': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
       '@material/typography': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-base@0.27.0':
     dependencies:
       '@material/base': 14.0.0-canary.53b3cad2f.0
       '@material/dom': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-button@0.27.0':
     dependencies:
@@ -11641,13 +12247,13 @@ snapshots:
       '@material/mwc-base': 0.27.0
       '@material/mwc-ripple': 0.27.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-floating-label@0.27.0':
     dependencies:
       '@material/floating-label': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-icon-button-toggle@0.27.0':
     dependencies:
@@ -11666,13 +12272,13 @@ snapshots:
   '@material/mwc-icon@0.27.0':
     dependencies:
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-line-ripple@0.27.0':
     dependencies:
       '@material/line-ripple': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-list@0.27.0':
     dependencies:
@@ -11691,7 +12297,7 @@ snapshots:
       '@material/mwc-base': 0.27.0
       '@material/notched-outline': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-radio@0.27.0':
     dependencies:
@@ -11699,7 +12305,7 @@ snapshots:
       '@material/mwc-ripple': 0.27.0
       '@material/radio': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-ripple@0.27.0':
     dependencies:
@@ -11707,7 +12313,7 @@ snapshots:
       '@material/mwc-base': 0.27.0
       '@material/ripple': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/mwc-textfield@0.27.0':
     dependencies:
@@ -11719,7 +12325,7 @@ snapshots:
       '@material/mwc-notched-outline': 0.27.0
       '@material/textfield': 14.0.0-canary.53b3cad2f.0
       lit: 2.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/notched-outline@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11729,7 +12335,7 @@ snapshots:
       '@material/rtl': 14.0.0-canary.53b3cad2f.0
       '@material/shape': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/radio@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11742,7 +12348,7 @@ snapshots:
       '@material/ripple': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
       '@material/touch-target': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/ripple@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11752,19 +12358,19 @@ snapshots:
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
       '@material/rtl': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/rtl@14.0.0-canary.53b3cad2f.0':
     dependencies:
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/shape@14.0.0-canary.53b3cad2f.0':
     dependencies:
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
       '@material/rtl': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/textfield@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11782,17 +12388,17 @@ snapshots:
       '@material/theme': 14.0.0-canary.53b3cad2f.0
       '@material/tokens': 14.0.0-canary.53b3cad2f.0
       '@material/typography': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/theme@14.0.0':
     dependencies:
       '@material/feature-targeting': 14.0.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/theme@14.0.0-canary.53b3cad2f.0':
     dependencies:
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/tokens@14.0.0-canary.53b3cad2f.0':
     dependencies:
@@ -11803,13 +12409,13 @@ snapshots:
       '@material/base': 14.0.0-canary.53b3cad2f.0
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
       '@material/rtl': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@material/typography@14.0.0-canary.53b3cad2f.0':
     dependencies:
       '@material/feature-targeting': 14.0.0-canary.53b3cad2f.0
       '@material/theme': 14.0.0-canary.53b3cad2f.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@messageformat/parser@5.1.0':
     dependencies:
@@ -12040,7 +12646,7 @@ snapshots:
   '@nrwl/tao@18.3.4(@swc-node/register@1.9.0(@swc/core@1.5.6(@swc/helpers@0.5.12))(@swc/types@0.1.12)(typescript@5.0.2))(@swc/core@1.5.6(@swc/helpers@0.5.12))':
     dependencies:
       nx: 18.3.4(@swc-node/register@1.9.0(@swc/core@1.5.6(@swc/helpers@0.5.12))(@swc/types@0.1.12)(typescript@5.0.2))(@swc/core@1.5.6(@swc/helpers@0.5.12))
-      tslib: 2.6.2
+      tslib: 2.8.1
     transitivePeerDependencies:
       - '@swc-node/register'
       - '@swc/core'
@@ -14375,7 +14981,7 @@ snapshots:
   '@swc/helpers@0.4.36':
     dependencies:
       legacy-swc-helpers: '@swc/helpers@0.4.14'
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@swc/helpers@0.5.12':
     dependencies:
@@ -14391,11 +14997,11 @@ snapshots:
 
   '@tanstack/query-core@5.51.21': {}
 
-  '@tanstack/query-devtools@5.59.19': {}
+  '@tanstack/query-devtools@5.65.0': {}
 
-  '@tanstack/react-query-devtools@5.59.19(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)':
+  '@tanstack/react-query-devtools@5.65.1(@tanstack/react-query@5.51.21(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@tanstack/query-devtools': 5.59.19
+      '@tanstack/query-devtools': 5.65.0
       '@tanstack/react-query': 5.51.21(react@18.2.0)
       react: 18.2.0
 
@@ -14664,6 +15270,8 @@ snapshots:
 
   '@types/unist@3.0.2': {}
 
+  '@types/uuid@10.0.0': {}
+
   '@types/uuid@9.0.8': {}
 
   '@types/webxr@0.5.16': {}
@@ -14734,7 +15342,7 @@ snapshots:
   '@yarnpkg/parsers@3.0.0-rc.46':
     dependencies:
       js-yaml: 3.14.1
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@zkochan/js-yaml@0.0.6':
     dependencies:
@@ -14812,7 +15420,7 @@ snapshots:
 
   aria-hidden@1.2.4:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   aria-query@5.3.0:
     dependencies:
@@ -15028,19 +15636,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-jest@29.7.0(@babel/core@7.26.0):
-    dependencies:
-      '@babel/core': 7.26.0
-      '@jest/transform': 29.7.0
-      '@types/babel__core': 7.20.5
-      babel-plugin-istanbul: 6.1.1
-      babel-preset-jest: 29.6.3(@babel/core@7.26.0)
-      chalk: 4.1.2
-      graceful-fs: 4.2.11
-      slash: 3.0.0
-    transitivePeerDependencies:
-      - supports-color
-
   babel-merge@3.0.0(@babel/core@7.24.5):
     dependencies:
       '@babel/core': 7.24.5
@@ -15132,33 +15727,11 @@ snapshots:
       '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.24.5)
       '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.24.5)
 
-  babel-preset-current-node-syntax@1.0.1(@babel/core@7.26.0):
-    dependencies:
-      '@babel/core': 7.26.0
-      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.26.0)
-      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.26.0)
-      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.26.0)
-      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.26.0)
-      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.26.0)
-      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.26.0)
-      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.26.0)
-      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.26.0)
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.26.0)
-      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.26.0)
-      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.26.0)
-      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.26.0)
-
   babel-preset-jest@29.6.3(@babel/core@7.24.5):
     dependencies:
       '@babel/core': 7.24.5
       babel-plugin-jest-hoist: 29.6.3
       babel-preset-current-node-syntax: 1.0.1(@babel/core@7.24.5)
-
-  babel-preset-jest@29.6.3(@babel/core@7.26.0):
-    dependencies:
-      '@babel/core': 7.26.0
-      babel-plugin-jest-hoist: 29.6.3
-      babel-preset-current-node-syntax: 1.0.1(@babel/core@7.26.0)
 
   bail@2.0.2: {}
 
@@ -15655,7 +16228,7 @@ snapshots:
       prop-types: 15.8.1
       react: 18.2.0
       react-is: 17.0.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   downshift@7.6.2(react@18.3.1):
     dependencies:
@@ -15664,7 +16237,7 @@ snapshots:
       prop-types: 15.8.1
       react: 18.3.1
       react-is: 17.0.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   downshift@9.0.4(react@18.2.0):
     dependencies:
@@ -15673,7 +16246,7 @@ snapshots:
       prop-types: 15.8.1
       react: 18.2.0
       react-is: 18.3.1
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   draco3d@1.5.7: {}
 
@@ -16565,9 +17138,6 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  immer@10.1.1:
-    optional: true
-
   immer@9.0.21: {}
 
   import-fresh@3.3.0:
@@ -16601,7 +17171,7 @@ snapshots:
       '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/fast-memoize': 2.2.0
       '@formatjs/icu-messageformat-parser': 2.7.6
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   is-alphabetical@1.0.4: {}
 
@@ -16910,46 +17480,46 @@ snapshots:
 
   jss-plugin-camel-case@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       hyphenate-style-name: 1.0.4
       jss: 10.10.0
 
   jss-plugin-default-unit@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       jss: 10.10.0
 
   jss-plugin-global@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       jss: 10.10.0
 
   jss-plugin-nested@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       jss: 10.10.0
       tiny-warning: 1.0.3
 
   jss-plugin-props-sort@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       jss: 10.10.0
 
   jss-plugin-rule-value-function@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       jss: 10.10.0
       tiny-warning: 1.0.3
 
   jss-plugin-vendor-prefixer@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       css-vendor: 2.0.8
       jss: 10.10.0
 
   jss@10.10.0:
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       csstype: 3.1.3
       is-in-browser: 1.1.3
       tiny-warning: 1.0.3
@@ -17006,11 +17576,21 @@ snapshots:
       '@lit/reactive-element': 2.0.4
       lit-html: 3.1.3
 
+  lit-element@4.1.1:
+    dependencies:
+      '@lit-labs/ssr-dom-shim': 1.2.0
+      '@lit/reactive-element': 2.0.4
+      lit-html: 3.2.1
+
   lit-html@2.8.0:
     dependencies:
       '@types/trusted-types': 2.0.7
 
   lit-html@3.1.3:
+    dependencies:
+      '@types/trusted-types': 2.0.7
+
+  lit-html@3.2.1:
     dependencies:
       '@types/trusted-types': 2.0.7
 
@@ -17031,6 +17611,12 @@ snapshots:
       '@lit/reactive-element': 2.0.4
       lit-element: 4.0.5
       lit-html: 3.1.3
+
+  lit@3.2.0:
+    dependencies:
+      '@lit/reactive-element': 2.0.4
+      lit-element: 4.1.1
+      lit-html: 3.2.1
 
   load-yaml-file@0.2.0:
     dependencies:
@@ -17127,10 +17713,6 @@ snapshots:
   markdown-table@3.0.3: {}
 
   markdown-to-jsx@7.4.7(react@18.2.0):
-    dependencies:
-      react: 18.2.0
-
-  markdown-to-jsx@7.5.0(react@18.2.0):
     dependencies:
       react: 18.2.0
 
@@ -18146,7 +18728,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  re-resizable@6.10.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  re-resizable@6.9.16(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -18215,6 +18797,13 @@ snapshots:
       react: 18.2.0
       scheduler: 0.23.2
 
+  react-dom@18.2.0(react@18.3.1):
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.3.1
+      scheduler: 0.23.2
+    optional: true
+
   react-dom@18.3.1(react@18.3.1):
     dependencies:
       loose-envify: 1.4.0
@@ -18261,13 +18850,25 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-sortablejs@6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.3):
+  react-router-dom@6.27.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@remix-run/router': 1.20.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 6.27.0(react@18.3.1)
+
+  react-router@6.27.0(react@18.3.1):
+    dependencies:
+      '@remix-run/router': 1.20.0
+      react: 18.3.1
+
+  react-sortablejs@6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6):
     dependencies:
       '@types/sortablejs': 1.15.8
       classnames: 2.3.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sortablejs: 1.15.3
+      sortablejs: 1.15.6
       tiny-invariant: 1.2.0
 
   react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
@@ -18805,7 +19406,7 @@ snapshots:
 
   slash@3.0.0: {}
 
-  sortablejs@1.15.3: {}
+  sortablejs@1.15.6: {}
 
   source-map-js@1.2.0: {}
 
@@ -19430,7 +20031,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  use-sync-external-store@1.2.2(react@18.2.0):
+  use-sync-external-store@1.4.0(react@18.2.0):
     dependencies:
       react: 18.2.0
 
@@ -19779,12 +20380,12 @@ snapshots:
 
   zstddec@0.0.2: {}
 
-  zustand@4.5.5(@types/react@18.3.2)(immer@10.1.1)(react@18.2.0):
+  zustand@4.5.6(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0):
     dependencies:
-      use-sync-external-store: 1.2.2(react@18.2.0)
+      use-sync-external-store: 1.4.0(react@18.2.0)
     optionalDependencies:
       '@types/react': 18.3.2
-      immer: 10.1.1
+      immer: 9.0.21
       react: 18.2.0
 
   zwitch@2.0.4: {}

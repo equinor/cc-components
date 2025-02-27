@@ -8,6 +8,7 @@ import {
 } from '@cc-components/shared/sidesheet';
 import { formatDateString } from '@cc-components/shared/utils-dates';
 import { ContentTable } from './LoopContentTable';
+import { Checklists } from './Checklists';
 
 type DetailsTabProps = {
   loop: Loop | undefined;
@@ -81,6 +82,7 @@ export const DetailsTab = ({ loop }: DetailsTabProps): JSX.Element | null => {
         </tbody>
       </StyledTable>
       <ContentTable loop={loop} />
+      {loop.loopId && <Checklists loopId={loop.loopId} />}
     </StyledTabContent>
   );
 };
