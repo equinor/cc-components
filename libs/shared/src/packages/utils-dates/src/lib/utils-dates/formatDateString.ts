@@ -3,6 +3,7 @@
  * @param dateString Date string to format
  * @returns The formatted date string DD/MM/YYY or 'N/A' if the date string is falsy or invalid.
  */
+
 export const formatDateString = (dateString: string | null): string => {
   if (!dateString) return 'N/A';
   const date = new Date(dateString);
