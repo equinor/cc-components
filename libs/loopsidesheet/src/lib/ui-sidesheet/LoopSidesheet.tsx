@@ -91,6 +91,8 @@ export const LoopSidesheet = (props: {
               <LinkCell
                 url={loop.commissioningPackageUrl}
                 urlText={loop.commissioningPackageNo}
+                aiLinkLocation="loop sidesheet header"
+                aiLinktype="CommPkgNo"
               />
             ) : (
               'N/A'
@@ -104,6 +106,8 @@ export const LoopSidesheet = (props: {
               <LinkCell
                 url={loop.mechanicalCompletionPackageUrl}
                 urlText={loop.mechanicalCompletionPackageNo}
+                aiLinkLocation="loop sidesheet header"
+                aiLinktype="McPkgNo"
               />
             ) : (
               'N/A'

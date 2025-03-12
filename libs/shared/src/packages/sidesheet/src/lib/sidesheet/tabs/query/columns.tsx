@@ -9,7 +9,14 @@ export const columns: ColDef<QueryBase>[] = [
     headerName: 'Document No.',
     valueGetter: (pkg) => pkg.data?.queryNo,
     cellRenderer: (props: ICellRendererProps<QueryBase, string | null>) => {
-      return <LinkCell url={props.data?.queryUrl} urlText={props.data?.queryNo} />;
+      return (
+        <LinkCell
+          url={props.data?.queryUrl}
+          urlText={props.data?.queryNo}
+          aiLinkLocation="shared query sidesheet"
+          aiLinktype="QueryNo"
+        />
+      );
     },
   },
   {

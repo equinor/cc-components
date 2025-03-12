@@ -120,20 +120,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
     },
     width: 130,
   },
-  // {
-  //   headerName: 'Current step',
-  //   headerTooltip: 'Current step',
-  //   valueGetter: (pkg) => pkg.data?.documents,
-  //   width: 180,
-  // },
-  // {
-  //   headerName: 'Next',
-  //   headerTooltip: 'Next',
-  //   valueGetter: (pkg) => {
-  //     return pkg.data && findNextToSign(pkg.data);
-  //   },
-  //   width: 220,
-  // },
   {
     headerName: 'Status',
     headerTooltip: 'Status',
@@ -160,11 +146,6 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
       pkg.data?.disciplineGuesstimates
         .map(({ discipline: { procosysCode } }) => procosysCode)
         .toString() ?? '',
-    //   cellRenderer: (
-    //     props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
-    //   ) => {
-    //     return props.valueFormatted ? props.valueFormatted : '';
-    //   },
     width: 140,
   },
   {
@@ -177,38 +158,12 @@ const columnDefinitions: ColDef<ScopeChangeRequest>[] = [
         .toString() ?? '',
     width: 150,
   },
-  // {
-  //   headerName: 'Est Mhrs',
-  //   headerTooltip: 'Estimate Manhours',
-  //   valueGetter: (pkg) => pkg.data?.workOrdersTotalEstimatedManHours,
-  //   width: 150,
-  // },
-  // {
-  //   headerName: 'Exp Mhrs',
-  //   headerTooltip: 'Expanded Manhours',
-  //   valueGetter: (pkg) => pkg.data?.workOrdersTotalExpendedManHours,
-  //   width: 150,
-  // },
-  // {
-  //   headerName: 'Rem Mhrs',
-  //   headerTooltip: 'Remaining Manhours',
-  //   valueGetter: (pkg) => pkg.data?.workOrdersTotalRemainingManHours,
-  //   width: 150,
-  // },
   {
     headerName: 'Change origin',
     headerTooltip: 'Change Origin',
     valueGetter: (pkg) => pkg.data?.originSourceId,
     valueFormatter: (pkg) =>
       `${pkg.data?.originSource} - ${pkg.data?.originSourceId}` ?? '',
-    //   cellRenderer: (
-    //     props: ICellRendererProps<ScopeChangeRequest, string | null | undefined>
-    //   ) => {
-    //     if (props.valueFormatted && props.value) {
-    //       return <LinkCell url={props.valueFormatted} urlText={props.value} />;
-    //     }
-    //     return null;
-    //   },
     width: 180,
   },
   {

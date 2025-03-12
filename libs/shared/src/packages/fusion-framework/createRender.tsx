@@ -23,7 +23,8 @@ export function createRender(
   appName: string = 'unknown'
 ) {
   return (el: HTMLElement, args: ComponentRenderArgs) => {
-    const connectionString = (args.env.config?.environment as { ai?: string })?.ai;
+    const connectionString =
+      'InstrumentationKey=cbbfe691-3aa2-419a-b6a7-af85c1eff567;IngestionEndpoint=https://norwayeast-0.in.applicationinsights.azure.com/;LiveEndpoint=https://norwayeast.livediagnostics.monitor.azure.com/;ApplicationId=d69e7801-7275-4540-89c1-962efce160f2';
 
     const teardown = (() => {
       if (connectionString) {

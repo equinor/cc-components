@@ -57,7 +57,12 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
     colId: 'pipetestNo',
     valueGetter: (element) => element.data?.pipetestNo,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => (
-      <LinkCell url={props.data?.mechanicalCompletionUrl} urlText={props.value ?? ''} />
+      <LinkCell
+        url={props.data?.mechanicalCompletionUrl}
+        urlText={props.value ?? ''}
+        aiLinkLocation="pipetest grid"
+        aiLinktype="PipetestNo"
+      />
     ),
   },
   {

@@ -95,7 +95,12 @@ export const PunchSidesheet = (props: {
             !punch.formTypeUrl || !punch.formularType ? (
               ''
             ) : (
-              <LinkCell url={punch.formTypeUrl} urlText={punch.formularType} />
+              <LinkCell
+                url={punch.formTypeUrl}
+                urlText={punch.formularType}
+                aiLinkLocation="punch sidesheet header"
+                aiLinktype="Formular Type"
+              />
             )
           }
         />
@@ -105,7 +110,12 @@ export const PunchSidesheet = (props: {
             !punch.tagUrl || !punch.tagNo ? (
               ''
             ) : (
-              <LinkCell url={punch.tagUrl} urlText={punch.tagNo} />
+              <LinkCell
+                url={punch.tagUrl}
+                urlText={punch.tagNo}
+                aiLinkLocation="punch sidesheet header"
+                aiLinktype="TagNo"
+              />
             )
           }
         />
@@ -118,6 +128,8 @@ export const PunchSidesheet = (props: {
               <LinkCell
                 url={punch.commissioningPackageUrl}
                 urlText={punch.commissioningPackageNo}
+                aiLinkLocation="punch sidesheet header"
+                aiLinktype="CommPkgNo"
               />
             )
           }
@@ -132,6 +144,8 @@ export const PunchSidesheet = (props: {
               <LinkCell
                 url={punch.mechanicalCompletionPackageUrl}
                 urlText={punch.mechanicalCompletionPackageNo}
+                aiLinkLocation="punch sidesheet header"
+                aiLinktype="McPkgNo"
               />
             )
           }

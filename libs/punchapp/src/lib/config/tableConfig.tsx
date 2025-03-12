@@ -44,9 +44,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
         e.api.autoSizeColumns(
-          e.api
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
+          e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
         );
       },
     },
@@ -65,7 +63,14 @@ const columnDefinitions: ColDef<Punch>[] = [
       if (!props.data?.punchUrl || !props.data?.punchItemNo) {
         return null;
       }
-      return <LinkCell url={props.data.punchUrl} urlText={props.data.punchItemNo} />;
+      return (
+        <LinkCell
+          url={props.data.punchUrl}
+          urlText={props.data.punchItemNo}
+          aiLinkLocation="punch grid"
+          aiLinktype="PunchNo"
+        />
+      );
     },
     onCellClicked: () => {},
   },
@@ -218,7 +223,14 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
-      return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
+      return (
+        <LinkCell
+          url={props.data.formTypeUrl}
+          urlText={props.data.formularType}
+          aiLinkLocation="punch grid"
+          aiLinktype="Formular Type"
+        />
+      );
     },
     onCellClicked: () => {},
   },
@@ -229,7 +241,14 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.tagUrl || !props.data?.tagNo) return null;
-      return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
+      return (
+        <LinkCell
+          url={props.data?.tagUrl}
+          urlText={props.data?.tagNo}
+          aiLinkLocation="punch grid"
+          aiLinktype="TagNo"
+        />
+      );
     },
     onCellClicked: () => {},
   },
@@ -247,6 +266,8 @@ const columnDefinitions: ColDef<Punch>[] = [
         <LinkCell
           url={`${props.data.commissioningPackageUrl}`}
           urlText={props.data.commissioningPackageNo}
+          aiLinkLocation="punch grid"
+          aiLinktype="CommPkgNo"
         />
       );
     },
@@ -259,7 +280,14 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => pkg.data?.workOrderNo,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
       if (!props.data?.workOrderNo || !props.data.workorderUrl) return null;
-      return <LinkCell url={props.data.workorderUrl} urlText={props.data?.workOrderNo} />;
+      return (
+        <LinkCell
+          url={props.data.workorderUrl}
+          urlText={props.data?.workOrderNo}
+          aiLinkLocation="punch grid"
+          aiLinktype="WorkOrderNo"
+        />
+      );
     },
     onCellClicked: () => {},
   },
