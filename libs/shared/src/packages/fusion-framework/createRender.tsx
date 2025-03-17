@@ -33,14 +33,11 @@ export function createRender(
       build: `commit: ${(args.env.config?.environment as any)?.commit}`,
     };
 
-    console.log('tags', tags);
-
     const possiblePrNumber = (args.env.config?.environment as any)?.pr;
 
     let cleanup = () => {};
 
     if (possiblePrNumber) {
-      console.log(`creating pr ${possiblePrNumber}`);
       cleanup = createPrLabel(possiblePrNumber, el);
     }
 
