@@ -46,7 +46,7 @@ export const useAppInsights = (): ApplicationInsights | undefined => {
 };
 
 type AppInsightsProviderProps = {
-  connectionString: string;
+  connectionString?: string;
   children: React.ReactNode;
   defaultTags?: Record<string, string>;
 };
@@ -56,25 +56,29 @@ export const AppInsightsProvider = ({
   children,
   defaultTags,
 }: AppInsightsProviderProps): JSX.Element => {
-  const appInsights = new ApplicationInsights({
-    config: {
-      connectionString: connectionString,
-      enableResponseHeaderTracking: true,
-      enableAjaxPerfTracking: true,
-      extensions: [new TestPlugin(defaultTags)],
-    },
-  });
+  let appInsights: ApplicationInsights | undefined = undefined;
+
+  if (connectionString) {
+    appInsights = new ApplicationInsights({
+      config: {
+        connectionString: connectionString,
+        enableResponseHeaderTracking: true,
+        enableAjaxPerfTracking: true,
+        extensions: [new TestPlugin(defaultTags)],
+      },
+    });
+  }
 
   useEffect(() => {
-    appInsights.loadAppInsights();
-    appInsights.trackPageView();
+    appInsights?.loadAppInsights();
+    appInsights?.trackPageView();
 
-    appInsights.trackEvent({ name: `[App loaded]: ${defaultTags?.appKey}` });
+    appInsights?.trackEvent({ name: `[App loaded]: ${defaultTags?.appKey}` });
 
     Object.assign(window, { ai: appInsights });
 
     return () => {
-      appInsights.unload();
+      appInsights?.unload();
     };
   }, [appInsights]);
 
