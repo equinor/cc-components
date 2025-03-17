@@ -1,6 +1,7 @@
 import { link } from 'fs';
 import { StyledLink } from './cell.styles';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { useAppInsights } from '../../../../../hooks';
 
 type LinkCellProps = {
   url?: string;
@@ -19,10 +20,10 @@ export const LinkCell = ({
   aiLinkLocation,
   tooltipText = 'Open in ProCoSys',
 }: LinkCellProps): JSX.Element => {
+  const applicationInsights = useAppInsights();
   const onClick = () => {
     if (aiLinktype && aiLinkLocation) {
-      console.log('Link clicked', aiLinktype, aiLinkLocation);
-      ((window as any).ai as ApplicationInsights).trackEvent({
+      applicationInsights?.trackEvent({
         name: 'LinkClicked',
         properties: {
           linkType: aiLinktype,
