@@ -10832,7 +10832,7 @@ snapshots:
 
   '@equinor/eds-core-react@0.28.0(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
-      '@babel/runtime': 7.24.5
+      '@babel/runtime': 7.26.0
       '@equinor/eds-icons': 0.17.0
       '@equinor/eds-tokens': 0.9.0
       '@equinor/eds-utils': 0.7.0(@babel/core@7.24.5)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
