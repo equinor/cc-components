@@ -15,6 +15,8 @@ export const columns: ColDef<McBase>[] = [
         <LinkCell
           url={props.data?.mechanicalCompletionPackageUrl}
           urlText={props.data?.mechanicalCompletionPackageNo}
+          aiLinkLocation="shared mechanical-completion sidesheet"
+          aiLinktype="McPkgNo"
         />
       );
     },

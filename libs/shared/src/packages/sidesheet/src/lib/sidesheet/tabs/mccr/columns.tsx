@@ -18,7 +18,14 @@ export const columns: ColDef<MccrBase>[] = [
       if (!props.data?.tagUrl) {
         return <StyledMonospace>{props.value}</StyledMonospace>;
       } else {
-        return <LinkCell url={props.data?.tagUrl} urlText={props.value ?? ''} />;
+        return (
+          <LinkCell
+            url={props.data?.tagUrl}
+            urlText={props.value ?? ''}
+            aiLinkLocation="shared mccr sidesheet"
+            aiLinktype="TagNo"
+          />
+        );
       }
     },
   },
@@ -39,7 +46,14 @@ export const columns: ColDef<MccrBase>[] = [
       if (!props.data?.mccrUrl) {
         return <StyledMonospace>{props.value}</StyledMonospace>;
       } else {
-        return <LinkCell url={props.data?.mccrUrl} urlText={props.value ?? ''} />;
+        return (
+          <LinkCell
+            url={props.data?.mccrUrl}
+            urlText={props.value ?? ''}
+            aiLinkLocation="shared mccr sidesheet"
+            aiLinktype="MccrType"
+          />
+        );
       }
     },
   },
@@ -74,6 +88,8 @@ export const columns: ColDef<MccrBase>[] = [
           <LinkCell
             url={props.data?.mechanicalCompletionPackageUrl}
             urlText={props.value ?? ''}
+            aiLinkLocation="shared mccr sidesheet"
+            aiLinktype="McPkgNo"
           />
         );
       }
@@ -90,6 +106,8 @@ export const columns: ColDef<MccrBase>[] = [
           <LinkCell
             url={props.data?.commissioningPackageUrl}
             urlText={props.value ?? ''}
+            aiLinkLocation="shared mccr sidesheet"
+            aiLinktype="CommPkgNo"
           />
         );
       }

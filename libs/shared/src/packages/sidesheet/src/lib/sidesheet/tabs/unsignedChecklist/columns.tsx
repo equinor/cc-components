@@ -9,7 +9,14 @@ export const columns: ColDef<UnsignedChecklistBase>[] = [
     headerName: 'Type',
     valueGetter: (pkg) => pkg.data?.type,
     cellRenderer: (props: ICellRendererProps<UnsignedChecklistBase>) => {
-      return <LinkCell url={props.data?.checklistUrl} urlText={props.value} />;
+      return (
+        <LinkCell
+          url={props.data?.checklistUrl}
+          urlText={props.value}
+          aiLinkLocation="shared unsigned-checklist sidesheet"
+          aiLinktype="UnsignedChecklistType"
+        />
+      );
     },
     flex: 1,
   },

@@ -12,14 +12,28 @@ export const columns: ColDef<PunchBase>[] = [
     headerName: 'Punch No',
     valueGetter: (pkg) => pkg.data?.punchItemNo,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
-      return <LinkCell url={props.data?.punchUrl ?? ''} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.data?.punchUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="shared punch sidesheet"
+          aiLinktype="PunchNo"
+        />
+      );
     },
   },
   {
     headerName: 'Tag',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<PunchBase, string | null>) => {
-      return <LinkCell url={props.data?.tagUrl} urlText={props.data?.tagNo} />;
+      return (
+        <LinkCell
+          url={props.data?.tagUrl}
+          urlText={props.data?.tagNo}
+          aiLinkLocation="shared punch sidesheet"
+          aiLinktype="TagNo"
+        />
+      );
     },
   },
   {

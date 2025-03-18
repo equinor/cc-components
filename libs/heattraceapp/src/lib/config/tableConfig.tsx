@@ -54,7 +54,12 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     valueGetter: (pkg) => pkg.data?.heatTraceCableNo,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {
       return (
-        <LinkCell url={props.data?.heatTraceCableUrl ?? ''} urlText={props.value ?? ''} />
+        <LinkCell
+          url={props.data?.heatTraceCableUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="heat-trace grid"
+          aiLinktype="HeatTraceCableNo"
+        />
       );
     },
   },

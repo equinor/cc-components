@@ -13,6 +13,8 @@ export const columns: ColDef<SwcrBase>[] = [
         <LinkCell
           url={props.data?.softwareChangeRecordUrl}
           urlText={props.data?.softwareChangeRecordNo}
+          aiLinkLocation="shared swcr sidesheet"
+          aiLinktype="SwcrNo"
         />
       );
     },
