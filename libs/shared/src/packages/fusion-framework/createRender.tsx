@@ -6,10 +6,11 @@ import {
 
 import { createRoot } from 'react-dom/client';
 
-import { ApplicationInsights, ITelemetryItem } from '@microsoft/applicationinsights-web';
+import { ITelemetryItem } from '@microsoft/applicationinsights-web';
 import { useState } from 'react';
 import { Button, CircularProgress } from '@equinor/eds-core-react';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { AppInsightsProvider } from '../hooks/src/lib/useAppInsights';
 
 /**
  * Facades the fusion-framework render setup, used in all apps
@@ -25,54 +26,18 @@ export function createRender(
   return (el: HTMLElement, args: ComponentRenderArgs) => {
     const connectionString = (args.env.config?.environment as { ai?: string })?.ai;
 
-    const teardown = (() => {
-      if (connectionString) {
-        console.log('application insights enabled');
-        const appInsights = new ApplicationInsights({
-          config: {
-            connectionString: connectionString,
-            enableResponseHeaderTracking: true,
-            accountId: tryGetAccountId(args),
-            enableAjaxPerfTracking: true,
-          },
-        });
-
-        appInsights.core.addTelemetryInitializer(ignorePowerBiGenericError);
-
-        appInsights.loadAppInsights();
-        appInsights.trackPageView();
-        appInsights.addTelemetryInitializer((envelope) => {
-          (envelope.tags as any)['ai.cloud.role'] = appName;
-          const sha = (args.env.config?.environment as any)?.commit;
-          if (sha) {
-            (envelope.tags as any)['ai.cloud.roleInstance'] = `commit: ${sha}`;
-          }
-        });
-
-        appInsights.trackEvent({
-          name: `[App loaded]: ${appName}`,
-          properties: {
-            appKey: appName,
-            url: window.location.toString(),
-            userId: tryGetAccountId(args),
-            build: `commit: ${(args.env.config?.environment as any)?.commit}`,
-          },
-        });
-
-        Object.assign(window, { ai: appInsights });
-        return () => {
-          console.log('Removing application insights');
-          appInsights.unload();
-        };
-      }
-    })();
+    const tags = {
+      appKey: appName,
+      url: window.location.toString(),
+      userId: tryGetAccountId(args),
+      build: `commit: ${(args.env.config?.environment as any)?.commit}`,
+    };
 
     const possiblePrNumber = (args.env.config?.environment as any)?.pr;
 
     let cleanup = () => {};
 
     if (possiblePrNumber) {
-      console.log(`creating pr ${possiblePrNumber}`);
       cleanup = createPrLabel(possiblePrNumber, el);
     }
 
@@ -84,13 +49,17 @@ export function createRender(
      * Second argu is the the render args (framework and env variables)
      * Third argument is the configuration callback
      */
-    const AppComponent = makeComponent(<Comp />, args, configure);
+    const AppComponent = makeComponent(
+      <AppInsightsProvider connectionString={connectionString} defaultTags={tags}>
+        <Comp />
+      </AppInsightsProvider>,
+      args,
+      configure
+    );
 
     root.render(<AppComponent />);
 
-    /** Teardown */
     return () => {
-      teardown && teardown();
       root.unmount();
       cleanup();
     };

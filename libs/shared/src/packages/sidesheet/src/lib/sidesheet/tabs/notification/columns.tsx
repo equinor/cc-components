@@ -13,6 +13,8 @@ export const columns: ColDef<NotificationBase>[] = [
         <LinkCell
           url={props.data?.notificationUrl}
           urlText={props.data?.notificationNo}
+          aiLinkLocation="shared notification sidesheet"
+          aiLinktype="NotificationNo"
         />
       );
     },

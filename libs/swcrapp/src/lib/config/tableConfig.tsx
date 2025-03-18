@@ -63,7 +63,12 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
         return null;
       }
       return (
-        <LinkCell url={props.data.swcrUrl} urlText={props.data.softwareChangeRecordNo} />
+        <LinkCell
+          url={props.data.swcrUrl}
+          urlText={props.data.softwareChangeRecordNo}
+          aiLinkLocation="swcr grid"
+          aiLinktype="SwcrNo"
+        />
       );
     },
     onCellClicked: () => {},

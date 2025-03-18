@@ -70,7 +70,11 @@ export const SwcrSidesheet = ({ id, close: closeSidesheet, item }: SwcrProps) =>
   return <SwcrSidesheetComponent id={id} item={data} close={closeSidesheet} />;
 };
 
-export const SwcrSidesheetComponent = ({ id, close: closeSidesheet, item }: Required<SwcrProps>) => {
+export const SwcrSidesheetComponent = ({
+  id,
+  close: closeSidesheet,
+  item,
+}: Required<SwcrProps>) => {
   const { data: signatures, isLoading: signaturesFetching, error } = useSignatures(id);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -90,7 +94,12 @@ export const SwcrSidesheetComponent = ({ id, close: closeSidesheet, item }: Requ
           title="SWCR"
           value={
             item.softwareChangeRecordNo && item.swcrUrl ? (
-              <LinkCell url={item.swcrUrl} urlText={item.softwareChangeRecordNo} />
+              <LinkCell
+                url={item.swcrUrl}
+                urlText={item.softwareChangeRecordNo}
+                aiLinkLocation="swcr sidesheet header"
+                aiLinktype="SwcrNo"
+              />
             ) : (
               item.softwareChangeRecordNo ?? 'N/A'
             )
@@ -128,7 +137,11 @@ export const SwcrSidesheetComponent = ({ id, close: closeSidesheet, item }: Requ
             />
           </Tabs.Panel>
           <Tabs.Panel>
-            <SignaturesTab signatures={signatures} isFetching={signaturesFetching} error={error} />
+            <SignaturesTab
+              signatures={signatures}
+              isFetching={signaturesFetching}
+              error={error}
+            />
           </Tabs.Panel>
         </StyledPanels>
       </StyledTabs>
@@ -148,4 +161,3 @@ const ErrorWrapper = styled.div`
 const ErrorMessage = styled.h3`
   margin: 0;
 `;
-

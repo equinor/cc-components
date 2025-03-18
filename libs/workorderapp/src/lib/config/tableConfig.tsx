@@ -69,7 +69,12 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
         return <StyledMonospace>{props.value}</StyledMonospace>;
       }
       return (
-        <LinkCell url={props.data?.workorderUrl} urlText={props.value ?? undefined} />
+        <LinkCell
+          url={props.data?.workorderUrl}
+          urlText={props.value ?? undefined}
+          aiLinkLocation="workorder grid"
+          aiLinktype="WorkorderNo"
+        />
       );
     },
   },

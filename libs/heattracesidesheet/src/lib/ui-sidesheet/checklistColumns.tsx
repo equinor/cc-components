@@ -12,7 +12,14 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     headerName: 'Tag No',
     valueGetter: (pkg) => pkg.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
-      return <LinkCell url={props.data?.tagUrl ?? ''} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.data?.tagUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="heat-trace checklist sidesheet"
+          aiLinktype="TagNo"
+        />
+      );
     },
   },
   {
@@ -20,7 +27,12 @@ export const checklistColumns: ColDef<HeatTraceChecklist>[] = [
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<HeatTraceChecklist>) => {
       return (
-        <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
+        <LinkCell
+          url={props.data?.checklistUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="heat-trace checklist sidesheet"
+          aiLinktype="Formular type"
+        />
       );
     },
   },

@@ -9,7 +9,14 @@ export const columns: ColDef<UnsignedActionBase>[] = [
     valueGetter: (pkg) => pkg.data?.actionNo,
     cellRenderer: (props: ICellRendererProps<UnsignedActionBase>) => {
       if (props.data) {
-        return <LinkCell url={props.data.unsignedTaskUrl} urlText={props.value} />;
+        return (
+          <LinkCell
+            url={props.data.unsignedTaskUrl}
+            urlText={props.value}
+            aiLinkLocation="shared unsigned-action sidesheet"
+            aiLinktype="UnsignedActionNo"
+          />
+        );
       } else return null;
     },
   },

@@ -8,7 +8,14 @@ export const heatedTagsColumns: ColDef<HeatTraceHeatedTag>[] = [
     headerName: 'Tag No',
     valueGetter: (pkg) => pkg.data?.heatedTagNo,
     cellRenderer: (props: ICellRendererProps<HeatTraceHeatedTag>) => {
-      return <LinkCell url={props.data?.tagUrl ?? ''} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.data?.tagUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="heat-trace heated-tags sidesheet"
+          aiLinktype="TagNo"
+        />
+      );
     },
   },
   {
@@ -31,6 +38,8 @@ export const heatedTagsColumns: ColDef<HeatTraceHeatedTag>[] = [
         <LinkCell
           url={props.data?.commissioningPackageUrl ?? ''}
           urlText={props.value ?? ''}
+          aiLinkLocation="heat-trace heated-tags sidesheet"
+          aiLinktype="CommPkg"
         />
       );
     },
@@ -43,6 +52,8 @@ export const heatedTagsColumns: ColDef<HeatTraceHeatedTag>[] = [
         <LinkCell
           url={props.data?.mechanicalCompletionUrl ?? ''}
           urlText={props.value ?? ''}
+          aiLinkLocation="heat-trace heated-tags sidesheet"
+          aiLinktype="McPkgNo"
         />
       );
     },

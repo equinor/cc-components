@@ -12,7 +12,14 @@ export const checklistColumns: ColDef<Checklist>[] = [
     headerName: 'Tag No',
     valueGetter: (item) => item.data?.tagNo,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
-      return <LinkCell url={props.data?.tagUrl ?? ''} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.data?.tagUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="pipetest checklist sidesheet"
+          aiLinktype="TagNo"
+        />
+      );
     },
   },
   {
@@ -26,7 +33,12 @@ export const checklistColumns: ColDef<Checklist>[] = [
     valueGetter: (item) => item.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Checklist>) => {
       return (
-        <LinkCell url={props.data?.checklistUrl ?? ''} urlText={props.value ?? ''} />
+        <LinkCell
+          url={props.data?.checklistUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="pipetest checklist sidesheet"
+          aiLinktype="Formular Type"
+        />
       );
     },
   },

@@ -17,6 +17,8 @@ export const columns: ColDef<NcrBase>[] = [
           url={props.data?.url ?? ''}
           urlText={props.value ?? ''}
           tooltipText="Open in Fusion Query"
+          aiLinkLocation="shared ncr sidesheet"
+          aiLinktype="NcrTitle"
         />
       );
     },

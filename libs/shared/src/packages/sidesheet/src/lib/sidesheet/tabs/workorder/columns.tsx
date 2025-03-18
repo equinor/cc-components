@@ -19,6 +19,8 @@ export const columns = (
           <LinkCell
             url={props.data?.workOrderUrl ?? undefined}
             urlText={props.data?.workOrderNumber}
+            aiLinkLocation="shared workorder sidesheet"
+            aiLinktype="Workorder"
           />
         );
       },

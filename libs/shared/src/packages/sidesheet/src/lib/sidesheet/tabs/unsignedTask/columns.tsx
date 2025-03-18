@@ -9,7 +9,14 @@ export const columns: ColDef<UnsignedTaskBase>[] = [
     headerName: '#',
     valueGetter: (pkg) => pkg.data?.taskId,
     cellRenderer: (props: ICellRendererProps<UnsignedTaskBase, string | null>) => {
-      return <LinkCell url={props.data?.unsignedTaskUrl} urlText={props.data?.taskId} />;
+      return (
+        <LinkCell
+          url={props.data?.unsignedTaskUrl}
+          urlText={props.data?.taskId}
+          aiLinkLocation="shared unsigned-task sidesheet"
+          aiLinktype="UnsignedTaskNo"
+        />
+      );
     },
   },
   {

@@ -52,9 +52,7 @@ export const useTableConfig = (
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
         e.api.autoSizeColumns(
-          e.api
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
+          e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
         );
       },
     },
@@ -72,7 +70,14 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
       if (!props.valueFormatted) {
         return props.value;
       }
-      return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.valueFormatted}
+          urlText={props.value ?? ''}
+          aiLinkLocation="handover grid"
+          aiLinktype="CommPkgNo"
+        />
+      );
     },
     minWidth: 150,
   },

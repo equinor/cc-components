@@ -121,7 +121,11 @@ export const WorkorderSidesheet = (props: {
           title="WO"
           value={
             wo.workorderUrl ? (
-              <LinkCell url={wo.workorderUrl} urlText={wo.workOrderNumber} />
+              <LinkCell
+                url={wo.workorderUrl}
+                urlText={wo.workOrderNumber}
+                aiLinkLocation="workorder sidesheet header"
+              />
             ) : (
               wo.workOrderNumber
             )
