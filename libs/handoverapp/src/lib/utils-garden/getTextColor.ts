@@ -5,6 +5,7 @@ export const getTextColor = (status: PackageStatus) => {
   return (
     [
       'RFO Accepted',
+      'RFO Sent',
       'RFO Partly signed',
       'RFR Accepted',
       'DCC Accepted',
