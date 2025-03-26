@@ -118,6 +118,8 @@ const HeattraceSidesheetComponent = ({
               <LinkCell
                 url={item.commissioningPackageUrl ?? ''}
                 urlText={item.commissioningPackageNo}
+                aiLinkLocation="heat-trace sidesheet header"
+                aiLinktype="CommPkgNo"
               />
             ) : (
               'N/A'
@@ -131,6 +133,8 @@ const HeattraceSidesheetComponent = ({
               <LinkCell
                 url={item.mechanicalCompletionUrl ?? ''}
                 urlText={item.mechanicalCompletionPackageNo}
+                aiLinkLocation="heat-trace sidesheet header"
+                aiLinktype="McPkgNo"
               />
             ) : (
               'N/A'

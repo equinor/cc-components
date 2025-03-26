@@ -22,6 +22,8 @@ const columns: ColDef<LoopContent>[] = [
           <LinkCell
             url={props.data?.contentTagUrl ?? undefined}
             urlText={props.value ?? ''}
+            aiLinkLocation="loop content sidesheet"
+            aiLinktype="TagNo"
           />
         );
       }
@@ -71,6 +73,8 @@ const columns: ColDef<LoopContent>[] = [
           <LinkCell
             url={props.data?.commissioningPackageUrl ?? undefined}
             urlText={props.value ?? ''}
+            aiLinkLocation="loop content sidesheet"
+            aiLinktype="CommPkgNo"
           />
         );
       }
@@ -87,6 +91,8 @@ const columns: ColDef<LoopContent>[] = [
           <LinkCell
             url={props.data?.mechanicalCompletionPackageUrl ?? undefined}
             urlText={props.value ?? ''}
+            aiLinkLocation="loop content sidesheet"
+            aiLinktype="McPkgNo"
           />
         );
       }

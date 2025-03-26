@@ -51,9 +51,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
         e.api.autoSizeColumns(
-          e.api
-            .getAllDisplayedColumns()
-            .filter((s) => s.getColId() !== 'description')
+          e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
         );
       },
     },
@@ -70,7 +68,14 @@ const columnDefinitions: ColDef<McPackage>[] = [
       if (!props.valueFormatted) {
         return props.value;
       }
-      return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.valueFormatted}
+          urlText={props.value ?? ''}
+          aiLinkLocation="mechanical-completion grid"
+          aiLinktype="MCPkgNo"
+        />
+      );
     },
     minWidth: 140,
   },
@@ -149,7 +154,14 @@ const columnDefinitions: ColDef<McPackage>[] = [
       if (!props.valueFormatted) {
         return props.value;
       }
-      return <LinkCell url={props.valueFormatted} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.valueFormatted}
+          urlText={props.value ?? ''}
+          aiLinkLocation="mechanical-completion grid"
+          aiLinktype="CommPkgNo"
+        />
+      );
     },
     minWidth: 185,
   },

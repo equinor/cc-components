@@ -16,7 +16,12 @@ const columns: ColDef<ChecklistForLoop>[] = [
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
       return props.value ? (
-        <LinkCell url={props.data?.commissioningPackageUrl} urlText={props.value} />
+        <LinkCell
+          url={props.data?.commissioningPackageUrl}
+          urlText={props.value}
+          aiLinkLocation="loop checklist sidesheet"
+          aiLinktype="CommPkgNo"
+        />
       ) : (
         'N/A'
       );
@@ -31,6 +36,8 @@ const columns: ColDef<ChecklistForLoop>[] = [
         <LinkCell
           url={props.data?.mechanicalCompletionPackageUrl}
           urlText={props.value}
+          aiLinkLocation="loop checklist sidesheet"
+          aiLinktype="McPkgNo"
         />
       ) : (
         'N/A'
@@ -65,7 +72,12 @@ const columns: ColDef<ChecklistForLoop>[] = [
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<ChecklistForLoop, string | null>) => {
       return props.value ? (
-        <LinkCell url={props.data?.checklistUrl} urlText={props.value} />
+        <LinkCell
+          url={props.data?.checklistUrl}
+          urlText={props.value}
+          aiLinkLocation="loop checklist sidesheet"
+          aiLinktype="From Type"
+        />
       ) : (
         'N/A'
       );

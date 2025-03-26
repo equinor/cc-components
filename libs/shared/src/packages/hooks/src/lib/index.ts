@@ -3,3 +3,4 @@ export * from './useExternalContextId';
 export * from './useContextId';
 export * from './useServiceDiscovery';
 export * from './useCloseSidesheetOnContextChanges';
+export * from './useAppInsights';

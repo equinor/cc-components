@@ -129,6 +129,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
             <LinkCell
               url={item.commissioningPackageUrl}
               urlText={item.commissioningPackageNo}
+              aiLinkLocation="pipetest sidesheet header"
             />
           }
         />

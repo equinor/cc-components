@@ -81,7 +81,14 @@ const columnDefinitions: ColDef<Loop>[] = [
     headerTooltip: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
     cellRenderer: (props: ICellRendererProps<Loop, string | null>) => {
-      return <LinkCell url={props.data?.loopUrl ?? ''} urlText={props.value ?? ''} />;
+      return (
+        <LinkCell
+          url={props.data?.loopUrl ?? ''}
+          urlText={props.value ?? ''}
+          aiLinkLocation="loop grid"
+          aiLinktype="LoopTag"
+        />
+      );
     },
     onCellClicked: () => {},
   },
@@ -116,6 +123,8 @@ const columnDefinitions: ColDef<Loop>[] = [
           <LinkCell
             url={props.data.commissioningPackageUrl}
             urlText={props.data.commissioningPackageNo}
+            aiLinkLocation="loop grid"
+            aiLinktype="CommPkgNo"
           />
         );
       } else {
@@ -138,6 +147,8 @@ const columnDefinitions: ColDef<Loop>[] = [
           <LinkCell
             url={props.data.mechanicalCompletionPackageUrl}
             urlText={props.data.mechanicalCompletionPackageNo}
+            aiLinkLocation="loop grid"
+            aiLinktype="McPkgNo"
           />
         );
       } else {
@@ -230,7 +241,14 @@ const columnDefinitions: ColDef<Loop>[] = [
     valueGetter: (pkg) => pkg.data?.formularType,
     cellRenderer: (props: ICellRendererProps<Loop, string>) => {
       if (!props.data?.formularType || !props.data.formTypeUrl) return null;
-      return <LinkCell url={props.data.formTypeUrl} urlText={props.data.formularType} />;
+      return (
+        <LinkCell
+          url={props.data.formTypeUrl}
+          urlText={props.data.formularType}
+          aiLinkLocation="loop grid"
+          aiLinktype="Formular Type"
+        />
+      );
     },
     onCellClicked: () => {},
     enableRowGroup: false,
