@@ -59,19 +59,19 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
             <td>{stringCell(mcPackage.remark)}</td>
           </tr>
           <tr>
-            <td>Contractor Final Punch Actual date (M01)</td>
+            <td>Contractor Final Punch Actual date (M-01)</td>
             <td>{stringCell(formatDateString(mcPackage.finalPunchActualDate))}</td>
           </tr>
           <tr>
-            <td>Punch Status Accepted Actual Date (M02)</td>
+            <td>Punch Status Accepted Actual Date (M-02)</td>
             <td>{stringCell(formatDateString(mcPackage.punchAcceptedActualtDate))}</td>
           </tr>
           <tr>
-            <td>RFC MC to Commissioning Actual Date (M03)</td>
+            <td>RFC MC to Commissioning Actual Date (M-03)</td>
             <td>{stringCell(formatDateString(mcPackage.rfC_ForecastDate))}</td>
           </tr>
           <tr>
-            <td>RFCC Accepted (M04)</td>
+            <td>RFCC Accepted (M-04)</td>
             <td>{stringCell(formatDateString(mcPackage.rfC_ActualDate))}</td>
           </tr>
           <tr>
