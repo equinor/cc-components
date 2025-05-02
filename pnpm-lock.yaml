@@ -58,8 +58,8 @@ importers:
         specifier: 8.4.1
         version: 8.4.1(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.30
-        version: 9.0.30(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)(tslib@2.8.1)
+        specifier: 9.0.29
+        version: 9.0.29(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)(tslib@2.8.1)
       '@microsoft/applicationinsights-web':
         specifier: 3.3.6
         version: 3.3.6(tslib@2.8.1)
@@ -2070,8 +2070,8 @@ packages:
       react-is: '>= 16.8.0'
       styled-components: ^5.3.5
 
-  '@equinor/workspace-fusion@9.0.30':
-    resolution: {integrity: sha512-5cskb0FPS+rZ/ATK1BYWJuX0DkVFwdEw2gfIaysQc0fozGx7dnB/Eo/u/IVQKs1s/Nkfb/4UF5PGaNbZk2og0Q==}
+  '@equinor/workspace-fusion@9.0.29':
+    resolution: {integrity: sha512-ZPXnCz4E7OvwHu1WzpC9P4g32+w9jvw9Gqcci5XIFXKA6s7ldUgJKWS88/NVwDa2t1oMHvyBIXz/ruSmYmBAow==}
 
   '@equinor/workspace-garden@8.0.4':
     resolution: {integrity: sha512-AnXl8anLuA1t5k26hepHOHhOGo1rprCDfpMZrWm6v0GVme+qf3BWmNJyh6V8O3E98x92BGij53MDivj0UfroFw==}
@@ -11471,7 +11471,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/sortablejs'
 
-  '@equinor/workspace-fusion@9.0.30(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)(tslib@2.8.1)':
+  '@equinor/workspace-fusion@9.0.29(@ag-grid-community/styles@32.3.2)(@ag-grid-enterprise/core@31.2.1)(@babel/core@7.24.5)(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(react-is@18.3.1)(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.22.0
