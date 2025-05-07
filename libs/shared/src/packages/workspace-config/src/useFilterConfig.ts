@@ -18,7 +18,6 @@ export const useFilterConfig = (
 ): FilterConfig => {
   const contextId = useContextId();
   return {
-    styles: { monospaceGroups: filterMonospaceWhitelist },
     dataSource: {
       getFilterMeta: async (state, signal) => {
         const res = await req({
