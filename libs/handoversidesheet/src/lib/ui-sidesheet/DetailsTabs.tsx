@@ -85,6 +85,7 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <th></th>
             <th>Planned</th>
             <th>Forecast</th>
+            <th>Actual</th>
           </tr>
         </thead>
         <tbody>
@@ -92,26 +93,31 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             <td>DCC (D01)</td>
             <td>{stringCell(formatDateString(commpkg.dccPlannedDate))}</td>
             <td>{stringCell(formatDateString(commpkg.dccForecastDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.dccActualDate))}</td>
           </tr>
           <tr>
             <td>RFRC (D03)</td>
             <td>{stringCell(formatDateString(commpkg.rfrcPlannedDate))}</td>
             <td>{stringCell(formatDateString(commpkg.rfrcForecastDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfrcActualDate))}</td>
           </tr>
           <tr>
             <td>RFCC (C01)</td>
             <td>{stringCell(formatDateString(commpkg.rfcPlannedDate))}</td>
             <td>{stringCell(formatDateString(commpkg.rfcForecastDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfcActualDate))}</td>
           </tr>
           <tr>
             <td>TAC (C06)</td>
             <td>{stringCell(formatDateString(commpkg.tacPlannedDate))}</td>
             <td>{stringCell(formatDateString(commpkg.tacForecastDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.tacActualDate))}</td>
           </tr>
           <tr>
             <td>RFOC (C07)</td>
             <td>{stringCell(formatDateString(commpkg.rfoPlannedDate))}</td>
             <td>{stringCell(formatDateString(commpkg.rfoForecastDate))}</td>
+            <td>{stringCell(formatDateString(commpkg.rfoActualDate))}</td>
           </tr>
         </tbody>
       </StyledTable>

@@ -29,11 +29,13 @@ export type HandoverPackage = {
   rfcForecastDate: string | null;
   rfcPlannedDate: string | null;
   rfcShippedDate: string | null;
+  rfcActualDate: string | null;
   rfoForecastDate: string | null;
   rfoPlannedDate: string | null;
   rfoActualDate: string | null;
   tacForecastDate: string | null;
   tacPlannedDate: string | null;
+  tacActualDate: string | null;
   isDemolition: string | null;
   mechanicalCompletionPkgsCount: number;
   mechanicalCompletionPkgsRfccShippedCount: number;
