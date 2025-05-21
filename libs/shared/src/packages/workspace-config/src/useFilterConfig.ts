@@ -14,7 +14,8 @@ import { useContextId } from '../../hooks';
  * ```
  */
 export const useFilterConfig = (
-  req: (init: RequestInit) => Promise<Response>
+  req: (init: RequestInit) => Promise<Response>,
+  descriptionReq?: (init: RequestInit) => Promise<Response>
 ): FilterConfig => {
   const contextId = useContextId();
   return {
@@ -30,6 +31,22 @@ export const useFilterConfig = (
           },
         });
 
+        return res.json();
+      },
+
+      getDescriptionMeta: async (descriptionIdentifiers, signal) => {
+        if (!descriptionReq) {
+          return {};
+        }
+        const res = await descriptionReq({
+          method: 'POST',
+          signal,
+          body: JSON.stringify(descriptionIdentifiers),
+          headers: {
+            ['content-type']: 'application/json',
+            ['x-fusion-context-id']: contextId,
+          },
+        });
         return res.json();
       },
     },
