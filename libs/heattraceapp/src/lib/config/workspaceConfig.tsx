@@ -35,8 +35,9 @@ export const WorkspaceWrapper = () => {
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'heat-trace');
 
-  const filterOptions = useFilterConfig((req) =>
-    client.fetch(`/api/contexts/${contextId}/heat-trace/filter-model`, req)
+  const filterOptions = useFilterConfig(
+    (req) => client.fetch(`/api/contexts/${contextId}/heat-trace/filter-model`, req),
+    (req) => client.fetch(`/api/contexts/${contextId}/library/descriptions`, req)
   );
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();

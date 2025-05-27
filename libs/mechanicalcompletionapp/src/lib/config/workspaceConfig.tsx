@@ -44,8 +44,10 @@ export const WorkspaceWrapper = () => {
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
-  const filterConfig = useFilterConfig((req) =>
-    client.fetch(`/api/contexts/${contextId}/mechanical-completion/filter-model`, req)
+  const filterConfig = useFilterConfig(
+    (req) =>
+      client.fetch(`/api/contexts/${contextId}/mechanical-completion/filter-model`, req),
+    (req) => client.fetch(`/api/contexts/${contextId}/library/descriptions`, req)
   );
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
