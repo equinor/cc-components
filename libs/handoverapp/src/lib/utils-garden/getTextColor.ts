@@ -10,6 +10,7 @@ export const getTextColor = (status: PackageStatus) => {
       'RFR Accepted',
       'DCC Accepted',
       'RFO Rejected',
+      'RFRC Accepted',
     ] as PackageStatus[]
   ).includes(status)
     ? itemContentColors.Dark
