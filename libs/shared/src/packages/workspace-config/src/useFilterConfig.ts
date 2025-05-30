@@ -17,20 +17,9 @@ export const useFilterConfig = (
   req: (init: RequestInit) => Promise<Response>
 ): FilterConfig => {
   const contextId = useContextId();
-  interface FilterMetaState {
-    [key: string]: unknown;
-  }
-
-  interface GetFilterMetaResponse {
-    [key: string]: unknown;
-  }
-
   return {
     dataSource: {
-      getFilterMeta: async (
-        state: FilterMetaState,
-        signal: AbortSignal
-      ): Promise<GetFilterMetaResponse> => {
+      getFilterMeta: async (state, signal) => {
         const res = await req({
           body: JSON.stringify(state),
           signal,
