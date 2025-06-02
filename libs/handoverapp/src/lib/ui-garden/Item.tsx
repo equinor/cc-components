@@ -15,6 +15,7 @@ import {
 } from './garden.styles';
 import { PopoverContent } from './PopoverContent';
 import { ItemOptions } from './types';
+import { colorMap } from '@cc-components/shared/mapping';
 
 const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,10 +37,22 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
 
   const size = getItemSize(data.volume, 100 || 0);
 
-  const backgroundColor = useMemo(
-    () => createProgressGradient(data),
-    [data, data.commissioningPackageStatus]
-  );
+  const backgroundColor = useMemo(() => {
+    if (
+      [
+        'RFRC Accepted',
+        'RFRC Sent',
+        'DCC Accepted',
+        'DCC Sendt',
+        'TAC Sent',
+        'TAC Accepted',
+        'TAC Rejected',
+      ].includes(data.commissioningPackageStatus)
+    ) {
+      return colorMap[data.commissioningPackageStatus];
+    }
+    return createProgressGradient(data);
+  }, [data, data.commissioningPackageStatus]);
   const textColor = getTextColor(data.commissioningPackageStatus);
 
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);

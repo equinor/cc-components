@@ -21,7 +21,7 @@ jobs:
       - name: PNPM setup
         uses: ./.github/actions/pnpm-setup
 
-      - uses: dtinth/setup-github-actions-caching-for-turbo@v1
+      - uses: rharkor/caching-for-turbo@v1.8
 
       - name: Build
         run: pnpm ci:build

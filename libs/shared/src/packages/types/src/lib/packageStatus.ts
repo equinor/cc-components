@@ -17,8 +17,8 @@ export type PackageStatus =
   | 'RFC Sent'
   | 'DCC Accepted'
   | 'DCC Sent'
-  | 'RFR Accepted'
-  | 'RFR Sent'
+  | 'RFRC Accepted'
+  | 'RFRC Sent'
   | 'OS'
   | 'No status'
   | 'OK';
