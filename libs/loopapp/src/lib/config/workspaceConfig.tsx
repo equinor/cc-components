@@ -45,8 +45,9 @@ export const WorkspaceWrapper = () => {
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'loop');
 
-  const filterOptions = useFilterConfig((req) =>
-    client.fetch(`/api/contexts/${contextId}/loop/filter-model`, req)
+  const filterOptions = useFilterConfig(
+    (req) => client.fetch(`/api/contexts/${contextId}/loop/filter-model`, req),
+    (req) => client.fetch(`/api/contexts/${contextId}/library/descriptions`, req)
   );
   const tableConfig = useTableConfig(contextId);
 

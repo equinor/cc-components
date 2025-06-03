@@ -46,8 +46,9 @@ export const WorkspaceWrapper = () => {
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
-  const filterConfig = useFilterConfig((req) =>
-    ccApi.fetch(`/api/contexts/${contextId}/swcr/filter-model`, req)
+  const filterConfig = useFilterConfig(
+    (req) => ccApi.fetch(`/api/contexts/${contextId}/swcr/filter-model`, req),
+    (req) => ccApi.fetch(`/api/contexts/${contextId}/library/descriptions`, req)
   );
   const tableConfig = useTableConfig(contextId);
   const statusbarConfig = useStatusBarConfig(contextId);

@@ -45,8 +45,9 @@ export const WorkspaceWrapper = () => {
     pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
   );
 
-  const filterConfig = useFilterConfig((req) =>
-    ccApi.fetch(`/api/contexts/${contextId}/punch/filter-model`, req)
+  const filterConfig = useFilterConfig(
+    (req) => ccApi.fetch(`/api/contexts/${contextId}/punch/filter-model`, req),
+    (req) => ccApi.fetch(`/api/contexts/${contextId}/library/descriptions`, req)
   );
   const tableConfig = useTableConfig(contextId);
   const statusbarConfig = useStatusBarConfig(contextId);
