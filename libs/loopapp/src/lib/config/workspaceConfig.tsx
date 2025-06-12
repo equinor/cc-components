@@ -5,6 +5,7 @@ import {
   useHttpClient,
   useWorkspaceBookmarks,
   useCloseSidesheetOnContextChange,
+  isAffiliateUser,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
@@ -65,6 +66,13 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (item) => item.checklistId,
         defaultTab: 'grid',
+        information: {
+          title: 'Loop Workspace',
+          dataSource: 'ProCoSys / Alpha',
+          dataRefreshRate: 'Hourly',
+          access: 'Internal',
+          isAffiliate: isAffiliateUser(),
+        },
       }}
       filterOptions={filterOptions}
       gardenOptions={gardenConfig}

@@ -27,7 +27,6 @@ export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConf
           target: { column: filters.column, table: filters.table },
         }
       : undefined,
-    ReportMetaData: (props) => <ReportMeta {...props} />,
     ErrorComponent,
     reportUri,
   };

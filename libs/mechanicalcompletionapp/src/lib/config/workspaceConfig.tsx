@@ -1,4 +1,5 @@
 import {
+  isAffiliateUser,
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
@@ -62,6 +63,13 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (item) => item.mechanicalCompletionPackageUrlId,
         defaultTab: 'garden',
+        information: {
+          title: 'Mechanical Completion Workspace',
+          dataSource: 'ProCoSys / Alpha',
+          dataRefreshRate: 'Hourly',
+          access: 'Internal',
+          isAffiliate: isAffiliateUser(),
+        },
       }}
       currentBookmark={currentBookmark}
       onBookmarkChange={onBookmarkChange}

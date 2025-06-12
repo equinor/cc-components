@@ -6,6 +6,7 @@ import { powerBiModule } from '@equinor/workspace-fusion/power-bi-module';
 import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import {
+  isAffiliateUser,
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
@@ -64,6 +65,13 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (ht) => ht.heatTraceCableId,
         defaultTab: 'grid',
+        information: {
+          title: 'Heat Trace Workspace',
+          dataSource: 'ProCoSys / Alpha',
+          dataRefreshRate: 'Hourly',
+          access: 'Internal',
+          isAffiliate: isAffiliateUser(),
+        },
       }}
       filterOptions={filterOptions}
       gardenOptions={gardenConfig}

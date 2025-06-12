@@ -2,7 +2,6 @@
 
 # compiled output
 /.nx
-/workspace
 /dist
 /tmp
 /out-tsc
