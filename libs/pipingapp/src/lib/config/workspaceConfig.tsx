@@ -12,6 +12,7 @@ import {
   useWorkspaceBookmarks,
   usePBIOptions,
   useCloseSidesheetOnContextChange,
+  isAffiliateUser,
 } from '@cc-components/shared';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './pipingSidesheet';
@@ -63,6 +64,13 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (pt) => pt.id,
         defaultTab: 'grid',
+        information: {
+          title: 'Pipetest Workspace',
+          dataSource: 'ProCoSys / Alpha',
+          dataRefreshRate: 'Hourly',
+          access: 'Internal',
+          isAffiliate: isAffiliateUser(),
+        },
       }}
       filterOptions={filterOptions}
       gardenOptions={gardenConfig}

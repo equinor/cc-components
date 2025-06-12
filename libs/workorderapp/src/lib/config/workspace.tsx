@@ -5,6 +5,7 @@ import {
   usePBIOptions,
   useWorkspaceBookmarks,
   useCloseSidesheetOnContextChange,
+  isAffiliateUser,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
@@ -65,6 +66,13 @@ export const WorkspaceWrapper = () => {
         workspaceOptions={{
           getIdentifier: (item) => item.workOrderId,
           defaultTab: 'grid',
+          information: {
+            title: 'Workorder Workspace',
+            dataSource: 'ProCoSys / Alpha',
+            dataRefreshRate: 'Hourly',
+            access: 'Internal',
+            isAffiliate: isAffiliateUser(),
+          },
         }}
         powerBiOptions={pbi}
         filterOptions={filterConfig}
