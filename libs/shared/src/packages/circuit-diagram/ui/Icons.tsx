@@ -143,8 +143,8 @@ export const MotorIcon = () => {
           fill="#FFF"
         ></path>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M28 48.502c11.322 0 20.5-9.178 20.5-20.5s-9.178-20.5-20.5-20.5-20.5 9.178-20.5 20.5 9.178 20.5 20.5 20.5zm0 3.5c13.255 0 24-10.745 24-24s-10.745-24-24-24-24 10.745-24 24 10.745 24 24 24z"
           fill="#243746"
         ></path>
