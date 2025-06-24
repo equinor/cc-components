@@ -9,18 +9,36 @@ import {
   statusColorMap,
 } from '@cc-components/shared';
 
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
   GridConfig,
   MenuModule,
+  ServerSideRowModelModule,
+  ICellRendererProps,
+  RowStyleModule,
+  ValidationModule,
+  RowApiModule,
+  ColumnApiModule,
+  ColumnAutoSizeModule,
+  TooltipModule,
+  TextFilterModule,
+  NumberFilterModule,
+  DateFilterModule,
+  SetFilterModule,
+  MultiFilterModule,
+  GroupFilterModule,
+  CustomFilterModule,
+  QuickFilterModule,
+  ExternalFilterModule,
+  AdvancedFilterModule,
 } from '@equinor/workspace-fusion/grid';
 
 import { useHttpClient } from '@cc-components/shared';
 import {
   GridColumnOption,
+  defaultModules,
   defaultGridOptions,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
@@ -46,8 +64,8 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
-    modules: [MenuModule, ColumnsToolPanelModule],
-    columnDefinitions: colDefs as any,
+    modules: defaultModules,
+    columnDefinitions: colDefs as ColDef<HandoverPackage>[],
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
@@ -55,7 +73,7 @@ export const useTableConfig = (
           e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
         );
       },
-    },
+    } as GridConfig<HandoverPackage, FilterState>['gridOptions'],
   };
 };
 

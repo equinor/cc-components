@@ -1,8 +1,9 @@
 import { Icon, Progress } from '@equinor/eds-core-react';
 import { error_outlined, info_circle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { ClientGrid, ColDef, GridOptions } from '@equinor/workspace-ag-grid';
+import { ClientGrid, ColDef, GridOptions } from '@equinor/workspace-fusion';
 import { defaultGridOptions } from '../../../../../workspace-config/src/defaultGridOptions';
+import { defaultModules } from '../../../../../workspace-config/src/defaultModules';
 import { InfoText, NoResourceData, TabTableStyles } from './tabTable.styles';
 
 type TabTableProps<T> = {
@@ -60,6 +61,7 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
         <ClientGrid
           rowData={packages}
           colDefs={columns}
+          modules={defaultModules}
           gridOptions={{
             ...defaultGridOptions,
             ...props.additionalGridOptions,

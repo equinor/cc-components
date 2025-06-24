@@ -1,4 +1,4 @@
-import { LicenseManager } from '@ag-grid-enterprise/core';
+import { LicenseManager } from 'ag-grid-enterprise';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import {
