@@ -26,8 +26,8 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
 
   const envConfig: LoopEnvConfig = c.env.config?.environment as LoopEnvConfig;
 
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
+  if ((window.Fusion.modules as any)?.agGrid?.licenseKey) {
+    LicenseManager.setLicenseKey((window.Fusion.modules as any).agGrid.licenseKey);
   }
 
   if (!envConfig) {

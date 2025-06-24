@@ -30,8 +30,8 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     throw new Error('Failed to load environemnt config for workorder');
   }
 
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
+  if ((window.Fusion.modules as any)?.agGrid?.licenseKey) {
+    LicenseManager.setLicenseKey((window.Fusion.modules as any).agGrid.licenseKey);
   }
 
   config.configureHttpClient('cc-app', {
