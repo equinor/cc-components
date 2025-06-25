@@ -30,16 +30,14 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     throw new Error('Failed to load environemnt config for workorder');
   }
 
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
-  }
-
   config.configureHttpClient('cc-app', {
     baseUri: envConfig?.uri,
     defaultScopes: envConfig?.defaultScopes,
   });
 
-  enableAgGrid(config);
+  enableAgGrid(config, (builder) => {
+    builder.setLicenseKey(envConfig.license);
+  });
 };
 
 type HandoverEnvConfig = {

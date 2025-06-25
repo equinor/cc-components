@@ -26,10 +26,6 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
 
   const envConfig: LoopEnvConfig = c.env.config?.environment as LoopEnvConfig;
 
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
-  }
-
   if (!envConfig) {
     throw new Error('Failed to load environemnt config for workorder');
   }
@@ -38,7 +34,9 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     defaultScopes: envConfig?.defaultScopes,
   });
 
-  enableAgGrid(config);
+  enableAgGrid(config, (builder) => {
+    builder.setLicenseKey(envConfig.license);
+  });
 };
 
 type LoopEnvConfig = {

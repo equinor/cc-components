@@ -27,10 +27,6 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
 
   const envConfig = c.env.config?.environment as MechEnvConfig & ModelViewerEnvConfig;
 
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
-  }
-
   if (!envConfig.uri) {
     throw new Error('Failed to load environemnt config for MC');
   }
@@ -39,7 +35,9 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     defaultScopes: envConfig?.defaultScopes,
   });
 
-  enableAgGrid(config);
+  enableAgGrid(config, (builder) => {
+    builder.setLicenseKey(envConfig.license);
+  });
   enableModelViewer(config, envConfig);
 };
 
