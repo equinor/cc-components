@@ -35,9 +35,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     defaultScopes: envConfig?.defaultScopes,
   });
 
-  enableAgGrid(config, (builder) => {
-    builder.setLicenseKey(envConfig.license);
-  });
+  enableAgGrid(config);
   enableModelViewer(config, envConfig);
 };
 
