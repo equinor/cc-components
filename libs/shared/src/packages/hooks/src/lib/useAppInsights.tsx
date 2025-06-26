@@ -2,18 +2,13 @@ import React, { createContext, useContext, useEffect } from 'react';
 import {
   ApplicationInsights,
   BaseTelemetryPlugin,
-  IAppInsightsCore,
-  IConfiguration,
-  IPlugin,
   IProcessTelemetryContext,
   ITelemetryItem,
 } from '@microsoft/applicationinsights-web';
-import { table } from 'console';
-import { context } from 'node_modules/@equinor/fusion-framework-react/dist/types/context';
 
 const AppInsightsContext = createContext<ApplicationInsights | undefined>(undefined);
 
-class TestPlugin extends BaseTelemetryPlugin {
+class ExtendMetadataPlugin extends BaseTelemetryPlugin {
   private defaultProperties: Record<string, string> | undefined;
   constructor(defaultProperties?: Record<string, string>) {
     super();
@@ -45,6 +40,16 @@ export const useAppInsights = (): ApplicationInsights | undefined => {
   return useContext(AppInsightsContext);
 };
 
+const filterUnwantedLogs = (envelope: ITelemetryItem): boolean => {
+  const message = envelope.baseData?.message || envelope.baseData?.properties?.message;
+  // Filters out unwanted logs from Fusion
+  if (message?.includes('ResizeObserver')) {
+    return false;
+  }
+
+  return true;
+};
+
 type AppInsightsProviderProps = {
   connectionString?: string;
   children: React.ReactNode;
@@ -64,9 +69,10 @@ export const AppInsightsProvider = ({
         connectionString: connectionString,
         enableResponseHeaderTracking: true,
         enableAjaxPerfTracking: true,
-        extensions: [new TestPlugin(defaultTags)],
+        extensions: [new ExtendMetadataPlugin(defaultTags)],
       },
     });
+    appInsights.addTelemetryInitializer(filterUnwantedLogs);
   }
 
   useEffect(() => {
