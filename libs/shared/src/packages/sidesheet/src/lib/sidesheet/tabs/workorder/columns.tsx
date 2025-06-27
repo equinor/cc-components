@@ -24,6 +24,8 @@ export const columns = (
           />
         );
       },
+      sort: 'asc',
+      sortIndex: 1,
     },
     {
       colId: 'title',
@@ -39,24 +41,6 @@ export const columns = (
       valueGetter: (pkg) => pkg.data?.discipline,
     },
     {
-      headerName: 'Status',
-      valueGetter: (pkg) => pkg.data?.jobStatus,
-    },
-    {
-      headerName: 'Plan. finish',
-      valueGetter: (pkg) => pkg.data?.plannedFinishDate,
-      cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        return <DateCell dateString={props.value} />;
-      },
-    },
-    {
-      headerName: 'Act. finish',
-      valueGetter: (pkg) => pkg.data?.actualCompletionDate,
-      cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
-        return <DateCell dateString={props.value} />;
-      },
-    },
-    {
       headerName: 'Progress',
       valueGetter: (pkg) => pkg.data?.projectProgress,
       cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
@@ -64,6 +48,8 @@ export const columns = (
       },
       cellStyle: progressBarCellStyle,
       minWidth: 150,
+      sort: 'asc',
+      sortIndex: 0,
     },
     {
       headerName: 'Estimated',
@@ -100,6 +86,24 @@ export const columns = (
       },
       cellStyle: progressBarCellStyle,
       minWidth: 150,
+    },
+    {
+      headerName: 'Status',
+      valueGetter: (pkg) => pkg.data?.jobStatus,
+    },
+    {
+      headerName: 'Plan. finish',
+      valueGetter: (pkg) => pkg.data?.plannedFinishDate,
+      cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
+        return <DateCell dateString={props.value} />;
+      },
+    },
+    {
+      headerName: 'Act. finish',
+      valueGetter: (pkg) => pkg.data?.actualCompletionDate,
+      cellRenderer: (props: ICellRendererProps<WorkorderBase>) => {
+        return <DateCell dateString={props.value} />;
+      },
     },
   ];
 };
