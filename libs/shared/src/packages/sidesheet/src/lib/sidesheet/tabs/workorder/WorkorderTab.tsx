@@ -39,10 +39,6 @@ export const WorkorderTab = <T extends WorkorderBase>({
     maxRemainingHours = findMaxHours(workorders || [], 'remainingHours');
   }
 
-  var options : GridOptions = {
-
-  }
-
   return (
     <StyledContentWrapper>
       <TabTable
