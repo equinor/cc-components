@@ -26,7 +26,7 @@ importers:
         version: 4.4.2(@types/semver@7.7.0)
       '@equinor/fusion-framework-module-ag-grid':
         specifier: 34.0.2
-        version: 34.0.2(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(ag-grid-community@34.0.0)(ag-grid-enterprise@34.0.0)
+        version: 34.0.2(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(ag-grid-community@33.2.4)(ag-grid-enterprise@33.2.4)
       '@equinor/fusion-framework-module-event':
         specifier: ^4.3.6
         version: 4.3.6(@types/semver@7.7.0)
@@ -55,8 +55,8 @@ importers:
         specifier: 8.5.1
         version: 8.5.1(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: link:workspace/packages/workspace-fusion
-        version: link:workspace/packages/workspace-fusion
+        specifier: 9.0.37-pr.5
+        version: 9.0.37-pr.5(@babel/core@7.27.7)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)
       '@microsoft/applicationinsights-web':
         specifier: 3.3.6
         version: 3.3.6(tslib@2.8.1)
@@ -590,8 +590,8 @@ importers:
         specifier: ^0.8.5
         version: 0.8.8(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: link:workspace/packages/workspace-fusion
-        version: link:workspace/packages/workspace-fusion
+        specifier: 9.0.37-pr.5
+        version: 9.0.37-pr.5(@babel/core@7.27.7)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)
       '@remirror/pm':
         specifier: ^2.0.8
         version: 2.0.9
@@ -1512,6 +1512,13 @@ packages:
       react-dom: 18.2.0
       styled-components: '>=4.2'
 
+  '@equinor/eds-core-react@0.43.0':
+    resolution: {integrity: sha512-6sWUic7ezZhFT6DaIkBa8wXTqPV6W47Sc1jy9cKToETQVA3jlM4+usv3788jYiObZQd+CIGvkzxR+a/5Jpo6Dw==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: '>=5.1'
+
   '@equinor/eds-icons@0.17.0':
     resolution: {integrity: sha512-Nhd/3rPS5l6IE+BN+fd1Om1yjS71CSMCCqWaXe3dVNPfkAG/ARIiG72+S4Rcjb1d5Qbn1bppNCUL26O5dlKrCw==}
     engines: {node: '>=10.0.0', pnpm: '>=4'}
@@ -1523,6 +1530,9 @@ packages:
   '@equinor/eds-icons@0.21.0':
     resolution: {integrity: sha512-k2keACHou9h9D5QLfSBeojTApqbPCkHNBWplUA/B9FQv8FMCMSBbjJAo2L/3yAExMylQN9LdwKo81T2tijRXoA==}
     engines: {node: '>=10.0.0', pnpm: '>=4'}
+
+  '@equinor/eds-icons@0.22.0':
+    resolution: {integrity: sha512-4SmPT67rUbl6qFyOCiSsue68EERgEGaXl9Xx6DkScW46AMbM6OdX3New1hctx1MIb6YdNlkHc/WwXTc+MG9j9Q==}
 
   '@equinor/eds-tokens@0.9.0':
     resolution: {integrity: sha512-7FLqrH13dRc/q+wxHzZrIGkV35XMYIGojjkqLIbIeM0AwijSE1PETKqLauNf8VtMZPevt/2Hr9dV2a2NpEORQw==}
@@ -1547,6 +1557,13 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0
       styled-components: '>=4.2'
+
+  '@equinor/eds-utils@0.8.6':
+    resolution: {integrity: sha512-15AtxEoqovSZdXJprjt5YISTGJYiQCh35HPS3PjvbiJeY03ZXOq77zI0O12qUXxJmQ/MsadKxIxtfqAUmfRvtQ==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: '>=5.1'
 
   '@equinor/fusion-framework-app@9.3.19':
     resolution: {integrity: sha512-r4cK4GBjj5DNnhY5/T3dFcYgmxXSbRPElWDArAFcnHztwkxfNQICKcWjH/EguwQV+o+W57Ua/IEMJou2d00+GQ==}
@@ -1611,6 +1628,9 @@ packages:
     peerDependenciesMeta:
       '@types/semver':
         optional: true
+
+  '@equinor/fusion-framework-react-ag-grid@33.2.7':
+    resolution: {integrity: sha512-OJFLDmsDqPHSJr9CCe+C88Fd45w2rQZfRAS7Hq7PI/2PEIEXvpPKkyF8SKq1J5NgOKknLBxgDWMqlwrY/T2ERg==}
 
   '@equinor/fusion-framework-react-app@6.2.3':
     resolution: {integrity: sha512-eNdtcKbCbJAl10IqHTlBq8+yoaZaCTixErh9DcFB83O/ERfiCBOmpBI0S/8Yz0s3NR/koGGTb1tTp8OeCbBh5A==}
@@ -1805,6 +1825,38 @@ packages:
 
   '@equinor/fusion-web-theme@0.1.10':
     resolution: {integrity: sha512-/Yzfie73UvMoBMo35gmeHO+5nTty5EyemomcB5ZbEDyHFNIodgCL1JGm2KfrIwqez9w9CTneHjnJWvwhu9TM+w==}
+
+  '@equinor/workspace-ag-grid@3.0.8-pr.0':
+    resolution: {integrity: sha512-l9mIooUXKEmYnXxMD1UXnu3gzP6rYb3t8619+O3TWu4T0tGXBjeWxyLSKu2VCGpineRX9asXgCu5hjN7H/SFrg==}
+    peerDependencies:
+      styled-components: '>= 5.0.0'
+
+  '@equinor/workspace-filter@4.0.18-pr.0':
+    resolution: {integrity: sha512-dwupeOsnm0M05vgm+UXKwuQTwThNLxez1150smotCrNAfd341DnEDPrLGeeOdDe02Didz/8L0ChP0xl2SxBonw==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: ^5.3.5
+
+  '@equinor/workspace-fusion@9.0.37-pr.5':
+    resolution: {integrity: sha512-oPvdbeBR0jDvun+nPhmATU8PUnDbZgZn5U5WerkqX76z2u5ek6qTijppKnT9QN5baKue2F+2zTpD8ks8Nb+7pw==}
+
+  '@equinor/workspace-garden@8.0.8-pr.0':
+    resolution: {integrity: sha512-9IKa6yKkc1qP3gBEAm1ISJlD1s2GabODSv4YVzAzDAfpTJb0q9M1l0zsaXwm+yCwZqkRDj2baigy0JxeS4BJaQ==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: ^5.3.6
+
+  '@equinor/workspace-powerbi@3.0.19-pr.5':
+    resolution: {integrity: sha512-xwKBQ7qaMRdxYwhZ3EfEr9Ek+tL5BtkSKsQWeGHj6O7ThDkPnnqXkhXVLinRHOCgZkuBXeBQDrqQir/UCVDhfQ==}
+
+  '@equinor/workspace-react@2.0.8-pr.0':
+    resolution: {integrity: sha512-0jHXXgAuQ2H6Z4amfQnF0ydRNn+KoF5PA3uCzJ0ipsX5vXVYuonOW4tGr57fUZyEdgUwoh7VOtVPickLPxqIdg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: ^5.3.6
 
   '@equinor/workspace-sidesheet@0.1.6':
     resolution: {integrity: sha512-e7Gn1SyDQqOPFnGA0+/AEvAdFcV7mMnjbmQq8jCS5UhsVid2kRHYHunfrxhVIspwnsZgiHRdlCJnzGlYn1VFaw==}
@@ -2304,6 +2356,12 @@ packages:
 
   '@floating-ui/react@0.26.28':
     resolution: {integrity: sha512-yORQuuAtVpiRjpMhdc0wJj06b9JFjrYF4qp96j++v2NBpbi6SEGF7donUJ3TMieerQ6qVkAv1tgr7L4r5roTqw==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
+  '@floating-ui/react@0.27.13':
+    resolution: {integrity: sha512-Qmj6t9TjgWAvbygNEu1hj4dbHI9CY0ziCMIJrmYoDIn9TUAH5lRmiIeZmRd4c6QEZkzdoH7jNnoNyoY1AIESiA==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
@@ -3030,6 +3088,9 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
+  '@reach/observe-rect@1.2.0':
+    resolution: {integrity: sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==}
 
   '@react-aria/breadcrumbs@3.5.26':
     resolution: {integrity: sha512-jybk2jy3m9KNmTpzJu87C0nkcMcGbZIyotgK1s8st8aUE2aJlxPZrvGuJTO8GUFZn9TKnCg3JjBC8qS9sizKQg==}
@@ -4313,6 +4374,15 @@ packages:
   '@tanstack/query-core@5.81.5':
     resolution: {integrity: sha512-ZJOgCy/z2qpZXWaj/oxvodDx07XcQa9BF92c0oINjHkoqUPsmm3uG08HpTaviviZ/N9eP1f9CM7mKSEkIo7O1Q==}
 
+  '@tanstack/query-devtools@5.81.2':
+    resolution: {integrity: sha512-jCeJcDCwKfoyyBXjXe9+Lo8aTkavygHHsUHAlxQKKaDeyT0qyQNLKl7+UyqYH2dDF6UN/14873IPBHchcsU+Zg==}
+
+  '@tanstack/react-query-devtools@5.81.5':
+    resolution: {integrity: sha512-lCGMu4RX0uGnlrlLeSckBfnW/UV+KMlTBVqa97cwK7Z2ED5JKnZRSjNXwoma6sQBTJrcULvzgx2K6jEPvNUpDw==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.81.5
+      react: 18.2.0
+
   '@tanstack/react-query@5.81.5':
     resolution: {integrity: sha512-lOf2KqRRiYWpQT86eeeftAGnjuTR35myTP8MXyvHa81VlomoAWNEd8x5vkcAfQefu0qtYCvyqLropFZqgI2EQw==}
     peerDependencies:
@@ -4323,6 +4393,18 @@ packages:
     peerDependencies:
       react: 18.2.0
 
+  '@tanstack/react-virtual@3.11.2':
+    resolution: {integrity: sha512-OuFzMXPF4+xZgx8UzJha0AieuMihhhaWG0tCqpp6tDzlFwOmNBPYMuLOtMJ1Tr4pXLHmgjcWhG6RlknY2oNTdQ==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
+  '@tanstack/react-virtual@3.13.12':
+    resolution: {integrity: sha512-Gd13QdxPSukP8ZrkbgS2RwoZseTTbQPLnQEn7HY/rqtM+8Zt95f7xKC7N0EsKs7aoz0WzZ+fditZux+F8EzYxA==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
   '@tanstack/react-virtual@3.2.0':
     resolution: {integrity: sha512-OEdMByf2hEfDa6XDbGlZN8qO6bTjlNKqjM3im9JG+u3mCL8jALy0T/67oDI001raUUPh1Bdmfn4ZvPOV5knpcg==}
     peerDependencies:
@@ -4331,6 +4413,12 @@ packages:
 
   '@tanstack/virtual-core@3.0.0-beta.30':
     resolution: {integrity: sha512-fewNoKiJeG5v0T4jg7UO99G+hUYDHig6AkiIeqvC1O2zEw96MlzR6DXw91aqxcsIPSVp83IPsgNa7su8yZWldw==}
+
+  '@tanstack/virtual-core@3.11.2':
+    resolution: {integrity: sha512-vTtpNt7mKCiZ1pwU9hfKPhpdVO2sVzFQsxoVBGtOSHxlrRRzYr8iQ2TlwbAcRYCcEiZ9ECAM8kBzH0v2+VzfKw==}
+
+  '@tanstack/virtual-core@3.13.12':
+    resolution: {integrity: sha512-1YBOJfRHV4sXUmWsFSf5rQor4Ss82G8dQWLRbnk3GA4jeP8hQt1hxXh0tmflpC0dz3VgEv/1+qwPyLeWkQuPFA==}
 
   '@tanstack/virtual-core@3.2.0':
     resolution: {integrity: sha512-P5XgYoAw/vfW65byBbJQCw+cagdXDT/qH6wmABiLt4v4YBT2q2vqCOhihe+D1Nt325F/S/0Tkv6C5z0Lv+VBQQ==}
@@ -4523,6 +4611,9 @@ packages:
   '@types/semver@7.7.0':
     resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
 
+  '@types/sortablejs@1.15.8':
+    resolution: {integrity: sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==}
+
   '@types/stats.js@0.17.4':
     resolution: {integrity: sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA==}
 
@@ -4633,26 +4724,32 @@ packages:
     resolution: {integrity: sha512-TGw5yVi4saajsSEgz25grObGHEUaDrniwvA2qwSC060KfqGPdglhvPMA2lPIoxs3PQIItj2iag35fONcQqgUaQ==}
     engines: {node: '>=12.0'}
 
-  ag-charts-community@12.0.0:
-    resolution: {integrity: sha512-5eexp2B+wopMWDGWtu8+bIrz2R3pwTBHq7THpIsDxMtsSc1+PXvjPDqM7zEsHcbckEBe5wVViGIX4JdKWKL+Zw==}
+  ag-charts-community@11.2.4:
+    resolution: {integrity: sha512-L4DDGpCP1IVjjgacADRMPSucUiH7CU4nLJFFI/eWkv+ee0WOte7XIgIiwzUci+UD4IhLHu5zwbOoHdZ9LX/E5w==}
 
-  ag-charts-core@12.0.0:
-    resolution: {integrity: sha512-TkVFSI+pHUv421p4arV1UcBKVAj5XrdyBX3NcRYZCixlr7jR/8yR027PG71TIj6fXztYbGNGQMREbpqeozaKpw==}
+  ag-charts-core@11.2.4:
+    resolution: {integrity: sha512-RiN2GXSBuYBAGhbfxiQjhM+pDnJ+2iT/W0r/2KHBHXI8Bv89l+jYKBunb/4SqcP6/DBaxhh+yESk25dYj391Bg==}
 
-  ag-charts-enterprise@12.0.0:
-    resolution: {integrity: sha512-ULy1Bru1DF+OugfW/ixerASBvKKa1SuDAPhjGvuZ0o22PjpDW0zBQPGFFbdOYUPwTg1sJsTpE8P+tlz5llmeeg==}
+  ag-charts-enterprise@11.2.4:
+    resolution: {integrity: sha512-4msY1swe0GwEytQI9H3ANM+pMWVeAa8u8yGcZJ8kMzTFB3urNjXXGmYLZ7rQCiPfzLUuY25iGKf36ToUMHrrNA==}
 
-  ag-charts-locale@12.0.0:
-    resolution: {integrity: sha512-mJimzTOkiMgxbNAlzgzSnrdcnCi+6+iz0NT0gg5KnsbVuCQcQ4XJwZozTe9sDVH5amYjbhbZg7/GKiHfJviiAg==}
+  ag-charts-locale@11.2.4:
+    resolution: {integrity: sha512-hArufzKISb/5UJtIPfTKu3TvSQ3ZAuwMrOsn8F6I4rOwJnNxbZYeQvm2yiKXx9D7hMhr3d1lNZxNIlKOrMZY/w==}
 
-  ag-charts-types@12.0.0:
-    resolution: {integrity: sha512-/SFzPVLnCzRDsEV6Lh/dqdbdgSowK23jBogYAWLZnQuHjM3o7wbV78yv4WXlQSb5TcubNk3GEdhRLgIMR17WIg==}
+  ag-charts-types@11.2.4:
+    resolution: {integrity: sha512-a1aQjtQ9ZH+J8BF3YcWAIHUt9ZLiL9IVZ8R5h7z2CkTNu2TPq5UlsCcF0/YZKc1M8CM0CdSNLSGQuWUwDNxAcA==}
 
-  ag-grid-community@34.0.0:
-    resolution: {integrity: sha512-mSHETYazOYHxYpA4p4fea/iJhM7SW0t12gaSaoS4wOLUEwo0vI+Lgq3F9ZSAyErcXpj9MLCSmRqQrpzBn3epHQ==}
+  ag-grid-community@33.2.4:
+    resolution: {integrity: sha512-7XT1+wxmMlMVXB27BJOzlft9ATB0C5HOJcCGMc8dCO2W17JXbNknVEEDGTBKoSvA4Cei8sARrRDxmPgY8mWopQ==}
 
-  ag-grid-enterprise@34.0.0:
-    resolution: {integrity: sha512-KbMdWhFWpM5OsI0cB/WbyE4O0ieEJKN+Wm6elx41r1EPJKi760U9HpJb6drN0rS9BoY6Dd3V3VnacZbaddX7Kg==}
+  ag-grid-enterprise@33.2.4:
+    resolution: {integrity: sha512-JFFm0d/7+cdTR/J0oMRwwKfFHII5xsYCw3t6ef1iQHjhpIR9H3vv6XVGL41aYvwuaQcZM4kDWZnwlVfjGFC47w==}
+
+  ag-grid-react@33.2.4:
+    resolution: {integrity: sha512-rP6zwrGxRimAf6blJQZDahE0t2LM2zqqOEEeBacD6M5coWP+zOESja9vklpyzU+UfIlyqToZ2O+rboBQt3Wqxg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
 
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
@@ -5014,6 +5111,9 @@ packages:
     resolution: {integrity: sha512-cYY9mypksY8NRqgDB1XD1RiJL338v/551niynFTGkZOO2LHuB2OmOYxDIe/ttN9AHwrqdum1360G3ald0W9kCg==}
     engines: {node: '>=8'}
 
+  classnames@2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+
   cli-boxes@3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}
     engines: {node: '>=10'}
@@ -5359,6 +5459,11 @@ packages:
     peerDependencies:
       react: 18.2.0
 
+  downshift@9.0.8:
+    resolution: {integrity: sha512-59BWD7+hSUQIM1DeNPLirNNnZIO9qMdIK5GQ/Uo8q34gT4B78RBlb9dhzgnh0HfQTJj4T/JKYD8KoLAlMWnTsA==}
+    peerDependencies:
+      react: 18.2.0
+
   draco3d@1.5.7:
     resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
 
@@ -5467,6 +5572,9 @@ packages:
 
   es6-object-assign@1.1.0:
     resolution: {integrity: sha512-MEl9uirslVwqQU369iHNWZXsI8yaZYGg/D65aOgZkeyFJwHYSxilf7rQzXKI7DdDuBPrBXbfk3sl9hJhmd5AUw==}
+
+  es6-promise@3.3.1:
+    resolution: {integrity: sha512-SOp9Phqvqn7jtEUxPWdWfWoLmyt2VaJ6MpvP9Comy1MceMXqE6bxvaTu4iaxpYYPzhny28Lc+M87/c2cPK6lDg==}
 
   esbuild@0.20.2:
     resolution: {integrity: sha512-WdOOppmUNU+IbZ0PaDiTst80zjnrOkyJNHoKupIcVyU8Lvla3Ugx94VzkQ32Ijqd7UhHJy75gNWDMUekcrSJ6g==}
@@ -5997,6 +6105,9 @@ packages:
   http-cache-semantics@4.2.0:
     resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
 
+  http-post-message@0.2.3:
+    resolution: {integrity: sha512-76heerrzYhvWptJfWxUarHw2O3fkMqF48bbq/S6XFWHUc34o8tkySBwtReXuAKJAECZWVu8U0TYLckFcwtSdrg==}
+
   human-signals@5.0.0:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
@@ -6489,6 +6600,10 @@ packages:
 
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+
+  lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -7140,6 +7255,20 @@ packages:
   potpack@1.0.2:
     resolution: {integrity: sha512-choctRBIV9EMT9WGAZHn3V7t0Z2pMQyl0EZE6pFc/6ml3ssw7Dlf/oAOvFwjm1HVsqfQN8GfeFyJ+d8tRzqueQ==}
 
+  powerbi-client-react@1.4.0:
+    resolution: {integrity: sha512-AfS96lP+emEc4drguCUqLG0s4cFa15OM9eqDaP1sJZ+ca0V+FdvFeI1bD6EyC3smPlpRcl862uSzYexVeUxdIQ==}
+    peerDependencies:
+      react: 18.2.0
+
+  powerbi-client@2.23.1:
+    resolution: {integrity: sha512-r04gDDq8YkrkZjSwOw4UBgzPwudXnA+x8B9ekVE7XDlhTDC7tujbcT15Z+iLDrx+49Bj4qVez0PgjA9CgEFpGw==}
+
+  powerbi-models@1.15.2:
+    resolution: {integrity: sha512-UcBLtBB2wa8pL412DxyVZvv/bKiUVJfLTCXAuGmIqnOkoA/EnYDUM3B8oS2piN1azyEN8pjN353rE9DeARCJtA==}
+
+  powerbi-router@0.1.5:
+    resolution: {integrity: sha512-DFJCKxwh/DqMZXtHSo6xZl87mbRviZGn4P7Oi2rT0L4HMI4AjnWIrwg0JCSM7ymBzYnNe5UmrsCaf2Upur5RQA==}
+
   precision@1.0.1:
     resolution: {integrity: sha512-cBMxnM2nzEF1xx75NhhOaKjsDNt92WUZv17t/p3wrvCfA+2RL0twbgfvXvgDbxxsfUUb5C5he5tla8Xa2ny1Ew==}
     engines: {node: '>=0.10.0'}
@@ -7319,6 +7448,9 @@ packages:
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
+  react-is@18.2.0:
+    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
@@ -7336,11 +7468,24 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
+  react-sortablejs@6.1.4:
+    resolution: {integrity: sha512-fc7cBosfhnbh53Mbm6a45W+F735jwZ1UFIYSrIqcO/gRIFoDyZeMtgKlpV4DdyQfbCzdh5LoALLTDRxhMpTyXQ==}
+    peerDependencies:
+      '@types/sortablejs': '1'
+      react: 18.2.0
+      react-dom: 18.2.0
+      sortablejs: '1'
+
   react-transition-group@4.4.5:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
+
+  react-virtual@2.10.4:
+    resolution: {integrity: sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==}
+    peerDependencies:
+      react: 18.2.0
 
   react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
@@ -7546,6 +7691,9 @@ packages:
   round@2.0.1:
     resolution: {integrity: sha512-wzT6PF3wNEd2PCLTBQxteheeSwViBrD89E1XZjl4sj505C4LwTpqOQSNXLEROHDQw35NoylYbMxoUhgf2hb4qw==}
 
+  route-recognizer@0.1.11:
+    resolution: {integrity: sha512-7JNu5mXQVa39zxmUKyk/bfpeF2WyEC5JKVTJO5HATcoUQpcQsI3eLzhwGU69xeOagQxfOQ+yr2sSv0G8xy+vQA==}
+
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
@@ -7663,6 +7811,9 @@ packages:
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+
+  sortablejs@1.15.6:
+    resolution: {integrity: sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -7889,6 +8040,9 @@ packages:
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
+
+  tiny-invariant@1.2.0:
+    resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==}
 
   tiny-warning@1.0.3:
     resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==}
@@ -8444,6 +8598,9 @@ packages:
     resolution: {integrity: sha512-o0cyEG0e8GPzT4iGHphIOh0cJOV8fivsXxddQasHPHfoZf1ZexrfeA21w2NaEN1RHE+fXlfISmOE8R9N3u3Qig==}
     engines: {node: '>=12'}
 
+  window-post-message-proxy@0.2.9:
+    resolution: {integrity: sha512-hHmF5dvY27wy4EKN9c5qukPtzlbrdUzkMiCHud4gYKXCFAiGOBhCfi/dVBvwbUf0qrEGwFNnqkvk6DE54sdlcw==}
+
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
@@ -8532,6 +8689,21 @@ packages:
 
   zstddec@0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
+
+  zustand@4.5.7:
+    resolution: {integrity: sha512-CHOUy7mu3lbD6o6LJLfllpjkzhHXSBlX8B9+qPddUsIfeF5S/UZ5q0kmCsnRqT1UHFQZchNFDDzMbQsuesHWlw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0.6'
+      react: 18.2.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -9650,11 +9822,32 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
+  '@equinor/eds-core-react@0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/eds-utils': 0.8.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@floating-ui/react': 0.27.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@internationalized/date': 3.8.2
+      '@react-aria/utils': 3.29.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@react-stately/calendar': 3.8.2(react@18.2.0)
+      '@react-stately/datepicker': 3.14.2(react@18.2.0)
+      '@react-types/shared': 3.30.0(react@18.2.0)
+      '@tanstack/react-virtual': 3.11.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      downshift: 9.0.8(react@18.2.0)
+      react: 18.2.0
+      react-aria: 3.41.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
   '@equinor/eds-icons@0.17.0': {}
 
   '@equinor/eds-icons@0.18.0': {}
 
   '@equinor/eds-icons@0.21.0': {}
+
+  '@equinor/eds-icons@0.22.0': {}
 
   '@equinor/eds-tokens@0.9.0': {}
 
@@ -9675,6 +9868,14 @@ snapshots:
       - supports-color
 
   '@equinor/eds-utils@0.8.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@equinor/eds-tokens': 0.9.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@equinor/eds-utils@0.8.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@babel/runtime': 7.27.6
       '@equinor/eds-tokens': 0.9.2
@@ -9736,12 +9937,12 @@ snapshots:
       - typescript
       - yaml
 
-  '@equinor/fusion-framework-module-ag-grid@34.0.2(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(ag-grid-community@34.0.0)(ag-grid-enterprise@34.0.0)':
+  '@equinor/fusion-framework-module-ag-grid@34.0.2(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(ag-grid-community@33.2.4)(ag-grid-enterprise@33.2.4)':
     dependencies:
       '@equinor/eds-tokens': 0.9.2
       '@equinor/fusion-framework-module': 4.4.2(@types/semver@7.7.0)
-      ag-grid-community: 34.0.0
-      ag-grid-enterprise: 34.0.0
+      ag-grid-community: 33.2.4
+      ag-grid-enterprise: 33.2.4
 
   '@equinor/fusion-framework-module-app@6.1.16(@types/react@18.3.2)(chalk@5.4.1)(react@18.2.0)':
     dependencies:
@@ -9839,6 +10040,17 @@ snapshots:
       semver: 7.7.2
     optionalDependencies:
       '@types/semver': 7.7.0
+
+  '@equinor/fusion-framework-react-ag-grid@33.2.7(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@equinor/fusion-framework-module-ag-grid': 34.0.2(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(ag-grid-community@33.2.4)(ag-grid-enterprise@33.2.4)
+      ag-grid-community: 33.2.4
+      ag-grid-enterprise: 33.2.4
+      ag-grid-react: 33.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+      - react
+      - react-dom
 
   ? '@equinor/fusion-framework-react-app@6.2.3(@equinor/fusion-framework-module-bookmark@2.1.14(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react@18.2.0))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.9(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@18.3.2)(@types/semver@7.7.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(odata-query@7.0.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@18.3.2)(react@18.2.0))(@remix-run/router@1.23.0)(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(odata-query@7.0.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2)'
   : dependencies:
@@ -10119,6 +10331,116 @@ snapshots:
     dependencies:
       '@equinor/eds-tokens': 0.9.2
       csstype: 3.1.3
+
+  '@equinor/workspace-ag-grid@3.0.8-pr.0(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/fusion-framework-react-ag-grid': 33.2.7(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      ag-grid-react: 33.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+
+  '@equinor/workspace-filter@4.0.18-pr.0(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@microsoft/applicationinsights-core-js': 3.3.6(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      '@tanstack/react-virtual': 3.13.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6)
+      react-virtual: 2.10.4(react@18.2.0)
+      sortablejs: 1.15.6
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/sortablejs'
+      - tslib
+
+  '@equinor/workspace-fusion@9.0.37-pr.5(@babel/core@7.27.7)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/workspace-ag-grid': 3.0.8-pr.0(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-filter': 4.0.18-pr.0(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)
+      '@equinor/workspace-garden': 8.0.8-pr.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-powerbi': 3.0.19-pr.5(@types/sortablejs@1.15.8)(tslib@2.8.1)
+      '@equinor/workspace-react': 2.0.8-pr.0(@babel/core@7.27.7)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      re-resizable: 6.11.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@equinor/fusion-framework-module'
+      - '@types/react'
+      - '@types/sortablejs'
+      - immer
+      - supports-color
+      - tslib
+
+  '@equinor/workspace-garden@8.0.8-pr.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      '@tanstack/react-query-devtools': 5.81.5(@tanstack/react-query@5.81.5(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      react-virtual: 2.10.4(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@equinor/workspace-powerbi@3.0.19-pr.5(@types/sortablejs@1.15.8)(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/workspace-filter': 4.0.18-pr.0(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      '@tanstack/react-virtual': 3.13.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      markdown-to-jsx: 7.7.10(react@18.2.0)
+      powerbi-client: 2.23.1
+      powerbi-client-react: 1.4.0(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6)
+      react-virtual: 2.10.4(react@18.2.0)
+      sortablejs: 1.15.6
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/sortablejs'
+      - tslib
+
+  '@equinor/workspace-react@2.0.8-pr.0(@babel/core@7.27.7)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.28.0(@babel/core@7.27.7)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.18.0
+      '@equinor/eds-tokens': 0.9.2
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      zustand: 4.5.7(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - immer
+      - supports-color
+      - tslib
 
   '@equinor/workspace-sidesheet@0.1.6(@babel/core@7.27.7)(react-dom@18.2.0(react@18.2.0))(react-is@19.1.0)(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
@@ -10421,6 +10743,14 @@ snapshots:
       tabbable: 6.2.0
 
   '@floating-ui/react@0.26.28(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@floating-ui/react-dom': 2.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@floating-ui/utils': 0.2.10
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tabbable: 6.2.0
+
+  '@floating-ui/react@0.27.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@floating-ui/react-dom': 2.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@floating-ui/utils': 0.2.10
@@ -11431,6 +11761,8 @@ snapshots:
   '@popperjs/core@2.11.6': {}
 
   '@popperjs/core@2.11.8': {}
+
+  '@reach/observe-rect@1.2.0': {}
 
   '@react-aria/breadcrumbs@3.5.26(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -13727,6 +14059,14 @@ snapshots:
 
   '@tanstack/query-core@5.81.5': {}
 
+  '@tanstack/query-devtools@5.81.2': {}
+
+  '@tanstack/react-query-devtools@5.81.5(@tanstack/react-query@5.81.5(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@tanstack/query-devtools': 5.81.2
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      react: 18.2.0
+
   '@tanstack/react-query@5.81.5(react@18.2.0)':
     dependencies:
       '@tanstack/query-core': 5.81.5
@@ -13737,6 +14077,18 @@ snapshots:
       '@tanstack/virtual-core': 3.0.0-beta.30
       react: 18.2.0
 
+  '@tanstack/react-virtual@3.11.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@tanstack/virtual-core': 3.11.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
+  '@tanstack/react-virtual@3.13.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@tanstack/virtual-core': 3.13.12
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
   '@tanstack/react-virtual@3.2.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@tanstack/virtual-core': 3.2.0
@@ -13744,6 +14096,10 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
 
   '@tanstack/virtual-core@3.0.0-beta.30': {}
+
+  '@tanstack/virtual-core@3.11.2': {}
+
+  '@tanstack/virtual-core@3.13.12': {}
 
   '@tanstack/virtual-core@3.2.0': {}
 
@@ -13935,6 +14291,8 @@ snapshots:
 
   '@types/semver@7.7.0': {}
 
+  '@types/sortablejs@1.15.8': {}
+
   '@types/stats.js@0.17.4': {}
 
   '@types/string.prototype.matchall@4.0.4': {}
@@ -14064,39 +14422,46 @@ snapshots:
 
   adm-zip@0.5.16: {}
 
-  ag-charts-community@12.0.0:
+  ag-charts-community@11.2.4:
     dependencies:
-      ag-charts-core: 12.0.0
-      ag-charts-locale: 12.0.0
-      ag-charts-types: 12.0.0
+      ag-charts-core: 11.2.4
+      ag-charts-locale: 11.2.4
+      ag-charts-types: 11.2.4
     optional: true
 
-  ag-charts-core@12.0.0:
+  ag-charts-core@11.2.4:
     dependencies:
-      ag-charts-types: 12.0.0
+      ag-charts-types: 11.2.4
     optional: true
 
-  ag-charts-enterprise@12.0.0:
+  ag-charts-enterprise@11.2.4:
     dependencies:
-      ag-charts-community: 12.0.0
-      ag-charts-core: 12.0.0
+      ag-charts-community: 11.2.4
+      ag-charts-core: 11.2.4
     optional: true
 
-  ag-charts-locale@12.0.0:
+  ag-charts-locale@11.2.4:
     optional: true
 
-  ag-charts-types@12.0.0: {}
+  ag-charts-types@11.2.4: {}
 
-  ag-grid-community@34.0.0:
+  ag-grid-community@33.2.4:
     dependencies:
-      ag-charts-types: 12.0.0
+      ag-charts-types: 11.2.4
 
-  ag-grid-enterprise@34.0.0:
+  ag-grid-enterprise@33.2.4:
     dependencies:
-      ag-grid-community: 34.0.0
+      ag-grid-community: 33.2.4
     optionalDependencies:
-      ag-charts-community: 12.0.0
-      ag-charts-enterprise: 12.0.0
+      ag-charts-community: 11.2.4
+      ag-charts-enterprise: 11.2.4
+
+  ag-grid-react@33.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      ag-grid-community: 33.2.4
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   ajv@6.12.6:
     dependencies:
@@ -14620,6 +14985,8 @@ snapshots:
 
   ci-info@4.2.0: {}
 
+  classnames@2.3.1: {}
+
   cli-boxes@3.0.0: {}
 
   cli-cursor@3.1.0:
@@ -14930,6 +15297,15 @@ snapshots:
       react-is: 18.3.1
       tslib: 2.8.1
 
+  downshift@9.0.8(react@18.2.0):
+    dependencies:
+      '@babel/runtime': 7.27.6
+      compute-scroll-into-view: 3.1.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-is: 18.2.0
+      tslib: 2.8.1
+
   draco3d@1.5.7: {}
 
   dset@3.1.4: {}
@@ -15095,6 +15471,8 @@ snapshots:
       is-symbol: 1.1.1
 
   es6-object-assign@1.1.0: {}
+
+  es6-promise@3.3.1: {}
 
   esbuild@0.20.2:
     optionalDependencies:
@@ -15850,6 +16228,10 @@ snapshots:
 
   http-cache-semantics@4.2.0: {}
 
+  http-post-message@0.2.3:
+    dependencies:
+      es6-promise: 3.3.1
+
   human-signals@5.0.0: {}
 
   hyphenate-style-name@1.1.0: {}
@@ -16337,6 +16719,8 @@ snapshots:
   lodash.clonedeep@4.5.0: {}
 
   lodash.debounce@4.0.8: {}
+
+  lodash.isequal@4.5.0: {}
 
   lodash.merge@4.6.2: {}
 
@@ -17251,6 +17635,26 @@ snapshots:
 
   potpack@1.0.2: {}
 
+  powerbi-client-react@1.4.0(react@18.2.0):
+    dependencies:
+      lodash.isequal: 4.5.0
+      powerbi-client: 2.23.1
+      react: 18.2.0
+
+  powerbi-client@2.23.1:
+    dependencies:
+      http-post-message: 0.2.3
+      powerbi-models: 1.15.2
+      powerbi-router: 0.1.5
+      window-post-message-proxy: 0.2.9
+
+  powerbi-models@1.15.2: {}
+
+  powerbi-router@0.1.5:
+    dependencies:
+      es6-promise: 3.3.1
+      route-recognizer: 0.1.11
+
   precision@1.0.1:
     dependencies:
       is-finite: 1.0.2
@@ -17518,6 +17922,8 @@ snapshots:
 
   react-is@17.0.2: {}
 
+  react-is@18.2.0: {}
+
   react-is@18.3.1: {}
 
   react-is@19.1.0: {}
@@ -17532,6 +17938,15 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
+  react-sortablejs@6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6):
+    dependencies:
+      '@types/sortablejs': 1.15.8
+      classnames: 2.3.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      sortablejs: 1.15.6
+      tiny-invariant: 1.2.0
+
   react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.27.6
@@ -17540,6 +17955,11 @@ snapshots:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+
+  react-virtual@2.10.4(react@18.2.0):
+    dependencies:
+      '@reach/observe-rect': 1.2.0
+      react: 18.2.0
 
   react@18.2.0:
     dependencies:
@@ -17916,6 +18336,8 @@ snapshots:
       precision: 1.0.1
       round-precision: 1.0.0
 
+  route-recognizer@0.1.11: {}
+
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
@@ -18080,6 +18502,8 @@ snapshots:
   skmeans@0.11.3: {}
 
   slash@3.0.0: {}
+
+  sortablejs@1.15.6: {}
 
   source-map-js@1.2.1: {}
 
@@ -18341,6 +18765,8 @@ snapshots:
   through@2.3.8: {}
 
   tiny-inflate@1.0.3: {}
+
+  tiny-invariant@1.2.0: {}
 
   tiny-warning@1.0.3: {}
 
@@ -18935,6 +19361,10 @@ snapshots:
     dependencies:
       string-width: 5.1.2
 
+  window-post-message-proxy@0.2.9:
+    dependencies:
+      es6-promise: 3.3.1
+
   word-wrap@1.2.5: {}
 
   wrap-ansi@7.0.0:
@@ -19009,5 +19439,13 @@ snapshots:
   zod@3.25.67: {}
 
   zstddec@0.0.2: {}
+
+  zustand@4.5.7(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0):
+    dependencies:
+      use-sync-external-store: 1.5.0(react@18.2.0)
+    optionalDependencies:
+      '@types/react': 18.3.2
+      immer: 9.0.21
+      react: 18.2.0
 
   zwitch@2.0.4: {}
