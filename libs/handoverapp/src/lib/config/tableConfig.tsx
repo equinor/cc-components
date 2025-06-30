@@ -9,13 +9,13 @@ import {
   statusColorMap,
 } from '@cc-components/shared';
 
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
   GridConfig,
   MenuModule,
+  ICellRendererProps,
 } from '@equinor/workspace-fusion/grid';
 
 import { useHttpClient } from '@cc-components/shared';
@@ -30,10 +30,10 @@ export const useTableConfig = (
 ): GridConfig<HandoverPackage, FilterState> => {
   const client = useHttpClient();
 
-  const { getRows, colDefs } = useGridDataSource(async (req) => {
+  const { getRows, colDefs } = useGridDataSource<HandoverPackage>(async (req) => {
     const res = await client.fetch(`/api/contexts/${contextId}/handover/grid`, req);
     const meta = (await res.json()) as {
-      items: any[];
+      items: HandoverPackage[];
       rowCount: number;
       columnDefinitions: GridColumnOption[];
     };
@@ -42,12 +42,12 @@ export const useTableConfig = (
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions as ColDef<HandoverPackage>[]);
 
   return {
     getRows: getRows,
     modules: [MenuModule, ColumnsToolPanelModule],
-    columnDefinitions: colDefs as any,
+    columnDefinitions: colDefs as ColDef<HandoverPackage>[],
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
@@ -55,7 +55,7 @@ export const useTableConfig = (
           e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
         );
       },
-    },
+    } as GridConfig<HandoverPackage, FilterState>['gridOptions'],
   };
 };
 
