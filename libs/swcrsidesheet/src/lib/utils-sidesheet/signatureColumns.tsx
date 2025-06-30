@@ -1,10 +1,7 @@
-import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
-import { SwcrSignature} from '../types';
-import {
-  StyledMonospace,
-} from '@cc-components/shared/table-helpers';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { SwcrSignature } from '../types';
+import { StyledMonospace } from '@cc-components/shared/table-helpers';
 import { SwcrPackage } from '@cc-components/swcrshared';
-
 
 export const signatureColumns: ColDef<SwcrSignature>[] = [
   {
@@ -13,12 +10,12 @@ export const signatureColumns: ColDef<SwcrSignature>[] = [
     cellRenderer: (props: ICellRendererProps<SwcrSignature, string>) => {
       return <StyledMonospace>{props.data?.signatureRole}</StyledMonospace>;
     },
-    minWidth: 350,  
+    minWidth: 350,
   },
   {
     headerName: 'Seq',
     valueGetter: (pkg) => pkg.data?.sequence,
-    minWidth: 100, 
+    minWidth: 100,
   },
   {
     headerName: 'By',
@@ -37,4 +34,3 @@ export const signatureColumns: ColDef<SwcrSignature>[] = [
     minWidth: 100,
   },
 ];
-

@@ -1,9 +1,9 @@
-import { ColDef } from '@equinor/workspace-ag-grid';
+import { ColDef } from '@equinor/workspace-fusion/grid';
 import { format } from 'date-fns/format';
 
 export const defaultColDef: ColDef = {
   valueFormatter: (a) => tryFormat(a.value),
-  resizable : true
+  resizable: true,
 };
 
 function tryFormat(value: unknown): string {

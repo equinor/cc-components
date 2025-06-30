@@ -1,4 +1,4 @@
-import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { HeatTraceHeatedTag } from '@cc-components/heattraceshared';
 
 import { LinkCell } from '@cc-components/shared';

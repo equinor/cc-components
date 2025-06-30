@@ -41,7 +41,6 @@
     "@types/node": "20.12.7",
     "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
-    "@types/react-is": "18.2.1",
     "cross-env": "^7.0.3",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsx-a11y": "6.8.0",
@@ -85,18 +84,12 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-error-boundary": "^4.1.2",
-    "react-is": "18.3.1",
     "rxjs": "^7.8.1",
     "styled-components": "6.1.12",
     "stylis": "^4.0.0"
   },
   "engines": {
     "node": "20"
-  },
-  "overrides": {
-    "ag-grid-community": "33.2.4",
-    "ag-grid-enterprise": "33.2.4",
-    "ag-grid-react": "33.2.4"
   },
   "pnpm": {
     "overrides": {

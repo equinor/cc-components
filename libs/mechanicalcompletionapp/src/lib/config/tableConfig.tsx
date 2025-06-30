@@ -6,7 +6,7 @@ import {
   YearAndWeekCell,
   statusColorMap,
 } from '@cc-components/shared';
-import { ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,

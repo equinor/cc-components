@@ -1,4 +1,3 @@
-import { LicenseManager } from '@ag-grid-enterprise/core';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import {
@@ -26,10 +25,6 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   const envConfig = c.env.config?.environment as MechEnvConfig & ModelViewerEnvConfig;
-
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
-  }
 
   if (!envConfig.uri) {
     throw new Error('Failed to load environemnt config for MC');

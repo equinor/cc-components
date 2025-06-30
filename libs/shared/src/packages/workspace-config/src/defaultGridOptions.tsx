@@ -1,5 +1,5 @@
 import { Skeleton } from '@cc-components/sharedcomponents';
-import { GridOptions } from '@equinor/workspace-ag-grid';
+import { GridOptions } from '@equinor/workspace-fusion/grid';
 import { memo } from 'react';
 import { defaultColDef } from './defaultColDef';
 

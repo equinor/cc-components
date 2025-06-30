@@ -1,4 +1,3 @@
-import { LicenseManager } from '@ag-grid-enterprise/core';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import {
   ComponentRenderArgs,
@@ -25,11 +24,7 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
   });
 
   const envConfig: LoopEnvConfig = c.env.config?.environment as LoopEnvConfig;
-
-  if (envConfig.license) {
-    LicenseManager.setLicenseKey(envConfig.license);
-  }
-
+  
   if (!envConfig) {
     throw new Error('Failed to load environemnt config for workorder');
   }
