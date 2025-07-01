@@ -16,12 +16,33 @@ import {
   GridConfig,
   MenuModule,
   ICellRendererProps,
+  ClientSideRowModelApiModule,
+  ClientSideRowModelModule,
+  ColumnApiModule,
+  EventApiModule,
+  GridStateModule,
+  RowApiModule,
+  ValidationModule,
+  RowStyleModule,
+  ColumnAutoSizeModule,
+  AdvancedFilterModule,
+  CustomFilterModule,
+  DateFilterModule,
+  ExternalFilterModule,
+  GroupFilterModule,
+  MultiFilterModule,
+  NumberFilterModule,
+  QuickFilterModule,
+  SetFilterModule,
+  TextFilterModule,
+  TooltipModule,
 } from '@equinor/workspace-fusion/grid';
 
 import { useHttpClient } from '@cc-components/shared';
 import {
   GridColumnOption,
   defaultGridOptions,
+  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 
@@ -46,7 +67,7 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
-    modules: [MenuModule, ColumnsToolPanelModule],
+    modules: defaultModules,
     columnDefinitions: colDefs as ColDef<HandoverPackage>[],
     gridOptions: {
       ...defaultGridOptions,

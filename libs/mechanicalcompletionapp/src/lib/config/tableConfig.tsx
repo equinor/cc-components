@@ -20,6 +20,7 @@ import { useHttpClient } from '@cc-components/shared';
 import {
   GridColumnOption,
   defaultGridOptions,
+  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 
@@ -45,7 +46,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
 
   return {
     getRows: getRows,
-    modules: [MenuModule, ColumnsToolPanelModule],
+    modules: defaultModules,
     columnDefinitions: colDefs as any,
     gridOptions: {
       ...defaultGridOptions,

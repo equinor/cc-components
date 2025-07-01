@@ -16,13 +16,6 @@ export const defaultGridOptions: GridOptions = {
   enableBrowserTooltips: true,
   enableCellTextSelection: true,
   ensureDomOrder: true,
-  onFirstDataRendered: (e) => {
-    e.api.autoSizeColumns(
-      e.api
-        .getAllDisplayedColumns()
-        .filter((s) => !excludedColumns.includes(s.getColId().toLocaleLowerCase()))
-    );
-  },
   rowStyle: { fontSize: '14px' },
   suppressColumnVirtualisation: true,
   autoSizePadding: 10,

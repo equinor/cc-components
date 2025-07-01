@@ -4,6 +4,7 @@ import { tokens } from '@equinor/eds-tokens';
 import { ClientGrid, ColDef, GridOptions } from '@equinor/workspace-fusion/grid';
 import { defaultGridOptions } from '../../../../../workspace-config/src/defaultGridOptions';
 import { InfoText, NoResourceData, TabTableStyles } from './tabTable.styles';
+import { defaultModules } from '../../../../../workspace-config';
 
 type TabTableProps<T> = {
   packages: T[] | undefined;
@@ -65,6 +66,7 @@ export const TabTable = <T extends Record<PropertyKey, unknown>>(
             ...props.additionalGridOptions,
             domLayout: 'autoHeight',
           }}
+          modules={defaultModules}
         />
       )}
     </TabTableStyles>
