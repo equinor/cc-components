@@ -7,7 +7,6 @@ import {
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
-  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -49,7 +48,6 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
     },
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<Pipetest>, ...ColDef<Pipetest>[]],
-    modules: defaultModules,
   };
 };
 

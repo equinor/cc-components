@@ -1,10 +1,6 @@
 import { Loop, Status } from '@cc-components/loopshared';
 import { statusColorMap } from '@cc-components/shared/mapping';
-import {
-  DataResponse,
-  defaultModules,
-  useGridDataSource,
-} from '@cc-components/shared/workspace-config';
+import { DataResponse, useGridDataSource } from '@cc-components/shared/workspace-config';
 import {
   DateCell,
   DescriptionCell,
@@ -74,7 +70,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     },
     getRows: getRows,
     excelExport: fetchLoopExport,
-    modules: defaultModules,
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 

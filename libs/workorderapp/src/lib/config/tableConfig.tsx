@@ -9,7 +9,6 @@ import {
 } from '@cc-components/shared';
 import {
   defaultGridOptions,
-  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -55,7 +54,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
       ...defaultGridOptions,
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
-    modules: defaultModules,
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 

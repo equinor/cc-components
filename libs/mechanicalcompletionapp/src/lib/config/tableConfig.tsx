@@ -6,7 +6,7 @@ import {
   YearAndWeekCell,
   statusColorMap,
 } from '@cc-components/shared';
-import { ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
@@ -20,7 +20,6 @@ import { useHttpClient } from '@cc-components/shared';
 import {
   GridColumnOption,
   defaultGridOptions,
-  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 
@@ -46,7 +45,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
 
   return {
     getRows: getRows,
-    modules: defaultModules,
+    modules: [MenuModule, ColumnsToolPanelModule],
     columnDefinitions: colDefs as any,
     gridOptions: {
       ...defaultGridOptions,

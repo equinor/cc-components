@@ -19,7 +19,6 @@ import { Icon } from '@equinor/eds-core-react';
 import {
   GridColumnOption,
   defaultGridOptions,
-  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import { DateCell } from '@cc-components/shared/table-helpers';
@@ -56,13 +55,15 @@ export const useTableConfig = (
 
   return {
     getRows: getRows,
-    modules: defaultModules,
+    modules: [MenuModule, ColumnsToolPanelModule],
     columnDefinitions: colDefs as any,
     gridOptions: {
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
         e.api.autoSizeColumns(
-          e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
+          e.api
+            .getAllDisplayedColumns()
+            .filter((s) => s.getColId() !== 'description')
         );
       },
     },

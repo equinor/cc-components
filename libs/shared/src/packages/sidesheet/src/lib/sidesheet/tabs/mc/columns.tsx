@@ -1,4 +1,4 @@
-import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { colorMap } from '../../../../../../mapping';
 import { DateCell, StatusCell } from '../../../../../../table-helpers';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';

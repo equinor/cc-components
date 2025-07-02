@@ -4,7 +4,7 @@ import {
   statusColorMap,
   LinkCell,
 } from '@cc-components/shared';
-import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { Checklist } from '@cc-components/pipingshared';
 
 export const checklistColumns: ColDef<Checklist>[] = [

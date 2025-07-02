@@ -1,3 +1,4 @@
+import { LicenseManager } from '@ag-grid-enterprise/core';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import {
   ComponentRenderArgs,
@@ -6,12 +7,8 @@ import {
 import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
-import { enableBookmark } from '@equinor/fusion-framework-react-app/bookmark';
-import { defaultModules } from '@cc-components/shared';
-import { themeQuartz } from '@equinor/workspace-fusion/grid';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
-  enableBookmark(config);
   enableNavigation(config, c.env.basename);
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster', 'Facility']);
@@ -33,17 +30,16 @@ export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs
     throw new Error('Failed to load environemnt config for workorder');
   }
 
+  if (envConfig.license) {
+    LicenseManager.setLicenseKey(envConfig.license);
+  }
+
   config.configureHttpClient('cc-app', {
     baseUri: envConfig?.uri,
     defaultScopes: envConfig?.defaultScopes,
   });
 
-  const myTheme = themeQuartz.withParams({});
-
-  enableAgGrid(config, (b) => {
-    b.setModules(defaultModules);
-    b.setTheme(myTheme);
-  });
+  enableAgGrid(config);
 };
 
 type HandoverEnvConfig = {

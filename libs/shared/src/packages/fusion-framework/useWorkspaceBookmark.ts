@@ -3,7 +3,6 @@ import { useRef, useEffect } from 'react';
 import {
   useCurrentBookmark,
   useBookmark,
-  enableBookmark
 } from '@equinor/fusion-framework-react-app/bookmark';
 
 export function useWorkspaceBookmarks() {
@@ -12,7 +11,7 @@ export function useWorkspaceBookmarks() {
   const id = bookmark?.id;
   const payload = bookmark?.payload;
   const bookmarkHandler = useBookmark<Partial<Bookmark>>();
-  
+
   useEffect(() => {
     const unsub = bookmarkHandler.addBookmarkCreator(async () => {
       return bookmarkRef.current;
