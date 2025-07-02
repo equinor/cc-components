@@ -13,6 +13,7 @@ import {
   useGridDataSource,
   defaultGridOptions,
   DataResponse,
+  defaultModules,
 } from '@cc-components/shared/workspace-config';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
@@ -49,7 +50,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
       },
     },
     columnDefinitions: colDefs as [ColDef<Punch>, ...ColDef<Punch>[]],
-    modules: [MenuModule, ColumnsToolPanelModule],
+    modules: defaultModules,
   };
 };
 

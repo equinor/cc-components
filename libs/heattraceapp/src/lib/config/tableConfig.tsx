@@ -3,6 +3,7 @@ import { HeatTrace } from '@cc-components/heattraceshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
+  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -44,6 +45,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
     },
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]],
+    modules: defaultModules,
   };
 };
 

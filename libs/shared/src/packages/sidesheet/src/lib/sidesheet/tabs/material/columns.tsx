@@ -1,4 +1,4 @@
-import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { AvailableItemCell } from './AvailableItemCell';
 import { MaterialBase } from './types';
 import { DescriptionCell } from '../../../../../../table-helpers/src/lib/table/cells/DescriptionCell';

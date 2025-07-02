@@ -8,7 +8,7 @@ import {
 } from '@cc-components/shared/table-helpers';
 import { hasProperty } from '@cc-components/shared/utils-typescript';
 
-import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { LoopContent } from '../types';
 import { useGetLoopContent } from '../utils-sidesheet/useGetLoopContent';
 
