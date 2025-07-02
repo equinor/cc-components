@@ -91,7 +91,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@equinor/fusion-react-person": "^0.8.5",
-    "@equinor/workspace-fusion": "9.0.37-pr.5",
+    "@equinor/workspace-fusion": "9.0.37",
     "@remirror/pm": "^2.0.8",
     "@remirror/react": "^2.0.35",
     "@remirror/react-editors": "^1.0.41",
