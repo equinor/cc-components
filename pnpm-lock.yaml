@@ -55,8 +55,8 @@ importers:
         specifier: 8.5.1
         version: 8.5.1(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.37-pr.5
-        version: 9.0.37-pr.5(@babel/core@7.27.7)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)
+        specifier: 9.0.37-pr.6
+        version: 9.0.37-pr.6(@babel/core@7.27.7)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)
       '@microsoft/applicationinsights-web':
         specifier: 3.3.6
         version: 3.3.6(tslib@2.8.1)
@@ -1632,6 +1632,9 @@ packages:
   '@equinor/fusion-framework-react-ag-grid@33.2.7':
     resolution: {integrity: sha512-OJFLDmsDqPHSJr9CCe+C88Fd45w2rQZfRAS7Hq7PI/2PEIEXvpPKkyF8SKq1J5NgOKknLBxgDWMqlwrY/T2ERg==}
 
+  '@equinor/fusion-framework-react-ag-grid@33.2.8':
+    resolution: {integrity: sha512-Oc2uHtnQ2ra5EYRQoHgRhhE+Oxbr5ijh/h8VXnP3qJ03zcSlTeEyfiP5QAReCTNZkcjuVfRIPdHJoyPAwTKUeA==}
+
   '@equinor/fusion-framework-react-app@6.2.3':
     resolution: {integrity: sha512-eNdtcKbCbJAl10IqHTlBq8+yoaZaCTixErh9DcFB83O/ERfiCBOmpBI0S/8Yz0s3NR/koGGTb1tTp8OeCbBh5A==}
     peerDependencies:
@@ -1831,8 +1834,20 @@ packages:
     peerDependencies:
       styled-components: '>= 5.0.0'
 
+  '@equinor/workspace-ag-grid@3.0.8-pr.1':
+    resolution: {integrity: sha512-3sqqbJcNsCi2ZDeeZv4GCaHHjrBV5s6+VQj+iIxvZHsoe0DoxS/ue4KMTVs2Wv3rAG0/J7fO8mDpyB6SqwcCGA==}
+    peerDependencies:
+      styled-components: '>= 5.0.0'
+
   '@equinor/workspace-filter@4.0.18-pr.0':
     resolution: {integrity: sha512-dwupeOsnm0M05vgm+UXKwuQTwThNLxez1150smotCrNAfd341DnEDPrLGeeOdDe02Didz/8L0ChP0xl2SxBonw==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: ^5.3.5
+
+  '@equinor/workspace-filter@4.0.18-pr.1':
+    resolution: {integrity: sha512-bPhEQUV5O8mcoKDxhH1HBIK+uFZEr5h6UW2KesUSof8ZONozSM8dKJaWAERflSptwq6jjcXY2BBvoLawAT6vsQ==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
@@ -1841,8 +1856,18 @@ packages:
   '@equinor/workspace-fusion@9.0.37-pr.5':
     resolution: {integrity: sha512-oPvdbeBR0jDvun+nPhmATU8PUnDbZgZn5U5WerkqX76z2u5ek6qTijppKnT9QN5baKue2F+2zTpD8ks8Nb+7pw==}
 
+  '@equinor/workspace-fusion@9.0.37-pr.6':
+    resolution: {integrity: sha512-9frqR5K5uwcl92V88ONzpuKlTXmSoQjY/0vicppIHIxWHgNXYi5C438cZhXeWXYMdJH80IndyBPOjz4OXQOzXA==}
+
   '@equinor/workspace-garden@8.0.8-pr.0':
     resolution: {integrity: sha512-9IKa6yKkc1qP3gBEAm1ISJlD1s2GabODSv4YVzAzDAfpTJb0q9M1l0zsaXwm+yCwZqkRDj2baigy0JxeS4BJaQ==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: ^5.3.6
+
+  '@equinor/workspace-garden@8.0.8-pr.1':
+    resolution: {integrity: sha512-cIL6EYntmF75Tu0ST+e1E1iNMAD7of+1UTPGMrSUa4JTKFoJYVaSWxIyDKlPqxewc5dkDlLoquIhzzvM4GB3+A==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
@@ -1851,8 +1876,18 @@ packages:
   '@equinor/workspace-powerbi@3.0.19-pr.5':
     resolution: {integrity: sha512-xwKBQ7qaMRdxYwhZ3EfEr9Ek+tL5BtkSKsQWeGHj6O7ThDkPnnqXkhXVLinRHOCgZkuBXeBQDrqQir/UCVDhfQ==}
 
+  '@equinor/workspace-powerbi@3.0.19-pr.6':
+    resolution: {integrity: sha512-8XNIPjuu8dkk2H0362jWJ+sMU+DL8v/1a1LOpF6my1KQheX7AikHDE/rpHrD4OzqePIu6DCPExBRrWbbN1x7ZA==}
+
   '@equinor/workspace-react@2.0.8-pr.0':
     resolution: {integrity: sha512-0jHXXgAuQ2H6Z4amfQnF0ydRNn+KoF5PA3uCzJ0ipsX5vXVYuonOW4tGr57fUZyEdgUwoh7VOtVPickLPxqIdg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+      styled-components: ^5.3.6
+
+  '@equinor/workspace-react@2.0.8-pr.1':
+    resolution: {integrity: sha512-5nhqh6jBxvFiOREq1gaRGPksN7qWCl9SW5VeNvinUbP5DG95kF5X2Tct6/uP1BubHvDc2z6VFhrXujiMFCoK2Q==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
@@ -10052,6 +10087,17 @@ snapshots:
       - react
       - react-dom
 
+  '@equinor/fusion-framework-react-ag-grid@33.2.8(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@equinor/fusion-framework-module-ag-grid': 34.0.2(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(ag-grid-community@33.2.4)(ag-grid-enterprise@33.2.4)
+      ag-grid-community: 33.2.4
+      ag-grid-enterprise: 33.2.4
+      ag-grid-react: 33.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+      - react
+      - react-dom
+
   ? '@equinor/fusion-framework-react-app@6.2.3(@equinor/fusion-framework-module-bookmark@2.1.14(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react@18.2.0))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.9(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@18.3.2)(@types/semver@7.7.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(odata-query@7.0.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@18.3.2)(react@18.2.0))(@remix-run/router@1.23.0)(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(odata-query@7.0.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rxjs@7.8.2)'
   : dependencies:
       '@equinor/fusion-framework-app': 9.3.19(@equinor/fusion-framework-module-bookmark@2.1.14(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(react@18.2.0))(@types/react@18.3.2)(@types/semver@7.7.0)(chalk@5.4.1)(odata-query@7.0.9)(react@18.2.0)
@@ -10343,7 +10389,37 @@ snapshots:
     transitivePeerDependencies:
       - '@equinor/fusion-framework-module'
 
+  '@equinor/workspace-ag-grid@3.0.8-pr.1(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/fusion-framework-react-ag-grid': 33.2.8(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+
   '@equinor/workspace-filter@4.0.18-pr.0(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@microsoft/applicationinsights-core-js': 3.3.6(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      '@tanstack/react-virtual': 3.13.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6)
+      react-virtual: 2.10.4(react@18.2.0)
+      sortablejs: 1.15.6
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/sortablejs'
+      - tslib
+
+  '@equinor/workspace-filter@4.0.18-pr.1(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.22.0
@@ -10389,7 +10465,46 @@ snapshots:
       - supports-color
       - tslib
 
+  '@equinor/workspace-fusion@9.0.37-pr.6(@babel/core@7.27.7)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/workspace-ag-grid': 3.0.8-pr.1(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-filter': 4.0.18-pr.1(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)
+      '@equinor/workspace-garden': 8.0.8-pr.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/workspace-powerbi': 3.0.19-pr.6(@types/sortablejs@1.15.8)(tslib@2.8.1)
+      '@equinor/workspace-react': 2.0.8-pr.1(@babel/core@7.27.7)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      re-resizable: 6.11.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@equinor/fusion-framework-module'
+      - '@types/react'
+      - '@types/sortablejs'
+      - immer
+      - supports-color
+      - tslib
+
   '@equinor/workspace-garden@8.0.8-pr.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      '@tanstack/react-query-devtools': 5.81.5(@tanstack/react-query@5.81.5(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      react-virtual: 2.10.4(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@equinor/workspace-garden@8.0.8-pr.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.22.0
@@ -10425,7 +10540,47 @@ snapshots:
       - '@types/sortablejs'
       - tslib
 
+  '@equinor/workspace-powerbi@3.0.19-pr.6(@types/sortablejs@1.15.8)(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.43.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/workspace-filter': 4.0.18-pr.1(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      '@tanstack/react-query': 5.81.5(react@18.2.0)
+      '@tanstack/react-virtual': 3.13.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      markdown-to-jsx: 7.7.10(react@18.2.0)
+      powerbi-client: 2.23.1
+      powerbi-client-react: 1.4.0(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-error-boundary: 4.1.2(react@18.2.0)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sortablejs@1.15.6)
+      react-virtual: 2.10.4(react@18.2.0)
+      sortablejs: 1.15.6
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/sortablejs'
+      - tslib
+
   '@equinor/workspace-react@2.0.8-pr.0(@babel/core@7.27.7)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.28.0(@babel/core@7.27.7)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@equinor/eds-icons': 0.18.0
+      '@equinor/eds-tokens': 0.9.2
+      '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-components: 6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      zustand: 4.5.7(@types/react@18.3.2)(immer@9.0.21)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - immer
+      - supports-color
+      - tslib
+
+  '@equinor/workspace-react@2.0.8-pr.1(@babel/core@7.27.7)(@types/react@18.3.2)(immer@9.0.21)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.28.0(@babel/core@7.27.7)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(styled-components@6.1.12(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@equinor/eds-icons': 0.18.0
