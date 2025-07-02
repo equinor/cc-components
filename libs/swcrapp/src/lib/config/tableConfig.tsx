@@ -7,7 +7,6 @@ import {
 import {
   DataResponse,
   defaultGridOptions,
-  defaultModules,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import { SwcrPackage } from '@cc-components/swcrshared';
@@ -50,7 +49,7 @@ export const useTableConfig = (
       },
     },
     columnDefinitions: colDefs as [ColDef<SwcrPackage>, ...ColDef<SwcrPackage>[]],
-    modules: defaultModules,
+    modules: [MenuModule, ColumnsToolPanelModule],
   };
 };
 

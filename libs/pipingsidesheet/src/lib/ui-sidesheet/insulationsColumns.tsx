@@ -1,4 +1,4 @@
-import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
 import { InsulationTag } from '@cc-components/pipingshared';
 import {
   BaseStatus,
