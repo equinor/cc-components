@@ -6,11 +6,13 @@ import {
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
+import { enableBookmark } from '@equinor/fusion-framework-module-bookmark';
 import { defaultModules } from '@cc-components/shared';
 import { themeQuartz } from '@equinor/workspace-fusion/grid';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableNavigation(config, c.env.basename);
+  enableBookmark(config);
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster']);
     builder.setContextParameterFn(({ search, type }) => {

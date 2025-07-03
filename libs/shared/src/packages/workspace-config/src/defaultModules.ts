@@ -22,6 +22,7 @@ import {
   TextFilterModule,
   TooltipModule,
   ValidationModule,
+  CellStyleModule,
 } from '@equinor/workspace-fusion/grid';
 
 export const defaultModules: Module[] = [
@@ -47,4 +48,5 @@ export const defaultModules: Module[] = [
   ExternalFilterModule,
   AdvancedFilterModule,
   TooltipModule,
+  CellStyleModule,
 ];
