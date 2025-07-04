@@ -4,7 +4,7 @@ import {
   StatusCircle,
   statusColorMap,
 } from '@cc-components/shared';
-import { ColDef, ICellRendererProps } from '@equinor/workspace-ag-grid';
+import { ColDef, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 
 export const checklistColumns: ColDef<HeatTraceChecklist>[] = [

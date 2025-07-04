@@ -2,7 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { WorkorderBase } from './types';
-import { GridOptions } from '@equinor/workspace-ag-grid';
+import { GridOptions } from '@equinor/workspace-fusion/grid';
 
 type WorkorderTabProps<T extends WorkorderBase> = {
   workorders: T[] | undefined;
