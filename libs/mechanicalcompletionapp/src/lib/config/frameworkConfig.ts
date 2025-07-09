@@ -5,7 +5,7 @@ import {
   IAppConfigurator,
 } from '@equinor/fusion-framework-react-app';
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
-import { enableBookmark } from '@equinor/fusion-framework-module-bookmark';
+import { enableBookmark } from '@equinor/fusion-framework-react-app/bookmark';
 import buildQuery from 'odata-query';
 import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
 import { defaultModules } from '@cc-components/shared';

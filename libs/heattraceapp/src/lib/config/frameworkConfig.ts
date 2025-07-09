@@ -7,7 +7,7 @@ import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
-import { enableBookmark } from '@equinor/fusion-framework-module-bookmark';
+import { enableBookmark } from '@equinor/fusion-framework-react-app/bookmark';
 import { defaultModules } from '@cc-components/shared';
 import { themeQuartz } from '@equinor/workspace-fusion/grid';
 
