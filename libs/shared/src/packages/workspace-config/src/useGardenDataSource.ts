@@ -21,6 +21,7 @@ type ApiGardenMeta = {
 type ApiHeader = {
   columnName: string;
   totalItemsCount: number;
+  completedItemsCount: number;
 };
 
 type GardenDataSourceArgs = {
@@ -104,6 +105,7 @@ export function useGardenDataSource(
       return (await res.json()).map((s: ApiHeader) => ({
         name: s.columnName,
         count: s.totalItemsCount,
+        completedCount: s.completedItemsCount,
       }));
     },
     getSubgroupItems: async (args, filter, signal) => {
