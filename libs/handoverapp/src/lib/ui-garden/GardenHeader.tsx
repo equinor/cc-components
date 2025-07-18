@@ -14,7 +14,6 @@ const StyledHeaderContent = styled.div`
 
 const StyledCount = styled(Typography).withConfig({ displayName: 'cc-apps-' })`
   color: ${tokens.colors.text.static_icons__default.hex};
-  margin-left: 0.8em;
   font-weight: 300;
   color: inherit;
 `;
