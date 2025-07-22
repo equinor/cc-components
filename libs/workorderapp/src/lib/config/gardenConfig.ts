@@ -4,6 +4,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import { GardenItem } from '../ui-garden';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useGardenDataSource } from '@cc-components/shared/workspace-config';
+import { GardenHeader } from '../ui-garden/GardenHeader';
 
 export const useGardenConfig = (
   contextId: string
@@ -34,9 +35,11 @@ export const useGardenConfig = (
     getSubgroupItems,
     customViews: {
       customItemView: GardenItem as any,
+      customHeaderView: GardenHeader,
     },
     visuals: {
       rowHeight: 31,
+      headerHeight: 42,
     },
   };
 };
