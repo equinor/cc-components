@@ -55,8 +55,8 @@ importers:
         specifier: 8.5.1
         version: 8.5.1(@types/react@18.3.2)(react@18.2.0)
       '@equinor/workspace-fusion':
-        specifier: 9.0.38
-        version: 9.0.38(@babel/core@7.28.0)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@18.3.2)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)
+        specifier: link:workspace/packages/workspace-fusion
+        version: link:workspace/packages/workspace-fusion
       '@microsoft/applicationinsights-web':
         specifier: 3.3.6
         version: 3.3.6(tslib@2.8.1)
