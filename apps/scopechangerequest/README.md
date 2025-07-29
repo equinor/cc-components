@@ -1,3 +1,0 @@
-# scopechangerequest
-
-Add readme
