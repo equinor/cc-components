@@ -251,15 +251,6 @@ importers:
         specifier: workspace:^
         version: link:../../libs/shared
 
-  apps/scopechangerequest:
-    dependencies:
-      '@cc-components/scopechangerequestapp':
-        specifier: workspace:^
-        version: link:../../libs/scopechangerequestapp
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../../libs/shared
-
   apps/swcr:
     dependencies:
       '@cc-components/shared':
@@ -545,39 +536,6 @@ importers:
         specifier: workspace:^
         version: link:../sharedcomponents
 
-  libs/scopechangerequestapp:
-    dependencies:
-      '@cc-components/scopechangerequestshared':
-        specifier: workspace:^
-        version: link:../scopechangerequestshared
-      '@cc-components/scopechangerequestsidesheet':
-        specifier: workspace:^
-        version: link:../scopechangerequestsidesheet
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
-
-  libs/scopechangerequestshared:
-    dependencies:
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
-
-  libs/scopechangerequestsidesheet:
-    dependencies:
-      '@cc-components/scopechangerequestshared':
-        specifier: workspace:^
-        version: link:../scopechangerequestshared
-      '@cc-components/shared':
-        specifier: workspace:^
-        version: link:../shared
-      '@cc-components/sharedcomponents':
-        specifier: workspace:^
-        version: link:../sharedcomponents
-      react-hook-form:
-        specifier: ^7.61.1
-        version: 7.61.1(react@19.1.1)
-
   libs/shared:
     dependencies:
       '@cc-components/sharedcomponents':
@@ -604,6 +562,9 @@ importers:
       '@remirror/react-editors':
         specifier: ^2.0.2
         version: 2.0.2(@emotion/css@11.13.5)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/node@24.1.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@remirror/react-ui':
+        specifier: ^1.0.0
+        version: 1.0.2(@remirror/pm@3.0.1)(@types/node@24.1.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@remirror/styles':
         specifier: ^3.0.0
         version: 3.0.0(@emotion/css@11.13.5)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -7300,12 +7261,6 @@ packages:
 
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
-
-  react-hook-form@7.61.1:
-    resolution: {integrity: sha512-2vbXUFDYgqEgM2RcXcAT2PwDW/80QARi+PKmHy5q2KhuKvOlG8iIYgf7eIlIANR5trW9fJbP4r5aub3a4egsew==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: ^19.1.1
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -17720,10 +17675,6 @@ snapshots:
       react: 19.1.1
 
   react-fast-compare@3.2.2: {}
-
-  react-hook-form@7.61.1(react@19.1.1):
-    dependencies:
-      react: 19.1.1
 
   react-is@16.13.1: {}
 

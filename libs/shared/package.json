@@ -96,9 +96,10 @@
     "@remirror/react-editors": "^2.0.2",
     "@remirror/styles": "^3.0.0",
     "@remirror/theme": "^3.0.0",
+    "@remirror/react-ui": "^1.0.0",
+    "remirror": "^3.0.2",
     "date-fns": "^4.1.0",
-    "markdown-to-jsx": "^7.7.12",
-    "remirror": "^3.0.2"
+    "markdown-to-jsx": "^7.7.12"
   },
   "peerDependencies": {
     "@equinor/workspace-fusion": "*"

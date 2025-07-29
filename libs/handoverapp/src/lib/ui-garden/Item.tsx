@@ -35,7 +35,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     parentRef,
   } = args;
 
-  const size = getItemSize(data.volume, 100 || 0);
+  const size = getItemSize(data.volume, 100);
 
   const backgroundColor = useMemo(() => {
     if (
