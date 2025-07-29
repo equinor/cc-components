@@ -1,11 +1,12 @@
 import { AabbModel } from '@equinor/echo-3d-viewer';
+import { ReactElement } from 'react';
 import { Box3, Vector3 } from 'three';
 
 export interface OverlayTag {
   key: string;
   tagNo: string;
   description?: string;
-  icon?: string | JSX.Element;
+  icon?: string | ReactElement;
   status?: string;
   type?: string;
   position: Vector3;

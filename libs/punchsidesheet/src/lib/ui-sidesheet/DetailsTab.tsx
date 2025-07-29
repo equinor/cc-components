@@ -7,12 +7,13 @@ import { Punch } from '@cc-components/punchshared';
 import { StyledTextBlock } from './sidesheet.styles';
 import { formatDateString } from '@cc-components/shared/utils-dates';
 import { domainNames } from '@cc-components/shared';
+import { ReactElement } from 'react';
 
 type DetailsTabProps = {
   punch: Punch | undefined;
 };
 
-export const DetailsTab = ({ punch }: DetailsTabProps): JSX.Element | null => {
+export const DetailsTab = ({ punch }: DetailsTabProps): ReactElement | null => {
   if (!punch) return null;
   return (
     <StyledTabContent>

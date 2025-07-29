@@ -1,6 +1,7 @@
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import styled from 'styled-components';
 import { LI, OL } from './ComponentOverrides';
+import { ReactElement } from 'react';
 
 // Doing it like this because of jest failing...
 const StyledMarkdown = styled((props: any) => <Markdown {...props} />)`
@@ -21,7 +22,7 @@ type MarkdownViewerProps = {
   /** A string with valid markdown syntax */
   children: string;
 };
-export const MarkdownViewer = ({ children }: MarkdownViewerProps): JSX.Element => {
+export const MarkdownViewer = ({ children }: MarkdownViewerProps): ReactElement => {
   const overrides: MarkdownToJSX.Overrides = {
     ol: {
       component: OL,

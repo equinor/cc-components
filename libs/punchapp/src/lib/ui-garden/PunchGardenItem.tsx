@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, ReactElement, useMemo } from 'react';
 import {
   StyledDescription,
   StyledItemText,
@@ -15,7 +15,7 @@ import {
 import { Punch } from '@cc-components/punchshared';
 import { FlagIcon } from '@cc-components/shared/common';
 
-function PunchGardenItem(props: CustomItemView<Punch>): JSX.Element {
+function PunchGardenItem(props: CustomItemView<Punch>): ReactElement {
   const {
     data,
     depth,

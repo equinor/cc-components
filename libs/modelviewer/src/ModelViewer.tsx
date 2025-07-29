@@ -5,6 +5,7 @@ import {
   PropsWithChildren,
   cloneElement,
   isValidElement,
+  ReactElement,
 } from 'react';
 
 import { ActionsMenu } from './components/actions-bar/ActionsMenu';
@@ -57,7 +58,7 @@ export const ModelViewer = (props: PropsWithChildren<ModelViewerProps>) => {
 const ModelViewerContent = (props: PropsWithChildren<ModelViewerProps>) => {
   const { facility, tagsOverlay, children } = props;
 
-  const components: { CustomActions?: React.ReactElement } = {
+  const components: { CustomActions?: ReactElement } = {
     CustomActions: undefined,
   };
 

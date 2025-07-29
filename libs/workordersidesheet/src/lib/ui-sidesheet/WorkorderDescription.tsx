@@ -5,12 +5,13 @@ import { tokens } from '@equinor/eds-tokens';
 import { StyledTabContent } from '@cc-components/shared';
 
 import { useWorkOrderDescription } from '../utils-sidesheet/useWorkOrderDescription';
+import { ReactElement } from 'react';
 
 type WorkOrderDescriptionProps = {
   workOrderId: string;
 };
 
-export const WorkOrderDescription = (props: WorkOrderDescriptionProps): JSX.Element => {
+export const WorkOrderDescription = (props: WorkOrderDescriptionProps): ReactElement => {
   const { workOrderId } = props;
 
   const { data, isFetching, error } = useWorkOrderDescription(workOrderId);

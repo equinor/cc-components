@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import {
   StyledActualProgress,
   StyledProgressBarContainer,
@@ -11,7 +12,7 @@ type ProgressCellProps = {
 /**
  * Standard component for displaying a progress bar inside a table cell.
  */
-export const ProgressCell = ({ percentWidth }: ProgressCellProps): JSX.Element => {
+export const ProgressCell = ({ percentWidth }: ProgressCellProps): ReactElement => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '5px', height: '100%' }}>
       <StyledProgressNumber>{`${Math.round(percentWidth)}%`}</StyledProgressNumber>

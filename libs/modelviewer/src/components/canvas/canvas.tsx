@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { RefObject } from 'react';
 
 type CanvasProps = {
-  viewerRef: RefObject<HTMLCanvasElement>;
+  viewerRef: RefObject<HTMLCanvasElement | null>;
 };
 
 export const Canvas = ({ viewerRef }: CanvasProps) => {

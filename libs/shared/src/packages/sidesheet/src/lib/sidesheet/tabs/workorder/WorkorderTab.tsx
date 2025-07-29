@@ -3,6 +3,7 @@ import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { WorkorderBase } from './types';
 import { GridOptions } from '@equinor/workspace-fusion/grid';
+import { ReactElement } from 'react';
 
 type WorkorderTabProps<T extends WorkorderBase> = {
   workorders: T[] | undefined;
@@ -13,7 +14,7 @@ export const WorkorderTab = <T extends WorkorderBase>({
   workorders,
   error,
   isFetching,
-}: WorkorderTabProps<T>): JSX.Element => {
+}: WorkorderTabProps<T>): ReactElement => {
   const findMaxHours = (
     list: WorkorderBase[],
     key: 'estimatedHours' | 'remainingHours'

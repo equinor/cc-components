@@ -1,6 +1,6 @@
 import { Icon } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { useRef, useState } from 'react';
+import { ReactElement, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DisputedTableIcon } from './DisputedTableIcon';
 import { DefaultWorkflowDot } from './DefaultWorkflowDot';
@@ -15,7 +15,7 @@ interface CriteriaWithParent {
   stepName: string;
 }
 
-export function WorkflowCompact({ steps }: WorkflowProps): JSX.Element {
+export function WorkflowCompact({ steps }: WorkflowProps): ReactElement {
   const compacted = steps?.reduce((acc, { name, criterias, isCurrent }) => {
     criterias.forEach(({ signedState }) =>
       acc.push({
@@ -78,7 +78,7 @@ const WorkflowPopover = styled.div`
 function getStatusFromCriteria(
   signedState: string | null,
   isCurrent: boolean
-): JSX.Element {
+): ReactElement {
   switch (true) {
     case signedState === 'Approved': {
       return (

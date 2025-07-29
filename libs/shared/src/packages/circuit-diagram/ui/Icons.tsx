@@ -1,6 +1,6 @@
 import { Icon } from '@equinor/eds-core-react';
 import { warning_outlined } from '@equinor/eds-icons';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { StyledCriticalLine, StyledMccrStatus } from './stylesCircuitDiagram';
 
 Icon.add({ warning_outlined });
@@ -15,11 +15,11 @@ export const TagMccrStatus = ({
   return <StyledMccrStatus mccrStatusColor={mccrColor} title={mccrStatus} />;
 };
 
-export const CriticalLine = (): JSX.Element => {
+export const CriticalLine = (): ReactElement => {
   return <StyledCriticalLine title="Heating Critical Line">CL</StyledCriticalLine>;
 };
 
-export const MissingCable = (): JSX.Element => {
+export const MissingCable = (): ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onOpen = () => setIsOpen(true);

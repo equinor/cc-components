@@ -1,5 +1,6 @@
 import { Icon } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
+import { ReactElement } from 'react';
 
 import styled from 'styled-components';
 
@@ -8,7 +9,7 @@ interface WorkflowIconProps {
   number?: number | string;
 }
 
-export function WorkflowIcon({ status, number }: WorkflowIconProps): JSX.Element {
+export function WorkflowIcon({ status, number }: WorkflowIconProps): ReactElement {
   switch (status) {
     case 'Active':
       return (

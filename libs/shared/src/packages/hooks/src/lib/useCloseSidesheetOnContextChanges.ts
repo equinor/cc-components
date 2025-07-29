@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useContextId } from "./useContextId";
 
 function usePrevious(value: string) {
-  const ref = useRef<string>();
+  const ref = useRef<string | undefined>(undefined);
   useEffect(() => {
     ref.current = value;
   }, [value]);

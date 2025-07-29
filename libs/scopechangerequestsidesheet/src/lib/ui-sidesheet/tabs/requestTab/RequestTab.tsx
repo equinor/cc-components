@@ -10,6 +10,7 @@ import {
   VerticalLine,
   WorklowIconAndLine,
 } from './requestTab.styles';
+import { ReactElement } from 'react';
 type RequestTabProps = {
   scopechange?: ScopeChangeRequest | undefined;
   isFetching?: boolean;
@@ -20,7 +21,7 @@ export const RequestTab = ({
   scopechange,
   error,
   isFetching,
-}: RequestTabProps): JSX.Element => {
+}: RequestTabProps): ReactElement => {
   return (
     <StyledRequestTabWrapper>
       <StyledRequestColumn>

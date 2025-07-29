@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { NotificationBase } from './types';
+import { ReactElement } from 'react';
 
 type NotificationTabProps<T> = {
   notifications: T[] | undefined;
@@ -12,7 +13,7 @@ export const NotificationTab = <T extends NotificationBase>({
   error,
   isFetching,
   notifications,
-}: NotificationTabProps<T>): JSX.Element => {
+}: NotificationTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { QueryBase } from './types';
+import { ReactElement } from 'react';
 
 type QueryTabProps<T> = {
   queries: T[] | undefined;
@@ -12,7 +13,7 @@ export const QueryTab = <T extends QueryBase>({
   error,
   isFetching,
   queries,
-}: QueryTabProps<T>): JSX.Element => {
+}: QueryTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

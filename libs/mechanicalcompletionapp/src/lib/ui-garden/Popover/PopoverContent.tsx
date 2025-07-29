@@ -27,7 +27,7 @@ type PopoverContentProps = {
 export const PopoverContent = ({
   data,
   options: { size, backgroundColor, contentsColor, mcDotColor, commDotColor, status },
-}: PopoverContentProps): JSX.Element => {
+}: PopoverContentProps): ReactElement => {
   return (
     <StyledPopoverContainer>
       <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>

@@ -9,6 +9,7 @@ import { Checkbox } from '@equinor/eds-core-react';
 import { LogEntry, ScopeChangeRequest } from '@cc-components/scopechangerequestshared';
 import { WorkflowChart } from './requestTab/workflow/WorkflowChart';
 import { VerticalLine } from './requestTab/requestTab.styles';
+import { ReactElement } from 'react';
 
 type LogTabProps = {
   logEntry?: LogEntry[] | undefined;
@@ -16,7 +17,7 @@ type LogTabProps = {
   error?: Error | null;
 };
 
-export const Logtab = ({ logEntry, error, isFetching }: LogTabProps): JSX.Element => {
+export const Logtab = ({ logEntry, error, isFetching }: LogTabProps): ReactElement => {
   return (
     <div>
       {logEntry?.map((s) => {

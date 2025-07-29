@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 type DateCellProps = {
   dateString: string | null | undefined;
 };
@@ -5,7 +7,7 @@ type DateCellProps = {
 /**
  * Standard component for displaying a date in a table cell.
  */
-export const DateCell = ({ dateString }: DateCellProps): JSX.Element | null => {
+export const DateCell = ({ dateString }: DateCellProps): ReactElement | null => {
   if (!dateString || typeof dateString !== 'string') return null;
   return (
     <div style={{ fontVariantNumeric: 'tabular-nums' }}>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useOverlay } from '../../hooks/useOverlay';
 import { useModelViewerContext, useTagSelectionContext } from '../../providers';
 
@@ -6,7 +6,7 @@ import { RevealHtmlOverlayWrapper } from '../reveal-hml-overlay-wrapper/revealHt
 import { TagItem } from '../tag-item/TagItem';
 import { useConfig } from '../../providers/configProvider';
 
-export const TagsOverlay = (): JSX.Element => {
+export const TagsOverlay = (): ReactElement => {
   const { echoInstance } = useModelViewerContext();
 
   const [selected, setSelected] = useState<string>();

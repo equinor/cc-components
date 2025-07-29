@@ -1,7 +1,8 @@
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 interface TagIconProps {
-  icon?: JSX.Element;
+  icon?: ReactElement;
   legendColor: string;
 }
 /**
@@ -11,12 +12,12 @@ interface TagIconProps {
  *  icon: Icon to be wrapped
  *  legendColor: background color to apply. Need to be valid css color
  * }
- * @return {*}  {JSX.Element} Wrapped icon with provided color
+ * @return {*}  {ReactElement} Wrapped icon with provided color
  */
 export const TagIcon: React.FC<TagIconProps> = ({
   icon,
   legendColor,
-}: TagIconProps): JSX.Element => {
+}: TagIconProps): ReactElement => {
   return <Icon style={{ background: legendColor }}>{icon}</Icon>;
 };
 

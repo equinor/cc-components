@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { PunchBase } from './type';
+import { ReactElement } from 'react';
 
 type PunchTabProps<T> = {
   punches: T[] | undefined;
@@ -12,7 +13,7 @@ export const PunchTab = <T extends PunchBase>({
   error,
   isFetching,
   punches,
-}: PunchTabProps<T>): JSX.Element => {
+}: PunchTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

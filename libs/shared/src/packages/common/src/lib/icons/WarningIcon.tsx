@@ -1,4 +1,6 @@
-export const WarningIcon = (): JSX.Element => {
+import { ReactElement } from 'react';
+
+export const WarningIcon = (): ReactElement => {
   return (
     <svg
       width="22"

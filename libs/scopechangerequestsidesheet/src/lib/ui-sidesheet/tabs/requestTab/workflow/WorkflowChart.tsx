@@ -9,6 +9,7 @@ import {
   WorklowIconAndLine,
 } from '../requestTab.styles';
 import { StyledWorkflowText } from '../requestTab.styles';
+import { ReactElement } from 'react';
 
 type WorkflowChartProps = {
   scopechange?: ScopeChangeRequest | undefined;
@@ -18,7 +19,7 @@ Icon.add({ check, arrow_forward });
 export const WorkflowChart = ({
   scopechange,
   error,
-}: WorkflowChartProps): JSX.Element => {
+}: WorkflowChartProps): ReactElement => {
   const workflowLen = scopechange?.workflowSteps?.length || 0;
   return (
     <>

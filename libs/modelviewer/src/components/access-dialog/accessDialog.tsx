@@ -1,12 +1,13 @@
 import { Button, Dialog } from '@equinor/eds-core-react';
 import { usePlantContext } from '../../providers/plantProvider';
+import { ReactElement } from 'react';
 
 type AccessDialogProps = {
   isOpen: boolean;
   onCancel: () => void;
 };
 
-export const AccessDialog = (props: AccessDialogProps): JSX.Element => {
+export const AccessDialog = (props: AccessDialogProps): ReactElement => {
   const { isOpen, onCancel } = props;
 
   const { currentPlant } = usePlantContext();

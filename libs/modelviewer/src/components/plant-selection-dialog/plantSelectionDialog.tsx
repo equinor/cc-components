@@ -1,12 +1,12 @@
 import { Button, Checkbox, Dialog, Divider } from '@equinor/eds-core-react';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 
 import { Plant, usePlantSelectionService } from '../../services/usePlantSelectionService';
 import PlantSelectionList from '../plant-selection-list/modelSelectionList';
 import { usePlantSelectionContext } from '../../providers/plantSelectionProvider';
 
-export const PlantSelectionDialog = (): JSX.Element => {
+export const PlantSelectionDialog = (): ReactElement => {
   const plantSelectionService = usePlantSelectionService();
 
   const { plants, setCurrentPlant, setShowPlantDialog, isPlantSelectionVisible } =
