@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 type SizeIconsProps = {
   size: string;
   color: string;
@@ -11,7 +13,7 @@ const lines = [
 const lineCount = (size: string): number =>
   size === 'small' ? 1 : size === 'medium' ? 2 : 3;
 
-export const SizeIcons = ({ size, color }: SizeIconsProps): JSX.Element => (
+export const SizeIcons = ({ size, color }: SizeIconsProps): ReactElement => (
   <svg width="14" height="12" viewBox="0 0 14 12" xmlns="http://www.w3.org/2000/svg">
     <g fill={color}>{lines.slice(0, lineCount(size)).map((line) => line)}</g>
   </svg>

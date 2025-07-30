@@ -5,6 +5,7 @@ import { ClientGrid, ColDef, GridOptions } from '@equinor/workspace-fusion/grid'
 import { defaultGridOptions } from '../../../../../workspace-config/src/defaultGridOptions';
 import { InfoText, NoResourceData, TabTableStyles } from './tabTable.styles';
 import { defaultModules } from '../../../../../workspace-config';
+import { ReactElement } from 'react';
 
 type TabTableProps<T> = {
   packages: T[] | undefined;
@@ -23,7 +24,7 @@ Icon.add({ info_circle, error_outlined });
  */
 export const TabTable = <T extends Record<PropertyKey, unknown>>(
   props: TabTableProps<T>
-): JSX.Element => {
+): ReactElement => {
   const { columns, error, isFetching, packages, resourceName } = props;
 
   return (

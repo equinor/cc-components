@@ -1,6 +1,7 @@
 import { TabTable } from '@cc-components/shared';
 import { checklistColumns } from './checklistColumns';
 import { HeatTraceChecklist } from 'libs/heattraceshared/dist/src';
+import { ReactElement } from 'react';
 
 type ChecklistTabProps = {
   checklists: HeatTraceChecklist[] | undefined;
@@ -11,7 +12,7 @@ export const ChecklistTab = ({
   checklists,
   error,
   isFetching,
-}: ChecklistTabProps): JSX.Element => {
+}: ChecklistTabProps): ReactElement => {
   return (
     <TabTable
       columns={checklistColumns}

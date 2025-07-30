@@ -1,5 +1,6 @@
 import { Tabs, TabsProps } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 export const StyledContentWrapper = styled.div`
@@ -20,7 +21,7 @@ export const StyledTabsList = styled(Tabs.List)`
   scroll-behavior: smooth;
 `;
 
-export const StyledTabs: (props: TabsProps) => JSX.Element = styled(Tabs)`
+export const StyledTabs: (props: TabsProps) => ReactElement = styled(Tabs)`
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;

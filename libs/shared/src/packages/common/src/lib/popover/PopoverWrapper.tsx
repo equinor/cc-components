@@ -3,6 +3,7 @@ import { tokens } from '@equinor/eds-tokens';
 import {
   MutableRefObject,
   PropsWithChildren,
+  ReactElement,
   useLayoutEffect,
   useRef,
   useState,
@@ -40,7 +41,7 @@ export const PopoverWrapper = ({
   popoverTitle,
   children,
   close,
-}: PropsWithChildren<PopoverWrapperProps>): JSX.Element | null => {
+}: PropsWithChildren<PopoverWrapperProps>): ReactElement | null => {
   const [placement, setPlacement] = useState<{ x: number; y: number }>({
     y: 30,
     x: -width / 2,

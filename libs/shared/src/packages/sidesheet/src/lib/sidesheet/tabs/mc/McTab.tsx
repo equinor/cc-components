@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { McBase } from './types';
+import { ReactElement } from 'react';
 
 type McTabProps<T> = {
   mc: T[] | undefined;
@@ -12,7 +13,7 @@ export const McTab = <T extends McBase>({
   error,
   isFetching,
   mc,
-}: McTabProps<T>): JSX.Element => {
+}: McTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

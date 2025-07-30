@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { UnsignedTaskBase } from './types';
+import { ReactElement } from 'react';
 
 type UnsignedTaskTabProps<T> = {
   unsignedTasks: T[] | undefined;
@@ -12,7 +13,7 @@ export const UnsignedTaskTab = <T extends UnsignedTaskBase>({
   error,
   isFetching,
   unsignedTasks,
-}: UnsignedTaskTabProps<T>): JSX.Element => {
+}: UnsignedTaskTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

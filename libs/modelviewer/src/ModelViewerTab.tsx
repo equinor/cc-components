@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { ReactElement, Suspense, lazy } from 'react';
 import { Icon, Progress } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 
@@ -41,7 +41,7 @@ export type ModelViewerTabProps = {
   options?: ModelViewerConfig;
 };
 
-export const ModelViewerTab = (props: ModelViewerTabProps): JSX.Element => {
+export const ModelViewerTab = (props: ModelViewerTabProps): ReactElement => {
   const { tagOverlay, facilities, options, isFetching, error } = props;
 
   if (isFetching) {

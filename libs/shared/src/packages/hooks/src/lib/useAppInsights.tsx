@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, ReactElement, useContext, useEffect } from 'react';
 import {
   ApplicationInsights,
   BaseTelemetryPlugin,
@@ -60,7 +60,7 @@ export const AppInsightsProvider = ({
   connectionString,
   children,
   defaultTags,
-}: AppInsightsProviderProps): JSX.Element => {
+}: AppInsightsProviderProps): ReactElement => {
   let appInsights: ApplicationInsights | undefined = undefined;
 
   if (connectionString) {

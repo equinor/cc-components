@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { CustomError } from '../../types/errors';
+import { ReactElement } from 'react';
 
 const Styled = {
   Wrapper: styled.div`
@@ -25,7 +26,7 @@ type CustomErrorMessageProps = {
   error: CustomError;
 };
 
-export const CustomErrorMessage = (props: CustomErrorMessageProps): JSX.Element => {
+export const CustomErrorMessage = (props: CustomErrorMessageProps): ReactElement => {
   const { error } = props;
 
   return (

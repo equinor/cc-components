@@ -46,7 +46,7 @@ export const StyledCircuitNameAndIconWrapper = styled.div<{ maybeRef: HTMLDivEle
   position: absolute;
   width: 100%;
   left: 0;
-  top: ${(p) => p.maybeRef?.offsetTop - 24 ?? 0}px;
+  top: ${(p) => p.maybeRef?.offsetTop - 24}px;
 `;
 
 export const StyledNetworkNameAndIcon = styled.div`

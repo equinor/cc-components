@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { UnsignedChecklistBase } from './types';
+import { ReactElement } from 'react';
 
 type UnsignedChecklistTabProps<T> = {
   unsignedChecklists: T[] | undefined;
@@ -12,7 +13,7 @@ export const UnsignedChecklistTab = <T extends UnsignedChecklistBase>({
   unsignedChecklists: unsignedChecklists,
   error,
   isFetching,
-}: UnsignedChecklistTabProps<T>): JSX.Element => {
+}: UnsignedChecklistTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

@@ -3,6 +3,7 @@ import { HtmlOverlayOptions, HtmlOverlayTool } from '@cognite/reveal/tools';
 import { throttle } from 'throttle-typescript';
 import { debounce } from '../utils/debounceUtils';
 import { Echo3dViewer } from '@equinor/echo-3d-viewer';
+import * as THREE from 'three';
 
 type HtmlOverlayElement = {
   position3D: THREE.Vector3;

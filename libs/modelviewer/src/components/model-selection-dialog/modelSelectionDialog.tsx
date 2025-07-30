@@ -1,5 +1,5 @@
 import { Button, Checkbox, Dialog, Divider } from '@equinor/eds-core-react';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 
 import { useModelSelectionContext } from '../../providers/modelSelectionProvider';
@@ -7,7 +7,7 @@ import ModelSelectionList from '../model-selection-list/modelSelectionList';
 import { useModelSelectionService } from '../../services';
 import { AccessError, NoAvailableModelsError } from '../../types/errors';
 
-export const ModelSelectionDialog = (): JSX.Element => {
+export const ModelSelectionDialog = (): ReactElement => {
   const modelSelectionService = useModelSelectionService();
 
   const { setShowModelDialog, setModelMeta, isModelSelectionVisible, models, hasAccess } =

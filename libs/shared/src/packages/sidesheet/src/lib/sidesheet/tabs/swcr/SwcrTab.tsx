@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './detailsColumns';
 import { SwcrBase } from './types';
+import { ReactElement } from 'react';
 
 type SwcrTabProps<T> = {
   swcrs: T[] | undefined;
@@ -12,7 +13,7 @@ export const SwcrTab = <T extends SwcrBase>({
   error,
   isFetching,
   swcrs,
-}: SwcrTabProps<T>): JSX.Element => {
+}: SwcrTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

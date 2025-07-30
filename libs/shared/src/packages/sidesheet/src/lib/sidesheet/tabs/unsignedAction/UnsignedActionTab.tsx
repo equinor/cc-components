@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { UnsignedActionBase } from './types';
+import { ReactElement } from 'react';
 
 type UnsignedActionTabProps<T> = {
   unsignedActions: T[] | undefined;
@@ -12,7 +13,7 @@ export const UnsignedActionTab = <T extends UnsignedActionBase>({
   unsignedActions,
   error,
   isFetching,
-}: UnsignedActionTabProps<T>): JSX.Element => {
+}: UnsignedActionTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable
