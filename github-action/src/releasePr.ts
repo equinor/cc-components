@@ -70,5 +70,9 @@ export async function release(context: ReleaseArgs) {
     ciUrl
   );
 
-  execSync(`echo '## ${pkg.name}' >> $GITHUB_STEP_SUMMARY`);
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    execSync(`echo '## ${pkg.name}' >> ${process.env.GITHUB_STEP_SUMMARY}`);
+  } else {
+    console.warn('GITHUB_STEP_SUMMARY is not set. Skipping step summary update.');
+  }
 }
