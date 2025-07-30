@@ -30,10 +30,7 @@ program
   .option('-T, --token <token>', 'azure token')
   .option('--pr <pr>', 'Pr number')
   .option('--ai <ai>', 'ai key')
-  .option(
-    '-modelViewerConfig, --modelViewerConfig <modelViewerConfig>',
-    'modelviewer config'
-  )
+  .option('--modelViewerConfig <modelViewerConfig>', 'modelviewer config')
   .option('--sha <sha>', 'commit sha')
   .action(async (args) => {
     if (!args.token) {
