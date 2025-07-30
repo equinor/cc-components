@@ -28,13 +28,13 @@ type ReleaseArgs = {
 program
   .command('release')
   .option('-T, --token <token>', 'azure token')
-  .option('-pr, --pr <pr>', 'Pr number')
-  .option('-ai, --ai <ai>', 'ai key')
+  .option('--pr <pr>', 'Pr number')
+  .option('--ai <ai>', 'ai key')
   .option(
     '-modelViewerConfig, --modelViewerConfig <modelViewerConfig>',
     'modelviewer config'
   )
-  .option('-sha, --sha <sha>', 'commit sha')
+  .option('--sha <sha>', 'commit sha')
   .action(async (args) => {
     if (!args.token) {
       throw new Error('Missing az token');
@@ -75,5 +75,3 @@ export async function release(context: ReleaseArgs) {
 
   execSync(`echo '## ${pkg.name}' >> $GITHUB_STEP_SUMMARY`);
 }
-
-
