@@ -30,13 +30,10 @@ type ReleaseArgs = {
 program
   .command('release')
   .option('-T, --token <token>', 'azure token')
-  .option('-pr, --pr <pr>', 'Pr number')
-  .option('-ai, --ai <ai>', 'ai key')
-  .option(
-    '-modelViewerConfig, --modelViewerConfig <modelViewerConfig>',
-    'modelviewer config'
-  )
-  .option('-sha, --sha <sha>', 'commit sha')
+  .option('--pr <pr>', 'Pr number')
+  .option('--ai <ai>', 'ai key')
+  .option('--modelViewerConfig <modelViewerConfig>', 'modelviewer config')
+  .option('--sha <sha>', 'commit sha')
   .action(async (args) => {
     if (!args.token) {
       throw new Error('Missing az token');
@@ -48,7 +45,6 @@ program
   });
 
 await program.parseAsync();
-
 
 export async function release(config: ReleaseArgs) {
   const pkg = parsePackageJson();
@@ -82,7 +78,11 @@ export async function release(config: ReleaseArgs) {
     prodUrl
   );
 
-  execSync(`echo '## ${pkg.name}' >> $GITHUB_STEP_SUMMARY`);
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    execSync(`echo '## ${pkg.name}' >> ${process.env.GITHUB_STEP_SUMMARY}`);
+  } else {
+    console.warn('GITHUB_STEP_SUMMARY is not set. Skipping step summary update.');
+  }
 }
 
 function shouldSkipProd() {

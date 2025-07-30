@@ -58,4 +58,5 @@ jobs:
         env:
           #Public hosted runners has 16GB available (linux | windows runners)
           NODE_OPTIONS: "--max_old_space_size=12288"
+          GITHUB_STEP_SUMMARY: $GITHUB_STEP_SUMMARY
         run: npx turbo run fprd:deploy --filter='${{inputs.appKey}}' --concurrency 4 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'
