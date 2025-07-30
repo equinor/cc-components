@@ -9,6 +9,7 @@ import {
   StyledPopoverProjectDescription,
 } from '@cc-components/shared/common';
 import { McPackage } from '../../../../../mechanicalcompletionshared';
+import { ReactElement } from 'react';
 
 type ItemOptions = {
   size: TagSize;

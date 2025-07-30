@@ -55,8 +55,8 @@ importers:
         specifier: 8.5.1
         version: 8.5.1(@types/react@19.1.9)(react@19.1.1)
       '@equinor/workspace-fusion':
-        specifier: link:workspace/packages/workspace-fusion
-        version: link:workspace/packages/workspace-fusion
+        specifier: 9.0.40-pr.0
+        version: 9.0.40-pr.0(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)(use-sync-external-store@1.5.0(react@19.1.1))
       '@microsoft/applicationinsights-web':
         specifier: 3.3.9
         version: 3.3.9(tslib@2.8.1)
@@ -552,7 +552,7 @@ importers:
         version: 0.10.5(react@19.1.1)
       '@equinor/workspace-fusion':
         specifier: '*'
-        version: 9.0.38(@babel/core@7.28.0)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/sortablejs@1.15.8)(immer@10.1.1)(tslib@2.8.1)
+        version: 9.0.38(@babel/core@7.28.0)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)
       '@remirror/pm':
         specifier: ^3.0.1
         version: 3.0.1
@@ -1797,6 +1797,11 @@ packages:
     peerDependencies:
       styled-components: '>= 5.0.0'
 
+  '@equinor/workspace-ag-grid@3.0.7-pr.0':
+    resolution: {integrity: sha512-ziLmvXA9D+utV7TVCsjBnvg4qpITnlhZ2pKwvFR2SXaXUAyx9zrm33pbYpe7GvnaLTLjHdIP2APZJWpMKSoITw==}
+    peerDependencies:
+      styled-components: ^6.1.19
+
   '@equinor/workspace-filter@4.0.17':
     resolution: {integrity: sha512-9Ec8FNT3N3cWPzvE/V94PcujEkVKQEJLJ3HV8nChpxJLBdjZfoFJf6YPEaYnUiUkjGaUcGPBljUaNnFwvefJkw==}
     peerDependencies:
@@ -1804,8 +1809,18 @@ packages:
       react-dom: ^19.1.1
       styled-components: ^5.3.5
 
+  '@equinor/workspace-filter@4.0.19-pr.0':
+    resolution: {integrity: sha512-480RXif07MoRkozNtU4k91ngZzu4ZrYVZkj6dfvyRZt2NhGwuzqW6xG/Q3ZkxdgiMH3JTDoFoOFSGXsxDYGfcQ==}
+    peerDependencies:
+      react: ^19.1.1
+      react-dom: ^19.1.1
+      styled-components: ^6.1.19
+
   '@equinor/workspace-fusion@9.0.38':
     resolution: {integrity: sha512-79Znk6hciSIFInMHrX38vZeHtgMY4mGji7RW+5+bV9s3vU2Us3Ye+X90LQeUGwjdBrOF6oLEeWjiWooGch+vOA==}
+
+  '@equinor/workspace-fusion@9.0.40-pr.0':
+    resolution: {integrity: sha512-gyi72hrqDnvVWPhd9nv3Se3IBtaG37QzNZ9R6Q1u/9hfwXINsh3JvD74lwruJHrnETo35FDjoOi9l5CXq8bk7w==}
 
   '@equinor/workspace-garden@8.0.7':
     resolution: {integrity: sha512-ljDwYrd7k9+SdjjRnz4NACa/aC/OxuJisDNpucF9RxEFSfwOsDkPtJCW+tEOLPdu/882tBaZMmiDVPuETeMCKg==}
@@ -1814,8 +1829,18 @@ packages:
       react-dom: ^19.1.1
       styled-components: ^5.3.6
 
+  '@equinor/workspace-garden@8.0.9-pr.0':
+    resolution: {integrity: sha512-yYe1fXUqyAm+mNrIxE1EaAf4aV00c8Zpbbp7r3zDwSa3M/9x0JdinZfivU1PuSYp5NjtJ6qTdP4of5PZn5GnNg==}
+    peerDependencies:
+      react: ^19.1.1
+      react-dom: ^19.1.1
+      styled-components: ^6.1.19
+
   '@equinor/workspace-powerbi@3.0.18':
     resolution: {integrity: sha512-dqmQrgF7LJyRMY/sXTVQgnb+xEber8Y9ArwFed4zgbmIwoFoJlIdPqxSUk9Y5rmH7LQMn3KHhuep8CSMPM4kow==}
+
+  '@equinor/workspace-powerbi@3.0.20-pr.0':
+    resolution: {integrity: sha512-4Rw9WLx4FTMa3wb/AJ1G6X/le61fvevB1wKVwWGP+d5YhHRGmmO+JJ2QPoB42sog/J+JOhwHrHJBTNPUH1OvJA==}
 
   '@equinor/workspace-react@2.0.5':
     resolution: {integrity: sha512-i1RGdbwMAHKS0ZrWR0oKKDWFnkZXPdsXNtHRNBuYy1oRw3Y4tNC8W6N2fernmnwJ0IXILa5Bhbkqia0pKG8Img==}
@@ -1823,6 +1848,13 @@ packages:
       react: ^19.1.1
       react-dom: ^19.1.1
       styled-components: ^5.3.6
+
+  '@equinor/workspace-react@2.0.7-pr.0':
+    resolution: {integrity: sha512-FYOcnzGMZIiEfsx/QVPnq62TFbrj89OnPspQwir94JyRUzy7yTgSLjn3LjUcN1to4uDaTvRzOK30VnVMFCDH5A==}
+    peerDependencies:
+      react: ^19.1.1
+      react-dom: ^19.1.1
+      styled-components: ^6.1.19
 
   '@equinor/workspace-sidesheet@0.1.6':
     resolution: {integrity: sha512-e7Gn1SyDQqOPFnGA0+/AEvAdFcV7mMnjbmQq8jCS5UhsVid2kRHYHunfrxhVIspwnsZgiHRdlCJnzGlYn1VFaw==}
@@ -5965,9 +5997,6 @@ packages:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
 
-  immer@10.1.1:
-    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
-
   immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
 
@@ -7071,6 +7100,11 @@ packages:
 
   powerbi-client-react@1.4.0:
     resolution: {integrity: sha512-AfS96lP+emEc4drguCUqLG0s4cFa15OM9eqDaP1sJZ+ca0V+FdvFeI1bD6EyC3smPlpRcl862uSzYexVeUxdIQ==}
+    peerDependencies:
+      react: ^19.1.1
+
+  powerbi-client-react@2.0.0:
+    resolution: {integrity: sha512-u6P96DhuhJZwcbS7RN0zxU0M0ERAfgOEY9T+z3RVSQsoU0PNnhHRn/CMDXbmAwUsB6UgGxH7Izw0Kflr+RF9CA==}
     peerDependencies:
       react: ^19.1.1
 
@@ -8576,6 +8610,24 @@ packages:
       immer:
         optional: true
       react:
+        optional: true
+
+  zustand@5.0.6:
+    resolution: {integrity: sha512-ihAqNeUVhe0MAD+X8M5UzqyZ9k3FFZLBTtqo6JLPwV53cbRB/mJwBI0PxcIgqhBBHlEs8G45OTDTMq3gNcLq3A==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: ^19.1.1
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
         optional: true
 
   zwitch@2.0.4:
@@ -10220,6 +10272,16 @@ snapshots:
     transitivePeerDependencies:
       - '@equinor/fusion-framework-module'
 
+  '@equinor/workspace-ag-grid@3.0.7-pr.0(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
+    dependencies:
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/fusion-framework-react-ag-grid': 33.2.8(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+
   '@equinor/workspace-filter@4.0.17(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -10228,7 +10290,7 @@ snapshots:
       '@microsoft/applicationinsights-core-js': 3.3.9(tslib@2.8.1)
       '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
       '@tanstack/react-query': 5.83.0(react@19.1.1)
-      '@tanstack/react-virtual': 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@tanstack/react-virtual': 3.13.8(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
       react-error-boundary: 4.1.2(react@19.1.1)
@@ -10240,7 +10302,27 @@ snapshots:
       - '@types/sortablejs'
       - tslib
 
-  '@equinor/workspace-fusion@9.0.38(@babel/core@7.28.0)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/sortablejs@1.15.8)(immer@10.1.1)(tslib@2.8.1)':
+  '@equinor/workspace-filter@4.0.19-pr.0(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@microsoft/applicationinsights-core-js': 3.3.9(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.9(tslib@2.8.1)
+      '@tanstack/react-query': 5.83.0(react@19.1.1)
+      '@tanstack/react-virtual': 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-error-boundary: 6.0.0(react@19.1.1)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sortablejs@1.15.6)
+      react-virtual: 2.10.4(react@19.1.1)
+      sortablejs: 1.15.6
+      styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/sortablejs'
+      - tslib
+
+  '@equinor/workspace-fusion@9.0.38(@babel/core@7.28.0)(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons': 0.22.0
@@ -10249,7 +10331,7 @@ snapshots:
       '@equinor/workspace-filter': 4.0.17(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)
       '@equinor/workspace-garden': 8.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/workspace-powerbi': 3.0.18(@types/sortablejs@1.15.8)(tslib@2.8.1)
-      '@equinor/workspace-react': 2.0.5(@babel/core@7.28.0)(@types/react@19.1.9)(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)
+      '@equinor/workspace-react': 2.0.5(@babel/core@7.28.0)(@types/react@19.1.9)(immer@9.0.21)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)
       '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
       '@tanstack/react-query': 5.83.0(react@19.1.1)
       re-resizable: 6.11.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -10266,6 +10348,31 @@ snapshots:
       - supports-color
       - tslib
 
+  '@equinor/workspace-fusion@9.0.40-pr.0(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/sortablejs@1.15.8)(immer@9.0.21)(tslib@2.8.1)(use-sync-external-store@1.5.0(react@19.1.1))':
+    dependencies:
+      '@equinor/eds-core-react': 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/workspace-ag-grid': 3.0.7-pr.0(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/workspace-filter': 4.0.19-pr.0(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)
+      '@equinor/workspace-garden': 8.0.9-pr.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/workspace-powerbi': 3.0.20-pr.0(@types/sortablejs@1.15.8)(tslib@2.8.1)
+      '@equinor/workspace-react': 2.0.7-pr.0(@types/react@19.1.9)(immer@9.0.21)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)(use-sync-external-store@1.5.0(react@19.1.1))
+      '@microsoft/applicationinsights-web': 3.3.9(tslib@2.8.1)
+      '@tanstack/react-query': 5.83.0(react@19.1.1)
+      re-resizable: 6.11.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-error-boundary: 6.0.0(react@19.1.1)
+      styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - '@equinor/fusion-framework-module'
+      - '@types/react'
+      - '@types/sortablejs'
+      - immer
+      - tslib
+      - use-sync-external-store
+
   '@equinor/workspace-garden@8.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -10279,6 +10386,19 @@ snapshots:
       react-virtual: 2.10.4(react@19.1.1)
       styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
+  '@equinor/workspace-garden@8.0.9-pr.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
+    dependencies:
+      '@equinor/eds-core-react': 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@tanstack/react-query': 5.83.0(react@19.1.1)
+      '@tanstack/react-query-devtools': 5.83.0(@tanstack/react-query@5.83.0(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-error-boundary: 6.0.0(react@19.1.1)
+      react-virtual: 2.10.4(react@19.1.1)
+      styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+
   '@equinor/workspace-powerbi@3.0.18(@types/sortablejs@1.15.8)(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.43.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -10287,7 +10407,7 @@ snapshots:
       '@equinor/workspace-filter': 4.0.17(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)
       '@microsoft/applicationinsights-web': 3.3.6(tslib@2.8.1)
       '@tanstack/react-query': 5.83.0(react@19.1.1)
-      '@tanstack/react-virtual': 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@tanstack/react-virtual': 3.13.8(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       markdown-to-jsx: 7.7.12(react@19.1.1)
       powerbi-client: 2.23.1
       powerbi-client-react: 1.4.0(react@19.1.1)
@@ -10302,7 +10422,30 @@ snapshots:
       - '@types/sortablejs'
       - tslib
 
-  '@equinor/workspace-react@2.0.5(@babel/core@7.28.0)(@types/react@19.1.9)(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)':
+  '@equinor/workspace-powerbi@3.0.20-pr.0(@types/sortablejs@1.15.8)(tslib@2.8.1)':
+    dependencies:
+      '@equinor/eds-core-react': 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@equinor/workspace-filter': 4.0.19-pr.0(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)
+      '@microsoft/applicationinsights-web': 3.3.9(tslib@2.8.1)
+      '@tanstack/react-query': 5.83.0(react@19.1.1)
+      '@tanstack/react-virtual': 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      markdown-to-jsx: 7.7.12(react@19.1.1)
+      powerbi-client: 2.23.1
+      powerbi-client-react: 2.0.0(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-error-boundary: 6.0.0(react@19.1.1)
+      react-sortablejs: 6.1.4(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sortablejs@1.15.6)
+      react-virtual: 2.10.4(react@19.1.1)
+      sortablejs: 1.15.6
+      styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/sortablejs'
+      - tslib
+
+  '@equinor/workspace-react@2.0.5(@babel/core@7.28.0)(@types/react@19.1.9)(immer@9.0.21)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)':
     dependencies:
       '@equinor/eds-core-react': 0.28.0(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons': 0.18.0
@@ -10311,13 +10454,29 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
       styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      zustand: 4.5.7(@types/react@19.1.9)(immer@10.1.1)(react@19.1.1)
+      zustand: 4.5.7(@types/react@19.1.9)(immer@9.0.21)(react@19.1.1)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
       - immer
       - supports-color
       - tslib
+
+  '@equinor/workspace-react@2.0.7-pr.0(@types/react@19.1.9)(immer@9.0.21)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tslib@2.8.1)(use-sync-external-store@1.5.0(react@19.1.1))':
+    dependencies:
+      '@equinor/eds-core-react': 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/eds-icons': 0.22.0
+      '@equinor/eds-tokens': 0.9.2
+      '@microsoft/applicationinsights-web': 3.3.9(tslib@2.8.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      styled-components: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      zustand: 5.0.6(@types/react@19.1.9)(immer@9.0.21)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1))
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - tslib
+      - use-sync-external-store
 
   '@equinor/workspace-sidesheet@0.1.6(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
     dependencies:
@@ -16010,9 +16169,6 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  immer@10.1.1:
-    optional: true
-
   immer@9.0.21: {}
 
   import-fresh@3.3.1:
@@ -17389,6 +17545,12 @@ snapshots:
       source-map-js: 1.2.1
 
   powerbi-client-react@1.4.0(react@19.1.1):
+    dependencies:
+      lodash.isequal: 4.5.0
+      powerbi-client: 2.23.1
+      react: 19.1.1
+
+  powerbi-client-react@2.0.0(react@19.1.1):
     dependencies:
       lodash.isequal: 4.5.0
       powerbi-client: 2.23.1
@@ -19182,12 +19344,19 @@ snapshots:
 
   zod@3.25.76: {}
 
-  zustand@4.5.7(@types/react@19.1.9)(immer@10.1.1)(react@19.1.1):
+  zustand@4.5.7(@types/react@19.1.9)(immer@9.0.21)(react@19.1.1):
     dependencies:
       use-sync-external-store: 1.5.0(react@19.1.1)
     optionalDependencies:
       '@types/react': 19.1.9
-      immer: 10.1.1
+      immer: 9.0.21
       react: 19.1.1
+
+  zustand@5.0.6(@types/react@19.1.9)(immer@9.0.21)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1)):
+    optionalDependencies:
+      '@types/react': 19.1.9
+      immer: 9.0.21
+      react: 19.1.1
+      use-sync-external-store: 1.5.0(react@19.1.1)
 
   zwitch@2.0.4: {}
