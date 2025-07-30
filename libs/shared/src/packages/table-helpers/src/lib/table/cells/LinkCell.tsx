@@ -2,6 +2,7 @@ import { link } from 'fs';
 import { StyledLink } from './cell.styles';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { useAppInsights } from '../../../../../hooks';
+import { ReactElement } from 'react';
 
 type LinkCellProps = {
   url?: string;
@@ -19,7 +20,7 @@ export const LinkCell = ({
   aiLinktype,
   aiLinkLocation,
   tooltipText = 'Open in ProCoSys',
-}: LinkCellProps): JSX.Element => {
+}: LinkCellProps): ReactElement => {
   const applicationInsights = useAppInsights();
   const onClick = () => {
     if (aiLinktype && aiLinkLocation) {

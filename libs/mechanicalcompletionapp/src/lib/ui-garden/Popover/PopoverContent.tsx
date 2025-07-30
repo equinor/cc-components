@@ -9,6 +9,7 @@ import {
   StyledPopoverProjectDescription,
 } from '@cc-components/shared/common';
 import { McPackage } from '../../../../../mechanicalcompletionshared';
+import { ReactElement } from 'react';
 
 type ItemOptions = {
   size: TagSize;
@@ -27,7 +28,7 @@ type PopoverContentProps = {
 export const PopoverContent = ({
   data,
   options: { size, backgroundColor, contentsColor, mcDotColor, commDotColor, status },
-}: PopoverContentProps): JSX.Element => {
+}: PopoverContentProps): ReactElement => {
   return (
     <StyledPopoverContainer>
       <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>

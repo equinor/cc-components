@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { NcrBase } from './types';
+import { ReactElement } from 'react';
 
 type NcrTabProps<T> = {
   ncrs: T[] | undefined;
@@ -15,7 +16,7 @@ export const NcrTab = <T extends NcrBase>({
   error,
   isFetching,
   ncrs,
-}: NcrTabProps<T>): JSX.Element => {
+}: NcrTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

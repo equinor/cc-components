@@ -12,17 +12,19 @@ import {
 } from 'remirror/extensions';
 import {
   EditorComponent,
-  Toolbar,
   Remirror,
   ThemeProvider,
   useRemirror,
-  ToggleBoldButton,
-  ToggleOrderedListButton,
-  ToggleItalicButton,
-  ToggleBulletListButton,
   useHelpers,
   OnChangeJSON,
 } from '@remirror/react';
+import {
+  Toolbar,
+  ToggleBoldButton,
+  ToggleBulletListButton,
+  ToggleItalicButton,
+  ToggleOrderedListButton,
+} from '@remirror/react-ui';
 import type { CreateEditorStateProps } from 'remirror';
 import type { RemirrorProps } from '@remirror/react';
 import { theme } from './theme';

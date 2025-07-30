@@ -9,12 +9,13 @@ import {
 import { formatDateString } from '@cc-components/shared/utils-dates';
 import { ContentTable } from './LoopContentTable';
 import { Checklists } from './Checklists';
+import { ReactElement } from 'react';
 
 type DetailsTabProps = {
   loop: Loop | undefined;
 };
 
-export const DetailsTab = ({ loop }: DetailsTabProps): JSX.Element | null => {
+export const DetailsTab = ({ loop }: DetailsTabProps): ReactElement | null => {
   if (!loop) return null;
   return (
     <StyledTabContent>

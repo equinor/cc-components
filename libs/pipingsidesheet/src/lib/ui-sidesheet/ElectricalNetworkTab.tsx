@@ -3,6 +3,7 @@ import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { Icon } from '@equinor/eds-core-react';
 import { InfoText, NoResourceData } from './electricalNetworkTab.styles';
 import { tokens } from '@equinor/eds-tokens';
+import { ReactElement } from 'react';
 
 type ElectricalNetworkTab = {
   networks: ElectricalNetwork[] | undefined;
@@ -11,7 +12,7 @@ type ElectricalNetworkTab = {
   error: Error | null;
 };
 
-export const ElecticalNetworkTab = (props: ElectricalNetworkTab): JSX.Element => {
+export const ElecticalNetworkTab = (props: ElectricalNetworkTab): ReactElement => {
   const { networks, isFetching, itemNo } = props;
 
   if (isFetching) {

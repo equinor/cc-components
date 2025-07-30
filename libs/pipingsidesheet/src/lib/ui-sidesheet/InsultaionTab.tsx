@@ -2,6 +2,7 @@ import { InsulationTagResponse } from '@cc-components/pipingshared';
 import { TabTable } from '@cc-components/shared';
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { insulationsColumns } from './insulationsColumns';
+import { ReactElement } from 'react';
 
 type InsulationTabProps = {
   insulationTags: InsulationTagResponse | undefined;
@@ -13,7 +14,7 @@ export const InsultaionTab = ({
   insulationTags,
   error,
   isFetching,
-}: InsulationTabProps): JSX.Element => {
+}: InsulationTabProps): ReactElement => {
   return (
     <StyledContentWrapper>
       {insulationTags?.pipeInsulationTags ? <h4>Pipe insulations:</h4> : ''}

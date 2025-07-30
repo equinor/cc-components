@@ -2,6 +2,7 @@ import { TabTable } from '../../../../../../table-helpers/src/lib/table/TabTable
 import { StyledContentWrapper } from '@cc-components/sharedcomponents';
 import { columns } from './columns';
 import { MccrBase } from './types';
+import { ReactElement } from 'react';
 
 type MccrTabProps<T> = {
   mccr: T[] | undefined;
@@ -12,7 +13,7 @@ export const MccrTab = <T extends MccrBase>({
   error,
   isFetching,
   mccr,
-}: MccrTabProps<T>): JSX.Element => {
+}: MccrTabProps<T>): ReactElement => {
   return (
     <StyledContentWrapper>
       <TabTable

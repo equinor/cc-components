@@ -72,4 +72,5 @@ export type HandoverPackage = {
   worstChecklistStatus: string;
   hasNonCountingScope: boolean | null;
   descriptionOfWork: string | null;
+  facility: string | null;
 };

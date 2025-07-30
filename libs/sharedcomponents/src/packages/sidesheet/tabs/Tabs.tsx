@@ -1,11 +1,11 @@
 import { Tabs as EdsTabs } from '@equinor/eds-core-react';
-import { ReactNode, useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 import { CustomStyledPanels, CustomStyledTabs } from './CustomTabs';
 import { StyledTabListWrapper, StyledTabsList } from './tabs.styles';
 
 export type TabConfig = {
   tabTitle: ReactNode;
-  tabContent: JSX.Element;
+  tabContent: ReactElement;
 };
 
 export type TabsProps = {

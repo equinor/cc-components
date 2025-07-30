@@ -1,6 +1,7 @@
 import { TabTable } from '@cc-components/shared';
 import { heatedTagsColumns } from './heatedTagsColumns';
 import { HeatTraceHeatedTag } from '@cc-components/heattraceshared';
+import { ReactElement } from 'react';
 
 type HeatedTagsTabProps = {
   data: HeatTraceHeatedTag[] | undefined;
@@ -8,7 +9,7 @@ type HeatedTagsTabProps = {
   error: Error | null;
 };
 
-export const HeatedTagsTab = (props: HeatedTagsTabProps): JSX.Element => {
+export const HeatedTagsTab = (props: HeatedTagsTabProps): ReactElement => {
   const { data, error, isFetching } = props;
   return (
     <TabTable

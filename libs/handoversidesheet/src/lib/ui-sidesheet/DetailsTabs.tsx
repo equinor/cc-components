@@ -24,6 +24,10 @@ export const DetailsTab = ({ commpkg }: DetailsTabProps) => {
             </td>
           </tr>
           <tr>
+            <td>Facility</td>
+            <td>{stringCell(`${commpkg.facility}`)}</td>
+          </tr>
+          <tr>
             <td>Comm Pkg Responsible</td>
             <td>{stringCell(commpkg.responsible)}</td>
           </tr>

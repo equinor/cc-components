@@ -9,12 +9,13 @@ import {
 
 import { getWoStatus, WorkOrder } from '@cc-components/workordershared';
 import { WorkOrderDescription } from './WorkorderDescription';
+import { ReactElement } from 'react';
 
 type DetailsTabProps = {
   workOrder: WorkOrder | undefined;
 };
 
-export const DetailsTab = ({ workOrder }: DetailsTabProps): JSX.Element | null => {
+export const DetailsTab = ({ workOrder }: DetailsTabProps): ReactElement | null => {
   if (!workOrder) return null;
 
   return (

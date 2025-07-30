@@ -103,7 +103,7 @@ export const domainNames = {
   nextToSignRole: 'Next To Sign Role',
   nodeIdentifier: `Node ${'Identifier'}`,
   types: 'Types',
-  softwareChangeRequests: 'Software Change Requests',
+  softwareChangeRequests: 'SWCR No.',
   handoverStatus: 'Handover Status',
   swcrContract: `SWCR Contract`,
   swcrStatus: 'SWCR Status',

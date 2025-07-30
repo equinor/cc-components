@@ -1,12 +1,13 @@
 import { Tooltip, Icon } from '@equinor/eds-core-react';
 import { check, clear } from '@equinor/eds-icons';
+import { ReactElement } from 'react';
 Icon.add({ check, clear });
 type AvailableItemCellProps = {
   available: boolean | null;
 };
 export const AvailableItemCell = ({
   available,
-}: AvailableItemCellProps): JSX.Element | null => {
+}: AvailableItemCellProps): ReactElement | null => {
   if (available === null) {
     return null;
   }

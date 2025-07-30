@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { StyledDescription, StyledFullDescription } from './cell.styles';
 
 type DescriptionCellProps = {
@@ -20,7 +21,7 @@ type DescriptionCellProps = {
 export const DescriptionCell = ({
   description,
   displayFullText,
-}: DescriptionCellProps): JSX.Element => {
+}: DescriptionCellProps): ReactElement => {
   return displayFullText ? (
     <StyledFullDescription> {description}</StyledFullDescription>
   ) : (

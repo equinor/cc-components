@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { ReactElement, useMemo } from 'react';
 import {
   StyledActualProgress,
   StyledProgressBarContainer,
@@ -12,7 +12,7 @@ type EstimateCellProps = {
 /**
  * Standard component for displaying an estimate bar in a table cell.
  */
-export const EstimateCell = ({ current, max }: EstimateCellProps): JSX.Element => {
+export const EstimateCell = ({ current, max }: EstimateCellProps): ReactElement => {
   const percentage = useMemo(
     () => (max === 0 ? 0 : (current / max) * 100),
     [current, max]

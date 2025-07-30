@@ -1,4 +1,5 @@
 import { Progress } from '@equinor/eds-core-react';
+import { ReactElement } from 'react';
 
 type LoadingTabTitleProps<T> = {
   isLoading: boolean;
@@ -11,7 +12,7 @@ type LoadingTabTitleProps<T> = {
 export const TabTitle = <T extends Record<string, unknown>>({
   data,
   isLoading,
-}: LoadingTabTitleProps<T>): JSX.Element => {
+}: LoadingTabTitleProps<T>): ReactElement => {
   if (isLoading) {
     return <Progress.Dots color="primary" />;
   }
