@@ -7,6 +7,7 @@ export type McPackage = {
   facility: string;
   project: string;
   projectDescription: string;
+  projectIdentifier: string;
   mechanicalCompletionPackageNo: string;
   description: string;
   remark: string;

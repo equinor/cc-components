@@ -62,6 +62,10 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): ReactElement | null 
             </td>
           </tr>
           <tr>
+            <td>Facility</td>
+            <td>{stringCell(workOrder.facility)}</td>
+          </tr>
+          <tr>
             <td>Responsible</td>
             <td>{stringCell(workOrder.responsibleCode)}</td>
           </tr>

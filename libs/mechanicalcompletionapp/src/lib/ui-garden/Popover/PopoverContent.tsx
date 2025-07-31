@@ -7,6 +7,7 @@ import {
   SizeIcons,
   StyledPopoverProjectTitle,
   StyledPopoverProjectDescription,
+  StyledDetailsRow,
 } from '@cc-components/shared/common';
 import { McPackage } from '../../../../../mechanicalcompletionshared';
 import { ReactElement } from 'react';
@@ -31,11 +32,22 @@ export const PopoverContent = ({
 }: PopoverContentProps): ReactElement => {
   return (
     <StyledPopoverContainer>
-      <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
-      <p>{data.projectDescription}</p>
-      <StyledPopoverProjectDescription>
-        {data.description}
-      </StyledPopoverProjectDescription>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Project: </StyledPopoverProjectTitle>
+        <p>
+          {data.project}, {data.projectDescription}
+        </p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Facility: </StyledPopoverProjectTitle>
+        <p>{data.facility}</p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Description: </StyledPopoverProjectTitle>
+        <StyledPopoverProjectDescription>
+          {data.description}
+        </StyledPopoverProjectDescription>
+      </StyledDetailsRow>
       <hr />
       <StyledPopoverProgressBar $barColor={backgroundColor} $textColor={contentsColor}>
         <span>

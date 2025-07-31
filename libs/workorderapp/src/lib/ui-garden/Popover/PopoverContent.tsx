@@ -1,6 +1,7 @@
 import {
   FlagIcon,
   SizeIcons,
+  StyledDetailsRow,
   StyledPopoverContainer,
   StyledPopoverProgressBar,
   StyledPopoverProjectDescription,
@@ -30,13 +31,22 @@ const WorkOrderPopoverWrapper = ({ data, itemOptions }: WorkOrderPopoverProps) =
     itemOptions;
   return (
     <StyledPopoverContainer>
-      <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
-      <p>
-        {data.projectIdentifier}, {data.projectDescription}
-      </p>
-      <StyledPopoverProjectDescription>
-        {data.description}
-      </StyledPopoverProjectDescription>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Project: </StyledPopoverProjectTitle>
+        <p>
+          {data.projectIdentifier}, {data.projectDescription}
+        </p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Facility: </StyledPopoverProjectTitle>
+        <p>{data.facility}</p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Description: </StyledPopoverProjectTitle>
+        <StyledPopoverProjectDescription>
+          {data.description}
+        </StyledPopoverProjectDescription>
+      </StyledDetailsRow>
       <hr />
       <StyledPopoverProgressBar $barColor={barColor} $textColor={textColor}>
         <strong>Status: {milestone}</strong>

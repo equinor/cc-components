@@ -23,6 +23,13 @@ export const StyledPopoverProjectTitle = styled.p`
   font-weight: bold;
 `;
 
+export const StyledDetailsRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: flex-start;
+`;
+
 export const StyledPopoverProjectDescription = styled.p`
   word-break: break-word;
   white-space: break-spaces;
