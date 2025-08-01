@@ -1,6 +1,7 @@
 import { Icon, Tooltip } from '@equinor/eds-core-react';
 import { info_circle } from '@equinor/eds-icons'; // import "save" icon
 import styled from 'styled-components';
+import { OsStatusIcon } from './status-icons/OsStatusIcon';
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -28,7 +29,7 @@ type StatusProps = {
 export const StatusCircle = ({ content, statusColor, infoMessage }: StatusProps) => {
   return (
     <Wrapper>
-      <StyledStatusCircle $statusColor={statusColor} />
+      <OsStatusIcon />
       {infoMessage ? (
         <Tooltip title={infoMessage}>
           <Icon data={info_circle} size={18} color="rgb(0, 112, 121)" rotation={180} />
