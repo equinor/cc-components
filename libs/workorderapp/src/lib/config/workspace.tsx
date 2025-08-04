@@ -20,6 +20,7 @@ import { useStatusBarConfig } from './statusBarConfig';
 import { useGardenConfig } from './gardenConfig';
 import { CCApiAccessLoading } from '@cc-components/sharedcomponents';
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+const appName = 'work-orders';
 
 const pbi_context_mapping = {
   Facility: {
@@ -37,7 +38,7 @@ export const WorkspaceWrapper = () => {
   useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
-  const { isLoading } = useCCApiAccessCheck(contextId, client, 'work-orders');
+  const { isLoading } = useCCApiAccessCheck(contextId, client, appName);
 
   const { currentContext } = useModuleCurrentContext();
 
@@ -47,7 +48,7 @@ export const WorkspaceWrapper = () => {
   );
 
   const filterConfig = useFilterConfig((req) =>
-    client.fetch(`/api/contexts/${contextId}/work-orders/filter-model`, req)
+    client.fetch(`/api/contexts/${contextId}/${appName}/filter-model`, req)
   );
   const tableConfig = useTableConfig(contextId);
   const statusBarConfig = useStatusBarConfig(contextId);
@@ -60,11 +61,12 @@ export const WorkspaceWrapper = () => {
   return (
     <>
       <Workspace
+        appName={appName}
         key={contextId + bookmarkKey}
         currentBookmark={currentBookmark}
         onBookmarkChange={onBookmarkChange}
         workspaceOptions={{
-          getIdentifier: (item) => item.workOrderId,
+          getIdentifier: (item: any) => item.workOrderId,
           defaultTab: 'grid',
           information: {
             title: 'Workorder Workspace',

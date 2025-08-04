@@ -7,6 +7,7 @@ import {
   StyledPopoverProjectDescription,
   StyledPopoverProjectTitle,
   StyledPopoverStatus,
+  StyledDetailsRow,
   WarningIcon,
 } from '@cc-components/shared/common';
 
@@ -38,13 +39,22 @@ export const PopoverContent = ({
 }: PopoverContentProps) => {
   return (
     <StyledPopoverContainer>
-      <StyledPopoverProjectTitle>Project (ProCoSys)</StyledPopoverProjectTitle>
-      <p>
-        {data.projectIdentifier}, {data.projectDescription}
-      </p>
-      <StyledPopoverProjectDescription>
-        {data.description}
-      </StyledPopoverProjectDescription>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Project: </StyledPopoverProjectTitle>
+        <p>
+          {data.projectIdentifier}, {data.projectDescription}
+        </p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Facility: </StyledPopoverProjectTitle>
+        <p>{data.facility}</p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Description: </StyledPopoverProjectTitle>
+        <StyledPopoverProjectDescription>
+          {data.description}
+        </StyledPopoverProjectDescription>
+      </StyledDetailsRow>
       <hr />
       <StyledPopoverProgressBar $barColor={barColor} $textColor={textColor}>
         <strong>{`Milestone: ${status}`}</strong>

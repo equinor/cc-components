@@ -25,6 +25,10 @@ export const DetailsTab = ({ mcPackage }: DetailsTabProps) => {
             </td>
           </tr>
           <tr>
+            <td>Facility</td>
+            <td>{stringCell(mcPackage.facility)}</td>
+          </tr>
+          <tr>
             <td>MC Package Responsible</td>
             <td>{stringCell(mcPackage.responsible)}</td>
           </tr>

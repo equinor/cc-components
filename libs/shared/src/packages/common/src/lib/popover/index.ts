@@ -5,4 +5,5 @@ export {
   StyledPopoverStatus,
   StyledPopoverProjectTitle,
   StyledPopoverProjectDescription,
+  StyledDetailsRow,
 } from './popover.styles';

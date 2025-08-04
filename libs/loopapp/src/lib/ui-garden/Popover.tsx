@@ -1,5 +1,6 @@
 import { Loop } from '@cc-components/loopshared';
 import {
+  StyledDetailsRow,
   StyledPopoverContainer,
   StyledPopoverProjectDescription,
   StyledPopoverProjectTitle,
@@ -14,11 +15,22 @@ type PopoverContentProps = {
 export const PopoverContent = ({ loop }: PopoverContentProps) => {
   return (
     <StyledPopoverContainer>
-      <StyledPopoverProjectTitle> Project (ProCoSys)</StyledPopoverProjectTitle>
-      <p>{loop.project}</p>
-      <StyledPopoverProjectDescription>
-        {loop.description}
-      </StyledPopoverProjectDescription>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Project: </StyledPopoverProjectTitle>
+        <p>
+          {loop.project}, {loop.projectDescription}
+        </p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Facility: </StyledPopoverProjectTitle>
+        <p>{loop.facility}</p>
+      </StyledDetailsRow>
+      <StyledDetailsRow>
+        <StyledPopoverProjectTitle>Description: </StyledPopoverProjectTitle>
+        <StyledPopoverProjectDescription>
+          {loop.description}
+        </StyledPopoverProjectDescription>
+      </StyledDetailsRow>
       <hr />
 
       <StyledStatuses>

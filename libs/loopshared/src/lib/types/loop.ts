@@ -32,6 +32,7 @@ export type Loop = {
   priority2: string | null;
   priority3: string | null;
   project: string | null;
+  projectDescription: string | null;
   register: string | null;
   remainingManHours: number | null;
   responsible: string | null;
