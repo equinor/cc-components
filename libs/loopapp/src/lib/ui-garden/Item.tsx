@@ -45,8 +45,6 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
 
   const linear = createProgressBackground((data.loopContentProgress ?? 0) * 100);
 
-
-
   const mcStatus = getStatusCircle(data.loopContentStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.status, colorAssistMode);
 
