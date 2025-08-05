@@ -4,7 +4,7 @@ export interface GreenStatusIconProps {
   visualIndicator?: boolean;
 }
 
-export const OkStatusIcon = ({
+export const GreenStatusIcon = ({
   visualIndicator = true,
 }: GreenStatusIconProps): ReactElement => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

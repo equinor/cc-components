@@ -1,4 +1,10 @@
-import { PopoverWrapper } from '@cc-components/shared/common';
+import {
+  GrayStatusIcon,
+  GreenStatusIcon,
+  OrangeStatusIcon,
+  RedStatusIcon,
+  PopoverWrapper,
+} from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
@@ -12,7 +18,6 @@ import {
   StyledItemWrapper,
   StyledRoot,
   StyledSizes,
-  StyledStatusCircles,
 } from './garden.styles';
 
 const McGardenItem = (props: CustomItemView<McPackage>) => {
@@ -26,6 +31,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     rowStart,
     columnStart,
     parentRef,
+    colorAssistMode,
   } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -70,6 +76,32 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     setIsOpen(false);
   };
 
+  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
+    switch (status) {
+      case 'PB':
+      case 'M05':
+      case 'M06':
+      case 'M07':
+      case 'M09':
+        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'PA':
+      case 'M02':
+      case 'M03':
+      case 'M04':
+        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'OK':
+      case 'M10':
+      case 'M11':
+      case 'MN':
+        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
+      default:
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
+    }
+  };
+
+  const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.commpkgStatus, colorAssistMode);
+
   return (
     <>
       <StyledRoot>
@@ -85,7 +117,12 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
           <StyledSizes color={contentsColor} size={size} />
           <StyledItemText> {data.mechanicalCompletionPackageNo}</StyledItemText>
 
-          <StyledStatusCircles mcColor={mcDotColor} commColor={commDotColor} />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
         {columnExpanded && (
           <StyledItemText title={data.description ?? ''}>

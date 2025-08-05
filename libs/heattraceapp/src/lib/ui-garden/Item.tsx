@@ -1,5 +1,12 @@
 import { colorMap } from '@cc-components/shared/mapping';
-import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
+import {
+  GrayStatusIcon,
+  GreenStatusIcon,
+  PackageStatus,
+  PopoverWrapper,
+  OrangeStatusIcon,
+  RedStatusIcon,
+} from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import {
@@ -7,7 +14,6 @@ import {
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
-  StyledStatusCircles,
 } from './garden.styles';
 import { HeatTrace } from '@cc-components/heattraceshared';
 import { getHeatTraceStatuses } from '../utils-garden/getHeatTraceStatuses';
@@ -31,6 +37,7 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
     columnStart,
     parentRef,
     displayName,
+    colorAssistMode,
   } = props;
 
   const {
@@ -40,6 +47,32 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   } = useMemo(() => getHeatTraceStatuses(data), [data]);
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
+
+  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
+    switch (status) {
+      case 'PB':
+      case 'M05':
+      case 'M06':
+      case 'M07':
+      case 'M09':
+        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'PA':
+      case 'M02':
+      case 'M03':
+      case 'M04':
+        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'OK':
+      case 'M10':
+      case 'M11':
+      case 'MN':
+        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
+      default:
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
+    }
+  };
+
+  const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 
   return (
     <>
@@ -61,18 +94,12 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
           $isSelected={isSelected}
         >
           <StyledItemText>{displayName}</StyledItemText>
-          <StyledStatusCircles
-            $mcColor={
-              data.mechanicalCompletionStatus
-                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
-                : null
-            }
-            $commColor={
-              data.commissioningStatus
-                ? colorMap[data.commissioningStatus as PackageStatus]
-                : null
-            }
-          />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (

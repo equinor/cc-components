@@ -1,4 +1,4 @@
-export { OkStatusIcon } from './OkStatusIcon';
-export { PaStatusIcon } from './PaStatusIcon';
-export { PbStatusIcon } from './PbStatusIcon';
-export { OsStatusIcon } from './OsStatusIcon';
+export { GreenStatusIcon } from './GreenStatusIcon';
+export { RedStatusIcon } from './RedStatusIcon';
+export { OrangeStatusIcon } from './OrangeStatusIcon';
+export { GrayStatusIcon } from './GrayStatusIcon';

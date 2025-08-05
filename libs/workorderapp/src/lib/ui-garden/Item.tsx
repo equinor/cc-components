@@ -1,10 +1,16 @@
-import { FlagIcon, PopoverWrapper } from '@cc-components/shared';
+import {
+  FlagIcon,
+  GreenStatusIcon,
+  GrayStatusIcon,
+  RedStatusIcon,
+  OrangeStatusIcon,
+  PopoverWrapper,
+} from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, ReactElement, useMemo, useRef, useState } from 'react';
 import { getWorkOrderStatuses } from '../utils-garden';
 import {
-  StyledStatusCircles,
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
@@ -33,6 +39,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
     width: itemWidth = 300,
     groupingKeys,
     displayName,
+    colorAssistMode,
   } = props;
 
   const {
@@ -52,6 +59,32 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
+
+  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
+    switch (status) {
+      case 'PB':
+      case 'M05':
+      case 'M06':
+      case 'M07':
+      case 'M09':
+        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'PA':
+      case 'M02':
+      case 'M03':
+      case 'M04':
+        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'OK':
+      case 'M10':
+      case 'M11':
+      case 'MN':
+        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
+      default:
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
+    }
+  };
+
+  const materialStatus = getStatusCircle(data.materialStatus, colorAssistMode);
+  const mccrStatus = getStatusCircle(data.mccrStatus, colorAssistMode);
 
   return (
     <>
@@ -77,7 +110,12 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
           <StyledSizes size={size} color={textColor} />
           {data.holdBy && <FlagIcon color={textColor} />}
           <StyledItemText>{displayName}</StyledItemText>
-          <StyledStatusCircles matColor={matColor} mccrColor={mccrColor} />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {materialStatus}
+            {mccrStatus}
+          </div>
         </StyledItemWrapper>
         {columnExpanded && (
           <StyledDescription title={data.description ?? ''}>

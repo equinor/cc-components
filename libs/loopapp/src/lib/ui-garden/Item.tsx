@@ -1,5 +1,11 @@
 import { Loop } from '@cc-components/loopshared';
-import { PopoverWrapper } from '@cc-components/shared/common';
+import {
+  GrayStatusIcon,
+  GreenStatusIcon,
+  OrangeStatusIcon,
+  RedStatusIcon,
+  PopoverWrapper,
+} from '@cc-components/shared/common';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
@@ -8,7 +14,6 @@ import {
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
-  StyledStatusCircles,
 } from './garden.styles';
 import { PopoverContent } from './Popover';
 import { itemContentColors } from '@cc-components/shared/mapping';
@@ -35,12 +40,39 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
     columnStart,
     parentRef,
     displayName,
+    colorAssistMode,
   } = props;
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const linear = createProgressBackground((data.loopContentProgress ?? 0) * 100);
+
+  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
+    switch (status) {
+      case 'PB':
+      case 'M05':
+      case 'M06':
+      case 'M07':
+      case 'M09':
+        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'PA':
+      case 'M02':
+      case 'M03':
+      case 'M04':
+        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'OK':
+      case 'M10':
+      case 'M11':
+      case 'MN':
+        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
+      default:
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
+    }
+  };
+
+  const mcStatus = getStatusCircle(data.loopContentStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.status, colorAssistMode);
 
   return (
     <>
@@ -62,12 +94,12 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
           isSelected={isSelected}
         >
           <StyledItemText>{displayName.replace('@LOOP-', '')}</StyledItemText>
-          <StyledStatusCircles
-            mcColor={
-              data.loopContentStatus ? statusColorMap[data.loopContentStatus] : null
-            }
-            commColor={data.status ? statusColorMap[data.status] : null}
-          />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (

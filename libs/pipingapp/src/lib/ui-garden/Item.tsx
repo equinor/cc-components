@@ -9,7 +9,14 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { Pipetest } from 'libs/pipingshared/dist/src';
-import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
+import {
+  PackageStatus,
+  PopoverWrapper,
+  GrayStatusIcon,
+  GreenStatusIcon,
+  OrangeStatusIcon,
+  RedStatusIcon,
+} from '@cc-components/shared';
 import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
 import { itemContentColors } from '@cc-components/shared/mapping';
 
@@ -31,12 +38,39 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
     columnStart,
     parentRef,
     displayName,
+    colorAssistMode,
   } = props;
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const colors = getPipetestStatusColors(data);
+
+  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
+    switch (status) {
+      case 'PB':
+      case 'M05':
+      case 'M06':
+      case 'M07':
+      case 'M09':
+        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'PA':
+      case 'M02':
+      case 'M03':
+      case 'M04':
+        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
+      case 'OK':
+      case 'M10':
+      case 'M11':
+      case 'MN':
+        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
+      default:
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
+    }
+  };
+
+  const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 
   return (
     <>
@@ -58,18 +92,12 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
           textColor={itemContentColors.Light}
         >
           <StyledItemText>{displayName}</StyledItemText>
-          <StyledStatusCircles
-            mcColor={
-              data.mechanicalCompletionStatus
-                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
-                : null
-            }
-            commColor={
-              data.commissioningStatus
-                ? colorMap[data.commissioningStatus as PackageStatus]
-                : null
-            }
-          />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (

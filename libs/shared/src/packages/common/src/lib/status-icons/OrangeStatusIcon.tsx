@@ -1,12 +1,12 @@
 import { ReactElement } from 'react';
 
-export interface YellowStatusIconProps {
+export interface OrangeStatusIconProps {
   visualIndicator?: boolean;
 }
 
-export const PbStatusIcon = ({
+export const OrangeStatusIcon = ({
   visualIndicator = false,
-}: YellowStatusIconProps): ReactElement => (
+}: OrangeStatusIconProps): ReactElement => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <ellipse
       style={{ fill: '#E9AB06', stroke: 'white', strokeWidth: 2 }}

@@ -1,10 +1,10 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import {
   FlagIcon,
-  OkStatusIcon,
-  OsStatusIcon,
-  PaStatusIcon,
-  PbStatusIcon,
+  GreenStatusIcon,
+  GrayStatusIcon,
+  RedStatusIcon,
+  OrangeStatusIcon,
   PopoverWrapper,
   WarningIcon,
 } from '@cc-components/shared/common';
@@ -40,6 +40,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     rowStart,
     columnStart,
     parentRef,
+    colorAssistMode,
   } = args;
 
   const size = getItemSize(data.volume, 100);
@@ -68,20 +69,26 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
   const getStatusCircle = (status: string, showVisualIndicator: boolean) => {
     switch (status) {
       case 'OS':
-        return <OsStatusIcon visualIndicator={showVisualIndicator} />;
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
       case 'PB':
-        return <PbStatusIcon visualIndicator={showVisualIndicator} />;
+        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
       case 'PA':
-        return <PaStatusIcon visualIndicator={showVisualIndicator} />;
+        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
       case 'OK':
-        return <OkStatusIcon visualIndicator={showVisualIndicator} />;
+        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
       default:
-        return <OsStatusIcon visualIndicator={showVisualIndicator} />;
+        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
     }
   };
 
-  const mcStatusCircle = getStatusCircle(data.mechanicalCompletionStatus, false);
-  const commStatusCircle = getStatusCircle(data.commissioningPackageStatus, false);
+  const mcStatusCircle = getStatusCircle(
+    data.mechanicalCompletionStatus,
+    colorAssistMode
+  );
+  const commStatusCircle = getStatusCircle(
+    data.commissioningPackageStatus,
+    colorAssistMode
+  );
 
   const showWarningIcon =
     data.mechanicalCompletionStatus === 'OS' &&
