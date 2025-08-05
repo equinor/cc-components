@@ -1,5 +1,9 @@
 import { colorMap } from '@cc-components/shared/mapping';
-import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
+import {
+  PackageStatus,
+  PopoverWrapper,
+  getStatusCircle,
+} from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import {
@@ -7,7 +11,6 @@ import {
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
-  StyledStatusCircles,
 } from './garden.styles';
 import { HeatTrace } from '@cc-components/heattraceshared';
 import { getHeatTraceStatuses } from '../utils-garden/getHeatTraceStatuses';
@@ -31,6 +34,7 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
     columnStart,
     parentRef,
     displayName,
+    colorAssistMode,
   } = props;
 
   const {
@@ -40,6 +44,11 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   } = useMemo(() => getHeatTraceStatuses(data), [data]);
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
+
+
+
+  const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 
   return (
     <>
@@ -61,18 +70,12 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
           $isSelected={isSelected}
         >
           <StyledItemText>{displayName}</StyledItemText>
-          <StyledStatusCircles
-            $mcColor={
-              data.mechanicalCompletionStatus
-                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
-                : null
-            }
-            $commColor={
-              data.commissioningStatus
-                ? colorMap[data.commissioningStatus as PackageStatus]
-                : null
-            }
-          />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (

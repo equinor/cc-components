@@ -61,31 +61,6 @@ type StatusCirclesProps = {
   mcColor: string;
   commColor: string;
 };
-export const StyledStatusCircles = styled.div<StatusCirclesProps>`
-  display: flex;
-  grid-column: 3/4;
-  justify-content: end;
-  align-items: center;
-
-  &:before {
-    width: 12px;
-    height: 12px;
-    border: 1px solid white;
-    background-color: ${(props) => props.mcColor};
-    border-radius: 50%;
-    margin: 0px 1px;
-    content: ' ';
-  }
-  &:after {
-    width: 12px;
-    height: 12px;
-    border: 1px solid white;
-    background-color: ${(props) => props.commColor};
-    border-radius: 50%;
-    margin: 0px 1px;
-    content: ' ';
-  }
-`;
 
 export const StyledHeaderContainer = styled.div`
   font-weight: 600;

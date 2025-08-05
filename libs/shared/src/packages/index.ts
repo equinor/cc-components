@@ -16,6 +16,7 @@ export * from './types';
 export * from './utils-dates';
 export * from './utils-domain';
 export * from './utils-formatting';
+export * from './utils-statuses';
 export * from './utils-typescript';
 export * from './workflow-visual';
 export * from './workspace-config';

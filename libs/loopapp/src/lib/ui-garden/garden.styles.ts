@@ -43,35 +43,6 @@ type StatusCirclesProps = {
   mcColor: string | null;
   commColor: string | null;
 };
-export const StyledStatusCircles = styled.div<StatusCirclesProps>`
-  display: flex;
-  grid-column: 2/3;
-  justify-content: end;
-  align-items: center;
-
-  &:before {
-    width: ${(props) => (props.mcColor ? '12px' : '13px')};
-    height: ${(props) => (props.mcColor ? '12px' : '13px')};
-    border: ${(props) => (props.mcColor ? '1px solid white' : `none`)};
-    background-color: ${(props) => props.mcColor ?? 'white'};
-    border-radius: 50%;
-    margin: 0px 1px;
-    outline: ${(props) => (props.mcColor ? 'none' : `1px dashed gray`)};
-    outline-offset: -1px;
-    content: ' ';
-  }
-  &:after {
-    width: ${(props) => (props.commColor ? '12px' : '13px')};
-    height: ${(props) => (props.commColor ? '12px' : '13px')};
-    border: ${(props) => (props.commColor ? '1px solid white' : `none`)};
-    background-color: ${(props) => props.commColor ?? 'white'};
-    border-radius: 50%;
-    margin: 0px 1px;
-    outline: ${(props) => (props.commColor ? 'none' : `1px dashed gray`)};
-    outline-offset: -2px;
-    content: ' ';
-  }
-`;
 
 export const StyledStatuses = styled.div`
   margin-top: 24px;

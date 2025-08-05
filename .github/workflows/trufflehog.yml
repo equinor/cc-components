@@ -18,5 +18,5 @@ jobs:
           path: ./
           base: ${{ github.event.repository.default_branch }}
           head: HEAD
-          extra_args: --debug
+          extra_args: --debug --results=verified,unknown
 

@@ -9,7 +9,11 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { Pipetest } from 'libs/pipingshared/dist/src';
-import { PackageStatus, PopoverWrapper } from '@cc-components/shared';
+import {
+  PackageStatus,
+  PopoverWrapper,
+  getStatusCircle,
+} from '@cc-components/shared';
 import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
 import { itemContentColors } from '@cc-components/shared/mapping';
 
@@ -31,12 +35,16 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
     columnStart,
     parentRef,
     displayName,
+    colorAssistMode,
   } = props;
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const colors = getPipetestStatusColors(data);
+
+  const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 
   return (
     <>
@@ -58,18 +66,12 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
           textColor={itemContentColors.Light}
         >
           <StyledItemText>{displayName}</StyledItemText>
-          <StyledStatusCircles
-            mcColor={
-              data.mechanicalCompletionStatus
-                ? colorMap[data.mechanicalCompletionStatus as PackageStatus]
-                : null
-            }
-            commColor={
-              data.commissioningStatus
-                ? colorMap[data.commissioningStatus as PackageStatus]
-                : null
-            }
-          />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (

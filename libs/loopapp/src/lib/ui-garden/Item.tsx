@@ -1,5 +1,8 @@
 import { Loop } from '@cc-components/loopshared';
-import { PopoverWrapper } from '@cc-components/shared/common';
+import {
+  PopoverWrapper,
+} from '@cc-components/shared/common';
+import { getStatusCircle } from '@cc-components/shared';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
@@ -8,7 +11,6 @@ import {
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
-  StyledStatusCircles,
 } from './garden.styles';
 import { PopoverContent } from './Popover';
 import { itemContentColors } from '@cc-components/shared/mapping';
@@ -35,12 +37,16 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
     columnStart,
     parentRef,
     displayName,
+    colorAssistMode,
   } = props;
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const linear = createProgressBackground((data.loopContentProgress ?? 0) * 100);
+
+  const mcStatus = getStatusCircle(data.loopContentStatus, colorAssistMode);
+  const comStatus = getStatusCircle(data.status, colorAssistMode);
 
   return (
     <>
@@ -62,12 +68,12 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
           isSelected={isSelected}
         >
           <StyledItemText>{displayName.replace('@LOOP-', '')}</StyledItemText>
-          <StyledStatusCircles
-            mcColor={
-              data.loopContentStatus ? statusColorMap[data.loopContentStatus] : null
-            }
-            commColor={data.status ? statusColorMap[data.status] : null}
-          />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatus}
+            {comStatus}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (

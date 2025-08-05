@@ -1,10 +1,9 @@
-import { FlagIcon, PopoverWrapper } from '@cc-components/shared';
+import { FlagIcon, PopoverWrapper, getStatusCircle } from '@cc-components/shared';
 import { WorkOrder } from '@cc-components/workordershared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, ReactElement, useMemo, useRef, useState } from 'react';
 import { getWorkOrderStatuses } from '../utils-garden';
 import {
-  StyledStatusCircles,
   StyledItemText,
   StyledItemWrapper,
   StyledRoot,
@@ -33,6 +32,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
     width: itemWidth = 300,
     groupingKeys,
     displayName,
+    colorAssistMode,
   } = props;
 
   const {
@@ -52,6 +52,9 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
 
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
+
+  const materialStatus = getStatusCircle(data.materialStatus, colorAssistMode);
+  const mccrStatus = getStatusCircle(data.mccrStatus, colorAssistMode);
 
   return (
     <>
@@ -77,7 +80,12 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
           <StyledSizes size={size} color={textColor} />
           {data.holdBy && <FlagIcon color={textColor} />}
           <StyledItemText>{displayName}</StyledItemText>
-          <StyledStatusCircles matColor={matColor} mccrColor={mccrColor} />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {materialStatus}
+            {mccrStatus}
+          </div>
         </StyledItemWrapper>
         {columnExpanded && (
           <StyledDescription title={data.description ?? ''}>

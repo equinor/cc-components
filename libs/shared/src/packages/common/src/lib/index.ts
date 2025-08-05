@@ -7,3 +7,4 @@ export * from './icons';
 export * from './popover';
 
 export { StyledItemLink } from './common.styles';
+export * from './status-icons';
