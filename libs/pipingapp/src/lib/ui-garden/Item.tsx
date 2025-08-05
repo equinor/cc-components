@@ -43,8 +43,6 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
 
   const colors = getPipetestStatusColors(data);
 
-
-
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 

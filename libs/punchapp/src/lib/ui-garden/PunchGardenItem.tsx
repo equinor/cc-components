@@ -33,8 +33,6 @@ function PunchGardenItem(props: CustomItemView<Punch>): ReactElement {
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
 
-
-
   const status = getStatusCircle(data.category, colorAssistMode);
   return (
     <StyledRoot>
