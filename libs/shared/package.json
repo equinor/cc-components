@@ -92,14 +92,14 @@
     "@emotion/styled": "^11.14.1",
     "@equinor/fusion-react-person": "^0.10.5",
     "@remirror/pm": "^3.0.1",
-    "@remirror/react": "^3.0.2",
-    "@remirror/react-editors": "^2.0.2",
+    "@remirror/react": "^3.0.3",
+    "@remirror/react-editors": "^2.0.3",
+    "@remirror/react-ui": "^1.0.3",
     "@remirror/styles": "^3.0.0",
     "@remirror/theme": "^3.0.0",
-    "@remirror/react-ui": "^1.0.0",
-    "remirror": "^3.0.2",
     "date-fns": "^4.1.0",
-    "markdown-to-jsx": "^7.7.12"
+    "markdown-to-jsx": "^7.7.12",
+    "remirror": "^3.0.3"
   },
   "peerDependencies": {
     "@equinor/workspace-fusion": "*"
