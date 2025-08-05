@@ -10,15 +10,6 @@ const Wrapper = styled.div`
   font-weight: 400;
   font-size: 13px;
 `;
-type StatusCircleProps = {
-  $statusColor: string;
-};
-const StyledStatusCircle = styled.div<StatusCircleProps>`
-  background-color: ${(props) => props.$statusColor};
-  height: 12px;
-  width: 12px;
-  border-radius: 50%;
-`;
 type StatusProps = {
   content: string;
   statusColor: string;
