@@ -73,8 +73,6 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     setIsOpen(false);
   };
 
-
-
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commpkgStatus, colorAssistMode);
 
