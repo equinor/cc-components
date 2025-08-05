@@ -195,8 +195,8 @@ importers:
         specifier: 4.3.0
         version: 4.3.0(@types/node@24.2.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tsx@4.20.3)(yaml@2.8.0)
       astro:
-        specifier: 5.12.8
-        version: 5.12.8(@types/node@24.2.0)(idb-keyval@6.2.2)(rollup@4.46.2)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        specifier: 5.12.4
+        version: 5.12.4(@types/node@24.2.0)(idb-keyval@6.2.2)(rollup@4.46.2)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
 
   apps/handover:
     dependencies:
@@ -436,13 +436,13 @@ importers:
     dependencies:
       '@cognite/reveal':
         specifier: 4.25.3
-        version: 4.25.3(@cognite/sdk@10.0.0)(three@0.179.1)
+        version: 4.25.3(@cognite/sdk@10.0.0)(three@0.178.0)
       '@cognite/sdk':
         specifier: 10.0.0
         version: 10.0.0
       '@equinor/echo-3d-viewer':
         specifier: ^0.0.4
-        version: 0.0.4(@cognite/reveal@4.25.3(@cognite/sdk@10.0.0)(three@0.179.1))(@cognite/sdk@10.0.0)(lodash@4.17.21)(three@0.179.1)
+        version: 0.0.4(@cognite/reveal@4.25.3(@cognite/sdk@10.0.0)(three@0.178.0))(@cognite/sdk@10.0.0)(lodash@4.17.21)(three@0.178.0)
       rxjs:
         specifier: ^7.8.2
         version: 7.8.2
@@ -450,8 +450,8 @@ importers:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       three:
-        specifier: 0.179.1
-        version: 0.179.1
+        specifier: 0.178.0
+        version: 0.178.0
       throttle-typescript:
         specifier: ^1.1.0
         version: 1.1.0
@@ -561,13 +561,13 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       '@remirror/react':
-        specifier: ^3.0.3
+        specifier: ^3.0.2
         version: 3.0.3(@remirror/pm@3.0.1)(@types/node@24.2.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@remirror/react-editors':
-        specifier: ^2.0.3
+        specifier: ^2.0.2
         version: 2.0.3(@emotion/css@11.13.5)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/node@24.2.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@remirror/react-ui':
-        specifier: ^1.0.3
+        specifier: ^1.0.0
         version: 1.0.3(@remirror/pm@3.0.1)(@types/node@24.2.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@remirror/styles':
         specifier: ^3.0.0
@@ -582,7 +582,7 @@ importers:
         specifier: ^7.7.12
         version: 7.7.12(react@19.1.1)
       remirror:
-        specifier: ^3.0.3
+        specifier: ^3.0.2
         version: 3.0.3(@remirror/extension-react-tables@3.0.3(@remirror/pm@3.0.1)(@types/node@24.2.0)(@types/react-dom@19.1.7(@types/react@19.1.9))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@remirror/pm@3.0.1)(@types/node@24.2.0)
 
   libs/sharedcomponents: {}
@@ -689,11 +689,11 @@ packages:
   '@astrojs/compiler@2.12.2':
     resolution: {integrity: sha512-w2zfvhjNCkNMmMMOn5b0J8+OmUaBL1o40ipMvqcG6NRpdC+lKxmTi48DT8Xw0SzJ3AfmeFLB45zXZXtmbsjcgw==}
 
-  '@astrojs/internal-helpers@0.7.1':
-    resolution: {integrity: sha512-7dwEVigz9vUWDw3nRwLQ/yH/xYovlUA0ZD86xoeKEBmkz9O6iELG1yri67PgAPW6VLL/xInA4t7H0CK6VmtkKQ==}
+  '@astrojs/internal-helpers@0.6.1':
+    resolution: {integrity: sha512-l5Pqf6uZu31aG+3Lv8nl/3s4DbUzdlxTWDof4pEpto6GUJNhhCbelVi9dEyurOVyqaelwmS9oSyOWOENSfgo9A==}
 
-  '@astrojs/markdown-remark@6.3.5':
-    resolution: {integrity: sha512-MiR92CkE2BcyWf3b86cBBw/1dKiOH0qhLgXH2OXA6cScrrmmks1Rr4Tl0p/lFpvmgQQrP54Pd1uidJfmxGrpWQ==}
+  '@astrojs/markdown-remark@6.3.3':
+    resolution: {integrity: sha512-DDRtD1sPvAuA7ms2btc9A7/7DApKqgLMNrE6kh5tmkfy8utD0Z738gqd3p5aViYYdUtHIyEJ1X4mCMxfCfu15w==}
 
   '@astrojs/prism@3.3.0':
     resolution: {integrity: sha512-q8VwfU/fDZNoDOf+r7jUnMC2//H2l0TuQ6FkGJL8vD8nw/q5KiL3DS1KKBI3QhI9UQhpJ5dc7AtqfbXWuOgLCQ==}
@@ -4775,8 +4775,8 @@ packages:
   ast-types-flow@0.0.8:
     resolution: {integrity: sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==}
 
-  astro@5.12.8:
-    resolution: {integrity: sha512-KkJ7FR+c2SyZYlpakm48XBiuQcRsrVtdjG5LN5an0givI/tLik+ePJ4/g3qrAVhYMjJOxBA2YgFQxANPiWB+Mw==}
+  astro@5.12.4:
+    resolution: {integrity: sha512-ns+/KpfWToKvVf2DJTj4EIa4U59/XVBXeeq6VZUr5DXe6OZJFs8NfJi+W20nRm5nduIeBZGRzaoxPFq9lm4WEg==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -7896,8 +7896,8 @@ packages:
   text-segmentation@1.0.3:
     resolution: {integrity: sha512-iOiPUo/BGnZ6+54OsWxZidGCsdU8YbE4PSpdPinp7DeMtUJNJBoJ/ouUSTJjHkh1KntHaltHl/gDs2FC4i5+Nw==}
 
-  three@0.179.1:
-    resolution: {integrity: sha512-5y/elSIQbrvKOISxpwXCR4sQqHtGiOI+MKLc3SsBdDXA2hz3Mdp3X59aUp8DyybMa34aeBwbFTpdoLJaUDEWSw==}
+  three@0.178.0:
+    resolution: {integrity: sha512-ybFIB0+x8mz0wnZgSGy2MO/WCO6xZhQSZnmfytSPyNpM0sBafGRVhdaj+erYh5U+RhQOAg/eXqw5uVDiM2BjhQ==}
 
   throttle-debounce@3.0.1:
     resolution: {integrity: sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==}
@@ -8697,11 +8697,11 @@ snapshots:
 
   '@astrojs/compiler@2.12.2': {}
 
-  '@astrojs/internal-helpers@0.7.1': {}
+  '@astrojs/internal-helpers@0.6.1': {}
 
-  '@astrojs/markdown-remark@6.3.5':
+  '@astrojs/markdown-remark@6.3.3':
     dependencies:
-      '@astrojs/internal-helpers': 0.7.1
+      '@astrojs/internal-helpers': 0.6.1
       '@astrojs/prism': 3.3.0
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.3
@@ -9590,7 +9590,7 @@ snapshots:
     dependencies:
       commander: 2.20.3
 
-  '@cognite/reveal@4.25.3(@cognite/sdk@10.0.0)(three@0.179.1)':
+  '@cognite/reveal@4.25.3(@cognite/sdk@10.0.0)(three@0.178.0)':
     dependencies:
       '@cognite/sdk': 10.0.0
       '@rajesh896/broprint.js': 2.1.1
@@ -9607,8 +9607,8 @@ snapshots:
       random-seed: 0.3.0
       rxjs: 7.8.2
       skmeans: 0.11.3
-      sparse-octree: 7.1.8(three@0.179.1)
-      three: 0.179.1
+      sparse-octree: 7.1.8(three@0.178.0)
+      three: 0.178.0
 
   '@cognite/sdk-core@5.0.0':
     dependencies:
@@ -9748,16 +9748,16 @@ snapshots:
 
   '@epic-web/invariant@1.0.0': {}
 
-  '@equinor/echo-3d-viewer@0.0.4(@cognite/reveal@4.25.3(@cognite/sdk@10.0.0)(three@0.179.1))(@cognite/sdk@10.0.0)(lodash@4.17.21)(three@0.179.1)':
+  '@equinor/echo-3d-viewer@0.0.4(@cognite/reveal@4.25.3(@cognite/sdk@10.0.0)(three@0.178.0))(@cognite/sdk@10.0.0)(lodash@4.17.21)(three@0.178.0)':
     dependencies:
-      '@cognite/reveal': 4.25.3(@cognite/sdk@10.0.0)(three@0.179.1)
+      '@cognite/reveal': 4.25.3(@cognite/sdk@10.0.0)(three@0.178.0)
       '@cognite/sdk': 10.0.0
       '@esfx/canceltoken': 1.0.0
       '@tweenjs/tween.js': 21.1.1
-      camera-controls: 2.10.1(three@0.179.1)
+      camera-controls: 2.10.1(three@0.178.0)
       hold-event: 1.1.2
       lodash: 4.17.21
-      three: 0.179.1
+      three: 0.178.0
 
   '@equinor/eds-core-react@0.28.0(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
     dependencies:
@@ -14639,11 +14639,11 @@ snapshots:
 
   ast-types-flow@0.0.8: {}
 
-  astro@5.12.8(@types/node@24.2.0)(idb-keyval@6.2.2)(rollup@4.46.2)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0):
+  astro@5.12.4(@types/node@24.2.0)(idb-keyval@6.2.2)(rollup@4.46.2)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0):
     dependencies:
       '@astrojs/compiler': 2.12.2
-      '@astrojs/internal-helpers': 0.7.1
-      '@astrojs/markdown-remark': 6.3.5
+      '@astrojs/internal-helpers': 0.6.1
+      '@astrojs/markdown-remark': 6.3.3
       '@astrojs/telemetry': 3.3.0
       '@capsizecss/unpack': 2.4.0
       '@oslojs/encoding': 1.1.0
@@ -14977,9 +14977,9 @@ snapshots:
 
   camelize@1.0.1: {}
 
-  camera-controls@2.10.1(three@0.179.1):
+  camera-controls@2.10.1(three@0.178.0):
     dependencies:
-      three: 0.179.1
+      three: 0.178.0
 
   caniuse-lite@1.0.30001731: {}
 
@@ -18504,9 +18504,9 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  sparse-octree@7.1.8(three@0.179.1):
+  sparse-octree@7.1.8(three@0.178.0):
     dependencies:
-      three: 0.179.1
+      three: 0.178.0
 
   spdx-correct@3.2.0:
     dependencies:
@@ -18711,7 +18711,7 @@ snapshots:
     dependencies:
       utrie: 1.0.2
 
-  three@0.179.1: {}
+  three@0.178.0: {}
 
   throttle-debounce@3.0.1: {}
 
