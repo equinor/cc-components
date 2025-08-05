@@ -1,13 +1,10 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import {
   FlagIcon,
-  GreenStatusIcon,
-  GrayStatusIcon,
-  RedStatusIcon,
-  OrangeStatusIcon,
   PopoverWrapper,
   WarningIcon,
 } from '@cc-components/shared/common';
+import { getStatusCircle } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import { getDotsColor, getItemSize, getTextColor } from '../utils-garden';
@@ -66,20 +63,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
   const commStatusColor = getDotsColor(data.status);
 
-  const getStatusCircle = (status: string, showVisualIndicator: boolean) => {
-    switch (status) {
-      case 'OS':
-        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'PB':
-        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'PA':
-        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'OK':
-        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
-      default:
-        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
-    }
-  };
+
 
   const mcStatusCircle = getStatusCircle(
     data.mechanicalCompletionStatus,

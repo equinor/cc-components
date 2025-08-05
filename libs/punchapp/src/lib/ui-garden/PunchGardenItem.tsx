@@ -14,10 +14,7 @@ import {
 import { Punch } from '@cc-components/punchshared';
 import { FlagIcon } from '@cc-components/shared/common';
 import {
-  GrayStatusIcon,
-  GreenStatusIcon,
-  OrangeStatusIcon,
-  RedStatusIcon,
+  getStatusCircle,
 } from '@cc-components/shared';
 
 function PunchGardenItem(props: CustomItemView<Punch>): ReactElement {
@@ -36,28 +33,7 @@ function PunchGardenItem(props: CustomItemView<Punch>): ReactElement {
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
 
-  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
-    switch (status) {
-      case 'PB':
-      case 'M05':
-      case 'M06':
-      case 'M07':
-      case 'M09':
-        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'PA':
-      case 'M02':
-      case 'M03':
-      case 'M04':
-        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'OK':
-      case 'M10':
-      case 'M11':
-      case 'MN':
-        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
-      default:
-        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
-    }
-  };
+
 
   const status = getStatusCircle(data.category, colorAssistMode);
   return (

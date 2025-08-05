@@ -13,7 +13,7 @@ dist/
 bin/
 # dependencies
 node_modules
-workspace/
+# workspace/
 
 # IDEs and editors
 /.idea

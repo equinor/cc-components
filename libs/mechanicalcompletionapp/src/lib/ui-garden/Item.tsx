@@ -1,10 +1,7 @@
 import {
-  GrayStatusIcon,
-  GreenStatusIcon,
-  OrangeStatusIcon,
-  RedStatusIcon,
   PopoverWrapper,
 } from '@cc-components/shared/common';
+import { getStatusCircle } from '@cc-components/shared';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
@@ -76,28 +73,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     setIsOpen(false);
   };
 
-  const getStatusCircle = (status: string | null, showVisualIndicator: boolean) => {
-    switch (status) {
-      case 'PB':
-      case 'M05':
-      case 'M06':
-      case 'M07':
-      case 'M09':
-        return <OrangeStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'PA':
-      case 'M02':
-      case 'M03':
-      case 'M04':
-        return <RedStatusIcon visualIndicator={showVisualIndicator} />;
-      case 'OK':
-      case 'M10':
-      case 'M11':
-      case 'MN':
-        return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
-      default:
-        return <GrayStatusIcon visualIndicator={showVisualIndicator} />;
-    }
-  };
+
 
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commpkgStatus, colorAssistMode);
