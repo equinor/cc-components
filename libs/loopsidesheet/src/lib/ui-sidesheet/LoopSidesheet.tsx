@@ -114,7 +114,6 @@ export const LoopSidesheet = (props: {
             )
           }
         />
-        <BannerItem title="Priority" value={loop.priority1 || 'N/A'} />
       </StyledBanner>
       <CustomStyledTabs activeTab={activeTab} onChange={handleChange}>
         <StyledTabListWrapper>
