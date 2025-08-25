@@ -1,5 +1,6 @@
 import { HandoverPackage } from '@cc-components/handovershared';
 import { FlagIcon, PopoverWrapper, WarningIcon } from '@cc-components/shared/common';
+import { getStatusCircle } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import { getDotsColor, getItemSize, getTextColor } from '../utils-garden';
@@ -10,7 +11,6 @@ import {
   StyledItemWrapper,
   StyledRoot,
   StyledSizes,
-  StyledStatusCircles,
   StyledWarningIconWrapper,
 } from './garden.styles';
 import { PopoverContent } from './PopoverContent';
@@ -33,6 +33,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     rowStart,
     columnStart,
     parentRef,
+    colorAssistMode,
   } = args;
 
   const size = getItemSize(data.volume, 100);
@@ -57,6 +58,13 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
 
   const mcPackageColor = getDotsColor(data.mechanicalCompletionStatus);
   const commStatusColor = getDotsColor(data.status);
+
+  const mcStatusCircle = getStatusCircle(
+    data.mechanicalCompletionStatus,
+    colorAssistMode
+  );
+
+  const commStatusCircle = getStatusCircle(data.status, colorAssistMode);
 
   const showWarningIcon =
     data.mechanicalCompletionStatus === 'OS' &&
@@ -117,7 +125,12 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
               <WarningIcon />
             </StyledWarningIconWrapper>
           )}
-          <StyledStatusCircles mcColor={mcPackageColor} commColor={commStatusColor} />
+          <div
+            style={{ display: 'flex', gap: '4px', height: '14px', marginLeft: 'auto' }}
+          >
+            {mcStatusCircle}
+            {commStatusCircle}
+          </div>
         </StyledItemWrapper>
 
         {columnExpanded && (
