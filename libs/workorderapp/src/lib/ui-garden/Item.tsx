@@ -98,10 +98,9 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
           close={() => setIsOpen(false)}
           popoverTitle={`Wo.Number: ${data.workOrderNumber}`}
           width={itemWidth}
-          columnStart={columnStart}
           parentRef={parentRef}
-          rowStart={rowStart}
           isOpen={isOpen}
+          anchorRef={anchorRef}
         >
           <WorkOrderPopover
             data={data}

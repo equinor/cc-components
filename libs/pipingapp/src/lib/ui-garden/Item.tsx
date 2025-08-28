@@ -9,11 +9,7 @@ import {
   StyledStatusCircles,
 } from './garden.styles';
 import { Pipetest } from 'libs/pipingshared/dist/src';
-import {
-  PackageStatus,
-  PopoverWrapper,
-  getStatusCircle,
-} from '@cc-components/shared';
+import { PackageStatus, PopoverWrapper, getStatusCircle } from '@cc-components/shared';
 import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
 import { itemContentColors } from '@cc-components/shared/mapping';
 
@@ -82,12 +78,11 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
       {isOpen && (
         <PopoverWrapper
           isOpen={isOpen}
-          rowStart={rowStart}
-          columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
           popoverTitle={data.description}
           close={() => setIsOpen(false)}
+          anchorRef={anchorRef}
         />
       )}
     </>

@@ -28,10 +28,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     onClick,
     columnExpanded,
     width: itemWidth = 300,
-    depth,
     isSelected,
-    rowStart,
-    columnStart,
     parentRef,
     colorAssistMode,
   } = args;
@@ -70,7 +67,6 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     data.mechanicalCompletionStatus === 'OS' &&
     data.commissioningPackageStatus === 'RFC Accepted';
 
-  const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const fittedWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
 
   const options: ItemOptions = {
@@ -102,6 +98,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     // Close the popover immediately
     setIsOpen(false);
   };
+
   return (
     <>
       <StyledRoot>
@@ -144,11 +141,10 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
         <PopoverWrapper
           close={() => setIsOpen(false)}
           isOpen={isOpen}
-          rowStart={rowStart}
-          columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
           popoverTitle={`Comm.pkg ${data.commissioningPackageNo}`}
+          anchorRef={anchorRef}
         >
           <PopoverContent data={data} itemOptions={options} />
         </PopoverWrapper>
