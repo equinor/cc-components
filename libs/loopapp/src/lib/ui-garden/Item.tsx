@@ -1,7 +1,5 @@
 import { Loop } from '@cc-components/loopshared';
-import {
-  PopoverWrapper,
-} from '@cc-components/shared/common';
+import { PopoverWrapper } from '@cc-components/shared/common';
 import { getStatusCircle } from '@cc-components/shared';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
@@ -33,8 +31,6 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
     depth,
     width: itemWidth = 300,
     isSelected,
-    rowStart,
-    columnStart,
     parentRef,
     displayName,
     colorAssistMode,
@@ -87,11 +83,10 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
         <PopoverWrapper
           close={() => setIsOpen(false)}
           isOpen={isOpen}
-          rowStart={rowStart}
-          columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
           popoverTitle={`${data.loopNo}`}
+          anchorRef={anchorRef}
         >
           <PopoverContent loop={data} />
         </PopoverWrapper>

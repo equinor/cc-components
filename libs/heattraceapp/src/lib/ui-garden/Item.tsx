@@ -1,9 +1,5 @@
 import { colorMap } from '@cc-components/shared/mapping';
-import {
-  PackageStatus,
-  PopoverWrapper,
-  getStatusCircle,
-} from '@cc-components/shared';
+import { PackageStatus, PopoverWrapper, getStatusCircle } from '@cc-components/shared';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
 import { memo, useMemo, useRef, useState } from 'react';
 import {
@@ -30,8 +26,6 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
     depth,
     width: itemWidth = 300,
     isSelected,
-    rowStart,
-    columnStart,
     parentRef,
     displayName,
     colorAssistMode,
@@ -44,8 +38,6 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   } = useMemo(() => getHeatTraceStatuses(data), [data]);
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.98, [itemWidth]);
-
-
 
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
@@ -88,12 +80,11 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
       {isOpen && (
         <PopoverWrapper
           isOpen={isOpen}
-          rowStart={rowStart}
-          columnStart={columnStart}
           width={itemWidth}
           parentRef={parentRef}
           popoverTitle={`${data.heatTraceCableDescription}`}
           close={() => setIsOpen(false)}
+          anchorRef={anchorRef}
         />
       )}
     </>

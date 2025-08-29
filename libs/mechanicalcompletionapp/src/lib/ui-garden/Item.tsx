@@ -1,6 +1,4 @@
-import {
-  PopoverWrapper,
-} from '@cc-components/shared/common';
+import { PopoverWrapper } from '@cc-components/shared/common';
 import { getStatusCircle } from '@cc-components/shared';
 import { statusColorMap } from '@cc-components/shared/mapping';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
@@ -33,6 +31,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const anchorRef = useRef<HTMLDivElement | null>(null);
 
   const size = getTagSize(data, 10);
   const status = data.commissioningStatus;
@@ -87,6 +86,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
           textColor={contentsColor}
           isSelected={isSelected}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
+          ref={anchorRef}
         >
           <StyledSizes color={contentsColor} size={size} />
           <StyledItemText> {data.mechanicalCompletionPackageNo}</StyledItemText>
@@ -110,9 +110,8 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
           isOpen={isOpen}
           width={itemWidth}
           parentRef={parentRef}
-          rowStart={rowStart}
-          columnStart={columnStart}
           popoverTitle={`Mc.pkg: ${data.mechanicalCompletionPackageNo}`}
+          anchorRef={anchorRef}
         >
           <PopoverContent data={data} options={options} />
         </PopoverWrapper>
