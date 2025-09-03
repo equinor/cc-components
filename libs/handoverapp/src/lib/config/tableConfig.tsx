@@ -238,10 +238,10 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 180,
   },
   {
-    headerName: 'Actual RFO',
-    colId: 'ActualRFO',
-    headerTooltip: 'Actual RFO',
-    valueGetter: (pkg) => pkg.data?.rfoActualDate,
+    headerName: domainNames.rfoForecastDate,
+    colId: 'ForecastRFO',
+    headerTooltip: domainNames.rfoForecastDate,
+    valueGetter: (pkg) => pkg.data?.rfoForecastDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
@@ -249,10 +249,10 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 180,
   },
   {
-    headerName: domainNames.rfoForecastDate,
-    colId: 'ForecastRFO',
-    headerTooltip: domainNames.rfoForecastDate,
-    valueGetter: (pkg) => pkg.data?.rfoForecastDate,
+    headerName: 'Actual RFO',
+    colId: 'ActualRFO',
+    headerTooltip: 'Actual RFO',
+    valueGetter: (pkg) => pkg.data?.rfoActualDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
