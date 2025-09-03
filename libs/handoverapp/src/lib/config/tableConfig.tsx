@@ -248,7 +248,6 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     },
     minWidth: 180,
   },
-  ,
   {
     headerName: domainNames.rfoForecastDate,
     colId: 'ForecastRFO',
