@@ -238,6 +238,17 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     minWidth: 180,
   },
   {
+    headerName: domainNames.rfoForecastDate,
+    colId: 'ForecastRFO',
+    headerTooltip: domainNames.rfoForecastDate,
+    valueGetter: (pkg) => pkg.data?.rfoForecastDate,
+    cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
+      if (props.node.group) return null;
+      return <DateCell dateString={props.value} />;
+    },
+    minWidth: 180,
+  },
+  {
     headerName: 'Actual RFO',
     colId: 'ActualRFO',
     headerTooltip: 'Actual RFO',
