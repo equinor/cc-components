@@ -8,6 +8,11 @@ type GroupingOption = {
   dateVariant: string[] | null;
 };
 
+type GardenHeaderOption = {
+  displayName: string;
+  groupingKey: string;
+};
+
 type ApiGardenMeta = {
   startIndex: number | null;
   columnCount: number;
@@ -16,12 +21,13 @@ type ApiGardenMeta = {
   subGroupCount: number;
   allGroupingOptions: GroupingOption[];
   validGroupingOptions: GroupingOption[];
+  headerOptions: GardenHeaderOption[];
 };
 
 type ApiHeader = {
   columnName: string;
   totalItemsCount: number;
-  completedItemsCount: number;
+  headerSummaryText: string;
 };
 
 type GardenDataSourceArgs = {
@@ -36,7 +42,7 @@ export function useGardenDataSource(
 ): GardenDataSource<FilterState> {
   return {
     getBlockAsync: async (args, filters, signal) => {
-      const { columnEnd, columnStart, groupingKeys, rowEnd, rowStart } = args;
+      const { columnEnd, columnStart, groupingKeys, rowEnd, rowStart, summaryKey } = args;
       const requestArgs = createRequestBody(
         {
           columnStart,
@@ -47,6 +53,7 @@ export function useGardenDataSource(
           timeInterval: args.timeInterval,
           groupingKeys,
           filter: filters,
+          summaryKey,
         },
         signal
       );
@@ -81,10 +88,11 @@ export function useGardenDataSource(
         columnStart: meta.startIndex,
         rowCount: meta.subGroupCount > 0 ? meta.subGroupCount : meta.rowCount,
         columnWidth: meta?.columnWidth,
+        headerOptions: meta?.headerOptions,
       };
     },
     getHeader: async (args, filters, signal) => {
-      const { columnEnd, columnStart, groupingKeys } = args;
+      const { columnEnd, columnStart, groupingKeys, summaryKey } = args;
       const requestArgs = createRequestBody(
         {
           columnStart,
@@ -95,6 +103,7 @@ export function useGardenDataSource(
           dateVariant: args.dateVariant,
           timeInterval: args.timeInterval,
           filter: filters,
+          summaryKey,
         },
         signal
       );
@@ -105,7 +114,7 @@ export function useGardenDataSource(
       return (await res.json()).map((s: ApiHeader) => ({
         name: s.columnName,
         count: s.totalItemsCount,
-        completedCount: s.completedItemsCount,
+        summaryText: s.headerSummaryText,
       }));
     },
     getSubgroupItems: async (args, filter, signal) => {

@@ -31,7 +31,7 @@ const Header = (props: CustomHeaderView) => {
     <StyledHeaderContent>
       <StyledHeaderText variant="h6">{header.name}</StyledHeaderText>
       <StyledCount group="navigation" variant="label">
-        RFOC: {header.completedCount ?? 0}/{header.count}
+        {header.summaryText}
       </StyledCount>
     </StyledHeaderContent>
   );
