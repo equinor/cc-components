@@ -10,6 +10,7 @@ const StyledHeaderContent = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 4px;
+  height: 40px;
 `;
 
 const StyledCount = styled(Typography).withConfig({ displayName: 'cc-apps-' })`
@@ -30,9 +31,11 @@ const Header = (props: CustomHeaderView) => {
   return (
     <StyledHeaderContent>
       <StyledHeaderText variant="h6">{header.name}</StyledHeaderText>
-      <StyledCount group="navigation" variant="label">
-        {header.summaryText}
-      </StyledCount>
+      {header.summaryText && (
+        <StyledCount group="navigation" variant="label">
+          {header.summaryText}
+        </StyledCount>
+      )}
     </StyledHeaderContent>
   );
 };
