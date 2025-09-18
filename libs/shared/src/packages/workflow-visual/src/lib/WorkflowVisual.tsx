@@ -11,13 +11,15 @@ export const WorkflowVisual = (props: WorkflowVisualProps) => {
   return (
     <>
       <WorkflowStepContainer>
-        {workflowSteps.map((x) => {
-          return (
-            <WorkflowStep>
-              <WorkflowDot step={x} />
-            </WorkflowStep>
-          );
-        })}
+        {workflowSteps
+          .sort((a, b) => a.sortOrder - b.sortOrder)
+          .map((x) => {
+            return (
+              <WorkflowStep>
+                <WorkflowDot step={x} />
+              </WorkflowStep>
+            );
+          })}
       </WorkflowStepContainer>
     </>
   );
