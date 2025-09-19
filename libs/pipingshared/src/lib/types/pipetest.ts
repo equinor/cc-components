@@ -34,7 +34,7 @@ export type Pipetest = {
   heatTraceCableNos: string[];
   commissioningPackageUrl?: string;
   mechanicalCompletionUrl?: string;
-  workflow: PipetestWorkflowStep[]
+  workflow: PipetestWorkflowStep[];
 };
 
 export type Checklist = {
@@ -66,4 +66,5 @@ export type PipetestWorkflowStep = {
   stepName: string;
   stepValue: string;
   status: string;
+  sortOrder: number;
 };
