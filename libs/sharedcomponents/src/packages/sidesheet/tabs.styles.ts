@@ -15,6 +15,8 @@ export const StyledTabs: (props: TabsProps) => ReactElement = styled(Tabs)`
 
 export const StyledPanels = styled(Tabs.Panels)`
   overflow: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
 
   /** Removing padding from Tabs.Panel components */
   > div {
@@ -36,6 +38,8 @@ export const StyledTabsList = styled(Tabs.List)`
   }
 
   scroll-behavior: smooth;
+  flex-grow: 0;
+  flex-shrink: 0;
   height: 48px;
 `;
 
