@@ -14,9 +14,7 @@ export const RootAppWrapper = ({
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <AppErrorBoundary>
-          <ClientProvider client={client}>
-            <StyledDefaultLayout>{children}</StyledDefaultLayout>
-          </ClientProvider>
+          <ClientProvider client={client}>{children}</ClientProvider>
         </AppErrorBoundary>
       </QueryClientProvider>
     </StrictMode>
