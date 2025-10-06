@@ -1,15 +1,14 @@
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
 
-export const StyledBanner = styled.div`
-  max-width: 100%;
+export const StyledBanner = styled.div<{ $padding?: string }>`
+  height: 76px;
+  width: 100%;
   background-color: ${tokens.colors.ui.background__light.hex};
   display: flex;
   flex-direction: row;
-  column-gap: 4rem;
-  row-gap: 1rem;
-  flex-wrap: wrap;
-  padding: 1rem;
+  gap: 5rem;
+  padding: ${({ $padding = '0 1em' }) => `${$padding}`};
   align-items: center;
 `;
 export const BannerItemTitle = styled.div`
