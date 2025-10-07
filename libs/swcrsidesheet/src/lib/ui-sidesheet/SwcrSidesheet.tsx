@@ -120,14 +120,12 @@ export const SwcrSidesheetComponent = ({
         <BannerItem title="System" value={item.system ?? 'N/A'} />
       </StyledBanner>
       <StyledTabs activeTab={activeTab} onChange={handleChange}>
-        <StyledTabListWrapper>
-          <StyledTabsList>
-            <Tabs.Tab>Details</Tabs.Tab>
-            <Tabs.Tab>
-              Signatures <TabTitle isLoading={signaturesFetching} data={signatures} />
-            </Tabs.Tab>
-          </StyledTabsList>
-        </StyledTabListWrapper>
+        <StyledTabsList>
+          <Tabs.Tab>Details</Tabs.Tab>
+          <Tabs.Tab>
+            Signatures <TabTitle isLoading={signaturesFetching} data={signatures} />
+          </Tabs.Tab>
+        </StyledTabsList>
         <StyledPanels>
           <Tabs.Panel>
             <DetailsTab

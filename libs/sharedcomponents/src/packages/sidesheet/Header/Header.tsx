@@ -7,9 +7,7 @@ Icon.add({ close, external_link });
 const StyledContainer = styled.div`
   display: grid;
   grid-template-columns: auto 1fr 35px;
-  padding-left: 24px;
-  padding-bottom: 24px;
-  padding-top: 24px;
+  padding: 24px;
   position: relative;
   gap: 1em;
   align-items: center;
@@ -99,15 +97,13 @@ export const SidesheetHeader = ({
         <StyledDescription> {description}</StyledDescription>
         <StyledApplicationTitle>{applicationTitle}</StyledApplicationTitle>
       </StyledWrapTitles>
-      <StyledButton>
-        <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
-          <Icon
-            name="close"
-            size={24}
-            color={tokens.colors.interactive.primary__resting.hex}
-          />
-        </Button>
-      </StyledButton>
+      <Button variant="ghost_icon" onClick={() => onClose()} title="Close sidesheet">
+        <Icon
+          name="close"
+          size={24}
+          color={tokens.colors.interactive.primary__resting.hex}
+        />
+      </Button>
     </StyledContainer>
   );
 };
