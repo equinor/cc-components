@@ -10,7 +10,7 @@ type GroupingOption = {
 
 type GardenHeaderOption = {
   displayName: string;
-  groupingKey: string;
+  summaryKey: string;
 };
 
 type ApiGardenMeta = {
@@ -27,7 +27,7 @@ type ApiGardenMeta = {
 type ApiHeader = {
   columnName: string;
   totalItemsCount: number;
-  headerSummaryText: string;
+  columnSummary: string;
 };
 
 type GardenDataSourceArgs = {
@@ -114,7 +114,7 @@ export function useGardenDataSource(
       return (await res.json()).map((s: ApiHeader) => ({
         name: s.columnName,
         count: s.totalItemsCount,
-        summaryText: s.headerSummaryText,
+        columnSummary: s.columnSummary,
       }));
     },
     getSubgroupItems: async (args, filter, signal) => {

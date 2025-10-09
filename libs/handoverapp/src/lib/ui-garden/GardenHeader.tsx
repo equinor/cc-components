@@ -31,9 +31,9 @@ const Header = (props: CustomHeaderView) => {
   return (
     <StyledHeaderContent>
       <StyledHeaderText variant="h6">{header.name}</StyledHeaderText>
-      {header.summaryText && (
+      {header.columnSummary && (
         <StyledCount group="navigation" variant="label">
-          {header.summaryText}
+          {header.columnSummary}
         </StyledCount>
       )}
     </StyledHeaderContent>
