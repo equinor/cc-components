@@ -42,16 +42,9 @@ const Header = (props: CustomHeaderView) => {
   return (
     <StyledHeaderContent>
       <StyledHeaderTitleContainer>
-        {header.name.split('\n').map((line, index) =>
-          index === 0 ? (
-            <StyledHeaderText key={index} variant="h6">
-              {line}
-            </StyledHeaderText>
-          ) : (
-            <StyledCount key={index} variant="caption">
-              {line}
-            </StyledCount>
-          )
+        <StyledHeaderText variant="h6">{header.name}</StyledHeaderText>
+        {header.columnSummary && (
+          <StyledCount variant="caption">{header.columnSummary}</StyledCount>
         )}
       </StyledHeaderTitleContainer>
       <StyledCount variant="caption">({header.count})</StyledCount>
