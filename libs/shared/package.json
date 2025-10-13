@@ -100,8 +100,5 @@
     "remirror": "^3.0.2",
     "date-fns": "^4.1.0",
     "markdown-to-jsx": "^7.7.12"
-  },
-  "peerDependencies": {
-    "@equinor/workspace-fusion": "*"
   }
 }
