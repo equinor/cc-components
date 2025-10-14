@@ -22,6 +22,8 @@ import { SignaturesTab } from './SignaturesTab';
 import { useQuery } from '@tanstack/react-query';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
+import { useAttachments } from '../utils-sidesheet/useAttachments';
+import { AttachmentTab } from './AttachmentTab';
 
 type SwcrProps = {
   id: string;
@@ -75,7 +77,16 @@ export const SwcrSidesheetComponent = ({
   close: closeSidesheet,
   item,
 }: Required<SwcrProps>) => {
-  const { data: signatures, isLoading: signaturesFetching, error } = useSignatures(id);
+  const {
+    data: signatures,
+    isLoading: signaturesFetching,
+    error: signaturesError,
+  } = useSignatures(id);
+  const {
+    data: attachments,
+    isLoading: attachmentsFetching,
+    error: attachmentsError,
+  } = useAttachments(id);
   const [activeTab, setActiveTab] = useState(0);
 
   const handleChange = (index: number) => {
@@ -125,20 +136,27 @@ export const SwcrSidesheetComponent = ({
           <Tabs.Tab>
             Signatures <TabTitle isLoading={signaturesFetching} data={signatures} />
           </Tabs.Tab>
+          <Tabs.Tab>
+            Attachments <TabTitle isLoading={attachmentsFetching} data={attachments} />
+          </Tabs.Tab>
         </StyledTabsList>
         <StyledPanels>
           <Tabs.Panel>
-            <DetailsTab
-              item={item}
-              signatures={signatures}
-              signaturesFetching={signaturesFetching}
-            />
+            <DetailsTab item={item} />
           </Tabs.Panel>
           <Tabs.Panel>
             <SignaturesTab
               signatures={signatures}
               isFetching={signaturesFetching}
-              error={error}
+              error={signaturesError}
+            />
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <AttachmentTab
+              attachments={attachments}
+              isFetching={attachmentsFetching}
+              error={attachmentsError}
+              detailsItem={item}
             />
           </Tabs.Panel>
         </StyledPanels>

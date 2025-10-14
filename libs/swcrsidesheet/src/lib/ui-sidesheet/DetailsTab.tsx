@@ -6,8 +6,6 @@ import styled from 'styled-components';
 
 type DetailsTabProps = {
   item: SwcrPackage | undefined;
-  signatures: SwcrSignature[] | undefined;
-  signaturesFetching: boolean;
 };
 export const DetailsTab = ({ item }: DetailsTabProps) => {
   return (
