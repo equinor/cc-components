@@ -37,10 +37,10 @@ export const AttachmentTab = ({
   return (
     <StyledContentWrapper>
       <TabTable
-        columns={attachmentColumns} // Make sure this is set up for signatures
+        columns={attachmentColumns}
         error={error}
         isFetching={isFetching}
-        packages={attachments || []} // Adjusted from workorders to attachments
+        packages={attachments || []}
         resourceName="Attachments"
       />
     </StyledContentWrapper>
