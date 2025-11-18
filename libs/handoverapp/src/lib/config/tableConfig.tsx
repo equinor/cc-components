@@ -208,7 +208,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
     headerName: domainNames.rfcPlannedDate,
     colId: 'PlannedRFC',
     headerTooltip: domainNames.rfcPlannedDate,
-    valueGetter: (pkg) => pkg.data?.rfrcPlannedDate,
+    valueGetter: (pkg) => pkg.data?.rfcPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
       if (props.node.group) return null;
       return <DateCell dateString={props.value} />;
