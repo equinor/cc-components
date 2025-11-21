@@ -17,6 +17,10 @@ export function useCCApiAccessCheck(
       );
 
       if (res.status === 403 || res.status === 401) {
+        var errorMessage = await res.json();
+        if (errorMessage && errorMessage.detail) {
+          throw new CCApiUnauthorizedError(errorMessage.detail);
+        }
         throw new CCApiUnauthorizedError('');
       }
       const json = await res.json();
@@ -24,7 +28,9 @@ export function useCCApiAccessCheck(
         throw new CCApiUnauthorizedError('');
       }
       if (res.ok === false) {
-        throw new Error(`Unknown error, code: ${res.status}, body: ${JSON.stringify(json)}`);
+        throw new Error(
+          `Unknown error, code: ${res.status}, body: ${JSON.stringify(json)}`
+        );
       }
       return json.result;
     },

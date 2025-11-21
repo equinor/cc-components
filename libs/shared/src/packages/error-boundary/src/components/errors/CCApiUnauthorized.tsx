@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { error_outlined } from '@equinor/eds-icons';
 import { Icon, Typography } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
+import { CCApiUnauthorizedError } from '../../classes/CCApiUnauthorizedError';
 
 Icon.add({ error_outlined });
 
-export function CCApiUnauthorized() {
+interface CCApiUnauthorizedProps {
+  error: CCApiUnauthorizedError;
+}
+
+export function CCApiUnauthorized({ error }: CCApiUnauthorizedProps) {
+  console.error('CCApiUnauthorizedError:', error);
   return (
     <StyledFusionError>
       <Icon
@@ -20,7 +26,7 @@ export function CCApiUnauthorized() {
         bold
         lines={2}
       >
-        Looks like you do not have access to the selected context.
+        {error.message || 'Looks like you do not have access to the selected context.'}
       </Typography>
     </StyledFusionError>
   );
