@@ -24,7 +24,7 @@ export function AppErrorBoundary({ children, resetKeys = [] }: AppErrorBoundaryP
       resetKeys={[contextId, ...resetKeys]}
       FallbackComponent={(props) => {
         if (props.error instanceof CCApiUnauthorizedError) {
-          return <CCApiUnauthorized />;
+          return <CCApiUnauthorized error={props.error} />;
         }
 
         if (props.error instanceof FusionDataProxyUnauthorized) {
