@@ -11,7 +11,6 @@ interface CCApiUnauthorizedProps {
 }
 
 export function CCApiUnauthorized({ error }: CCApiUnauthorizedProps) {
-  console.error('CCApiUnauthorizedError:', error);
   return (
     <StyledFusionError>
       <Icon
