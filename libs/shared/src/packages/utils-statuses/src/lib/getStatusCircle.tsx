@@ -32,6 +32,7 @@ export const getStatusCircle = (
     case 'OK':
     case 'M10':
     case 'M11':
+    case 'M12':
     case 'MN':
       return <GreenStatusIcon visualIndicator={showVisualIndicator} />;
     case 'OS':

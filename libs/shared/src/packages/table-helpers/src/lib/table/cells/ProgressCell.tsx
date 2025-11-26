@@ -15,7 +15,7 @@ type ProgressCellProps = {
 export const ProgressCell = ({ percentWidth }: ProgressCellProps): ReactElement => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '5px', height: '100%' }}>
-      <StyledProgressNumber>{`${Math.round(percentWidth)}%`}</StyledProgressNumber>
+      <StyledProgressNumber>{`${Math.floor(percentWidth)}%`}</StyledProgressNumber>
       <StyledProgressBarContainer>
         {Math.round(percentWidth) > 0 ? (
           <StyledActualProgress
