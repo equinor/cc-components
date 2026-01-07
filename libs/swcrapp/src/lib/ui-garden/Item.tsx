@@ -25,9 +25,8 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
 
   const handleClick = (event: React.MouseEvent) => {
-    if ((event.ctrlKey || event.metaKey) && data.swcrUrl) {
-      window.open(data.swcrUrl, '_blank');
-    } else {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
       onClick?.();
     }
   };
@@ -35,6 +34,9 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   return (
     <StyledRoot>
       <StyledItemWrapper
+        href={data.swcrUrl || undefined}
+        target="_blank"
+        rel="noopener noreferrer"
         style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
         $backgroundColor={statusColor}
         $textColor={textColor}

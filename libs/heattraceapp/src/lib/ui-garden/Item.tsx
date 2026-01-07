@@ -17,7 +17,7 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
     null
   );
 
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const anchorRef = useRef<HTMLAnchorElement | null>(null);
 
   const {
     data,
@@ -42,10 +42,20 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
+          href={data.heatTraceCableUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           ref={anchorRef}
           onMouseEnter={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
@@ -57,7 +67,7 @@ const HeattraceGardenItem = (props: CustomItemView<HeatTrace>) => {
           }}
           $backgroundColor={backgroundColor}
           color={textColor}
-          onClick={onClick}
+          onClick={handleClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           $isSelected={isSelected}
         >

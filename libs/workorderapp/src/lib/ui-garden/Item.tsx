@@ -18,7 +18,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
     null
   );
 
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const anchorRef = useRef<HTMLAnchorElement | null>(null);
 
   const {
     data,
@@ -56,10 +56,20 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
   const materialStatus = getStatusCircle(data.materialStatus, colorAssistMode);
   const mccrStatus = getStatusCircle(data.mccrStatus, colorAssistMode);
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
+          href={data.workorderUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           backgroundColor={backgroundColor}
           textColor={textColor}
           background={progressBar}
@@ -72,7 +82,7 @@ const WorkorderItem = (props: CustomItemView<WorkOrder>): ReactElement => {
             hoverTimeout && clearTimeout(hoverTimeout);
             setIsOpen(false);
           }}
-          onClick={onClick}
+          onClick={handleClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           progressBackground={progressBar}
           isSelected={isSelected}
