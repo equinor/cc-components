@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "sideEffects": false,
-  "license": "MIT",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup"
+  },
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
@@ -15,12 +14,11 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "build:prod": "tsup"
+  "dependencies": {
+    "@equinor/eds-core-react": "catalog:",
+    "@equinor/eds-icons": "catalog:",
+    "@equinor/eds-tokens": "catalog:",
+    "@tanstack/react-virtual": "catalog:"
   },
   "peerDependencies": {
     "react": "catalog:",
@@ -34,11 +32,5 @@
     "@types/styled-components": "catalog:",
     "tsup": "catalog:",
     "typescript": "catalog:"
-  },
-  "dependencies": {
-    "@equinor/eds-core-react": "catalog:",
-    "@equinor/eds-icons": "catalog:",
-    "@equinor/eds-tokens": "catalog:",
-    "@tanstack/react-virtual": "catalog:"
   }
 }

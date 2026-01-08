@@ -3,18 +3,10 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "sideEffects": false,
-  "license": "MIT",
   "scripts": {
     "build": "tsup",
     "build:prod": "tsup"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
