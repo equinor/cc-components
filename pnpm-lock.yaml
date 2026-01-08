@@ -4,6 +4,99 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@equinor/eds-core-react':
+      specifier: ^0.47.0
+      version: 0.47.0
+    '@equinor/eds-icons':
+      specifier: ^0.22.0
+      version: 0.22.0
+    '@equinor/eds-tokens':
+      specifier: ^0.9.2
+      version: 0.9.2
+    '@equinor/fusion-framework-react-ag-grid':
+      specifier: 33.2.8
+      version: 33.2.8
+    '@microsoft/applicationinsights-core-js':
+      specifier: ^3.3.9
+      version: 3.3.9
+    '@microsoft/applicationinsights-web':
+      specifier: 3.3.9
+      version: 3.3.9
+    '@tanstack/react-query':
+      specifier: ^5.84.1
+      version: 5.84.1
+    '@tanstack/react-query-devtools':
+      specifier: ^5.84.1
+      version: 5.90.2
+    '@tanstack/react-virtual':
+      specifier: ^3.13.12
+      version: 3.13.12
+    '@types/jest':
+      specifier: 30.0.0
+      version: 30.0.0
+    '@types/luxon':
+      specifier: ^3.7.1
+      version: 3.7.1
+    '@types/react':
+      specifier: ^19.1.9
+      version: 19.1.9
+    '@types/react-dom':
+      specifier: ^19.1.7
+      version: 19.1.7
+    '@types/sortablejs':
+      specifier: ^1.15.8
+      version: 1.15.8
+    '@types/styled-components':
+      specifier: ^5.1.34
+      version: 5.1.36
+    '@vitejs/plugin-react':
+      specifier: ^4.7.0
+      version: 4.7.0
+    luxon:
+      specifier: ^3.7.1
+      version: 3.7.1
+    markdown-to-jsx:
+      specifier: ^7.7.12
+      version: 7.7.12
+    powerbi-client:
+      specifier: ^2.23.1
+      version: 2.23.1
+    powerbi-client-react:
+      specifier: ^2.0.0
+      version: 2.0.0
+    re-resizable:
+      specifier: ^6.11.2
+      version: 6.11.2
+    react-error-boundary:
+      specifier: ^6.0.0
+      version: 6.0.0
+    react-sortablejs:
+      specifier: ^6.1.4
+      version: 6.1.4
+    react-virtual:
+      specifier: ^2.10.4
+      version: 2.10.4
+    sortablejs:
+      specifier: ^1.15.6
+      version: 1.15.6
+    tsup:
+      specifier: ^8.5.0
+      version: 8.5.1
+    typescript:
+      specifier: ^5.8.3
+      version: 5.9.2
+    vite:
+      specifier: ^7.0.6
+      version: 7.0.6
+    vitest:
+      specifier: ^3.2.4
+      version: 3.2.4
+    zustand:
+      specifier: ^5.0.6
+      version: 5.0.8
+
 overrides:
   styled-components: 6.1.19
   react: ^19.1.1
@@ -42,7 +135,7 @@ importers:
         version: 7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@equinor/fusion-framework-react-app':
         specifier: 6.2.4
-        version: 6.2.4(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@19.1.9)(react@19.1.1))(@remix-run/router@1.23.0)(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)
+        version: 6.2.4(zspnamuzlbq3lj7trk43rf6gbu)
       '@equinor/fusion-framework-react-module-bookmark':
         specifier: 4.0.11
         version: 4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)
@@ -551,6 +644,9 @@ importers:
       '@equinor/fusion-react-person':
         specifier: ^0.8.0
         version: 0.8.8(react@19.1.1)
+      '@equinor/workspace-fusion':
+        specifier: workspace:*
+        version: link:../workspace/fusion
       '@tanstack/react-query':
         specifier: ^5.84.1
         version: 5.84.1(react@19.1.1)
@@ -9546,99 +9642,6 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-catalogs:
-  default:
-    '@equinor/eds-core-react':
-      specifier: ^0.47.0
-      version: 0.47.0
-    '@equinor/eds-icons':
-      specifier: ^0.22.0
-      version: 0.22.0
-    '@equinor/eds-tokens':
-      specifier: ^0.9.2
-      version: 0.9.2
-    '@equinor/fusion-framework-react-ag-grid':
-      specifier: 33.2.8
-      version: 33.2.8
-    '@microsoft/applicationinsights-core-js':
-      specifier: ^3.3.9
-      version: 3.3.9
-    '@microsoft/applicationinsights-web':
-      specifier: 3.3.9
-      version: 3.3.9
-    '@tanstack/react-query':
-      specifier: ^5.84.1
-      version: 5.84.1
-    '@tanstack/react-query-devtools':
-      specifier: ^5.84.1
-      version: 5.90.2
-    '@tanstack/react-virtual':
-      specifier: ^3.13.12
-      version: 3.13.12
-    '@types/jest':
-      specifier: 30.0.0
-      version: 30.0.0
-    '@types/luxon':
-      specifier: ^3.7.1
-      version: 3.7.1
-    '@types/react':
-      specifier: ^19.1.9
-      version: 19.1.9
-    '@types/react-dom':
-      specifier: ^19.1.7
-      version: 19.1.7
-    '@types/sortablejs':
-      specifier: ^1.15.8
-      version: 1.15.8
-    '@types/styled-components':
-      specifier: ^5.1.34
-      version: 5.1.36
-    '@vitejs/plugin-react':
-      specifier: ^4.7.0
-      version: 4.7.0
-    luxon:
-      specifier: ^3.7.1
-      version: 3.7.1
-    markdown-to-jsx:
-      specifier: ^7.7.12
-      version: 7.7.12
-    powerbi-client:
-      specifier: ^2.23.1
-      version: 2.23.1
-    powerbi-client-react:
-      specifier: ^2.0.0
-      version: 2.0.0
-    re-resizable:
-      specifier: ^6.11.2
-      version: 6.11.2
-    react-error-boundary:
-      specifier: ^6.0.0
-      version: 6.0.0
-    react-sortablejs:
-      specifier: ^6.1.4
-      version: 6.1.4
-    react-virtual:
-      specifier: ^2.10.4
-      version: 2.10.4
-    sortablejs:
-      specifier: ^1.15.6
-      version: 1.15.6
-    tsup:
-      specifier: ^8.5.0
-      version: 8.5.1
-    typescript:
-      specifier: ^5.8.3
-      version: 5.9.2
-    vite:
-      specifier: ^7.0.6
-      version: 7.0.6
-    vitest:
-      specifier: ^3.2.4
-      version: 3.2.4
-    zustand:
-      specifier: ^5.0.6
-      version: 5.0.8
-
 snapshots:
 
   '@actions/core@1.11.1':
@@ -11010,8 +11013,8 @@ snapshots:
       - react
       - react-dom
 
-  ? '@equinor/fusion-framework-react-app@6.2.4(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@19.1.9)(react@19.1.1))(@remix-run/router@1.23.0)(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)'
-  : dependencies:
+  '@equinor/fusion-framework-react-app@6.2.4(zspnamuzlbq3lj7trk43rf6gbu)':
+    dependencies:
       '@equinor/fusion-framework-app': 9.3.20(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react@19.1.1)
       '@equinor/fusion-framework-module': 4.4.2(@types/semver@7.7.0)
       '@equinor/fusion-framework-module-app': 6.1.16(@types/react@19.1.9)(chalk@5.5.0)(react@19.1.1)
