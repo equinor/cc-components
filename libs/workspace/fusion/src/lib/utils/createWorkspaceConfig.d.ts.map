@@ -1,0 +1,1 @@
+{"version":3,"file":"createWorkspaceConfig.d.ts","sourceRoot":"","sources":["createWorkspaceConfig.tsx"],"names":[],"mappings":"AACA,OAAO,EAAY,sBAAsB,EAAE,cAAc,EAAE,MAAM,UAAU,CAAC;AAQ5E,wBAAgB,yBAAyB,CACvC,KAAK,SAAS,MAAM,CAAC,WAAW,EAAE,OAAO,CAAC,EAC1C,QAAQ,SAAS,MAAM,CAAC,WAAW,EAAE,OAAO,CAAC,GAAG,KAAK,EACrD,KAAK,EAAE,cAAc,CAAC,KAAK,EAAE,QAAQ,CAAC,GAAG,sBAAsB,CAoChE"}

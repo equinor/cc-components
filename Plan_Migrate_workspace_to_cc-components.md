@@ -42,24 +42,18 @@ This document outlines the steps to migrate the Workspace repository into the CC
 mkdir -p libs/workspace
 ```
 
-#### 1.2 Backup Current State
-```bash
-# Create a backup branch
-git checkout main
-git checkout -b backup/pre-workspace-migration
-git push origin backup/pre-workspace-migration
-git checkout feat/merge-workspace-into-cc-components
-```
+#### 1.2 Note on Workspace Repository
+The workspace folder is ignored in .gitignore as it's its own repository. No backup branch needed.
 
 ### Phase 2: Move Workspace Packages
 
 #### 2.1 Copy Workspace Packages
-Move each package from the workspace repository to the cc-components repository:
+Move each package from the workspace repository to the cc-components repository using shorter directory names:
 
 ```bash
 # For each workspace package
 cp -r workspace/packages/core libs/workspace/core
-cp -r workspace/packages/react libs/workspace/react
+cp -r workspace/packages/workspace-react libs/workspace/react
 cp -r workspace/packages/workspace-fusion libs/workspace/fusion
 cp -r workspace/packages/ag-grid libs/workspace/ag-grid
 cp -r workspace/packages/garden libs/workspace/garden
@@ -68,11 +62,7 @@ cp -r workspace/packages/filter libs/workspace/filter
 cp -r workspace/packages/workspace-fusion-integration-test libs/workspace/integration-test
 ```
 
-#### 2.2 Preserve Git History
-```bash
-# Use git subtree or git filter-branch
-git subtree add --prefix=libs/workspace https://github.com/equinor/fusion-workspace.git main --squash
-```
+Note: Git history from the separate workspace repository will not be preserved as it's a separate ignored repository.
 
 ### Phase 3: Update Package Configuration
 
@@ -252,13 +242,7 @@ pnpm ci:build
 ```
 
 #### 8.3 Run Tests
-```bash
-# Run workspace integration tests
-pnpm --filter @equinor/workspace-fusion-integration-test test
-
-# Run all tests
-pnpm test
-```
+Tests will be skipped during initial migration. Focus on successful builds.
 
 #### 8.4 Test Applications
 ```bash
@@ -279,12 +263,12 @@ Ensure CI builds include workspace packages:
 
 ## Post-Migration Checklist
 
-- [ ] All workspace packages moved to `libs/workspace/`
-- [ ] Package.json files updated (removed publish config)
+- [ ] All workspace packages moved to `libs/workspace/` with shorter names
+- [ ] Package.json files updated (removed publish config, version set to 0.0.0, private: true)
 - [ ] pnpm-workspace.yaml updated
 - [ ] tsconfig.base.json updated with path mappings
 - [ ] All packages build successfully
-- [ ] All tests pass
+- [ ] Tests skipped for initial migration
 - [ ] Applications run correctly
 - [ ] Old workspace directory removed
 - [ ] Link scripts removed/updated
@@ -305,8 +289,8 @@ Ensure CI builds include workspace packages:
 
 If issues arise:
 
-1. Restore from backup branch: `git checkout backup/pre-workspace-migration`
-2. Re-link workspace: `pnpm link:workspace`
+1. Git reset to previous commit: `git reset --hard HEAD~1`
+2. The workspace folder remains intact as it's ignored by git
 3. Reinstall dependencies: `pnpm install`
 
 ## Notes

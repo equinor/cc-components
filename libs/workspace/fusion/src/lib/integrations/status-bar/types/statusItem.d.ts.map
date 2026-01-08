@@ -1,0 +1,1 @@
+{"version":3,"file":"statusItem.d.ts","sourceRoot":"","sources":["statusItem.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,UAAU;IACzB,wCAAwC;IACxC,KAAK,EAAE,MAAM,CAAC;IACd,0CAA0C;IAC1C,KAAK,EAAE,MAAM,GAAG,MAAM,CAAC;IACvB,WAAW,CAAC,EAAE,MAAM,CAAC;IACrB,KAAK,CAAC,EAAE,MAAM,CAAC;CAChB"}

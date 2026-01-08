@@ -1,0 +1,1 @@
+{"version":3,"file":"embedConfig.d.ts","sourceRoot":"","sources":["embedConfig.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,gBAAgB,CAAC;AAE3D,MAAM,MAAM,qBAAqB,GAAG,CAAC,SAAS,EAAE,MAAM,KAAK,OAAO,CAAC,yBAAyB,CAAC,CAAC;AAE9F,MAAM,WAAW,iBAAiB;IAChC,QAAQ,EAAE,MAAM,CAAC;IACjB,QAAQ,EAAE,MAAM,CAAC;CAClB"}

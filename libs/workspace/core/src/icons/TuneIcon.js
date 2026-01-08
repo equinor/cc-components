@@ -1,0 +1,8 @@
+import { jsx as _jsx } from "react/jsx-runtime";
+import styled from 'styled-components';
+const StyledSvg = styled.svg `
+  path {
+    fill: ${({ color }) => color || 'currentColor'};
+  }
+`;
+export const TuneIcon = ({ color }) => (_jsx(StyledSvg, { width: "24", height: "24", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", color: color, children: _jsx("path", { "fill-rule": "evenodd", "clip-rule": "evenodd", d: "M17 9h-2V3h2v2h4v2h-4zM3 7V5h10v2zm0 12v-2h6v2zm10 2v-2h8v-2h-8v-2h-2v6zM7 11V9h2v6H7v-2H3v-2zm14 2v-2H11v2z" }) }));

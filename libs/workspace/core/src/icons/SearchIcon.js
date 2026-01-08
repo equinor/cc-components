@@ -1,0 +1,8 @@
+import { jsx as _jsx } from "react/jsx-runtime";
+import styled from 'styled-components';
+const StyledSvg = styled.svg `
+  path {
+    fill: ${({ color }) => color || 'currentColor'};
+  }
+`;
+export const SearchIcon = ({ color }) => (_jsx(StyledSvg, { width: "24", height: "24", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", color: color, children: _jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M14.966 14.255h.79l4.99 5-1.49 1.49-5-4.99v-.79l-.27-.28a6.47 6.47 0 0 1-4.23 1.57 6.5 6.5 0 1 1 6.5-6.5c0 1.61-.59 3.09-1.57 4.23zm-9.71-4.5c0 2.49 2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5-4.5 2.01-4.5 4.5" }) }));

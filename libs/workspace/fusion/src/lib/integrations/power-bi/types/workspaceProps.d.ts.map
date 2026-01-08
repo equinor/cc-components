@@ -1,0 +1,1 @@
+{"version":3,"file":"workspaceProps.d.ts","sourceRoot":"","sources":["workspaceProps.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,aAAa,CAAC;AAE5C,MAAM,MAAM,qBAAqB,GAAG;IAClC,cAAc,CAAC,EAAE,aAAa,CAAC;IAC/B,iBAAiB,CAAC,EAAE,OAAO,CAAC;CAC7B,CAAC"}

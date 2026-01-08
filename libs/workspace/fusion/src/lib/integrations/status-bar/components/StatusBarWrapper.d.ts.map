@@ -1,0 +1,1 @@
+{"version":3,"file":"StatusBarWrapper.d.ts","sourceRoot":"","sources":["StatusBarWrapper.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,eAAe,EAAE,MAAM,0BAA0B,CAAC;AAK3D,KAAK,qBAAqB,GAAG;IAC3B,MAAM,EAAE,eAAe,CAAC;CACzB,CAAC;AAEF,wBAAgB,gBAAgB,CAAC,EAAE,MAAM,EAAE,EAAE,qBAAqB,2CAajE"}
