@@ -1,1 +1,0 @@
-export { addStatusBar } from './addStatusBar';

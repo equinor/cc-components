@@ -1,1 +1,0 @@
-export { sortFusionTabs } from './fusionTabOrder';
