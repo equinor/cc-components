@@ -1,0 +1,44 @@
+{
+  "name": "@equinor/workspace-filter",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "@equinor/eds-core-react": "catalog:",
+    "@equinor/eds-icons": "catalog:",
+    "@equinor/eds-tokens": "catalog:",
+    "@equinor/workspace-core": "workspace:*",
+    "@microsoft/applicationinsights-core-js": "catalog:",
+    "@microsoft/applicationinsights-web": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "@tanstack/react-virtual": "catalog:",
+    "react-error-boundary": "catalog:",
+    "react-sortablejs": "catalog:",
+    "react-virtual": "catalog:",
+    "sortablejs": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
+  },
+  "devDependencies": {
+    "@types/jest": "catalog:",
+    "@types/react": "catalog:",
+    "@types/sortablejs": "catalog:",
+    "@types/styled-components": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  }
+}

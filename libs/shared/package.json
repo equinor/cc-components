@@ -91,6 +91,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@equinor/fusion-react-person": "^0.10.5",
+    "@equinor/workspace-fusion": "workspace:*",
     "@remirror/pm": "^3.0.1",
     "@remirror/react": "^3.0.2",
     "@remirror/react-editors": "^2.0.2",

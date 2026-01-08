@@ -1,0 +1,90 @@
+{
+  "name": "@equinor/workspace-fusion",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./garden": {
+      "require": "./dist/lib/integrations/garden/index.cjs",
+      "import": "./dist/lib/integrations/garden/index.js",
+      "types": "./dist/lib/integrations/garden/index.d.ts"
+    },
+    "./filter": {
+      "require": "./dist/lib/integrations/filter/index.cjs",
+      "import": "./dist/lib/integrations/filter/index.js",
+      "types": "./dist/lib/integrations/filter/index.d.ts"
+    },
+    "./status-bar": {
+      "require": "./dist/lib/integrations/status-bar/index.cjs",
+      "import": "./dist/lib/integrations/status-bar/index.js",
+      "types": "./dist/lib/integrations/status-bar/index.d.ts"
+    },
+    "./power-bi": {
+      "require": "./dist/lib/integrations/power-bi/index.cjs",
+      "import": "./dist/lib/integrations/power-bi/index.js",
+      "types": "./dist/lib/integrations/power-bi/index.d.ts"
+    },
+    "./grid": {
+      "require": "./dist/lib/integrations/grid/index.cjs",
+      "import": "./dist/lib/integrations/grid/index.js",
+      "types": "./dist/lib/integrations/grid/index.d.ts"
+    },
+    "./sidesheet": {
+      "require": "./dist/lib/integrations/sidesheet/index.cjs",
+      "import": "./dist/lib/integrations/sidesheet/index.js",
+      "types": "./dist/lib/integrations/sidesheet/index.d.ts"
+    },
+    "./power-bi-module": {
+      "require": "./dist/modules/power-bi/index.cjs",
+      "import": "./dist/modules/power-bi/index.js",
+      "types": "./dist/modules/power-bi/index.d.ts"
+    },
+    "./grid-module": {
+      "require": "./dist/modules/grid/index.cjs",
+      "import": "./dist/modules/grid/index.js",
+      "types": "./dist/modules/grid/index.d.ts"
+    },
+    "./garden-module": {
+      "require": "./dist/modules/garden/index.cjs",
+      "import": "./dist/modules/garden/index.js",
+      "types": "./dist/modules/garden/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "@equinor/eds-core-react": "catalog:",
+    "@equinor/eds-icons": "catalog:",
+    "@equinor/eds-tokens": "catalog:",
+    "@equinor/workspace-ag-grid": "workspace:*",
+    "@equinor/workspace-filter": "workspace:*",
+    "@equinor/workspace-garden": "workspace:*",
+    "@equinor/workspace-powerbi": "workspace:*",
+    "@equinor/workspace-react": "workspace:*",
+    "@microsoft/applicationinsights-web": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "re-resizable": "catalog:",
+    "react-error-boundary": "catalog:",
+    "@equinor/workspace-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
