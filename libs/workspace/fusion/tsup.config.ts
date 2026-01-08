@@ -22,4 +22,5 @@ export default defineConfig({
     './src/lib/integrations/filter/index.ts',
     './src/modules/garden/index.tsx',
   ],
+  external: ['react', 'react-dom', 'styled-components'],
 });

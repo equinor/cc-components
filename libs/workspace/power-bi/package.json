@@ -6,8 +6,8 @@
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "build": "tsup ./src/index.ts --format cjs,esm --dts --clean",
-    "build:prod": "tsup ./src/index.ts --format cjs,esm --dts --clean"
+    "build": "tsup",
+    "build:prod": "tsup"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -23,29 +23,31 @@
     "dist"
   ],
   "dependencies": {
-    "@equinor/eds-core-react": "^0.47.0",
-    "@equinor/eds-icons": "^0.22.0",
-    "@equinor/eds-tokens": "^0.9.2",
+    "@equinor/eds-core-react": "catalog:",
+    "@equinor/eds-icons": "catalog:",
+    "@equinor/eds-tokens": "catalog:",
     "@equinor/workspace-filter": "workspace:*",
-    "@microsoft/applicationinsights-web": "3.3.9",
-    "@tanstack/react-query": "^5.83.0",
-    "@tanstack/react-virtual": "^3.13.12",
-    "markdown-to-jsx": "^7.7.12",
-    "powerbi-client": "^2.23.1",
-    "powerbi-client-react": "^2.0.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-error-boundary": "^6.0.0",
-    "react-sortablejs": "^6.1.4",
-    "react-virtual": "^2.10.4",
-    "sortablejs": "^1.15.6",
-    "styled-components": "^6.1.19"
+    "@microsoft/applicationinsights-web": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "@tanstack/react-virtual": "catalog:",
+    "markdown-to-jsx": "catalog:",
+    "powerbi-client": "catalog:",
+    "powerbi-client-react": "catalog:",
+    "react-error-boundary": "catalog:",
+    "react-sortablejs": "catalog:",
+    "react-virtual": "catalog:",
+    "sortablejs": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
-    "@types/sortablejs": "^1.15.8",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@types/sortablejs": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
   }
 }

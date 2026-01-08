@@ -4,6 +4,99 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@equinor/eds-core-react':
+      specifier: ^0.47.0
+      version: 0.47.0
+    '@equinor/eds-icons':
+      specifier: ^0.22.0
+      version: 0.22.0
+    '@equinor/eds-tokens':
+      specifier: ^0.9.2
+      version: 0.9.2
+    '@equinor/fusion-framework-react-ag-grid':
+      specifier: 33.2.8
+      version: 33.2.8
+    '@microsoft/applicationinsights-core-js':
+      specifier: ^3.3.9
+      version: 3.3.9
+    '@microsoft/applicationinsights-web':
+      specifier: 3.3.9
+      version: 3.3.9
+    '@tanstack/react-query':
+      specifier: ^5.84.1
+      version: 5.84.1
+    '@tanstack/react-query-devtools':
+      specifier: ^5.84.1
+      version: 5.90.2
+    '@tanstack/react-virtual':
+      specifier: ^3.13.12
+      version: 3.13.12
+    '@types/jest':
+      specifier: 30.0.0
+      version: 30.0.0
+    '@types/luxon':
+      specifier: ^3.7.1
+      version: 3.7.1
+    '@types/react':
+      specifier: ^19.1.9
+      version: 19.1.9
+    '@types/react-dom':
+      specifier: ^19.1.7
+      version: 19.1.7
+    '@types/sortablejs':
+      specifier: ^1.15.8
+      version: 1.15.8
+    '@types/styled-components':
+      specifier: ^5.1.34
+      version: 5.1.36
+    '@vitejs/plugin-react':
+      specifier: ^4.7.0
+      version: 4.7.0
+    luxon:
+      specifier: ^3.7.1
+      version: 3.7.1
+    markdown-to-jsx:
+      specifier: ^7.7.12
+      version: 7.7.12
+    powerbi-client:
+      specifier: ^2.23.1
+      version: 2.23.1
+    powerbi-client-react:
+      specifier: ^2.0.0
+      version: 2.0.0
+    re-resizable:
+      specifier: ^6.11.2
+      version: 6.11.2
+    react-error-boundary:
+      specifier: ^6.0.0
+      version: 6.0.0
+    react-sortablejs:
+      specifier: ^6.1.4
+      version: 6.1.4
+    react-virtual:
+      specifier: ^2.10.4
+      version: 2.10.4
+    sortablejs:
+      specifier: ^1.15.6
+      version: 1.15.6
+    tsup:
+      specifier: ^8.5.0
+      version: 8.5.1
+    typescript:
+      specifier: ^5.8.3
+      version: 5.9.2
+    vite:
+      specifier: ^7.0.6
+      version: 7.0.6
+    vitest:
+      specifier: ^3.2.4
+      version: 3.2.4
+    zustand:
+      specifier: ^5.0.6
+      version: 5.0.8
+
 overrides:
   styled-components: 6.1.19
   react: ^19.1.1
@@ -14,13 +107,13 @@ importers:
   .:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: 0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: 0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: 0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@equinor/fusion-framework-module':
         specifier: 4.4.2
@@ -42,7 +135,7 @@ importers:
         version: 7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@equinor/fusion-framework-react-app':
         specifier: 6.2.4
-        version: 6.2.4(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@19.1.9)(react@19.1.1))(@remix-run/router@1.23.0)(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)
+        version: 6.2.4(zspnamuzlbq3lj7trk43rf6gbu)
       '@equinor/fusion-framework-react-module-bookmark':
         specifier: 4.0.11
         version: 4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)
@@ -59,19 +152,19 @@ importers:
         specifier: workspace:*
         version: link:libs/workspace/fusion
       '@microsoft/applicationinsights-web':
-        specifier: 3.3.9
+        specifier: 'catalog:'
         version: 3.3.9(tslib@2.8.1)
       '@swc/helpers':
         specifier: 0.5.17
         version: 0.5.17
       '@tanstack/react-query':
-        specifier: ^5.84.1
+        specifier: 'catalog:'
         version: 5.84.1(react@19.1.1)
       core-js:
         specifier: ^3.45.0
         version: 3.45.0
       luxon:
-        specifier: ^3.7.1
+        specifier: 'catalog:'
         version: 3.7.1
       odata-query:
         specifier: ^8.0.3
@@ -83,7 +176,7 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-error-boundary:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(react@19.1.1)
       rimraf:
         specifier: ^6.0.1
@@ -126,16 +219,16 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       '@types/luxon':
-        specifier: ^3.7.1
+        specifier: 'catalog:'
         version: 3.7.1
       '@types/node':
         specifier: 24.2.0
         version: 24.2.0
       '@types/react':
-        specifier: 19.1.9
+        specifier: 'catalog:'
         version: 19.1.9
       '@types/react-dom':
-        specifier: 19.1.7
+        specifier: 'catalog:'
         version: 19.1.7(@types/react@19.1.9)
       cross-env:
         specifier: ^10.0.0
@@ -171,10 +264,10 @@ importers:
         specifier: ^2.5.5
         version: 2.5.5
       typescript:
-        specifier: 5.9.2
+        specifier: 'catalog:'
         version: 5.9.2
       vite:
-        specifier: ^7.0.6
+        specifier: 'catalog:'
         version: 7.0.6(@types/node@24.2.0)(tsx@4.20.3)(yaml@2.8.0)
       vite-plugin-environment:
         specifier: ^1.1.3
@@ -186,7 +279,7 @@ importers:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.9.2)(vite@7.0.6(@types/node@24.2.0)(tsx@4.20.3)(yaml@2.8.0))
       vitest:
-        specifier: ^3.2.4
+        specifier: 'catalog:'
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.2.0)(@vitest/ui@3.2.4)(jsdom@26.1.0)(tsx@4.20.3)(yaml@2.8.0)
 
   apps/docs:
@@ -665,10 +758,10 @@ importers:
   libs/workspace/ag-grid:
     dependencies:
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@equinor/fusion-framework-react-ag-grid':
-        specifier: 33.2.8
+        specifier: 'catalog:'
         version: 33.2.8(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: ^19.1.1
@@ -676,42 +769,42 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
-    devDependencies:
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
-      '@types/react':
-        specifier: ^19.1.9
-        version: 19.1.9
-      '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.9)
-      '@types/styled-components':
-        specifier: ^5.1.34
-        version: 5.1.36
       styled-components:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    devDependencies:
+      '@types/jest':
+        specifier: 'catalog:'
+        version: 30.0.0
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.9
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.1.7(@types/react@19.1.9)
+      '@types/styled-components':
+        specifier: 'catalog:'
+        version: 5.1.36
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
   libs/workspace/core:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: ^0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: ^0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@tanstack/react-virtual':
-        specifier: ^3.13.12
+        specifier: 'catalog:'
         version: 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: ^19.1.1
@@ -724,101 +817,101 @@ importers:
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@types/jest':
-        specifier: 30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/react':
-        specifier: ^19.1.9
+        specifier: 'catalog:'
         version: 19.1.9
       '@types/react-dom':
-        specifier: ^19.1.7
+        specifier: 'catalog:'
         version: 19.1.7(@types/react@19.1.9)
       '@types/styled-components':
-        specifier: ^5.1.34
+        specifier: 'catalog:'
         version: 5.1.36
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
   libs/workspace/filter:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: ^0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: ^0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@equinor/workspace-core':
         specifier: workspace:*
         version: link:../core
       '@microsoft/applicationinsights-core-js':
-        specifier: ^3.3.9
+        specifier: 'catalog:'
         version: 3.3.9(tslib@2.8.1)
       '@microsoft/applicationinsights-web':
-        specifier: 3.3.9
+        specifier: 'catalog:'
         version: 3.3.9(tslib@2.8.1)
       '@tanstack/react-query':
-        specifier: ^5.83.0
+        specifier: 'catalog:'
         version: 5.84.1(react@19.1.1)
       '@tanstack/react-virtual':
-        specifier: ^3.13.12
+        specifier: 'catalog:'
         version: 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      react-error-boundary:
-        specifier: ^6.0.0
-        version: 6.0.0(react@19.1.1)
-      react-sortablejs:
-        specifier: ^6.1.4
-        version: 6.1.4(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sortablejs@1.15.6)
-      react-virtual:
-        specifier: ^2.10.4
-        version: 2.10.4(react@19.1.1)
-      sortablejs:
-        specifier: ^1.15.6
-        version: 1.15.6
-    devDependencies:
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
-      '@types/react':
-        specifier: ^19.1.9
-        version: 19.1.9
-      '@types/sortablejs':
-        specifier: ^1.15.8
-        version: 1.15.8
-      '@types/styled-components':
-        specifier: ^5.1.34
-        version: 5.1.36
       react:
         specifier: ^19.1.1
         version: 19.1.1
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+      react-error-boundary:
+        specifier: 'catalog:'
+        version: 6.0.0(react@19.1.1)
+      react-sortablejs:
+        specifier: 'catalog:'
+        version: 6.1.4(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sortablejs@1.15.6)
+      react-virtual:
+        specifier: 'catalog:'
+        version: 2.10.4(react@19.1.1)
+      sortablejs:
+        specifier: 'catalog:'
+        version: 1.15.6
       styled-components:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    devDependencies:
+      '@types/jest':
+        specifier: 'catalog:'
+        version: 30.0.0
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.9
+      '@types/sortablejs':
+        specifier: 'catalog:'
+        version: 1.15.8
+      '@types/styled-components':
+        specifier: 'catalog:'
+        version: 5.1.36
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
   libs/workspace/fusion:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: ^0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: ^0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@equinor/workspace-ag-grid':
         specifier: workspace:*
@@ -839,13 +932,13 @@ importers:
         specifier: workspace:*
         version: link:../react
       '@microsoft/applicationinsights-web':
-        specifier: 3.3.9
+        specifier: 'catalog:'
         version: 3.3.9(tslib@2.8.1)
       '@tanstack/react-query':
-        specifier: ^5.83.0
+        specifier: 'catalog:'
         version: 5.84.1(react@19.1.1)
       re-resizable:
-        specifier: ^6.11.2
+        specifier: 'catalog:'
         version: 6.11.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: ^19.1.1
@@ -854,117 +947,117 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-error-boundary:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(react@19.1.1)
       styled-components:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@types/react':
-        specifier: ^19.1.9
+        specifier: 'catalog:'
         version: 19.1.9
       '@types/react-dom':
-        specifier: ^19.1.7
+        specifier: 'catalog:'
         version: 19.1.7(@types/react@19.1.9)
       '@vitejs/plugin-react':
-        specifier: ^4.7.0
+        specifier: 'catalog:'
         version: 4.7.0(vite@7.0.6(@types/node@24.2.0)(tsx@4.20.3)(yaml@2.8.0))
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
       vite:
-        specifier: ^7.0.6
+        specifier: 'catalog:'
         version: 7.0.6(@types/node@24.2.0)(tsx@4.20.3)(yaml@2.8.0)
 
   libs/workspace/garden:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: ^0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: ^0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@equinor/workspace-core':
         specifier: workspace:*
         version: link:../core
       '@tanstack/react-query':
-        specifier: ^5.83.0
+        specifier: 'catalog:'
         version: 5.84.1(react@19.1.1)
       '@tanstack/react-query-devtools':
-        specifier: ^5.83.0
+        specifier: 'catalog:'
         version: 5.90.2(@tanstack/react-query@5.84.1(react@19.1.1))(react@19.1.1)
-      react-error-boundary:
-        specifier: ^6.0.0
-        version: 6.0.0(react@19.1.1)
-      react-virtual:
-        specifier: ^2.10.4
-        version: 2.10.4(react@19.1.1)
-    devDependencies:
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
-      '@types/react':
-        specifier: ^19.1.9
-        version: 19.1.9
-      '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.9)
-      '@types/styled-components':
-        specifier: ^5.1.34
-        version: 5.1.36
       react:
         specifier: ^19.1.1
         version: 19.1.1
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+      react-error-boundary:
+        specifier: 'catalog:'
+        version: 6.0.0(react@19.1.1)
+      react-virtual:
+        specifier: 'catalog:'
+        version: 2.10.4(react@19.1.1)
       styled-components:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    devDependencies:
+      '@types/jest':
+        specifier: 'catalog:'
+        version: 30.0.0
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.9
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.1.7(@types/react@19.1.9)
+      '@types/styled-components':
+        specifier: 'catalog:'
+        version: 5.1.36
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
   libs/workspace/power-bi:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: ^0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: ^0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@equinor/workspace-filter':
         specifier: workspace:*
         version: link:../filter
       '@microsoft/applicationinsights-web':
-        specifier: 3.3.9
+        specifier: 'catalog:'
         version: 3.3.9(tslib@2.8.1)
       '@tanstack/react-query':
-        specifier: ^5.83.0
+        specifier: 'catalog:'
         version: 5.84.1(react@19.1.1)
       '@tanstack/react-virtual':
-        specifier: ^3.13.12
+        specifier: 'catalog:'
         version: 3.13.12(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       markdown-to-jsx:
-        specifier: ^7.7.12
+        specifier: 'catalog:'
         version: 7.7.12(react@19.1.1)
       powerbi-client:
-        specifier: ^2.23.1
+        specifier: 'catalog:'
         version: 2.23.1
       powerbi-client-react:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0(react@19.1.1)
       react:
         specifier: ^19.1.1
@@ -973,64 +1066,51 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-error-boundary:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(react@19.1.1)
       react-sortablejs:
-        specifier: ^6.1.4
+        specifier: 'catalog:'
         version: 6.1.4(@types/sortablejs@1.15.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sortablejs@1.15.6)
       react-virtual:
-        specifier: ^2.10.4
+        specifier: 'catalog:'
         version: 2.10.4(react@19.1.1)
       sortablejs:
-        specifier: ^1.15.6
+        specifier: 'catalog:'
         version: 1.15.6
       styled-components:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@types/react':
-        specifier: ^19.1.9
+        specifier: 'catalog:'
         version: 19.1.9
       '@types/react-dom':
-        specifier: ^19.1.7
+        specifier: 'catalog:'
         version: 19.1.7(@types/react@19.1.9)
       '@types/sortablejs':
-        specifier: ^1.15.8
+        specifier: 'catalog:'
         version: 1.15.8
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
   libs/workspace/react:
     dependencies:
       '@equinor/eds-core-react':
-        specifier: ^0.47.0
+        specifier: 'catalog:'
         version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@equinor/eds-icons':
-        specifier: ^0.22.0
+        specifier: 'catalog:'
         version: 0.22.0
       '@equinor/eds-tokens':
-        specifier: ^0.9.2
+        specifier: 'catalog:'
         version: 0.9.2
       '@microsoft/applicationinsights-web':
-        specifier: 3.3.9
+        specifier: 'catalog:'
         version: 3.3.9(tslib@2.8.1)
-      zustand:
-        specifier: ^5.0.6
-        version: 5.0.8(@types/react@19.1.9)(immer@9.0.21)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1))
-    devDependencies:
-      '@types/jest':
-        specifier: 30.0.0
-        version: 30.0.0
-      '@types/react':
-        specifier: ^19.1.9
-        version: 19.1.9
-      '@types/styled-components':
-        specifier: ^5.1.34
-        version: 5.1.36
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -1040,11 +1120,24 @@ importers:
       styled-components:
         specifier: 6.1.19
         version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      zustand:
+        specifier: 'catalog:'
+        version: 5.0.8(@types/react@19.1.9)(immer@9.0.21)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1))
+    devDependencies:
+      '@types/jest':
+        specifier: 'catalog:'
+        version: 30.0.0
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.9
+      '@types/styled-components':
+        specifier: 'catalog:'
+        version: 5.1.36
       tsup:
-        specifier: ^8.5.0
+        specifier: 'catalog:'
         version: 8.5.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
 packages:
@@ -10733,8 +10826,8 @@ snapshots:
       - react
       - react-dom
 
-  ? '@equinor/fusion-framework-react-app@6.2.4(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@19.1.9)(react@19.1.1))(@remix-run/router@1.23.0)(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)'
-  : dependencies:
+  '@equinor/fusion-framework-react-app@6.2.4(zspnamuzlbq3lj7trk43rf6gbu)':
+    dependencies:
       '@equinor/fusion-framework-app': 9.3.20(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react@19.1.1)
       '@equinor/fusion-framework-module': 4.4.2(@types/semver@7.7.0)
       '@equinor/fusion-framework-module-app': 6.1.16(@types/react@19.1.9)(chalk@5.5.0)(react@19.1.1)
@@ -10996,7 +11089,7 @@ snapshots:
   '@equinor/fusion-web-theme@0.1.10':
     dependencies:
       '@equinor/eds-tokens': 0.9.2
-      csstype: 3.1.3
+      csstype: 3.2.3
 
   '@equinor/workspace-sidesheet@0.1.6(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
     dependencies:
@@ -11955,7 +12048,7 @@ snapshots:
       '@popperjs/core': 2.11.8
       '@types/react-transition-group': 4.4.12(@types/react@19.1.9)
       clsx: 2.1.1
-      csstype: 3.1.3
+      csstype: 3.2.3
       prop-types: 15.8.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
@@ -11980,7 +12073,7 @@ snapshots:
       '@babel/runtime': 7.28.2
       '@emotion/cache': 11.14.0
       '@emotion/serialize': 1.3.3
-      csstype: 3.1.3
+      csstype: 3.2.3
       prop-types: 15.8.1
       react: 19.1.1
     optionalDependencies:
@@ -11995,7 +12088,7 @@ snapshots:
       '@mui/types': 7.2.24(@types/react@19.1.9)
       '@mui/utils': 5.17.1(@types/react@19.1.9)(react@19.1.1)
       clsx: 2.1.1
-      csstype: 3.1.3
+      csstype: 3.2.3
       prop-types: 15.8.1
       react: 19.1.1
     optionalDependencies:
@@ -14751,7 +14844,7 @@ snapshots:
   '@types/jest@30.0.0':
     dependencies:
       expect: 30.2.0
-      pretty-format: 30.0.5
+      pretty-format: 30.2.0
 
   '@types/json-schema@7.0.15': {}
 
@@ -14806,7 +14899,7 @@ snapshots:
 
   '@types/react@19.1.9':
     dependencies:
-      csstype: 3.1.3
+      csstype: 3.2.3
 
   '@types/reactcss@1.2.13(@types/react@19.1.9)':
     dependencies:
@@ -15870,7 +15963,7 @@ snapshots:
   dom-helpers@5.2.1:
     dependencies:
       '@babel/runtime': 7.28.2
-      csstype: 3.1.3
+      csstype: 3.2.3
 
   dom-walk@0.1.2: {}
 

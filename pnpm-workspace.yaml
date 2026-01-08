@@ -6,3 +6,57 @@ packages:
   - 'fusion-portal/**'
   - 'cli'
   - 'github-action'
+
+catalog:
+  # React ecosystem
+  react: ^19.1.1
+  react-dom: ^19.1.1
+  '@types/react': ^19.1.9
+  '@types/react-dom': ^19.1.7
+  react-error-boundary: ^6.0.0
+  react-virtual: ^2.10.4
+  react-sortablejs: ^6.1.4
+
+  # Styling
+  styled-components: ^6.1.19
+  '@types/styled-components': ^5.1.34
+
+  # Equinor Design System
+  '@equinor/eds-core-react': ^0.47.0
+  '@equinor/eds-icons': ^0.22.0
+  '@equinor/eds-tokens': ^0.9.2
+
+  # Equinor Fusion Framework
+  '@equinor/fusion-framework-react-ag-grid': 33.2.8
+
+  # Build tools
+  typescript: ^5.8.3
+  tsup: ^8.5.0
+  vite: ^7.0.6
+  '@vitejs/plugin-react': ^4.7.0
+
+  # Data fetching
+  '@tanstack/react-query': ^5.84.1
+  '@tanstack/react-query-devtools': ^5.84.1
+  '@tanstack/react-virtual': ^3.13.12
+
+  # Microsoft
+  '@microsoft/applicationinsights-web': 3.3.9
+  '@microsoft/applicationinsights-core-js': ^3.3.9
+
+  # Testing
+  '@types/jest': 30.0.0
+  vitest: ^3.2.4
+
+  # Utilities
+  luxon: ^3.7.1
+  '@types/luxon': ^3.7.1
+  sortablejs: ^1.15.6
+  '@types/sortablejs': ^1.15.8
+  zustand: ^5.0.6
+  re-resizable: ^6.11.2
+  markdown-to-jsx: ^7.7.12
+
+  # Power BI
+  powerbi-client: ^2.23.1
+  powerbi-client-react: ^2.0.0
