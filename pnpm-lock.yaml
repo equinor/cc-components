@@ -4,99 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-catalogs:
-  default:
-    '@equinor/eds-core-react':
-      specifier: ^0.47.0
-      version: 0.47.0
-    '@equinor/eds-icons':
-      specifier: ^0.22.0
-      version: 0.22.0
-    '@equinor/eds-tokens':
-      specifier: ^0.9.2
-      version: 0.9.2
-    '@equinor/fusion-framework-react-ag-grid':
-      specifier: 33.2.8
-      version: 33.2.8
-    '@microsoft/applicationinsights-core-js':
-      specifier: ^3.3.9
-      version: 3.3.9
-    '@microsoft/applicationinsights-web':
-      specifier: 3.3.9
-      version: 3.3.9
-    '@tanstack/react-query':
-      specifier: ^5.84.1
-      version: 5.84.1
-    '@tanstack/react-query-devtools':
-      specifier: ^5.84.1
-      version: 5.90.2
-    '@tanstack/react-virtual':
-      specifier: ^3.13.12
-      version: 3.13.12
-    '@types/jest':
-      specifier: 30.0.0
-      version: 30.0.0
-    '@types/luxon':
-      specifier: ^3.7.1
-      version: 3.7.1
-    '@types/react':
-      specifier: ^19.1.9
-      version: 19.1.9
-    '@types/react-dom':
-      specifier: ^19.1.7
-      version: 19.1.7
-    '@types/sortablejs':
-      specifier: ^1.15.8
-      version: 1.15.8
-    '@types/styled-components':
-      specifier: ^5.1.34
-      version: 5.1.36
-    '@vitejs/plugin-react':
-      specifier: ^4.7.0
-      version: 4.7.0
-    luxon:
-      specifier: ^3.7.1
-      version: 3.7.1
-    markdown-to-jsx:
-      specifier: ^7.7.12
-      version: 7.7.12
-    powerbi-client:
-      specifier: ^2.23.1
-      version: 2.23.1
-    powerbi-client-react:
-      specifier: ^2.0.0
-      version: 2.0.0
-    re-resizable:
-      specifier: ^6.11.2
-      version: 6.11.2
-    react-error-boundary:
-      specifier: ^6.0.0
-      version: 6.0.0
-    react-sortablejs:
-      specifier: ^6.1.4
-      version: 6.1.4
-    react-virtual:
-      specifier: ^2.10.4
-      version: 2.10.4
-    sortablejs:
-      specifier: ^1.15.6
-      version: 1.15.6
-    tsup:
-      specifier: ^8.5.0
-      version: 8.5.1
-    typescript:
-      specifier: ^5.8.3
-      version: 5.9.2
-    vite:
-      specifier: ^7.0.6
-      version: 7.0.6
-    vitest:
-      specifier: ^3.2.4
-      version: 3.2.4
-    zustand:
-      specifier: ^5.0.6
-      version: 5.0.8
-
 overrides:
   styled-components: 6.1.19
   react: ^19.1.1
@@ -135,7 +42,7 @@ importers:
         version: 7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@equinor/fusion-framework-react-app':
         specifier: 6.2.4
-        version: 6.2.4(zspnamuzlbq3lj7trk43rf6gbu)
+        version: 6.2.4(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@19.1.9)(react@19.1.1))(@remix-run/router@1.23.0)(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)
       '@equinor/fusion-framework-react-module-bookmark':
         specifier: 4.0.11
         version: 4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)
@@ -632,6 +539,30 @@ importers:
       '@cc-components/sharedcomponents':
         specifier: workspace:^
         version: link:../sharedcomponents
+
+  libs/reportshared:
+    dependencies:
+      '@equinor/eds-core-react':
+        specifier: ^0.47.0
+        version: 0.47.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(styled-components@6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+      '@equinor/eds-tokens':
+        specifier: ^0.9.2
+        version: 0.9.2
+      '@equinor/fusion-react-person':
+        specifier: ^0.8.0
+        version: 0.8.8(react@19.1.1)
+      '@tanstack/react-query':
+        specifier: ^5.84.1
+        version: 5.84.1(react@19.1.1)
+      markdown-to-jsx:
+        specifier: ^7.7.12
+        version: 7.7.12(react@19.1.1)
+      odata-query:
+        specifier: ^7.0.4
+        version: 7.0.9
+      styled-components:
+        specifier: 6.1.19
+        version: 6.1.19(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
   libs/shared:
     dependencies:
@@ -1139,6 +1070,144 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
+
+  reports/activities:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ads-commercial-meeting:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ads-engineering-meeting:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ads-monthly-meeting:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ads-offshore-installation:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ads-schedule-viewer:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ads-weekly-meeting:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/atex-inspection:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/ccoverview:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/checklist:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/commissioning-task:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/completion-analytics:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/jca-installation:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/jca-job-analytics:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/jca-progress-summary:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/jca-spools:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/jca-work-preparation:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/preservation-workspace:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/projectsafetybarriers:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/query-workspace:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/schedule-viewer:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/tags:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
+
+  reports/workorder-area-overview:
+    dependencies:
+      '@cc-components/reportshared':
+        specifier: workspace:^
+        version: link:../../libs/reportshared
 
 packages:
 
@@ -2241,6 +2310,9 @@ packages:
   '@equinor/fusion-react-person@0.10.5':
     resolution: {integrity: sha512-EDjbea1mWnqetTShHNrj0/PzuKjx/W6aYtxWRPMLK6NSOx/m9YjTzNcPhlpItsQ6N0/cbxKYj0+6YWbf2TwX3g==}
 
+  '@equinor/fusion-react-person@0.8.8':
+    resolution: {integrity: sha512-sIkDIqERI2tpRcbkxGz/FEOoZdXFJnbTw26iugbDFry3GMdMwJ6TVDuDO8Axdtgcze7eyko9roYa5Ijg1zUtJw==}
+
   '@equinor/fusion-react-utils@2.2.3':
     resolution: {integrity: sha512-dZ6EhF0f03v3bz1fBz7eR0zb1FeclpxrRH3LAZqf2GeNMBpIohvYhQtKMd2+S4C6x19pwgn7Z19A9jHwrvq84w==}
     peerDependencies:
@@ -2270,6 +2342,9 @@ packages:
   '@equinor/fusion-wc-list@1.1.4':
     resolution: {integrity: sha512-IZyG+Jyv7vJzQyYJg8RsIlars0q8Ix2LT+Vh1E26p70rBdZZzmU2q1KATOyyEr8vWJSX9HlFMuYTg+N26Mxtdg==}
 
+  '@equinor/fusion-wc-person@2.6.9':
+    resolution: {integrity: sha512-BR3enrFVaGb662FdZ2CUYxv6DIWJ5P9Rv789JXlbL+pTRCp0jvvDsbUgdXE3WnyzKsLlQy6Wh+IesQFHW8ilmQ==}
+
   '@equinor/fusion-wc-person@3.1.9':
     resolution: {integrity: sha512-xnVuEDpaMQurEVx5VMSPKjRm5QyUkOH8N9xYXEBjEdEvlHX42kcjw2VCtsBv1S1BP5zB/jAyYlPuAx/dlFaysA==}
 
@@ -2281,6 +2356,9 @@ packages:
 
   '@equinor/fusion-wc-ripple@1.1.1':
     resolution: {integrity: sha512-TuyBqTRekg7Kh+09+guD7P0HldGOkE7gicYF+rW1yfVFJGwCjBWQ+2EDqhImDPViRq5RWvE73Y8Ajayt/wO0Qw==}
+
+  '@equinor/fusion-wc-searchable-dropdown@3.7.4':
+    resolution: {integrity: sha512-ED34b/1f6Sg05TT5lUhakhZHGfWiLpMLy0PhAuO18BhWVpHMHikQeoaZU1P13he6ks/GCIXt+K+2/Y47nBi4Ng==}
 
   '@equinor/fusion-wc-skeleton@2.1.2':
     resolution: {integrity: sha512-LqrfUAg6BEqBi59kNs08UG+K7ESCvYJ6NMDIXI8EBTy1x2nt12D2JRXAE5zIeYU4+I084/zwKwt62Gx3yFtSkA==}
@@ -5099,6 +5177,9 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
+  '@types/uuid@10.0.0':
+    resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
+
   '@types/webxr@0.5.22':
     resolution: {integrity: sha512-Vr6Stjv5jPRqH690f5I5GLjVk8GSsoQSYJ2FVd/3jJF7KaqfwPi3ehfBS96mlQ2kPCwZaX6U0rG2+NGHBKkA/A==}
 
@@ -7095,6 +7176,9 @@ packages:
   lit@2.8.0:
     resolution: {integrity: sha512-4Sc3OFX9QHOJaHbmTMk28SYgVxLN3ePDjg7hofEft2zWlehFL3LiAuapWc4U/kYwMYJSh2hTCPZ6/LIC7ii0MA==}
 
+  lit@3.1.4:
+    resolution: {integrity: sha512-q6qKnKXHy2g1kjBaNfcoLlgbI3+aSOZ9Q4tiGa9bGYXq5RBXxkVTqTIVmP2VWMp29L4GyvCFm8ZQ2o56eUAMyA==}
+
   lit@3.2.0:
     resolution: {integrity: sha512-s6tI33Lf6VpDu7u4YqsSX78D28bYQulM+VAzsGch4fx2H0eLZnJsUBsPWmGYSGoKDNbjtRv02rio1o+UdPVwvw==}
 
@@ -7598,6 +7682,9 @@ packages:
   object.values@1.2.1:
     resolution: {integrity: sha512-gXah6aZrcUxjWg2zR2MwouP2eHlCBzdV4pygudehaKXSGW4v2AsRQUK+lwwXhii6KFZcunEnmSUoYp5CXibxtA==}
     engines: {node: '>= 0.4'}
+
+  odata-query@7.0.9:
+    resolution: {integrity: sha512-su42BqFqwFP+3tH9+3WMtjoUbU/CJrWpGFAyvffBQxzLSraBperwbfnf9uLroKfW5Xx8f1xnBcqfVe+DQ8dGIA==}
 
   odata-query@8.0.3:
     resolution: {integrity: sha512-RlwUZL2H0SACENjT8y90tJL9IBOC8Boh4B4Pk7JGeN812TL5vQgBEjcq/LsGYRKwbqWCsyHLtb2gJYKmlK62Dw==}
@@ -9064,6 +9151,10 @@ packages:
   utrie@1.0.2:
     resolution: {integrity: sha512-1MLa5ouZiOmQzUbjbu9VmjLzn1QLXBhwpUa7kdLUQK+KQ5KA9I1vk5U4YHe/X2Ch7PYnJfWuWT+VbuxbGwljhw==}
 
+  uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+
   uuid@11.1.0:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
@@ -9454,6 +9545,99 @@ packages:
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+
+catalogs:
+  default:
+    '@equinor/eds-core-react':
+      specifier: ^0.47.0
+      version: 0.47.0
+    '@equinor/eds-icons':
+      specifier: ^0.22.0
+      version: 0.22.0
+    '@equinor/eds-tokens':
+      specifier: ^0.9.2
+      version: 0.9.2
+    '@equinor/fusion-framework-react-ag-grid':
+      specifier: 33.2.8
+      version: 33.2.8
+    '@microsoft/applicationinsights-core-js':
+      specifier: ^3.3.9
+      version: 3.3.9
+    '@microsoft/applicationinsights-web':
+      specifier: 3.3.9
+      version: 3.3.9
+    '@tanstack/react-query':
+      specifier: ^5.84.1
+      version: 5.84.1
+    '@tanstack/react-query-devtools':
+      specifier: ^5.84.1
+      version: 5.90.2
+    '@tanstack/react-virtual':
+      specifier: ^3.13.12
+      version: 3.13.12
+    '@types/jest':
+      specifier: 30.0.0
+      version: 30.0.0
+    '@types/luxon':
+      specifier: ^3.7.1
+      version: 3.7.1
+    '@types/react':
+      specifier: ^19.1.9
+      version: 19.1.9
+    '@types/react-dom':
+      specifier: ^19.1.7
+      version: 19.1.7
+    '@types/sortablejs':
+      specifier: ^1.15.8
+      version: 1.15.8
+    '@types/styled-components':
+      specifier: ^5.1.34
+      version: 5.1.36
+    '@vitejs/plugin-react':
+      specifier: ^4.7.0
+      version: 4.7.0
+    luxon:
+      specifier: ^3.7.1
+      version: 3.7.1
+    markdown-to-jsx:
+      specifier: ^7.7.12
+      version: 7.7.12
+    powerbi-client:
+      specifier: ^2.23.1
+      version: 2.23.1
+    powerbi-client-react:
+      specifier: ^2.0.0
+      version: 2.0.0
+    re-resizable:
+      specifier: ^6.11.2
+      version: 6.11.2
+    react-error-boundary:
+      specifier: ^6.0.0
+      version: 6.0.0
+    react-sortablejs:
+      specifier: ^6.1.4
+      version: 6.1.4
+    react-virtual:
+      specifier: ^2.10.4
+      version: 2.10.4
+    sortablejs:
+      specifier: ^1.15.6
+      version: 1.15.6
+    tsup:
+      specifier: ^8.5.0
+      version: 8.5.1
+    typescript:
+      specifier: ^5.8.3
+      version: 5.9.2
+    vite:
+      specifier: ^7.0.6
+      version: 7.0.6
+    vitest:
+      specifier: ^3.2.4
+      version: 3.2.4
+    zustand:
+      specifier: ^5.0.6
+      version: 5.0.8
 
 snapshots:
 
@@ -10544,7 +10728,7 @@ snapshots:
       '@emotion/memoize': 0.9.0
       '@emotion/unitless': 0.10.0
       '@emotion/utils': 1.4.2
-      csstype: 3.1.3
+      csstype: 3.2.3
 
   '@emotion/sheet@1.4.0': {}
 
@@ -10826,8 +11010,8 @@ snapshots:
       - react
       - react-dom
 
-  '@equinor/fusion-framework-react-app@6.2.4(zspnamuzlbq3lj7trk43rf6gbu)':
-    dependencies:
+  ? '@equinor/fusion-framework-react-app@6.2.4(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-module-msal@4.0.7)(@equinor/fusion-framework-react-module-bookmark@4.0.11(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@equinor/fusion-framework-react-module@3.1.12(@types/react@19.1.9)(@types/semver@7.7.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@equinor/fusion-framework-react@7.4.15(@equinor/fusion-framework-module-event@4.3.6(@types/semver@7.7.0))(@equinor/fusion-framework-module-http@6.3.3(@types/semver@7.7.0))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-framework-react-module-context@6.2.31(@equinor/fusion-framework-module@4.4.2(@types/semver@7.7.0))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2))(@equinor/fusion-observable@8.5.1(@types/react@19.1.9)(react@19.1.1))(@remix-run/router@1.23.0)(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rxjs@7.8.2)'
+  : dependencies:
       '@equinor/fusion-framework-app': 9.3.20(@equinor/fusion-framework-module-bookmark@2.1.15(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(react@19.1.1))(@types/react@19.1.9)(@types/semver@7.7.0)(chalk@5.5.0)(odata-query@8.0.3)(react@19.1.1)
       '@equinor/fusion-framework-module': 4.4.2(@types/semver@7.7.0)
       '@equinor/fusion-framework-module-app': 6.1.16(@types/react@19.1.9)(chalk@5.5.0)(react@19.1.1)
@@ -10976,6 +11160,13 @@ snapshots:
     transitivePeerDependencies:
       - react
 
+  '@equinor/fusion-react-person@0.8.8(react@19.1.1)':
+    dependencies:
+      '@equinor/fusion-react-utils': 2.2.3(react@19.1.1)
+      '@equinor/fusion-wc-person': 2.6.9
+    transitivePeerDependencies:
+      - react
+
   '@equinor/fusion-react-utils@2.2.3(react@19.1.1)':
     dependencies:
       date-fns: 4.1.0
@@ -11038,6 +11229,23 @@ snapshots:
       '@material/mwc-list': 0.27.0
       lit: 3.3.0
 
+  '@equinor/fusion-wc-person@2.6.9':
+    dependencies:
+      '@equinor/fusion-wc-avatar': 3.2.3
+      '@equinor/fusion-wc-badge': 1.3.2
+      '@equinor/fusion-wc-button': 2.4.2
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-wc-list': 1.1.4
+      '@equinor/fusion-wc-searchable-dropdown': 3.7.4
+      '@equinor/fusion-wc-skeleton': 2.1.2
+      '@equinor/fusion-wc-textinput': 1.1.4
+      '@equinor/fusion-web-theme': 0.1.10
+      '@floating-ui/dom': 1.7.3
+      '@lit-labs/observers': 2.0.6
+      '@lit-labs/task': 3.1.0
+      lit: 3.1.4
+
   '@equinor/fusion-wc-person@3.1.9':
     dependencies:
       '@equinor/fusion-wc-avatar': 3.2.3
@@ -11071,6 +11279,20 @@ snapshots:
       '@equinor/fusion-wc-core': 2.0.0
       '@material/mwc-ripple': 0.27.0
       lit: 3.2.0
+
+  '@equinor/fusion-wc-searchable-dropdown@3.7.4':
+    dependencies:
+      '@equinor/fusion-wc-core': 2.0.0
+      '@equinor/fusion-wc-divider': 1.1.2
+      '@equinor/fusion-wc-icon': 2.3.1
+      '@equinor/fusion-wc-list': 1.1.4
+      '@equinor/fusion-wc-textinput': 1.1.4
+      '@equinor/fusion-web-theme': 0.1.10
+      '@lit-labs/task': 3.1.0
+      '@material/mwc-textfield': 0.27.0
+      '@types/uuid': 10.0.0
+      lit: 3.2.0
+      uuid: 10.0.0
 
   '@equinor/fusion-wc-skeleton@2.1.2':
     dependencies:
@@ -14947,6 +15169,8 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
+  '@types/uuid@10.0.0': {}
+
   '@types/webxr@0.5.22': {}
 
   '@types/yargs-parser@21.0.3': {}
@@ -17427,6 +17651,12 @@ snapshots:
       lit-element: 3.3.3
       lit-html: 2.8.0
 
+  lit@3.1.4:
+    dependencies:
+      '@lit/reactive-element': 2.1.1
+      lit-element: 4.2.1
+      lit-html: 3.3.1
+
   lit@3.2.0:
     dependencies:
       '@lit/reactive-element': 2.1.1
@@ -18174,6 +18404,10 @@ snapshots:
       call-bound: 1.0.4
       define-properties: 1.2.1
       es-object-atoms: 1.1.1
+
+  odata-query@7.0.9:
+    dependencies:
+      tslib: 2.8.1
 
   odata-query@8.0.3:
     dependencies:
@@ -19993,6 +20227,8 @@ snapshots:
   utrie@1.0.2:
     dependencies:
       base64-arraybuffer: 1.0.2
+
+  uuid@10.0.0: {}
 
   uuid@11.1.0: {}
 

@@ -1,0 +1,18 @@
+{
+  "name": "commissioning-task",
+  "displayName": "Commissioning task",
+  "shortName": "commissioning-task",
+  "version": "0.0.1",
+  "main": "./src/main.tsx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "fusion-framework-cli app dev",
+    "build": "tsc -b -f",
+    "deploy": "tsx ../../github-action/src/deploy/deployReport.ts deploy",
+    "fprd:deploy": "tsx ../../github-action/src/deploy/deployReport.ts deploy"
+  },
+  "dependencies": {
+    "@cc-components/reportshared": "workspace:^"
+  }
+}

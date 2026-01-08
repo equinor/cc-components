@@ -1,0 +1,12 @@
+import { Report, configure, RootAppWrapper, createRender } from '@cc-components/reportshared';
+
+const ReportWrapper = () => {
+  return (
+    <RootAppWrapper>
+      <Report reportId={'pp-progress-status'} config={{ table: "", column: "" }} />
+    </RootAppWrapper>
+  );
+};
+
+export const render = createRender(ReportWrapper, configure(['Facility','ProjectMaster']));
+export default render;

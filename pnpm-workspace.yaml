@@ -2,6 +2,7 @@ packages:
   - 'libs/**'
   - 'libs/workspace/*'
   - 'apps/*'
+  - 'reports/*'
   - 'portal/*'
   - 'fusion-portal/**'
   - 'cli'
