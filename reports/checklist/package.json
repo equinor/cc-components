@@ -10,8 +10,7 @@
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b -f",
     "pr:deploy": "tsx ../../github-action/src/releasePr.ts release",
-    "deploy": "tsx ../../github-action/src/deploy/deployReport.ts deploy",
-    "fprd:deploy": "tsx ../../github-action/src/deploy/deployReport.ts deploy"
+    "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
     "@cc-components/reportshared": "workspace:^"

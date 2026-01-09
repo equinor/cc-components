@@ -9,8 +9,8 @@
   "scripts": {
     "dev": "fusion-framework-cli app dev",
     "build": "tsc -b -f",
-    "deploy": "tsx ../../github-action/src/deploy/deployReport.ts deploy",
-    "fprd:deploy": "tsx ../../github-action/src/deploy/deployReport.ts deploy"
+    "pr:deploy": "tsx ../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
     "@cc-components/reportshared": "workspace:^"
