@@ -9,14 +9,14 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./modules": {
-      "require": "./dist/modules/index.cjs",
+      "types": "./dist/modules/index.d.ts",
       "import": "./dist/modules/index.js",
-      "types": "./dist/modules/index.d.ts"
+      "require": "./dist/modules/index.cjs"
     }
   },
   "dependencies": {

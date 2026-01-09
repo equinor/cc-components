@@ -9,54 +9,54 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./garden": {
-      "require": "./dist/lib/integrations/garden/index.cjs",
+      "types": "./dist/lib/integrations/garden/index.d.ts",
       "import": "./dist/lib/integrations/garden/index.js",
-      "types": "./dist/lib/integrations/garden/index.d.ts"
+      "require": "./dist/lib/integrations/garden/index.cjs"
     },
     "./filter": {
-      "require": "./dist/lib/integrations/filter/index.cjs",
+      "types": "./dist/lib/integrations/filter/index.d.ts",
       "import": "./dist/lib/integrations/filter/index.js",
-      "types": "./dist/lib/integrations/filter/index.d.ts"
+      "require": "./dist/lib/integrations/filter/index.cjs"
     },
     "./status-bar": {
-      "require": "./dist/lib/integrations/status-bar/index.cjs",
+      "types": "./dist/lib/integrations/status-bar/index.d.ts",
       "import": "./dist/lib/integrations/status-bar/index.js",
-      "types": "./dist/lib/integrations/status-bar/index.d.ts"
+      "require": "./dist/lib/integrations/status-bar/index.cjs"
     },
     "./power-bi": {
-      "require": "./dist/lib/integrations/power-bi/index.cjs",
+      "types": "./dist/lib/integrations/power-bi/index.d.ts",
       "import": "./dist/lib/integrations/power-bi/index.js",
-      "types": "./dist/lib/integrations/power-bi/index.d.ts"
+      "require": "./dist/lib/integrations/power-bi/index.cjs"
     },
     "./grid": {
-      "require": "./dist/lib/integrations/grid/index.cjs",
+      "types": "./dist/lib/integrations/grid/index.d.ts",
       "import": "./dist/lib/integrations/grid/index.js",
-      "types": "./dist/lib/integrations/grid/index.d.ts"
+      "require": "./dist/lib/integrations/grid/index.cjs"
     },
     "./sidesheet": {
-      "require": "./dist/lib/integrations/sidesheet/index.cjs",
+      "types": "./dist/lib/integrations/sidesheet/index.d.ts",
       "import": "./dist/lib/integrations/sidesheet/index.js",
-      "types": "./dist/lib/integrations/sidesheet/index.d.ts"
+      "require": "./dist/lib/integrations/sidesheet/index.cjs"
     },
     "./power-bi-module": {
-      "require": "./dist/modules/power-bi/index.cjs",
+      "types": "./dist/modules/power-bi/index.d.ts",
       "import": "./dist/modules/power-bi/index.js",
-      "types": "./dist/modules/power-bi/index.d.ts"
+      "require": "./dist/modules/power-bi/index.cjs"
     },
     "./grid-module": {
-      "require": "./dist/modules/grid/index.cjs",
+      "types": "./dist/modules/grid/index.d.ts",
       "import": "./dist/modules/grid/index.js",
-      "types": "./dist/modules/grid/index.d.ts"
+      "require": "./dist/modules/grid/index.cjs"
     },
     "./garden-module": {
-      "require": "./dist/modules/garden/index.cjs",
+      "types": "./dist/modules/garden/index.d.ts",
       "import": "./dist/modules/garden/index.js",
-      "types": "./dist/modules/garden/index.d.ts"
+      "require": "./dist/modules/garden/index.cjs"
     }
   },
   "dependencies": {
