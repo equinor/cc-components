@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "../../dist/workspace"
+  },
+  "references": [
+    { "path": "./core" },
+    { "path": "./react" },
+    { "path": "./ag-grid" },
+    { "path": "./garden" },
+    { "path": "./power-bi" },
+    { "path": "./filter" },
+    { "path": "./fusion" }
+  ]
+}

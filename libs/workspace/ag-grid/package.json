@@ -1,0 +1,39 @@
+{
+  "name": "@equinor/workspace-ag-grid",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./modules": {
+      "types": "./dist/modules/index.d.ts",
+      "import": "./dist/modules/index.js",
+      "require": "./dist/modules/index.cjs"
+    }
+  },
+  "dependencies": {
+    "@equinor/eds-tokens": "catalog:",
+    "@equinor/fusion-framework-react-ag-grid": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
+  },
+  "devDependencies": {
+    "@types/jest": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@types/styled-components": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  }
+}

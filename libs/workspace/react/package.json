@@ -1,0 +1,36 @@
+{
+  "name": "@equinor/workspace-react",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "dependencies": {
+    "@equinor/eds-core-react": "catalog:",
+    "@equinor/eds-icons": "catalog:",
+    "@equinor/eds-tokens": "catalog:",
+    "@microsoft/applicationinsights-web": "catalog:",
+    "zustand": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
+  },
+  "devDependencies": {
+    "@types/jest": "catalog:",
+    "@types/react": "catalog:",
+    "@types/styled-components": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,1 @@
+export { InfoPopoverIcon } from './InfoPopoverIcon';
