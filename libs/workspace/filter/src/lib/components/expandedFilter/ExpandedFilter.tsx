@@ -43,6 +43,8 @@ const DEFAULT_COLUMN_WIDTH = 250;
 const MIN_COLUMN_WIDTH = 150;
 const MAX_COLUMN_WIDTH = 1000;
 
+const columnWidthCache = new Map<string, number>();
+
 const FilterColumn: React.FC<FilterColumnProps> = ({
   group,
   handleFilterItemClick,
@@ -54,7 +56,9 @@ const FilterColumn: React.FC<FilterColumnProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [columnWidth, setColumnWidth] = useState(DEFAULT_COLUMN_WIDTH);
+  const [columnWidth, setColumnWidth] = useState(
+    () => columnWidthCache.get(group.name) ?? DEFAULT_COLUMN_WIDTH
+  );
   const resizeHandlersRef = useRef<{
     move: (e: MouseEvent) => void;
     up: () => void;
@@ -143,6 +147,7 @@ const FilterColumn: React.FC<FilterColumnProps> = ({
         MAX_COLUMN_WIDTH
       );
       setColumnWidth(clampedWidth);
+      columnWidthCache.set(group.name, clampedWidth);
     };
 
     const handleMouseUp = () => {
