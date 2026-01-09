@@ -15,7 +15,6 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
     width: itemWidth = 300,
     displayName,
   } = props;
-  console.log('Url:', props.data.swcrUrl);
 
   const statusColor = getSwcrStatusColor(data.status);
   const textColor = ['Closed - Rejected', 'Closed'].includes(data.status)
