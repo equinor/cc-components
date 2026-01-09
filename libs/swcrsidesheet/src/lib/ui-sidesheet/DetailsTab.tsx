@@ -1,7 +1,8 @@
 import { StyledTabContent } from '@cc-components/shared/sidesheet';
+import { MarkdownViewer } from '@cc-components/shared/markdown-viewer';
 import { SwcrPackage } from '@cc-components/swcrshared';
 import { SwcrSignature } from '../types';
-import { PreBlock, StyledTextBlock, StyledTextBlockEmpty } from './sidesheet.styles';
+import { StyledTextBlock, StyledTextBlockEmpty } from './sidesheet.styles';
 import styled from 'styled-components';
 
 type DetailsTabProps = {
@@ -14,7 +15,7 @@ export const DetailsTab = ({ item }: DetailsTabProps) => {
         <StyledTextBlock>
           <h5>Description</h5>
           {item?.description ? (
-            <PreBlock>{item.description}</PreBlock>
+            <MarkdownViewer>{item.description}</MarkdownViewer>
           ) : (
             <StyledTextBlockEmpty>No description</StyledTextBlockEmpty>
           )}
@@ -22,7 +23,7 @@ export const DetailsTab = ({ item }: DetailsTabProps) => {
         <StyledTextBlock>
           <h5>Modifications</h5>
           {item?.modificationDescription ? (
-            <PreBlock>{item.modificationDescription}</PreBlock>
+            <MarkdownViewer>{item.modificationDescription}</MarkdownViewer>
           ) : (
             <StyledTextBlockEmpty>No modifications</StyledTextBlockEmpty>
           )}

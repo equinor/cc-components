@@ -19,7 +19,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
     null
   );
 
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const anchorRef = useRef<HTMLAnchorElement | null>(null);
   const {
     data,
     onClick,
@@ -42,10 +42,20 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commissioningStatus, colorAssistMode);
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
+          href={data.checklistUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           ref={anchorRef}
           onMouseEnter={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
@@ -56,7 +66,7 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
             setIsOpen(false);
           }}
           backgroundColor={colors.backgroundColor}
-          onClick={onClick}
+          onClick={handleClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
           textColor={itemContentColors.Light}

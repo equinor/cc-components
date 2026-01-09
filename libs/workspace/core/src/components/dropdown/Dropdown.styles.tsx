@@ -24,17 +24,21 @@ export const DropdownContainer = styled.div<{ selected: boolean }>`
     background-color: ${tokens.colors.interactive.primary__hover_alt.hex};
   }
   * {
-    ${({ selected }) => selected && `color: ${tokens.colors.interactive.primary__resting.hex} !important;`}
+    ${({ selected }) =>
+      selected && `color: ${tokens.colors.interactive.primary__resting.hex} !important;`}
     text-transform: capitalize;
   }
 `;
 
-export const VirtualListContainer = styled.div`
+export const VirtualListContainer = styled.div<{ width?: number; height?: number }>`
   max-height: 400px;
   max-width: 100%;
   min-width: 200px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: 100px;
+  overflow: auto;
+  resize: both;
+  ${({ width }) => width && `width: ${width}px;`}
+  ${({ height }) => height && `height: ${height}px;`}
 `;
 
 export const VirtualListItemContainer = styled.div<{ height: number }>`
@@ -43,11 +47,13 @@ export const VirtualListItemContainer = styled.div<{ height: number }>`
   position: relative;
 `;
 
-export const DropdownListItem = styled.div.attrs<{ height: number; start: number }>((props) => ({
-  style: {
-    transform: `translateY(${props.start}px)`,
-  },
-}))`
+export const DropdownListItem = styled.div.attrs<{ height: number; start: number }>(
+  (props) => ({
+    style: {
+      transform: `translateY(${props.start}px)`,
+    },
+  })
+)`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -72,7 +78,9 @@ export const DropdownListItem = styled.div.attrs<{ height: number; start: number
 `;
 
 export const DropdownMenu: React.FC<MenuProps> = styled(
-  forwardRef<HTMLDivElement | null, MenuProps>((props, ref) => <Menu {...props} ref={ref} />)
+  forwardRef<HTMLDivElement | null, MenuProps>((props, ref) => (
+    <Menu {...props} ref={ref} />
+  ))
 )(({ theme }) => ({
   '& [class^=MenuList__List]': {
     padding: 0,

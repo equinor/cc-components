@@ -5,10 +5,10 @@ import { ReactElement } from 'react';
 
 // Doing it like this because of jest failing...
 const StyledMarkdown = styled((props: any) => <Markdown {...props} />)`
-  font-size: 16px !important;
+  font-size: 13px !important;
   word-break: break-word;
   p {
-    font-size: 16px !important;
+    font-size: 13px !important;
   }
 
   ul {

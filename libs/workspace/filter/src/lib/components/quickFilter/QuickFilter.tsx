@@ -33,17 +33,30 @@ export function QuickFilter({
               (item) => !includeItemCount || item.count === undefined || item.count > 0
             )}
             key={group.name}
+            cacheKey={`quickfilter-${group.name}`}
             valueSelected={(value) => {
               filterChanged(group, value);
             }}
             clearAll={() => clearFilterGroup(group.name)}
             valueGetter={(value) => value.value}
             tooltipGetter={(item) =>
-              item.descriptions && item.descriptions.length > 0 ? item.descriptions?.join(' // ') : item.value
+              item.descriptions && item.descriptions.length > 0
+                ? item.descriptions?.join(' // ')
+                : item.value
             }
             customRenderer={(v) => (
-              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', overflow: 'hidden' }}>
-                <Typography variant="caption" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  overflow: 'hidden',
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                >
                   {v.value}
                 </Typography>
                 {v.count && <Typography variant="caption">{`(${v.count})`}</Typography>}

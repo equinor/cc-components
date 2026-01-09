@@ -15,7 +15,8 @@ export type ItemProps = {
   textColor: string;
 };
 
-export const StyledItemWrapper = styled.div<ItemProps>`
+export const StyledItemWrapper = styled.a<ItemProps>`
+  text-decoration: none;
   display: grid;
   grid-template-columns: 3fr auto;
   align-items: center;

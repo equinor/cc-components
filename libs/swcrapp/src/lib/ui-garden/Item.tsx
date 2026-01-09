@@ -15,6 +15,7 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
     width: itemWidth = 300,
     displayName,
   } = props;
+  console.log('Url:', props.data.swcrUrl);
 
   const statusColor = getSwcrStatusColor(data.status);
   const textColor = ['Closed - Rejected', 'Closed'].includes(data.status)
@@ -23,13 +24,23 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   const width = useMemo(() => (depth ? 100 - depth * 3 : 100), [depth]);
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <StyledRoot>
       <StyledItemWrapper
+        href={data.swcrUrl || undefined}
+        target="_blank"
+        rel="noopener noreferrer"
         style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
         $backgroundColor={statusColor}
         $textColor={textColor}
-        onClick={onClick}
+        onClick={handleClick}
         $isSelected={isSelected}
       >
         {displayName}

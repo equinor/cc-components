@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 type PunchItemProps = { backgroundColor: string; textColor: string; isSelected: boolean };
 
-export const StyledPunchItem = styled.div<PunchItemProps>`
+export const StyledPunchItem = styled.a<PunchItemProps>`
+  text-decoration: none;
   display: grid;
   grid-template-columns: 15px 3fr auto;
   align-items: center;
