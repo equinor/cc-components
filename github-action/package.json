@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.1",
-    "adm-zip": "^0.5.16",
-    "commander": "14.0.0",
-    "markdown-table": "3.0.4"
+    "@actions/core": "catalog:",
+    "@actions/github": "catalog:",
+    "adm-zip": "catalog:",
+    "commander": "catalog:",
+    "markdown-table": "catalog:"
   }
 }

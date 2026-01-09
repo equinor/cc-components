@@ -1,0 +1,22 @@
+{
+  "name": "@cc-components/reportshared",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "module": "./dist/src/index.js",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -b -f"
+  },
+  "dependencies": {
+    "@equinor/eds-core-react": "catalog:",
+    "@equinor/eds-tokens": "catalog:",
+    "@equinor/fusion-react-person": "catalog:",
+    "@equinor/workspace-fusion": "workspace:*",
+    "@tanstack/react-query": "catalog:",
+    "markdown-to-jsx": "catalog:",
+    "odata-query": "catalog:",
+    "styled-components": "catalog:"
+  }
+}

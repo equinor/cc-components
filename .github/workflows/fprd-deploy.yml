@@ -45,3 +45,9 @@ jobs:
           NODE_OPTIONS: "--max_old_space_size=12288"
           GITHUB_STEP_SUMMARY: $GITHUB_STEP_SUMMARY
         run: npx turbo run fprd:deploy --filter=...[HEAD^] --concurrency 4 -- --token ${{ steps.get-fusion-token.outputs.token }} --ai '${{secrets.ai}}' --modelViewerConfig '${{vars.modelViewerConfig}}' --sha '${{github.sha}}'
+
+      - name: 'Deploy affected reports to Fusion PROD'
+        shell: bash
+        env:
+          NODE_OPTIONS: "--max_old_space_size=12288"
+        run: npx turbo run fprd:deploy --filter='./reports/**[HEAD^]' --concurrency 4 -- --token ${{ steps.get-fusion-token.outputs.token }} --env fprd

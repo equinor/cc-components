@@ -5,7 +5,7 @@ on:
     inputs:
       appKey:
         type: choice
-        description: Which app to deploy to production
+        description: Which app or report to deploy to production
         options:
           - handover
           - mechanical-completion
@@ -17,6 +17,30 @@ on:
           - punch
           - scopechangerequest
           - workorder
+          - activities
+          - ads-commercial-meeting
+          - ads-engineering-meeting
+          - ads-monthly-meeting
+          - ads-offshore-installation
+          - ads-schedule-viewer
+          - ads-weekly-meeting
+          - atex-inspection
+          - cc-overview-analytics3
+          - ccoverview
+          - checklist
+          - commissioning-task
+          - completion-analytics
+          - jca-installation
+          - jca-job-analytics
+          - jca-progress-summary
+          - jca-spools
+          - jca-work-preparation
+          - preservation-workspace
+          - projectsafetybarriers
+          - query-workspace
+          - schedule-viewer
+          - tags
+          - workorder-area-overview
           - '*'
 permissions:
   actions: read

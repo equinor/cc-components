@@ -1,0 +1,18 @@
+{
+  "name": "ads-monthly-meeting",
+  "displayName": "Monthly Meeting",
+  "shortName": "ads-monthly-meeting",
+  "version": "0.0.1",
+  "main": "./src/main.tsx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "fusion-framework-cli app dev",
+    "build": "tsc -b -f",
+    "pr:deploy": "tsx ../../github-action/src/releasePr.ts release",
+    "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
+  },
+  "dependencies": {
+    "@cc-components/reportshared": "workspace:^"
+  }
+}
