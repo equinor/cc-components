@@ -1,6 +1,6 @@
 import { Button, Checkbox, Tooltip } from '@equinor/eds-core-react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   ActionsContainer,
@@ -11,6 +11,9 @@ import {
   VirtualListContainer,
   VirtualListItemContainer,
 } from './Dropdown.styles';
+
+type Dimensions = { width: number; height: number };
+const dimensionsCache = new Map<string, Dimensions>();
 
 export type DropdownListItem<T> = T & {
   selected?: boolean;
@@ -27,6 +30,7 @@ export type DropdownPopoverProps<T> = {
   clickedOutside: () => void;
   buttonElement: React.RefObject<HTMLDivElement | null>;
   customRenderer?: (value: T) => React.ReactNode;
+  cacheKey?: string;
 };
 
 export const DropdownPopover = <T,>({
@@ -40,16 +44,28 @@ export const DropdownPopover = <T,>({
   clickedOutside,
   buttonElement,
   customRenderer,
+  cacheKey,
 }: DropdownPopoverProps<T>) => {
   const [searchText, setSearchText] = useState<string>('');
-  const [filteredItems, setFilteredItems] = useState<DropdownListItem<T>[]>(listItems);
-  const ref = useRef<HTMLDivElement | null>(null);
+  const [dimensions, setDimensions] = useState<Dimensions | undefined>(
+    cacheKey ? dimensionsCache.get(cacheKey) : undefined
+  );
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const menuElRef = useRef<HTMLDivElement | null>(null);
   const searchbarRef = useRef<HTMLInputElement>(null);
 
+  const filteredItems = useMemo(
+    () =>
+      listItems.filter((item) =>
+        valueGetter(item).toLowerCase().includes(searchText.toLowerCase())
+      ),
+    [listItems, searchText, valueGetter]
+  );
+
   const rowVirtualizer = useVirtualizer({
     count: filteredItems.length,
-    getScrollElement: () => ref.current,
+    getScrollElement: () => containerRef.current,
     estimateSize: () => 30,
   });
 
@@ -57,12 +73,33 @@ export const DropdownPopover = <T,>({
     setSearchText(event.currentTarget.value);
   }
 
+  const setContainerRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
+
+      containerRef.current = element;
+
+      if (element && cacheKey) {
+        resizeObserverRef.current = new ResizeObserver(() => {
+          const { width, height } = element.getBoundingClientRect();
+          const newDimensions = { width, height };
+          dimensionsCache.set(cacheKey, newDimensions);
+          setDimensions(newDimensions);
+        });
+        resizeObserverRef.current.observe(element);
+      }
+    },
+    [cacheKey]
+  );
+
   useEffect(() => {
-    const filtered = listItems.filter((item) => {
-      return valueGetter(item).toLowerCase().includes(searchText.toLowerCase());
-    });
-    setFilteredItems(filtered);
-  }, [searchText, listItems]);
+    return () => {
+      resizeObserverRef.current?.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -84,12 +121,22 @@ export const DropdownPopover = <T,>({
           />,
           document.body
         )}
-      <DropdownMenu open={open} anchorEl={anchorEl} placement="bottom-end">
+      <DropdownMenu open={open} anchorEl={anchorEl} placement="bottom-start">
         <div ref={menuElRef}>
           <SearchbarContainer>
-            <input value={searchText} placeholder="Search" onInput={handleInput} autoFocus={open} ref={searchbarRef} />
+            <input
+              value={searchText}
+              placeholder="Search"
+              onInput={handleInput}
+              autoFocus={open}
+              ref={searchbarRef}
+            />
           </SearchbarContainer>
-          <VirtualListContainer ref={ref}>
+          <VirtualListContainer
+            ref={setContainerRef}
+            width={dimensions?.width}
+            height={dimensions?.height}
+          >
             <VirtualListItemContainer height={rowVirtualizer.getTotalSize()}>
               {rowVirtualizer.getVirtualItems()?.map(({ index, key, size, start }) => {
                 const item = filteredItems[index];
@@ -98,7 +145,11 @@ export const DropdownPopover = <T,>({
                 }
                 const value = valueGetter(item);
                 return (
-                  <Tooltip title={tooltipGetter ? tooltipGetter(item) : value} key={key} enterDelay={500}>
+                  <Tooltip
+                    title={tooltipGetter ? tooltipGetter(item) : value}
+                    key={key}
+                    enterDelay={500}
+                  >
                     <DropdownListItem
                       key={key}
                       onClick={(e) => {
@@ -109,7 +160,11 @@ export const DropdownPopover = <T,>({
                       start={start}
                     >
                       <Checkbox checked={item.selected} readOnly />
-                      {customRenderer ? customRenderer(item) : <ListItemText>{value}</ListItemText>}
+                      {customRenderer ? (
+                        customRenderer(item)
+                      ) : (
+                        <ListItemText>{value}</ListItemText>
+                      )}
                     </DropdownListItem>
                   </Tooltip>
                 );
