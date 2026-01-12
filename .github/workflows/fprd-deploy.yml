@@ -50,4 +50,4 @@ jobs:
         shell: bash
         env:
           NODE_OPTIONS: "--max_old_space_size=12288"
-        run: npx turbo run fprd:deploy --filter='./reports/**[HEAD^]' --concurrency 4 -- --token ${{ steps.get-fusion-token.outputs.token }} --env fprd
+        run: npx turbo run fprd:deploy --filter='./reports/**...[HEAD^]' --concurrency 4 -- --token ${{ steps.get-fusion-token.outputs.token }} --env fprd
