@@ -1485,12 +1485,6 @@ importers:
         specifier: workspace:^
         version: link:../../libs/reportshared
 
-  reports/schedule-viewer:
-    dependencies:
-      '@cc-components/reportshared':
-        specifier: workspace:^
-        version: link:../../libs/reportshared
-
   reports/tags:
     dependencies:
       '@cc-components/reportshared':

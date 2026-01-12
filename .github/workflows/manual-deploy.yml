@@ -38,7 +38,6 @@ on:
           - preservation-workspace
           - projectsafetybarriers
           - query-workspace
-          - schedule-viewer
           - tags
           - workorder-area-overview
           - '*'
