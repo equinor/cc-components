@@ -14,17 +14,17 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@cognite/reveal": "4.25.3",
-    "@cognite/sdk": "10.0.0",
-    "@equinor/echo-3d-viewer": "^0.0.4",
-    "rxjs": "^7.8.2",
-    "three": "0.178.0",
-    "throttle-typescript": "^1.1.0"
+    "@cognite/reveal": "catalog:",
+    "@cognite/sdk": "catalog:",
+    "@equinor/echo-3d-viewer": "catalog:",
+    "rxjs": "catalog:",
+    "three": "catalog:",
+    "throttle-typescript": "catalog:"
   },
   "devDependencies": {
-    "@types/three": "~0.179.0"
+    "@types/three": "catalog:"
   },
   "peerDependencies": {
-    "styled-components": "^6.1.19"
+    "styled-components": "catalog:"
   }
 }
