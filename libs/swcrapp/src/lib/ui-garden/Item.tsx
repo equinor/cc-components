@@ -8,9 +8,7 @@ import { PopoverContent } from './Popover';
 
 export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<ReturnType<typeof setTimeout> | null>(
-    null
-  );
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const anchorRef = useRef<HTMLAnchorElement | null>(null);
 
   const {
@@ -46,12 +44,12 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
           target="_blank"
           rel="noopener noreferrer"
           ref={anchorRef}
-          onMouseOver={() => {
-            hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
-            setHoverTimeout(setTimeout(() => setIsOpen(true), 700));
+          onMouseEnter={() => {
+            hoverTimeout.current && clearTimeout(hoverTimeout.current);
+            hoverTimeout.current = setTimeout(() => setIsOpen(true), 700);
           }}
-          onMouseOut={() => {
-            hoverTimeout && clearTimeout(hoverTimeout);
+          onMouseLeave={() => {
+            hoverTimeout.current && clearTimeout(hoverTimeout.current);
             setIsOpen(false);
           }}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
