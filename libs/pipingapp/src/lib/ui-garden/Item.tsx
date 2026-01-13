@@ -53,9 +53,6 @@ const PipetestGardenItem = (props: CustomItemView<Pipetest>) => {
     <>
       <StyledRoot>
         <StyledItemWrapper
-          href={data.checklistUrl || undefined}
-          target="_blank"
-          rel="noopener noreferrer"
           ref={anchorRef}
           onMouseEnter={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
