@@ -29,7 +29,7 @@ export type DropdownPopoverProps<T> = {
   clearAll?: () => void;
   clickedOutside: () => void;
   buttonElement: React.RefObject<HTMLDivElement | null>;
-  customRenderer?: (value: T) => React.ReactNode;
+  CustomRenderer?: React.ComponentType<T>;
   cacheKey?: string;
 };
 
@@ -43,7 +43,7 @@ export const DropdownPopover = <T,>({
   clearAll,
   clickedOutside,
   buttonElement,
-  customRenderer,
+  CustomRenderer,
   cacheKey,
 }: DropdownPopoverProps<T>) => {
   const [searchText, setSearchText] = useState<string>('');
@@ -160,8 +160,8 @@ export const DropdownPopover = <T,>({
                       start={start}
                     >
                       <Checkbox checked={item.selected} readOnly />
-                      {customRenderer ? (
-                        customRenderer(item)
+                      {CustomRenderer ? (
+                        <CustomRenderer {...item} />
                       ) : (
                         <ListItemText>{value}</ListItemText>
                       )}

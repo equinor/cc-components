@@ -1,7 +1,7 @@
 import { getSwcrStatusColor, SwcrPackage } from '@cc-components/swcrshared';
 import { PopoverWrapper } from '@cc-components/shared/common';
 import { CustomItemView } from '@equinor/workspace-fusion/garden';
-import { memo, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { StyledItemWrapper, StyledRoot } from './garden.styles';
 import { itemContentColors } from '@cc-components/shared/mapping';
 import { PopoverContent } from './Popover';
@@ -10,6 +10,14 @@ export const SwcrItem = (props: CustomItemView<SwcrPackage>) => {
   const [isOpen, setIsOpen] = useState(false);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const anchorRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout.current) {
+        clearTimeout(hoverTimeout.current);
+      }
+    };
+  }, []);
 
   const {
     columnExpanded,
