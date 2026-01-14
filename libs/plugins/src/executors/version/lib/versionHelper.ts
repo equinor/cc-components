@@ -1,4 +1,4 @@
-import { readJsonFile, writeJsonFile } from '@nrwl/devkit';
+import { readJsonFile, writeJsonFile } from '@nx/devkit';
 type Manifest = {
   name: string;
   shortName: string;
