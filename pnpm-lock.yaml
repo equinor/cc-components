@@ -1437,36 +1437,6 @@ importers:
         specifier: workspace:^
         version: link:../../libs/reportshared
 
-  reports/jca-installation:
-    dependencies:
-      '@cc-components/reportshared':
-        specifier: workspace:^
-        version: link:../../libs/reportshared
-
-  reports/jca-job-analytics:
-    dependencies:
-      '@cc-components/reportshared':
-        specifier: workspace:^
-        version: link:../../libs/reportshared
-
-  reports/jca-progress-summary:
-    dependencies:
-      '@cc-components/reportshared':
-        specifier: workspace:^
-        version: link:../../libs/reportshared
-
-  reports/jca-spools:
-    dependencies:
-      '@cc-components/reportshared':
-        specifier: workspace:^
-        version: link:../../libs/reportshared
-
-  reports/jca-work-preparation:
-    dependencies:
-      '@cc-components/reportshared':
-        specifier: workspace:^
-        version: link:../../libs/reportshared
-
   reports/preservation-workspace:
     dependencies:
       '@cc-components/reportshared':

@@ -14,7 +14,8 @@ export type ItemProps = {
   isSelected: boolean;
 };
 
-export const StyledItemWrapper = styled.div<ItemProps>`
+export const StyledItemWrapper = styled.a<ItemProps>`
+  text-decoration: none;
   display: grid;
   grid-template-columns: 15px 3fr auto;
   align-items: center;

@@ -31,7 +31,7 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const anchorRef = useRef<HTMLAnchorElement | null>(null);
 
   const size = getTagSize(data, 10);
   const status = data.commissioningStatus;
@@ -72,6 +72,13 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     setIsOpen(false);
   };
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   const mcStatus = getStatusCircle(data.mechanicalCompletionStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.commpkgStatus, colorAssistMode);
 
@@ -79,9 +86,12 @@ const McGardenItem = (props: CustomItemView<McPackage>) => {
     <>
       <StyledRoot>
         <StyledItemWrapper
+          href={data.mechanicalCompletionPackageUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onClick={onClick}
+          onClick={handleClick}
           backgroundColor={backgroundColor}
           textColor={contentsColor}
           isSelected={isSelected}

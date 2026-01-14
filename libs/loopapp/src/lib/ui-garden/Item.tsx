@@ -23,7 +23,7 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
     null
   );
 
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const anchorRef = useRef<HTMLAnchorElement | null>(null);
   const {
     data,
     onClick,
@@ -44,10 +44,20 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
   const mcStatus = getStatusCircle(data.loopContentStatus, colorAssistMode);
   const comStatus = getStatusCircle(data.status, colorAssistMode);
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
+          href={data.loopUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           ref={anchorRef}
           onMouseOver={() => {
             hoverTimeout && !isOpen && clearTimeout(hoverTimeout);
@@ -59,7 +69,7 @@ const LoopGardenItem = (props: CustomItemView<Loop>) => {
           }}
           backgroundColor={linear}
           textColor={itemContentColors.Light}
-          onClick={onClick}
+          onClick={handleClick}
           style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
           isSelected={isSelected}
         >

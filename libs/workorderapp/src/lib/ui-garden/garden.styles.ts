@@ -18,7 +18,8 @@ export type WorkOrderItemProps = {
   progressBackground: string;
   isSelected: boolean;
 };
-export const StyledItemWrapper = styled.div<WorkOrderItemProps>`
+export const StyledItemWrapper = styled.a<WorkOrderItemProps>`
+  text-decoration: none;
   display: grid;
   grid-template-columns: 15px 3fr auto;
   align-items: center;

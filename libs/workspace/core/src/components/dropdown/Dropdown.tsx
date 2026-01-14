@@ -10,7 +10,8 @@ export type DropdownProps<T> = {
   tooltipGetter?: (value: T) => string;
   valueGetter: (value: T) => string;
   clearAll?: () => void;
-  customRenderer?: (value: T) => React.ReactNode;
+  CustomRenderer?: React.ComponentType<T>;
+  cacheKey?: string;
 };
 
 export const Dropdown = <T,>({
@@ -19,13 +20,16 @@ export const Dropdown = <T,>({
   valueSelected,
   valueGetter,
   tooltipGetter,
-  customRenderer,
+  CustomRenderer,
   clearAll,
+  cacheKey,
 }: DropdownProps<T>) => {
   const [open, setOpen] = useState(false);
   const anchorEl = useRef<HTMLDivElement>(null);
 
-  const selectedCount = (listItems as DropdownListItem<T>[]).filter((item) => item.selected).length;
+  const selectedCount = (listItems as DropdownListItem<T>[]).filter(
+    (item) => item.selected
+  ).length;
 
   const handleValueSelected = (value: T, selected: boolean) => {
     valueSelected(value);
@@ -33,9 +37,15 @@ export const Dropdown = <T,>({
 
   return (
     <EdsProvider density="compact">
-      <DropdownContainer onClick={() => setOpen(!open)} ref={anchorEl} selected={selectedCount > 0}>
+      <DropdownContainer
+        onClick={() => setOpen(!open)}
+        ref={anchorEl}
+        selected={selectedCount > 0}
+      >
         {children}
-        {selectedCount > 0 && <Typography variant="caption">{` (+${selectedCount})`}</Typography>}
+        {selectedCount > 0 && (
+          <Typography variant="caption">{` (+${selectedCount})`}</Typography>
+        )}
         <Icon name={open ? 'chevron_up' : 'chevron_down'} />
       </DropdownContainer>
       {open && (
@@ -51,7 +61,8 @@ export const Dropdown = <T,>({
           }}
           buttonElement={anchorEl}
           tooltipGetter={tooltipGetter}
-          customRenderer={customRenderer}
+          CustomRenderer={CustomRenderer}
+          cacheKey={cacheKey}
         />
       )}
     </EdsProvider>

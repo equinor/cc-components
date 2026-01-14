@@ -9,9 +9,14 @@ export const StyledRoot = styled.div`
   margin-left: 5px;
   position: relative;
 `;
-export type ItemProps = { backgroundColor: string; isSelected: boolean; textColor: string };
+export type ItemProps = {
+  backgroundColor: string;
+  isSelected: boolean;
+  textColor: string;
+};
 
-export const StyledItemWrapper = styled.div<ItemProps>`
+export const StyledItemWrapper = styled.a<ItemProps>`
+  text-decoration: none;
   display: grid;
   grid-template-columns: 3fr auto;
   align-items: center;
