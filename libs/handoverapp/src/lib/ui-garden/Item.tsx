@@ -21,7 +21,7 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
   const [isOpen, setIsOpen] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+  const anchorRef = useRef<HTMLAnchorElement | null>(null);
 
   const {
     data,
@@ -99,16 +99,26 @@ const HandoverItem = (args: CustomItemView<HandoverPackage>) => {
     setIsOpen(false);
   };
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <>
       <StyledRoot>
         <StyledItemWrapper
+          href={data.commissioningPackageUrl || undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           ref={anchorRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           backgroundColor={backgroundColor}
           textColor={textColor}
-          onClick={onClick}
+          onClick={handleClick}
           style={{
             minWidth: fittedWidth,
           }}

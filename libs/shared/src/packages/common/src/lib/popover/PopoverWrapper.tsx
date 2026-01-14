@@ -1,6 +1,6 @@
 import { Icon, Popover, Typography } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { MutableRefObject, PropsWithChildren, ReactElement } from 'react';
+import { PropsWithChildren, ReactElement, RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -15,9 +15,9 @@ type PopoverWrapperProps = {
   isOpen: boolean;
   width: number;
   popoverTitle: string;
-  parentRef: MutableRefObject<HTMLDivElement | null>;
+  parentRef: RefObject<HTMLDivElement | null>;
   close: VoidFunction;
-  anchorRef: MutableRefObject<HTMLDivElement | null>;
+  anchorRef: RefObject<HTMLDivElement | HTMLAnchorElement | null>;
 };
 
 /**

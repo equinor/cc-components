@@ -126,6 +126,8 @@ export const SwcrSidesheetComponent = ({
             />
           }
         />
+        <BannerItem title="Project" value={item.project ?? 'N/A'} />
+        <BannerItem title="Facility" value={item.facility ?? 'N/A'} />
         <BannerItem title="Contract" value={item.contract ?? 'N/A'} />
         <BannerItem title="Priority" value={item.priority ?? 'N/A'} />
         <BannerItem title="Supplier" value={item.supplier ?? 'N/A'} />

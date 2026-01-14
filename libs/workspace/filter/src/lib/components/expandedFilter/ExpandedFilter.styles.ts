@@ -14,16 +14,49 @@ export const FilterListContainer = styled.div`
   gap: 16px;
 `;
 
-export const FilterContainer = styled.div`
+export const FilterContainer = styled.div<{
+  width: number;
+  minWidth: number;
+  maxWidth: number;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-  width: 250px;
+  width: ${({ width }) => width}px;
+  min-width: ${({ minWidth }) => minWidth}px;
+  max-width: ${({ maxWidth }) => maxWidth}px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  position: relative;
+`;
+
+export const ResizeHandle = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  background-color: transparent;
+  z-index: 10;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: transparent;
+  }
+
+  &:hover::after,
+  &:active::after {
+    background-color: ${tokens.colors.interactive.primary__resting.hex};
+  }
 `;
 
 export const FilterContainerHeader = styled.div<{ isfilteractive: Boolean }>`
@@ -37,7 +70,9 @@ export const FilterContainerHeader = styled.div<{ isfilteractive: Boolean }>`
   width: 100%;
   border-bottom: 2px solid
     ${({ isfilteractive }) =>
-      isfilteractive ? tokens.colors.interactive.primary__resting.hex : tokens.colors.ui.background__medium.rgba};
+      isfilteractive
+        ? tokens.colors.interactive.primary__resting.hex
+        : tokens.colors.ui.background__medium.rgba};
   justify-content: space-between;
 `;
 
@@ -80,14 +115,18 @@ export const ListItem = styled.div<{ start: number; height: number }>`
   }
 `;
 
-export const ListItemText: StyledComponent<typeof Typography, any, {}, never> = styled(Typography)`
+export const ListItemText: StyledComponent<typeof Typography, any, {}, never> = styled(
+  Typography
+)`
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
-export const ItemCount: StyledComponent<typeof Typography, any, {}, never> = styled(Typography)`
+export const ItemCount: StyledComponent<typeof Typography, any, {}, never> = styled(
+  Typography
+)`
   margin-left: auto;
 `;
 export const SearchbarContainer = styled.div`
@@ -119,7 +158,9 @@ export const SearchbarContainer = styled.div`
   }
 `;
 
-export const HeaderIconButton: StyledComponent<typeof Button, any, {}, never> = styled(Button)`
+export const HeaderIconButton: StyledComponent<typeof Button, any, {}, never> = styled(
+  Button
+)`
   aspect-ratio: 1;
   width: 32px;
   color: ${tokens.colors.text.static_icons__tertiary.hex} !important;

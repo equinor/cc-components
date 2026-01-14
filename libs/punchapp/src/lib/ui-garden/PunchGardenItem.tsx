@@ -13,9 +13,7 @@ import {
 } from '../utils-statuses/punchStatusColors';
 import { Punch } from '@cc-components/punchshared';
 import { FlagIcon } from '@cc-components/shared/common';
-import {
-  getStatusCircle,
-} from '@cc-components/shared';
+import { getStatusCircle } from '@cc-components/shared';
 
 function PunchGardenItem(props: CustomItemView<Punch>): ReactElement {
   const {
@@ -34,13 +32,24 @@ function PunchGardenItem(props: CustomItemView<Punch>): ReactElement {
   const maxWidth = useMemo(() => itemWidth * 0.95, [itemWidth]);
 
   const status = getStatusCircle(data.category, colorAssistMode);
+
+  const handleClick = (event: React.MouseEvent) => {
+    if (!event.ctrlKey && !event.metaKey && event.button === 0) {
+      event.preventDefault();
+      onClick?.();
+    }
+  };
+
   return (
     <StyledRoot>
       <StyledPunchItem
+        href={data.punchUrl || undefined}
+        target="_blank"
+        rel="noopener noreferrer"
         style={{ width: `${columnExpanded ? 100 : width}%`, maxWidth }}
         backgroundColor={statusColor}
         textColor={textColor}
-        onClick={onClick}
+        onClick={handleClick}
         isSelected={isSelected}
       >
         {data.materialRequired && <FlagIcon color={textColor} />}

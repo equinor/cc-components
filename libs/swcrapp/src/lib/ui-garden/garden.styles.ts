@@ -6,7 +6,8 @@ type SwcrItemProps = {
   $isSelected: boolean;
 };
 
-export const StyledItemWrapper = styled.div<SwcrItemProps>`
+export const StyledItemWrapper = styled.a<SwcrItemProps>`
+  text-decoration: none;
   display: grid;
   grid-template-columns: 15px 3fr auto;
   align-items: center;
