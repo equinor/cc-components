@@ -35,7 +35,7 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
   const isAffiliateUser = () => {
-    return !window.Fusion.modules.auth.defaultAccount?.username.endsWith('@equinor.com');
+    return !window.Fusion.modules.auth.account?.username.endsWith('@equinor.com');
   };
 
   return (

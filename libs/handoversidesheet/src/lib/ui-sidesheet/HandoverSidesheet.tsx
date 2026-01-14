@@ -93,7 +93,8 @@ const HandoverSidesheetComponent = (props: Required<HandoverProps>) => {
   const [activeTab, setActiveTab] = useState(0);
   const [ShowOnlyOutstandingPunch, setShowOnlyOutstandingPunch] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
-  const handleChange = (index: number) => {
+  const handleChange = (value: number | string) => {
+    const index = typeof value === 'number' ? value : parseInt(value, 10);
     setActiveTab(index);
     ref && ref.current && ref.current.scrollTo({ left: index ** index });
   };

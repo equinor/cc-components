@@ -7,7 +7,7 @@ description: Getting started developing your own applications and components
 Before starting developing your own applications and components you should have an understanding of some NX functionalities. 
 
 ### Generator plugins
-With NX as a development and build tool, it is possible to easily scaffold different projects based on your needs. If you want to scaffold a simple react application, you can write `nx g @nrwl/react:app <app-name>`. This will create a new folder in the `apps`-folder and add the basic files needed for a react application. The same goes for a new react library: `nx g @nrwl/react:lib <lib-name>`.
+With NX as a development and build tool, it is possible to easily scaffold different projects based on your needs. If you want to scaffold a simple react application, you can write `nx g @nx/react:app <app-name>`. This will create a new folder in the `apps`-folder and add the basic files needed for a react application. The same goes for a new react library: `nx g @nx/react:lib <lib-name>`.
 Since CC applications are heavily based on fusion-workspace and fusion-framework, there will be similarities and some boilerplate code between the different applications. To be efficient, we have created a custom plugin to generate what we call a "Fusion app". You can use the NX Console extension to see it (Open NX Console in the sidebar, click on "generate" inside the "GENERATE & RUN TARGET" section, search for "Fusion app generator") or you can use the terminal: `nx g @cc-components/plugins:fusion-app-generator --name=<app-name> --tags=<pbi or ws>`. This will scaffold a new application for you with a structure similar to this:
 ```
 📦app-name

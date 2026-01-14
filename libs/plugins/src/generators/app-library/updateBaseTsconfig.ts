@@ -1,4 +1,4 @@
-import { getWorkspaceLayout, joinPathFragments, Tree, updateJson } from '@nrwl/devkit';
+import { getWorkspaceLayout, joinPathFragments, Tree, updateJson } from '@nx/devkit';
 import { NormalizedSchema } from './schema';
 
 const getRootTsConfigPathInTree = (tree: Tree): string | null => {

@@ -16,7 +16,8 @@ export type TabsProps = {
 export const Tabs = (props: TabsProps) => {
   const [activeTab, setActiveTab] = useState(props.initialTabIndex ?? 0);
 
-  const handleChange = (index: number) => {
+  const handleChange = (value: number | string) => {
+    const index = typeof value === 'number' ? value : parseInt(value, 10);
     setActiveTab(index);
   };
 

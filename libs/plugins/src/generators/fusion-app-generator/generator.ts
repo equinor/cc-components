@@ -6,7 +6,7 @@ import {
   offsetFromRoot,
   Tree,
   installPackagesTask,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import doStuff from '../app-library/generator';
 import * as path from 'path';
 import { FusionAppGeneratorGeneratorSchema } from './schema';

@@ -89,7 +89,8 @@ export const SwcrSidesheetComponent = ({
   } = useAttachments(id);
   const [activeTab, setActiveTab] = useState(0);
 
-  const handleChange = (index: number) => {
+  const handleChange = (value: number | string) => {
+    const index = typeof value === 'number' ? value : parseInt(value, 10);
     setActiveTab(index);
   };
 
