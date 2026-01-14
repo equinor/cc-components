@@ -106,7 +106,8 @@ export const WorkorderSidesheet = (props: {
   if (!wo || error) {
     return <div>Failed to get Workorder with id: {props.id}</div>;
   }
-  const handleChange = (index: number) => {
+  const handleChange = (value: number | string) => {
+    const index = typeof value === 'number' ? value : parseInt(value, 10);
     setActiveTab(index);
   };
   return (

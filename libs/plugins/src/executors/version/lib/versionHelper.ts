@@ -26,18 +26,16 @@ const compareArr = (arr1: string[], arr2: string[]) => {
 
 const bumpedPkgJsonVersion = (
   oldVersion: PackageJson['version'],
-  type: 'patch' | 'minor' | 'major'
+  type: 'patch' | 'minor' | 'major' = 'patch'
 ): PackageJson['version'] => {
   const splitVersion = oldVersion.split('.');
-  if (type === 'patch') {
-    return `${splitVersion[0]}.${splitVersion[1]}.${Number(splitVersion[2]) + 1}`;
+  if (type === 'major') {
+    return `${Number(splitVersion[0]) + 1}.0.0`;
   }
   if (type === 'minor') {
     return `${splitVersion[0]}.${Number(splitVersion[1]) + 1}.0`;
   }
-  if (type === 'major') {
-    return `${Number(splitVersion[0]) + 1}.0.0}`;
-  }
+  return `${splitVersion[0]}.${splitVersion[1]}.${Number(splitVersion[2]) + 1}`;
 };
 
 export const versionHelper = (root: string, projectName: string | undefined) => {

@@ -47,7 +47,8 @@ export const PunchSidesheet = (props: {
 }) => {
   const [activeTab, setActiveTab] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
-  const handleChange = (index: number) => {
+  const handleChange = (value: number | string) => {
+    const index = typeof value === 'number' ? value : parseInt(value, 10);
     setActiveTab(index);
     ref.current && ref.current.scrollTo({ left: index ** index });
   };

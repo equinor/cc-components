@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nx/devkit';
 import { versionHelper } from './lib/versionHelper';
 import { VersionExecutorSchema } from './schema';
 import changelogExecutor from '../changelog/executor';

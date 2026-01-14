@@ -104,7 +104,8 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
     error: modelConfigError,
   } = useGetEchoConfig(item.id);
 
-  const handleChange = (index: number) => {
+  const handleChange = (value: number | string) => {
+    const index = typeof value === 'number' ? value : parseInt(value, 10);
     setActiveTab(index);
   };
 

@@ -30,8 +30,10 @@
   },
   "devDependencies": {
     "@equinor/fusion-framework-cli": "catalog:",
-    "@nrwl/devkit": "catalog:",
-    "@nrwl/js": "catalog:",
+    "@nx/devkit": "catalog:",
+    "@nx/js": "catalog:",
+    "@nx/vite": "catalog:",
+    "@nx/eslint": "catalog:",
     "@swc-node/register": "catalog:",
     "@swc/core": "catalog:",
     "@testing-library/jest-dom": "catalog:",
@@ -82,12 +84,12 @@
     "core-js": "catalog:",
     "luxon": "catalog:",
     "odata-query": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-error-boundary": "catalog:",
     "rimraf": "catalog:",
     "rxjs": "catalog:",
-    "styled-components": "catalog:",
+    "styled-components": "^6.3.6",
     "stylis": "catalog:"
   },
   "engines": {
@@ -95,28 +97,36 @@
   },
   "pnpm": {
     "overrides": {
-      "react": "^19.1.1",
-      "react-dom": "^19.1.1"
+      "react": "^19.2.3",
+      "react-dom": "^19.2.3",
+      "styled-components": "^6.3.6"
     },
     "peerDependencyRules": {
       "allowedVersions": {
-        "react": "^19.1.1",
-        "react-dom": "^19.1.1"
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+        "styled-components": "^6.3.6"
       },
       "ignoreMissing": [
         "react",
         "react-dom",
         "@babel/*",
-        "@types/*"
+        "@types/*",
+        "@types/react",
+        "@types/react-dom"
       ]
     }
   },
   "overrides": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "@types/react": "19.1.9"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "styled-components": "^6.3.6"
   },
   "resolutions": {
-    "styled-components": "6.1.19"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "styled-components": "^6.3.6"
   }
 }

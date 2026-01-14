@@ -1,4 +1,4 @@
-import { ExecutorContext, logger, readJsonFile } from '@nrwl/devkit';
+import { ExecutorContext, logger, readJsonFile } from '@nx/devkit';
 import { ChangelogExecutorSchema } from './schema';
 import * as fs from 'fs';
 

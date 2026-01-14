@@ -69,7 +69,7 @@ export function createRender(
 function tryGetAccountId(args: ComponentRenderArgs) {
   try {
     const modules = args.fusion.modules as any;
-    return modules.auth.defaultAccount?.localAccountId;
+    return modules.auth.account?.localAccountId;
   } catch (e) {
     return '';
   }
