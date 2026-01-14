@@ -10,7 +10,7 @@ export type DropdownProps<T> = {
   tooltipGetter?: (value: T) => string;
   valueGetter: (value: T) => string;
   clearAll?: () => void;
-  customRenderer?: (value: T) => React.ReactNode;
+  CustomRenderer?: React.ComponentType<T>;
   cacheKey?: string;
 };
 
@@ -20,7 +20,7 @@ export const Dropdown = <T,>({
   valueSelected,
   valueGetter,
   tooltipGetter,
-  customRenderer,
+  CustomRenderer,
   clearAll,
   cacheKey,
 }: DropdownProps<T>) => {
@@ -61,7 +61,7 @@ export const Dropdown = <T,>({
           }}
           buttonElement={anchorEl}
           tooltipGetter={tooltipGetter}
-          customRenderer={customRenderer}
+          CustomRenderer={CustomRenderer}
           cacheKey={cacheKey}
         />
       )}
