@@ -67,3 +67,22 @@ export interface ReportInfo {
   reportType: number;
   isEditable: boolean;
 }
+
+export type StaticInformation = {
+  title: string;
+  dataSource: string;
+  dataRefreshRate: string;
+  access: string;
+  isAffiliate?: boolean;
+};
+
+export type DynamicInformation = {
+  reportUri: string;
+  isAffiliate?: boolean;
+};
+
+export type Information = StaticInformation | DynamicInformation;
+
+export const isDynamicInformation = (info: Information): info is DynamicInformation => {
+  return 'reportUri' in info;
+};

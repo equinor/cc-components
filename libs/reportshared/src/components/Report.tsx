@@ -4,6 +4,8 @@ import { useFusionContext } from '../hooks/useContext';
 import { usePBIOptions } from '../hooks/usePBIOptions';
 import { useWorkspaceBookmarks } from '../hooks/useWorkspaceBookmark';
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+import { useReportInformation } from '../hooks/useReportInformation';
+import { Information, isDynamicInformation, StaticInformation } from '../types/types';
 
 type FusionReportProps = {
   reportId: string;
@@ -11,6 +13,7 @@ type FusionReportProps = {
     table: string;
     column: string;
   };
+  information?: Information;
 };
 
 const pbi_context_mapping = {
@@ -24,7 +27,18 @@ const pbi_context_mapping = {
   },
 } as const;
 
-export const FusionReport = ({ reportId, config }: FusionReportProps) => {
+const defaultInformation: StaticInformation = {
+  title: 'Analytics',
+  dataSource: 'ProCoSys / Alpha',
+  dataRefreshRate: 'Hourly',
+  access: 'Internal',
+};
+
+export const FusionReport = ({
+  reportId,
+  config,
+  information: informationProp,
+}: FusionReportProps) => {
   const contextId = useFusionContext()?.id;
   const { currentContext } = useModuleCurrentContext();
   const pbi_config =
@@ -38,6 +52,30 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
     return !window.Fusion.modules.auth.account?.username.endsWith('@equinor.com');
   };
 
+  const dynamicInfo = informationProp && isDynamicInformation(informationProp);
+  const { information: fetchedInformation, isLoading } = useReportInformation(
+    dynamicInfo ? informationProp.reportUri : '',
+    isAffiliateUser()
+  );
+
+  const resolveInformation = (): StaticInformation => {
+    if (!informationProp) {
+      return { ...defaultInformation, isAffiliate: isAffiliateUser() };
+    }
+
+    if (isDynamicInformation(informationProp)) {
+      if (isLoading || !fetchedInformation) {
+        return { ...defaultInformation, isAffiliate: isAffiliateUser() };
+      }
+      return fetchedInformation;
+    }
+
+    return {
+      ...informationProp,
+      isAffiliate: informationProp.isAffiliate ?? isAffiliateUser(),
+    };
+  };
+
   return (
     <Workspace
       key={contextId + (bookmarkKey ?? '')}
@@ -45,13 +83,7 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
       onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: () => '',
-        information: {
-          title: 'Analytics',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: resolveInformation(),
       }}
       powerBiOptions={pbi}
       modules={[powerBiModule]}
