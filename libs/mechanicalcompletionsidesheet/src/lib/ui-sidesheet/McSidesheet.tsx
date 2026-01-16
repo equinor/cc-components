@@ -15,7 +15,7 @@ import {
   TabTitle,
 } from '@cc-components/sharedcomponents';
 
-import { ModelViewerTab } from '@cc-components/modelviewer';
+import { LazyModelViewerTab } from '@cc-components/modelviewer';
 
 import { Icon, Switch, Tabs } from '@equinor/eds-core-react';
 import { error_outlined } from '@equinor/eds-icons';
@@ -237,7 +237,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
             />
           </StyledPanel>
           <StyledPanel style={{ height: '100%' }}>
-            <ModelViewerTab
+            <LazyModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
               isFetching={isFetchingModelConfig}

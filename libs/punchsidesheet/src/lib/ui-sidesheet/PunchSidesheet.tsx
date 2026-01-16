@@ -22,7 +22,7 @@ import {
   StyledTabs,
 } from '@cc-components/sharedcomponents';
 
-import { ModelViewerTab } from '@cc-components/modelviewer';
+import { LazyModelViewerTab } from '@cc-components/modelviewer';
 
 import { Tabs } from '@equinor/eds-core-react';
 import { useQuery } from '@tanstack/react-query';
@@ -165,7 +165,7 @@ export const PunchSidesheet = (props: {
             <DetailsTab punch={punch} />
           </Tabs.Panel>
           <Tabs.Panel style={{ height: '100%' }}>
-            <ModelViewerTab
+            <LazyModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
               isFetching={false}

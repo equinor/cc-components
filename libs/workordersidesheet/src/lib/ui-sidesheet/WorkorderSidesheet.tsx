@@ -31,7 +31,7 @@ import {
   getMatStatusColorByStatus,
   getMccrStatusColorByStatus,
 } from '@cc-components/workordershared';
-import { ModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
+import { LazyModelViewerTab, TagOverlay } from '@cc-components/modelviewer';
 import { useMaterial, useMccr } from '../utils-sidesheet';
 import { DetailsTab } from './DetailsTab';
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
@@ -213,7 +213,7 @@ export const WorkorderSidesheet = (props: {
             />
           </StyledPanel>
           <StyledPanel style={{ height: '100%' }}>
-            <ModelViewerTab
+            <LazyModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
               isFetching={isFetchingModelConfig}

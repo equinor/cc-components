@@ -4,7 +4,7 @@ import { Tabs } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import { tokens } from '@equinor/eds-tokens';
 import { WorkorderTab } from '@cc-components/shared/sidesheet';
-import { ModelViewerTab } from '@cc-components/modelviewer';
+import { LazyModelViewerTab } from '@cc-components/modelviewer';
 
 import {
   BaseStatus,
@@ -191,7 +191,7 @@ const PipingSidesheetContent = (props: Required<PipingProps>) => {
             />
           </StyledPanel>
           <StyledPanel>
-            <ModelViewerTab
+            <LazyModelViewerTab
               tagOverlay={tagsOverlay}
               options={viewerOptions}
               isFetching={isFetchingModelConfig}
