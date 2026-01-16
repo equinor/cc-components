@@ -17,6 +17,7 @@ import { StoreApi } from 'zustand';
 import { createTabController } from '../utils/tabController';
 import { useTabContext } from '../hooks/useTab';
 import styled from 'styled-components';
+import type { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
 type WorkspaceEvents = {
   onTabChange?: (newTab: string, tabs: Tab[]) => void;
@@ -28,6 +29,7 @@ export interface WorkspaceProps {
   Sidesheet?: () => ReactElement;
   providers: Provider[];
   events?: WorkspaceEvents;
+  appInsights?: ApplicationInsights;
 }
 
 export const TabProvider = createContext<StoreApi<TabController> | null>(null);
@@ -38,8 +40,15 @@ export type TabController = {
   setActiveTab: (name: string) => void;
 };
 
-export function Workspace({ tabs, defaultTab, Sidesheet = () => <></>, providers, events }: WorkspaceProps) {
-  const tabController = useRef(createTabController({ defaultTab, tabs }));
+export function Workspace({
+  tabs,
+  defaultTab,
+  Sidesheet = () => <></>,
+  providers,
+  events,
+  appInsights,
+}: WorkspaceProps) {
+  const tabController = useRef(createTabController({ defaultTab, tabs, appInsights }));
 
   return (
     <WorkspaceWrapper id="workspace_root">

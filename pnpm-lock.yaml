@@ -884,6 +884,9 @@ importers:
       '@equinor/fusion-react-person':
         specifier: 'catalog:'
         version: 1.0.0(react@19.2.3)
+      '@equinor/workspace-core':
+        specifier: workspace:*
+        version: link:../workspace/core
       '@equinor/workspace-fusion':
         specifier: workspace:*
         version: link:../workspace/fusion
@@ -1040,6 +1043,9 @@ importers:
       '@equinor/eds-tokens':
         specifier: 'catalog:'
         version: 2.1.1
+      '@microsoft/applicationinsights-web':
+        specifier: 'catalog:'
+        version: 3.3.11(tslib@2.8.1)
       '@tanstack/react-virtual':
         specifier: 'catalog:'
         version: 3.13.18(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1275,6 +1281,9 @@ importers:
       '@equinor/eds-tokens':
         specifier: 'catalog:'
         version: 2.1.1
+      '@equinor/workspace-core':
+        specifier: workspace:*
+        version: link:../core
       '@equinor/workspace-filter':
         specifier: workspace:*
         version: link:../filter

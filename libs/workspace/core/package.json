@@ -18,6 +18,7 @@
     "@equinor/eds-core-react": "catalog:",
     "@equinor/eds-icons": "catalog:",
     "@equinor/eds-tokens": "catalog:",
+    "@microsoft/applicationinsights-web": "catalog:",
     "@tanstack/react-virtual": "catalog:"
   },
   "peerDependencies": {

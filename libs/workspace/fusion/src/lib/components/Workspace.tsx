@@ -10,14 +10,13 @@ import { updateQueryParams } from '../classes/fusionUrlHandler';
 import { WorkspaceContextProvider } from '../context/WorkspaceControllerContext';
 import { useWorkspace } from '../hooks';
 import { useMemo, useRef } from 'react';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { SettingsProvider } from '@equinor/workspace-core';
+import { SettingsProvider, useAppInsights } from '@equinor/workspace-core';
 
 const client = new QueryClient();
 
 export function Workspace<
   TData extends Record<PropertyKey, unknown>,
-  TContext extends Record<PropertyKey, unknown> = never,
+  TContext extends Record<PropertyKey, unknown> = never
 >(props: WorkspaceProps<TData, TContext>) {
   return (
     <WorkspaceBoundary>
@@ -42,15 +41,20 @@ function useCheckParentClient(): QueryClient {
 
 function WorkspaceComponent<
   TData extends Record<PropertyKey, unknown>,
-  TContext extends Record<PropertyKey, unknown> = never,
+  TContext extends Record<PropertyKey, unknown> = never
 >(props: WorkspaceProps<TData, TContext>) {
   const client = useCheckParentClient();
   const bookmarkRef = useRef<Bookmark | null | undefined>(props.currentBookmark);
 
   const { handleTabChange, updatePayload } = useWorkspace();
 
+  const appInsights = useAppInsights();
+
   const configuration = useMemo(
-    () => createConfigurationObject(bookmarkRef.current ? props : { ...props, currentBookmark: null }),
+    () =>
+      createConfigurationObject(
+        bookmarkRef.current ? props : { ...props, currentBookmark: null }
+      ),
     []
   );
 
@@ -63,6 +67,7 @@ function WorkspaceComponent<
           providers={configuration.providers}
           defaultTab={configuration.defaultTab}
           tabs={configuration.tabs}
+          appInsights={appInsights}
           events={{
             onTabChange: (newTab) => {
               bookmarkRef.current = null;
@@ -73,12 +78,12 @@ function WorkspaceComponent<
         />
       </>
     );
-  }, [configuration]);
+  }, [configuration, appInsights]);
 
   const filterDataSource = props.filterOptions?.dataSource;
 
   if (bookmarkRef.current) {
-    ((window as any).ai as ApplicationInsights)?.trackEvent({
+    appInsights?.trackEvent({
       name: 'BookmarkUsed',
       properties: {
         bookmark: bookmarkRef.current,

@@ -8,10 +8,18 @@ import { getFiltersAsync } from '../../utils/getFiltersAsync';
 import { search, playlist_add, drag_handle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { Skeleton } from '../skeleton/Skeleton';
-import { getVisibleFiltersFromLocalStorage, useVisibleFilters } from '../../hooks/useVisibleFilterGroups';
+import {
+  getVisibleFiltersFromLocalStorage,
+  useVisibleFilters,
+} from '../../hooks/useVisibleFilterGroups';
 import styled from 'styled-components';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { Filter, FilterGroup, FilterValueType, useFilterContext } from '@equinor/workspace-filter';
+import { useAppInsights } from '@equinor/workspace-core';
+import {
+  Filter,
+  FilterGroup,
+  FilterValueType,
+  useFilterContext,
+} from '@equinor/workspace-filter';
 
 Icon.add({ search, playlist_add, drag_handle });
 
@@ -23,7 +31,11 @@ export interface FilterController {
     filter: PowerBiFilterItem,
     allVisibleFilterValues: string[]
   ) => Promise<void>;
-  handleOnChange: (group: PowerBiFilter, filter: PowerBiFilterItem, singleClick?: boolean) => Promise<void>;
+  handleOnChange: (
+    group: PowerBiFilter,
+    filter: PowerBiFilterItem,
+    singleClick?: boolean
+  ) => Promise<void>;
   resetFilter: () => Promise<void>;
   isAnyFiltersActive: () => boolean;
   slicerFilters: PowerBiFilter[];
@@ -54,7 +66,7 @@ export const PowerBIFilter = ({
 
   const { filterValues: workspaceFilterValues } = useFilterContext();
 
-  const appInsights = (window as any).ai as ApplicationInsights | undefined;
+  const appInsights = useAppInsights();
 
   const initFilters = async () => {
     const filters = await getFiltersAsync(report);
@@ -67,7 +79,9 @@ export const PowerBIFilter = ({
     if (state) {
       setFilterGroupVisible(state);
     } else if (filterGroupNames.length > 0) {
-      setFilterGroupVisible((s) => [...s, ...filterGroupNames].filter((v, i, a) => a.indexOf(v) === i));
+      setFilterGroupVisible((s) =>
+        [...s, ...filterGroupNames].filter((v, i, a) => a.indexOf(v) === i)
+      );
     } else {
       setFilterGroupVisible(filters.map((s) => s.type));
     }
@@ -80,9 +94,13 @@ export const PowerBIFilter = ({
         return {
           name: sFilters.type,
           isQuickFilter:
-            usePowerBiFilters ?? workspaceFilterValues.some((f) => f.name === sFilters.type && f.isQuickFilter),
+            usePowerBiFilters ??
+            workspaceFilterValues.some(
+              (f) => f.name === sFilters.type && f.isQuickFilter
+            ),
           filterItems: sFilters.filterVals.map((filter) => {
-            const isSelected = activeFilters[sFilters.type]?.includes(filter ?? '(Blank)') ?? false;
+            const isSelected =
+              activeFilters[sFilters.type]?.includes(filter ?? '(Blank)') ?? false;
             return {
               value: filter,
               selected: isSelected,
@@ -130,7 +148,12 @@ export const PowerBIFilter = ({
     }
   };
 
-  if (isFiltersLoading || !activeFilters || !slicerFilters || filterGroupVisible.length === 0)
+  if (
+    isFiltersLoading ||
+    !activeFilters ||
+    !slicerFilters ||
+    filterGroupVisible.length === 0
+  )
     return <QuickFilterLoading />;
 
   const slicerRecord: Record<string, PowerBiFilter> = {};
@@ -147,7 +170,10 @@ export const PowerBIFilter = ({
     slicerRecord[filterName].slicer.setSlicerState({ filters: [filter] });
   };
 
-  const createFilter = (filterName: string, values: ActiveFilter[]): models.ISlicerFilter => {
+  const createFilter = (
+    filterName: string,
+    values: ActiveFilter[]
+  ): models.ISlicerFilter => {
     const hasBlank = values.includes('(Blank)');
     hasBlank && values.push('');
     const basicFilter: models.IBasicFilter = {
@@ -160,7 +186,10 @@ export const PowerBIFilter = ({
     return basicFilter;
   };
 
-  const handleFilterItemClick = async (filterGroup: FilterGroup, value: FilterValueType) => {
+  const handleFilterItemClick = async (
+    filterGroup: FilterGroup,
+    value: FilterValueType
+  ) => {
     appInsights?.trackEvent({
       name: `[FilterChanged]: ${filterGroup.name}`,
       properties: {

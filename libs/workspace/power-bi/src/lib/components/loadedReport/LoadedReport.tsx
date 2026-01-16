@@ -4,7 +4,7 @@ import { PowerBIEmbed } from 'powerbi-client-react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { StyledReportRoot, StyledReportContainer } from '../powerbi.styles';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { useAppInsights } from '@equinor/workspace-core';
 
 const defaultAspectRatio = 0.41;
 
@@ -15,7 +15,7 @@ interface LoadedReportProps {
 export const LoadedReport = ({ config, onReportReady }: LoadedReportProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [width] = useResizeObserver(ref);
-  const appInsights = (window as any).ai as ApplicationInsights | undefined;
+  const appInsights = useAppInsights();
 
   const initialRenderTimeRef = useRef<number | null>(null);
 

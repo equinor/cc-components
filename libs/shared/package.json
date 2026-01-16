@@ -91,6 +91,7 @@
     "@emotion/react": "catalog:",
     "@emotion/styled": "catalog:",
     "@equinor/fusion-react-person": "catalog:",
+    "@equinor/workspace-core": "workspace:*",
     "@equinor/workspace-fusion": "workspace:*",
     "@remirror/pm": "catalog:",
     "@remirror/react": "catalog:",

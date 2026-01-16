@@ -1,7 +1,20 @@
-import { QueryClient, QueryClientProvider, useQuery, keepPreviousData } from '@tanstack/react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+  keepPreviousData,
+} from '@tanstack/react-query';
 import { FilterDataSource, FilterGroup, FilterStateGroup, FilterStyles } from '../types';
-import { createContext, PropsWithChildren, ReactNode, useContext, useEffect, useRef, useState } from 'react';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import {
+  createContext,
+  PropsWithChildren,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { useAppInsights } from '@equinor/workspace-core';
 import { useCallback } from 'react';
 
 export type IFilterContext = {
@@ -47,11 +60,18 @@ export const FilterContextProvider = ({
   onChange,
   appName,
 }: PropsWithChildren<FilterContextProviderProps>) => {
-  const client = useRef(new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } }));
+  const client = useRef(
+    new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
+  );
 
   return (
     <QueryClientProvider client={client.current}>
-      <FilterContextWrapper dataSource={dataSource} initialState={initialState} onChange={onChange} appName={appName}>
+      <FilterContextWrapper
+        dataSource={dataSource}
+        initialState={initialState}
+        onChange={onChange}
+        appName={appName}
+      >
         {children}
       </FilterContextWrapper>
     </QueryClientProvider>
@@ -91,14 +111,21 @@ export const FilterContextWrapper = ({
     return storedValue ? JSON.parse(storedValue) : false;
   };
 
-  const [filterState, setFilterState] = useState<FilterState>(initialState?.filterState ?? { groups: [], search: '' });
+  const [filterState, setFilterState] = useState<FilterState>(
+    initialState?.filterState ?? { groups: [], search: '' }
+  );
   const [selectedItems, setSelectedItems] = useState<Record<string, string[]>>({});
-  const [quickFilters, setQuickFilters] = useState<string[] | undefined>(getPersistedQuickFilters());
+  const [quickFilters, setQuickFilters] = useState<string[] | undefined>(
+    getPersistedQuickFilters()
+  );
   const [includeCount, setIncludeCount] = useState<boolean>(getPersistedIncludeCount());
   const query = useQuery<FilterGroup[]>({
     queryKey: ['filter-meta', JSON.stringify(filterState), includeCount],
     queryFn: async ({ signal }): Promise<FilterGroup[]> => {
-      const data = await dataSource?.getFilterMeta({ ...filterState, includeCount }, signal);
+      const data = await dataSource?.getFilterMeta(
+        { ...filterState, includeCount },
+        signal
+      );
       return data ?? [];
     },
     throwOnError: false,
@@ -108,13 +135,10 @@ export const FilterContextWrapper = ({
 
   useEffect(() => {
     setSelectedItems(
-      initialState?.filterState.groups.reduce(
-        (acc, group) => {
-          acc[group.name] = group.values;
-          return acc;
-        },
-        {} as Record<string, string[]>
-      ) || {}
+      initialState?.filterState.groups.reduce((acc, group) => {
+        acc[group.name] = group.values;
+        return acc;
+      }, {} as Record<string, string[]>) || {}
     );
   }, []);
 
@@ -139,10 +163,12 @@ export const FilterContextWrapper = ({
   const persistedGroupOrder = getPersistedGroupOrder();
 
   const filterValues = Array.isArray(query.data)
-    ? (query.data
+    ? query.data
         ?.map((group) => ({
           ...group,
-          isQuickFilter: quickFilters ? quickFilters.includes(group.name) : group.isQuickFilter,
+          isQuickFilter: quickFilters
+            ? quickFilters.includes(group.name)
+            : group.isQuickFilter,
           filterItems: group.filterItems.map((item) => ({
             ...item,
             selected: selectedItems[group.name]?.includes(item.value),
@@ -155,7 +181,7 @@ export const FilterContextWrapper = ({
           if (indexA === -1) return 1;
           if (indexB === -1) return -1;
           return indexA - indexB;
-        }) ?? [])
+        }) ?? []
     : [];
 
   const reorderFilterGroups = useCallback((newOrder: string[]) => {
@@ -169,8 +195,10 @@ export const FilterContextWrapper = ({
     }));
   }, []);
 
+  const appInsights = useAppInsights();
+
   const setFilter = (filterName: string, values: string[]) => {
-    ((window as any).ai as ApplicationInsights)?.trackEvent({
+    appInsights?.trackEvent({
       name: `[FilterChanged]: ${filterName}`,
       properties: {
         filter: values,
@@ -206,7 +234,8 @@ export const FilterContextWrapper = ({
   };
 
   const updatePersistedQuickFilters = (filterName: string, isQuickFilter: boolean) => {
-    const currentQuickFilters = quickFilters ?? filterValues.filter((v) => v.isQuickFilter).map((f) => f.name);
+    const currentQuickFilters =
+      quickFilters ?? filterValues.filter((v) => v.isQuickFilter).map((f) => f.name);
     const updatedQuickFilters = isQuickFilter
       ? [...currentQuickFilters, filterName]
       : currentQuickFilters.filter((filter) => filter !== filterName);
