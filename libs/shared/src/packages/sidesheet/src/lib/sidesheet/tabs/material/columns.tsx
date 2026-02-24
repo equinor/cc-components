@@ -40,5 +40,8 @@ export const columns: ColDef<MaterialBase>[] = [
   {
     headerName: 'Stock Location',
     valueGetter: (pkg) => pkg.data?.stockLocation,
+    cellRenderer: (props: ICellRendererProps<MaterialBase, string | null>) => {
+      return <DescriptionCell description={props.value} />;
+    },
   },
 ];
