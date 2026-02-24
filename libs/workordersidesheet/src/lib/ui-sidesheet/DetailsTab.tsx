@@ -71,7 +71,11 @@ export const DetailsTab = ({ workOrder }: DetailsTabProps): ReactElement | null 
           </tr>
           <tr>
             <td>Milestone</td>
-            <td>{stringCell(workOrder.milestone)}</td>
+            <td>{stringCell([workOrder.milestoneCode, workOrder.milestone].filter(Boolean).join(', ') || null)}</td>
+          </tr>
+          <tr>
+            <td>Sub Milestone</td>
+            <td>{stringCell([workOrder.subMilestoneCode, workOrder.subMilestone].filter(Boolean).join(', ') || null)}</td>
           </tr>
           <tr>
             <td>Project progress</td>
