@@ -102,6 +102,12 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     valueGetter: (pkg) => pkg.data?.milestoneCode,
   },
   {
+    colId: 'SubMilestoneCode',
+    headerName: domainNames.workorderSubMilestone,
+    headerTooltip: domainNames.workorderSubMilestone,
+    valueGetter: (pkg) => pkg.data?.subMilestoneCode,
+  },
+  {
     colId: 'JobStatus',
     headerName: domainNames.jobStatus,
     headerTooltip: domainNames.jobStatus,
