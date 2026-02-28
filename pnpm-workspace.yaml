@@ -100,7 +100,7 @@ catalog:
   markdown-to-jsx: ^9.5.7
   date-fns: ^4.1.0
   core-js: ^3.47.0
-  rimraf: ^6.0.1
+  rimraf: ^6.1.2
   rxjs: ^7.8.2
   '@types/html-escaper': ^3.0.4
   '@types/node': ^24.2.0
