@@ -14,10 +14,6 @@
     "@cc-components/modelviewer": "workspace:^",
     "@cc-components/shared": "workspace:^",
     "@cc-components/sharedcomponents": "workspace:^",
-    "@cc-components/workordershared": "workspace:^",
-    "dompurify": "^3.3.1"
-  },
-  "devDependencies": {
-    "@types/dompurify": "^3.2.0"
+    "@cc-components/workordershared": "workspace:^"
   }
 }
