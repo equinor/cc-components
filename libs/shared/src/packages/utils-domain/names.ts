@@ -131,6 +131,7 @@ export const domainNames = {
   workorderResponsible: 'WO Responsible',
   workorderStatus: 'WO Status',
   workorderMilestone: 'WO Milestone',
+  workorderSubMilestone: 'WO Sub Milestone',
   workorderProgress: 'WO Progress',
   workorderLocation: 'WO Location',
   workorderWBS: 'WO WBS',

@@ -20,6 +20,8 @@ export type WorkOrder = {
   mccrStatus: string | null;
   milestone: string | null;
   milestoneCode: string | null;
+  subMilestone: string | null;
+  subMilestoneCode: string | null;
   plannedFinishDate: string | null;
   plannedStartupDate: string | null;
   projectDescription: string | null;
