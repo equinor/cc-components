@@ -51,6 +51,7 @@ export const useTableConfig = (
     },
     columnDefinitions: colDefs as [ColDef<SwcrPackage>, ...ColDef<SwcrPackage>[]],
     modules: defaultModules,
+    storageKey: 'cc.swcr.grid.columnState',
   };
 };
 

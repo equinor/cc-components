@@ -56,6 +56,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
         );
       },
     },
+    storageKey: 'cc.mechanicalcompletion.grid.columnState',
   };
 };
 

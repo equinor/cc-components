@@ -4,6 +4,7 @@ export type {
   ICellRendererParams as ICellRendererProps,
   IServerSideDatasource,
   GridApi,
+  GridState,
   RowNode,
   GridReadyEvent,
   AgEvent,

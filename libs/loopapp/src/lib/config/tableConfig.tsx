@@ -75,6 +75,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     getRows: getRows,
     excelExport: fetchLoopExport,
     modules: defaultModules,
+    storageKey: 'cc.loop.grid.columnState',
   };
 };
 

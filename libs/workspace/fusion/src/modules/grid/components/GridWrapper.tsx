@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { GridApi, GridOptions, ServerGrid } from '@equinor/workspace-ag-grid';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { GridApi, GridOptions, ServerGrid, usePersistedColumnState } from '@equinor/workspace-ag-grid';
 import { useFilterContext } from '@equinor/workspace-filter';
 import { tokens } from '@equinor/eds-tokens';
 
@@ -36,6 +36,14 @@ export const GridWrapper = <
   config.gridOptions ??= {};
   setDefaultColDef<TData>(config.gridOptions, selectItem);
 
+  const { onGridReady: persistOnGridReady, saveColumnState, hasPersistedState, initialGridState } =
+    usePersistedColumnState(config.storageKey, config.columnDefinitions);
+
+  const handleSaveColumnState = useCallback(
+    (api: GridApi, source?: string) => saveColumnState(api, source),
+    [saveColumnState],
+  );
+
   useEffect(() => {
     /**
      *  Bad practice but there is not another cleaner way
@@ -56,14 +64,20 @@ export const GridWrapper = <
   useEffect(() => {
     const icon: HeaderIcon = {
       Icon: ({ anchor }) => (
-        <GridOptionPopover anchor={anchor} filterState={filterState} excelExport={config.excelExport} />
+        <GridOptionPopover
+          anchor={anchor}
+          filterState={filterState}
+          excelExport={config.excelExport}
+          storageKey={config.storageKey}
+          gridApi={gridApi}
+        />
       ),
       name: 'grid-settings',
       placement: 'right',
       type: 'button',
     };
 
-    if (config.excelExport) {
+    if (config.excelExport || config.storageKey) {
       setIcons((s) => [...s, icon]);
     }
 
@@ -77,6 +91,7 @@ export const GridWrapper = <
       <ServerGrid<TData>
         onGridReady={(event) => {
           setGridApi(event.api);
+          persistOnGridReady(event);
         }}
         getRows={async (params) => {
           await config.getRows(params, filterStateCopy.current as TFilter);
@@ -91,6 +106,16 @@ export const GridWrapper = <
         height={height}
         context={filterState}
         modules={config.modules}
+        initialState={initialGridState ?? undefined}
+        onColumnResized={(e) => {
+          if (e.finished) handleSaveColumnState(e.api, e.source);
+        }}
+        onColumnMoved={(e) => {
+          if (e.finished) handleSaveColumnState(e.api, e.source);
+        }}
+        onColumnVisible={(e) => handleSaveColumnState(e.api)}
+        onColumnPinned={(e) => handleSaveColumnState(e.api)}
+        onSortChanged={(e) => handleSaveColumnState(e.api)}
         enableCellTextSelection
         ensureDomOrder
       />

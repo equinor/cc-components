@@ -50,6 +50,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<Pipetest>, ...ColDef<Pipetest>[]],
     modules: defaultModules,
+    storageKey: 'cc.piping.grid.columnState',
   };
 };
 

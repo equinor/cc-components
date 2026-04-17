@@ -51,6 +51,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
     },
     columnDefinitions: colDefs as [ColDef<Punch>, ...ColDef<Punch>[]],
     modules: defaultModules,
+    storageKey: 'cc.punch.grid.columnState',
   };
 };
 

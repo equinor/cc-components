@@ -56,6 +56,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
     modules: defaultModules,
+    storageKey: 'cc.workorder.grid.columnState',
   };
 };
 

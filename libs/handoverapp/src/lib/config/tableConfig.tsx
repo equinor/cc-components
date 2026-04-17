@@ -77,6 +77,7 @@ export const useTableConfig = (
         );
       },
     } as GridConfig<HandoverPackage, FilterState>['gridOptions'],
+    storageKey: 'cc.handover.grid.columnState',
   };
 };
 
