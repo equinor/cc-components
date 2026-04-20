@@ -108,7 +108,6 @@ function reorderColDefs<T>(colDefs: ColDef<T>[], persistedOrder: string[]): ColD
     }
   }
 
-  // Append any new columns not in persisted state
   for (const def of colDefMap.values()) {
     ordered.push(def);
   }
