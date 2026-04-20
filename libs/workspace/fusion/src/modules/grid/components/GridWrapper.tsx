@@ -39,6 +39,10 @@ export const GridWrapper = <
   const { onGridReady: persistOnGridReady, saveColumnState, hasPersistedState, initialGridState } =
     usePersistedColumnState(config.storageKey, config.columnDefinitions);
 
+  if (hasPersistedState) {
+    delete config.gridOptions.onFirstDataRendered;
+  }
+
   const handleSaveColumnState = useCallback(
     (api: GridApi, source?: string) => saveColumnState(api, source),
     [saveColumnState],
