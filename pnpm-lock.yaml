@@ -884,6 +884,9 @@ importers:
       '@equinor/fusion-react-person':
         specifier: 'catalog:'
         version: 1.0.0(react@19.2.3)
+      '@equinor/workspace-ag-grid':
+        specifier: workspace:*
+        version: link:../workspace/ag-grid
       '@equinor/workspace-fusion':
         specifier: workspace:*
         version: link:../workspace/fusion

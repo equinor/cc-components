@@ -62,6 +62,19 @@ export function clearPersistedColumnState(storageKey: string, api: GridApi): voi
   api.resetColumnState();
 }
 
+export function hasPersistedColumnState(storageKey: string | undefined, columnDefs: ColDef[]): boolean {
+  if (!storageKey) return false;
+  const persisted = readFromStorage(storageKey);
+  return persisted?.fingerprint === computeFingerprint(columnDefs);
+}
+
+export function getPersistedColumnOrder(storageKey: string | undefined, columnDefs: ColDef[]): string[] | null {
+  if (!storageKey) return null;
+  const persisted = readFromStorage(storageKey);
+  if (persisted?.fingerprint !== computeFingerprint(columnDefs)) return null;
+  return persisted.state.map((s) => s.colId);
+}
+
 export function usePersistedColumnState(storageKey: string | undefined, columnDefs: ColDef[]) {
   const fingerprint = useMemo(
     () => (storageKey ? computeFingerprint(columnDefs) : ''),

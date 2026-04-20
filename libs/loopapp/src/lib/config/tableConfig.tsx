@@ -35,7 +35,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions, 'cc.loop.grid.columnState');
 
   async function fetchLoopExport(filterstate: FilterState): Promise<void> {
     const requestOptions = {

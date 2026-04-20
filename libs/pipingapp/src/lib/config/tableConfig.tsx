@@ -35,7 +35,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions, 'cc.piping.grid.columnState');
   return {
     gridOptions: {
       ...defaultGridOptions,

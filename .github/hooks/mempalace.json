@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "hooks": {
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "powershell": "powershell -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.copilot\\hooks\\mempal_save_hook.ps1\"",
+        "timeoutSec": 10
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "powershell": "powershell -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.copilot\\hooks\\mempal_session_end_hook.ps1\"",
+        "timeoutSec": 120
+      }
+    ]
+  }
+}

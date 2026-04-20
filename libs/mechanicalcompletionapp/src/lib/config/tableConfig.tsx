@@ -42,7 +42,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions, 'cc.mechanicalcompletion.grid.columnState');
 
   return {
     getRows: getRows,

@@ -39,6 +39,15 @@ export const GridWrapper = <
   const { onGridReady: persistOnGridReady, saveColumnState, hasPersistedState, initialGridState } =
     usePersistedColumnState(config.storageKey, config.columnDefinitions);
 
+  // Preserve column state (order, width, sort, visibility, pinning) when columnDefs are
+  // replaced via updateGridOptions (e.g. when useGridDataSource applies server-provided
+  // sortable/enableRowGroup flags after the first data response). Without this, AG Grid
+  // resets column state on every columnDefs change, which fires onColumnMoved and overwrites
+  // any persisted state restored via initialState.
+  config.gridOptions.maintainColumnOrder = true;
+
+  // When persisted state exists, skip the app-defined onFirstDataRendered callback (which
+  // typically calls autoSizeColumns and would overwrite persisted column widths).
   if (hasPersistedState) {
     delete config.gridOptions.onFirstDataRendered;
   }

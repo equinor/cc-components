@@ -63,7 +63,7 @@ export const useTableConfig = (
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions as ColDef<HandoverPackage>[]);
+  }, columnDefinitions as ColDef<HandoverPackage>[], 'cc.handover.grid.columnState');
 
   return {
     getRows: getRows,

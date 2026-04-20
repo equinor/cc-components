@@ -1,3 +1,3 @@
 export * from './components';
 export * from './types';
-export { clearPersistedColumnState, usePersistedColumnState } from './usePersistedColumnState';
+export { clearPersistedColumnState, getPersistedColumnOrder, hasPersistedColumnState, usePersistedColumnState } from './usePersistedColumnState';

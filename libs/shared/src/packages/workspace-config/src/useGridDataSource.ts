@@ -5,6 +5,7 @@ import {
 } from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import { useState } from 'react';
+import { getPersistedColumnOrder } from '@equinor/workspace-ag-grid';
 import { useContextId } from '../../hooks/src/lib/useContextId';
 
 type IServerSideRowGetParams = Parameters<GridConfig<unknown, unknown>['getRows']>[0];
@@ -30,7 +31,8 @@ export function useGridDataSource<TData>(
     requestArgs: RequestInit,
     params: IServerSideGetRowsParams<any>
   ) => Promise<DataResponse<TData>>,
-  columnDefinitions: ColDef<TData>[]
+  columnDefinitions: ColDef<TData>[],
+  storageKey?: string
 ) {
   const [colDefs, setColDefs] = useState<ColDef<TData>[]>(columnDefinitions);
   const contextId = useContextId();
@@ -77,8 +79,13 @@ export function useGridDataSource<TData>(
             return def;
           });
 
-          params.api.updateGridOptions({ columnDefs: newColDefs });
-          setColDefs(newColDefs);
+          const persistedOrder = getPersistedColumnOrder(storageKey, columnDefinitions);
+          const orderedColDefs = persistedOrder
+            ? reorderColDefs(newColDefs, persistedOrder)
+            : newColDefs;
+
+          params.api.updateGridOptions({ columnDefs: orderedColDefs });
+          setColDefs(orderedColDefs);
         }
 
         params.success({ rowData: response.items, rowCount: response.rowCount });
@@ -87,4 +94,24 @@ export function useGridDataSource<TData>(
       }
     },
   };
+}
+
+function reorderColDefs<T>(colDefs: ColDef<T>[], persistedOrder: string[]): ColDef<T>[] {
+  const colDefMap = new Map(colDefs.map((def) => [def.colId ?? def.field ?? '', def]));
+  const ordered: ColDef<T>[] = [];
+
+  for (const colId of persistedOrder) {
+    const def = colDefMap.get(colId);
+    if (def) {
+      ordered.push(def);
+      colDefMap.delete(colId);
+    }
+  }
+
+  // Append any new columns not in persisted state
+  for (const def of colDefMap.values()) {
+    ordered.push(def);
+  }
+
+  return ordered;
 }

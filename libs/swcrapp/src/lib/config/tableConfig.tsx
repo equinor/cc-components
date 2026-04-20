@@ -35,7 +35,7 @@ export const useTableConfig = (
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions, 'cc.swcr.grid.columnState');
 
   return {
     getRows,
