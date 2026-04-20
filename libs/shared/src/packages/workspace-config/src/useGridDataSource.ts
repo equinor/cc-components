@@ -97,7 +97,7 @@ export function useGridDataSource<TData>(
 }
 
 function reorderColDefs<T>(colDefs: ColDef<T>[], persistedOrder: string[]): ColDef<T>[] {
-  const colDefMap = new Map(colDefs.map((def) => [def.colId ?? def.field ?? '', def]));
+  const colDefMap = new Map(colDefs.map((def, index) => [def.colId ?? def.field ?? `__index_${index}`, def]));
   const ordered: ColDef<T>[] = [];
 
   for (const colId of persistedOrder) {

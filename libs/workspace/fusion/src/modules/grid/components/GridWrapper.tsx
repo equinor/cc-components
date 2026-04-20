@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { GridApi, GridOptions, ServerGrid, usePersistedColumnState } from '@equinor/workspace-ag-grid';
 import { useFilterContext } from '@equinor/workspace-filter';
-import { tokens } from '@equinor/eds-tokens';
-
 import { useResizeObserver } from '../../../lib/hooks/useResizeObserver';
 import { GridConfig } from '../../../lib/integrations/grid';
 import { GetIdentifier, HeaderIcon, useWorkspaceHeaderComponents } from '../../../lib';
@@ -36,7 +34,7 @@ export const GridWrapper = <
   config.gridOptions ??= {};
   setDefaultColDef<TData>(config.gridOptions, selectItem);
 
-  const { onGridReady: persistOnGridReady, saveColumnState, hasPersistedState, initialGridState } =
+  const { saveColumnState, hasPersistedState, initialGridState } =
     usePersistedColumnState(config.storageKey, config.columnDefinitions);
 
   config.gridOptions.maintainColumnOrder = true;
@@ -90,14 +88,13 @@ export const GridWrapper = <
     return () => {
       setIcons((s) => s.filter((y) => y.name !== icon.name));
     };
-  }, [filterState]);
+  }, [filterState, gridApi, config.excelExport, config.storageKey, setIcons]);
 
   return (
     <div id="workspace_grid_wrapper" style={{ height: '100%', width: '100%' }} ref={ref}>
       <ServerGrid<TData>
         onGridReady={(event) => {
           setGridApi(event.api);
-          persistOnGridReady(event);
         }}
         getRows={async (params) => {
           await config.getRows(params, filterStateCopy.current as TFilter);

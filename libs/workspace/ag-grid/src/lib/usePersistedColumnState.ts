@@ -1,4 +1,4 @@
-import { ColDef, ColumnState, GridApi, GridReadyEvent, GridState } from '@equinor/fusion-framework-react-ag-grid/community';
+import { ColDef, ColumnState, GridApi, GridState } from '@equinor/fusion-framework-react-ag-grid/community';
 import { useCallback, useMemo, useRef } from 'react';
 
 type PersistedState = { fingerprint: string; state: ColumnState[] };
@@ -78,7 +78,7 @@ export function getPersistedColumnOrder(storageKey: string | undefined, columnDe
 export function usePersistedColumnState(storageKey: string | undefined, columnDefs: ColDef[]) {
   const fingerprint = useMemo(
     () => (storageKey ? computeFingerprint(columnDefs) : ''),
-    [storageKey],
+    [storageKey, columnDefs],
   );
 
   const persistedRef = useRef<PersistedState | null>(
@@ -96,13 +96,6 @@ export function usePersistedColumnState(storageKey: string | undefined, columnDe
     return columnStateToGridState(persistedRef.current.state);
   }, [storageKey, fingerprint]);
 
-  const onGridReady = useCallback(
-    (_event: GridReadyEvent) => {
-      if (!storageKey) return;
-    },
-    [storageKey, fingerprint],
-  );
-
   const saveColumnState = useCallback(
     (api: GridApi, source?: string) => {
       if (!storageKey) return;
@@ -114,5 +107,5 @@ export function usePersistedColumnState(storageKey: string | undefined, columnDe
     [storageKey, fingerprint],
   );
 
-  return { onGridReady, saveColumnState, hasPersistedState, initialGridState };
+  return { saveColumnState, hasPersistedState, initialGridState };
 }
