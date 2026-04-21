@@ -31,7 +31,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions, 'cc.heattrace.grid.columnState');
   return {
     gridOptions: {
       ...defaultGridOptions,
@@ -46,6 +46,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]],
     modules: defaultModules,
+    storageKey: 'cc.heattrace.grid.columnState',
   };
 };
 

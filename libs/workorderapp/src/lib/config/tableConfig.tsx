@@ -47,7 +47,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
       items: meta.items,
       columnDefinitions: meta.columnDefinitions,
     };
-  }, columnDefinitions);
+  }, columnDefinitions, 'cc.workorder.grid.columnState');
 
   return {
     getRows: getRows,
@@ -56,6 +56,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
     modules: defaultModules,
+    storageKey: 'cc.workorder.grid.columnState',
   };
 };
 

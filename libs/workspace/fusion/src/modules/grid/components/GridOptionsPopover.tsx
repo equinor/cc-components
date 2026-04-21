@@ -1,6 +1,7 @@
 import { Button, Icon, Popover, Progress } from '@equinor/eds-core-react';
 import { close, more_vertical } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
+import { GridApi, clearPersistedColumnState } from '@equinor/workspace-ag-grid';
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -13,8 +14,10 @@ type GridOptionsPopoverProps = {
   anchor: HTMLElement;
   filterState: any;
   excelExport?: (params: any) => Promise<void>;
+  storageKey?: string;
+  gridApi: GridApi | null;
 };
-export const GridOptionPopover = ({ anchor, excelExport, filterState }: GridOptionsPopoverProps) => {
+export const GridOptionPopover = ({ anchor, excelExport, filterState, storageKey, gridApi }: GridOptionsPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const pRef = useRef(null);
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -65,13 +68,23 @@ export const GridOptionPopover = ({ anchor, excelExport, filterState }: GridOpti
                   }
                 />
               )}
-              <ButtonButton
-                disabled={excelExport == undefined}
-                style={{ width: '130px', padding: '0px' }}
-                onClick={!isPending ? handleExportToExcel : undefined}
-              >
-                {isPending ? <Progress.Dots color={'neutral'} /> : 'Export to Excel'}
-              </ButtonButton>
+              {excelExport && (
+                <ButtonButton
+                  disabled={excelExport == undefined}
+                  style={{ width: '130px', padding: '0px' }}
+                  onClick={!isPending ? handleExportToExcel : undefined}
+                >
+                  {isPending ? <Progress.Dots color={'neutral'} /> : 'Export to Excel'}
+                </ButtonButton>
+              )}
+              {storageKey && gridApi && (
+                <ButtonButton
+                  style={{ width: '130px', padding: '0px' }}
+                  onClick={() => clearPersistedColumnState(storageKey, gridApi)}
+                >
+                  Reset columns
+                </ButtonButton>
+              )}
             </ButtonContainer>
           </Popover.Content>
         </Popover>,

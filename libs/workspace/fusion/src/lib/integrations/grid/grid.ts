@@ -13,6 +13,8 @@ import {
   Module,
 } from '@equinor/workspace-ag-grid';
 
+export { clearPersistedColumnState, usePersistedColumnState } from '@equinor/workspace-ag-grid';
+
 export type {
   ColDef,
   ColumnState,
@@ -33,4 +35,5 @@ type GridConfig<T, TFilter> = {
    */
   modules?: Module[];
   excelExport?: (params: TFilter) => Promise<void>;
+  storageKey?: string;
 };
