@@ -1,7 +1,7 @@
-import { useFilterContext } from 'lib/context/filterContext';
+import { useFilterContext } from '../../context/filterContext';
 import { useState } from 'react';
 import { Filter } from '../filter/Filter';
-import { FilterGroup, FilterValueType } from 'lib/types';
+import { FilterGroup, FilterValueType } from '../../types';
 import { Skeleton } from '../skeleton/Skeleton';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';

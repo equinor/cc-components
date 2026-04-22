@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Popover, Typography } from '@equinor/eds-core-react';
 import styled from 'styled-components';
 import * as ReactDOM from 'react-dom';
-import { Information } from 'lib';
+import { Information } from '../../../../lib';
 
 export type InfoPopoverIconProps = {
   information: Information;

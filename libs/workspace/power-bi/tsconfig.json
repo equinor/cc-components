@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "rootDir": "src",
-    "baseUrl": "src",
     "allowJs": false,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": false,
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-  }
+    "outDir": "./dist",
+    "rootDir": ".",
+    "declaration": true
+  },
+  "exclude": [
+    "dist",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.spec.tsx",
+    "**/*.test.tsx"
+  ],
+  "extends": "../../../tsconfig.base.json"
 }

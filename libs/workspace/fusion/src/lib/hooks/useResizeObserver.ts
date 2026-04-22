@@ -5,7 +5,7 @@ import { RefObject, useCallback, useLayoutEffect, useState } from 'react';
  * @param callback Optional callback function that accesses the node
  * @returns width and height for the observed node
  */
-export const useResizeObserver = (ref: RefObject<HTMLElement>, callback?: (entry: DOMRectReadOnly) => void) => {
+export const useResizeObserver = (ref: RefObject<HTMLElement | null>, callback?: (entry: DOMRectReadOnly) => void) => {
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
 

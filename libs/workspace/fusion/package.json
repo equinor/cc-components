@@ -4,60 +4,25 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "tsup",
-    "build:prod": "tsup"
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
+    "build": "tsc -b -f",
+    "build:prod": "tsc -b -f"
   },
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./garden": {
-      "types": "./dist/lib/integrations/garden/index.d.ts",
-      "import": "./dist/lib/integrations/garden/index.js",
-      "require": "./dist/lib/integrations/garden/index.cjs"
-    },
-    "./filter": {
-      "types": "./dist/lib/integrations/filter/index.d.ts",
-      "import": "./dist/lib/integrations/filter/index.js",
-      "require": "./dist/lib/integrations/filter/index.cjs"
-    },
-    "./status-bar": {
-      "types": "./dist/lib/integrations/status-bar/index.d.ts",
-      "import": "./dist/lib/integrations/status-bar/index.js",
-      "require": "./dist/lib/integrations/status-bar/index.cjs"
-    },
-    "./power-bi": {
-      "types": "./dist/lib/integrations/power-bi/index.d.ts",
-      "import": "./dist/lib/integrations/power-bi/index.js",
-      "require": "./dist/lib/integrations/power-bi/index.cjs"
-    },
-    "./grid": {
-      "types": "./dist/lib/integrations/grid/index.d.ts",
-      "import": "./dist/lib/integrations/grid/index.js",
-      "require": "./dist/lib/integrations/grid/index.cjs"
-    },
-    "./sidesheet": {
-      "types": "./dist/lib/integrations/sidesheet/index.d.ts",
-      "import": "./dist/lib/integrations/sidesheet/index.js",
-      "require": "./dist/lib/integrations/sidesheet/index.cjs"
-    },
-    "./power-bi-module": {
-      "types": "./dist/modules/power-bi/index.d.ts",
-      "import": "./dist/modules/power-bi/index.js",
-      "require": "./dist/modules/power-bi/index.cjs"
-    },
-    "./grid-module": {
-      "types": "./dist/modules/grid/index.d.ts",
-      "import": "./dist/modules/grid/index.js",
-      "require": "./dist/modules/grid/index.cjs"
-    },
-    "./garden-module": {
-      "types": "./dist/modules/garden/index.d.ts",
-      "import": "./dist/modules/garden/index.js",
-      "require": "./dist/modules/garden/index.cjs"
-    }
+    ".": "./dist/src/index.js",
+    "./garden": "./dist/src/lib/integrations/garden/index.js",
+    "./filter": "./dist/src/lib/integrations/filter/index.js",
+    "./status-bar": "./dist/src/lib/integrations/status-bar/index.js",
+    "./power-bi": "./dist/src/lib/integrations/power-bi/index.js",
+    "./grid": "./dist/src/lib/integrations/grid/index.js",
+    "./sidesheet": "./dist/src/lib/integrations/sidesheet/index.js",
+    "./power-bi-module": "./dist/src/modules/power-bi/index.js",
+    "./grid-module": "./dist/src/modules/grid/index.js",
+    "./garden-module": "./dist/src/modules/garden/index.js"
   },
   "dependencies": {
     "@equinor/eds-core-react": "catalog:",
@@ -83,7 +48,6 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
-    "tsup": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   }

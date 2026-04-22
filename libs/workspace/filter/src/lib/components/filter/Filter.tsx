@@ -6,7 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Skeleton } from '../skeleton/Skeleton';
 import { ExpandedFilter } from '../expandedFilter/ExpandedFilter';
 import { FilterQuickSearch } from '../filterQuickSearch/FilterQuickSearch';
-import { FilterGroup, FilterValueType } from 'lib/types';
+import { FilterGroup, FilterValueType } from '../../types';
 import { FilterClearIcon, FilterCollapseIcon, FilterExpandIcon } from '@equinor/workspace-core';
 import { StyledButton, StyledButtonContent, StyledFilterBar, StyledFilterLoadingFallback } from './Filter.styles';
 import FilterSettingsMenu from '../filterSettingsMenu/filterSettingsMenu';

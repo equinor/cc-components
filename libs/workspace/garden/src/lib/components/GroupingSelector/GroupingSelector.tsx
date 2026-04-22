@@ -10,7 +10,7 @@ import {
   StyledSubGroupHeader,
 } from './groupingSelector.styles';
 import { useGarden } from '../../hooks/useGarden';
-import { GardenHeaderOption } from '../../types';
+import { GardenHeaderOption, GroupingOption } from '../../types';
 
 type GroupingSelectorProps<TContext> = {
   setGroupingKeys: (keys: string[]) => void;
@@ -89,20 +89,20 @@ export function GroupingSelector<TContext>({
             key={groupingKeys[0]}
             options={gardenMetaQuery.data.allGroupingOptions}
             label={'Group by'}
-            optionLabel={(s) => s?.displayName ?? s?.groupingKey ?? ''}
+            optionLabel={(s: GroupingOption) => s?.displayName ?? s?.groupingKey ?? ''}
             hideClearButton
             multiple={false}
-            selectedOptions={[gardenMetaQuery.data.allGroupingOptions.find((s) => s.groupingKey == groupingKeys[0])]}
-            onOptionsChange={(changes) => handleGardenKeyChange(changes.selectedItems[0]?.groupingKey)}
+            selectedOptions={gardenMetaQuery.data.allGroupingOptions.filter((s) => s.groupingKey == groupingKeys[0])}
+            onOptionsChange={(changes) => handleGardenKeyChange(changes.selectedItems[0]?.groupingKey ?? null)}
           />
           <Autocomplete
             options={gardenMetaQuery.data.validGroupingOptions}
             label={'Then Group by'}
-            selectedOptions={[
-              gardenMetaQuery.data.allGroupingOptions.find((s) => s.groupingKey === groupingKeys.at(1)),
-            ]}
+            selectedOptions={gardenMetaQuery.data.allGroupingOptions.filter(
+              (s) => s.groupingKey === groupingKeys.at(1)
+            )}
             multiple={false}
-            optionLabel={(s) => s?.displayName ?? s?.groupingKey ?? ''}
+            optionLabel={(s: GroupingOption) => s?.displayName ?? s?.groupingKey ?? ''}
             onOptionsChange={(changes) => handleExistingSelectionChange(changes.selectedItems[0]?.groupingKey)}
           />
           {Array.isArray(gardenMetaQuery.data.headerOptions) && gardenMetaQuery.data.headerOptions.length > 0 && (

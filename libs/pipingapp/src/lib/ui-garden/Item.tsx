@@ -8,7 +8,7 @@ import {
   StyledRoot,
   StyledStatusCircles,
 } from './garden.styles';
-import { Pipetest } from 'libs/pipingshared/dist/src';
+import { Pipetest } from '@cc-components/pipingshared';
 import { PackageStatus, PopoverWrapper, getStatusCircle } from '@cc-components/shared';
 import { getPipetestStatusColors } from '../utils-garden/getPipetestStatusColors';
 import { itemContentColors } from '@cc-components/shared/mapping';

@@ -7,7 +7,11 @@ export function ErrorComponent(props: ErrorComponentProps) {
   const { reportUri, error } = props;
 
   // If error related to access
-  if (error.cause instanceof Response && unauthCodes.includes(error.cause.status)) {
+  if (
+    error instanceof Error &&
+    error.cause instanceof Response &&
+    unauthCodes.includes(error.cause.status)
+  ) {
     return <AccessErrorComponent reportUri={reportUri} />;
   }
 

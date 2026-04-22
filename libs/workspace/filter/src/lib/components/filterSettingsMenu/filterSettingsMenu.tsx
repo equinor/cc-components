@@ -1,6 +1,6 @@
 import { Button, EdsProvider, Menu, Switch, Typography, Dialog } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import { useFilterContext } from 'lib/context/filterContext';
+import { useFilterContext } from '../../context/filterContext';
 import React, { useEffect, useRef, useState } from 'react';
 import { ReactSortable, SortableEvent } from 'react-sortablejs';
 import styled from 'styled-components';

@@ -1,7 +1,7 @@
 import { QuickFilterChip, QuickFilterContainer } from './quickFilter.styles';
 import { Dropdown } from '@equinor/workspace-core';
 import { Typography } from '@equinor/eds-core-react';
-import { FilterGroup, FilterValueType } from 'lib/types';
+import { FilterGroup, FilterValueType } from '../../types';
 import { ReactElement } from 'react';
 
 type QuickFilterProps = {
@@ -44,7 +44,7 @@ export function QuickFilter({
                 ? item.descriptions?.join(' // ')
                 : item.value
             }
-            customRenderer={(v) => (
+            CustomRenderer={(v: FilterValueType) => (
               <div
                 style={{
                   display: 'flex',

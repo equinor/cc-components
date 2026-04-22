@@ -24,7 +24,7 @@ export function useBlockCache<T, TContext = undefined>({
     groupingService: { groupingKeys, timeInterval, dateVariant, summaryKey },
   } = useGarden();
 
-  const blockCache: UseBlockCacheArgs<T, TContext> = useQueries({
+  const blockCache = useQueries({
     queries: blocks.map((block) => ({
       /** Unique identifier for blocks, add state here to invalidate query onChange */
       queryKey: [

@@ -14,7 +14,7 @@ import {
   GridConfig,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
-import { McPackage, McStatus } from 'libs/mechanicalcompletionshared';
+import { McPackage, McStatus } from '@cc-components/mechanicalcompletionshared';
 
 import { useHttpClient } from '@cc-components/shared';
 import {

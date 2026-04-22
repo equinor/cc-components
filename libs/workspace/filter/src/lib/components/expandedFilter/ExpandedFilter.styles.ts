@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Checkbox, Typography, Button } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
-import type { StyledComponent } from 'styled-components';
+// @equinor/eds-utils is needed for declaration emit (Typography references OverridableComponent)
+import type {} from '@equinor/eds-utils';
 
 export const FilterListContainer = styled.div`
   display: flex;
@@ -115,7 +116,7 @@ export const ListItem = styled.div<{ start: number; height: number }>`
   }
 `;
 
-export const ListItemText: StyledComponent<typeof Typography, any, {}, never> = styled(
+export const ListItemText = styled(
   Typography
 )`
   width: 100%;
@@ -124,7 +125,7 @@ export const ListItemText: StyledComponent<typeof Typography, any, {}, never> = 
   white-space: nowrap;
 `;
 
-export const ItemCount: StyledComponent<typeof Typography, any, {}, never> = styled(
+export const ItemCount = styled(
   Typography
 )`
   margin-left: auto;
@@ -158,7 +159,7 @@ export const SearchbarContainer = styled.div`
   }
 `;
 
-export const HeaderIconButton: StyledComponent<typeof Button, any, {}, never> = styled(
+export const HeaderIconButton = styled(
   Button
 )`
   aspect-ratio: 1;

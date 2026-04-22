@@ -12,7 +12,7 @@ export function createPowerBiFilter({ data, filter: sliceFilter, slicer }: Slice
   const { values, type } = transformData(data);
 
   // Initial filter Object
-  const filter = { type, slicer, sortOrder, value: {}, filterVals: values };
+  const filter: PowerBiFilter = { type, slicer, sortOrder, value: {}, filterVals: values };
 
   // Adding filter values
   values.forEach((item) => {

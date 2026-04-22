@@ -4,15 +4,16 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "tsup",
-    "build:prod": "tsup"
+    "dev": "npm run build -- --watch",
+    "dev:local": "npm run dev -- --watch",
+    "build": "tsc -b -f",
+    "build:prod": "tsc -b -f"
   },
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+    ".": "./dist/src/index.js"
   },
   "dependencies": {
     "@equinor/eds-core-react": "catalog:",
@@ -30,7 +31,6 @@
     "@types/jest": "catalog:",
     "@types/react": "catalog:",
     "@types/styled-components": "catalog:",
-    "tsup": "catalog:",
     "typescript": "catalog:"
   }
 }
