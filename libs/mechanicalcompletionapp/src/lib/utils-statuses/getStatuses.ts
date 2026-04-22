@@ -1,4 +1,4 @@
-import { McPackage } from 'libs/mechanicalcompletionshared/dist/src';
+import { McPackage } from '@cc-components/mechanicalcompletionshared';
 
 export const getCommissioningStatus = (mcPackage: McPackage): string => {
   if (mcPackage.rfO_IsAccepted) {

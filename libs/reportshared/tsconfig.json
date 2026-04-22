@@ -5,7 +5,6 @@
     "outDir": "./dist",
     "jsx": "react-jsx",
     "allowJs": false,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "types": ["node"]

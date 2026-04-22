@@ -1,6 +1,6 @@
 import { TabTable } from '@cc-components/shared';
 import { checklistColumns } from './checklistColumns';
-import { HeatTraceChecklist } from 'libs/heattraceshared/dist/src';
+import { HeatTraceChecklist } from '@cc-components/heattraceshared';
 import { ReactElement } from 'react';
 
 type ChecklistTabProps = {

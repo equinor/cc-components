@@ -5,9 +5,9 @@ import { TabNavigation } from '../../../../lib/integrations/common/components/Ta
 import { useStatusBar } from '../../../../lib/integrations/status-bar';
 import { useCreateButton } from '../../../../lib/hooks/useCreateButton';
 import { SidesheetConfig } from '../../../../lib/integrations/sidesheet';
-import { InfoPopoverIcon } from 'modules/shared/components/InfoPopover';
-import { HeaderIcon, Information, TabButtonDivider, useWorkspaceHeaderComponents } from 'lib';
-import { Divider } from 'lib/components/divider';
+import { InfoPopoverIcon } from '../../../shared/components/InfoPopover';
+import { HeaderIcon, Information, TabButtonDivider, useWorkspaceHeaderComponents } from '../../../../lib';
+import { Divider } from '../../../../lib/components/divider';
 import { useEffect } from 'react';
 
 type GardenWorkspaceHeaderProps<
