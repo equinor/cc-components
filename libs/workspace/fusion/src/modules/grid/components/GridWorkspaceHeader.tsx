@@ -5,8 +5,8 @@ import { StyledActionBar } from '../../../lib/components/Header/actionBar.styles
 import { TabNavigation } from '../../../lib/integrations/common/components/TabNavigation';
 import { SidesheetConfig } from '../../../lib/integrations/sidesheet';
 import { useCreateButton } from '../../../lib/hooks/useCreateButton';
-import { HeaderIcon, Information, useWorkspaceHeaderComponents } from 'lib';
-import { InfoPopoverIcon } from 'modules/shared/components/InfoPopover';
+import { HeaderIcon, Information, useWorkspaceHeaderComponents } from '../../../lib';
+import { InfoPopoverIcon } from '../../shared/components/InfoPopover';
 import { useEffect } from 'react';
 
 type GridHeaderProps<TData extends Record<PropertyKey, unknown>> = {

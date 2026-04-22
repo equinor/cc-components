@@ -31,9 +31,9 @@
   "devDependencies": {
     "@equinor/fusion-framework-cli": "catalog:",
     "@nx/devkit": "catalog:",
+    "@nx/eslint": "catalog:",
     "@nx/js": "catalog:",
     "@nx/vite": "catalog:",
-    "@nx/eslint": "catalog:",
     "@swc-node/register": "catalog:",
     "@swc/core": "catalog:",
     "@testing-library/jest-dom": "catalog:",
@@ -84,12 +84,12 @@
     "core-js": "catalog:",
     "luxon": "catalog:",
     "odata-query": "catalog:",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-error-boundary": "catalog:",
     "rimraf": "catalog:",
     "rxjs": "catalog:",
-    "styled-components": "^6.3.6",
+    "styled-components": "catalog:",
     "stylis": "catalog:"
   },
   "engines": {
@@ -97,15 +97,15 @@
   },
   "pnpm": {
     "overrides": {
-      "react": "^19.2.3",
-      "react-dom": "^19.2.3",
-      "styled-components": "^6.3.6"
+      "react": "catalog:",
+      "react-dom": "catalog:",
+      "styled-components": "catalog:"
     },
     "peerDependencyRules": {
       "allowedVersions": {
-        "react": "^19.2.3",
-        "react-dom": "^19.2.3",
-        "styled-components": "^6.3.6"
+        "react": "^19.2.5",
+        "react-dom": "^19.2.5",
+        "styled-components": "^6.4.1"
       },
       "ignoreMissing": [
         "react",
@@ -115,18 +115,21 @@
         "@types/react",
         "@types/react-dom"
       ]
+    },
+    "patchedDependencies": {
+      "tsup@8.5.1": "patches/tsup@8.5.1.patch"
     }
   },
   "overrides": {
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "@types/react": "^19.2.8",
-    "@types/react-dom": "^19.2.3",
-    "styled-components": "^6.3.6"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "styled-components": "catalog:"
   },
   "resolutions": {
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "styled-components": "^6.3.6"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:"
   }
 }

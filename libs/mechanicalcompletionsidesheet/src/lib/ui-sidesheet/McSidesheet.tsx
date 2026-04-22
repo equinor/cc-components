@@ -253,7 +253,7 @@ const McSideSheetComponent = (props: Required<McProps>) => {
 
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { useQuery } from '@tanstack/react-query';
-import { MccrBase } from 'libs/shared/dist/src/packages/sidesheet/src/lib/sidesheet/tabs/mccr/types';
+import { MccrBase } from '@cc-components/shared/sidesheet';
 import { useGetEchoConfig } from '../utils-sidesheet/useGetEchoConfig';
 
 const EnsureMcPkg = ({ id, close, item }: McProps) => {

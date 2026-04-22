@@ -1,5 +1,5 @@
 import { McStatus } from './mcStatuses';
-import { BaseStatus } from 'libs/shared/dist/src';
+import { BaseStatus } from '@cc-components/shared';
 
 export type McPackage = {
   mechanicalCompletionPackageId: string;
