@@ -45,8 +45,6 @@ catalog:
   '@equinor/fusion-framework-react-module-http': ^11.0.0
   '@equinor/fusion-observable': ^9.0.0
   '@equinor/fusion-react-person': ^2.0.3
-  '@equinor/workspace-sidesheet': ^0.1.6
-
   # Build tools
   typescript: ^6.0.3
   tsup: ^8.5.1
