@@ -61,7 +61,7 @@ export const GridWrapper = <
 
   const [_, height] = useResizeObserver(ref);
 
-  useDeselectionEvent(selection, config.gridOptions.api);
+  useDeselectionEvent(selection, gridApi);
 
   const { setIcons } = useWorkspaceHeaderComponents();
 

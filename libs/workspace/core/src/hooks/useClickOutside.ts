@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useRef } from 'react';
 
 export const useClickOutside = (
-  elementRefs: RefObject<Element> | RefObject<Element>[],
+  elementRefs: RefObject<Element | null> | RefObject<Element | null>[],
   callback: (e: MouseEvent) => void,
   isActive = true
 ) => {

@@ -44,7 +44,7 @@ export function QuickFilter({
                 ? item.descriptions?.join(' // ')
                 : item.value
             }
-            customRenderer={(v) => (
+            CustomRenderer={(v: FilterValueType) => (
               <div
                 style={{
                   display: 'flex',

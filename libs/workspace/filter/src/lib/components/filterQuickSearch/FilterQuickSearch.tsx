@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { EdsSearch } from './filterQuickSearch.styles';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 const FullWidthEdsSearch = styled(EdsSearch)`
   width: 100%;
@@ -18,8 +18,8 @@ export const FilterQuickSearch = ({ searchText, searchTextChange }: FilterQuickS
     }
   }
 
-  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.target;
+  function handleInput(e: React.FormEvent<HTMLInputElement>) {
+    const { value } = e.currentTarget;
     searchTextChange(value || '');
   }
 

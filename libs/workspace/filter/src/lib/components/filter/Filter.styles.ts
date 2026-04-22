@@ -1,10 +1,10 @@
 import { Button } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
+// @equinor/eds-utils is needed for declaration emit (Button references OverridableComponent)
+import type {} from '@equinor/eds-utils';
 
-import type { StyledComponent } from 'styled-components';
-
-export const StyledButton: StyledComponent<typeof Button, any, {}, never> = styled(Button)`
+export const StyledButton = styled(Button)`
   min-width: 40px;
 `;
 

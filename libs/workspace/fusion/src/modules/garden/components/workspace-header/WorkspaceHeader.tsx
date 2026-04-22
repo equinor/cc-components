@@ -1,6 +1,6 @@
 import { WorkspaceFilter, FilterDataSource } from '@equinor/workspace-filter';
 import styled from 'styled-components';
-import { StyledActionBar, StyledActionBarRight } from '../../../../lib/components/Header/actionBar.styles';
+import { StyledActionBar } from '../../../../lib/components/Header/actionBar.styles';
 import { TabNavigation } from '../../../../lib/integrations/common/components/TabNavigation';
 import { useStatusBar } from '../../../../lib/integrations/status-bar';
 import { useCreateButton } from '../../../../lib/hooks/useCreateButton';

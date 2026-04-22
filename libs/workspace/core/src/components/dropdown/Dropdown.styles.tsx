@@ -1,7 +1,9 @@
 import { Menu, MenuProps, Typography } from '@equinor/eds-core-react';
 import { tokens } from '@equinor/eds-tokens';
 import React, { forwardRef } from 'react';
-import { styled, StyledComponent } from 'styled-components';
+import styled from 'styled-components';
+// @equinor/eds-utils is needed for declaration emit (Typography references OverridableComponent)
+import type {} from '@equinor/eds-utils';
 
 export const DropdownContainer = styled.div<{ selected: boolean }>`
   display: flex;
@@ -116,7 +118,7 @@ export const ActionsContainer = styled.div`
   border-top: 2px solid ${tokens.colors.ui.background__medium.rgba};
 `;
 
-export const ListItemText: StyledComponent<typeof Typography, any> = styled(Typography)`
+export const ListItemText = styled(Typography)`
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -6,7 +6,7 @@ import { GardenDataSource } from '../components';
 export type GardenState = {
   selectionService: SelectionService;
   groupingService: GroupingService;
-  gardenMetaQuery: ThisType<UseSuspenseQueryResult<GardenMeta, unknown>>;
+  gardenMetaQuery: UseSuspenseQueryResult<GardenMeta, unknown>;
 };
 
 type GroupingService = {

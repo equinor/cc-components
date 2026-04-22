@@ -63,6 +63,8 @@
     "vitest": "catalog:"
   },
   "dependencies": {
+    "ag-grid-community": "^34.3.1",
+    "ag-grid-enterprise": "^34.3.1",
     "@equinor/eds-core-react": "catalog:",
     "@equinor/eds-icons": "catalog:",
     "@equinor/eds-tokens": "catalog:",
@@ -99,7 +101,9 @@
     "overrides": {
       "react": "catalog:",
       "react-dom": "catalog:",
-      "styled-components": "catalog:"
+      "styled-components": "catalog:",
+      "ag-grid-community": "^34.3.1",
+      "ag-grid-enterprise": "^34.3.1"
     },
     "peerDependencyRules": {
       "allowedVersions": {
@@ -116,9 +120,7 @@
         "@types/react-dom"
       ]
     },
-    "patchedDependencies": {
-      "tsup@8.5.1": "patches/tsup@8.5.1.patch"
-    }
+    "patchedDependencies": {}
   },
   "overrides": {
     "react": "catalog:",

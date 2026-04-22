@@ -30,26 +30,25 @@ catalog:
   '@equinor/eds-icons': ^1.4.0
   '@equinor/eds-tokens': ^2.2.0
 
-  # Equinor Fusion Framework
-  '@equinor/fusion-framework-cli': ^14.2.3
-  '@equinor/fusion-framework-module': ^6.0.0
-  '@equinor/fusion-framework-module-ag-grid': ^36.0.0
-  '@equinor/fusion-framework-module-event': ^6.0.0
-  '@equinor/fusion-framework-module-http': ^8.0.0
-  '@equinor/fusion-framework-module-msal': ^8.0.1
-  '@equinor/fusion-framework-react': ^8.0.0
-  '@equinor/fusion-framework-react-ag-grid': ^36.0.1
-  '@equinor/fusion-framework-react-app': ^10.0.2
-  '@equinor/fusion-framework-react-module-bookmark': ^6.0.0
-  '@equinor/fusion-framework-react-module-context': ^7.0.0
-  '@equinor/fusion-framework-react-module-http': ^11.0.0
-  '@equinor/fusion-observable': ^9.0.0
+  # Equinor Fusion Framework (held at current majors — portal not yet compatible with v10)
+  '@equinor/fusion-framework-cli': ^13.3.18
+  '@equinor/fusion-framework-module': ^5.0.6
+  '@equinor/fusion-framework-module-ag-grid': ^34.4.0
+  '@equinor/fusion-framework-module-event': ^4.4.1
+  '@equinor/fusion-framework-module-http': ^7.0.8
+  '@equinor/fusion-framework-module-msal': ^6.0.5
+  '@equinor/fusion-framework-react': ^7.4.20
+  '@equinor/fusion-framework-react-ag-grid': ^34.4.1
+  '@equinor/fusion-framework-react-app': ^8.2.0
+  '@equinor/fusion-framework-react-module-bookmark': ^5.0.2
+  '@equinor/fusion-framework-react-module-context': ^6.2.34
+  '@equinor/fusion-framework-react-module-http': ^10.0.1
+  '@equinor/fusion-observable': ^8.5.8
   '@equinor/fusion-react-person': ^2.0.3
   # Build tools
   typescript: ^6.0.3
-  tsup: ^8.5.1
-  vite: ^8.0.9
-  '@vitejs/plugin-react': ^6.0.1
+  vite: ^7.3.2
+  '@vitejs/plugin-react': ^5.2.0
   turbo: ^2.9.6
   tsx: ^4.21.0
   ts-node: ^10.9.2
