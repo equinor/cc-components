@@ -98,7 +98,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
 
 const columnDefinitions: ColDef<Loop>[] = [
   {
-    colId: 'LoopTag',
+    colId: 'LoopNo',
     headerName: 'Loop tag',
     headerTooltip: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
@@ -125,7 +125,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     width: 350,
   },
   {
-    colId: domainNames.commSystem,
+    colId: 'System',
     headerName: domainNames.commSystem,
     headerTooltip: domainNames.commSystem,
     valueGetter: (pkg) => pkg.data?.system,
@@ -135,7 +135,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     enableRowGroup: false,
   },
   {
-    colId: 'CommPkgNo',
+    colId: 'CommissioningPackageNo',
     headerName: domainNames.commPkg,
     headerTooltip: domainNames.commPkg,
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
@@ -156,7 +156,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'MCPkgNo',
+    colId: 'MechanicalCompletionPackageNo',
     headerName: domainNames.mcPkg,
     headerTooltip: domainNames.mcPkg,
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
@@ -221,7 +221,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
-    colId: 'CLStatus',
+    colId: 'Status',
     headerName: domainNames.checklistStatus,
     headerTooltip: domainNames.checklistStatus,
     valueGetter: (pkg) => pkg.data?.status,
@@ -296,6 +296,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
+    colId: 'LoopContentStatus',
     headerName: 'Content MC status',
     headerTooltip: 'Content MC status',
     valueGetter: (pkg) => pkg.data?.loopContentStatus,

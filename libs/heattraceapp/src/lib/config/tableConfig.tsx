@@ -146,7 +146,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
       );
     },
   },
-  { headerName: domainNames.currentStep, valueGetter: (pkg) => pkg.data?.checklistStep },
+  { colId: 'ChecklistStep', headerName: domainNames.currentStep, valueGetter: (pkg) => pkg.data?.checklistStep },
   {
     colId: 'RfCPlannedForecastDate',
     headerName: 'RFC',
@@ -156,7 +156,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     },
   },
   {
-    colId: 'CommissioningIdentifierCode',
+    colId: 'CommissioningIdentifierDescription',
     headerName: domainNames.commIdentifier,
     valueGetter: (pkg) => pkg.data?.commissioningIdentifierDescription,
   },
@@ -176,6 +176,7 @@ const columnDefinitions: [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]] = [
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPhase,
   },
   {
+    colId: 'Pipetest',
     headerName: 'Pipetest',
     valueGetter: (pkg) => pkg.data?.pipetest,
     cellRenderer: (props: ICellRendererProps<HeatTrace, string>) => {

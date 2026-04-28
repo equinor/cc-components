@@ -61,7 +61,7 @@ export const useTableConfig = (
         e.api.autoSizeColumns(
           e.api
             .getAllDisplayedColumns()
-            .filter((s) => !['description', 'title'].includes(s.getColId()))
+            .filter((s) => !['description', 'Title'].includes(s.getColId()))
         );
       },
     },
@@ -74,7 +74,7 @@ export const useTableConfig = (
 
 const columnDefinitions: ColDef<SwcrPackage>[] = [
   {
-    colId: 'SwcrNo',
+    colId: 'SoftwareChangeRecordNo',
     headerName: domainNames.softwareChangeRequests,
     valueGetter: (pkg) => pkg.data?.softwareChangeRecordNo,
     cellRenderer: (props: ICellRendererProps<SwcrPackage, string>) => {
@@ -93,7 +93,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'title',
+    colId: 'Title',
     headerName: 'Title',
     headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.title,
@@ -110,7 +110,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 200,
   },
   {
-    colId: 'System',
+    colId: 'FunctionalSystem',
     headerName: domainNames.swcrFunctionalSystem,
     headerTooltip: domainNames.swcrFunctionalSystem,
     valueGetter: (pkg) => pkg.data?.functionalSystem,
@@ -130,7 +130,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
   // next sign by will be included with "Next sign role"
   {
-    colId: 'NextSignBy',
+    colId: 'NextToSignFunctionalRole',
     headerName: domainNames.nextSignBy, //denne heter functionalrole i FAM.
     headerTooltip: domainNames.nextSignBy,
     valueGetter: (pkg) => {
@@ -141,7 +141,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 400,
   },
   {
-    colId: 'NextSignRole',
+    colId: 'NextToSignRole',
     headerName: domainNames.nextToSignRole,
     headerTooltip: domainNames.nextToSignRole,
     valueGetter: (pkg) => {
@@ -153,7 +153,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     minWidth: 200,
   },
   {
-    colId: 'LatestSignBy',
+    colId: 'LatestSignedRoleFunctionalRole',
     headerName: domainNames.lastSignedBy,
     headerTooltip: domainNames.lastSignedBy,
     valueGetter: (pkg) => {
@@ -164,7 +164,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
   },
 
   {
-    colId: 'LatestSignByRole',
+    colId: 'LatestSignedRole',
     headerName: domainNames.lastSignedByRole,
     headerTooltip: domainNames.lastSignedByRole,
     valueGetter: (pkg) => {
@@ -183,7 +183,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 150,
   },
   {
-    colId: 'Types',
+    colId: 'SwcrTypes',
     headerName: domainNames.swcrTypes,
     headerTooltip: domainNames.swcrTypes,
     valueGetter: (pkg) => pkg.data?.swcrTypes,
@@ -206,7 +206,7 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 200,
   },
   {
-    colId: 'Node',
+    colId: 'NodeIdentifier',
     headerName: domainNames.swcrNodeIdentifier,
     headerTooltip: domainNames.swcrNodeIdentifier,
     valueGetter: (pkg) => pkg.data?.nodeIdentifier,
@@ -216,35 +216,35 @@ const columnDefinitions: ColDef<SwcrPackage>[] = [
     width: 150,
   },
   {
-    colId: 'commSystem',
+    colId: 'System',
     headerName: domainNames.commSystem,
     headerTooltip: domainNames.system,
     valueGetter: (pkg) => pkg.data?.system,
     width: 200,
   },
   {
-    colId: 'priority1',
+    colId: 'Priority1',
     headerName: domainNames.commPriority1,
     headerTooltip: domainNames.commPriority1,
     valueGetter: (pkg) => pkg.data?.priority1,
     width: 200,
   },
   {
-    colId: 'priority2',
+    colId: 'Priority2',
     headerName: domainNames.commPriority2,
     headerTooltip: domainNames.commPriority2,
     valueGetter: (pkg) => pkg.data?.priority2,
     width: 200,
   },
   {
-    colId: 'priority3',
+    colId: 'Priority3',
     headerName: domainNames.commPriority3,
     headerTooltip: domainNames.commPriority3,
     valueGetter: (pkg) => pkg.data?.priority3,
     width: 200,
   },
   {
-    colId: 'handoverStatus',
+    colId: 'HandoverStatus',
     headerName: domainNames.handoverStatus,
     headerTooltip: domainNames.handoverStatus,
     valueGetter: (pkg) => pkg.data?.handoverStatus,

@@ -99,7 +99,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     headerName: 'Title',
-    colId: 'Title',
+    colId: 'Description',
     headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -108,7 +108,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     width: 300,
   },
   {
-    colId: 'DisciplineCode',
+    colId: 'Discipline',
     headerName: domainNames.workorderDiscipline,
     headerTooltip: domainNames.workorderDiscipline,
     valueGetter: (pkg) => pkg.data?.discipline,
@@ -207,7 +207,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     minWidth: 150,
   },
   {
-    colId: 'MCStatus',
+    colId: 'MccrStatus',
     headerName: domainNames.mcStatus,
     headerTooltip: domainNames.mcStatus,
     valueGetter: (pkg) => pkg.data?.mccrStatus,
@@ -237,7 +237,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     valueGetter: (pkg) => pkg.data?.systems,
   },
   {
-    colId: 'EstimatedHours',
+    colId: 'RemainingHours',
     headerName: domainNames.remainingManHours,
     headerTooltip: domainNames.remainingManHours,
     valueGetter: (pkg) => pkg.data?.remainingHours,
@@ -247,7 +247,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
-    colId: 'RemainingHours',
+    colId: 'EstimatedHours',
     headerName: domainNames.estimatedManHours,
     headerTooltip: domainNames.estimatedManHours,
     valueGetter: (pkg) => pkg.data?.estimatedHours,

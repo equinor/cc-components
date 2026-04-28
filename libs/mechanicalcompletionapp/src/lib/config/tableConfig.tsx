@@ -80,7 +80,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
 const columnDefinitions: ColDef<McPackage>[] = [
   {
     headerName: 'MC Pkg',
-    colId: 'MCPkgNo',
+    colId: 'MechanicalCompletionPackageNo',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
     valueFormatter: (pkg) => pkg.data?.mechanicalCompletionPackageUrl ?? '',
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -118,7 +118,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'MC Status',
-    colId: 'McStatus',
+    colId: 'MechanicalCompletionStatus',
     headerTooltip: 'Mechanical Completion Status',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<McPackage, McStatus | null>) => {
@@ -146,7 +146,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Phase',
-    colId: 'Phase',
+    colId: 'MechanicalCompletionPhase',
     headerTooltip: 'mechanicalCompletionPhase',
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPhase,
     enableRowGroup: true,
@@ -165,7 +165,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Comm Pkg',
-    colId: 'CommPkg',
+    colId: 'CommissioningPackageNo',
     headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     valueFormatter: (pkg) => pkg.data?.commissioningPackageUrl ?? '',
@@ -197,7 +197,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Actual M-01 Actual Date',
-    colId: 'PlannedM1FinalPunch',
+    colId: 'FinalPunchPlannedDate',
     headerTooltip: 'finalPunchPlannedDate',
     valueGetter: (pkg) => pkg.data?.finalPunchPlannedDate,
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -207,7 +207,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Actual M-02 RFC',
-    colId: 'ActualM2ActualDate',
+    colId: 'FinalPunchActualDate',
     headerTooltip: 'finalPunchActualDate',
     valueGetter: (pkg) => pkg.data?.finalPunchActualDate,
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -217,7 +217,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Actual M-03 RFC',
-    colId: 'CommPri3',
+    colId: 'RFC_ActualDate',
     headerTooltip: 'rfC_ActualDate',
     valueGetter: (pkg) => pkg.data?.rfC_ActualDate,
     cellRenderer: (props: ICellRendererProps<McPackage, string | null>) => {
@@ -227,7 +227,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Comm Pri1',
-    colId: 'CommPri1',
+    colId: 'Priority1',
     headerTooltip: 'Commissioning Priority 1',
     valueGetter: (pkg) => pkg.data?.priority1,
     enableRowGroup: true,
@@ -235,7 +235,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Comm Pri2',
-    colId: 'CommPri2',
+    colId: 'Priority2',
     headerTooltip: 'Commissioning Priority 2',
     valueGetter: (pkg) => pkg.data?.priority2,
     enableRowGroup: true,
@@ -243,7 +243,7 @@ const columnDefinitions: ColDef<McPackage>[] = [
   },
   {
     headerName: 'Comm Pri3',
-    colId: 'CommPri3',
+    colId: 'Priority3',
     headerTooltip: 'Commissioning Priority 3',
     valueGetter: (pkg) => pkg.data?.priority3,
     enableRowGroup: true,

@@ -61,7 +61,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
       ...defaultGridOptions,
       onFirstDataRendered: (e) => {
         e.api.autoSizeColumns(
-          e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'description')
+          e.api.getAllDisplayedColumns().filter((s) => s.getColId() !== 'Description')
         );
       },
     },
@@ -74,7 +74,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
 
 const columnDefinitions: ColDef<Punch>[] = [
   {
-    colId: 'Punch',
+    colId: 'PunchItemNo',
     headerName: domainNames.punch,
     headerTooltip: domainNames.punch,
     valueGetter: (pkg) => pkg.data?.punchItemNo,
@@ -95,7 +95,7 @@ const columnDefinitions: ColDef<Punch>[] = [
   },
   {
     headerName: 'Description',
-    colId: 'description',
+    colId: 'Description',
     headerTooltip: 'Description',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
@@ -152,13 +152,13 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => pkg.data?.discipline,
   },
   {
-    colId: 'PLSorting',
+    colId: 'Sorting',
     headerName: domainNames.punchSorting,
     headerTooltip: domainNames.punchSorting,
     valueGetter: (pkg) => pkg.data?.sorting,
   },
   {
-    colId: 'PLType',
+    colId: 'Type',
     headerName: domainNames.punchType,
     headerTooltip: domainNames.punchType,
     valueGetter: (pkg) => pkg.data?.type,
@@ -179,13 +179,13 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
-    colId: 'RaisedByOrg',
+    colId: 'RaisedBy',
     headerName: domainNames.raisedBy,
     headerTooltip: domainNames.raisedBy,
     valueGetter: (pkg) => pkg.data?.raisedBy,
   },
   {
-    colId: 'ClearingByOrg',
+    colId: 'ClearedBy',
     headerName: domainNames.clearingBy,
     headerTooltip: domainNames.clearingBy,
     valueGetter: (pkg) => pkg.data?.clearedBy,
@@ -209,7 +209,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (params) => params.data?.priority3,
   },
   {
-    colId: 'Cleared',
+    colId: 'ClearedAtDate',
     headerName: 'Cleared',
     headerTooltip: 'Cleared',
     valueGetter: (pkg) => pkg.data?.clearedAtDate,
@@ -218,7 +218,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
-    colId: 'Verified',
+    colId: 'VerifiedAtDate',
     headerName: domainNames.verified,
     headerTooltip: domainNames.verified,
     valueGetter: (pkg) => pkg.data?.verifiedAtDate,
@@ -236,7 +236,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
-    colId: 'FormType',
+    colId: 'FormularType',
     headerName: domainNames.formType,
     headerTooltip: domainNames.formType,
     valueGetter: (pkg) => pkg.data?.formularType,
@@ -254,7 +254,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'Tag',
+    colId: 'TagNo',
     headerName: domainNames.tag,
     headerTooltip: domainNames.tag,
     valueGetter: (pkg) => pkg.data?.tagNo,
@@ -272,7 +272,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'CommPkg',
+    colId: 'CommissioningPackageNo',
     headerName: domainNames.commPkg,
     headerTooltip: domainNames.commPkg,
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
@@ -293,7 +293,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'WorkOrder',
+    colId: 'WorkOrderNo',
     headerName: domainNames.workorder,
     headerTooltip: domainNames.workorder,
     valueGetter: (pkg) => pkg.data?.workOrderNo,
@@ -317,7 +317,7 @@ const columnDefinitions: ColDef<Punch>[] = [
     valueGetter: (pkg) => (pkg.data?.materialRequired ? 'Yes' : 'No'),
   },
   {
-    colId: 'MaterialEstimate',
+    colId: 'MaterialEstimatedTimeOfArrival',
     headerName: domainNames.materialEstimate,
     headerTooltip: domainNames.materialEstimate,
     valueGetter: (pkg) => pkg.data?.materialEstimatedTimeOfArrival,
