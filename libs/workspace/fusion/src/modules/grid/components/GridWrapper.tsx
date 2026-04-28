@@ -72,6 +72,7 @@ export const GridWrapper = <
           anchor={anchor}
           filterState={filterState}
           excelExport={config.excelExport}
+          csvExport={config.csvExport}
           storageKey={config.storageKey}
           gridApi={gridApi}
         />
@@ -81,14 +82,14 @@ export const GridWrapper = <
       type: 'button',
     };
 
-    if (config.excelExport || config.storageKey) {
+    if (config.excelExport || config.csvExport || config.storageKey) {
       setIcons((s) => [...s, icon]);
     }
 
     return () => {
       setIcons((s) => s.filter((y) => y.name !== icon.name));
     };
-  }, [filterState, gridApi, config.excelExport, config.storageKey, setIcons]);
+  }, [filterState, gridApi, config.excelExport, config.csvExport, config.storageKey, setIcons]);
 
   return (
     <div id="workspace_grid_wrapper" style={{ height: '100%', width: '100%' }} ref={ref}>

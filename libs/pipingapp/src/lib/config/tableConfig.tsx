@@ -1,4 +1,4 @@
-import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ColDef, CsvExportColumn, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import {
   Pipetest,
   PipetestWorkflowStep,
@@ -8,6 +8,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -36,6 +37,21 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
       columnDefinitions: meta.columnDefinitions,
     };
   }, columnDefinitions, 'cc.piping.grid.columnState');
+
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/pipetest/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'piping-export.csv',
+      contextId
+    );
+  }
+
   return {
     gridOptions: {
       ...defaultGridOptions,
@@ -50,6 +66,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<Pipetest>, ...ColDef<Pipetest>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.piping.grid.columnState',
   };
 };

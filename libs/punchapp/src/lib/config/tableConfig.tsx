@@ -14,10 +14,12 @@ import {
   defaultGridOptions,
   DataResponse,
   defaultModules,
+  downloadCsv,
 } from '@cc-components/shared/workspace-config';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
+  CsvExportColumn,
   GridConfig,
   ICellRendererProps,
   MenuModule,
@@ -39,6 +41,20 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
     };
   }, columnDefinitions, 'cc.punch.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/punch/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'punch-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows,
     gridOptions: {
@@ -51,6 +67,7 @@ export const useTableConfig = (contextId: string): GridConfig<Punch, FilterState
     },
     columnDefinitions: colDefs as [ColDef<Punch>, ...ColDef<Punch>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.punch.grid.columnState',
   };
 };

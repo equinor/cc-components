@@ -8,6 +8,7 @@ import {
   DataResponse,
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import { SwcrPackage } from '@cc-components/swcrshared';
@@ -15,6 +16,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
+  CsvExportColumn,
   GridConfig,
   ICellRendererProps,
   MenuModule,
@@ -37,6 +39,20 @@ export const useTableConfig = (
     };
   }, columnDefinitions, 'cc.swcr.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/SWCR/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'swcr-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows,
     gridOptions: {
@@ -51,6 +67,7 @@ export const useTableConfig = (
     },
     columnDefinitions: colDefs as [ColDef<SwcrPackage>, ...ColDef<SwcrPackage>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.swcr.grid.columnState',
   };
 };

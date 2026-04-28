@@ -11,6 +11,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
+  CsvExportColumn,
   GridConfig,
   MenuModule,
 } from '@equinor/workspace-fusion/grid';
@@ -21,6 +22,7 @@ import {
   GridColumnOption,
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 
@@ -44,6 +46,20 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
     };
   }, columnDefinitions, 'cc.mechanicalcompletion.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/mechanical-completion/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'mechanicalcompletion-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows: getRows,
     modules: defaultModules,
@@ -56,6 +72,7 @@ export const useTableConfig = (contextId: string): GridConfig<McPackage, FilterS
         );
       },
     },
+    csvExport: fetchCsvExport,
     storageKey: 'cc.mechanicalcompletion.grid.columnState',
   };
 };

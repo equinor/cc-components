@@ -1,9 +1,10 @@
-import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ColDef, CsvExportColumn, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import { HeatTrace } from '@cc-components/heattraceshared';
 import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -32,6 +33,21 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
       columnDefinitions: meta.columnDefinitions,
     };
   }, columnDefinitions, 'cc.heattrace.grid.columnState');
+
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/heat-trace/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'heattrace-export.csv',
+      contextId
+    );
+  }
+
   return {
     gridOptions: {
       ...defaultGridOptions,
@@ -46,6 +62,7 @@ export const useTableConfig = (contextId: string): GridConfig<HeatTrace, FilterS
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<HeatTrace>, ...ColDef<HeatTrace>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.heattrace.grid.columnState',
   };
 };

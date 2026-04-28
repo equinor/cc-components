@@ -3,6 +3,7 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DataResponse,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -16,6 +17,7 @@ import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import {
   ColDef,
+  CsvExportColumn,
   GridConfig,
   MenuModule,
   ColumnsToolPanelModule,
@@ -67,6 +69,20 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     window.URL.revokeObjectURL(url);
   }
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/loop/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'loop-export.csv',
+      contextId
+    );
+  }
+
   return {
     columnDefinitions: colDefs as [ColDef<Loop>, ...ColDef<Loop>[]],
     gridOptions: {
@@ -74,6 +90,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     },
     getRows: getRows,
     excelExport: fetchLoopExport,
+    csvExport: fetchCsvExport,
     modules: defaultModules,
     storageKey: 'cc.loop.grid.columnState',
   };

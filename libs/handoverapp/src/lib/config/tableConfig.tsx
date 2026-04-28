@@ -13,6 +13,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
+  CsvExportColumn,
   GridConfig,
   MenuModule,
   ICellRendererProps,
@@ -43,6 +44,7 @@ import {
   GridColumnOption,
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 
@@ -65,6 +67,20 @@ export const useTableConfig = (
     };
   }, columnDefinitions as ColDef<HandoverPackage>[], 'cc.handover.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/handover/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'handover-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows: getRows,
     modules: defaultModules,
@@ -77,6 +93,7 @@ export const useTableConfig = (
         );
       },
     } as GridConfig<HandoverPackage, FilterState>['gridOptions'],
+    csvExport: fetchCsvExport,
     storageKey: 'cc.handover.grid.columnState',
   };
 };

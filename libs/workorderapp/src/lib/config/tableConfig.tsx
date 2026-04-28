@@ -10,6 +10,7 @@ import {
 import {
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -23,6 +24,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
+  CsvExportColumn,
   GridConfig,
   ICellRendererProps,
   MenuModule,
@@ -49,6 +51,20 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     };
   }, columnDefinitions, 'cc.workorder.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/work-orders/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'workorder-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows: getRows,
     gridOptions: {
@@ -56,6 +72,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.workorder.grid.columnState',
   };
 };

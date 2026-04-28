@@ -2,6 +2,7 @@ import { Button, Icon, Popover, Progress } from '@equinor/eds-core-react';
 import { close, more_vertical } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { GridApi, clearPersistedColumnState } from '@equinor/workspace-ag-grid';
+import { CsvExportColumn } from '../../../lib/integrations/grid';
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -14,15 +15,28 @@ type GridOptionsPopoverProps = {
   anchor: HTMLElement;
   filterState: any;
   excelExport?: (params: any) => Promise<void>;
+  csvExport?: (filterState: any, columns: CsvExportColumn[], sort?: { colId: string; descending: boolean }) => Promise<void>;
   storageKey?: string;
   gridApi: GridApi | null;
 };
-export const GridOptionPopover = ({ anchor, excelExport, filterState, storageKey, gridApi }: GridOptionsPopoverProps) => {
+export const GridOptionPopover = ({
+  anchor,
+  excelExport,
+  csvExport,
+  filterState,
+  storageKey,
+  gridApi,
+}: GridOptionsPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const pRef = useRef(null);
   const popoverRef = useRef<HTMLDivElement | null>(null);
 
-  const { error, isPending, isError, mutateAsync } = useMutation({
+  const {
+    error: excelError,
+    isPending: isExcelPending,
+    isError: isExcelError,
+    mutateAsync: mutateExcel,
+  } = useMutation({
     mutationKey: ['exportData'],
     mutationFn: async () => {
       if (!excelExport) {
@@ -33,9 +47,42 @@ export const GridOptionPopover = ({ anchor, excelExport, filterState, storageKey
     },
   });
 
+  const {
+    error: csvError,
+    isPending: isCsvPending,
+    isError: isCsvError,
+    mutateAsync: mutateCsv,
+  } = useMutation({
+    mutationKey: ['csvExportData'],
+    mutationFn: async () => {
+      if (!csvExport || !gridApi) {
+        console.warn('No CSV export function or grid API found');
+        return;
+      }
+      const columns: CsvExportColumn[] = gridApi
+        .getAllDisplayedColumns()
+        .map((col) => ({
+          colId: col.getColId(),
+          headerName: gridApi.getDisplayNameForColumn(col, 'header') ?? col.getColId(),
+        }));
+      const sortedCol = gridApi.getColumnState().find((c) => c.sort);
+      const sort = sortedCol
+        ? { colId: sortedCol.colId!, descending: sortedCol.sort === 'desc' }
+        : undefined;
+      return await csvExport(filterState, columns, sort);
+    },
+  });
+
   const handleExportToExcel = () => {
-    mutateAsync();
+    mutateExcel();
   };
+
+  const handleExportToCsv = () => {
+    mutateCsv();
+  };
+
+  const error = excelError || csvError;
+  const isError = isExcelError || isCsvError;
 
   return (
     <>
@@ -72,9 +119,18 @@ export const GridOptionPopover = ({ anchor, excelExport, filterState, storageKey
                 <ButtonButton
                   disabled={excelExport == undefined}
                   style={{ width: '130px', padding: '0px' }}
-                  onClick={!isPending ? handleExportToExcel : undefined}
+                  onClick={!isExcelPending ? handleExportToExcel : undefined}
                 >
-                  {isPending ? <Progress.Dots color={'neutral'} /> : 'Export to Excel'}
+                  {isExcelPending ? <Progress.Dots color={'neutral'} /> : 'Export to Excel'}
+                </ButtonButton>
+              )}
+              {csvExport && (
+                <ButtonButton
+                  disabled={!gridApi}
+                  style={{ width: '130px', padding: '0px' }}
+                  onClick={!isCsvPending ? handleExportToCsv : undefined}
+                >
+                  {isCsvPending ? <Progress.Dots color={'neutral'} /> : 'Export to CSV'}
                 </ButtonButton>
               )}
               {storageKey && gridApi && (
