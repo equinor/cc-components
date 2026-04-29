@@ -15,6 +15,7 @@ export type GridWrapperProps<
 > = {
   config: GridConfig<TData, TFilter>;
   getIdentifier: GetIdentifier<TData>;
+  gridApiRef?: { current: GridApi | null };
 };
 
 export const GridWrapper = <
@@ -24,6 +25,7 @@ export const GridWrapper = <
 >({
   config,
   getIdentifier,
+  gridApiRef,
 }: GridWrapperProps<TData, TContext, TFilter>) => {
   const ref = useRef(null);
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
@@ -73,7 +75,6 @@ export const GridWrapper = <
           filterState={filterState}
           excelExport={config.excelExport}
           csvExport={config.csvExport}
-          storageKey={config.storageKey}
           gridApi={gridApi}
         />
       ),
@@ -82,20 +83,21 @@ export const GridWrapper = <
       type: 'button',
     };
 
-    if (config.excelExport || config.csvExport || config.storageKey) {
+    if (config.excelExport || config.csvExport) {
       setIcons((s) => [...s, icon]);
     }
 
     return () => {
       setIcons((s) => s.filter((y) => y.name !== icon.name));
     };
-  }, [filterState, gridApi, config.excelExport, config.csvExport, config.storageKey, setIcons]);
+  }, [filterState, gridApi, config.excelExport, config.csvExport, setIcons]);
 
   return (
     <div id="workspace_grid_wrapper" style={{ height: '100%', width: '100%' }} ref={ref}>
       <ServerGrid<TData>
         onGridReady={(event) => {
           setGridApi(event.api);
+          if (gridApiRef) gridApiRef.current = event.api;
         }}
         getRows={async (params) => {
           await config.getRows(params, filterStateCopy.current as TFilter);

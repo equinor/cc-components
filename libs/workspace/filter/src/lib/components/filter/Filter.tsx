@@ -23,6 +23,7 @@ interface FilterProps {
   searchTextChange?: (text: string) => void;
   includeItemCount?: boolean;
   disableSettings?: boolean;
+  onResetColumns?: () => void;
 }
 
 export function Filter({
@@ -35,6 +36,7 @@ export function Filter({
   searchTextChange,
   includeItemCount,
   disableSettings,
+  onResetColumns,
 }: FilterProps) {
   const [expanded, setExpanded] = useState(false);
 
@@ -83,7 +85,7 @@ export function Filter({
           </Button>
         </Tooltip>
         <Tooltip title="Open filter settings">
-          <FilterSettingsMenu disabled={disableSettings} />
+          <FilterSettingsMenu disabled={disableSettings} onResetColumns={onResetColumns} />
         </Tooltip>
       </StyledFilterBar>
       {expanded && (

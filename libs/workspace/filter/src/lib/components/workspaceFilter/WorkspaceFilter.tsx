@@ -20,7 +20,11 @@ export const StyledFilterBar = styled.div`
   border-bottom: 2px solid ${tokens.colors.ui.background__medium.rgba};
 `;
 
-export function WorkspaceFilter() {
+interface WorkspaceFilterProps {
+  onResetColumns?: () => void;
+}
+
+export function WorkspaceFilter({ onResetColumns }: WorkspaceFilterProps = {}) {
   const {
     filterValues,
     setFilter,
@@ -79,6 +83,7 @@ export function WorkspaceFilter() {
       searchText={searchText}
       searchTextChange={handleSearchTextChange}
       includeItemCount={includeCount}
+      onResetColumns={onResetColumns}
     />
   );
 }

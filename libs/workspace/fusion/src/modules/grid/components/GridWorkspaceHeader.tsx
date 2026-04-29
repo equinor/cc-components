@@ -13,12 +13,14 @@ type GridHeaderProps<TData extends Record<PropertyKey, unknown>> = {
   dataSource?: FilterDataSource;
   sidesheetConfig?: SidesheetConfig<TData>;
   information?: Information;
+  onResetColumns?: () => void;
 };
 
 export function GridHeader<TData extends Record<PropertyKey, unknown>>({
   dataSource,
   sidesheetConfig,
   information,
+  onResetColumns,
 }: GridHeaderProps<TData>) {
   useCreateButton(sidesheetConfig);
   const { setIcons } = useWorkspaceHeaderComponents();
@@ -42,7 +44,7 @@ export function GridHeader<TData extends Record<PropertyKey, unknown>>({
   return (
     <StyledGridHeader>
       <NavigationBar />
-      {dataSource && <WorkspaceFilter />}
+      {dataSource && <WorkspaceFilter onResetColumns={onResetColumns} />}
     </StyledGridHeader>
   );
 }

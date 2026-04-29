@@ -1,7 +1,7 @@
 import { Button, Icon, Popover, Progress } from '@equinor/eds-core-react';
 import { close, more_vertical } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { GridApi, clearPersistedColumnState } from '@equinor/workspace-ag-grid';
+import { GridApi } from '@equinor/workspace-ag-grid';
 import { CsvExportColumn } from '../../../lib/integrations/grid';
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
@@ -16,7 +16,6 @@ type GridOptionsPopoverProps = {
   filterState: any;
   excelExport?: (params: any) => Promise<void>;
   csvExport?: (filterState: any, columns: CsvExportColumn[], sort?: { colId: string; descending: boolean }) => Promise<void>;
-  storageKey?: string;
   gridApi: GridApi | null;
 };
 export const GridOptionPopover = ({
@@ -24,7 +23,6 @@ export const GridOptionPopover = ({
   excelExport,
   csvExport,
   filterState,
-  storageKey,
   gridApi,
 }: GridOptionsPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,14 +129,6 @@ export const GridOptionPopover = ({
                   onClick={!isCsvPending ? handleExportToCsv : undefined}
                 >
                   {isCsvPending ? <Progress.Dots color={'neutral'} /> : 'Export to CSV'}
-                </ButtonButton>
-              )}
-              {storageKey && gridApi && (
-                <ButtonButton
-                  style={{ width: '130px', padding: '0px' }}
-                  onClick={() => clearPersistedColumnState(storageKey, gridApi)}
-                >
-                  Reset columns
                 </ButtonButton>
               )}
             </ButtonContainer>
