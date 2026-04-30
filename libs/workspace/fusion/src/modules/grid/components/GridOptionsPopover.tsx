@@ -1,21 +1,21 @@
-import { Button, Icon, Popover, Progress } from '@equinor/eds-core-react';
-import { close, more_vertical } from '@equinor/eds-icons';
+import { Button, EdsProvider, Icon, Menu, Progress } from '@equinor/eds-core-react';
+import { more_vertical } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { GridApi } from '@equinor/workspace-ag-grid';
+import { GridApi, clearPersistedColumnState } from '@equinor/workspace-ag-grid';
 import { CsvExportColumn } from '../../../lib/integrations/grid';
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { DumpsterFireDialog } from '../../../lib/components/ErrorComponent';
 
-Icon.add({ close, more_vertical });
+Icon.add({ more_vertical });
 
 type GridOptionsPopoverProps = {
   anchor: HTMLElement;
   filterState: any;
   excelExport?: (params: any) => Promise<void>;
   csvExport?: (filterState: any, columns: CsvExportColumn[], sort?: { colId: string; descending: boolean }) => Promise<void>;
+  storageKey?: string;
   gridApi: GridApi | null;
 };
 export const GridOptionPopover = ({
@@ -23,11 +23,12 @@ export const GridOptionPopover = ({
   excelExport,
   csvExport,
   filterState,
+  storageKey,
   gridApi,
 }: GridOptionsPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const pRef = useRef(null);
-  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const iconRef = useRef<HTMLElement | null>(null);
 
   const {
     error: excelError,
@@ -87,84 +88,84 @@ export const GridOptionPopover = ({
       <Icon
         name="more_vertical"
         color={tokens.colors.interactive.primary__resting.hex}
-        ref={pRef}
+        ref={(el) => {
+          iconRef.current = el;
+          setAnchorEl(el);
+        }}
         onClick={() => setIsOpen((s) => !s)}
       />
-      {createPortal(
-        <Popover ref={popoverRef} open={isOpen} anchorEl={pRef.current}>
-          <Popover.Header>
-            <StyledPopoverHeaderLine>
-              <Popover.Title>Grid Options</Popover.Title>
-              <Icon
-                name="close"
-                color={tokens.colors.interactive.primary__resting.hex}
-                onClick={() => setIsOpen(false)}
-              />
-            </StyledPopoverHeaderLine>
-          </Popover.Header>
-          <Popover.Content style={{ overflow: 'hidden' }}>
-            <ButtonContainer>
+      <Menu open={isOpen} anchorEl={anchorEl} onClose={() => setIsOpen(false)}>
+        <EdsProvider density={'compact'}>
+          <Menu.Section title="Grid Options">
+            <StyledMenuList>
               {isError && (
-                <DumpsterFireDialog
-                  text={
-                    typeof error === 'string'
-                      ? error
-                      : 'We encountered an issue fetching the data. Please try again later.'
-                  }
-                />
+                <StyledMenuItem>
+                  <DumpsterFireDialog
+                    text={
+                      typeof error === 'string'
+                        ? error
+                        : 'We encountered an issue fetching the data. Please try again later.'
+                    }
+                  />
+                </StyledMenuItem>
               )}
               {excelExport && (
-                <ButtonButton
-                  disabled={excelExport == undefined}
-                  style={{ width: '130px', padding: '0px' }}
-                  onClick={!isExcelPending ? handleExportToExcel : undefined}
-                >
-                  {isExcelPending ? <Progress.Dots color={'neutral'} /> : 'Export to Excel'}
-                </ButtonButton>
+                <StyledMenuItem>
+                  <FullWidthButton variant="ghost_icon" onClick={!isExcelPending ? handleExportToExcel : undefined}>
+                    {isExcelPending ? <Progress.Dots color={'neutral'} /> : 'Export to Excel'}
+                  </FullWidthButton>
+                </StyledMenuItem>
               )}
               {csvExport && (
-                <ButtonButton
-                  disabled={!gridApi}
-                  style={{ width: '130px', padding: '0px' }}
-                  onClick={!isCsvPending ? handleExportToCsv : undefined}
-                >
-                  {isCsvPending ? <Progress.Dots color={'neutral'} /> : 'Export to CSV'}
-                </ButtonButton>
+                <StyledMenuItem>
+                  <FullWidthButton
+                    variant="ghost_icon"
+                    disabled={!gridApi}
+                    onClick={!isCsvPending ? handleExportToCsv : undefined}
+                  >
+                    {isCsvPending ? <Progress.Dots color={'neutral'} /> : 'Export to CSV'}
+                  </FullWidthButton>
+                </StyledMenuItem>
               )}
-            </ButtonContainer>
-          </Popover.Content>
-        </Popover>,
-        anchor
-      )}
+              {storageKey && gridApi && (
+                <StyledMenuItem>
+                  <FullWidthButton
+                    variant="ghost_icon"
+                    onClick={() => clearPersistedColumnState(storageKey, gridApi)}
+                  >
+                    Reset Columns
+                  </FullWidthButton>
+                </StyledMenuItem>
+              )}
+            </StyledMenuList>
+          </Menu.Section>
+        </EdsProvider>
+      </Menu>
     </>
   );
 };
 
-const StyledPopoverHeaderLine = styled.div`
-  display: flex;
-  width: 268px;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const ButtonButton = styled(Button)`
-  & *:first-child {
-    padding-top: 0px;
-    padding-bottom: 0px;
+const FullWidthButton = styled(Button)`
+  width: 100%;
+  justify-content: center;
+  margin: 4px 0;
+  &:hover {
+    border-radius: 4px;
   }
-  padding: 0px;
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
-export const StyledLoadingWrapper = styled.div`
+const StyledMenuList = styled.div`
+  max-height: 60vh;
+  overflow-y: auto;
+`;
+
+const StyledMenuItem = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
-  gap: 1em;
-  width: 268px;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 3px 6px;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  user-select: none;
 `;

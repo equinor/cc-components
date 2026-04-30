@@ -8,7 +8,6 @@ import { DragHandleIcon, StarIcon, StarOutlinedIcon, TuneIcon, useSettings } fro
 
 interface FilterSettingsMenuProps {
   disabled?: boolean;
-  onResetColumns?: () => void;
 }
 
 const StyledButton = styled(Button)`
@@ -62,7 +61,7 @@ const StyledDialogActions = styled(Dialog.Actions)`
   box-sizing: border-box;
 `;
 
-const FilterSettingsMenu: React.FC<FilterSettingsMenuProps> = ({ disabled, onResetColumns }) => {
+const FilterSettingsMenu: React.FC<FilterSettingsMenuProps> = ({ disabled }) => {
   const { filterValues, reorderFilterGroups, updateQuickFilters, setIncludeCount, includeCount, clearSettings } =
     useFilterContext();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -130,13 +129,6 @@ const FilterSettingsMenu: React.FC<FilterSettingsMenuProps> = ({ disabled, onRes
                   Reset Filters
                 </FullWidthButton>
               </StyledMenuItem>
-              {onResetColumns && (
-                <StyledMenuItem>
-                  <FullWidthButton variant="ghost_icon" onClick={onResetColumns}>
-                    Reset Columns
-                  </FullWidthButton>
-                </StyledMenuItem>
-              )}
             </StyledMenuList>
           </Menu.Section>
           <Menu.Section title="Filter Order">

@@ -5,7 +5,6 @@ import { GridIcon } from './icons/GridIcon';
 
 import { FusionWorkspaceModule } from '../../lib';
 import { FilterState } from '@equinor/workspace-filter';
-import { GridApi, clearPersistedColumnState } from '@equinor/workspace-ag-grid';
 
 /**
  * Adds the module to the workspace
@@ -17,15 +16,6 @@ export const gridModule: FusionWorkspaceModule = {
     props.workspaceOptions.getIdentifier;
     if (!gridConfig) return;
     gridConfig.gridOptions ??= {};
-
-    const gridApiRef = { current: null as GridApi | null };
-    const handleResetColumns = gridConfig.storageKey
-      ? () => {
-          if (gridApiRef.current && gridConfig.storageKey) {
-            clearPersistedColumnState(gridConfig.storageKey, gridApiRef.current);
-          }
-        }
-      : undefined;
 
     const provider: Provider = {
       Component: ({ children }) => {
@@ -45,7 +35,6 @@ export const gridModule: FusionWorkspaceModule = {
           <GridWrapper<any, any, FilterState>
             getIdentifier={props.workspaceOptions.getIdentifier}
             config={gridConfig}
-            gridApiRef={gridApiRef}
           />
         ),
         name: 'grid',
@@ -55,7 +44,6 @@ export const gridModule: FusionWorkspaceModule = {
             dataSource={props.filterOptions?.dataSource}
             sidesheetConfig={props.sidesheetOptions}
             information={props.workspaceOptions.information}
-            onResetColumns={handleResetColumns}
           />
         ),
       },
