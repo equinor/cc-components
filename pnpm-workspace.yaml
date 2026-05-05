@@ -50,7 +50,7 @@ catalog:
   # Build tools
   typescript: ^5.9.3
   tsup: ^8.5.1
-  vite: ^7.3.1
+  vite: ^6.4.2
   '@vitejs/plugin-react': ^5.1.2
   turbo: ^2.7.4
   tsx: ^4.21.0
@@ -135,7 +135,7 @@ catalog:
 
   # Astro (docs)
   '@astrojs/react': ^4.4.2
-  astro: ^5.16.9
+  astro: ^6.1.6
 
   # GitHub Action
   '@actions/core': ^1.11.1
