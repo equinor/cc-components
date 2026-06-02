@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { WorkflowDot } from './WorkflowDot';
-import { WorkflowStep } from './workflowStep';
+import type { WorkflowStep } from './workflowStep';
 
 export interface WorkflowVisualProps {
   workflowSteps: WorkflowStep[];

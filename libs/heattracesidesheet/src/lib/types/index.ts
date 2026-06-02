@@ -1,1 +1,1 @@
-export { Workorder } from './workorder';
+export type { Workorder } from './workorder';

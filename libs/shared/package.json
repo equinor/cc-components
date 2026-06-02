@@ -32,9 +32,6 @@
       "markdown-viewer": [
         "dist/src/packages/markdown-viewer/index"
       ],
-      "modal": [
-        "dist/src/packages/modal/index"
-      ],
       "pbi-helpers": [
         "dist/src/packages/pbi-helpers/index"
       ],
@@ -74,7 +71,6 @@
     "./mapping": "./dist/src/packages/mapping/index.js",
     "./markdown-editor": "./dist/src/packages/markdown-editor/index.js",
     "./markdown-viewer": "./dist/src/packages/markdown-viewer/index.js",
-    "./modal": "./dist/src/packages/modal/index.js",
     "./pbi-helpers": "./dist/src/packages/pbi-helpers/index.js",
     "./sidesheet": "./dist/src/packages/sidesheet/index.js",
     "./table-helpers": "./dist/src/packages/table-helpers/index.js",

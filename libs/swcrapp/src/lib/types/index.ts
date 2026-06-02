@@ -1,2 +1,2 @@
-export { GetKeyFunction } from './getKeyFunction';
-export { ExtendedGardenFields } from './extendedGardenFields';
+export type { GetKeyFunction } from './getKeyFunction';
+export type { ExtendedGardenFields } from './extendedGardenFields';

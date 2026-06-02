@@ -1,2 +1,2 @@
 export { WorkorderTab } from './WorkorderTab';
-export { WorkorderBase } from './types';
+export type { WorkorderBase } from './types';

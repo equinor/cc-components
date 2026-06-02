@@ -11,7 +11,10 @@ interface FilterQuickSearchProps {
   searchTextChange: (text: string) => void;
 }
 
-export const FilterQuickSearch = ({ searchText, searchTextChange }: FilterQuickSearchProps): ReactElement => {
+export const FilterQuickSearch = ({
+  searchText,
+  searchTextChange,
+}: FilterQuickSearchProps): ReactElement => {
   function handleClear(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.value.length === 0) {
       searchTextChange('');

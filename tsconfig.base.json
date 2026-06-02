@@ -3,6 +3,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "strict": true,
+    "isolatedModules": true,
     "baseUrl": ".",
     "sourceMap": false,
     "declaration": true,

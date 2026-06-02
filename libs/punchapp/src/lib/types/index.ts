@@ -1,1 +1,1 @@
-export { ExtendedGardenFields } from './extendedGardenFields';
+export type { ExtendedGardenFields } from './extendedGardenFields';
