@@ -14,7 +14,7 @@
     "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
-    "@cc-components/mechanicalcompletionapp": "workspace:^",
+    "@cc-components/mechanicalcompletion": "workspace:^",
     "@cc-components/shared": "workspace:^"
   }
 }

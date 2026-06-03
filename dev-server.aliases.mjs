@@ -37,6 +37,26 @@ export const repoRoot = findRepoRoot();
 
 const LIBS_DIR = resolve(repoRoot, 'libs');
 
+// Internal package name prefixes that should be served from TypeScript source
+// during dev. Any workspace package whose name starts with one of these is
+// aliased to its `src/` entry instead of its built `dist/` output.
+const INTERNAL_PREFIXES = ['@cc-components/', '@equinor/workspace-'];
+
+const isInternal = (name) =>
+  typeof name === 'string' && INTERNAL_PREFIXES.some((prefix) => name.startsWith(prefix));
+
+// Resolve a (possibly conditional) `exports` target down to the single target
+// string used to derive the source path. Conditional exports use an object
+// keyed by condition; the ESM dev server consumes the `import` condition, so
+// prefer it, then fall back to other module-shaped conditions.
+const resolveExportTarget = (target) => {
+  if (typeof target === 'string') return target;
+  if (target && typeof target === 'object') {
+    return target.import ?? target.default ?? target.node ?? target.require;
+  }
+  return undefined;
+};
+
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /**
@@ -80,13 +100,16 @@ const aliasesForPackage = (libDir, pkg) => {
   const entries = [];
 
   if (pkgExports && typeof pkgExports === 'object') {
-    // Subpath exports map (e.g. @cc-components/shared). Mirror every entry
-    // exactly so subpaths resolve to source rather than falling back to dist.
-    for (const [subpath, target] of Object.entries(pkgExports)) {
+    // Subpath exports map (e.g. @cc-components/shared, @equinor/workspace-*).
+    // Mirror every entry exactly so subpaths resolve to source rather than
+    // falling back to dist. Targets may be plain strings or conditional
+    // exports objects ({ types, import, require }).
+    for (const [subpath, rawTarget] of Object.entries(pkgExports)) {
+      const target = resolveExportTarget(rawTarget);
       if (typeof target !== 'string') {
         throw new Error(
-          `[dev-server.aliases] Unsupported conditional exports for "${name}${subpath.replace(/^\./, '')}". ` +
-            `Only string targets are handled.`
+          `[dev-server.aliases] Unsupported exports target for "${name}${subpath.replace(/^\./, '')}". ` +
+            `Could not derive a source path from: ${JSON.stringify(rawTarget)}`
         );
       }
       const specifier = subpath === '.' ? name : `${name}/${subpath.replace(/^\.\//, '')}`;
@@ -110,26 +133,34 @@ const aliasesForPackage = (libDir, pkg) => {
 };
 
 /**
- * Scan `libs/*` and produce Vite `resolve.alias` entries for every
- * `@cc-components/*` package, pointing each at its TypeScript source.
- * Throws if a derived source path does not exist (fail-fast: prevents a stale
- * `dist` build from silently shadowing source).
+ * Scan the workspace and produce Vite `resolve.alias` entries for every
+ * internal package (`@cc-components/*` and `@equinor/workspace-*`), pointing
+ * each at its TypeScript source. Throws if a derived source path does not
+ * exist (fail-fast: prevents a stale `dist` build from silently shadowing
+ * source).
  *
  * @returns {{ find: RegExp, replacement: string }[]}
  */
 export const ccAliases = () => {
   const aliases = [];
 
-  for (const dirent of readdirSync(LIBS_DIR, { withFileTypes: true })) {
-    if (!dirent.isDirectory()) continue;
-    const libDir = resolve(LIBS_DIR, dirent.name);
-    const pkgPath = resolve(libDir, 'package.json');
-    if (!existsSync(pkgPath)) continue;
+  // `@cc-components/*` libs live directly under `libs/*`; the
+  // `@equinor/workspace-*` framework libs are nested under `libs/workspace/*`.
+  const packageDirs = [LIBS_DIR, resolve(LIBS_DIR, 'workspace')];
 
-    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-    if (!pkg.name?.startsWith('@cc-components/')) continue;
+  for (const baseDir of packageDirs) {
+    if (!existsSync(baseDir)) continue;
+    for (const dirent of readdirSync(baseDir, { withFileTypes: true })) {
+      if (!dirent.isDirectory()) continue;
+      const libDir = resolve(baseDir, dirent.name);
+      const pkgPath = resolve(libDir, 'package.json');
+      if (!existsSync(pkgPath)) continue;
 
-    aliases.push(...aliasesForPackage(libDir, pkg));
+      const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+      if (!isInternal(pkg.name)) continue;
+
+      aliases.push(...aliasesForPackage(libDir, pkg));
+    }
   }
 
   return aliases;

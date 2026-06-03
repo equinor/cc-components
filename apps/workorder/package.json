@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@cc-components/workorderapp": "workspace:^"
+    "@cc-components/workorder": "workspace:^"
   },
   "files": [
     "dist/app-bundle.js",
