@@ -12,7 +12,7 @@ type FusionApp = {
   name: string;
   shortName: string;
   description: string;
-  owners: string[];
+  owners: { azureUniqueId: string }[];
   admins: { azureUniqueId: string }[];
   accentColor: string;
   categoryId: string;
@@ -124,7 +124,7 @@ export async function createFusionApp(
     name: displayName,
     shortName: appKey,
     description: '.',
-    owners,
+    owners: owners.map((s) => ({ azureUniqueId: s })),
     admins: admins.map((s) => ({ azureUniqueId: s })),
     accentColor: category.color,
     categoryId: category.id,
