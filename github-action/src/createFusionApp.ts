@@ -44,6 +44,7 @@ program
   .option('-D, --displayname <displayname>')
   .option('-C, --category <category>')
   .option('-O, --admins <admins>')
+  .option('-W, --owners <owners>')
   .option('-E, env <env>')
   .action(async (args) => {
     const fusionEnv: string = args.env;
@@ -69,6 +70,9 @@ program
       throw new Error('Application needs atleast one admin');
     }
 
+    const owners =
+      args.owners && args.owners.trim().length > 0 ? args.owners.split(',') : [];
+
     setSecret(args.token);
     createFusionApp(
       args.token,
@@ -76,6 +80,7 @@ program
       args.displayname,
       args.category,
       admins,
+      owners,
       fusionEnv as 'CI' | 'FPRD'
     );
   });
@@ -102,6 +107,7 @@ export async function createFusionApp(
   displayName: string,
   categoryName: string,
   admins: string[],
+  owners: string[],
   env: 'CI' | 'FPRD'
 ) {
   //TODO: fetch dynamically
@@ -118,7 +124,7 @@ export async function createFusionApp(
     name: displayName,
     shortName: appKey,
     description: '.',
-    owners: [],
+    owners,
     admins: admins.map((s) => ({ azureUniqueId: s })),
     accentColor: category.color,
     categoryId: category.id,

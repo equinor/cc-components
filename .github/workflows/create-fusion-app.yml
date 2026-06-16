@@ -67,7 +67,7 @@ jobs:
 
       - name: 'Create application in Fusion CI'
         shell: bash
-        run: npx tsx ./github-action/src/createFusionApp.ts create -T ${{ steps.get-fusion-token-ci.outputs.token }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{vars.FUSION_APP_ADMINS_CI}}' -E 'CI'
+        run: npx tsx ./github-action/src/createFusionApp.ts create -T ${{ steps.get-fusion-token-ci.outputs.token }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{vars.FUSION_APP_ADMINS_CI}}' -W '${{vars.FUSION_APP_OWNERS_CI}}' -E 'CI'
 
   create-fusion-app-fprd:
     runs-on: ubuntu-latest
@@ -95,4 +95,4 @@ jobs:
 
       - name: 'Create application in Fusion FPRD'
         shell: bash
-        run: npx tsx ./github-action/src/createFusionApp.ts create -T ${{ steps.get-fusion-token-fprd.outputs.token }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{vars.FUSION_APP_ADMINS_FPRD}}'  -E 'FPRD'
+        run: npx tsx ./github-action/src/createFusionApp.ts create -T ${{ steps.get-fusion-token-fprd.outputs.token }} -A '${{inputs.appKey}}' -C '${{inputs.category}}' -D '${{inputs.displayName}}' -O '${{vars.FUSION_APP_ADMINS_FPRD}}' -W '${{vars.FUSION_APP_OWNERS_FPRD}}' -E 'FPRD'
