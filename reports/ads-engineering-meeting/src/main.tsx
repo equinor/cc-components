@@ -8,7 +8,7 @@ const ReportWrapper = () => {
   );
 };
 
-export const render = createRender(ReportWrapper, configure(['Facility','ProjectMaster']));
+export const render = createRender(ReportWrapper, configure(['ProjectMaster']));
 export default render;
 
 

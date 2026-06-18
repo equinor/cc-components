@@ -31,7 +31,7 @@ catalog:
   '@equinor/eds-tokens': ^2.1.1
 
   # Equinor Fusion Framework
-  '@equinor/fusion-framework-cli': ^13.0.0
+  '@equinor/fusion-framework-cli': ^13.3.18
   '@equinor/fusion-framework-module': ^5.0.5
   '@equinor/fusion-framework-module-ag-grid': ^34.4.0
   '@equinor/fusion-framework-module-event': ^4.4.0
