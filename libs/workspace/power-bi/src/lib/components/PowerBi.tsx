@@ -11,6 +11,7 @@ import { Report } from './report/Report';
 
 import React from 'react';
 import { models, factories, service } from 'powerbi-client';
+import { EventHandler } from 'powerbi-client-react';
 import styled from 'styled-components';
 import { StyledLoadingWrapper } from './loading/loading.styles';
 
@@ -28,6 +29,11 @@ export interface PowerBiProps {
   filters?: models.IBasicFilter;
   bookmark?: string;
   controller: PowerBiController;
+  /**
+   * Optional Power BI embed event handlers (e.g. loaded, rendered, pageChanged).
+   * Forwarded to the underlying <PowerBIEmbed eventHandlers />.
+   */
+  eventHandlers?: Map<string, EventHandler>;
 }
 
 const client = new QueryClient();

@@ -15,7 +15,7 @@ const StyledLoadingWrapper = styled.div`
   justify-content: center;
 `;
 
-export function Report({ getEmbedInfo, getToken, reportUri, controller, filters, bookmark }: PowerBiProps) {
+export function Report({ getEmbedInfo, getToken, reportUri, controller, filters, bookmark, eventHandlers }: PowerBiProps) {
   const {
     data: token,
     isLoading: isTokenLoading,
@@ -62,6 +62,7 @@ export function Report({ getEmbedInfo, getToken, reportUri, controller, filters,
   return (
     <LoadedReport
       config={generateEmbedConfig(embed, token.token, filters)}
+      eventHandlers={eventHandlers}
       onReportReady={(rep) => {
         if (bookmark) {
           rep.bookmarksManager.applyState(bookmark);
