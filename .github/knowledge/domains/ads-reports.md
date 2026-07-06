@@ -27,7 +27,7 @@ user-interaction tracking in the embedded reports).
 
 - OWNS: how an ADS report is filtered to the selected project
 - READS FROM: `currentContext.type.id === 'ProjectMaster'` → `pbi_context_mapping.ProjectMaster` = `{ table: 'Dim_ProjectMaster', column: 'ProjectMaster GUID' }`
-- WRITES FROM: a Power BI `IBasicFilter` with `values: [context.externalId]` applied to the embedded report
+- WRITES TO: a Power BI `IBasicFilter` with `values: [context.externalId]` applied to the embedded report
 - INVARIANT: the report will not render without a ProjectMaster context selected (guarded by `RootAppWrapper`)
 
 ## ads-interaction-tracking (cc-toolbox#4792)
