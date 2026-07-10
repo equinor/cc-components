@@ -74,10 +74,6 @@ type PowerBiConfig = {
   ErrorComponent: React.ComponentType<ErrorComponentProps>;
   filters?: FilterConfig;
   getClassification?: (reportUri: string, signal?: AbortSignal) => Promise<string>;
-  /**
-   * Optional Power BI embed event handlers (e.g. loaded, rendered, pageChanged)
-   * used for interaction tracking. Forwarded to the underlying <PowerBIEmbed />.
-   */
   eventHandlers?: Map<string, EventHandler>;
 };
 

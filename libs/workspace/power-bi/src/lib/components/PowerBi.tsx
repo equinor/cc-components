@@ -29,10 +29,6 @@ export interface PowerBiProps {
   filters?: models.IBasicFilter;
   bookmark?: string;
   controller: PowerBiController;
-  /**
-   * Optional Power BI embed event handlers (e.g. loaded, rendered, pageChanged).
-   * Forwarded to the underlying <PowerBIEmbed eventHandlers />.
-   */
   eventHandlers?: Map<string, EventHandler>;
 }
 

@@ -11,10 +11,6 @@ const defaultAspectRatio = 0.41;
 interface LoadedReportProps {
   config: IReportEmbedConfiguration;
   onReportReady?: (rep: Report) => void;
-  /**
-   * Optional Power BI embed event handlers (e.g. analytics tracking).
-   * Merged with the internal `loaded`/`rendered` handlers so both fire.
-   */
   eventHandlers?: Map<string, EventHandler>;
 }
 export const LoadedReport = ({ config, onReportReady, eventHandlers }: LoadedReportProps) => {
@@ -42,12 +38,6 @@ export const LoadedReport = ({ config, onReportReady, eventHandlers }: LoadedRep
     }
   }
 
-  /**
-   * PowerBIEmbed's `setEventHandlers` calls `embed.off(event)` for every event in the
-   * map before (re)attaching, so the internal `loaded`/`rendered` handlers cannot be
-   * registered separately (e.g. via `getEmbeddedComponent`) — they would be clobbered.
-   * Instead, keep them in this map and compose with any externally provided handlers.
-   */
   const mergedEventHandlers = useMemo(() => {
     const internal = new Map<string, EventHandler>([
       [
@@ -76,7 +66,6 @@ export const LoadedReport = ({ config, onReportReady, eventHandlers }: LoadedRep
       }
     });
     return merged;
-    // trackReportLoadTime/onReportReady are stable in behavior; config drives re-embeds.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventHandlers, onReportReady, config]);
 
