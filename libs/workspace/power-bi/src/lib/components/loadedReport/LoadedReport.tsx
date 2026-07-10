@@ -1,7 +1,7 @@
 import { useResizeObserver } from '../../hooks/useResizeObserver';
 import { IReportEmbedConfiguration, Report } from 'powerbi-client';
-import { PowerBIEmbed } from 'powerbi-client-react';
-import { useEffect, useRef, useState } from 'react';
+import { PowerBIEmbed, EventHandler } from 'powerbi-client-react';
+import { useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { StyledReportRoot, StyledReportContainer } from '../powerbi.styles';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
@@ -11,8 +11,9 @@ const defaultAspectRatio = 0.41;
 interface LoadedReportProps {
   config: IReportEmbedConfiguration;
   onReportReady?: (rep: Report) => void;
+  eventHandlers?: Map<string, EventHandler>;
 }
-export const LoadedReport = ({ config, onReportReady }: LoadedReportProps) => {
+export const LoadedReport = ({ config, onReportReady, eventHandlers }: LoadedReportProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [width] = useResizeObserver(ref);
   const appInsights = (window as any).ai as ApplicationInsights | undefined;
@@ -37,6 +38,37 @@ export const LoadedReport = ({ config, onReportReady }: LoadedReportProps) => {
     }
   }
 
+  const mergedEventHandlers = useMemo(() => {
+    const internal = new Map<string, EventHandler>([
+      [
+        'loaded',
+        (_event, embeddedEntity) => {
+          if (embeddedEntity) {
+            onReportReady?.(embeddedEntity as Report);
+          }
+        },
+      ],
+      ['rendered', () => trackReportLoadTime()],
+    ]);
+
+    if (!eventHandlers) return internal;
+
+    const merged = new Map<string, EventHandler>(internal);
+    eventHandlers.forEach((handler, event) => {
+      const existing = merged.get(event);
+      if (existing && handler) {
+        merged.set(event, (e, entity) => {
+          existing(e, entity);
+          handler(e, entity);
+        });
+      } else {
+        merged.set(event, handler);
+      }
+    });
+    return merged;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eventHandlers, onReportReady, config]);
+
   return (
     <StyledReportRoot id={'reportRoot'} ref={ref}>
       <StyledReportContainer>
@@ -45,13 +77,7 @@ export const LoadedReport = ({ config, onReportReady }: LoadedReportProps) => {
             <PowerBIEmbed
               cssClassName="pbiEmbed"
               embedConfig={config}
-              getEmbeddedComponent={(embed) => {
-                embed.on('loaded', () => {
-                  onReportReady && onReportReady(embed as Report);
-                });
-                embed.off('rendered', trackReportLoadTime);
-                embed.on('rendered', trackReportLoadTime);
-              }}
+              eventHandlers={mergedEventHandlers}
             />
           </PowerBiWrapper>
         </StyledAspectRatio>
