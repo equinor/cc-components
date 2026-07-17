@@ -10,6 +10,7 @@ import {
 import {
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -23,6 +24,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
+  CsvExportColumn,
   GridConfig,
   ICellRendererProps,
   MenuModule,
@@ -49,6 +51,20 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     };
   }, columnDefinitions, 'cc.workorder.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/work-orders/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'workorder-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows: getRows,
     gridOptions: {
@@ -56,6 +72,7 @@ export const useTableConfig = (contextId: string): GridConfig<WorkOrder, FilterS
     },
     columnDefinitions: colDefs as [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.workorder.grid.columnState',
   };
 };
@@ -82,7 +99,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
   },
   {
     headerName: 'Title',
-    colId: 'Title',
+    colId: 'Description',
     headerTooltip: 'Title',
     valueGetter: (pkg) => pkg.data?.description,
     cellRenderer: (props: ICellRendererProps<WorkOrder, string | null>) => {
@@ -91,7 +108,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     width: 300,
   },
   {
-    colId: 'DisciplineCode',
+    colId: 'Discipline',
     headerName: domainNames.workorderDiscipline,
     headerTooltip: domainNames.workorderDiscipline,
     valueGetter: (pkg) => pkg.data?.discipline,
@@ -190,7 +207,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     minWidth: 150,
   },
   {
-    colId: 'MCStatus',
+    colId: 'MccrStatus',
     headerName: domainNames.mcStatus,
     headerTooltip: domainNames.mcStatus,
     valueGetter: (pkg) => pkg.data?.mccrStatus,
@@ -220,7 +237,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     valueGetter: (pkg) => pkg.data?.systems,
   },
   {
-    colId: 'EstimatedHours',
+    colId: 'RemainingHours',
     headerName: domainNames.remainingManHours,
     headerTooltip: domainNames.remainingManHours,
     valueGetter: (pkg) => pkg.data?.remainingHours,
@@ -230,7 +247,7 @@ const columnDefinitions: [ColDef<WorkOrder>, ...ColDef<WorkOrder>[]] = [
     },
   },
   {
-    colId: 'RemainingHours',
+    colId: 'EstimatedHours',
     headerName: domainNames.estimatedManHours,
     headerTooltip: domainNames.estimatedManHours,
     valueGetter: (pkg) => pkg.data?.estimatedHours,

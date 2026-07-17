@@ -1,4 +1,4 @@
-import { ColDef, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
+import { ColDef, CsvExportColumn, GridConfig, ICellRendererProps } from '@equinor/workspace-fusion/grid';
 import {
   Pipetest,
   PipetestWorkflowStep,
@@ -8,6 +8,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -36,6 +37,21 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
       columnDefinitions: meta.columnDefinitions,
     };
   }, columnDefinitions, 'cc.piping.grid.columnState');
+
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/pipetest/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'piping-export.csv',
+      contextId
+    );
+  }
+
   return {
     gridOptions: {
       ...defaultGridOptions,
@@ -43,13 +59,14 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
         e.api.autoSizeColumns(
           e.api
             .getAllDisplayedColumns()
-            .filter((column) => column.getColId() !== 'description')
+            .filter((column) => column.getColId() !== 'Description')
         );
       },
     },
     getRows: getRows,
     columnDefinitions: colDefs as [ColDef<Pipetest>, ...ColDef<Pipetest>[]],
     modules: defaultModules,
+    csvExport: fetchCsvExport,
     storageKey: 'cc.piping.grid.columnState',
   };
 };
@@ -57,7 +74,7 @@ export const useTableConfig = (contextId: string): GridConfig<Pipetest, FilterSt
 const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   {
     headerName: 'Pipetest',
-    colId: 'pipetestNo',
+    colId: 'PipetestNo',
     valueGetter: (element) => element.data?.pipetestNo,
     cellRenderer: (props: ICellRendererProps<Pipetest, string>) => (
       <LinkCell
@@ -70,7 +87,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: 'Description',
-    colId: 'description',
+    colId: 'Description',
     valueGetter: (element) => element.data?.description,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => (
       <DescriptionCell description={props.value} />
@@ -79,27 +96,27 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.commPriority1,
-    colId: 'priority1',
+    colId: 'Priority1',
     valueGetter: (element) => element.data?.priority1,
   },
   {
     headerName: domainNames.commPriority2,
-    colId: 'priority2',
+    colId: 'Priority2',
     valueGetter: (element) => element.data?.priority2,
   },
   {
     headerName: domainNames.commPriority3,
-    colId: 'priority3',
+    colId: 'Priority3',
     valueGetter: (element) => element.data?.priority3,
   },
   {
     headerName: domainNames.mcLocation,
-    colId: 'location',
+    colId: 'Location',
     valueGetter: (element) => element.data?.location,
   },
   {
     headerName: domainNames.checklistStatus,
-    colId: 'workflow',
+    colId: 'Workflow',
     valueGetter: (element) => element.data?.workflow,
     cellRenderer: (props: ICellRendererProps<Pipetest, PipetestWorkflowStep[]>) => {
       if (!props.value) return;
@@ -109,7 +126,7 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.mcStatus,
-    colId: 'mechanicalCompletionStatus',
+    colId: 'MechanicalCompletionStatus',
     valueGetter: (element) => element.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       if (!props.value) return;
@@ -123,12 +140,12 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.currentStep,
-    colId: 'currentStep',
+    colId: 'ChecklistStep',
     valueGetter: (element) => element.data?.checklistStep,
   },
   {
     headerName: 'RFC',
-    colId: 'rfCPlannedForecastDate',
+    colId: 'RfCPlannedForecastDate',
     valueGetter: (element) => element.data?.rfCPlannedForecastDate,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null | undefined>) => {
       return props.value ? <DateCell dateString={props.value} /> : null;
@@ -136,27 +153,27 @@ const columnDefinitions: [ColDef<Pipetest>, ...ColDef<Pipetest>[]] = [
   },
   {
     headerName: domainNames.commIdentifier,
-    colId: 'commissioningIdentifierCode',
+    colId: 'CommissioningIdentifierCode',
     valueGetter: (element) => element.data?.commissioningIdentifierCode,
   },
   {
     headerName: 'MC Handover Status',
-    colId: 'mechanicalCompletionHandoverStatus',
+    colId: 'MechanicalCompletionHandoverStatus',
     valueGetter: (element) => element.data?.mechanicalCompletionHandoverStatus,
   },
   {
     headerName: domainNames.mcResponsible,
-    colId: 'mechanicalCompletionResponsible',
+    colId: 'MechanicalCompletionResponsible',
     valueGetter: (element) => element.data?.mechanicalCompletionResponsible,
   },
   {
     headerName: domainNames.mcPhase,
-    colId: 'mechanicalCompletionPhase',
+    colId: 'MechanicalCompletionPhase',
     valueGetter: (element) => element.data?.mechanicalCompletionPhase,
   },
   {
     headerName: 'HT cables',
-    colId: 'heatTraceCableNos',
+    colId: 'HeatTraceCableNos',
     valueGetter: (element) => element.data?.heatTraceCableNos,
     cellRenderer: (props: ICellRendererProps<Pipetest, string | null>) => {
       const values = generateCommaSeperatedString(props.data?.heatTraceCableNos ?? []);

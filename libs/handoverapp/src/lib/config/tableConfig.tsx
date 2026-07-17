@@ -13,6 +13,7 @@ import { FilterState } from '@equinor/workspace-fusion/filter';
 import {
   ColDef,
   ColumnsToolPanelModule,
+  CsvExportColumn,
   GridConfig,
   MenuModule,
   ICellRendererProps,
@@ -43,6 +44,7 @@ import {
   GridColumnOption,
   defaultGridOptions,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 
@@ -65,6 +67,20 @@ export const useTableConfig = (
     };
   }, columnDefinitions as ColDef<HandoverPackage>[], 'cc.handover.grid.columnState');
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/handover/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'handover-export.csv',
+      contextId
+    );
+  }
+
   return {
     getRows: getRows,
     modules: defaultModules,
@@ -77,6 +93,7 @@ export const useTableConfig = (
         );
       },
     } as GridConfig<HandoverPackage, FilterState>['gridOptions'],
+    csvExport: fetchCsvExport,
     storageKey: 'cc.handover.grid.columnState',
   };
 };
@@ -84,7 +101,7 @@ export const useTableConfig = (
 const columnDefinitions: ColDef<HandoverPackage>[] = [
   {
     headerName: domainNames.commPkg,
-    colId: 'CommPkgNo',
+    colId: 'CommissioningPackageNo',
     headerTooltip: 'Commissioning Package Number',
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
     valueFormatter: (pkg) => pkg.data?.commissioningPackageUrl ?? '',
@@ -115,6 +132,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.mcDisciplines,
+    colId: 'McDisciplines',
     headerTooltip: domainNames.mcDisciplines,
     valueGetter: (pkg) => pkg.data?.mcDisciplines,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
@@ -124,7 +142,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.mcStatus,
-    colId: 'MCStatus',
+    colId: 'MechanicalCompletionStatus',
     headerTooltip: domainNames.mcStatus,
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
@@ -143,7 +161,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.commPkgStatus,
-    colId: 'CommStatus',
+    colId: 'CommissioningPackageStatus',
     headerTooltip: domainNames.commPkgStatus,
     valueGetter: (pkg) => pkg.data?.commissioningPackageStatus,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, BaseStatus>) => {
@@ -162,7 +180,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.responsible,
-    colId: domainNames.responsible,
+    colId: 'Responsible',
     headerTooltip: domainNames.responsible,
     valueGetter: (pkg) => pkg.data?.responsible,
     enableRowGroup: true,
@@ -170,7 +188,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.area,
-    colId: domainNames.area,
+    colId: 'Location',
     headerTooltip: domainNames.area,
     valueGetter: (pkg) => pkg.data?.location,
     enableRowGroup: true,
@@ -178,7 +196,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.system,
-    colId: domainNames.system,
+    colId: 'System',
     headerTooltip: domainNames.system,
     valueGetter: (pkg) => pkg.data?.system,
     enableRowGroup: true,
@@ -207,7 +225,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.rfcPlannedDate,
-    colId: 'PlannedRFC',
+    colId: 'RfcPlannedDate',
     headerTooltip: domainNames.rfcPlannedDate,
     valueGetter: (pkg) => pkg.data?.rfcPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
@@ -218,7 +236,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.rfcForecastDate,
-    colId: 'ForecastRFC',
+    colId: 'RfcForecastDate',
     headerTooltip: domainNames.rfcForecastDate,
     valueGetter: (pkg) => pkg.data?.rfcForecastDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
@@ -229,7 +247,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.rfoPlannedDate,
-    colId: 'PlannedRFO',
+    colId: 'RfoPlannedDate',
     headerTooltip: domainNames.rfoPlannedDate,
     valueGetter: (pkg) => pkg.data?.rfoPlannedDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
@@ -240,7 +258,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: domainNames.rfoForecastDate,
-    colId: 'ForecastRFO',
+    colId: 'RfoForecastDate',
     headerTooltip: domainNames.rfoForecastDate,
     valueGetter: (pkg) => pkg.data?.rfoForecastDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {
@@ -251,7 +269,7 @@ const columnDefinitions: ColDef<HandoverPackage>[] = [
   },
   {
     headerName: 'Actual RFO',
-    colId: 'ActualRFO',
+    colId: 'RfoActualDate',
     headerTooltip: 'Actual RFO',
     valueGetter: (pkg) => pkg.data?.rfoActualDate,
     cellRenderer: (props: ICellRendererProps<HandoverPackage, string | null>) => {

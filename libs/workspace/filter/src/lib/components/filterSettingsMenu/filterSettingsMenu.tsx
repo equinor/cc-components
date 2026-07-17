@@ -126,7 +126,7 @@ const FilterSettingsMenu: React.FC<FilterSettingsMenuProps> = ({ disabled }) => 
               </StyledMenuItem>
               <StyledMenuItem>
                 <FullWidthButton variant="ghost_icon" onClick={openConfirmDialog}>
-                  Reset Settings
+                  Reset Filters
                 </FullWidthButton>
               </StyledMenuItem>
             </StyledMenuList>
@@ -156,17 +156,17 @@ const FilterSettingsMenu: React.FC<FilterSettingsMenuProps> = ({ disabled }) => 
 
       <StyledDialog open={isConfirmDialogOpen} onClose={closeConfirmDialog}>
         <Dialog.Header>
-          <Dialog.Title>Reset Workspace Settings</Dialog.Title>
+          <Dialog.Title>Reset Filters</Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
-          <Typography variant="body_short">Are you sure you want to reset all workspace settings?</Typography>
+          <Typography variant="body_short">Are you sure you want to reset all filter settings?</Typography>
         </Dialog.Content>
         <StyledDialogActions>
           <Button variant="outlined" onClick={closeConfirmDialog}>
             Cancel
           </Button>
           <Button variant="contained" color="danger" onClick={handleClearSettings}>
-            Reset Settings
+            Reset Filters
           </Button>
         </StyledDialogActions>
       </StyledDialog>
