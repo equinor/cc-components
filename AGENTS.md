@@ -1,7 +1,7 @@
 # CC Components — Agent Instructions
 
 Construction & Commissioning (CC) web applications for Equinor's Project Portal.  
-Monorepo using **pnpm workspaces**, **Turborepo**, **NX generators**, **React 19**, **TypeScript**, and **Vite**.
+Monorepo using **pnpm workspaces**, **Turborepo**, **React 19**, **TypeScript**, and **Vite**.
 
 ## Essential Commands
 
@@ -28,7 +28,6 @@ libs/shared/                 # Cross-app shared code (hooks, types, utils, API)
 libs/sharedcomponents/       # Cross-app shared React components
 libs/workspace/              # Workspace framework packages (ag-grid, garden, etc.)
 libs/modelviewer/            # 3D model viewer integration
-libs/plugins/                # NX generators for scaffolding
 libs/reportshared/           # Shared report utilities
 github-action/               # CI/CD deploy scripts
 ```
@@ -124,4 +123,3 @@ Each `<appname>shared` lib typically exports status mapping utilities in `utils-
 
 - [README.md](README.md) — Getting started and project overview
 - [CONTRIBUTING.md](CONTRIBUTING.md) — Contribution workflow and code structure rules
-- [NX Monorepo Patterns](https://nx.dev/more-concepts/monorepo-nx-enterprise#using-nx-at-enterpriseshere)
