@@ -13,8 +13,6 @@ pnpm ci:build                   # Build all (sequential, CI-safe)
 pnpm serve <appname>            # Dev server (remote API)
 pnpm serve:local <appname>      # Dev server (local API)
 pnpm watch <appname>            # Build lib + deps in watch mode
-pnpm new:app                    # Scaffold new Fusion app (NX generator)
-pnpm new:report                 # Scaffold new report (NX generator)
 ```
 
 App names match folder names under `apps/`: `workorder`, `punch`, `swcr`, `handover`, `heattrace`, `loop`, `mechanicalcompletion`, `piping`.
@@ -121,7 +119,6 @@ Each `<appname>shared` lib typically exports status mapping utilities in `utils-
 | [workspace-config](.github/skills/workspace-config/SKILL.md) | Creating or editing `workspace.tsx` / `frameworkConfig.ts` |
 | [table-config](.github/skills/table-config/SKILL.md) | AG Grid column definitions and `useTableConfig` |
 | [sidesheet](.github/skills/sidesheet/SKILL.md) | Sidesheet tabs, data hooks, and detail panels |
-| [new-app](.github/skills/new-app/SKILL.md) | Scaffolding a new app with its shared + sidesheet libs |
 
 ## References
 

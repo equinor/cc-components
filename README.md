@@ -127,7 +127,7 @@ The pipelines are located in the `./github/workflows` folder
 ## Creating new apps 🚀
 
 1. Run the following [action](https://github.com/equinor/cc-components/actions/workflows/create-fusion-app.yml) to create and register the app with the fusion portal.
-2. Create the app locally in CC-components. Run the following command `pnpm new:app` or `pnpm new:report`
+2. Create the app locally in CC-components by copying an existing app and its `libs/<name>{app,shared,sidesheet}` libraries, then renaming the packages.
 3. To deploy the app to test, run this [action](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
 4. Follow the [guide](https://github.com/equinor/lighthouse/blob/main/docs/project-portal/administration.md) to onboard the app to the project portal.
    [HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
