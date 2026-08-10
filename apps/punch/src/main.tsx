@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/punchapp';
+import { configure, WorkspaceWrapper } from '@cc-components/punch';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 

@@ -1,3 +1,4 @@
-export { ModelViewerTab, ModelViewerTabProps } from './ModelViewerTab';
+export { ModelViewerTab } from './ModelViewerTab';
+export type { ModelViewerTabProps } from './ModelViewerTab';
 export { enableModelViewer } from './hooks/enableModelViewer';
-export { ModelViewerEnvConfig, TagOverlay } from './types';
+export type { ModelViewerEnvConfig, TagOverlay } from './types';

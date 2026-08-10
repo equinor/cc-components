@@ -1,3 +1,0 @@
-# loopsidesheet
-
-Add readme
