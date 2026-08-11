@@ -1,7 +1,7 @@
 # CC Components — Agent Instructions
 
 Construction & Commissioning (CC) web applications for Equinor's Project Portal.  
-Monorepo using **pnpm workspaces**, **Turborepo**, **NX generators**, **React 19**, **TypeScript**, and **Vite**.
+Monorepo using **pnpm workspaces**, **Turborepo**, **React 19**, **TypeScript**, and **Vite**.
 
 ## Essential Commands
 
@@ -13,8 +13,6 @@ pnpm ci:build                   # Build all (sequential, CI-safe)
 pnpm serve <appname>            # Dev server (remote API)
 pnpm serve:local <appname>      # Dev server (local API)
 pnpm watch <appname>            # Build lib + deps in watch mode
-pnpm new:app                    # Scaffold new Fusion app (NX generator)
-pnpm new:report                 # Scaffold new report (NX generator)
 ```
 
 App names match folder names under `apps/`: `workorder`, `punch`, `swcr`, `handover`, `heattrace`, `loop`, `mechanicalcompletion`, `piping`.
@@ -28,7 +26,6 @@ libs/shared/                 # Cross-app shared code (hooks, types, utils, API)
 libs/sharedcomponents/       # Cross-app shared React components
 libs/workspace/              # Workspace framework packages (ag-grid, garden, etc.)
 libs/modelviewer/            # 3D model viewer integration
-libs/plugins/                # NX generators for scaffolding
 libs/reportshared/           # Shared report utilities
 github-action/               # CI/CD deploy scripts
 ```
@@ -119,10 +116,8 @@ Each app library typically exports status mapping utilities in `src/lib/utils-st
 | [workspace-config](.github/skills/workspace-config/SKILL.md) | Creating or editing `workspace.tsx` / `frameworkConfig.ts` |
 | [table-config](.github/skills/table-config/SKILL.md) | AG Grid column definitions and `useTableConfig` |
 | [sidesheet](.github/skills/sidesheet/SKILL.md) | Sidesheet tabs, data hooks, and detail panels |
-| [new-app](.github/skills/new-app/SKILL.md) | Scaffolding a new app with its shared + sidesheet libs |
 
 ## References
 
 - [README.md](README.md) — Getting started and project overview
 - [CONTRIBUTING.md](CONTRIBUTING.md) — Contribution workflow and code structure rules
-- [NX Monorepo Patterns](https://nx.dev/more-concepts/monorepo-nx-enterprise#using-nx-at-enterpriseshere)
