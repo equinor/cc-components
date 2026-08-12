@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/workorderapp';
+import { configure, WorkspaceWrapper } from '@cc-components/workorder';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 

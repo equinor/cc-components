@@ -21,9 +21,7 @@ App names match folder names under `apps/`: `workorder`, `punch`, `swcr`, `hando
 
 ```
 apps/<appname>/              # Thin app shells (main.tsx + Fusion config)
-libs/<appname>app/           # App business logic, workspace config, garden
-libs/<appname>shared/        # Types and utilities shared between app + sidesheet
-libs/<appname>sidesheet/     # Sidesheet UI for the app
+libs/<appname>/              # App business logic: workspace config, garden, shared types, sidesheet
 libs/shared/                 # Cross-app shared code (hooks, types, utils, API)
 libs/sharedcomponents/       # Cross-app shared React components
 libs/workspace/              # Workspace framework packages (ag-grid, garden, etc.)
@@ -34,16 +32,16 @@ github-action/               # CI/CD deploy scripts
 
 ### App ↔ Lib Relationship
 
-Each app in `apps/` is a minimal entry point that imports from its corresponding `libs/<appname>app/` package. All logic lives in libs:
+Each app in `apps/` is a minimal entry point that imports from its corresponding `libs/<appname>/` package. All logic lives in that one library:
 
-- `apps/workorder/src/main.tsx` → imports `@cc-components/workorderapp`
-- `@cc-components/workorderapp` → depends on `@cc-components/workordershared` + `@cc-components/workordersidesheet`
+- `apps/workorder/src/main.tsx` → imports `@cc-components/workorder`
+- `@cc-components/workorder` → depends only on the cross-app `@cc-components/shared` + `@cc-components/sharedcomponents`. Its workspace config, garden, shared types (`src/lib/shared/`) and sidesheet (`src/lib/sidesheet/`) all live in the one package.
 
 ### Dependency Rules
 
-- An app library **cannot** import from another app library (e.g., `workorderapp` cannot import from `punchapp`)
+- An app library **cannot** import from another app library (e.g., `workorder` cannot import from `punch`)
 - Shared code used by multiple apps belongs in `@cc-components/shared` or `@cc-components/sharedcomponents`
-- Each `<appname>shared` lib contains types and status utilities shared between `<appname>app` and `<appname>sidesheet`
+- Within an app library, cross-cutting types live in `src/lib/shared/` and the detail panel in `src/lib/sidesheet/`
 
 ## Architecture
 
@@ -56,7 +54,7 @@ Apps are built on [Equinor Fusion Framework](https://github.com/equinor/fusion-f
 - **Filter** — server-driven filter model
 - **Status bar** — summary metrics
 
-App configuration lives in `libs/<appname>app/src/lib/config/`:
+App configuration lives in `libs/<appname>/src/lib/config/`:
 
 | File | Purpose |
 |------|---------|
@@ -101,15 +99,15 @@ Every app follows the same workspace pattern in `workspace.tsx`:
 
 ### Sidesheet Structure
 
-Each sidesheet lib (`libs/<appname>sidesheet/`) contains:
+Each app library's sidesheet lives in `libs/<appname>/src/lib/sidesheet/` and contains:
 
 - `ui-sidesheet/` — React components for the sidesheet tabs
 - `utils-sidesheet/` — Utility functions and queries
-- `types/` — TypeScript interfaces for sidesheet data
+- `types.ts` — TypeScript interfaces for sidesheet data
 
 ### Status Utilities
 
-Each `<appname>shared` lib typically exports status mapping utilities in `utils-statuses/` for consistent status coloring across views.
+Each app library typically exports status mapping utilities in `src/lib/utils-statuses/` for consistent status coloring across views.
 
 ## Skills & Instructions
 

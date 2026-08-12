@@ -13,7 +13,7 @@
     "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
-    "@cc-components/pipingapp": "workspace:^",
+    "@cc-components/piping": "workspace:^",
     "@cc-components/shared": "workspace:^"
   },
   "files": [

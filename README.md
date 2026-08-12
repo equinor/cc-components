@@ -63,9 +63,7 @@ The following snippet provides a brief overview of how application code is struc
 |        +-- app.config.local.js # Configuration for local env
 +-- libs
 |    +-- shared # Components and functionality shared between apps
-|    +-- <appname>app # The code for the application
-|    +-- <appname>shared # Code shared between the app and sidesheet
-|    +-- <appname>sidesheet # The code for the sidesheet
+|    +-- <appname> # All code for the application (config, garden, shared types, sidesheet)
 +-- widgets # Code for stand-alone widgets used in the apps
 ...
 ```
@@ -86,17 +84,16 @@ Note: `sharedcomponents` was created a long time after `shared`, so `sharedcompo
 
 This chapter only refers to the `libs` folder.
 
-Each app has three different folders. The naming convention for the three folders are `<appname>app`, `<appname>shared` and `<appname>sidesheet`, e.g. handoverapp, handovershared and handoversidesheet.
+Each app is a single library named after the app, e.g. `handover`, `workorder`. The library bundles everything for that app:
 
-The `app` folder contains all the configurations, business logic and UI to the app, except the things that are related to the sidesheet.
-
-The `shared` folder contains all shared code/resources that are used in both `app` and `sidesheet`. This will typically be different types and maybe some styling.
-
-The `sidesheet` folder contains all the business logic and UI for the sidesheet.
+- `src/lib/config/` — workspace, table, garden, sidesheet and framework configuration.
+- `src/lib/shared/` — shared code/resources (types, styling) used by both the app and its sidesheet.
+- `src/lib/sidesheet/` — all business logic and UI for the sidesheet.
+- `src/lib/ui-garden/`, `src/lib/utils-garden/`, `src/lib/utils-statuses/` — garden view and status helpers.
 
 ### App config
 
-All the apps are build up by the same components and configuration options. These options can be found in `\libs\<appname>app\src\lib\config\workspaceConfig.tsx`.
+All the apps are build up by the same components and configuration options. These options can be found in `\libs\<appname>\src\lib\config\workspaceConfig.tsx`.
 
 All the configuration options every app uses is filterOptions, gridOptions, gardenOptions, statusBarOptions, sidesheetOptions, powerBiOptions and workspaceOptions. Without the filterOptions you won't see any filters, without gridOptions you won't see any table, etc.
 
