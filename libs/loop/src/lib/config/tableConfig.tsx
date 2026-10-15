@@ -3,6 +3,7 @@ import { statusColorMap } from '@cc-components/shared/mapping';
 import {
   DataResponse,
   defaultModules,
+  downloadCsv,
   useGridDataSource,
 } from '@cc-components/shared/workspace-config';
 import {
@@ -16,6 +17,7 @@ import { defaultGridOptions } from '@cc-components/shared/workspace-config';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import {
   ColDef,
+  CsvExportColumn,
   GridConfig,
   MenuModule,
   ColumnsToolPanelModule,
@@ -67,6 +69,20 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     window.URL.revokeObjectURL(url);
   }
 
+  async function fetchCsvExport(
+    filterState: FilterState,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) {
+    await downloadCsv(
+      (url, init) => client.fetch(url, init),
+      `/api/contexts/${contextId}/loop/csv-export`,
+      { filter: filterState, columns, orderBy: sort?.colId, descending: sort?.descending },
+      'loop-export.csv',
+      contextId
+    );
+  }
+
   return {
     columnDefinitions: colDefs as [ColDef<Loop>, ...ColDef<Loop>[]],
     gridOptions: {
@@ -74,6 +90,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
     },
     getRows: getRows,
     excelExport: fetchLoopExport,
+    csvExport: fetchCsvExport,
     modules: defaultModules,
     storageKey: 'cc.loop.grid.columnState',
   };
@@ -81,7 +98,7 @@ export const useTableConfig = (contextId: string): GridConfig<Loop, FilterState>
 
 const columnDefinitions: ColDef<Loop>[] = [
   {
-    colId: 'LoopTag',
+    colId: 'LoopNo',
     headerName: 'Loop tag',
     headerTooltip: 'Loop tag',
     valueGetter: (pkg) => pkg.data?.loopNo,
@@ -108,7 +125,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     width: 350,
   },
   {
-    colId: domainNames.commSystem,
+    colId: 'System',
     headerName: domainNames.commSystem,
     headerTooltip: domainNames.commSystem,
     valueGetter: (pkg) => pkg.data?.system,
@@ -118,7 +135,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     enableRowGroup: false,
   },
   {
-    colId: 'CommPkgNo',
+    colId: 'CommissioningPackageNo',
     headerName: domainNames.commPkg,
     headerTooltip: domainNames.commPkg,
     valueGetter: (pkg) => pkg.data?.commissioningPackageNo,
@@ -139,7 +156,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     onCellClicked: () => {},
   },
   {
-    colId: 'MCPkgNo',
+    colId: 'MechanicalCompletionPackageNo',
     headerName: domainNames.mcPkg,
     headerTooltip: domainNames.mcPkg,
     valueGetter: (pkg) => pkg.data?.mechanicalCompletionPackageNo,
@@ -204,7 +221,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
-    colId: 'CLStatus',
+    colId: 'Status',
     headerName: domainNames.checklistStatus,
     headerTooltip: domainNames.checklistStatus,
     valueGetter: (pkg) => pkg.data?.status,
@@ -279,6 +296,7 @@ const columnDefinitions: ColDef<Loop>[] = [
     },
   },
   {
+    colId: 'LoopContentStatus',
     headerName: 'Content MC status',
     headerTooltip: 'Content MC status',
     valueGetter: (pkg) => pkg.data?.loopContentStatus,
