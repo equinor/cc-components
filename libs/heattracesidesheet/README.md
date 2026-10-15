@@ -1,3 +1,0 @@
-# heattraceapp
-
-Add readme

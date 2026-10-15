@@ -1,3 +1,0 @@
-# pipingshared
-
-Add readme

@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/mechanicalcompletionapp';
+import { configure, WorkspaceWrapper } from '@cc-components/mechanicalcompletion';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 

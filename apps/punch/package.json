@@ -12,7 +12,7 @@
     "fprd:deploy": "tsx ../../github-action/src/releaseMain.ts release"
   },
   "dependencies": {
-    "@cc-components/punchapp": "workspace:^",
+    "@cc-components/punch": "workspace:^",
     "@cc-components/shared": "workspace:^"
   },
   "files": [

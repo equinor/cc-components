@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "@cc-components/shared": "workspace:^",
-    "@cc-components/swcrapp": "workspace:^"
+    "@cc-components/swcr": "workspace:^"
   }
 }

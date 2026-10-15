@@ -31,19 +31,21 @@ catalog:
   '@equinor/eds-tokens': ^2.1.1
 
   # Equinor Fusion Framework
-  '@equinor/fusion-framework-cli': ^13.3.18
-  '@equinor/fusion-framework-module': ^5.0.5
-  '@equinor/fusion-framework-module-ag-grid': ^34.4.0
-  '@equinor/fusion-framework-module-event': ^4.4.0
-  '@equinor/fusion-framework-module-http': ^7.0.5
-  '@equinor/fusion-framework-module-msal': ^6.0.4
-  '@equinor/fusion-framework-react': ^7.4.19
-  '@equinor/fusion-framework-react-ag-grid': ^34.4.0
-  '@equinor/fusion-framework-react-app': ^8.2.0
-  '@equinor/fusion-framework-react-module-bookmark': ^5.0.1
-  '@equinor/fusion-framework-react-module-context': ^6.2.33
-  '@equinor/fusion-framework-react-module-http': ^10.0.0
-  '@equinor/fusion-observable': ^8.5.7
+  '@equinor/fusion-framework-cli': ^15.2.5
+  '@equinor/fusion-framework-module': ^6.1.2
+  '@equinor/fusion-framework-module-ag-grid': ^37.0.1
+  '@equinor/fusion-framework-module-event': ^6.0.1
+  '@equinor/fusion-framework-module-http': ^8.0.5
+  '@equinor/fusion-framework-module-msal': ^10.0.2
+  '@equinor/fusion-framework-module-state': ^2.0.0
+  '@equinor/fusion-framework-react': ^8.0.1
+  '@equinor/fusion-framework-react-ag-grid': ^37.0.1
+  '@equinor/fusion-framework-react-app': ^14.0.0
+  '@equinor/fusion-framework-react-router': ^2.4.0
+  '@equinor/fusion-framework-react-module-bookmark': ^6.0.1
+  '@equinor/fusion-framework-react-module-context': ^7.0.2
+  '@equinor/fusion-framework-react-module-http': ^11.0.1
+  '@equinor/fusion-observable': ^9.1.1
   '@equinor/fusion-react-person': ^1.0.0
   '@equinor/workspace-sidesheet': ^0.1.6
 

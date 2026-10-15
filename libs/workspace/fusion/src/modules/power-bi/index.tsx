@@ -158,6 +158,7 @@ const PowerBiWrapper = (powerBiConfig: PowerBiConfig & { controller: PowerBiCont
       reportUri={powerBiConfig.reportUri}
       filters={createBasicFilter(powerBiConfig.filters)}
       ErrorComponent={powerBiConfig.ErrorComponent}
+      eventHandlers={powerBiConfig.eventHandlers}
     />
   );
 };

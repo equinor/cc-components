@@ -63,9 +63,7 @@ The following snippet provides a brief overview of how application code is struc
 |        +-- app.config.local.js # Configuration for local env
 +-- libs
 |    +-- shared # Components and functionality shared between apps
-|    +-- <appname>app # The code for the application
-|    +-- <appname>shared # Code shared between the app and sidesheet
-|    +-- <appname>sidesheet # The code for the sidesheet
+|    +-- <appname> # All code for the application (config, garden, shared types, sidesheet)
 +-- widgets # Code for stand-alone widgets used in the apps
 ...
 ```
@@ -86,17 +84,16 @@ Note: `sharedcomponents` was created a long time after `shared`, so `sharedcompo
 
 This chapter only refers to the `libs` folder.
 
-Each app has three different folders. The naming convention for the three folders are `<appname>app`, `<appname>shared` and `<appname>sidesheet`, e.g. handoverapp, handovershared and handoversidesheet.
+Each app is a single library named after the app, e.g. `handover`, `workorder`. The library bundles everything for that app:
 
-The `app` folder contains all the configurations, business logic and UI to the app, except the things that are related to the sidesheet.
-
-The `shared` folder contains all shared code/resources that are used in both `app` and `sidesheet`. This will typically be different types and maybe some styling.
-
-The `sidesheet` folder contains all the business logic and UI for the sidesheet.
+- `src/lib/config/` — workspace, table, garden, sidesheet and framework configuration.
+- `src/lib/shared/` — shared code/resources (types, styling) used by both the app and its sidesheet.
+- `src/lib/sidesheet/` — all business logic and UI for the sidesheet.
+- `src/lib/ui-garden/`, `src/lib/utils-garden/`, `src/lib/utils-statuses/` — garden view and status helpers.
 
 ### App config
 
-All the apps are build up by the same components and configuration options. These options can be found in `\libs\<appname>app\src\lib\config\workspaceConfig.tsx`.
+All the apps are build up by the same components and configuration options. These options can be found in `\libs\<appname>\src\lib\config\workspaceConfig.tsx`.
 
 All the configuration options every app uses is filterOptions, gridOptions, gardenOptions, statusBarOptions, sidesheetOptions, powerBiOptions and workspaceOptions. Without the filterOptions you won't see any filters, without gridOptions you won't see any table, etc.
 
@@ -127,7 +124,7 @@ The pipelines are located in the `./github/workflows` folder
 ## Creating new apps 🚀
 
 1. Run the following [action](https://github.com/equinor/cc-components/actions/workflows/create-fusion-app.yml) to create and register the app with the fusion portal.
-2. Create the app locally in CC-components. Run the following command `pnpm new:app` or `pnpm new:report`
+2. Create the app locally in CC-components by copying an existing app and its `libs/<name>{app,shared,sidesheet}` libraries, then renaming the packages.
 3. To deploy the app to test, run this [action](https://github.com/equinor/cc-components/actions/workflows/manual-deploy.yml)
 4. Follow the [guide](https://github.com/equinor/lighthouse/blob/main/docs/project-portal/administration.md) to onboard the app to the project portal.
    [HMR](https://webpack.js.org/guides/hot-module-replacement/) does not work. To apply changes stop the server and run `pnpm serve <app>`
