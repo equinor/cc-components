@@ -139,12 +139,10 @@ export const PowerBIFilter = ({
   });
 
   const updatePbiFilters = async (filterName: string, filterValues: ActiveFilter[]) => {
-    if (filterValues.length === 0) {
-      slicerRecord[filterName].slicer.setSlicerState({ filters: [] });
-      return;
-    }
-    const filter = createFilter(filterName, filterValues);
-    slicerRecord[filterName].slicer.setSlicerState({ filters: [filter] });
+    const filters = filterValues.length === 0 ? [] : [createFilter(filterName, filterValues)];
+    await slicerRecord[filterName].slicer
+      .setSlicerState({ filters })
+      .catch((error) => console.error(`Couldnt apply filter ${filterName}`, error));
   };
 
   const createFilter = (filterName: string, values: ActiveFilter[]): models.ISlicerFilter => {

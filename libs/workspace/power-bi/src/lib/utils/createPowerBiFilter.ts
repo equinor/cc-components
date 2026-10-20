@@ -2,7 +2,7 @@ import { PowerBiFilter } from '../types';
 import { SlicerData } from '../types/slicer';
 import { transformData } from './transformData';
 
-export function createPowerBiFilter({ data, filter: sliceFilter, slicer }: SlicerData): PowerBiFilter {
+export function createPowerBiFilter({ data, target, slicer }: SlicerData): PowerBiFilter {
   // SortOrder
   const x = slicer.layout.x || 0;
   const y = slicer.layout.y || 0;
@@ -20,7 +20,7 @@ export function createPowerBiFilter({ data, filter: sliceFilter, slicer }: Slice
       type: filter.type,
       value: item,
       slicerName: slicer.name,
-      target: sliceFilter?.target,
+      target,
     };
   });
 
