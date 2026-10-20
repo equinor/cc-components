@@ -1,3 +1,0 @@
-# loopshared
-
-Add readme

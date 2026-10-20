@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/loopapp';
+import { configure, WorkspaceWrapper } from '@cc-components/loop';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 

@@ -1,4 +1,4 @@
-import { configure, WorkspaceWrapper } from '@cc-components/heattraceapp';
+import { configure, WorkspaceWrapper } from '@cc-components/heattrace';
 import { useHttpClient } from '@equinor/fusion-framework-react-app/http';
 import { createRender, RootAppWrapper } from '@cc-components/shared';
 

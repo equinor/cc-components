@@ -1,6 +1,7 @@
 import { PowerBiConfig } from '@equinor/workspace-fusion/power-bi';
 import { usePBIHelpers } from './usePbiHelpers';
 import { useFusionContext } from './useContext';
+import { usePBIEventHandlers } from './usePBIEventHandlers';
 import { ReportMeta } from '../components/ReportMeta';
 import { ErrorComponent } from '../components/ErrorComponent/ErrorComponent';
 
@@ -17,6 +18,7 @@ export type Filters = {
 export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConfig {
   const { getEmbed, getToken } = usePBIHelpers();
   const externalId = useFusionContext()?.externalId;
+  const eventHandlers = usePBIEventHandlers(reportUri);
 
   return {
     getEmbed,
@@ -29,5 +31,6 @@ export function usePBIOptions(reportUri: string, filters?: Filters): PowerBiConf
       : undefined,
     reportUri,
     ErrorComponent,
+    eventHandlers,
   };
 }

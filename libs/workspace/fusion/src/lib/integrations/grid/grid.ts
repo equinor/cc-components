@@ -25,6 +25,11 @@ export type {
   IServerSideGetRowsRequest,
 };
 
+export type CsvExportColumn = {
+  colId: string;
+  headerName: string;
+};
+
 type GridConfig<T, TFilter> = {
   columnDefinitions: ColDef<T>[];
   getRows: (params: IServerSideGetRowsParams, filters: TFilter) => Promise<void>;
@@ -35,5 +40,10 @@ type GridConfig<T, TFilter> = {
    */
   modules?: Module[];
   excelExport?: (params: TFilter) => Promise<void>;
+  csvExport?: (
+    filterState: TFilter,
+    columns: CsvExportColumn[],
+    sort?: { colId: string; descending: boolean }
+  ) => Promise<void>;
   storageKey?: string;
 };
