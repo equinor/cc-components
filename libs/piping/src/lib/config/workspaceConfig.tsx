@@ -13,6 +13,7 @@ import {
   usePBIOptions,
   useCloseSidesheetOnContextChange,
   isAffiliateUser,
+  useWorkspaceInformation,
 } from '@cc-components/shared';
 import { useGardenConfig } from './gardenConfig';
 import { sidesheetConfig } from './pipingSidesheet';
@@ -52,6 +53,13 @@ export const WorkspaceWrapper = () => {
     pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
   );
 
+  const information = useWorkspaceInformation({
+    title: 'Pipetest Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
@@ -64,13 +72,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (pt) => pt.id,
         defaultTab: 'grid',
-        information: {
-          title: 'Pipetest Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       filterOptions={filterOptions}
       gardenOptions={gardenConfig}

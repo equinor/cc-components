@@ -4,6 +4,7 @@ import { useFusionContext } from '../hooks/useContext';
 import { usePBIOptions } from '../hooks/usePBIOptions';
 import { useWorkspaceBookmarks } from '../hooks/useWorkspaceBookmark';
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+import { useWorkspaceInformation } from '../hooks/useWorkspaceInformation';
 
 type FusionReportProps = {
   reportId: string;
@@ -34,6 +35,13 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
+  const information = useWorkspaceInformation({
+    title: 'Analytics',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   const isAffiliateUser = () => {
     return !window.Fusion.modules.auth.account?.username.endsWith('@equinor.com');
   };
@@ -45,13 +53,7 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
       onBookmarkChange={onBookmarkChange}
       workspaceOptions={{
         getIdentifier: () => '',
-        information: {
-          title: 'Analytics',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       powerBiOptions={pbi}
       modules={[powerBiModule]}
