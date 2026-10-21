@@ -7,6 +7,7 @@ import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import {
   isAffiliateUser,
+  useWorkspaceInformation,
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
@@ -53,6 +54,13 @@ export const WorkspaceWrapper = () => {
     pbi_context_mapping[currentContext?.type.id as 'ProjectMaster' | 'Facility']
   );
 
+  const information = useWorkspaceInformation({
+    title: 'Heat Trace Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
@@ -65,13 +73,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (ht) => ht.heatTraceCableId,
         defaultTab: 'grid',
-        information: {
-          title: 'Heat Trace Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       filterOptions={filterOptions}
       gardenOptions={gardenConfig}

@@ -6,6 +6,7 @@ import {
   useWorkspaceBookmarks,
   useCloseSidesheetOnContextChange,
   isAffiliateUser,
+  useWorkspaceInformation,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import { Workspace } from '@equinor/workspace-fusion';
@@ -54,6 +55,13 @@ export const WorkspaceWrapper = () => {
   const statusBarConfig = useStatusBarConfig(contextId);
   const gardenConfig = useGardenConfig(contextId);
 
+  const information = useWorkspaceInformation({
+    title: 'Loop Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
@@ -66,13 +74,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (item) => item.checklistId,
         defaultTab: 'grid',
-        information: {
-          title: 'Loop Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       filterOptions={filterOptions}
       gardenOptions={gardenConfig}

@@ -1,5 +1,6 @@
 import {
   isAffiliateUser,
+  useWorkspaceInformation,
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
@@ -52,6 +53,13 @@ export const WorkspaceWrapper = () => {
 
   const gardenConfig = useGardenConfig(contextId);
 
+  const information = useWorkspaceInformation({
+    title: 'Handover Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
@@ -62,13 +70,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (item) => item.commissioningPackageUrlId,
         defaultTab: 'garden',
-        information: {
-          title: 'Handover Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       currentBookmark={currentBookmark}
       onBookmarkChange={onBookmarkChange}

@@ -1,5 +1,6 @@
 import {
   isAffiliateUser,
+  useWorkspaceInformation,
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
@@ -54,6 +55,13 @@ export const WorkspaceWrapper = () => {
   const gardenConfig = useGardenConfig(contextId);
   const { isLoading } = useCCApiAccessCheck(contextId, ccApi, 'punch');
 
+  const information = useWorkspaceInformation({
+    title: 'Punch Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
@@ -66,13 +74,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (item) => item.punchItemNo,
         defaultTab: 'grid',
-        information: {
-          title: 'Punch Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       filterOptions={filterConfig}
       gridOptions={tableConfig}

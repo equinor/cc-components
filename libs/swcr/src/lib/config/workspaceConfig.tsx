@@ -1,5 +1,6 @@
 import {
   isAffiliateUser,
+  useWorkspaceInformation,
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
@@ -55,6 +56,13 @@ export const WorkspaceWrapper = () => {
   const gardenConfig = useGardenConfig(contextId);
   const { isLoading } = useCCApiAccessCheck(contextId, ccApi, 'swcr');
 
+  const information = useWorkspaceInformation({
+    title: 'SWCR Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
+
   if (isLoading) {
     return <CCApiAccessLoading />;
   }
@@ -67,13 +75,7 @@ export const WorkspaceWrapper = () => {
       workspaceOptions={{
         getIdentifier: (item) => item.softwareChangeRecordId,
         defaultTab: 'garden',
-        information: {
-          title: 'SWCR Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
-          isAffiliate: isAffiliateUser(),
-        },
+        information: { ...information, isAffiliate: isAffiliateUser() },
       }}
       filterOptions={filterConfig}
       gridOptions={tableConfig}
