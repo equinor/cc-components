@@ -18,6 +18,14 @@ import { sidesheetConfig } from './sidesheetConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import { useTableConfig } from './tableConfig';
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+import { useAppEnvironmentVariables } from '@equinor/fusion-framework-react-app';
+
+type HandoverEnvironment = {
+  title?: string;
+  dataSource?: string;
+  dataRefreshRate?: string;
+  access?: string;
+};
 
 const pbi_context_mapping = {
   Facility: {
@@ -37,6 +45,7 @@ export const WorkspaceWrapper = () => {
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
   const { currentContext } = useModuleCurrentContext();
+  const { value: env } = useAppEnvironmentVariables<HandoverEnvironment>();
 
   const pbi = usePBIOptions(
     'handoveranalytics',
@@ -63,10 +72,10 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (item) => item.commissioningPackageUrlId,
         defaultTab: 'garden',
         information: {
-          title: 'Handover Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          title: env?.title ?? 'Handover Workspace',
+          dataSource: env?.dataSource ?? 'ProCoSys / Alpha',
+          dataRefreshRate: env?.dataRefreshRate ?? 'Hourly',
+          access: env?.access ?? 'Internal',
           isAffiliate: isAffiliateUser(),
         },
       }}

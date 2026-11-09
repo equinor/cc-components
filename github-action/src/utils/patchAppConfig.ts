@@ -35,7 +35,8 @@ export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}
   config: AppConfig & T,
   token: string,
   appKey: string,
-  url: string
+  url: string,
+  defaults: Record<string, unknown> = {}
 ) {
   const client = new HttpClient();
 
@@ -45,7 +46,12 @@ export async function patchAppConfig<T extends Record<PropertyKey, unknown> = {}
   };
   const existingConfig = await getAppConfig(token, appKey, url);
 
-  existingConfig.environment = { ...existingConfig.environment, ...config };
+  // defaults only fill missing keys, so values edited in App Admin survive releases
+  existingConfig.environment = {
+    ...defaults,
+    ...existingConfig.environment,
+    ...config,
+  };
 
   //patch
   const patchResponse = await client.put(
