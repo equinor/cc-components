@@ -1,4 +1,14 @@
+import { tokens } from '@equinor/eds-tokens';
 import styled from 'styled-components';
+
+/** Pins its absolutely positioned children to the left edge of the scroll container */
+export const StyledFrozenColumn = styled.div`
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: ${tokens.colors.ui.background__default.hex};
+  box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.3);
+`;
 
 export const StyledLayoutRoot = styled.div`
   height: 100%;

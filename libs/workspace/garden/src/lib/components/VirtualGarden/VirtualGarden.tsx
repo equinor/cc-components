@@ -1,5 +1,5 @@
 import { Fragment, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
-import { useVirtual } from 'react-virtual';
+import { defaultRangeExtractor, Range, useVirtual } from 'react-virtual';
 
 import { useExpand } from '../../hooks/useExpand';
 import { useVirtualScrolling } from '../../hooks/useVirtualScrolling';
@@ -14,6 +14,7 @@ import {
 import { GardenItemContainer } from '../GardenItemContainer/GardenItemContainer';
 import { HeaderContainer } from '../HeaderContainer/HeaderContainer';
 import { Layout } from '../Layout/Layout';
+import { StyledFrozenColumn } from '../Layout/layout.styles';
 
 import { UseQueryResult } from '@tanstack/react-query';
 import { useBlockCache } from '../../hooks/useBlockCache';
@@ -82,11 +83,23 @@ export const VirtualGarden = <TData extends Record<PropertyKey, unknown>, TConte
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const {
-    visuals: { rowHeight, headerHeight },
+    visuals: { rowHeight, headerHeight, freezeFirstColumn },
     components: { customGroupView, customItemView },
   } = useGardenConfig();
 
   const { groupingService } = useGarden();
+
+  /** Shares the query key with HeaderContainer, so this does not cause an extra request */
+  const [firstHeaderQuery] = useBlockCache({
+    blocks: [{ x: 0, y: 0 }],
+    blocksInView: freezeFirstColumn ? [{ x: 0, y: 0 }] : [],
+    blockSqrt,
+    context,
+    getBlockAsync: getHeader,
+    hash: ['header'],
+  });
+  const firstHeader = firstHeaderQuery?.data?.[0];
+  const isFirstColumnFrozen = !!firstHeader && !!freezeFirstColumn?.(firstHeader);
 
   /**
    * Reset to block x,y when grouping changes
@@ -121,6 +134,14 @@ export const VirtualGarden = <TData extends Record<PropertyKey, unknown>, TConte
     keyExtractor: useCallback((index) => index, [contextWidths]),
     useObserver: useCallback(() => ({ height: 0, width: window.innerWidth }), []),
     overscan: 3,
+    /** Keep the frozen first column rendered when it is scrolled out of view */
+    rangeExtractor: useCallback(
+      (range: Range) => {
+        const indexes = defaultRangeExtractor(range);
+        return isFirstColumnFrozen && indexes[0] !== 0 ? [0, ...indexes] : indexes;
+      },
+      [isFirstColumnFrozen]
+    ),
   });
 
   const { collapseColumn, expandColumn, expanded } = useExpandedSubGroups(columnCount);
@@ -130,12 +151,19 @@ export const VirtualGarden = <TData extends Record<PropertyKey, unknown>, TConte
   const packageChild = customItemView ?? undefined;
 
   const blocks = makeBlocks({ blockSqrt, columnCount, rowCount });
+  /** Exclude the frozen column so it does not stretch the range of blocks to fetch */
+  const scrollingColumns = isFirstColumnFrozen
+    ? columnVirtualizer.virtualItems.filter((column) => column.index !== 0)
+    : columnVirtualizer.virtualItems;
   const { xEnd, xStart, yEnd, yStart } = getCoordinatesInView(
-    columnVirtualizer.virtualItems,
+    scrollingColumns.length ? scrollingColumns : columnVirtualizer.virtualItems,
     rowVirtualizer.virtualItems
   );
 
-  const blocksInView = getBlocksInView(xStart, xEnd, yStart, yEnd, blockSqrt);
+  const blocksInView = [
+    ...getBlocksInView(xStart, xEnd, yStart, yEnd, blockSqrt),
+    ...(isFirstColumnFrozen ? getBlocksInView(0, 0, yStart, yEnd, blockSqrt) : []),
+  ];
   const blockCache = useBlockCache({
     blocks,
     blocksInView,
@@ -163,32 +191,45 @@ export const VirtualGarden = <TData extends Record<PropertyKey, unknown>, TConte
           columnStart={xStart}
           highlightedColumn={columnStart ?? undefined}
           columnVirtualizer={columnVirtualizer}
+          isFirstColumnFrozen={isFirstColumnFrozen}
         />
         {columnVirtualizer.virtualItems.map((virtualColumn) => {
           const updateRowCount = (newVal: number) => patchCount(virtualColumn.index, newVal);
 
           const maxRowCount = columnheights[virtualColumn.index];
 
+          const itemContainer = (
+            <GardenItemContainer
+              context={context}
+              getSubGroupItems={getSubgroupItems}
+              maxRowCount={maxRowCount}
+              collapseColumn={(name) => collapseColumn(virtualColumn.index, name)}
+              expandColumn={(item) => expandColumn(virtualColumn.index, item)}
+              expandedIndexes={expanded[virtualColumn.index]}
+              setUpdatedRowCount={updateRowCount}
+              blockSqrt={blockSqrt}
+              rowVirtualizer={rowVirtualizer}
+              getBlockCache={(currBlock) => findBlockCacheEntry(currBlock, blocks, blockCache)}
+              packageChild={packageChild}
+              customSubGroup={customGroupView}
+              itemWidth={width}
+              handleOnClick={handleOnItemClick}
+              parentRef={containerRef}
+              virtualColumn={virtualColumn}
+            />
+          );
+
           return (
             <Fragment key={virtualColumn.key}>
-              <GardenItemContainer
-                context={context}
-                getSubGroupItems={getSubgroupItems}
-                maxRowCount={maxRowCount}
-                collapseColumn={(name) => collapseColumn(virtualColumn.index, name)}
-                expandColumn={(item) => expandColumn(virtualColumn.index, item)}
-                expandedIndexes={expanded[virtualColumn.index]}
-                setUpdatedRowCount={updateRowCount}
-                blockSqrt={blockSqrt}
-                rowVirtualizer={rowVirtualizer}
-                getBlockCache={(currBlock) => findBlockCacheEntry(currBlock, blocks, blockCache)}
-                packageChild={packageChild}
-                customSubGroup={customGroupView}
-                itemWidth={width}
-                handleOnClick={handleOnItemClick}
-                parentRef={containerRef}
-                virtualColumn={virtualColumn}
-              />
+              {isFirstColumnFrozen && virtualColumn.index === 0 ? (
+                <StyledFrozenColumn
+                  style={{ width: `${virtualColumn.size}px`, height: `${rowVirtualizer.totalSize}px` }}
+                >
+                  {itemContainer}
+                </StyledFrozenColumn>
+              ) : (
+                itemContainer
+              )}
             </Fragment>
           );
         })}

@@ -39,6 +39,7 @@ export const useGardenConfig = (
     visuals: {
       rowHeight: 31,
       headerHeight: 42,
+      freezeFirstColumn: (header) => header.name === '(Blank)',
     },
   };
 };
