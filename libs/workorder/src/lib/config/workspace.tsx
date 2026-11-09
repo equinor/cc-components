@@ -1,6 +1,7 @@
 import {
   useCCApiAccessCheck,
   useContextId,
+  useWorkspaceInformation,
   useHttpClient,
   usePBIOptions,
   useWorkspaceBookmarks,
@@ -35,6 +36,12 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  const workspaceInformation = useWorkspaceInformation({
+    title: 'Workorder Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
   useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
@@ -69,10 +76,7 @@ export const WorkspaceWrapper = () => {
           getIdentifier: (item: any) => item.workOrderId,
           defaultTab: 'grid',
           information: {
-            title: 'Workorder Workspace',
-            dataSource: 'ProCoSys / Alpha',
-            dataRefreshRate: 'Hourly',
-            access: 'Internal',
+            ...workspaceInformation,
             isAffiliate: isAffiliateUser(),
           },
         }}

@@ -7,6 +7,7 @@ import { useTableConfig } from './tableConfig';
 import { useStatusBarConfig } from './statusBarConfig';
 import {
   useContextId,
+  useWorkspaceInformation,
   useHttpClient,
   useCCApiAccessCheck,
   useWorkspaceBookmarks,
@@ -32,6 +33,12 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  const workspaceInformation = useWorkspaceInformation({
+    title: 'Pipetest Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
   useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');
@@ -65,10 +72,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (pt) => pt.id,
         defaultTab: 'grid',
         information: {
-          title: 'Pipetest Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}

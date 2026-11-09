@@ -2,6 +2,7 @@ import {
   usePBIOptions,
   useCCApiAccessCheck,
   useContextId,
+  useWorkspaceInformation,
   useHttpClient,
   useWorkspaceBookmarks,
   useCloseSidesheetOnContextChange,
@@ -33,6 +34,12 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  const workspaceInformation = useWorkspaceInformation({
+    title: 'Loop Workspace',
+    dataSource: 'ProCoSys / Alpha',
+    dataRefreshRate: 'Hourly',
+    access: 'Internal',
+  });
   useCloseSidesheetOnContextChange();
 
   const { currentContext } = useModuleCurrentContext();
@@ -67,10 +74,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (item) => item.checklistId,
         defaultTab: 'grid',
         information: {
-          title: 'Loop Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}
