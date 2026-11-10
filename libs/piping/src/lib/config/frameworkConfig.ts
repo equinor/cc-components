@@ -5,6 +5,7 @@ import {
 import { enableContext } from '@equinor/fusion-framework-react-module-context';
 import buildQuery from 'odata-query';
 import { enableBookmark } from '@equinor/fusion-framework-react-app/bookmark';
+import { enableAppState } from '@equinor/fusion-framework-react-app/state';
 import { enableAgGrid } from '@equinor/fusion-framework-module-ag-grid';
 import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
@@ -14,6 +15,7 @@ import { themeQuartz } from '@equinor/workspace-fusion/grid';
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableNavigation(config, c.env.basename);
   enableBookmark(config);
+  enableAppState(config);
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster', 'Facility']);
     builder.setContextParameterFn(({ search, type }) => {

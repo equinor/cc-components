@@ -1,4 +1,5 @@
 import { ColDef, ColumnState, GridApi, GridState } from '@equinor/fusion-framework-react-ag-grid/community';
+import { usePersistedState } from '@equinor/workspace-core';
 import { useCallback, useMemo, useRef } from 'react';
 
 type PersistedState = { fingerprint: string; state: ColumnState[] };
@@ -7,13 +8,8 @@ function computeFingerprint(columnDefs: ColDef[]): string {
   return JSON.stringify(columnDefs);
 }
 
-function readFromStorage(key: string): PersistedState | null {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as PersistedState) : null;
-  } catch {
-    return null;
-  }
+function usePersistedColumnStateItem(storageKey: string | undefined) {
+  return usePersistedState<PersistedState>(storageKey, { legacyKey: storageKey });
 }
 
 function columnStateToGridState(states: ColumnState[]): GridState {
@@ -57,22 +53,14 @@ const PROGRAMMATIC_SOURCES = [
   'columnSetActualWidth',
 ] as const;
 
-export function clearPersistedColumnState(storageKey: string, api: GridApi): void {
-  localStorage.removeItem(storageKey);
-  api.resetColumnState();
-}
-
-export function hasPersistedColumnState(storageKey: string | undefined, columnDefs: ColDef[]): boolean {
-  if (!storageKey) return false;
-  const persisted = readFromStorage(storageKey);
-  return persisted?.fingerprint === computeFingerprint(columnDefs);
-}
-
-export function getPersistedColumnOrder(storageKey: string | undefined, columnDefs: ColDef[]): string[] | null {
-  if (!storageKey) return null;
-  const persisted = readFromStorage(storageKey);
-  if (persisted?.fingerprint !== computeFingerprint(columnDefs)) return null;
-  return persisted.state.map((s) => s.colId);
+/** Latest persisted column order, or null when none matches the current column definitions. */
+export function usePersistedColumnOrder(storageKey: string | undefined, columnDefs: ColDef[]): string[] | null {
+  const { value: persisted } = usePersistedColumnStateItem(storageKey);
+  const fingerprint = useMemo(() => computeFingerprint(columnDefs), [columnDefs]);
+  return useMemo(
+    () => (persisted?.fingerprint === fingerprint ? persisted.state.map((s) => s.colId) : null),
+    [persisted, fingerprint]
+  );
 }
 
 export function usePersistedColumnState(storageKey: string | undefined, columnDefs: ColDef[]) {
@@ -81,31 +69,40 @@ export function usePersistedColumnState(storageKey: string | undefined, columnDe
     [storageKey, columnDefs],
   );
 
-  const persistedRef = useRef<PersistedState | null>(
-    storageKey ? readFromStorage(storageKey) : null,
-  );
+  const { value: persisted, setValue, isLoaded } = usePersistedColumnStateItem(storageKey);
 
-  const hasPersistedState = storageKey
-    ? persistedRef.current?.fingerprint === fingerprint
-    : false;
+  // AG Grid only reads initialState on creation, so keep the value that was loaded first.
+  const loadedStateRef = useRef<{ value: PersistedState | undefined } | null>(null);
+  if (isLoaded && !loadedStateRef.current) {
+    loadedStateRef.current = { value: persisted };
+  }
+  const loadedState = loadedStateRef.current?.value;
+
+  const hasPersistedState = storageKey ? persisted?.fingerprint === fingerprint : false;
 
   const initialGridState = useMemo((): GridState | null => {
-    if (!storageKey || !persistedRef.current || persistedRef.current.fingerprint !== fingerprint) {
+    if (!storageKey || !loadedState || loadedState.fingerprint !== fingerprint) {
       return null;
     }
-    return columnStateToGridState(persistedRef.current.state);
-  }, [storageKey, fingerprint]);
+    return columnStateToGridState(loadedState.state);
+  }, [storageKey, fingerprint, loadedState]);
 
   const saveColumnState = useCallback(
     (api: GridApi, source?: string) => {
       if (!storageKey) return;
       if (source && (PROGRAMMATIC_SOURCES as readonly string[]).includes(source)) return;
-      const next: PersistedState = { fingerprint, state: api.getColumnState() };
-      persistedRef.current = next;
-      localStorage.setItem(storageKey, JSON.stringify(next));
+      setValue({ fingerprint, state: api.getColumnState() });
     },
-    [storageKey, fingerprint],
+    [storageKey, fingerprint, setValue],
   );
 
-  return { saveColumnState, hasPersistedState, initialGridState };
+  const clearColumnState = useCallback(
+    (api: GridApi) => {
+      setValue(undefined);
+      api.resetColumnState();
+    },
+    [setValue],
+  );
+
+  return { saveColumnState, clearColumnState, hasPersistedState, initialGridState, isLoaded };
 }

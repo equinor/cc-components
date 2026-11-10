@@ -642,6 +642,9 @@ importers:
       '@equinor/echo-3d-viewer':
         specifier: 'catalog:'
         version: 0.0.4(@cognite/reveal@4.29.0(@cognite/sdk@10.5.0)(@mixpanel/rrweb-utils@2.0.0-alpha.18.2)(three@0.182.0))(@cognite/sdk@10.5.0)(lodash@4.18.1)(three@0.182.0)
+      '@equinor/workspace-core':
+        specifier: workspace:*
+        version: link:../workspace/core
       rxjs:
         specifier: 'catalog:'
         version: 7.8.2
@@ -792,6 +795,9 @@ importers:
       '@equinor/fusion-framework-react-ag-grid':
         specifier: 'catalog:'
         version: 37.0.1(@equinor/eds-tokens@2.1.1)(@equinor/fusion-framework-module@6.1.2(@types/semver@7.7.1))(@equinor/fusion-framework-react-module@4.0.2(@types/react@19.2.8)(@types/semver@7.7.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@equinor/workspace-core':
+        specifier: workspace:*
+        version: link:../core
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -832,6 +838,9 @@ importers:
       '@equinor/eds-tokens':
         specifier: 'catalog:'
         version: 2.1.1
+      '@equinor/fusion-framework-react-app':
+        specifier: 'catalog:'
+        version: 14.0.0(zc7ufy5wqzpwhcgicyozamqnd4)
       '@tanstack/react-virtual':
         specifier: 'catalog:'
         version: 3.13.18(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -841,6 +850,9 @@ importers:
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      rxjs:
+        specifier: 'catalog:'
+        version: 7.8.2
       styled-components:
         specifier: ^6.3.6
         version: 6.3.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1067,6 +1079,9 @@ importers:
       '@equinor/eds-tokens':
         specifier: 'catalog:'
         version: 2.1.1
+      '@equinor/workspace-core':
+        specifier: workspace:*
+        version: link:../core
       '@equinor/workspace-filter':
         specifier: workspace:*
         version: link:../filter
@@ -5763,6 +5778,7 @@ packages:
   eslint@9.32.0:
     resolution: {integrity: sha512-LSehfdpgMeWcTZkWZVIJl+tkZ2nuSkyyB9C27MZqFWXuph7DvaowgcTvKqxvpLW1JZIk8PN7hFY3Rj9LQ7m7lg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
