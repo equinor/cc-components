@@ -1,6 +1,6 @@
 {
   "title": "Schedule Viewer",
-  "dataSource": "ADS",
-  "dataRefreshRate": "Daily",
+  "dataSource": "Schedule Analytics",
+  "dataRefreshRate": "Weekly",
   "access": "Internal"
 }

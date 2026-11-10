@@ -1,6 +1,6 @@
 {
   "title": "Monthly Meeting",
-  "dataSource": "ADS",
-  "dataRefreshRate": "Daily",
+  "dataSource": "Schedule Analytics",
+  "dataRefreshRate": "Weekly",
   "access": "Internal"
 }
