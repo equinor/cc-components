@@ -8,6 +8,7 @@ import { makeManifest } from './utils/makeManifest.js';
 import { zipBundle } from './utils/zipBundle.js';
 import { uploadBundle } from './utils/uploadBundle.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
+import { readConfigDefaults } from './utils/readConfigDefaults.js';
 import { execSync } from 'child_process';
 import { getVersion } from './utils/bumpVersion.js';
 
@@ -67,7 +68,8 @@ export async function release(context: ReleaseArgs) {
     },
     context.token,
     pkg.name,
-    ciUrl
+    ciUrl,
+    readConfigDefaults()
   );
 
   if (process.env.GITHUB_STEP_SUMMARY) {

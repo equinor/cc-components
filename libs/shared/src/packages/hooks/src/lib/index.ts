@@ -4,3 +4,4 @@ export * from './useContextId';
 export * from './useServiceDiscovery';
 export * from './useCloseSidesheetOnContextChanges';
 export * from './useAppInsights';
+export * from './useWorkspaceInformation';

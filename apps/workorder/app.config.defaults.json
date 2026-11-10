@@ -1,0 +1,6 @@
+{
+  "title": "Workorder Workspace",
+  "dataSource": "ProCoSys / Alpha",
+  "dataRefreshRate": "Hourly",
+  "access": "Internal"
+}

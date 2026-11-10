@@ -1,0 +1,6 @@
+{
+  "title": "Atex inspection",
+  "dataSource": "ProCoSys / Alpha",
+  "dataRefreshRate": "Hourly",
+  "access": "Internal"
+}

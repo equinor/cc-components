@@ -685,6 +685,9 @@ importers:
 
   libs/reportshared:
     dependencies:
+      '@cc-components/shared':
+        specifier: workspace:^
+        version: link:../shared
       '@equinor/eds-core-react':
         specifier: 'catalog:'
         version: 2.2.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(styled-components@6.3.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3))

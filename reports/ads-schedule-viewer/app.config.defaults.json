@@ -1,0 +1,6 @@
+{
+  "title": "Schedule Viewer",
+  "dataSource": "Schedule Analytics",
+  "dataRefreshRate": "Weekly",
+  "access": "Internal"
+}

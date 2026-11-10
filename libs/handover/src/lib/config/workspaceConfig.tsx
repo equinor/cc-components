@@ -3,6 +3,7 @@ import {
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
+  useWorkspaceInformation,
   usePBIOptions,
   useWorkspaceBookmarks,
 } from '@cc-components/shared';
@@ -37,6 +38,7 @@ export const WorkspaceWrapper = () => {
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
   const { currentContext } = useModuleCurrentContext();
+  const workspaceInformation = useWorkspaceInformation();
 
   const pbi = usePBIOptions(
     'handoveranalytics',
@@ -63,10 +65,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (item) => item.commissioningPackageUrlId,
         defaultTab: 'garden',
         information: {
-          title: 'Handover Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}

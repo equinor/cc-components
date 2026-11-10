@@ -10,6 +10,7 @@ import {
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
+  useWorkspaceInformation,
   useHttpClient,
   usePBIOptions,
   useWorkspaceBookmarks,
@@ -32,6 +33,7 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  const workspaceInformation = useWorkspaceInformation();
   useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'heat-trace');
@@ -66,10 +68,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (ht) => ht.heatTraceCableId,
         defaultTab: 'grid',
         information: {
-          title: 'Heat Trace Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}

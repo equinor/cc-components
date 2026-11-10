@@ -3,6 +3,7 @@ import {
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
+  useWorkspaceInformation,
   useWorkspaceBookmarks,
 } from '@cc-components/shared';
 import { usePBIOptions } from '@cc-components/shared/pbi-helpers';
@@ -32,6 +33,7 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  const workspaceInformation = useWorkspaceInformation();
   useCloseSidesheetOnContextChange();
   const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'mechanical-completion');
@@ -64,10 +66,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (item) => item.mechanicalCompletionPackageUrlId,
         defaultTab: 'garden',
         information: {
-          title: 'Mechanical Completion Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}

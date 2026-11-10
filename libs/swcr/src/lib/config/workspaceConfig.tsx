@@ -3,6 +3,7 @@ import {
   useCCApiAccessCheck,
   useCloseSidesheetOnContextChange,
   useContextId,
+  useWorkspaceInformation,
   useHttpClient,
   usePBIOptions,
   useWorkspaceBookmarks,
@@ -35,6 +36,7 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
+  const workspaceInformation = useWorkspaceInformation();
   useCloseSidesheetOnContextChange();
   const ccApi = useHttpClient();
 
@@ -68,10 +70,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (item) => item.softwareChangeRecordId,
         defaultTab: 'garden',
         information: {
-          title: 'SWCR Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}

@@ -20,6 +20,7 @@ import {
   useWorkspaceBookmarks,
   useCloseSidesheetOnContextChange,
   isAffiliateUser,
+  useWorkspaceInformation,
 } from '@cc-components/shared';
 import { useFilterConfig } from '@cc-components/shared/workspace-config';
 import Workspace from '@equinor/workspace-fusion';
@@ -51,6 +52,7 @@ export const WorkspaceWrapper = () => {
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
   const { isLoading } = useCCApiAccessCheck(contextId, client, appName);
   const { currentContext } = useModuleCurrentContext();
+  const workspaceInformation = useWorkspaceInformation();
 
   const pbi = usePBIOptions(
     '<app>-analytics',
@@ -76,10 +78,7 @@ export const WorkspaceWrapper = () => {
         getIdentifier: (item: any) => item.<entityId>,
         defaultTab: 'grid',
         information: {
-          title: '<AppName> Workspace',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}
@@ -102,6 +101,7 @@ export const WorkspaceWrapper = () => {
 - `useFilterConfig` takes a fetch callback, not a URL
 - Modules are passed as array: `[gridModule, gardenModule, powerBiModule]`
 - Always include `isAffiliate: isAffiliateUser()` in workspace information
+- Header info (`title`, `dataSource`, `dataRefreshRate`, `access`) comes from the Fusion app config through `useWorkspaceInformation()`. Seed values live in `apps/<appname>/app.config.defaults.json`. Release adds missing keys to the Fusion config, and app admins edit them in App Admin. `app.config.js` spreads the same file into `environment` for local dev.
 
 ## Framework Config Pattern (`frameworkConfig.ts`)
 

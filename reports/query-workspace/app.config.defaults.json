@@ -1,0 +1,6 @@
+{
+  "title": "Query workspace",
+  "dataSource": "ProCoSys / Alpha",
+  "dataRefreshRate": "Hourly",
+  "access": "Internal"
+}
