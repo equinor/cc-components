@@ -1,0 +1,6 @@
+{
+  "title": "Schedule Viewer",
+  "dataSource": "ADS",
+  "dataRefreshRate": "Daily",
+  "access": "Internal"
+}

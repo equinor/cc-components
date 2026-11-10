@@ -36,12 +36,7 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
-  const workspaceInformation = useWorkspaceInformation({
-    title: 'Punch Workspace',
-    dataSource: 'ProCoSys / Alpha',
-    dataRefreshRate: 'Hourly',
-    access: 'Internal',
-  });
+  const workspaceInformation = useWorkspaceInformation();
   useCloseSidesheetOnContextChange();
   const ccApi = useHttpClient();
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();

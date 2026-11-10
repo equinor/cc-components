@@ -10,6 +10,7 @@
     "build": "tsc -b -f"
   },
   "dependencies": {
+    "@cc-components/shared": "workspace:^",
     "@equinor/eds-core-react": "catalog:",
     "@equinor/eds-tokens": "catalog:",
     "@equinor/fusion-react-person": "catalog:",

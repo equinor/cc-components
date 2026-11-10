@@ -38,12 +38,7 @@ export const WorkspaceWrapper = () => {
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'handover');
 
   const { currentContext } = useModuleCurrentContext();
-  const workspaceInformation = useWorkspaceInformation({
-    title: 'Handover Workspace',
-    dataSource: 'ProCoSys / Alpha',
-    dataRefreshRate: 'Hourly',
-    access: 'Internal',
-  });
+  const workspaceInformation = useWorkspaceInformation();
 
   const pbi = usePBIOptions(
     'handoveranalytics',

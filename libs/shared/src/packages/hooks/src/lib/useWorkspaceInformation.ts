@@ -8,17 +8,16 @@ export type WorkspaceInformation = {
 };
 
 /**
- * Workspace info shown in the header. Values come from the Fusion app config
- * (editable in App Admin); `defaults` apply for keys the config doesn't have.
+ * Workspace info shown in the header, read from the Fusion app config so app
+ * admins can edit it in App Admin. Release seeds missing keys from the app's
+ * app.config.defaults.json.
  */
-export const useWorkspaceInformation = (
-  defaults: WorkspaceInformation
-): WorkspaceInformation => {
+export const useWorkspaceInformation = (): WorkspaceInformation => {
   const { value } = useAppEnvironmentVariables<Partial<WorkspaceInformation>>();
   return {
-    title: value?.title ?? defaults.title,
-    dataSource: value?.dataSource ?? defaults.dataSource,
-    dataRefreshRate: value?.dataRefreshRate ?? defaults.dataRefreshRate,
-    access: value?.access ?? defaults.access,
+    title: value?.title ?? '',
+    dataSource: value?.dataSource ?? '',
+    dataRefreshRate: value?.dataRefreshRate ?? '',
+    access: value?.access ?? '',
   };
 };

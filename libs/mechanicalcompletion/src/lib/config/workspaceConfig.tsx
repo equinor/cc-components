@@ -33,12 +33,7 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
-  const workspaceInformation = useWorkspaceInformation({
-    title: 'Mechanical Completion Workspace',
-    dataSource: 'ProCoSys / Alpha',
-    dataRefreshRate: 'Hourly',
-    access: 'Internal',
-  });
+  const workspaceInformation = useWorkspaceInformation();
   useCloseSidesheetOnContextChange();
   const client = useHttpClient('cc-app');
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'mechanical-completion');

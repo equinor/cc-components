@@ -33,12 +33,7 @@ const pbi_context_mapping = {
 
 export const WorkspaceWrapper = () => {
   const contextId = useContextId();
-  const workspaceInformation = useWorkspaceInformation({
-    title: 'Pipetest Workspace',
-    dataSource: 'ProCoSys / Alpha',
-    dataRefreshRate: 'Hourly',
-    access: 'Internal',
-  });
+  const workspaceInformation = useWorkspaceInformation();
   useCloseSidesheetOnContextChange();
   const client = useHttpClient();
   const { isLoading } = useCCApiAccessCheck(contextId, client, 'pipetest');

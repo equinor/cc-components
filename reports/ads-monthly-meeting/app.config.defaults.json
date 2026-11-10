@@ -1,0 +1,6 @@
+{
+  "title": "Monthly Meeting",
+  "dataSource": "ADS",
+  "dataRefreshRate": "Daily",
+  "access": "Internal"
+}

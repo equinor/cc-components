@@ -4,6 +4,7 @@ import { useFusionContext } from '../hooks/useContext';
 import { usePBIOptions } from '../hooks/usePBIOptions';
 import { useWorkspaceBookmarks } from '../hooks/useWorkspaceBookmark';
 import { useModuleCurrentContext } from '@equinor/fusion-framework-react-module-context';
+import { useWorkspaceInformation } from '@cc-components/shared/hooks';
 
 type FusionReportProps = {
   reportId: string;
@@ -31,6 +32,7 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
     config ??
     pbi_context_mapping[currentContext?.type.id as keyof typeof pbi_context_mapping];
   const pbi = usePBIOptions(reportId, pbi_config);
+  const workspaceInformation = useWorkspaceInformation();
 
   const { bookmarkKey, currentBookmark, onBookmarkChange } = useWorkspaceBookmarks();
 
@@ -46,10 +48,7 @@ export const FusionReport = ({ reportId, config }: FusionReportProps) => {
       workspaceOptions={{
         getIdentifier: () => '',
         information: {
-          title: 'Analytics',
-          dataSource: 'ProCoSys / Alpha',
-          dataRefreshRate: 'Hourly',
-          access: 'Internal',
+          ...workspaceInformation,
           isAffiliate: isAffiliateUser(),
         },
       }}

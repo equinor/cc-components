@@ -1,0 +1,6 @@
+{
+  "title": "Commissioning task",
+  "dataSource": "ProCoSys / Alpha",
+  "dataRefreshRate": "Hourly",
+  "access": "Internal"
+}
