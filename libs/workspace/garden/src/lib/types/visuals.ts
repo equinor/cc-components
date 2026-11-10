@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { GetDescription } from './';
+import { GardenHeaderGroup, GetDescription } from './';
 
 export interface Visuals<TData extends Record<PropertyKey, unknown>> {
   /**
@@ -15,6 +15,8 @@ export interface Visuals<TData extends Record<PropertyKey, unknown>> {
   /** Function that returns the color of the item to be displayed */
   itemColor?: string;
   popoverComponent?: (props: PopoverComponentProps<TData>) => ReactElement;
+  /** Pins the first column to the left edge while scrolling horizontally when this returns true for its header */
+  freezeFirstColumn?: (header: GardenHeaderGroup) => boolean;
 }
 
 export type PopoverComponentProps<TData extends Record<PropertyKey, unknown>> = {

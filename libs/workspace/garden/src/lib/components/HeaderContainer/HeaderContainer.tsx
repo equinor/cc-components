@@ -10,6 +10,7 @@ import { SkeletonPackage } from '../gardenSkeleton/GardenSkeleton';
 import { makeBlocks } from '../../utils/gardenBlock';
 import { useGardenConfig } from '../../hooks/useGardenConfig';
 import { useGarden } from '../../hooks/useGarden';
+import { StyledFrozenColumn } from '../Layout/layout.styles';
 
 type HeaderContainerProps<TContext = undefined> = {
   columnVirtualizer: { virtualItems: VirtualItem[] };
@@ -20,6 +21,7 @@ type HeaderContainerProps<TContext = undefined> = {
   context: TContext;
   columnEnd: number;
   getHeader: (args: GetHeaderBlockRequestArgs, context: TContext, signal: AbortSignal) => Promise<GardenHeaderGroup[]>;
+  isFirstColumnFrozen?: boolean;
 };
 export const HeaderContainer = <TContext,>({
   columnVirtualizer,
@@ -30,9 +32,13 @@ export const HeaderContainer = <TContext,>({
   columnStart,
   context,
   getHeader,
+  isFirstColumnFrozen = false,
 }: HeaderContainerProps<TContext>): ReactElement => {
   const blocks = makeBlocks({ blockSqrt, columnCount, rowCount: 1 });
-  const blocksInView = getBlocksInView(columnStart, columnEnd, 0, 0, blockSqrt);
+  const blocksInView = [
+    ...getBlocksInView(columnStart, columnEnd, 0, 0, blockSqrt),
+    ...(isFirstColumnFrozen ? [{ x: 0, y: 0 }] : []),
+  ];
   const blockCache = useBlockCache({
     blocks: blocks,
     blocksInView: blocksInView,
@@ -70,57 +76,68 @@ export const HeaderContainer = <TContext,>({
   return (
     <HeaderRoot>
       {columnVirtualizer.virtualItems.map((virtualColumn) => {
-        const columnExpanded = !!expanded.expandedColumns.find((s) => s === virtualColumn.index);
-        const blockXIndex = Math.floor(virtualColumn.index / blockSqrt);
-        /** Find current blocks yIndex */
-
-        /** Get query entry for current block */
-        const { isLoading, data, error, refetch } = getBlockCache({ x: blockXIndex, y: 0 });
-
-        if (isLoading) {
-          return (
-            <Header
-              style={{
-                width: `${virtualColumn.size}px`,
-                transform: `translateX(${virtualColumn.start}px) translateY(0px)`,
-                backgroundColor: '#f7f7f7',
-              }}
-              key={virtualColumn.key}
-            >
-              <SkeletonPackage height={headerHeight || 35} width={200} />
-            </Header>
-          );
-        }
-
-        if (error || !data) {
-          // TODO: fix
-          return <div key={virtualColumn.key}>rip</div>;
-        }
-
-        const header = data[virtualColumn.index % blockSqrt];
-
-        const isHighlighted = highlightedColumn === virtualColumn.index;
-        return (
-          <Header
-            /**TODO: fix handle expand */
-            onClick={() => handleHeaderClick(virtualColumn.index)}
-            style={{
-              width: `${virtualColumn.size}px`,
-              transform: `translateX(${virtualColumn.start}px) translateY(0px)`,
-              backgroundColor: isHighlighted ? '#007079' : '#f7f7f7',
-              color: isHighlighted ? 'white' : 'black',
-            }}
-            key={virtualColumn.key}
-          >
-            <HeaderChild
-              header={header}
-              columnIndex={virtualColumn.index}
-              columnIsExpanded={columnExpanded}
-              groupByKey={gardenKey}
-            />
-          </Header>
+        const header = renderHeader(virtualColumn);
+        return isFirstColumnFrozen && virtualColumn.index === 0 ? (
+          <StyledFrozenColumn key={virtualColumn.key} style={{ width: `${virtualColumn.size}px`, height: 0 }}>
+            {header}
+          </StyledFrozenColumn>
+        ) : (
+          header
         );
       })}
     </HeaderRoot>
   );
+
+  function renderHeader(virtualColumn: VirtualItem) {
+    const columnExpanded = !!expanded.expandedColumns.find((s) => s === virtualColumn.index);
+    const blockXIndex = Math.floor(virtualColumn.index / blockSqrt);
+    /** Find current blocks yIndex */
+
+    /** Get query entry for current block */
+    const { isLoading, data, error, refetch } = getBlockCache({ x: blockXIndex, y: 0 });
+
+    if (isLoading) {
+      return (
+        <Header
+          style={{
+            width: `${virtualColumn.size}px`,
+            transform: `translateX(${virtualColumn.start}px) translateY(0px)`,
+            backgroundColor: '#f7f7f7',
+          }}
+          key={virtualColumn.key}
+        >
+          <SkeletonPackage height={headerHeight || 35} width={200} />
+        </Header>
+      );
+    }
+
+    if (error || !data) {
+      // TODO: fix
+      return <div key={virtualColumn.key}>rip</div>;
+    }
+
+    const header = data[virtualColumn.index % blockSqrt];
+
+    const isHighlighted = highlightedColumn === virtualColumn.index;
+    return (
+      <Header
+        /**TODO: fix handle expand */
+        onClick={() => handleHeaderClick(virtualColumn.index)}
+        style={{
+          width: `${virtualColumn.size}px`,
+          transform: `translateX(${virtualColumn.start}px) translateY(0px)`,
+          backgroundColor: isHighlighted ? '#007079' : '#f7f7f7',
+          color: isHighlighted ? 'white' : 'black',
+        }}
+        key={virtualColumn.key}
+      >
+        <HeaderChild
+          header={header}
+          columnIndex={virtualColumn.index}
+          columnIsExpanded={columnExpanded}
+          groupByKey={gardenKey}
+        />
+      </Header>
+    );
+  }
 };
