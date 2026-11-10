@@ -227,6 +227,15 @@ const columnDefinitions: ColDef<Punch>[] = [
     },
   },
   {
+    colId: 'DueDate',
+    headerName: domainNames.dueDate,
+    headerTooltip: domainNames.dueDate,
+    valueGetter: (pkg) => pkg.data?.dueDate,
+    cellRenderer: (props: ICellRendererProps<Punch, string | null | undefined>) => {
+      return props.value ? <DateCell dateString={props.value} /> : null;
+    },
+  },
+  {
     colId: 'HandoverPlan',
     headerName: domainNames.handoverPlan,
     headerTooltip: domainNames.handoverPlan,
