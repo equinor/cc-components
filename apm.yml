@@ -1,0 +1,11 @@
+name: cc-components
+version: "1.0.0"
+description: Agent skills for CC Components development
+targets:
+  - copilot
+dependencies:
+  apm:
+    - git: equinor/procosys-ai-tools
+      path: fusion-pkg
+      ref: main
+  mcp: []

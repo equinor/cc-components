@@ -13,7 +13,7 @@ Construction and Commisioning (CC) web applications developed for the Project Po
 
 ## Getting started 🚀
 
-To install the dependencies required to run the project, run `pnpm first-time-setup`. You can then run one of the apps using one of the following commands:
+To install the dependencies required to run the project, run `pnpm first-time-setup`. This also installs the Copilot agent skills declared in `apm.yml`, which requires the [APM CLI](https://github.com/microsoft/apm#get-started). Run `pnpm agents:install` to install or update them later. You can then run one of the apps using one of the following commands:
 
 ```bash
 pnpm serve <appname> # run app

@@ -7,7 +7,8 @@ Monorepo using **pnpm workspaces**, **Turborepo**, **React 19**, **TypeScript**,
 
 ```bash
 pnpm install                    # Install dependencies
-pnpm first-time-setup           # First-time: installs global tools + builds
+pnpm first-time-setup           # First-time: installs global tools + builds + agent skills
+pnpm agents:install             # Install agent skills from apm.yml (needs APM CLI)
 pnpm build                      # Build all (parallel)
 pnpm ci:build                   # Build all (sequential, CI-safe)
 pnpm serve <appname>            # Dev server (remote API)
