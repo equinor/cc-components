@@ -13,7 +13,7 @@ import {
   Module,
 } from '@equinor/workspace-ag-grid';
 
-export { clearPersistedColumnState, usePersistedColumnState } from '@equinor/workspace-ag-grid';
+export { usePersistedColumnState } from '@equinor/workspace-ag-grid';
 
 export type {
   ColDef,

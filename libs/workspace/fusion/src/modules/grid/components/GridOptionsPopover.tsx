@@ -1,7 +1,7 @@
 import { Button, EdsProvider, Icon, Menu, Progress } from '@equinor/eds-core-react';
 import { more_vertical } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
-import { GridApi, clearPersistedColumnState } from '@equinor/workspace-ag-grid';
+import { GridApi } from '@equinor/workspace-ag-grid';
 import { CsvExportColumn } from '../../../lib/integrations/grid';
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
@@ -15,7 +15,7 @@ type GridOptionsPopoverProps = {
   filterState: any;
   excelExport?: (params: any) => Promise<void>;
   csvExport?: (filterState: any, columns: CsvExportColumn[], sort?: { colId: string; descending: boolean }) => Promise<void>;
-  storageKey?: string;
+  onResetColumns?: (api: GridApi) => void;
   gridApi: GridApi | null;
 };
 export const GridOptionPopover = ({
@@ -23,7 +23,7 @@ export const GridOptionPopover = ({
   excelExport,
   csvExport,
   filterState,
-  storageKey,
+  onResetColumns,
   gridApi,
 }: GridOptionsPopoverProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -127,11 +127,11 @@ export const GridOptionPopover = ({
                   </FullWidthButton>
                 </StyledMenuItem>
               )}
-              {storageKey && gridApi && (
+              {onResetColumns && gridApi && (
                 <StyledMenuItem>
                   <FullWidthButton
                     variant="ghost_icon"
-                    onClick={() => clearPersistedColumnState(storageKey, gridApi)}
+                    onClick={() => onResetColumns(gridApi)}
                   >
                     Reset Columns
                   </FullWidthButton>
