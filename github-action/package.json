@@ -13,7 +13,6 @@
   "dependencies": {
     "@actions/core": "catalog:",
     "@actions/github": "catalog:",
-    "adm-zip": "catalog:",
     "commander": "catalog:",
     "markdown-table": "catalog:"
   }

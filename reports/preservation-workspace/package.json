@@ -3,7 +3,7 @@
   "displayName": "Preservation",
   "shortName": "preservation-workspace",
   "version": "0.0.1",
-  "main": "./src/main.tsx",
+  "main": "dist/app-bundle.js",
   "private": true,
   "type": "module",
   "scripts": {

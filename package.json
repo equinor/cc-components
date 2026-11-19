@@ -90,7 +90,7 @@
     "stylis": "catalog:"
   },
   "engines": {
-    "node": "20"
+    "node": "22"
   },
   "pnpm": {
     "overrides": {

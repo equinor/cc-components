@@ -1,7 +1,7 @@
 {
   "name": "loop",
   "version": "0.3.2",
-  "main": "src/main.tsx",
+  "main": "dist/app-bundle.js",
   "private": true,
   "type": "module",
   "scripts": {

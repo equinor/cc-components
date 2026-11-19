@@ -3,7 +3,7 @@
   "displayName": "Atex inspection",
   "shortName": "atex",
   "version": "0.0.5",
-  "main": "./src/main.tsx",
+  "main": "dist/app-bundle.js",
   "private": true,
   "type": "module",
   "scripts": {

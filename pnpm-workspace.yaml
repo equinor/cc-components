@@ -52,8 +52,8 @@ catalog:
   # Build tools
   typescript: ^5.9.3
   tsup: ^8.5.1
-  vite: ^7.3.7
-  '@vitejs/plugin-react': ^5.1.2
+  vite: ^8.2.4
+  '@vitejs/plugin-react': ^6.0.5
   turbo: ^2.9.14
   tsx: ^4.21.0
   ts-node: ^10.9.2
@@ -142,6 +142,5 @@ catalog:
   # GitHub Action
   '@actions/core': ^1.11.1
   '@actions/github': ^6.0.1
-  adm-zip: ^0.5.16
   commander: ^14.0.2
   markdown-table: ^3.0.4

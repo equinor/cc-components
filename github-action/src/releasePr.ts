@@ -3,10 +3,7 @@
 import { Command } from 'commander';
 import { setSecret } from '@actions/core';
 import { parsePackageJson } from './utils/parsePackageJson.js';
-import { prepareBundle } from './utils/prepareBundle.js';
-import { makeManifest } from './utils/makeManifest.js';
-import { zipBundle } from './utils/zipBundle.js';
-import { uploadBundle } from './utils/uploadBundle.js';
+import { publishApp } from './utils/publishApp.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { readConfigDefaults } from './utils/readConfigDefaults.js';
 import { execSync } from 'child_process';
@@ -47,7 +44,6 @@ program
 await program.parseAsync();
 
 export async function release(context: ReleaseArgs) {
-  prepareBundle();
   const pkg = parsePackageJson();
   if (!pkg.name) {
     throw new Error(
@@ -56,9 +52,7 @@ export async function release(context: ReleaseArgs) {
   }
 
   const version = await getVersion(ciUrl, context.token, pkg.name);
-  makeManifest('./package.json', version, context.sha);
-  const zipped = zipBundle();
-  await uploadBundle(ciUrl, context.token, pkg.name, zipped, version);
+  publishApp('ci', context.token, version, context.sha);
   await patchAppConfig(
     {
       ai: context.ai,

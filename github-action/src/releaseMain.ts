@@ -1,14 +1,10 @@
 #!/usr/bin/env node
-import { HttpClient } from '@actions/http-client';
 import { readdirSync } from 'fs';
 import { Command } from 'commander';
 import { setSecret, warning } from '@actions/core';
 
 import { parsePackageJson } from './utils/parsePackageJson.js';
-import { prepareBundle } from './utils/prepareBundle.js';
-import { makeManifest } from './utils/makeManifest.js';
-import { zipBundle } from './utils/zipBundle.js';
-import { uploadBundle } from './utils/uploadBundle.js';
+import { publishApp } from './utils/publishApp.js';
 import { patchAppConfig } from './utils/patchAppConfig.js';
 import { readConfigDefaults } from './utils/readConfigDefaults.js';
 import { execSync } from 'child_process';
@@ -60,14 +56,8 @@ export async function release(config: ReleaseArgs) {
     return;
   }
 
-  prepareBundle();
-
   const version = await getVersion(prodUrl, config.token, pkg.name);
-  makeManifest('./package.json', version, config.sha);
-
-  const zipped = zipBundle();
-
-  await uploadBundle(prodUrl, config.token, pkg.name, zipped, version);
+  publishApp('fprd', config.token, version, config.sha);
   await patchAppConfig(
     {
       ai: config.ai,
