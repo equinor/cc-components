@@ -34,7 +34,7 @@ export const GridWrapper = <
   config.gridOptions ??= {};
   setDefaultColDef<TData>(config.gridOptions, selectItem);
 
-  const { saveColumnState, hasPersistedState, initialGridState } =
+  const { saveColumnState, clearColumnState, hasPersistedState, initialGridState, isLoaded } =
     usePersistedColumnState(config.storageKey, config.columnDefinitions);
 
   config.gridOptions.maintainColumnOrder = true;
@@ -73,7 +73,7 @@ export const GridWrapper = <
           filterState={filterState}
           excelExport={config.excelExport}
           csvExport={config.csvExport}
-          storageKey={config.storageKey}
+          onResetColumns={config.storageKey ? clearColumnState : undefined}
           gridApi={gridApi}
         />
       ),
@@ -89,40 +89,42 @@ export const GridWrapper = <
     return () => {
       setIcons((s) => s.filter((y) => y.name !== icon.name));
     };
-  }, [filterState, gridApi, config.excelExport, config.csvExport, config.storageKey, setIcons]);
+  }, [filterState, gridApi, config.excelExport, config.csvExport, config.storageKey, clearColumnState, setIcons]);
 
   return (
     <div id="workspace_grid_wrapper" style={{ height: '100%', width: '100%' }} ref={ref}>
-      <ServerGrid<TData>
-        onGridReady={(event) => {
-          setGridApi(event.api);
-        }}
-        getRows={async (params) => {
-          await config.getRows(params, filterStateCopy.current as TFilter);
-          handleSelectionEvent(selection, params.api);
-        }}
-        colDefs={config.columnDefinitions}
-        getRowId={(params) => {
-          const { data } = params;
-          return getIdentifier(data);
-        }}
-        gridOptions={config.gridOptions}
-        height={height}
-        context={filterState}
-        modules={config.modules}
-        initialState={initialGridState ?? undefined}
-        onColumnResized={(e) => {
-          if (e.finished) handleSaveColumnState(e.api, e.source);
-        }}
-        onColumnMoved={(e) => {
-          if (e.finished) handleSaveColumnState(e.api, e.source);
-        }}
-        onColumnVisible={(e) => handleSaveColumnState(e.api)}
-        onColumnPinned={(e) => handleSaveColumnState(e.api)}
-        onSortChanged={(e) => handleSaveColumnState(e.api)}
-        enableCellTextSelection
-        ensureDomOrder
-      />
+      {isLoaded && (
+        <ServerGrid<TData>
+          onGridReady={(event) => {
+            setGridApi(event.api);
+          }}
+          getRows={async (params) => {
+            await config.getRows(params, filterStateCopy.current as TFilter);
+            handleSelectionEvent(selection, params.api);
+          }}
+          colDefs={config.columnDefinitions}
+          getRowId={(params) => {
+            const { data } = params;
+            return getIdentifier(data);
+          }}
+          gridOptions={config.gridOptions}
+          height={height}
+          context={filterState}
+          modules={config.modules}
+          initialState={initialGridState ?? undefined}
+          onColumnResized={(e) => {
+            if (e.finished) handleSaveColumnState(e.api, e.source);
+          }}
+          onColumnMoved={(e) => {
+            if (e.finished) handleSaveColumnState(e.api, e.source);
+          }}
+          onColumnVisible={(e) => handleSaveColumnState(e.api)}
+          onColumnPinned={(e) => handleSaveColumnState(e.api)}
+          onSortChanged={(e) => handleSaveColumnState(e.api)}
+          enableCellTextSelection
+          ensureDomOrder
+        />
+      )}
     </div>
   );
 };

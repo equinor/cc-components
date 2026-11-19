@@ -1,11 +1,11 @@
 import { AssetMetadataSimpleDto } from '@equinor/echo-3d-viewer';
 
 import { useModelViewerContext } from '../providers';
+import { usePersistedDefaults } from './usePersistedDefaults';
 
 export const useModelSelectionService = () => {
-  const LOCAL_MODEL_ID_KEY = 'echoModelId';
-
   const { echoInstance } = useModelViewerContext();
+  const { getDefault, setDefault } = usePersistedDefaults('modelviewer.defaultModels', 'echoModelId');
 
   const { modelApiClient } = echoInstance;
 
@@ -26,28 +26,10 @@ export const useModelSelectionService = () => {
     );
   };
 
-  const getDefaultModel = (plantCode: string): string | undefined => {
-    const localModelsJson = localStorage.getItem(LOCAL_MODEL_ID_KEY);
+  const getDefaultModel = (plantCode: string): string | undefined => getDefault(plantCode);
 
-    if (!localModelsJson) {
-      return undefined;
-    }
-
-    const localModels = JSON.parse(localModelsJson);
-    return localModels[plantCode.toLowerCase()] || undefined;
-  };
-
-  const setDefaultModel = (modelMeta: AssetMetadataSimpleDto): void => {
-    const plantCode = modelMeta.plantCode;
-    const platformSectionId = modelMeta.platformSectionId;
-
-    const existingModelsJson = localStorage.getItem(LOCAL_MODEL_ID_KEY);
-    const existingModels = existingModelsJson ? JSON.parse(existingModelsJson) : {};
-
-    existingModels[plantCode.toLowerCase()] = platformSectionId;
-
-    localStorage.setItem(LOCAL_MODEL_ID_KEY, JSON.stringify(existingModels));
-  };
+  const setDefaultModel = (modelMeta: AssetMetadataSimpleDto): void =>
+    setDefault(modelMeta.plantCode, modelMeta.platformSectionId);
 
   return {
     getModelsForPlant,

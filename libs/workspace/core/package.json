@@ -21,6 +21,8 @@
     "@tanstack/react-virtual": "catalog:"
   },
   "peerDependencies": {
+    "@equinor/fusion-framework-react-app": "catalog:",
+    "rxjs": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "styled-components": "catalog:"

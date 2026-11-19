@@ -17,6 +17,7 @@
     "@cognite/reveal": "catalog:",
     "@cognite/sdk": "catalog:",
     "@equinor/echo-3d-viewer": "catalog:",
+    "@equinor/workspace-core": "workspace:*",
     "rxjs": "catalog:",
     "three": "catalog:",
     "throttle-typescript": "catalog:"

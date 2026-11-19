@@ -8,11 +8,13 @@ import buildQuery from 'odata-query';
 import { ModelViewerEnvConfig, enableModelViewer } from '@cc-components/modelviewer';
 import { enableNavigation } from '@equinor/fusion-framework-module-navigation';
 import { enableBookmark } from '@equinor/fusion-framework-react-app/bookmark';
+import { enableAppState } from '@equinor/fusion-framework-react-app/state';
 import { defaultModules } from '@cc-components/shared';
 import { themeQuartz } from '@equinor/workspace-fusion/grid';
 
 export const configure = async (config: IAppConfigurator, c: ComponentRenderArgs) => {
   enableBookmark(config);
+  enableAppState(config);
   enableNavigation(config, c.env.basename);
   enableContext(config, async (builder) => {
     builder.setContextType(['ProjectMaster', 'Facility']);

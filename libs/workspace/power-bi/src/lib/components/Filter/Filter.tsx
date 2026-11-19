@@ -1,6 +1,6 @@
 import { Icon } from '@equinor/eds-core-react';
 import { models, Report } from 'powerbi-client';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import { ActiveFilter, PowerBiFilter, PowerBiFilterItem } from '../../types';
 import { getActiveFilterGroupArray } from '../../utils/getActiveFilterGroupArray';
 import { getActiveFilterValues } from '../../utils/getActiveFilterValues';
@@ -8,7 +8,7 @@ import { getFiltersAsync } from '../../utils/getFiltersAsync';
 import { search, playlist_add, drag_handle } from '@equinor/eds-icons';
 import { tokens } from '@equinor/eds-tokens';
 import { Skeleton } from '../skeleton/Skeleton';
-import { getVisibleFiltersFromLocalStorage, useVisibleFilters } from '../../hooks/useVisibleFilterGroups';
+import { useVisibleFilters } from '../../hooks/useVisibleFilterGroups';
 import styled from 'styled-components';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { Filter, FilterGroup, FilterValueType, useFilterContext } from '@equinor/workspace-filter';
@@ -49,7 +49,10 @@ export const PowerBIFilter = ({
   const [slicerFilters, setSlicerFilters] = useState<PowerBiFilter[] | null>(null);
   const [reportRendered, setReportRendered] = useState(false);
   const [isFiltersLoading, setIsFiltersLoading] = useState(true);
-  const [filterGroupVisible, setFilterGroupVisible] = useVisibleFilters(report);
+  const [filterGroupVisible, setFilterGroupVisible, visibleFiltersState] = useVisibleFilters(report);
+  const visibleFiltersStateRef = useRef(visibleFiltersState);
+  visibleFiltersStateRef.current = visibleFiltersState;
+  const pendingInitRef = useRef(false);
   const [filterValues, setFilterValues] = useState<FilterGroup[]>([]);
 
   const { filterValues: workspaceFilterValues } = useFilterContext();
@@ -62,8 +65,7 @@ export const PowerBIFilter = ({
     setActiveFilters(defaultActiveFilters);
     setSlicerFilters(filters.sort((a, b) => a.type.localeCompare(b.type)));
     const filterGroupNames = getActiveFilterGroupArray(defaultActiveFilters);
-    const reportId = report.getId();
-    const state = getVisibleFiltersFromLocalStorage(reportId);
+    const state = visibleFiltersStateRef.current.storedValue;
     if (state) {
       setFilterGroupVisible(state);
     } else if (filterGroupNames.length > 0) {
@@ -94,9 +96,21 @@ export const PowerBIFilter = ({
   }, [slicerFilters, activeFilters, workspaceFilterValues]);
 
   useEffect(() => {
+    if (visibleFiltersState.isLoaded && pendingInitRef.current) {
+      pendingInitRef.current = false;
+      initFilters();
+    }
+  }, [visibleFiltersState.isLoaded]);
+
+  useEffect(() => {
     const handleRendered = async () => {
       if (!reportRendered) {
-        initFilters();
+        // Wait for persisted visible filters so defaults don't overwrite them.
+        if (visibleFiltersStateRef.current.isLoaded) {
+          initFilters();
+        } else {
+          pendingInitRef.current = true;
+        }
         setReportRendered(true);
         report.off('rendered', handleRendered);
       }

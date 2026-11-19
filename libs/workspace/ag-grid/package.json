@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@equinor/eds-tokens": "catalog:",
-    "@equinor/fusion-framework-react-ag-grid": "catalog:"
+    "@equinor/fusion-framework-react-ag-grid": "catalog:",
+    "@equinor/workspace-core": "workspace:*"
   },
   "peerDependencies": {
     "react": "catalog:",

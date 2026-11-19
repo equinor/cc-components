@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
+import { createContext, useContext, ReactNode, useCallback } from 'react';
+import { usePersistedState } from '../hooks/usePersistedState';
 
 interface SettingsContextType {
   colorAssistMode: boolean;
@@ -6,36 +7,20 @@ interface SettingsContextType {
   clearSettings: () => void;
 }
 
-interface SettingsState {
-  colorAssistMode: boolean;
-}
-
-const GLOBAL_STORAGE_PREFIX = 'cc_workspace';
-const COLOR_ASSIST_MODE_KEY = `${GLOBAL_STORAGE_PREFIX}_colorAssistMode`;
-
-const getPersistedColorAssistMode = (): boolean => {
-  const storedValue = localStorage.getItem(COLOR_ASSIST_MODE_KEY);
-  return storedValue ? JSON.parse(storedValue) : false;
-};
-
-const saveColorAssistModeToLocalStorage = (enabled: boolean): void => {
-  localStorage.setItem(COLOR_ASSIST_MODE_KEY, JSON.stringify(enabled));
-};
+const COLOR_ASSIST_MODE_KEY = 'workspace.settings.colorAssistMode';
+const LEGACY_COLOR_ASSIST_MODE_KEY = 'cc_workspace_colorAssistMode';
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
-  const [colorAssistMode, setColorAssistModeState] = useState<boolean>(getPersistedColorAssistMode());
+  const { value, setValue } = usePersistedState<boolean>(COLOR_ASSIST_MODE_KEY, {
+    legacyKey: LEGACY_COLOR_ASSIST_MODE_KEY,
+  });
+  const colorAssistMode = value ?? false;
 
-  const setColorAssistMode = useCallback((enabled: boolean) => {
-    setColorAssistModeState(enabled);
-    saveColorAssistModeToLocalStorage(enabled);
-  }, []);
+  const setColorAssistMode = useCallback((enabled: boolean) => setValue(enabled), [setValue]);
 
-  const clearSettings = useCallback(() => {
-    localStorage.removeItem(COLOR_ASSIST_MODE_KEY);
-    setColorAssistModeState(false);
-  }, []);
+  const clearSettings = useCallback(() => setValue(undefined), [setValue]);
 
   return (
     <SettingsContext.Provider value={{ colorAssistMode, setColorAssistMode, clearSettings }}>

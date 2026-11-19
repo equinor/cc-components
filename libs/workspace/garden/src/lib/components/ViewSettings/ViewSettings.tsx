@@ -1,10 +1,13 @@
 import { Button, Icon } from '@equinor/eds-core-react';
 import { expand, collapse } from '@equinor/eds-icons';
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
+import { usePersistedState } from '@equinor/workspace-core';
 import { GroupingSelector } from '../GroupingSelector/GroupingSelector';
 import { StyledViewSettings } from './viewSettings.styles';
 
-const LOCAL_STORAGE_KEY = 'WorkspaceSidebarToggleState';
+const VIEW_SETTINGS_EXPANDED_KEY = 'workspace.garden.viewSettingsExpanded';
+const LEGACY_VIEW_SETTINGS_EXPANDED_KEY = 'WorkspaceSidebarToggleState';
+const parseLegacyToggle = (raw: string) => !!JSON.parse(raw);
 
 interface ViewSettingsProps<TData extends Record<PropertyKey, unknown>, TContext = undefined> {
   groupingKeys: string[];
@@ -25,15 +28,13 @@ export function ViewSettings<TData extends Record<PropertyKey, unknown>, TContex
   onChangeDateVariant,
   setGroupingKeys,
 }: ViewSettingsProps<TData, TContext>): ReactElement | null {
-  const [toggle, setToggle] = useState<boolean>(() => {
-    const savedState = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return savedState !== null ? !!JSON.parse(savedState) : true;
+  const { value, setValue } = usePersistedState<boolean>(VIEW_SETTINGS_EXPANDED_KEY, {
+    legacyKey: LEGACY_VIEW_SETTINGS_EXPANDED_KEY,
+    parseLegacy: parseLegacyToggle,
   });
+  const toggle = value ?? true;
 
-  const onChangeToggle = (state: boolean) => {
-    setToggle(state);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
-  };
+  const onChangeToggle = (state: boolean) => setValue(state);
 
   return (
     <StyledViewSettings expanded={toggle}>

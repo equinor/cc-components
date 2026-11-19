@@ -1,3 +1,5 @@
+import { usePersistedDefaults } from './usePersistedDefaults';
+
 export type Plant = {
   plantCode: string;
   installationCode: string;
@@ -7,30 +9,11 @@ export type Plant = {
 };
 
 export const usePlantSelectionService = () => {
-  const LOCAL_PLANT_ID_KEY = 'echoPlantId';
+  const { getDefault, setDefault } = usePersistedDefaults('modelviewer.defaultPlants', 'echoPlantId');
 
-  const getDefaultPlant = (instCode: string): string | undefined => {
-    const localPlantJson = localStorage.getItem(LOCAL_PLANT_ID_KEY);
+  const getDefaultPlant = (instCode: string): string | undefined => getDefault(instCode);
 
-    if (localPlantJson) {
-      const localModels = JSON.parse(localPlantJson);
-      return localModels[instCode.toLowerCase()] || undefined;
-    }
-
-    return undefined;
-  };
-
-  const setDefaultPlant = (plant: Plant) => {
-    const plantCode = plant.plantCode;
-    const instCode = plant.installationCode;
-
-    const existingModelsJson = localStorage.getItem(LOCAL_PLANT_ID_KEY);
-    const existingModels = existingModelsJson ? JSON.parse(existingModelsJson) : {};
-
-    existingModels[instCode.toLowerCase()] = plantCode;
-
-    localStorage.setItem(LOCAL_PLANT_ID_KEY, JSON.stringify(existingModels));
-  };
+  const setDefaultPlant = (plant: Plant) => setDefault(plant.installationCode, plant.plantCode);
 
   return {
     getDefaultPlant,

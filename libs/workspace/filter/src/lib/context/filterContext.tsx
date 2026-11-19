@@ -3,6 +3,12 @@ import { FilterDataSource, FilterGroup, FilterStateGroup, FilterStyles } from '.
 import { createContext, PropsWithChildren, ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { useCallback } from 'react';
+import { usePersistedState } from '@equinor/workspace-core';
+
+const GROUP_ORDER_KEY = 'workspace.filter.groupOrder';
+const QUICK_FILTERS_KEY = 'workspace.filter.quickFilters';
+const INCLUDE_COUNT_KEY = 'workspace.filter.includeCount';
+const EMPTY_ORDER: string[] = [];
 
 export type IFilterContext = {
   filterState: FilterState;
@@ -73,34 +79,29 @@ export const FilterContextWrapper = ({
   onChange,
   appName,
 }: FilterContextWrapperProps) => {
-  const STORAGE_PREFIX = appName ?? 'cc_reports';
-  const LOCAL_STORAGE_KEY = `${STORAGE_PREFIX}_filterGroupOrder`;
-  const QUICK_FILTERS_KEY = `${STORAGE_PREFIX}_quickFilters`;
-  const INCLUDE_COUNT_KEY = `${STORAGE_PREFIX}_includeCount`;
+  const LEGACY_STORAGE_PREFIX = appName ?? 'cc_reports';
 
-  const getPersistedGroupOrder = (): string[] => {
-    const storedOrder = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return storedOrder ? JSON.parse(storedOrder) : [];
-  };
-  const getPersistedQuickFilters = (): string[] | undefined => {
-    const storedFilters = localStorage.getItem(QUICK_FILTERS_KEY);
-    return storedFilters ? JSON.parse(storedFilters) : undefined;
-  };
-  const getPersistedIncludeCount = (): boolean => {
-    const storedValue = localStorage.getItem(INCLUDE_COUNT_KEY);
-    return storedValue ? JSON.parse(storedValue) : false;
-  };
+  const groupOrder = usePersistedState<string[]>(GROUP_ORDER_KEY, {
+    legacyKey: `${LEGACY_STORAGE_PREFIX}_filterGroupOrder`,
+  });
+  const quickFiltersState = usePersistedState<string[]>(QUICK_FILTERS_KEY, {
+    legacyKey: `${LEGACY_STORAGE_PREFIX}_quickFilters`,
+  });
+  const includeCountState = usePersistedState<boolean>(INCLUDE_COUNT_KEY, {
+    legacyKey: `${LEGACY_STORAGE_PREFIX}_includeCount`,
+  });
 
   const [filterState, setFilterState] = useState<FilterState>(initialState?.filterState ?? { groups: [], search: '' });
   const [selectedItems, setSelectedItems] = useState<Record<string, string[]>>({});
-  const [quickFilters, setQuickFilters] = useState<string[] | undefined>(getPersistedQuickFilters());
-  const [includeCount, setIncludeCount] = useState<boolean>(getPersistedIncludeCount());
+  const quickFilters = quickFiltersState.value;
+  const includeCount = includeCountState.value ?? false;
   const query = useQuery<FilterGroup[]>({
     queryKey: ['filter-meta', JSON.stringify(filterState), includeCount],
     queryFn: async ({ signal }): Promise<FilterGroup[]> => {
       const data = await dataSource?.getFilterMeta({ ...filterState, includeCount }, signal);
       return data ?? [];
     },
+    enabled: includeCountState.isLoaded,
     throwOnError: false,
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5, // 5 minutes
@@ -118,25 +119,11 @@ export const FilterContextWrapper = ({
     );
   }, []);
 
-  const saveGroupOrderToLocalStorage = (order: string[]) => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(order));
-  };
+  const setGroupOrder = groupOrder.setValue;
+  const setPersistedQuickFilters = quickFiltersState.setValue;
+  const setPersistedIncludeCount = includeCountState.setValue;
 
-  const saveQuickFiltersToLocalStorage = (filters: string[]) => {
-    localStorage.setItem(QUICK_FILTERS_KEY, JSON.stringify(filters));
-  };
-
-  const saveIncludeCountToLocalStorage = (include: boolean) => {
-    localStorage.setItem(INCLUDE_COUNT_KEY, JSON.stringify(include));
-  };
-
-  const resetLocalStorage = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
-    localStorage.removeItem(QUICK_FILTERS_KEY);
-    localStorage.removeItem(INCLUDE_COUNT_KEY);
-  };
-
-  const persistedGroupOrder = getPersistedGroupOrder();
+  const persistedGroupOrder = groupOrder.value ?? EMPTY_ORDER;
 
   const filterValues = Array.isArray(query.data)
     ? (query.data
@@ -158,16 +145,19 @@ export const FilterContextWrapper = ({
         }) ?? [])
     : [];
 
-  const reorderFilterGroups = useCallback((newOrder: string[]) => {
-    if (newOrder.length === 0) return;
-    saveGroupOrderToLocalStorage(newOrder);
-    setFilterState((prev) => ({
-      ...prev,
-      groups: newOrder
-        .map((name) => prev.groups.find((group) => group.name === name))
-        .filter(Boolean) as FilterStateGroup[],
-    }));
-  }, []);
+  const reorderFilterGroups = useCallback(
+    (newOrder: string[]) => {
+      if (newOrder.length === 0) return;
+      setGroupOrder(newOrder);
+      setFilterState((prev) => ({
+        ...prev,
+        groups: newOrder
+          .map((name) => prev.groups.find((group) => group.name === name))
+          .filter(Boolean) as FilterStateGroup[],
+      }));
+    },
+    [setGroupOrder]
+  );
 
   const setFilter = (filterName: string, values: string[]) => {
     ((window as any).ai as ApplicationInsights)?.trackEvent({
@@ -210,20 +200,18 @@ export const FilterContextWrapper = ({
     const updatedQuickFilters = isQuickFilter
       ? [...currentQuickFilters, filterName]
       : currentQuickFilters.filter((filter) => filter !== filterName);
-    setQuickFilters(updatedQuickFilters);
-    saveQuickFiltersToLocalStorage(updatedQuickFilters);
+    setPersistedQuickFilters(updatedQuickFilters);
   };
 
   const updatePersistedIncludeCount = (include: boolean) => {
-    setIncludeCount(include);
-    saveIncludeCountToLocalStorage(include);
+    setPersistedIncludeCount(include);
   };
 
   const clearSettings = useCallback(() => {
-    resetLocalStorage();
-    setQuickFilters(undefined);
-    setIncludeCount(false);
-  }, []);
+    setGroupOrder(undefined);
+    setPersistedQuickFilters(undefined);
+    setPersistedIncludeCount(undefined);
+  }, [setGroupOrder, setPersistedQuickFilters, setPersistedIncludeCount]);
 
   return (
     <FilterContext.Provider

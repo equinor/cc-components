@@ -4,8 +4,8 @@ import {
   IServerSideGetRowsParams,
 } from '@equinor/workspace-fusion/grid';
 import { FilterState } from '@equinor/workspace-fusion/filter';
-import { useState } from 'react';
-import { getPersistedColumnOrder } from '@equinor/workspace-ag-grid';
+import { useRef, useState } from 'react';
+import { usePersistedColumnOrder } from '@equinor/workspace-ag-grid';
 import { useContextId } from '../../hooks/src/lib/useContextId';
 
 type IServerSideRowGetParams = Parameters<GridConfig<unknown, unknown>['getRows']>[0];
@@ -36,6 +36,8 @@ export function useGridDataSource<TData>(
 ) {
   const [colDefs, setColDefs] = useState<ColDef<TData>[]>(columnDefinitions);
   const contextId = useContextId();
+  const persistedOrderRef = useRef<string[] | null>(null);
+  persistedOrderRef.current = usePersistedColumnOrder(storageKey, columnDefinitions);
 
   return {
     colDefs,
@@ -79,7 +81,7 @@ export function useGridDataSource<TData>(
             return def;
           });
 
-          const persistedOrder = getPersistedColumnOrder(storageKey, columnDefinitions);
+          const persistedOrder = persistedOrderRef.current;
           const orderedColDefs = persistedOrder
             ? reorderColDefs(newColDefs, persistedOrder)
             : newColDefs;

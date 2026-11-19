@@ -19,6 +19,7 @@
     "@equinor/eds-icons": "catalog:",
     "@equinor/eds-tokens": "catalog:",
     "@equinor/workspace-filter": "workspace:*",
+    "@equinor/workspace-core": "workspace:*",
     "@microsoft/applicationinsights-web": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-virtual": "catalog:",

@@ -1,33 +1,32 @@
-import { useState } from 'react';
+import { SetStateAction, useCallback } from 'react';
 import { Report } from 'powerbi-client';
+import { usePersistedState } from '@equinor/workspace-core';
 
-export const getVisibleFiltersFromLocalStorage = (reportId: string) => {
-  const value = localStorage.getItem(`${reportId}-filters`);
-  if (!value) return null;
-  try {
-    const parsedValue = JSON.parse(value);
-    if (Array.isArray(parsedValue) && parsedValue.every((s) => typeof s === 'string')) {
-      return parsedValue as string[];
-    }
-  } catch (e) {
-    return null;
+const EMPTY: string[] = [];
+
+const parseLegacyVisibleFilters = (raw: string): string[] | undefined => {
+  const parsedValue = JSON.parse(raw);
+  if (Array.isArray(parsedValue) && parsedValue.every((s) => typeof s === 'string')) {
+    return parsedValue as string[];
   }
-  return null;
+  return undefined;
 };
 
 export const useVisibleFilters = (report: Report) => {
-  const [filterGroupVisible, setFilterGroupVisible] = useState<string[]>(
-    getVisibleFiltersFromLocalStorage(report.getId()) ?? []
+  const reportId = report.getId();
+  const { value, setValue, isLoaded } = usePersistedState<string[]>(
+    reportId ? `workspace.powerbi.${reportId}.visibleFilters` : undefined,
+    {
+      legacyKey: reportId ? `${reportId}-filters` : undefined,
+      parseLegacy: parseLegacyVisibleFilters,
+    }
   );
 
-  return [
-    filterGroupVisible,
-    (e: Parameters<typeof setFilterGroupVisible>[0]) => {
-      const reportId = report.getId();
-      if (reportId) {
-        localStorage.setItem(`${reportId}-filters`, JSON.stringify(e));
-      }
-      setFilterGroupVisible(e);
-    },
-  ] as const;
+  const setVisibleFilters = useCallback(
+    (next: SetStateAction<string[]>) =>
+      setValue((prev) => (typeof next === 'function' ? next(prev ?? EMPTY) : next)),
+    [setValue]
+  );
+
+  return [value ?? EMPTY, setVisibleFilters, { storedValue: value, isLoaded }] as const;
 };
