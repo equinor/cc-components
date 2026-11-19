@@ -3,7 +3,7 @@
   "displayName": "Activities",
   "shortName": "activities",
   "version": "0.0.1",
-  "main": "./src/main.tsx",
+  "main": "dist/app-bundle.js",
   "private": true,
   "type": "module",
   "scripts": {
